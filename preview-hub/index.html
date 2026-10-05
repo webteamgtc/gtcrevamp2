@@ -1,0 +1,114 @@
+<title>GTCFX Homepage Drafts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  /* Layout: brand header strip, then three draft cards with EN / AR links */
+  :root {
+    --bg: #f5f6fa;
+    --surface: #ffffff;
+    --fg: #0b0b0f;
+    --muted: #5d6275;
+    --line: #e2e5ef;
+    --brand: #293b93;
+    --brand-soft: #eef0fa;
+    --gold: #b68756;
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b0d18; --surface: #141729; --fg: #f3f4f8; --muted: #a2a7bb;
+      --line: #262a42; --brand: #8390d4; --brand-soft: #1c2142; --gold: #d2a67a; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0d18; --surface: #141729; --fg: #f3f4f8; --muted: #a2a7bb;
+    --line: #262a42; --brand: #8390d4; --brand-soft: #1c2142; --gold: #d2a67a; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); line-height: 1.5; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 48px 64px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--gold); }
+  h1 { margin: 14px 0 0; font-size: clamp(2rem, 4.6vw, 3.4rem); line-height: 1.05; letter-spacing: -.03em; font-weight: 800; text-wrap: balance; }
+  h1 span { color: var(--brand); }
+  .lead { margin: 16px 0 0; max-width: 62ch; color: var(--muted); font-size: 1.05rem; }
+  .grid { margin-top: 40px; display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 10px; display: flex; flex-direction: column; transition: transform .35s ease, box-shadow .35s ease; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px -24px rgba(41, 59, 147, .35); }
+  .thumb { display: block; border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: var(--brand-soft); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+  .card:hover .thumb img { transform: scale(1.04); }
+  .body { padding: 16px 10px 8px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .tag { font-size: 12px; font-weight: 600; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; }
+  h2 { margin: 0; font-size: 1.25rem; letter-spacing: -.01em; }
+  .body p { margin: 0; color: var(--muted); font-size: .95rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: 999px; font-weight: 600; font-size: .9rem; text-decoration: none; border: 1px solid var(--line); color: var(--fg); background: transparent; transition: background .25s, color .25s, border-color .25s; }
+  .btn.primary { background: #293b93; border-color: #293b93; color: #fff; }
+  .btn.primary:hover { background: #222f78; }
+  .btn:not(.primary):hover { border-color: var(--brand); color: var(--brand); }
+  .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .notes { margin-top: 40px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px 24px; }
+  .notes h3 { margin: 0 0 10px; font-size: 1rem; }
+  .notes ul { margin: 0; padding-inline-start: 18px; color: var(--muted); display: grid; gap: 6px; font-size: .93rem; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <span class="eyebrow">GTCFX website revamp · Round 2</span>
+  <h1>Homepage drafts <span>for review</span></h1>
+  <p class="lead">Three design directions for the new gtcfx.com homepage, built in Next.js with Tailwind and Motion. Scroll each draft slowly to see the section animations, and use the language button in the header to switch between English and Arabic.</p>
+
+  <div class="grid">
+    <article class="card">
+      <a class="thumb" href="en/draft-1/index.html"><img src="thumbs/draft-1.jpg" alt="Draft 1 hero, light theme"></a>
+      <div class="body">
+        <span class="tag">Draft 1 · Light</span>
+        <h2>Clarity</h2>
+        <p>White and soft-gray surfaces with navy and gold. Opens with an animated GTC Go app on a phone, then an arc-shaped market carousel and stacking platform cards.</p>
+        <div class="actions">
+          <a class="btn primary" href="en/draft-1/index.html">Open in English</a>
+          <a class="btn" href="ar/draft-1/index.html" lang="ar">العربية</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="thumb" href="en/draft-2/index.html"><img src="thumbs/draft-2.jpg" alt="Draft 2 hero, dark theme"></a>
+      <div class="body">
+        <span class="tag">Draft 2 · Dark</span>
+        <h2>Midnight</h2>
+        <p>Black and midnight navy with glowing gold. A trading screen that flattens as you scroll, a feature hub that cycles on its own, and side-scrolling markets.</p>
+        <div class="actions">
+          <a class="btn primary" href="en/draft-2/index.html">Open in English</a>
+          <a class="btn" href="ar/draft-2/index.html" lang="ar">العربية</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="thumb" href="en/draft-3/index.html"><img src="thumbs/draft-3.jpg" alt="Draft 3 hero, mixed theme"></a>
+      <div class="body">
+        <span class="tag">Draft 3 · Light + Dark + Gray</span>
+        <h2>Fusion</h2>
+        <p>A rotating 3D ring of live prices in the hero, then alternating white, gray, navy and black sections with expanding market panels.</p>
+        <div class="actions">
+          <a class="btn primary" href="en/draft-3/index.html">Open in English</a>
+          <a class="btn" href="ar/draft-3/index.html" lang="ar">العربية</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <section class="notes" aria-labelledby="notes-h">
+    <h3 id="notes-h">Placeholders in these drafts</h3>
+    <ul>
+      <li>The logo is cropped from a screenshot of the current site and will be swapped for the original file.</li>
+      <li>The CEO &amp; GM names, photos and quotes are placeholders.</li>
+      <li>Prices are a simulated demo feed, not live market data.</li>
+      <li>Descriptions for seven of the eight markets and all FAQ answers are draft copy awaiting compliance review.</li>
+      <li>Buttons and menu links don't go anywhere yet.</li>
+    </ul>
+  </section>
+</div>

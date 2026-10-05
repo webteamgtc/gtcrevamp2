@@ -1,0 +1,525 @@
+{
+  "meta": {
+    "title": "GTCFX | Access Global Markets – Forex & CFD Trading",
+    "description": "Trade forex, metals, commodities, indices and more with GTCFX. Tight spreads, leverage up to 1:2000 and execution in under 10 milliseconds."
+  },
+  "drafts": {
+    "title": "GTCFX Homepage Drafts",
+    "subtitle": "Three design directions for the new GTCFX homepage. Open each one to review the layout and animations.",
+    "d1": {
+      "name": "Draft 1 — Light",
+      "desc": "Clean white and soft gray surfaces with navy and gold accents."
+    },
+    "d2": {
+      "name": "Draft 2 — Dark",
+      "desc": "Deep black and midnight navy with glowing gold highlights."
+    },
+    "d3": {
+      "name": "Draft 3 — Fusion",
+      "desc": "Light, dark and gray sections alternating for strong rhythm."
+    },
+    "open": "Open draft",
+    "language": "Preview in Arabic (RTL)"
+  },
+  "riskBar": "CFDs are highly speculative, leveraged instruments. Trading in CFDs carries a high degree of risk to your capital. Investors should ensure they possess adequate market knowledge or seek independent financial advice before executing trades.",
+  "nav": {
+    "company": "Company",
+    "trading": "Trading",
+    "markets": "Markets",
+    "learn": "Learn",
+    "news": "GTC News",
+    "register": "Register",
+    "login": "Log in",
+    "menu": "Menu",
+    "close": "Close",
+    "groups": {
+      "company": [
+        {
+          "label": "About Us",
+          "desc": "Who we are and what drives us"
+        },
+        {
+          "label": "Why GTCFX",
+          "desc": "What makes our trading different"
+        },
+        {
+          "label": "Global Regulation",
+          "desc": "Our licences and regulated entities"
+        },
+        {
+          "label": "Events",
+          "desc": "Expos, awards and gatherings"
+        }
+      ],
+      "trading": [
+        {
+          "label": "Account Types",
+          "desc": "Standard and ECN accounts"
+        },
+        {
+          "label": "Copy Trading",
+          "desc": "Follow experienced traders"
+        },
+        {
+          "label": "Deposit & Withdraw",
+          "desc": "Funding methods and timings"
+        },
+        {
+          "label": "Trading Instruments",
+          "desc": "Full list of tradable products"
+        },
+        {
+          "label": "Promotions",
+          "desc": "Current offers and campaigns"
+        }
+      ],
+      "markets": [
+        {
+          "label": "Forex CFDs",
+          "desc": "Major, minor and exotic pairs"
+        },
+        {
+          "label": "Metals CFDs",
+          "desc": "Gold, silver and more"
+        },
+        {
+          "label": "Energy CFDs",
+          "desc": "Crude oil and natural gas"
+        },
+        {
+          "label": "Indices CFDs",
+          "desc": "Global stock indices"
+        },
+        {
+          "label": "Shares/Equity CFDs",
+          "desc": "Leading global companies"
+        },
+        {
+          "label": "Crypto CFDs",
+          "desc": "Popular digital assets"
+        },
+        {
+          "label": "Futures CFDs",
+          "desc": "Futures contracts as CFDs"
+        }
+      ],
+      "learn": [
+        {
+          "label": "FAQ",
+          "desc": "Answers to common questions"
+        },
+        {
+          "label": "Help Center",
+          "desc": "Guides and support articles"
+        },
+        {
+          "label": "Contact Us",
+          "desc": "Talk to our support team"
+        }
+      ],
+      "news": [
+        {
+          "label": "Latest News",
+          "desc": "Company announcements"
+        },
+        {
+          "label": "Events",
+          "desc": "Where to meet GTCFX next"
+        }
+      ]
+    }
+  },
+  "hero": {
+    "badge": "Trusted · Regulated · Global",
+    "title": "Access Global Markets with GTCFX",
+    "titleA": "Access Global",
+    "titleB": "Markets with GTCFX",
+    "subtitle": "Trade forex, metals, commodities, indices, and more on a secure and professional CFD trading platform built for fast and reliable trading.",
+    "ctaLive": "Open Live Account",
+    "ctaDemo": "Free Demo Account",
+    "liveLabel": "Live prices",
+    "tabs": [
+      "Metals",
+      "Energy",
+      "FX Minors",
+      "Stock",
+      "Future"
+    ],
+    "bid": "Bid",
+    "ask": "Ask",
+    "spreadLabel": "Spreads from",
+    "leverageLabel": "Leverage up to",
+    "executionLabel": "Execution",
+    "pricesNote": "Indicative prices for demonstration.",
+    "appBadge": "New · GTC Go app"
+  },
+  "features": {
+    "titleA": "Unlock Global Markets",
+    "titleB": "With A Reliable CFD Broker",
+    "subtitle": "Access global markets with powerful trading tools designed for a fast and seamless trading experience.",
+    "items": [
+      {
+        "eyebrow": "Trading Conditions",
+        "title": "Tight Spreads",
+        "text": "Enjoy competitive spreads designed to improve your trading costs while ensuring access to global markets."
+      },
+      {
+        "eyebrow": "Trade with Flexibility",
+        "title": "Best Leverage",
+        "text": "Benefit from high leverage up to 1:2000, with minimal margin requirements starting from just 0.1%."
+      },
+      {
+        "eyebrow": "Swift and Secure Transactions",
+        "title": "Fast Execution",
+        "text": "Take advantage of fast, secure execution in under 10 milliseconds, ensuring that you never miss a trading opportunity."
+      },
+      {
+        "eyebrow": "Leverage That Adapts",
+        "title": "Dynamic Leverage",
+        "text": "Dynamic leverage that adjusts based on your positions, providing the flexibility to trade effectively."
+      },
+      {
+        "eyebrow": "Trade Across Multiple Markets",
+        "title": "24/5 Trading",
+        "text": "Stay connected to global markets 24/5 — trade on your schedule, wherever you are."
+      },
+      {
+        "eyebrow": "Trading Protection",
+        "title": "Stop-Out Protection",
+        "text": "Stay in control during volatile markets with 20% stop-out protection, allowing your positions more flexibility before automatic closure."
+      }
+    ],
+    "maxLeverage": "Max leverage"
+  },
+  "markets": {
+    "eyebrow": "Markets",
+    "titleA": "Trade The Leading",
+    "titleB": "Global CFDs Markets",
+    "cta": "View More",
+    "hint": "Drag or tap a card to explore",
+    "items": [
+      {
+        "name": "Forex",
+        "title": "Forex Trading Made Simple",
+        "text": "Trade currency pairs with tight spreads, fast execution, and low margin requirements."
+      },
+      {
+        "name": "Metals",
+        "title": "Trade Precious Metals",
+        "text": "Trade gold, silver and other metals with competitive pricing and flexible leverage."
+      },
+      {
+        "name": "Energy",
+        "title": "Power Up with Energy",
+        "text": "Access crude oil and natural gas markets and react quickly to global supply and demand."
+      },
+      {
+        "name": "Indices",
+        "title": "Trade Global Indices",
+        "text": "Gain exposure to the world's leading stock indices in a single position."
+      },
+      {
+        "name": "Commodity CFDs",
+        "title": "Diversify with Commodities",
+        "text": "Trade soft and hard commodities to broaden your portfolio across global markets."
+      },
+      {
+        "name": "Shares/Equity",
+        "title": "Trade Leading Shares",
+        "text": "Take positions on the price movements of well-known global companies."
+      },
+      {
+        "name": "Crypto",
+        "title": "Trade Crypto CFDs",
+        "text": "Trade popular digital assets as CFDs without needing a crypto wallet."
+      },
+      {
+        "name": "Futures",
+        "title": "Futures CFDs",
+        "text": "Trade futures contracts as CFDs with transparent conditions and fast execution."
+      }
+    ],
+    "topInstruments": "Popular instruments",
+    "live": "Live",
+    "tradeCta": "Trade {name}"
+  },
+  "stats": {
+    "items": [
+      {
+        "value": 985000,
+        "prefix": "",
+        "suffix": "+",
+        "label": "Served Clients"
+      },
+      {
+        "value": 7,
+        "prefix": "",
+        "suffix": "+",
+        "label": "Trading Markets"
+      },
+      {
+        "value": 20,
+        "prefix": "",
+        "suffix": "+",
+        "label": "Languages Supported"
+      },
+      {
+        "value": 850,
+        "prefix": "$",
+        "suffix": " Billion",
+        "label": "Monthly Trades"
+      }
+    ]
+  },
+  "platforms": {
+    "eyebrow": "Platforms",
+    "title": "Trade Anywhere, On Any Device",
+    "subtitle": "Choose the platform that fits your style — on mobile, desktop or web.",
+    "items": [
+      {
+        "key": "gtcgo",
+        "brand": "GTC Go",
+        "title": "GTC Go – Trade & Invest",
+        "tagline": "Our own app for trading and investing on the go",
+        "cta": "Download GTC Go"
+      },
+      {
+        "key": "mt5",
+        "brand": "MetaTrader 5",
+        "title": "MT5 Trading Platform",
+        "tagline": "Advanced tools for modern trading",
+        "cta": "Download MT5 Platform"
+      },
+      {
+        "key": "mt4",
+        "brand": "MetaTrader 4",
+        "title": "MT4 Trading Platform",
+        "tagline": "A trusted and classic trading platform",
+        "cta": "Download MT4 Platform"
+      }
+    ],
+    "features": [
+      "Windows · macOS · Web",
+      "iOS · Android",
+      "One-click trading"
+    ],
+    "stageHint": "Choose a platform",
+    "perks": [
+      "<10ms execution",
+      "Leverage up to 1:2000",
+      "24/5 trading"
+    ]
+  },
+  "accounts": {
+    "eyebrow": "Accounts",
+    "title": "Choose Your Trading Account",
+    "subtitle": "Every trader is different. Find the account that matches your experience level, trading style, and goals.",
+    "recommended": "Recommended",
+    "open": "Open Account",
+    "compare": "Compare Accounts",
+    "labels": {
+      "minDeposit": "Minimum Deposit",
+      "spreads": "Spreads From",
+      "commission": "Commission",
+      "leverage": "Max Leverage",
+      "lot": "Min Lot Size"
+    },
+    "standard": {
+      "name": "Standard",
+      "desc": "Built for everyday trading — no minimum deposit, zero commission, and full platform access from day one.",
+      "minDeposit": "No minimum",
+      "spreads": "1.0 pips",
+      "commission": "$0",
+      "leverage": "1:2000",
+      "lot": "0.01"
+    },
+    "ecn": {
+      "name": "ECN",
+      "desc": "Raw market access for active traders — 0.0 pip spreads, transparent commission, and ECN execution for scalpers and EAs.",
+      "minDeposit": "$3,000",
+      "spreads": "0.0 pips",
+      "commission": "$5/lot",
+      "leverage": "1:500",
+      "lot": "0.01"
+    }
+  },
+  "leaders": {
+    "eyebrow": "Leadership",
+    "title": "Meet Our CEO & GM",
+    "subtitle": "The people steering GTCFX's vision, growth and commitment to every trader.",
+    "ceo": {
+      "name": "CEO Name",
+      "role": "Chief Executive Officer",
+      "quote": "Our mission is simple: give every trader fair, fast and transparent access to the world's markets — backed by a team that puts clients first.",
+      "linkedin": "LinkedIn"
+    },
+    "gm": {
+      "name": "GM Name",
+      "role": "General Manager",
+      "quote": "We build long-term relationships through reliable service, local support and technology that keeps our clients ahead of the market.",
+      "linkedin": "LinkedIn"
+    },
+    "placeholder": "Photo"
+  },
+  "faq": {
+    "title": "Everything You Need to Know",
+    "subtitle": "Still have a trading question? Reach our customer service team for support.",
+    "contact": "Contact us",
+    "items": [
+      {
+        "q": "What is CFD trading?",
+        "a": "A Contract for Difference (CFD) lets you speculate on the price movement of an asset without owning it. You can go long if you expect the price to rise or short if you expect it to fall."
+      },
+      {
+        "q": "Which markets can I trade with GTCFX?",
+        "a": "You can trade CFDs on forex, metals, energy, indices, commodities, shares, crypto and futures — all from one account."
+      },
+      {
+        "q": "What is leverage in trading?",
+        "a": "Leverage lets you control a larger position with a smaller amount of capital. It magnifies both profits and losses, so it should be used with care."
+      },
+      {
+        "q": "How do spreads and commissions work?",
+        "a": "The spread is the difference between the bid and ask price. Standard accounts are commission-free with spreads from 1.0 pips, while ECN accounts offer spreads from 0.0 pips with a $5 per lot commission."
+      },
+      {
+        "q": "What is margin and how is it calculated?",
+        "a": "Margin is the amount required to open and maintain a leveraged position. It is calculated from the trade size, the instrument price and the leverage applied to your account."
+      }
+    ],
+    "chatAgent": "GTC Support",
+    "online": "Online now",
+    "chatHello": "Hi there! How can we help you today?",
+    "chatTyping": "Support is typing…",
+    "supportHours": "24/5 support",
+    "languages": "20+ languages",
+    "questions": "Questions"
+  },
+  "register": {
+    "eyebrow": "Get Started",
+    "title": "Trade the World's markets",
+    "subtitle": "Open your account in minutes and start trading with GTCFX.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "phone": "Phone number",
+    "country": "Country of residence",
+    "submit": "Create Account",
+    "consent": "By continuing you agree to our Terms and Conditions and Privacy Policy.",
+    "steps": [
+      "Register",
+      "Verify",
+      "Fund",
+      "Trade"
+    ]
+  },
+  "footer": {
+    "tagline": "Global Markets. One Connection.",
+    "columns": {
+      "instruments": {
+        "title": "Instruments",
+        "links": [
+          "Forex CFDs",
+          "Energy CFDs",
+          "Indices CFDs",
+          "Metals CFDs",
+          "Shares/Equity CFDs",
+          "Crypto CFDs",
+          "Futures CFDs"
+        ]
+      },
+      "quick": {
+        "title": "Quick Navigation",
+        "links": [
+          "Account Types",
+          "Copy Trading",
+          "Deposit & Withdraw",
+          "Trading Instruments",
+          "Promotions"
+        ]
+      },
+      "platforms": {
+        "title": "Platforms",
+        "links": [
+          "MT4 Platform",
+          "MT5 Platform",
+          "GTC Go - Trade & Invest"
+        ]
+      },
+      "company": {
+        "title": "Company",
+        "links": [
+          "About Us",
+          "Why GTCFX",
+          "Global Regulation",
+          "Events"
+        ]
+      },
+      "support": {
+        "title": "Support",
+        "links": [
+          "FAQ",
+          "Contact Us",
+          "Help Center"
+        ]
+      },
+      "legal": {
+        "title": "Legal",
+        "links": [
+          "Website Disclaimer",
+          "Risk Disclosure",
+          "Restricted Countries",
+          "Deposit & Refund Policy",
+          "KYC & Compliance Policy",
+          "Cookie Policy",
+          "Privacy Policy",
+          "Terms and Conditions"
+        ]
+      }
+    },
+    "riskTitle": "Risk Warning",
+    "risk": [
+      "Trading in derivatives, including rolling spot Foreign Exchange (FX) and Contracts for Difference (CFDs), is highly speculative, carries a substantial degree of risk, and is not appropriate for every investor. Nothing on this website constitutes investment advice or a recommendation, and it has been prepared without regard to your individual objectives, financial circumstances or needs.",
+      "FX and CFDs are complex instruments dealt on a margined basis and carry a high risk of losing money rapidly by reason of leverage, which magnifies gains and losses alike. You may lose part or all of your invested capital, and losses may exceed your initial investment. Before trading, you should consider your objectives, financial position, level of experience and appetite for risk, satisfy yourself that you understand how these products operate, and trade only with funds you can afford to lose. Seek independent financial or tax advice if in any doubt. Past performance is not indicative of future results.",
+      "The entity with which a client contracts will depend on the client's jurisdiction, eligibility, classification and onboarding route. The applicable contracting entity and, where relevant, the product issuer and/or counterparty will be clearly disclosed before the client submits an account application and will be identified in the relevant Client Agreement. Products and services available under one entity may not be available under another entity. Each entity within the GTC Financial Group is a separate legal entity. A licence held by one entity does not extend to any other entity within the group.",
+      "GTC Global Trading Ltd, is a company incorporated in Anjouan, Union of the Comoros (Company No. 16283) and licensed by the Anjouan Offshore Finance Authority under Licence No. L16283/GTC. Its registered address is Boulevard de Coalancanthe, Mutsamudu, Anjouan, Union of the Comoros.",
+      "GTC Global Trade Capital Co. Limited (Company No. 40354) is a company incorporated in Vanuatu. The company holds Class A, Class B and Class C Principal's Licences issued by the Vanuatu Financial Services Commission under the Financial Dealers Licensing Act [CAP. 70]. Its registered address is First Floor, B&P House, Kumul Highway, Port Vila, Vanuatu.",
+      "Services offered through this international website are not available to residents of the United States, Japan, Australia, or in any jurisdiction where the provision of those services would contravene applicable laws, regulations, or sanctions."
+    ],
+    "rights": "All rights reserved.",
+    "cookie": "We use cookies to enhance your experience, analyze website traffic, and remember your preferences. Some cookies are essential, while others help us improve our services and personalize content. By clicking “Accept All,” you consent to our use of cookies.",
+    "cookieAccept": "Accept All",
+    "cookieSettings": "Settings",
+    "backToTop": "Back to top"
+  },
+  "common": {
+    "prev": "Previous",
+    "next": "Next",
+    "scroll": "Scroll to explore"
+  },
+  "app": {
+    "tagline": "Trade & Invest",
+    "watchlist": "Watchlist",
+    "portfolio": "Portfolio",
+    "balance": "Balance",
+    "today": "Today",
+    "buy": "Buy",
+    "sell": "Sell",
+    "filled": "Order filled",
+    "filledSub": "Buy 0.10 lot XAUUSD",
+    "copy": "Copy Trading",
+    "copySub": "Follow top strategies",
+    "download": "Download GTC Go",
+    "appStore": "App Store",
+    "googlePlay": "Google Play",
+    "rating": "Rated by traders worldwide",
+    "tabs": [
+      "Markets",
+      "Trade",
+      "Portfolio",
+      "Profile"
+    ],
+    "onAppStore": "Download on the",
+    "onPlay": "GET IT ON"
+  }
+}
