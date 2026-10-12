@@ -139,7 +139,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
       </div>
 
       {/* Big watermark that rises into view */}
-      {layout !== 'split' && <motion.div
+      {/* {layout !== 'split' && <motion.div
         dir="ltr"
         aria-hidden
         style={{ y: wmY, opacity: wmOpacity }}
@@ -149,7 +149,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
         )}
       >
         GTCFX
-      </motion.div>}
+      </motion.div>} */}
 
       <CookieBanner dark={dark} />
     </footer>
