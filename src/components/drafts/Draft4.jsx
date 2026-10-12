@@ -4,6 +4,7 @@
  * Black + midnight-navy surfaces, glowing gold (#b68756) accents, navy (#293b93) light.
  */
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ArrowRight, ArrowUpRight, Check, Download, Headphones, Plus, Quote, SlidersHorizontal, Sparkles, Wallet, Scale, X } from 'lucide-react';
@@ -13,7 +14,7 @@ import { Button } from '../ui/button';
 import { FEATURE_ICONS, MARKET_ICONS, LinkedInIcon } from '../shared/icons';
 import { useTicker, FlashPrice, Sparkline, UpDown, fmt, TICKER_GROUPS } from '../shared/ticker';
 import { CandleChart, AreaChart, LaptopMockup, PhoneMockup, TabletMockup } from '../shared/devices';
-import { SectionHeading, Portrait, RegisterForm, Steps, HeadingStyle, Ambient } from '../shared/blocks';
+import { SectionHeading, RegisterForm, Steps, HeadingStyle, Ambient } from '../shared/blocks';
 import { getDir } from '@/i18n/locales';
 import {
   Reveal,
@@ -398,7 +399,7 @@ function Markets() {
   return (
     <section ref={ref} className="relative h-[320vh] bg-[#eef0f5] text-ink">
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-50" />
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-24">
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-16">
         <div className="container-x relative flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index={2} eyebrow={t('eyebrow')} title={t('titleA')} titleB={t('titleB')} align="start" />
           <div className="w-48">
@@ -779,7 +780,7 @@ function Accounts() {
                   <div
                     className={cn(
                       'px-6 pb-7 pt-6 md:px-7 md:pt-7',
-                      standard ? 'bg-brand text-white' : 'bg-[#e8ebf2] text-ink'
+                      standard ? 'bg-brand text-white' : 'bg-[#d4d8e1] text-ink'
                     )}
                   >
                     <div className="flex items-center justify-between gap-3">
@@ -890,9 +891,7 @@ function Accounts() {
 /* ---------------------------------------------------- LEADERS (editorial) */
 function Leaders() {
   const t = useTranslations('leaders');
-  const people = [
-    { k: 'ceo', initials: 'CEO', tone: 'brand' },
-  ];
+  const people = [{ k: 'ceo', photo: '/ceo.png' }];
   return (
     <section className="relative overflow-hidden bg-white py-10 text-ink md:py-16">
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-30" />
@@ -900,26 +899,9 @@ function Leaders() {
       <div className="container-x relative">
         <SectionHeading index={5} eyebrow={t('eyebrow')} title={t('title')} subtitle={t('subtitle')} />
         <div className="mt-20 space-y-24">
-          {people.map((p, i) => (
-            <div key={p.k} className={cn('grid items-center gap-10 lg:grid-cols-2 lg:gap-20', i % 2 && 'lg:[&>*:first-child]:order-2')}>
-              <div className="relative">
-                <div className={cn('absolute -inset-4 rounded-[2.5rem] blur-2xl', p.tone === 'gold' ? 'bg-gold/15' : 'bg-brand/15')} />
-                <Parallax offset={30}>
-                  <MaskReveal className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand/10 bg-white shadow-xl shadow-brand/10" from="circle">
-                    <Portrait initials={p.initials} tone={p.tone} />
-                  </MaskReveal>
-                </Parallax>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: 'spring', delay: 0.6 }}
-                  className="absolute -bottom-6 end-6 grid size-24 place-items-center rounded-full bg-gold text-white shadow-2xl shadow-gold/25"
-                >
-                  <Quote className="size-10 rtl:-scale-x-100" />
-                </motion.div>
-              </div>
-              <div>
+          {people.map((p) => (
+            <div key={p.k} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
+              <div className="lg:pe-4">
                 <Reveal y={16}>
                   <span className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-700">{t(`${p.k}.role`)}</span>
                 </Reveal>
@@ -936,6 +918,23 @@ function Leaders() {
                     <LinkedInIcon className="size-4" /> {t(`${p.k}.linkedin`)}
                   </a>
                 </Reveal>
+              </div>
+              <div className="relative lg:ps-4">
+                <div className="absolute -inset-4 rounded-[2.5rem] bg-brand/15 blur-2xl" aria-hidden />
+                <Parallax offset={30}>
+                  <MaskReveal className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-brand/10 bg-white shadow-xl shadow-brand/10" from="circle">
+                    <Image src={p.photo} alt={t(`${p.k}.name`)} fill className="object-cover object-top" sizes="(max-width: 1024px) 100vw, 560px" priority />
+                  </MaskReveal>
+                </Parallax>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', delay: 0.6 }}
+                  className="absolute -bottom-6 end-6 grid size-24 place-items-center rounded-full bg-gold text-white shadow-2xl shadow-gold/25"
+                >
+                  <Quote className="size-10 rtl:-scale-x-100" />
+                </motion.div>
               </div>
             </div>
           ))}

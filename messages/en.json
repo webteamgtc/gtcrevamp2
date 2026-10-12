@@ -337,7 +337,7 @@
     },
     "ecn": {
       "name": "ECN",
-      "desc": "Raw market access for active traders — 0.0 pip spreads, transparent commission, and ECN execution for scalpers and EAs.",
+      "desc": "Raw market access for active traders — 0.0 pip spreads, low commission and ECN execution for active traders.",
       "minDeposit": "$3,000",
       "spreads": "0.0 pips",
       "commission": "$5/lot",
@@ -350,7 +350,7 @@
     "title": "Meet Our CEO",
     "subtitle": "The people steering GTCFX's vision, growth and commitment to every trader.",
     "ceo": {
-      "name": "CEO Name",
+      "name": "Charbel Raffoul",
       "role": "Chief Executive Officer",
       "quote": "Our mission is simple: give every trader fair, fast and transparent access to the world's markets — backed by a team that puts clients first.",
       "linkedin": "LinkedIn"
