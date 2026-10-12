@@ -124,7 +124,7 @@ function Hero() {
   const glowY = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16">
+    <section ref={ref} className="relative overflow-hidden pt-32 md:pt-40">
       <div className="bg-grid-dark mask-radial absolute inset-0" />
       <motion.div style={{ y: glowY }} className="absolute inset-x-0 top-0 h-[700px]">
         <div className="absolute left-1/2 top-[-200px] h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-brand/50 blur-[140px]" />
@@ -319,7 +319,7 @@ function Features() {
   const items = t.raw('items');
   const layout = ['', 'md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-2', '', '', '', 'md:col-span-2 lg:col-span-3'];
   return (
-    <section className="relative overflow-hidden bg-white py-16 text-ink md:py-24">
+    <section className="relative overflow-hidden bg-white py-16 text-ink md:py-16">
       <Ambient tone="light" />
       <HeadingStyle.Provider value="pill">
         <div className="container-x relative">
@@ -450,7 +450,7 @@ function Stats() {
   const t = useTranslations('stats');
   const items = t.raw('items');
   return (
-    <section className="relative overflow-hidden py-20 md:py-24">
+    <section className="relative overflow-hidden py-10 md:py-16">
       <div className="bg-dots-dark mask-radial absolute inset-0 opacity-70" />
       <div className="container-x relative">
         <Stagger className="grid grid-cols-2 gap-y-14 lg:grid-cols-4" stagger={0.15}>
@@ -501,13 +501,13 @@ function Platforms() {
 
   const it = items[i];
   return (
-    <section className="relative overflow-hidden bg-[#eef0f5] py-20 text-ink md:py-24">
-      <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-40" />
+    <section className="relative overflow-hidden bg-white py-10 text-ink md:py-16">
+      <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-30" />
       <Ambient tone="light" />
       <div className="container-x relative">
         <SectionHeading index={3} eyebrow={t('eyebrow')} title={t('title')} subtitle={t('subtitle')} />
 
-        <Reveal y={24} className="relative mt-14 overflow-hidden rounded-[2rem] border border-brand/10 bg-white shadow-2xl shadow-brand/[0.08]">
+        <Reveal y={24} className="relative mt-14 overflow-hidden rounded-[2rem] border border-brand/10 bg-[#f7f8fc] shadow-xl shadow-brand/[0.06]">
           <div className="absolute -end-24 -top-24 size-72 rounded-full bg-gold-100/80 blur-3xl" aria-hidden />
           <div className="absolute -start-20 bottom-0 size-64 rounded-full bg-brand-100/60 blur-3xl" aria-hidden />
 
@@ -747,7 +747,7 @@ function Accounts() {
   }));
 
   return (
-    <section id="accounts" className="relative overflow-hidden bg-[#eef0f5] py-20 text-ink md:py-24">
+    <section id="accounts" className="relative overflow-hidden bg-[#eef0f5] py-10 text-ink md:py-16">
       <div className="container-x relative">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <Reveal y={16} className="max-w-xl">
@@ -894,8 +894,8 @@ function Leaders() {
     { k: 'ceo', initials: 'CEO', tone: 'brand' },
   ];
   return (
-    <section className="relative overflow-hidden bg-[#eef0f5] py-20 text-ink md:py-24">
-      <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-40" />
+    <section className="relative overflow-hidden bg-white py-10 text-ink md:py-16">
+      <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-30" />
       <Ambient tone="light" />
       <div className="container-x relative">
         <SectionHeading index={5} eyebrow={t('eyebrow')} title={t('title')} subtitle={t('subtitle')} />
@@ -954,7 +954,7 @@ function Faq() {
   const total = String(items.length).padStart(2, '0');
 
   return (
-    <section className="relative overflow-hidden bg-[#f5f6fa] py-20 text-ink md:py-24">
+    <section className="relative overflow-hidden bg-[#f5f6fa] py-10 text-ink md:py-16">
       <Ambient tone="light" />
       <div className="container-x relative">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -1053,7 +1053,7 @@ function Faq() {
 function Register() {
   const t = useTranslations('register');
   return (
-    <section id="register" className="relative overflow-hidden py-20 md:py-24">
+    <section id="register" className="relative overflow-hidden py-10 md:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-ink via-brand-950 to-ink" />
       <div dir="ltr" className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         {[300, 500, 700, 900].map((sz, i) => (
