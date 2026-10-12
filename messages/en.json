@@ -311,18 +311,20 @@
     ]
   },
   "accounts": {
-    "eyebrow": "Accounts",
+    "eyebrow": "An account that fits you",
+    "titleA": "Your trading style.",
+    "titleB": "Your account.",
     "title": "Choose Your Trading Account",
     "subtitle": "Every trader is different. Find the account that matches your experience level, trading style, and goals.",
     "recommended": "Recommended",
-    "open": "Open Account",
-    "compare": "Compare Accounts",
+    "open": "Open account",
+    "compare": "Compare accounts",
     "labels": {
-      "minDeposit": "Minimum Deposit",
-      "spreads": "Spreads From",
+      "minDeposit": "Minimum deposit",
+      "spreads": "Spreads from",
       "commission": "Commission",
-      "leverage": "Max Leverage",
-      "lot": "Min Lot Size"
+      "leverage": "Maximum leverage",
+      "lot": "Minimum lot size"
     },
     "standard": {
       "name": "Standard",
@@ -345,7 +347,7 @@
   },
   "leaders": {
     "eyebrow": "Leadership",
-    "title": "Meet Our CEO & GM",
+    "title": "Meet Our CEO",
     "subtitle": "The people steering GTCFX's vision, growth and commitment to every trader.",
     "ceo": {
       "name": "CEO Name",
@@ -362,6 +364,9 @@
     "placeholder": "Photo"
   },
   "faq": {
+    "eyebrow": "Here to help",
+    "titleA": "Everything you",
+    "titleB": "need to know.",
     "title": "Everything You Need to Know",
     "subtitle": "Still have a trading question? Reach our customer service team for support.",
     "contact": "Contact us",
