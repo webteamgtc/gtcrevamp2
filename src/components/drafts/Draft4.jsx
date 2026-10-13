@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useTransform, useSpring } from 'motion/react';
-import { ArrowRight, ArrowUpRight, Check, Download, Headphones, Plus, Quote, SlidersHorizontal, Sparkles, Wallet, Scale, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, Download, Headphones, Quote, SlidersHorizontal, Sparkles, Wallet, Scale } from 'lucide-react';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 import { Button } from '../ui/button';
@@ -897,14 +897,13 @@ function Leaders() {
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-30" />
       <Ambient tone="light" />
       <div className="container-x relative">
-        <SectionHeading index={5} eyebrow={t('eyebrow')} title={t('title')} subtitle={t('subtitle')} />
-        <div className="mt-20 space-y-24">
-          {people.map((p) => (
-            <div key={p.k} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
-              <div className="lg:pe-4">
-                <Reveal y={16}>
-                  <span className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-700">{t(`${p.k}.role`)}</span>
-                </Reveal>
+        {people.map((p) => (
+          <div key={p.k} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
+            <div className="lg:pe-4">
+              <SectionHeading index={5} eyebrow={t('eyebrow')} title={t('title')} subtitle={t('subtitle')} align="start" className="max-w-xl" />
+              <Reveal y={16} className="mt-10 md:mt-12">
+                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-700">{t(`${p.k}.role`)}</span>
+              </Reveal>
                 <h3 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">
                   <WordReveal text={t(`${p.k}.name`)} />
                 </h3>
@@ -935,10 +934,9 @@ function Leaders() {
                 >
                   <Quote className="size-10 rtl:-scale-x-100" />
                 </motion.div>
-              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -949,98 +947,128 @@ function Faq() {
   const t = useTranslations('faq');
   const items = t.raw('items');
   const [active, setActive] = useState(0);
-  const current = items[active];
   const total = String(items.length).padStart(2, '0');
 
   return (
-    <section className="relative overflow-hidden bg-[#f5f6fa] py-10 text-ink md:py-16">
+    <section id="faq" className="relative overflow-hidden bg-[#f5f5f6] py-10 text-ink md:py-16">
       <Ambient tone="light" />
       <div className="container-x relative">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-[70px]">
           <SectionHeading index={6} eyebrow={t('eyebrow')} title={t('titleA')} titleB={t('titleB')} align="start" className="max-w-xl" />
-          <Reveal y={12} className="max-w-sm lg:text-end">
-            <p className="text-[15px] leading-relaxed text-ink/60">{t('subtitle')}</p>
-            <a href="#" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand transition hover:text-brand-700">
-              <Headphones className="size-4 text-gold" strokeWidth={1.75} />
+          <Reveal y={12} delay={0.12} className="max-w-[375px] justify-self-start pb-1 lg:justify-self-end lg:text-end">
+            <p className="text-base leading-[1.8] text-ink/60">{t('subtitle')}</p>
+            <a href="#" className="mt-3 inline-flex items-center gap-2 py-2 text-sm font-semibold text-brand transition hover:text-brand-700">
+              <Headphones className="size-[19px] text-gold" strokeWidth={1.75} />
               {t('contact')}
             </a>
           </Reveal>
         </div>
 
-        <div className="mt-14 grid items-start gap-8 lg:grid-cols-[min(100%,420px)_1fr] lg:gap-10">
-          <Stagger className="space-y-3" stagger={0.06}>
-            {items.map((it, i) => {
-              const on = active === i;
-              return (
-                <StaggerItem key={it.q}>
+        <div className="mt-12 grid min-w-0 items-stretch gap-5 lg:mt-14 lg:grid-cols-[1fr_1.05fr] lg:gap-[30px]">
+          <Reveal delay={0.1} className="min-w-0">
+            <div
+              className="flex flex-col gap-[11px] max-lg:-mx-1 max-lg:flex-row max-lg:overflow-x-auto max-lg:pb-3 max-lg:snap-x max-lg:snap-proximity max-lg:scrollbar-thin"
+              role="tablist"
+              aria-label={t('questions')}
+            >
+              {items.map((it, i) => {
+                const on = active === i;
+                return (
                   <button
+                    key={it.q}
                     type="button"
+                    role="tab"
+                    aria-selected={on}
                     onClick={() => setActive(i)}
                     className={cn(
-                      'group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border bg-white px-4 py-4 text-start transition-all duration-300 md:px-5 md:py-5',
-                      on
-                        ? 'border-brand/15 shadow-lg shadow-brand/10'
-                        : 'border-brand/10 shadow-sm hover:border-brand/20 hover:shadow-md'
+                      'group relative isolate grid min-h-[86px] w-full shrink-0 grid-cols-[40px_1fr_22px] items-center gap-[17px] overflow-hidden rounded-[10px] border bg-white px-6 py-[19px] text-start text-base leading-normal transition-[border-color,color,transform] duration-500 max-lg:min-h-[105px] max-lg:w-[255px] max-lg:snap-start max-lg:px-[17px] md:px-6',
+                      on ? 'border-brand/25 text-brand' : 'border-[#e5e5e7] text-ink hover:-translate-y-0.5 hover:border-gold hover:text-brand max-lg:grid-cols-[34px_1fr]'
                     )}
                   >
-                    {on && <span className="absolute inset-y-3 start-0 w-1 rounded-full bg-gradient-to-b from-gold to-gold-600" />}
+                    {on && (
+                      <motion.span
+                        layoutId="faq-selected-question"
+                        className="absolute inset-0 rounded-[9px] bg-brand/[0.03] shadow-[inset_3px_0_0_0_#b68756] rtl:shadow-[inset_-3px_0_0_0_#b68756]"
+                        transition={{ duration: 0.7, ease: EASE }}
+                      />
+                    )}
                     <span
                       className={cn(
-                        'grid size-10 shrink-0 place-items-center rounded-full text-xs font-bold tabular-nums transition-colors md:size-11',
-                        on ? 'bg-brand text-white shadow-md shadow-brand/25' : 'border border-brand/15 bg-white text-ink/35'
+                        'relative z-[1] grid size-[37px] shrink-0 place-items-center rounded-full border text-xs tabular-nums transition-[background,border-color,color] duration-[650ms] max-lg:size-[31px]',
+                        on ? 'border-brand bg-brand text-white' : 'border-[#e5e5e7] bg-white text-[#75757c]'
                       )}
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={cn('min-w-0 flex-1 text-sm font-semibold leading-snug md:text-[15px]', on ? 'text-brand' : 'text-ink/70')}>{it.q}</span>
-                    <span
-                      className={cn(
-                        'grid size-8 shrink-0 place-items-center rounded-full border transition-colors',
-                        on ? 'border-transparent bg-brand-50 text-brand' : 'border-brand/10 text-ink/40 group-hover:border-brand/25 group-hover:text-brand'
-                      )}
+                    <span className="relative z-[1] min-w-0 text-base font-medium tracking-tight max-lg:text-[15px]">{it.q}</span>
+                    <motion.span
                       aria-hidden
+                      className={cn(
+                        'relative z-[1] justify-self-end text-2xl font-light leading-none text-[#73737b] transition-[transform,color] duration-[650ms] max-lg:hidden',
+                        on && 'rotate-45 text-brand'
+                      )}
                     >
-                      {on ? <X className="size-4" strokeWidth={2} /> : <Plus className="size-4" strokeWidth={2} />}
-                    </span>
+                      +
+                    </motion.span>
                   </button>
-                </StaggerItem>
-              );
-            })}
-          </Stagger>
+                );
+              })}
+            </div>
+          </Reveal>
 
-          <Reveal y={24} className="min-w-0 lg:sticky lg:top-32">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.45, ease: EASE }}
-                className="relative flex min-h-[min(520px,70vh)] flex-col overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand via-brand-700 to-brand-950 p-8 text-white shadow-2xl shadow-brand/30 md:p-10"
-              >
-                <div className="bg-grid-dark absolute inset-0 opacity-40" />
-                <div className="relative flex items-start justify-between gap-4">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-bold tabular-nums text-gold md:text-6xl">{String(active + 1).padStart(2, '0')}</span>
-                    <span className="text-lg font-medium text-white/35">/ {total}</span>
-                  </div>
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">GTCFX</span>
-                </div>
-                <h3 className="relative mt-10 text-2xl font-bold leading-snug md:text-[1.65rem]">{current.q}</h3>
-                <p className="relative mt-5 flex-1 text-[15px] leading-relaxed text-white/75 md:text-base">{current.a}</p>
-                <div className="relative mt-10 flex gap-2">
-                  {items.map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      aria-label={`${t('questions')} ${i + 1}`}
-                      onClick={() => setActive(i)}
-                      className={cn('h-1 flex-1 rounded-full transition-colors', i === active ? 'bg-gold' : 'bg-white/20 hover:bg-white/35')}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+          <Reveal delay={0.2} y={24} className="relative flex min-h-[420px] min-w-0 flex-col overflow-hidden rounded-[15px] bg-brand px-8 pb-[34px] pt-[42px] text-white md:min-h-[520px] md:px-11">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gold" aria-hidden />
+            <div className="relative mb-8 flex items-center justify-between gap-5 md:mb-10">
+              <div className="flex min-h-[60px] items-baseline gap-2 overflow-hidden tabular-nums">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={active}
+                    initial={{ y: 35, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -35, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: EASE }}
+                    className="inline-block text-[47px] font-normal leading-none tracking-[-0.07em] text-[#d9b48e] md:text-[56px]"
+                  >
+                    {String(active + 1).padStart(2, '0')}
+                  </motion.span>
+                </AnimatePresence>
+                <span className="text-xs tracking-[0.08em] text-[#c8cee6]">/ {total}</span>
+              </div>
+              <span className="text-xs tracking-[0.16em] text-[#d3d7e9]">GTCFX</span>
+            </div>
+
+            <div className="relative flex flex-1 flex-col" aria-live="polite">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, x: 26, y: 12 }}
+                  animate={{ opacity: 1, x: 0, y: 0 }}
+                  exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.7, ease: EASE }}
+                  className="flex-1"
+                >
+                  <h3 className="text-[clamp(1.55rem,2.4vw,2rem)] font-medium leading-[1.3] tracking-[-0.035em] text-white">
+                    {items[active].q}
+                  </h3>
+                  <p className="mt-6 text-base leading-[1.9] text-[#dce0f0]">{items[active].a}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="relative mt-10 flex gap-2" aria-hidden>
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  tabIndex={-1}
+                  onClick={() => setActive(i)}
+                  className={cn(
+                    'h-0.5 rounded-full bg-white/15 transition-[width,background-color] duration-700',
+                    i === active ? 'w-[70px] bg-gold' : 'w-[25px]'
+                  )}
+                />
+              ))}
+            </div>
           </Reveal>
         </div>
       </div>
