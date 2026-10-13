@@ -384,9 +384,9 @@ function Markets() {
   const rtl = getDir(useLocale()) === 'rtl';
   const ref = useRef(null);
   const rowRef = useRef(null);
-  const contentRef = useRef(null);
+  const headRef = useRef(null);
   const [dist, setDist] = useState(0);
-  const [contentH, setContentH] = useState(720);
+  const [headH, setHeadH] = useState(110);
   const [vh, setVh] = useState(900);
   useEffect(() => {
     const measure = () => {
@@ -397,12 +397,13 @@ function Markets() {
         const cards = row.scrollWidth - gutter * 2;
         setDist(Math.max(0, Math.ceil(gutter + cards + 20 - document.documentElement.clientWidth)));
       }
-      if (contentRef.current) setContentH(contentRef.current.offsetHeight);
+      if (headRef.current) setHeadH(headRef.current.offsetHeight);
       setVh(window.innerHeight);
     };
     measure();
     const ro = new ResizeObserver(measure);
-    if (contentRef.current) ro.observe(contentRef.current);
+    if (headRef.current) ro.observe(headRef.current);
+    if (rowRef.current) ro.observe(rowRef.current);
     window.addEventListener('resize', measure);
     return () => {
       ro.disconnect();
@@ -410,20 +411,31 @@ function Markets() {
     };
   }, []);
 
-  // Pin only when the content fills most of the screen; otherwise pinning would leave
-  // big empty bands (tall / zoomed-out screens). In that case the row slides while the
-  // whole section is visible, and the section keeps its natural height.
-  const pin = dist > 0 && contentH >= vh * 0.7;
-  const panelH = Math.max(contentH, vh);
-  const pinTop = Math.min(0, vh - panelH);
+  // When pinned, the panel is exactly one screen tall and the cards grow to fill it,
+  // so there is no empty band above/below. If the screen is so tall that the cards
+  // would exceed CARD_MAX, pinning would leave gaps — then the row instead slides
+  // while the (natural-height) section is fully on screen.
+  const TOP = 88; // clears the fixed site header
+  const BOTTOM = 40;
+  const ROW_GAP = 40;
+  const CARD = 440;
+  const CARD_MIN = 400;
+  const CARD_MAX = 580;
+  const fit = vh - TOP - BOTTOM - headH - ROW_GAP;
+  const pin = dist > 0 && fit <= CARD_MAX + 60;
+  const cardH = pin ? Math.min(CARD_MAX, Math.max(CARD_MIN, fit)) : CARD;
+  const panelH = pin ? Math.max(vh, TOP + BOTTOM + headH + ROW_GAP + cardH) : 0;
+  const pinTop = pin ? Math.min(0, vh - panelH) : 0;
+  const naturalH = 64 * 2 + headH + 48 + CARD; // py-16 + heading + mt-12 + cards
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: pin ? [`start ${pinTop}px`, `end ${pinTop + panelH}px`] : ['start end', 'end start']
   });
-  // Non-pinned: section is fully on screen between these progress points.
-  const total = vh + contentH;
-  const from = pin ? 0 : Math.min(contentH, vh) / total;
-  const to = pin ? 1 : Math.max(vh, contentH) / total;
+  // Non-pinned: the section is fully on screen between these progress points.
+  const total = vh + naturalH;
+  const from = pin ? 0 : Math.min(naturalH, vh) / total;
+  const to = pin ? 1 : Math.max(vh, naturalH) / total;
   const span = to - from;
   const xRaw = useTransform(scrollYProgress, [from + span * 0.05, from + span * 0.95], [0, rtl ? dist : -dist]);
   const x = useSpring(xRaw, { stiffness: 90, damping: 25 });
@@ -433,11 +445,11 @@ function Markets() {
     <section ref={ref} style={pin ? { height: panelH + dist * 1.2 } : undefined} className="relative bg-[#eef0f5] text-ink">
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-50" />
       <div
-        style={pin ? { top: pinTop, minHeight: vh } : undefined}
-        className={cn('flex flex-col justify-center overflow-hidden', pin && 'sticky')}
+        style={pin ? { top: pinTop, height: panelH, paddingTop: TOP, paddingBottom: BOTTOM } : undefined}
+        className={cn('flex flex-col justify-center overflow-hidden', pin ? 'sticky' : 'py-16')}
       >
-      <div ref={contentRef} className="relative py-16">
-        <div className="container-x relative flex flex-wrap items-end justify-between gap-6">
+      <div className="relative">
+        <div ref={headRef} className="container-x relative flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index={2} eyebrow={t('eyebrow')} title={t('titleA')} titleB={t('titleB')} align="start" />
           <div className={cn('w-48', dist === 0 && 'invisible')}>
             <div className="text-xs text-ink/45">{tc('scroll')}</div>
@@ -446,12 +458,12 @@ function Markets() {
             </div>
           </div>
         </div>
-        <motion.div ref={rowRef} style={{ x }} className="relative mt-12 flex w-max gap-6 px-[max(1.25rem,calc((100vw-1280px)/2+2rem))]">
+        <motion.div ref={rowRef} style={{ x, marginTop: pin ? ROW_GAP : 48 }} className="relative flex w-max gap-6 px-[max(1.25rem,calc((100vw-1280px)/2+2rem))]">
           {items.map((it, i) => {
             const Icon = MARKET_ICONS[i];
             return (
               <TiltCard key={it.name} max={7} className="group shrink-0">
-                <div className="relative flex h-[440px] w-[320px] flex-col overflow-hidden rounded-[2rem] border border-brand/10 bg-white p-8 shadow-xl shadow-brand/5 transition-shadow duration-500 group-hover:border-brand/20 group-hover:shadow-2xl group-hover:shadow-brand/10 md:w-[360px]">
+                <div style={{ height: cardH }} className="relative flex w-[320px] flex-col overflow-hidden rounded-[2rem] border border-brand/10 bg-white p-8 shadow-xl shadow-brand/5 transition-shadow duration-500 group-hover:border-brand/20 group-hover:shadow-2xl group-hover:shadow-brand/10 md:w-[360px]">
                   <div className="absolute -end-16 -top-16 size-48 rounded-full bg-brand/15 blur-3xl transition-all duration-700 group-hover:bg-gold/25" />
                   <div className="relative flex items-center justify-between">
                     <span className="grid size-16 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-800 text-white shadow-lg shadow-brand/30 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
