@@ -376,183 +376,95 @@ function Features() {
   );
 }
 
-/* ------------------------------------------------- MARKETS (carousel) */
+/* ------------------------------------------------- MARKETS (scroll-pinned) */
 function Markets() {
   const t = useTranslations('markets');
+  const tc = useTranslations('common');
   const items = t.raw('items');
   const rtl = getDir(useLocale()) === 'rtl';
-  const [active, setActive] = useState(0);
-  const viewportRef = useRef(null);
-  const trackRef = useRef(null);
-  const x = useMotionValue(0);
-  const activeRef = useRef(active);
-  activeRef.current = active;
-
-  const slideTo = (index, instant = false) => {
-    const clamped = Math.max(0, Math.min(index, items.length - 1));
-    setActive(clamped);
-    const viewport = viewportRef.current;
-    const track = trackRef.current;
-    const card = track?.children[clamped];
-    if (!(viewport instanceof HTMLElement) || !(card instanceof HTMLElement)) return;
-    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-    const target = viewport.clientWidth / 2 - cardCenter;
-    if (instant) x.set(target);
-    else animate(x, target, { type: 'spring', stiffness: 380, damping: 38 });
-  };
-
-  useLayoutEffect(() => {
-    const measure = () => slideTo(activeRef.current, true);
+  const ref = useRef(null);
+  const rowRef = useRef(null);
+  const stickyRef = useRef(null);
+  const [dist, setDist] = useState(1800);
+  const [stickyH, setStickyH] = useState(700);
+  const [vh, setVh] = useState(900);
+  useEffect(() => {
+    const measure = () => {
+      // Distance needed until the last card is fully on screen (with a small edge gap).
+      // 0 when every card already fits, which disables pinning so no extra height is added.
+      const row = rowRef.current;
+      if (row) {
+        const gutter = parseFloat(getComputedStyle(row).paddingInlineStart) || 0;
+        const cards = row.scrollWidth - gutter * 2;
+        setDist(Math.max(0, Math.ceil(gutter + cards + 20 - document.documentElement.clientWidth)));
+      }
+      if (stickyRef.current) setStickyH(stickyRef.current.offsetHeight);
+      setVh(window.innerHeight);
+    };
     measure();
-    requestAnimationFrame(measure);
     const ro = new ResizeObserver(measure);
-    if (viewportRef.current) ro.observe(viewportRef.current);
-    if (trackRef.current) ro.observe(trackRef.current);
+    if (stickyRef.current) ro.observe(stickyRef.current);
     window.addEventListener('resize', measure);
     return () => {
       ro.disconnect();
       window.removeEventListener('resize', measure);
     };
-  }, [items.length]);
-
-  const onDragEnd = () => {
-    const track = trackRef.current;
-    const viewport = viewportRef.current;
-    if (!track || !viewport) return;
-    const current = x.get();
-    let nearest = 0;
-    let min = Infinity;
-    Array.from(track.children).forEach((el, i) => {
-      if (!(el instanceof HTMLElement)) return;
-      const center = el.offsetLeft + el.offsetWidth / 2;
-      const snapX = viewport.clientWidth / 2 - center;
-      const d = Math.abs(current - snapX);
-      if (d < min) {
-        min = d;
-        nearest = i;
-      }
-    });
-    slideTo(nearest);
-  };
-
-  const barPct = items.length > 1 ? (active / (items.length - 1)) * 100 : 100;
-  const prev = () => slideTo(active - 1);
-  const next = () => slideTo(active + 1);
+  }, []);
+  // Pin the content block vertically centred (not full-screen), and make the
+  // section only as tall as the content + the scroll needed to slide the row.
+  // Progress runs exactly over the pinned range, so every card is seen before unpinning.
+  const pinScroll = dist * 1.2;
+  const pinTop = Math.max(0, Math.round((vh - stickyH) / 2));
+  const { scrollYProgress } = useScroll({ target: ref, offset: [`start ${pinTop}px`, `end ${pinTop + stickyH}px`] });
+  const xRaw = useTransform(scrollYProgress, [0.05, 0.95], [0, rtl ? dist : -dist]);
+  const x = useSpring(xRaw, { stiffness: 90, damping: 25 });
+  const bar = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section id="markets" className="relative overflow-hidden bg-[#eef0f5] py-10 text-ink md:py-16">
+    <section ref={ref} style={{ height: stickyH + pinScroll }} className="relative bg-[#eef0f5] text-ink">
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-50" />
-      <div className="container-x relative">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+      <div ref={stickyRef} style={{ top: pinTop }} className="sticky flex flex-col overflow-hidden py-16">
+        <div className="container-x relative flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index={2} eyebrow={t('eyebrow')} title={t('titleA')} titleB={t('titleB')} align="start" />
-          <Reveal delay={0.1} className="flex items-center gap-3">
-            <div className="hidden w-40 sm:block">
-              <div className="text-xs text-ink/45">{t('hint')}</div>
-              <div className="mt-2 h-1 overflow-hidden rounded-full bg-brand/10">
-                <motion.div
-                  animate={{ width: `${barPct}%` }}
-                  transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-                  className="h-full rounded-full bg-gradient-to-r from-gold to-brand"
-                />
-              </div>
+          <div className={cn('w-48', dist === 0 && 'invisible')}>
+            <div className="text-xs text-ink/45">{tc('scroll')}</div>
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-brand/10">
+              <motion.div style={{ width: bar }} className="h-full rounded-full bg-gradient-to-r from-gold to-brand" />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm tabular-nums text-ink/45">
-                0{active + 1} / {String(items.length).padStart(2, '0')}
-              </span>
-              <button
-                type="button"
-                aria-label="Previous"
-                disabled={active === 0}
-                onClick={prev}
-                className="grid size-10 place-items-center rounded-full border border-brand/15 bg-white text-brand shadow-sm transition enabled:hover:shadow-md disabled:opacity-35"
-              >
-                <ChevronLeft className={cn('size-5', rtl && '-scale-x-100')} />
-              </button>
-              <button
-                type="button"
-                aria-label="Next"
-                disabled={active === items.length - 1}
-                onClick={next}
-                className="grid size-10 place-items-center rounded-full border border-brand/15 bg-white text-brand shadow-sm transition enabled:hover:shadow-md disabled:opacity-35"
-              >
-                <ChevronRight className={cn('size-5', rtl && '-scale-x-100')} />
-              </button>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="relative mt-10 md:mt-12">
-          <div className="pointer-events-none absolute inset-y-0 start-0 z-10 w-12 bg-gradient-to-r from-[#eef0f5] to-transparent sm:w-20" />
-          <div className="pointer-events-none absolute inset-y-0 end-0 z-10 w-12 bg-gradient-to-l from-[#eef0f5] to-transparent sm:w-20" />
-          <div ref={viewportRef} className="overflow-hidden px-1">
-            <motion.div
-              ref={trackRef}
-              drag="x"
-              dragConstraints={{ left: -4000, right: 4000 }}
-              dragElastic={0.08}
-              dragMomentum={false}
-              onDragEnd={onDragEnd}
-              style={{ x }}
-              className="flex w-max cursor-grab gap-5 active:cursor-grabbing md:gap-6"
-            >
-              {items.map((it, i) => {
-                const Icon = MARKET_ICONS[i];
-                const focus = active === i;
-                return (
-                  <motion.div
-                    key={it.name}
-                    animate={{ scale: focus ? 1 : 0.94, opacity: focus ? 1 : 0.55 }}
-                    transition={{ type: 'spring', stiffness: 320, damping: 28 }}
-                    className="shrink-0"
-                  >
-                    <TiltCard max={focus ? 8 : 4} className="group">
-                      <div className="relative flex h-[420px] w-[min(calc(100vw-3rem),320px)] flex-col overflow-hidden rounded-[2rem] border border-brand/10 bg-white p-6 shadow-xl shadow-brand/5 transition-shadow duration-500 group-hover:border-brand/20 group-hover:shadow-2xl group-hover:shadow-brand/10 sm:w-[320px] sm:p-8 md:h-[440px] md:w-[360px]">
-                        <div className="absolute -end-16 -top-16 size-48 rounded-full bg-brand/15 blur-3xl transition-all duration-700 group-hover:bg-gold/25" />
-                        <div className="relative flex items-center justify-between">
-                          <span className="grid size-16 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-800 text-white shadow-lg shadow-brand/30 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
-                            <Icon className="size-8" strokeWidth={1.5} />
-                          </span>
-                          <span className="text-6xl font-bold text-brand/[0.07]">0{i + 1}</span>
-                        </div>
-                        <div className="relative mt-auto">
-                          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gold-700">{it.name}</span>
-                          <h3 className="mt-3 text-2xl font-semibold text-ink">{it.title}</h3>
-                          <p className="mt-3 text-ink/60">{it.text}</p>
-                          <div className="mt-5 h-14">
-                            <AreaChart seed={i + 4} color={i % 2 ? '#b68756' : '#5565bd'} className="h-full" />
-                          </div>
-                          <a href="#" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand">
-                            {t('cta')}
-                            <span className="grid size-8 place-items-center rounded-full bg-brand-50 text-brand transition-all group-hover:rotate-45 group-hover:bg-gold group-hover:text-white">
-                              <ArrowUpRight className="size-4" />
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                    </TiltCard>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
           </div>
         </div>
-
-        <div className="mt-8 flex justify-center gap-2">
-          {items.map((it, i) => (
-            <button
-              key={it.name}
-              type="button"
-              aria-label={it.name}
-              aria-current={active === i}
-              onClick={() => slideTo(i)}
-              className={cn(
-                'h-1.5 rounded-full transition-all duration-500',
-                active === i ? 'w-10 bg-gradient-to-r from-gold to-brand' : 'w-3 bg-brand/20 hover:bg-brand/35'
-              )}
-            />
-          ))}
-        </div>
+        <motion.div ref={rowRef} style={{ x }} className="relative mt-12 flex w-max gap-6 px-[max(1.25rem,calc((100vw-1280px)/2+2rem))]">
+          {items.map((it, i) => {
+            const Icon = MARKET_ICONS[i];
+            return (
+              <TiltCard key={it.name} max={7} className="group shrink-0">
+                <div className="relative flex h-[440px] w-[320px] flex-col overflow-hidden rounded-[2rem] border border-brand/10 bg-white p-8 shadow-xl shadow-brand/5 transition-shadow duration-500 group-hover:border-brand/20 group-hover:shadow-2xl group-hover:shadow-brand/10 md:w-[360px]">
+                  <div className="absolute -end-16 -top-16 size-48 rounded-full bg-brand/15 blur-3xl transition-all duration-700 group-hover:bg-gold/25" />
+                  <div className="relative flex items-center justify-between">
+                    <span className="grid size-16 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-800 text-white shadow-lg shadow-brand/30 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+                      <Icon className="size-8" strokeWidth={1.5} />
+                    </span>
+                    <span className="text-6xl font-bold text-brand/[0.07]">0{i + 1}</span>
+                  </div>
+                  <div className="relative mt-auto">
+                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gold-700">{it.name}</span>
+                    <h3 className="mt-3 text-2xl font-semibold text-ink">{it.title}</h3>
+                    <p className="mt-3 text-ink/60">{it.text}</p>
+                    <div className="mt-5 h-14">
+                      <AreaChart seed={i + 4} color={i % 2 ? '#b68756' : '#5565bd'} className="h-full" />
+                    </div>
+                    <a href="#" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                      {t('cta')}
+                      <span className="grid size-8 place-items-center rounded-full bg-brand-50 text-brand transition-all group-hover:rotate-45 group-hover:bg-gold group-hover:text-white">
+                        <ArrowUpRight className="size-4" />
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </TiltCard>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
