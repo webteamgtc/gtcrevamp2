@@ -384,46 +384,59 @@ function Markets() {
   const rtl = getDir(useLocale()) === 'rtl';
   const ref = useRef(null);
   const rowRef = useRef(null);
-  const stickyRef = useRef(null);
-  const [dist, setDist] = useState(1800);
-  const [stickyH, setStickyH] = useState(700);
+  const contentRef = useRef(null);
+  const [dist, setDist] = useState(0);
+  const [contentH, setContentH] = useState(720);
   const [vh, setVh] = useState(900);
   useEffect(() => {
     const measure = () => {
-      // Distance needed until the last card is fully on screen (with a small edge gap).
-      // 0 when every card already fits, which disables pinning so no extra height is added.
+      // How far the row must move until the last card is fully on screen (0 = all cards fit).
       const row = rowRef.current;
       if (row) {
         const gutter = parseFloat(getComputedStyle(row).paddingInlineStart) || 0;
         const cards = row.scrollWidth - gutter * 2;
         setDist(Math.max(0, Math.ceil(gutter + cards + 20 - document.documentElement.clientWidth)));
       }
-      if (stickyRef.current) setStickyH(stickyRef.current.offsetHeight);
+      if (contentRef.current) setContentH(contentRef.current.offsetHeight);
       setVh(window.innerHeight);
     };
     measure();
     const ro = new ResizeObserver(measure);
-    if (stickyRef.current) ro.observe(stickyRef.current);
+    if (contentRef.current) ro.observe(contentRef.current);
     window.addEventListener('resize', measure);
     return () => {
       ro.disconnect();
       window.removeEventListener('resize', measure);
     };
   }, []);
-  // Pin the content block vertically centred (not full-screen), and make the
-  // section only as tall as the content + the scroll needed to slide the row.
-  // Progress runs exactly over the pinned range, so every card is seen before unpinning.
-  const pinScroll = dist * 1.2;
-  const pinTop = Math.max(0, Math.round((vh - stickyH) / 2));
-  const { scrollYProgress } = useScroll({ target: ref, offset: [`start ${pinTop}px`, `end ${pinTop + stickyH}px`] });
-  const xRaw = useTransform(scrollYProgress, [0.05, 0.95], [0, rtl ? dist : -dist]);
+
+  // Pin only when the content fills most of the screen; otherwise pinning would leave
+  // big empty bands (tall / zoomed-out screens). In that case the row slides while the
+  // whole section is visible, and the section keeps its natural height.
+  const pin = dist > 0 && contentH >= vh * 0.7;
+  const panelH = Math.max(contentH, vh);
+  const pinTop = Math.min(0, vh - panelH);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: pin ? [`start ${pinTop}px`, `end ${pinTop + panelH}px`] : ['start end', 'end start']
+  });
+  // Non-pinned: section is fully on screen between these progress points.
+  const total = vh + contentH;
+  const from = pin ? 0 : Math.min(contentH, vh) / total;
+  const to = pin ? 1 : Math.max(vh, contentH) / total;
+  const span = to - from;
+  const xRaw = useTransform(scrollYProgress, [from + span * 0.05, from + span * 0.95], [0, rtl ? dist : -dist]);
   const x = useSpring(xRaw, { stiffness: 90, damping: 25 });
-  const bar = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const bar = useTransform(scrollYProgress, [from, to], ['0%', '100%']);
 
   return (
-    <section ref={ref} style={{ height: stickyH + pinScroll }} className="relative bg-[#eef0f5] text-ink">
+    <section ref={ref} style={pin ? { height: panelH + dist * 1.2 } : undefined} className="relative bg-[#eef0f5] text-ink">
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-50" />
-      <div ref={stickyRef} style={{ top: pinTop }} className="sticky flex flex-col overflow-hidden py-16">
+      <div
+        style={pin ? { top: pinTop, minHeight: vh } : undefined}
+        className={cn('flex flex-col justify-center overflow-hidden', pin && 'sticky')}
+      >
+      <div ref={contentRef} className="relative py-16">
         <div className="container-x relative flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index={2} eyebrow={t('eyebrow')} title={t('titleA')} titleB={t('titleB')} align="start" />
           <div className={cn('w-48', dist === 0 && 'invisible')}>
@@ -465,6 +478,7 @@ function Markets() {
             );
           })}
         </motion.div>
+      </div>
       </div>
     </section>
   );
