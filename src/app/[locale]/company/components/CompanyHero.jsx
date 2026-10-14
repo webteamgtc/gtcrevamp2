@@ -1,5 +1,4 @@
 'use client';
-import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ChevronRight, Users, Layers, ChartNoAxesCombined, Languages } from 'lucide-react';
@@ -8,51 +7,9 @@ import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
 import { Stagger, StaggerItem, CountUp, EASE } from '@/components/motion';
 import { AccentTitle } from './parts';
+import HeroTradingBackdrop from './HeroTradingBackdrop';
 
 const STAT_ICONS = [Users, Layers, Languages, ChartNoAxesCombined];
-
-/** Generic line-art skyline (deterministic, no image request). */
-function Skyline() {
-  const towers = useMemo(() => {
-    let seed = 11;
-    const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    const out = [];
-    let x = 0;
-    while (x < 1440) {
-      const w = 34 + Math.round(rnd() * 60);
-      const center = Math.abs(x + w / 2 - 720) / 720; // shorter in the middle, taller at the edges
-      const h = 60 + Math.round(rnd() * 120 + center * 170);
-      out.push({ x, w, h, spire: rnd() > 0.78 });
-      x += w + 6;
-    }
-    return out;
-  }, []);
-  return (
-    <svg dir="ltr" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice" className="pointer-events-none absolute inset-x-0 bottom-0 h-[260px] w-full md:h-[340px]" aria-hidden>
-      <defs>
-        <linearGradient id="sky-fade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.07" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      {towers.map((t, i) => (
-        <motion.g
-          key={i}
-          style={{ transformOrigin: `${t.x + t.w / 2}px 360px` }}
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: 1 }}
-          transition={{ duration: 1.1, delay: 0.25 + (Math.abs(i - towers.length / 2) / towers.length) * 0.9, ease: EASE }}
-        >
-          <rect x={t.x} y={360 - t.h} width={t.w} height={t.h} fill="url(#sky-fade)" stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
-          {Array.from({ length: Math.floor(t.h / 22) }).map((_, r) => (
-            <line key={r} x1={t.x + 6} x2={t.x + t.w - 6} y1={360 - t.h + 14 + r * 22} y2={360 - t.h + 14 + r * 22} stroke="rgba(255,255,255,0.05)" strokeDasharray="3 5" />
-          ))}
-          {t.spire && <line x1={t.x + t.w / 2} x2={t.x + t.w / 2} y1={360 - t.h} y2={360 - t.h - 40} stroke="rgba(182,135,86,0.6)" />}
-        </motion.g>
-      ))}
-    </svg>
-  );
-}
 
 export function CompanyHero() {
   const t = useTranslations('companyPage');
@@ -69,7 +26,7 @@ export function CompanyHero() {
         animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
         transition={{ duration: 10, repeat: Infinity }}
       />
-      <Skyline />
+      <HeroTradingBackdrop />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
       <div className="container-x relative text-center">

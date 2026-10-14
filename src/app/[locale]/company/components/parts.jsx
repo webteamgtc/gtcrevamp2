@@ -1,5 +1,4 @@
 'use client';
-import { motion } from 'motion/react';
 import { Reveal } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
@@ -51,27 +50,6 @@ export function SectionIntro({ title, sub, description, layout = 'center', dark 
         </Reveal>
       )}
       {children}
-    </div>
-  );
-}
-
-/** Little "keep scrolling" cue for pinned sections; dots show which step you are on. */
-export function ScrollHint({ text, count, index, onPick, labels = [] }) {
-  return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-5 flex justify-center">
-      <div className="pointer-events-auto flex items-center gap-4 rounded-full border border-brand/10 bg-white/90 py-2 pe-2 ps-4 text-xs font-semibold text-ink/55 shadow-lg shadow-brand/10 backdrop-blur">
-        <span className="flex items-center gap-2">
-          <span className="relative flex h-6 w-4 justify-center rounded-full border-2 border-ink/25" aria-hidden>
-            <motion.span className="mt-1 h-1.5 w-1 rounded-full bg-gold" animate={{ y: [0, 7, 0], opacity: [1, 0.2, 1] }} transition={{ duration: 1.6, repeat: Infinity }} />
-          </span>
-          {text}
-        </span>
-        <span className="flex gap-1.5">
-          {Array.from({ length: count }).map((_, k) => (
-            <button key={k} type="button" onClick={() => onPick(k)} aria-label={labels[k]} className={cn('h-1.5 rounded-full transition-all duration-500', k === index ? 'w-6 bg-brand' : 'w-1.5 bg-brand/25 hover:bg-brand/50')} />
-          ))}
-        </span>
-      </div>
     </div>
   );
 }

@@ -97,8 +97,8 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
     }
   }, []);
 
-  const onTriggerKey = (e, g) => {
-    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+  const onTriggerKey = (e, g, isLink = false) => {
+    if (e.key === 'ArrowDown' || (!isLink && (e.key === 'Enter' || e.key === ' '))) {
       e.preventDefault();
       show(g);
       setTimeout(() => navRef.current?.querySelector('[data-mega] a')?.focus(), 60);
@@ -182,7 +182,9 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
               <ul className="relative hidden items-center gap-0.5 lg:flex" onMouseLeave={() => { leave(); setHover(null); }}>
                 {MENU.map((g, i) => {
                   const on = open === g.id;
-                  const current = g.columns.flat().some((s) => s.items.some((it) => isActive(it.href)));
+                  const current = isActive(g.href) || g.columns.flat().some((s) => s.items.some((it) => isActive(it.href)));
+                  // a group with its own page (e.g. Company → /company) is a link: click opens the page, hover opens the menu
+                  const Trigger = g.href ? NavLink : 'button';
                   return (
                     <motion.li
                       key={g.id}
@@ -192,14 +194,13 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
                       onMouseEnter={() => { enter(g.id); setHover(g.id); }}
                       className="relative"
                     >
-                      <button
+                      <Trigger
                         ref={(el) => (btnRefs.current[g.id] = el)}
-                        type="button"
+                        {...(g.href ? { href: g.href, onClick: close } : { type: 'button', onClick: () => (on ? close() : show(g.id)) })}
                         aria-expanded={on}
                         aria-controls="mega-panel"
                         aria-haspopup="true"
-                        onClick={() => (on ? close() : show(g.id))}
-                        onKeyDown={(e) => onTriggerKey(e, g.id)}
+                        onKeyDown={(e) => onTriggerKey(e, g.id, !!g.href)}
                         className={cn(
                           'relative flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-gold xl:px-4',
                           dark ? (on ? 'text-white' : 'text-white/80 hover:text-white') : on ? 'text-brand' : 'text-brand-900 hover:text-brand'
@@ -211,7 +212,7 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
                         <span className="relative">{tm(`groups.${g.id}`)}</span>
                         <ChevronDown className={cn('relative size-4 opacity-70 transition-transform duration-300', on && 'rotate-180')} />
                         {current && !on && hover !== g.id && <span className="absolute -bottom-0.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-gold" aria-hidden />}
-                      </button>
+                      </Trigger>
                     </motion.li>
                   );
                 })}

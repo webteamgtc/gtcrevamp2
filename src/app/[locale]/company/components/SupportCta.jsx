@@ -1,61 +1,69 @@
 'use client';
+import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { Headset, Mail, MessageCircle, Globe, ShieldCheck, Clock3 } from 'lucide-react';
 import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
 import { Reveal } from '@/components/motion';
 import { AccentTitle } from './parts';
 
-const ORBIT = [Mail, MessageCircle, Globe, ShieldCheck, Clock3];
+/** soft price line drawn across the band (decorative) */
+function BandLine() {
+  const d = useMemo(() => {
+    let s = 5;
+    const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+    let y = 70;
+    return Array.from({ length: 40 }, (_, i) => {
+      y = Math.max(18, Math.min(92, y - 1.2 + (rnd() - 0.5) * 12));
+      return `${i ? 'L' : 'M'}${i * 30} ${y.toFixed(1)}`;
+    }).join(' ');
+  }, []);
+  return (
+    <svg dir="ltr" viewBox="0 0 1170 110" preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 bottom-0 h-12 w-full opacity-70" aria-hidden>
+      <defs>
+        <linearGradient id="band-line" x1="0" x2="1">
+          <stop offset="0" stopColor="#f1e3d3" stopOpacity="0" />
+          <stop offset="0.6" stopColor="#d2a67a" stopOpacity="0.7" />
+          <stop offset="1" stopColor="#f1e3d3" stopOpacity="0.9" />
+        </linearGradient>
+      </defs>
+      <motion.path d={d} fill="none" stroke="url(#band-line)" strokeWidth="1.6" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2.4, ease: 'easeInOut' }} />
+    </svg>
+  );
+}
 
-/** Support CTA: split card — text and buttons on one side, an animated support hub on the other. */
+/**
+ * Support CTA: a clean, compact navy band — title and text on one side, the two
+ * account buttons on the other, with a quiet animated price line along the bottom.
+ */
 export function SupportCta() {
   const t = useTranslations('companyPage.ctaSection');
   return (
-    <section id="support" className="relative bg-white pb-16 pt-4 text-ink md:pb-24">
+    <section id="support" className="relative bg-white py-14 text-white md:py-20">
       <div className="container-x">
-        <Reveal y={30}>
-          <div className="relative grid overflow-hidden rounded-[2rem] border border-brand/10 bg-gradient-to-br from-[#f6f7fb] via-white to-[#eef0f7] md:rounded-[2.5rem] lg:grid-cols-[1.15fr_1fr]">
-            <div className="relative p-8 md:p-14">
-              <h2 className="heading-section">
-                <AccentTitle text={t('title')} words={2} />
-              </h2>
-              <p className="mt-6 max-w-xl text-pretty text-[15px] leading-relaxed text-ink/60 md:text-base">{t('description')}</p>
-              <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <ArrowLink href={PORTAL.register}>{t('live')}</ArrowLink>
-                <NavLink href={PORTAL.demo} className="group relative text-base font-semibold text-brand">
-                  {t('demo')}
-                  <span className="absolute -bottom-1 start-0 h-0.5 w-full origin-left scale-x-50 rounded-full bg-gold transition-transform duration-500 group-hover:scale-x-100 rtl:origin-right" />
-                </NavLink>
-              </div>
-            </div>
+        <Reveal y={24}>
+          <div className="is-dark relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-brand-700 via-brand-800 to-brand-950 px-6 py-10 shadow-2xl shadow-brand/25 md:px-12 md:py-14">
+            {/* gold hairline + soft glow */}
+            <span className="absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent" aria-hidden />
+            <motion.span className="absolute -end-24 -top-24 size-80 rounded-full bg-gold/25 blur-[100px]" animate={{ opacity: [0.5, 0.9, 0.5] }} transition={{ duration: 6, repeat: Infinity }} aria-hidden />
+            <div className="bg-grid-dark absolute inset-0 opacity-40" aria-hidden />
+            <BandLine />
 
-            {/* support hub */}
-            <div className="is-dark relative grid min-h-[340px] place-items-center overflow-hidden bg-gradient-to-br from-brand-800 via-brand-950 to-ink" aria-hidden>
-              <div className="bg-grid-dark absolute inset-0 opacity-60" />
-              <div className="absolute size-72 rounded-full bg-gold/25 blur-[90px]" />
-              <div dir="ltr" className="relative size-[280px]">
-                {[280, 200, 120].map((s, i) => (
-                  <motion.span key={s} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" style={{ width: s, height: s }} animate={{ scale: [1, 1.05, 1], opacity: [0.5, 1, 0.5] }} transition={{ duration: 4, delay: i * 0.5, repeat: Infinity }} />
-                ))}
-                <motion.div className="absolute inset-0" animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}>
-                  {ORBIT.map((Icon, i) => {
-                    const a = (i / ORBIT.length) * Math.PI * 2;
-                    return (
-                      <motion.span key={i} className="absolute grid size-11 place-items-center rounded-2xl bg-white/10 text-gold-200 ring-1 ring-white/15 backdrop-blur" style={{ left: `calc(50% + ${Math.cos(a) * 140}px - 22px)`, top: `calc(50% + ${Math.sin(a) * 140}px - 22px)` }} animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}>
-                        <Icon className="size-5" />
-                      </motion.span>
-                    );
-                  })}
-                </motion.div>
-                <span className="absolute left-1/2 top-1/2 grid size-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-3xl bg-gradient-to-br from-gold to-gold-600 text-white shadow-[0_0_50px_rgba(182,135,86,0.55)]">
-                  <motion.span animate={{ rotate: [0, -8, 8, 0] }} transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 1 }}>
-                    <Headset className="size-9" />
-                  </motion.span>
-                </span>
-                <span className="absolute left-1/2 top-1/2 size-20 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-3xl bg-gold/20" />
+            <div className="relative grid items-center gap-8 lg:grid-cols-[1.4fr_auto] lg:gap-14">
+              <div>
+                <h2 className="heading-section">
+                  <AccentTitle text={t('title')} words={2} />
+                </h2>
+                <p className="mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-white/65 md:text-[15px]">{t('description')}</p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                <ArrowLink href={PORTAL.register} variant="gold" className="justify-between">
+                  {t('live')}
+                </ArrowLink>
+                <NavLink href={PORTAL.demo} className="inline-flex h-13 items-center justify-center rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
+                  {t('demo')}
+                </NavLink>
               </div>
             </div>
           </div>

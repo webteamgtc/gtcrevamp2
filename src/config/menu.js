@@ -20,6 +20,7 @@ export const PORTAL = {
 export const MENU = [
   {
     id: 'company',
+    href: '/company', // clicking "Company" in the top bar opens the Company page
     columns: [
       [{ id: 'about', items: [
         { id: 'companyOverview', href: '/company', icon: Landmark },

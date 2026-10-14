@@ -6,7 +6,7 @@ import ArrowLink from '@/components/shared/ArrowLink';
 import { Reveal, EASE } from '@/components/motion';
 import { AU, MU, ZA, VU, KH } from 'country-flag-icons/react/3x2';
 import { cn } from '@/lib/utils';
-import { SectionIntro, ScrollHint } from './parts';
+import { SectionIntro } from './parts';
 import { useScrollSteps } from './useScrollSteps';
 
 const AUTO_MS = 6500;
@@ -21,7 +21,8 @@ const ENTITIES = [
 
 /**
  * Legal Information: flag tabs + a spotlight card that slides in the direction you move.
- * Desktop: the section pins and each scroll step shows the next jurisdiction. Phones: auto-advances.
+ * Desktop: the jurisdiction follows the scroll as the section passes (no pinning, no extra height).
+ * Phones: auto-advances.
  */
 export function Legal() {
   const t = useTranslations('companyPage.legalSection');
@@ -32,12 +33,12 @@ export function Legal() {
   const { id, Flag } = ENTITIES[i];
 
   return (
-    <section id="legal" ref={s.outerRef} style={s.outerStyle} className="relative scroll-mt-24 bg-white text-ink">
-      <div className={cn('relative overflow-hidden', s.pinned ? 'sticky top-0 flex h-screen flex-col justify-center py-8' : 'py-14 md:py-24')}>
+    <section id="legal" ref={s.outerRef} className="relative scroll-mt-24 bg-white text-ink">
+      <div className="relative overflow-hidden py-14 md:py-20">
       <div className="container-x relative w-full">
         <SectionIntro layout="split" title={t('title')} sub={t('subtitle')} description={t('description')} />
 
-        <div className={s.pinned ? 'mt-8' : 'mt-12'} {...s.hover}>
+        <div className="mt-10" {...s.hover}>
           {/* tabs */}
           <div>
             <div role="tablist" aria-label={t('subtitle')} className="grid grid-cols-5 gap-1.5 sm:gap-2 rounded-2xl border border-brand/10 bg-[#f3f5fa] p-1.5">
@@ -84,7 +85,7 @@ export function Legal() {
                 className="grid md:grid-cols-[0.8fr_1.2fr]"
               >
                 {/* flag stage */}
-                <div className="relative grid min-h-[220px] place-items-center overflow-hidden bg-gradient-to-br from-brand-900 to-brand-950 p-8 md:min-h-[340px]">
+                <div className="relative grid min-h-[200px] place-items-center overflow-hidden bg-gradient-to-br from-brand-900 to-brand-950 p-8 md:min-h-[280px]">
                   <div className="bg-grid-dark absolute inset-0 opacity-60" aria-hidden />
                   <div className="absolute size-64 rounded-full bg-gold/25 blur-[80px]" aria-hidden />
                   {[1, 2, 3].map((r) => (
@@ -98,7 +99,7 @@ export function Legal() {
                   </motion.div>
                 </div>
                 {/* text */}
-                <div className="flex flex-col justify-center p-7 md:p-12">
+                <div className="flex flex-col justify-center p-7 md:p-10">
                   <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">
                     <ShieldCheck className="size-3.5" /> {t('entity')}
                   </span>
@@ -110,11 +111,10 @@ export function Legal() {
           </div>
         </div>
 
-        <Reveal y={12} className={cn('flex justify-center', s.pinned ? 'mt-7' : 'mt-10')}>
+        <Reveal y={12} className="mt-8 flex justify-center">
           <ArrowLink href="/regulation">{t('viewMore')}</ArrowLink>
         </Reveal>
       </div>
-      {s.pinned && <ScrollHint text={t('scrollHint')} count={ENTITIES.length} index={i} onPick={s.goTo} labels={ENTITIES.map((e) => t(`entities.${e.id}.name`))} />}
       </div>
     </section>
   );

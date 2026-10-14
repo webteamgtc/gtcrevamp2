@@ -140,7 +140,14 @@ export default function MobileNav({ open, onClose }) {
                     transition={{ duration: 0.35, ease: EASE }}
                     className="absolute inset-0 overflow-y-auto overscroll-contain px-5 py-6"
                   >
-                    <h2 className="heading-title">{t(`groups.${group.id}`)}</h2>
+                    {group.href ? (
+                      <NavLink href={group.href} onClick={onClose} className="group inline-flex items-center gap-2">
+                        <h2 className="heading-title">{t(`groups.${group.id}`)}</h2>
+                        <ChevronRight className="size-5 text-gold transition-transform group-active:translate-x-1 rtl:-scale-x-100" />
+                      </NavLink>
+                    ) : (
+                      <h2 className="heading-title">{t(`groups.${group.id}`)}</h2>
+                    )}
                     <div className="mt-6 space-y-7">
                       {group.columns.flat().map((sec, si) => (
                         <motion.section key={sec.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 + si * 0.05 }}>
