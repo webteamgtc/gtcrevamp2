@@ -18,16 +18,8 @@ export function CompanyHero() {
 
   return (
     <section className="is-dark relative overflow-hidden pb-14 pt-36 md:pb-20 md:pt-44">
-      {/* background: grid, glows, skyline */}
-      <div className="bg-grid-dark mask-radial absolute inset-0 opacity-80" />
-      <div className="absolute left-1/2 top-[-260px] h-[620px] w-[960px] -translate-x-1/2 rounded-full bg-brand/45 blur-[140px]" />
-      <motion.div
-        className="absolute end-[8%] top-40 size-[320px] rounded-full bg-gold/20 blur-[110px]"
-        animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
+      {/* background: moving navy/gold gradient mesh + horizon glow */}
       <HeroTradingBackdrop />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
       <div className="container-x relative text-center">
         <nav aria-label="Breadcrumb" className="flex justify-center">
