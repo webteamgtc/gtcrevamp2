@@ -9,7 +9,7 @@ import { Reveal, WordReveal, TextGenerate, Parallax, MaskReveal } from '@/compon
 
 export function Leaders() {
   const t = useTranslations('leaders');
-  const people = [{ k: 'ceo', photo: '/ceo.png' }];
+  const people = [{ k: 'ceo', photo: '/ceo.webp' }];
   return (
     <section className="relative overflow-hidden bg-white py-10 text-ink md:py-16">
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-30" />

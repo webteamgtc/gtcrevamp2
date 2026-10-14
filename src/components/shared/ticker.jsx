@@ -51,6 +51,20 @@ export const TICKER_GROUPS = [
     { s: 'COCOA', n: 'Cocoa', p: 7420.0, d: 1 },
     { s: 'SUGAR', n: 'Sugar', p: 16.84, d: 2 },
     { s: 'WHEAT', n: 'Wheat', p: 521.6, d: 1 }
+  ],
+  // 7: menu "Recommendations"
+  [
+    { s: 'EURUSD', n: 'Euro / Dollar', p: 1.16035, d: 5 },
+    { s: 'GBPUSD', n: 'Pound / Dollar', p: 1.34218, d: 5 },
+    { s: 'USDJPY', n: 'Dollar / Yen', p: 151.842, d: 3 },
+    { s: 'USDCHF', n: 'Dollar / Franc', p: 0.80412, d: 5 },
+    { s: 'XAUUSD', n: 'Gold', p: 4158.99, d: 2 }
+  ],
+  // 8: menu "Popular indices"
+  [
+    { s: 'US30', n: 'Wall Street', p: 46820.5, d: 1 },
+    { s: 'SPX500', n: 'US SP 500', p: 6720.4, d: 1 },
+    { s: 'NAS100', n: 'US Tech 100', p: 24980.2, d: 1 }
   ]
 ];
 export const TAB_GROUPS = 5;

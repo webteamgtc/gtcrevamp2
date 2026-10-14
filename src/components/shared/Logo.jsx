@@ -2,19 +2,21 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 /**
- * Draft logo — cropped from the current site. Replace /public/images/gtc-logo.png
- * with the official SVG (and a white version for dark headers) before launch.
+ * GTCFX logo.
+ * Live site: the official logos from S3 (white on dark backgrounds, colour on light backgrounds).
+ * Review-link builds use local copies, because the review host blocks images from other sites.
  */
+const S3 = 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/logo';
+const PREVIEW = process.env.NEXT_PUBLIC_STATIC_EXPORT === '1';
+const src = (onDark) =>
+  PREVIEW
+    ? onDark ? '/images/preview-logo-white.png' : '/images/preview-logo.png'
+    : onDark ? `${S3}/footer-logo.webp` : `${S3}/main-logo.webp`;
+
 export default function Logo({ className, onDark = false }) {
   return (
-    <span
-      className={cn(
-        'inline-flex items-center rounded-lg transition-all',
-        onDark && ' px-1.5 py-1 shadow-lg shadow-black/20',
-        className
-      )}
-    >
-      <Image src={onDark?"https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/logo/footer-logo.webp":"https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/logo/main-logo.webp"} alt="GTCFX" width={186} height={72} priority className="h-9 w-auto md:h-10" />
+    <span className={cn('inline-flex items-center', className)}>
+      <Image src={src(onDark)} alt="GTCFX" width={174} height={62} priority className="h-11 w-auto md:h-12" />
     </span>
   );
 }

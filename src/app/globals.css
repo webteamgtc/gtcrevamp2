@@ -81,6 +81,12 @@
 @layer base {
   html { scroll-behavior: smooth; }
   html[dir="rtl"] body { font-family: var(--font-arabic); }
+  /* scripts Inter does not cover: use good system fonts */
+  :lang(th) { font-family: "Inter Variable", "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif; }
+  :lang(hi) { font-family: "Inter Variable", "Noto Sans Devanagari", "Nirmala UI", "Kohinoor Devanagari", sans-serif; }
+  :lang(zh) { font-family: "Inter Variable", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  :lang(zh-TW) { font-family: "Inter Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
+  :lang(ur), :lang(ps) { font-family: var(--font-arabic); }
   body {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -141,6 +147,21 @@
     -webkit-mask-composite: xor; mask-composite: exclude;
     animation: var(--animate-beam); z-index: -1; pointer-events: none;
   }
+
+  /* Moving gradient border on left, right and bottom only (open mega menu, language panel).
+     Two highlights half a turn apart, centred on the top edge, so one is always travelling
+     down a side or along the bottom. */
+  .beam-drop { isolation: isolate; } /* set position (relative or fixed) on the element */
+  .beam-drop::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 0 1px 1px;
+    background: conic-gradient(from var(--beam-angle) at 50% 0%,
+      rgb(182 135 86 / 0.32) 0%, rgb(182 135 86 / 0.32) 32%, #b68756 40%, #f1e3d3 44%, #293b93 48%, rgb(182 135 86 / 0.32) 50%,
+      rgb(182 135 86 / 0.32) 82%, #b68756 90%, #f1e3d3 94%, #293b93 98%, rgb(182 135 86 / 0.32) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    animation: beam 7s linear infinite; z-index: 1; pointer-events: none;
+  }
+  @media (prefers-reduced-motion: reduce) { .beam-drop::before, .border-beam::before { animation: none; } }
 
   .shine { position: relative; overflow: hidden; }
   .shine::after {
