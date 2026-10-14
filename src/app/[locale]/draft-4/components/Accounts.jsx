@@ -25,14 +25,10 @@ export function Accounts() {
       <div className="container-x relative">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <Reveal y={16} className="max-w-xl">
-            <div className="flex items-center gap-3">
-              <span className="h-0.5 w-10 shrink-0 bg-gold" aria-hidden />
-              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-ink/45">{t('eyebrow')}</span>
-            </div>
-            <h2 className="mt-5 text-balance text-3xl font-bold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.65rem]">
+            <h2 className="heading-section">
               {t('titleA')}
               <br />
-              <span className="text-gradient-brand">{t('titleB')}</span>
+              <span className="heading-accent">{t('titleB')}</span>
             </h2>
           </Reveal>
           <Reveal y={12} delay={0.1} className="max-w-md lg:pb-1">
@@ -71,7 +67,7 @@ export function Accounts() {
                         </span>
                       )}
                     </div>
-                    <h3 className={cn('mt-4 text-[1.65rem] font-bold leading-tight md:text-[1.75rem]', standard ? 'text-white' : 'text-ink')}>
+                    <h3 className={cn('heading-title mt-4', standard && 'is-dark')}>
                       {item.name}
                     </h3>
                     <p

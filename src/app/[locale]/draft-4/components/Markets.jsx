@@ -83,7 +83,7 @@ export function Markets() {
       >
       <div className="relative">
         <div ref={headRef} className="container-x relative flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading index={2} eyebrow={t('eyebrow')} title={t('titleA')} titleB={t('titleB')} align="start" />
+          <SectionHeading title={t('titleA')} titleB={t('titleB')} align="start" />
           <div className={cn('w-48', dist === 0 && 'invisible')}>
             <div className="text-xs text-ink/45">{tc('scroll')}</div>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-brand/10">
@@ -106,7 +106,7 @@ export function Markets() {
                   </div>
                   <div className="relative mt-auto">
                     <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gold-700">{it.name}</span>
-                    <h3 className="mt-3 text-2xl font-semibold text-ink">{it.title}</h3>
+                    <h3 className="heading-title mt-3">{it.title}</h3>
                     <p className="mt-3 text-ink/60">{it.text}</p>
                     <div className="mt-5 h-14">
                       <AreaChart seed={i + 4} color={i % 2 ? '#b68756' : '#5565bd'} className="h-full" />

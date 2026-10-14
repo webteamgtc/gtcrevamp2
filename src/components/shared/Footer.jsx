@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUp, ChevronDown, Cookie } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import Logo from './Logo';
 import { SOCIALS } from './icons';
 import { StoreBadges } from './GtcGoPhone';
 import { Stagger, StaggerItem, Reveal, EASE } from '../motion';
@@ -31,10 +30,9 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
         {layout === 'split' ? (
           <div className="grid gap-12 pb-12 lg:grid-cols-[1fr_2fr]">
             <Reveal x={-20} y={0}>
-              <Logo onDark={dark} />
-              <h2 className="mt-6 max-w-xs text-2xl font-bold tracking-tight md:text-3xl">
+              <h2 className={cn('heading-title max-w-xs', dark && 'is-dark')}>
                 {t('tagline').split('. ').map((part, i, arr) => (
-                  <span key={i} className={i === 1 ? 'text-gradient-gold' : ''}>
+                  <span key={i} className={i === 1 ? 'heading-accent' : ''}>
                     {part}
                     {i < arr.length - 1 ? '. ' : ''}
                   </span>
@@ -71,12 +69,12 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
           </div>
         ) : (
           <>
-        <div className={cn('flex flex-col gap-8 border-b pb-10 md:flex-row md:items-center md:justify-between', dark ? 'border-white/10' : 'border-brand/10')}>
+        <div className={cn('flex flex-col gap-6 border-b pb-10 md:flex-row md:items-center md:justify-between', dark ? 'border-white/10' : 'border-brand/10')}>
+          {/* tagline on the start side, social icons on the end side, vertically centred on one line */}
           <Reveal>
-            <Logo onDark={dark} />
-            <h2 className="mt-6 text-2xl font-bold tracking-tight md:text-3xl">
+            <h2 className={cn('heading-title', dark && 'is-dark')}>
               {t('tagline').split('. ').map((part, i, arr) => (
-                <span key={i} className={i === 1 ? 'text-gradient-gold' : ''}>
+                <span key={i} className={i === 1 ? 'heading-accent' : ''}>
                   {part}
                   {i < arr.length - 1 ? '. ' : ''}
                 </span>
@@ -90,7 +88,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
                   href={s.href}
                   aria-label={s.name}
                   className={cn(
-                    'grid size-11 place-items-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:bg-gold hover:text-white',
+                    'grid size-10 place-items-center rounded-full border transition-all duration-300 md:size-11 hover:-translate-y-1 hover:border-gold hover:bg-gold hover:text-white',
                     dark ? 'border-white/15 text-white/80' : 'border-brand/15 bg-white text-brand'
                   )}
                 >
@@ -118,7 +116,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
 
         {/* Risk warning */}
         <Reveal className={cn('border-t py-10', dark ? 'border-white/10' : 'border-brand/10')} y={16}>
-          <h3 className="text-xs font-bold uppercase tracking-[0.2em]">{t('riskTitle')}</h3>
+          <h3 className={cn('heading-label', dark && 'is-dark')}>{t('riskTitle')}</h3>
           <div className={cn('mt-4 space-y-3 text-[13px] leading-relaxed', dark ? 'text-white/55' : 'text-ink/60')}>
             {t.raw('risk').map((p, i) => (
               <p key={i}>{p}</p>
@@ -161,7 +159,7 @@ function FooterColumn({ title, links, dark }) {
   return (
     <div className={cn('border-b py-4 sm:border-0 sm:py-0', dark ? 'border-white/10' : 'border-brand/10')}>
       <button onClick={() => setOpen((o) => !o)} className="flex w-full items-center justify-between sm:pointer-events-none" aria-expanded={open}>
-        <h4 className="text-sm font-bold uppercase tracking-[0.14em] text-gold">{title}</h4>
+        <h4 className={cn('heading-label', dark && 'is-dark')}>{title}</h4>
         <ChevronDown className={cn('size-4 text-gold transition-transform sm:hidden', open && 'rotate-180')} />
       </button>
       <ul className={cn('mt-4 space-y-3 overflow-hidden text-[15px] sm:block', open ? 'block' : 'hidden')}>

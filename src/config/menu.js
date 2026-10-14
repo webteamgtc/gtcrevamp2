@@ -22,7 +22,8 @@ export const MENU = [
     id: 'company',
     columns: [
       [{ id: 'about', items: [
-        { id: 'aboutUs', href: '/about', icon: Building2 },
+        { id: 'companyOverview', href: '/company', icon: Landmark },
+        { id: 'aboutUs', href: '/company/about-us', icon: Building2 },
         { id: 'whyGtcfx', href: '/why-gtcfx', icon: Sparkles },
         { id: 'globalPresence', href: '/global-presence', icon: Globe },
         { id: 'events', href: '/events', icon: CalendarDays }

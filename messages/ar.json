@@ -627,7 +627,8 @@
       "earnings": "مفكرة الأرباح والتوزيعات",
       "holidays": "عطلات السوق",
       "companyNews": "أخبار الشركة",
-      "awardsMedia": "الجوائز والإعلام"
+      "awardsMedia": "الجوائز والإعلام",
+      "companyOverview": "نظرة عامة على الشركة"
     },
     "promos": {
       "company": {
@@ -724,7 +725,8 @@
       "earnings": "نتائج الشركات والتوزيعات",
       "holidays": "ساعات التداول والإغلاقات",
       "companyNews": "إعلانات GTCFX",
-      "awardsMedia": "التغطية الإعلامية والجوائز"
+      "awardsMedia": "التغطية الإعلامية والجوائز",
+      "companyOverview": "GTCFX في لمحة"
     },
     "eyebrow": "GTCFX"
   }

@@ -117,7 +117,7 @@ function Watch({ t, dark }) {
   return (
     <div className="px-4">
       <div className="flex items-center justify-between">
-        <h4 className="text-base font-bold">{t('watchlist')}</h4>
+        <h4 className="heading-small">{t('watchlist')}</h4>
         <span className="rounded-full bg-gold/15 px-2 py-0.5 text-[9px] font-bold text-gold">LIVE</span>
       </div>
       <div className="mt-3 space-y-1.5">
@@ -199,7 +199,7 @@ function Trade({ t, dark }) {
 function Portfolio({ t, dark }) {
   return (
     <div className="px-4">
-      <h4 className="text-base font-bold">{t('portfolio')}</h4>
+      <h4 className="heading-small">{t('portfolio')}</h4>
       <div className="mt-3 overflow-hidden rounded-2xl bg-gradient-to-br from-brand to-brand-900 p-4 text-white">
         <div className="text-[9px] text-white/60">{t('balance')}</div>
         <div className="text-xl font-bold">

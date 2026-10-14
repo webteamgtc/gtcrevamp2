@@ -16,9 +16,10 @@ export const HeadingStyle = createContext('pill');
  */
 export function SectionHeading({ eyebrow, title, titleB, subtitle, dark = false, align = 'center', index, className }) {
   const style = useContext(HeadingStyle);
-  const h2 = cn('text-balance text-2xl font-bold leading-[1.15] tracking-tight sm:text-3xl lg:text-[2.6rem]', dark ? 'text-white' : 'text-ink');
+  // size, weight, colour and gradient come from .heading-section / .heading-accent in globals.css
+  const h2 = cn('heading-section', dark && 'is-dark');
   const sub = cn('text-pretty text-[15px] leading-relaxed md:text-base', dark ? 'text-white/60' : 'text-ink/60');
-  const gradient = dark ? 'text-gradient-gold' : 'text-gradient-brand';
+  const gradient = 'heading-accent';
   const Title = (
     <>
       <WordReveal text={title} />
@@ -34,6 +35,7 @@ export function SectionHeading({ eyebrow, title, titleB, subtitle, dark = false,
   if (style === 'index') {
     return (
       <div className={cn('max-w-3xl', className)}>
+        {(index || eyebrow) && (
         <div className="flex items-center gap-4">
           {index && (
             <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-mono text-sm font-semibold tabular-nums text-gold">
@@ -47,7 +49,8 @@ export function SectionHeading({ eyebrow, title, titleB, subtitle, dark = false,
             </Reveal>
           )}
         </div>
-        <h2 className={cn(h2, 'mt-5')}>{Title}</h2>
+        )}
+        <h2 className={cn(h2, (index || eyebrow) && 'mt-5')}>{Title}</h2>
         {subtitle && (
           <Reveal delay={0.2} y={16}>
             <p className={cn(sub, 'mt-4 max-w-xl')}>{subtitle}</p>
@@ -69,7 +72,7 @@ export function SectionHeading({ eyebrow, title, titleB, subtitle, dark = false,
               </span>
             </Reveal>
           )}
-          <h2 className={cn(h2, 'mt-4')}>{Title}</h2>
+          <h2 className={cn(h2, eyebrow && 'mt-4')}>{Title}</h2>
         </div>
         {subtitle && (
           <div className="relative ps-6">
@@ -102,7 +105,7 @@ export function SectionHeading({ eyebrow, title, titleB, subtitle, dark = false,
           </span>
         </Reveal>
       )}
-      <h2 className={cn(h2, 'mt-5')}>{Title}</h2>
+      <h2 className={cn(h2, eyebrow && 'mt-5')}>{Title}</h2>
       {subtitle && (
         <Reveal delay={0.2} y={16}>
           <p className={cn(sub, 'mt-4', align === 'center' && 'mx-auto max-w-2xl')}>{subtitle}</p>

@@ -126,6 +126,67 @@
   .mask-fade-x { mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
   .mask-radial { mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%); }
 
+  /* ------------------------------------------------------------------
+     Heading system: every heading on the site uses one of these classes.
+     Change sizes, weights, colours or the accent gradient here only.
+       heading-display  hero h1 (homepage)
+       heading-page     hero h1 on inner pages (same size as heading-section)
+       heading-section  section h2
+       heading-title    large h3 (feature cards, people, platforms)
+       heading-card     card / dialog / panel titles
+       heading-small    small h4
+       heading-label    small uppercase label titles (footer columns, menu groups)
+       heading-accent   the gradient part of a heading (navy on light, gold on dark)
+     Add `is-dark` to a heading, or to any parent on a dark background,
+     to switch the colours to the dark set.
+     ------------------------------------------------------------------ */
+  :root {
+    --heading-fg: var(--color-ink);
+    --heading-label: var(--color-gold-700);
+    --heading-accent: linear-gradient(100deg, #293b93 0%, #5565bd 45%, #b68756 100%);
+    --heading-accent-size: 100% auto;
+    --heading-accent-anim: none;
+  }
+  .is-dark {
+    --heading-fg: #ffffff;
+    --heading-label: var(--color-gold-300);
+    --heading-accent: linear-gradient(100deg, #d2a67a 0%, #b68756 40%, #f1e3d3 55%, #b68756 70%, #9a6f43 100%);
+    --heading-accent-size: 200% auto;
+    --heading-accent-anim: shimmer 6s linear infinite;
+  }
+  .heading-display, .heading-page, .heading-section, .heading-title, .heading-card, .heading-small, .heading-label {
+    color: var(--heading-fg);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .heading-display { font-size: 2.3rem; line-height: 1.05; letter-spacing: -0.03em; }
+  .heading-page    { font-size: 1.75rem; line-height: 1.12; letter-spacing: -0.025em; } /* inner-page hero: same scale as section titles */
+  .heading-section { font-size: 1.75rem; line-height: 1.15; letter-spacing: -0.025em; }
+  .heading-title   { font-size: 1.375rem; line-height: 1.2;  letter-spacing: -0.025em; }
+  .heading-card    { font-size: 1.25rem; line-height: 1.3; letter-spacing: -0.015em; }
+  .heading-small   { font-size: 1rem; line-height: 1.4; }
+  .heading-label   { color: var(--heading-label); font-size: 0.75rem; line-height: 1.4; letter-spacing: 0.18em; text-transform: uppercase; }
+  @media (min-width: 640px) {
+    .heading-display { font-size: 3rem; }
+    .heading-page    { font-size: 1.875rem; }
+    .heading-section { font-size: 1.875rem; }
+  }
+  @media (min-width: 768px) {
+    .heading-title { font-size: 1.875rem; }
+  }
+  @media (min-width: 1024px) {
+    .heading-display { font-size: 3.9rem; }
+    .heading-page    { font-size: 2.6rem; }
+    .heading-section { font-size: 2.6rem; }
+  }
+  .heading-accent {
+    background-image: var(--heading-accent);
+    background-size: var(--heading-accent-size);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: var(--heading-accent-anim);
+  }
+  @media (prefers-reduced-motion: reduce) { .heading-accent { animation: none; } }
+
   .text-gradient-gold {
     background: linear-gradient(100deg, #d2a67a 0%, #b68756 40%, #f1e3d3 55%, #b68756 70%, #9a6f43 100%);
     background-size: 200% auto;

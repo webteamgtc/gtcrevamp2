@@ -99,7 +99,7 @@ function Section({ sec, onNavigate, dark }) {
   const t = useTranslations('menu');
   return (
     <motion.div variants={item} className="min-w-0">
-      <h3 className={cn('px-3 text-[11px] font-bold uppercase tracking-[0.18em]', dark ? 'text-gold-200/80' : 'text-gold-700')}>{t(`sections.${sec.id}`)}</h3>
+      <h3 className={cn('heading-label px-3', dark && 'is-dark')}>{t(`sections.${sec.id}`)}</h3>
       {sec.live !== undefined ? (
         <LiveList sec={sec} onNavigate={onNavigate} dark={dark} />
       ) : (
@@ -197,7 +197,7 @@ function Promo({ promo, onNavigate }) {
 
       <motion.div className="relative" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.4, ease: EASE }}>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-200">{t('eyebrow')}</p>
-        <h3 className="mt-3 text-xl font-bold tracking-tight">{t(`${p}.title`)}</h3>
+        <h3 className="heading-card is-dark mt-3">{t(`${p}.title`)}</h3>
         <p className="mt-2 text-sm leading-relaxed text-white/75">{t(`${p}.text`)}</p>
       </motion.div>
 

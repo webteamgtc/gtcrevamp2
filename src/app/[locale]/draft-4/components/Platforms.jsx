@@ -46,7 +46,7 @@ export function Platforms() {
       <div className="bg-dots-light mask-radial pointer-events-none absolute inset-0 opacity-30" />
       <Ambient tone="light" />
       <div className="container-x relative">
-        <SectionHeading index={3} eyebrow={t('eyebrow')} title={t('title')} subtitle={t('subtitle')} />
+        <SectionHeading title={t('title')} subtitle={t('subtitle')} />
 
         <Reveal y={24} className="relative mt-14 overflow-hidden rounded-[2rem] border border-brand/10 bg-[#f7f8fc] shadow-xl shadow-brand/[0.06]">
           <div className="absolute -end-24 -top-24 size-72 rounded-full bg-gold-100/80 blur-3xl" aria-hidden />
@@ -91,7 +91,7 @@ export function Platforms() {
                     <span className="grid size-5 place-items-center rounded-full bg-gradient-to-br from-gold to-gold-600 text-[9px] font-black text-white">{platformBadge(it.key)}</span>
                     {it.brand}
                   </span>
-                  <h3 className="mt-5 text-2xl font-bold tracking-tight text-ink md:text-3xl">{it.title}</h3>
+                  <h3 className="heading-title mt-5">{it.title}</h3>
                   <p className="mt-3 text-[15px] leading-relaxed text-ink/60 md:text-base">{it.tagline}</p>
                   <ul className="mt-6 space-y-2.5">
                     {features.map((f, k) => (

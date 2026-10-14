@@ -38,7 +38,7 @@ export function Features() {
                       <div className="flex items-start justify-between">
                         <div>
                           <p className={cn('text-xs font-medium', hero ? 'text-white/60' : 'text-ink/45')}>{it.eyebrow}</p>
-                          <h3 className={cn('mt-1.5 font-semibold', hero ? 'text-2xl md:text-3xl' : 'text-xl text-ink')}>{it.title}</h3>
+                          <h3 className={cn('mt-1.5', hero ? 'heading-title is-dark' : 'heading-card')}>{it.title}</h3>
                         </div>
                         <motion.span
                           whileHover={{ rotate: 12, scale: 1.1 }}

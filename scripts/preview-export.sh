@@ -10,12 +10,17 @@ mkdir -p preview
 cp -r out/_next out/images out/icon.png preview/ 2>/dev/null || true
 # Draft 4 (the chosen homepage) in every language
 for d in out/*/draft-4; do l=$(basename $(dirname $d)); mkdir -p preview/$l/draft-4; cp $d/index.html preview/$l/draft-4/; done
+# Company hub in every language
+for d in out/*/company; do l=$(basename $(dirname $d)); mkdir -p preview/$l/company; cp $d/index.html preview/$l/company/; done
+# award images: the real ones from public/awards, or preview stand-ins
+mkdir -p preview/awards
+if ls public/awards/*.webp >/dev/null 2>&1; then cp public/awards/*.webp preview/awards/; else cp preview-hub/awards/*.webp preview/awards/ 2>/dev/null || true; fi
 cp public/ceo.webp preview/
 # every draft page sits two folders deep, so ../../ points to the preview root
 # CSS files live in _next/static/css/, so their font URLs point to ../media/
 find preview -name '*.css' | while read f; do sed -i 's#/__GTC__/_next/static/media/#../media/#g' "$f"; done
 find preview -name '*.html' -o -name '*.js' | while read f; do
-  sed -i 's#/__GTC__/_next/#../../_next/#g; s#"/images/#"../../images/#g; s#"/icon.png#"../../icon.png#g; s#"/ceo.webp#"../../ceo.webp#g' "$f"
+  sed -i 's#/__GTC__/_next/#../../_next/#g; s#"/images/#"../../images/#g; s#"/icon.png#"../../icon.png#g; s#"/ceo.webp#"../../ceo.webp#g; s#"/awards/#"../../awards/#g' "$f"
 done
 
 # avoid "[locale]" in URLs: rename the chunk folder and its references

@@ -29,7 +29,7 @@ export function AccountsCompareDialog({ open, onOpenChange, t, items, labels }) 
             transition={{ duration: 0.35, ease: EASE }}
           >
             <div className="border-b border-brand/10 px-6 py-5 md:px-8">
-              <h2 id="accounts-compare-title" className="text-xl font-bold text-ink">
+              <h2 id="accounts-compare-title" className="heading-card">
                 {t('compare')}
               </h2>
               <p className="mt-1 text-sm text-ink/60">{t('subtitle')}</p>

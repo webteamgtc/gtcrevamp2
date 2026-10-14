@@ -18,11 +18,11 @@ export function Leaders() {
         {people.map((p) => (
           <div key={p.k} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
             <div className="lg:pe-4">
-              <SectionHeading index={5} eyebrow={t('eyebrow')} title={t('title')} subtitle={t('subtitle')} align="start" className="max-w-xl" />
+              <SectionHeading title={t('title')} subtitle={t('subtitle')} align="start" className="max-w-xl" />
               <Reveal y={16} className="mt-10 md:mt-12">
                 <span className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-700">{t(`${p.k}.role`)}</span>
               </Reveal>
-                <h3 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">
+                <h3 className="heading-title mt-4">
                   <WordReveal text={t(`${p.k}.name`)} />
                 </h3>
                 <TextGenerate text={`“${t(`${p.k}.quote`)}”`} className="mt-6 text-lg font-light leading-relaxed text-ink/70 md:text-2xl" />

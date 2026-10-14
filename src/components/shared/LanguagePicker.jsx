@@ -195,7 +195,7 @@ export default function LanguagePicker({ dark = false, className, onOpenChange, 
         <Globe className="size-5" />
       </span>
       <div className="min-w-0 flex-1">
-        <h2 id="lang-title" className={cn('text-lg font-bold', c.title)}>
+        <h2 id="lang-title" className={cn('heading-card', dark && 'is-dark')}>
           {t('title')}
         </h2>
         <p className={cn('text-sm', c.muted)}>{t('subtitle', { count: LOCALES.length })}</p>

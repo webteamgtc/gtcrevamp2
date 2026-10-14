@@ -72,10 +72,10 @@ export function Hero() {
           <span className="size-1.5 rounded-full bg-gold" /> {t('badge')}
         </motion.span>
 
-        <h1 className="mx-auto mt-8 max-w-5xl text-[2.3rem] font-bold leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-[3.9rem]">
+        <h1 className="heading-display is-dark mx-auto mt-8 max-w-5xl">
           <WordReveal text={t('titleA')} immediate delay={0.1} />
           <br />
-          <WordReveal text={t('titleB')} immediate delay={0.3} wordClassName="text-gradient-gold" />
+          <WordReveal text={t('titleB')} immediate delay={0.3} wordClassName="heading-accent" />
         </h1>
 
         <Reveal delay={0.55} y={16}>

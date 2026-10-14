@@ -631,7 +631,8 @@
       "earnings": "Earnings & Dividends Calendar",
       "holidays": "Market Holidays",
       "companyNews": "Company News",
-      "awardsMedia": "Awards & Media"
+      "awardsMedia": "Awards & Media",
+      "companyOverview": "Company Overview"
     },
     "promos": {
       "company": {
@@ -728,8 +729,171 @@
       "earnings": "Company results and payouts",
       "holidays": "Trading hours and closures",
       "companyNews": "Announcements from GTCFX",
-      "awardsMedia": "Press coverage and awards"
+      "awardsMedia": "Press coverage and awards",
+      "companyOverview": "GTCFX at a glance"
     },
     "eyebrow": "GTCFX"
+  },
+  "companyPage": {
+    "meta": {
+      "title": "About GTCFX | Global Regulated CFD Broker Since 2012",
+      "description": "GTCFX is a global leader in financial derivatives since 2012, serving over 985,000 clients. Learn about our regulated entities, awards, leverage, partnerships and support."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "company": "Company"
+    },
+    "hubSection": {
+      "title": "About GTCFX",
+      "description": "GTCFX is a global leader in financial derivatives, established in 2012. The GTCFX brand encompasses multiple companies that provide a diverse range of online trading products, serving over 985,000 clients worldwide. GTCFX is recognized for its commitment to delivering top-tier financial services, with a strong emphasis on excellence and innovation.",
+      "ctaLive": "Open Live Account",
+      "ctaSecondary": "Our Licences"
+    },
+    "legalSection": {
+      "title": "Legal Information",
+      "subtitle": "GTCFX Regulation",
+      "description": "GTC Group owns the following entities globally, together the GTC Financial Group. Each of these entities provides financial services according to their respective licences in the relevant jurisdiction.",
+      "viewMore": "View More",
+      "entities": {
+        "australia": {
+          "name": "Australia",
+          "text": "GTC Global (Australia) Pty Ltd holds an Australian Financial Services Licence number 496371. GTC Global (Australia) focuses on providing education services to Australian clients."
+        },
+        "mauritius": {
+          "name": "Mauritius",
+          "text": "GTC Global Ltd. is a limited company incorporated in Mauritius (company number: C188049) and licensed by the Financial Services Commission, Mauritius (No. GB22200292) to trade as an SEC-2."
+        },
+        "southAfrica": {
+          "name": "South Africa",
+          "text": "GTC Global SA (Pty) Ltd (Company No. 2020/810937/07) is an authorised financial services provider (FSP No. 51545). Its registered address is 18 Cavendish Road, Claremont, Cape Town, Western Cape, 7708, South Africa. The company is neither a market maker nor a product issuer and acts solely as an intermediary under the Financial Advisory and Intermediary Services Act, 2002 (FAIS)."
+        },
+        "vanuatu": {
+          "name": "Vanuatu",
+          "text": "GTC Global Trade Capital Co. Limited, is a global finance brokerage company registered, supervised, and authorized by the Vanuatu Financial Services Commission of the Republic of Vanuatu Company license number: 40354. Registered address: 1/Floor, B&P House, Kumul Highway, Port Vila, Vanuatu."
+        },
+        "cambodia": {
+          "name": "Cambodia",
+          "text": "GTCFX Co., Ltd. is licensed by the Securities and Exchange Regulator of Cambodia (SERC) as a Derivative Broker under licence number 043 N.M.K./A.B./Ch.U., valid from 8 October 2026 to 7 October 2028. Registered address: Building No. 40, 8th Floor, Street 289, Phum 13, Sangkat Boeung Kak 1, Khan Tuol Kork, Phnom Penh, Cambodia."
+        }
+      },
+      "entity": "Regulated entity",
+      "scrollHint": "Scroll to see each jurisdiction"
+    },
+    "awardsSection": {
+      "title": "GTCFX Awards",
+      "subtitle": "Award-Winning CFD Broker Recognized for Excellence",
+      "description": "GTCFX has earned industry recognition across multiple international expos and financial events, reflecting our commitment to innovation, service quality, and excellence in global trading solutions.",
+      "viewMore": "View More",
+      "prev": "Previous awards",
+      "next": "Next awards",
+      "items": [
+        {
+          "title": "Best Liquidity Provider Globally",
+          "image": "/awards/1.webp"
+        },
+        {
+          "title": "Best Liquidity Provider",
+          "image": "/awards/2.webp"
+        },
+        {
+          "title": "Best Forex Introducing Broker",
+          "image": "/awards/3.webp"
+        }
+      ],
+      "recognised": "Recognised by the industry"
+    },
+    "leverageSection": {
+      "title": "Leverage Information",
+      "viewMore": "View More",
+      "points": {
+        "multiplier": {
+          "title": "Leverage Multiplier Effect",
+          "description": "Leverage amplifies both losses and profits equally. A 1% market move on a 1:100 leveraged position results in a 100% gain or loss on your margin — understanding this relationship is essential before trading with leverage."
+        },
+        "margin": {
+          "title": "Leverage Ratio & Margin Relationship",
+          "description": "Leverage multiple determines required margin ratio: Margin = Position Value ÷ Leverage"
+        },
+        "lots": {
+          "title": "Contract Size & Lot Size",
+          "description": "Standard Lot = 100,000 Base Currency Units\nMini Lot (0.01 Lot) = 1,000 Base Currency Units"
+        }
+      },
+      "calculator": {
+        "title": "See leverage at work",
+        "leverage": "Leverage",
+        "position": "Position value",
+        "margin": "Required margin",
+        "move": "If the market moves 1%",
+        "ofMargin": "{pct}% of your margin",
+        "formula": "Margin = Position Value ÷ Leverage",
+        "note": "Illustrative example only. Leverage magnifies losses as well as gains."
+      }
+    },
+    "helpCenterSection": {
+      "title": "Help Center",
+      "headlineLine1": "We're here to help",
+      "headlineLine2": "you",
+      "description": "Your satisfaction is our top priority — we're dedicated to ensuring a seamless and professional experience with our services.",
+      "viewMore": "View More",
+      "features": {
+        "fastResponse": {
+          "title": "Fast Response",
+          "description": "Replies within 24 hours on all business days, no waiting around."
+        },
+        "localExpertise": {
+          "title": "Local Expertise",
+          "description": "Agents who deeply understand your regional market and local needs."
+        },
+        "secure": {
+          "title": "Secure & Confidential",
+          "description": "Your data is fully encrypted and handled in accordance with our Privacy Policy."
+        }
+      }
+    },
+    "partnerSection": {
+      "title": "Partner with Us",
+      "description": "Enhance your business and expand your client network with our partnership programs unlock the full potential of your business and maximize earnings through our dedicated ib program, designed to accelerate growth and boost your profitability",
+      "tabs": {
+        "partners": {
+          "label": "Partners Program",
+          "contentTitle": "Partners Program",
+          "contentDescription": "Grow your Introducing Broker business with dedicated support, marketing resources, and competitive revenue structures designed to help you scale your client network and maximize profitability.",
+          "linkAriaLabel": "Open Partners Program"
+        },
+        "prime": {
+          "label": "GTCFX Prime",
+          "contentTitle": "GTCFX Prime",
+          "contentDescription": "Access institutional-grade liquidity and advanced trading technology with GTC Prime. Benefit from tailor-made pricing sourced from tier-1 banks, DMA execution, and end-to-end broker solutions built for professional trading communities.",
+          "linkAriaLabel": "Open GTCFX Prime"
+        }
+      }
+    },
+    "trustPromiseSection": {
+      "eyebrow": "Trust promise",
+      "title": "Trust promise",
+      "description": "GTCFX establishes and practices an ESG strategy for sustainable management and long-term value for our clients and communities.",
+      "panels": {
+        "environment": {
+          "title": "Environment",
+          "description": "Through environmental management and health & safety practices, we protect corporate wellbeing, social wellbeing, and the health of our planet."
+        },
+        "social": {
+          "title": "Social",
+          "description": "As members of society, we fulfill our social responsibilities to clients, employees, and local communities."
+        },
+        "governance": {
+          "title": "Governance",
+          "description": "Through responsible and ethical management, we do our utmost to protect the rights and interests of shareholders and stakeholders."
+        }
+      }
+    },
+    "ctaSection": {
+      "eyebrow": "Still need assistance?",
+      "title": "Didn't Find What You Were Looking For?",
+      "description": "Submit an enquiry or contact our support team using one of the channels above. Our team can assist with account, platform, payment and general service-related matters. GTCFX provides general and administrative support only through this page. Nothing communicated through our support channels constitutes investment, legal or tax advice.",
+      "live": "Open Live Account",
+      "demo": "Open Free Demo Account"
+    }
   }
 }

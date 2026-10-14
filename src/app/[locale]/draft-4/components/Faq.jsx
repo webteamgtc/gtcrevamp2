@@ -18,7 +18,7 @@ export function Faq() {
       <Ambient tone="light" />
       <div className="container-x relative">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-[70px]">
-          <SectionHeading index={6} eyebrow={t('eyebrow')} title={t('titleA')} titleB={t('titleB')} align="start" className="max-w-xl" />
+          <SectionHeading title={t('titleA')} titleB={t('titleB')} align="start" className="max-w-xl" />
           <Reveal y={12} delay={0.12} className="max-w-[375px] justify-self-start pb-1 lg:justify-self-end lg:text-end">
             <p className="text-base leading-[1.8] text-ink/60">{t('subtitle')}</p>
             <a href="#" className="mt-3 inline-flex items-center gap-2 py-2 text-sm font-semibold text-brand transition hover:text-brand-700">
@@ -111,7 +111,7 @@ export function Faq() {
                   transition={{ duration: 0.7, ease: EASE }}
                   className="flex-1"
                 >
-                  <h3 className="text-[clamp(1.55rem,2.4vw,2rem)] font-medium leading-[1.3] tracking-[-0.035em] text-white">
+                  <h3 className="heading-title is-dark">
                     {items[active].q}
                   </h3>
                   <p className="mt-6 text-base leading-[1.9] text-[#dce0f0]">{items[active].a}</p>

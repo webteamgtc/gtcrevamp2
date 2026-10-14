@@ -140,11 +140,11 @@ export default function MobileNav({ open, onClose }) {
                     transition={{ duration: 0.35, ease: EASE }}
                     className="absolute inset-0 overflow-y-auto overscroll-contain px-5 py-6"
                   >
-                    <h2 className="text-2xl font-bold tracking-tight">{t(`groups.${group.id}`)}</h2>
+                    <h2 className="heading-title">{t(`groups.${group.id}`)}</h2>
                     <div className="mt-6 space-y-7">
                       {group.columns.flat().map((sec, si) => (
                         <motion.section key={sec.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 + si * 0.05 }}>
-                          <h3 className="text-[11px] font-bold uppercase tracking-[0.16em] text-gold-700">{t(`sections.${sec.id}`)}</h3>
+                          <h3 className="heading-label">{t(`sections.${sec.id}`)}</h3>
                           <ul className="mt-2 grid gap-1">
                             {sec.items.map((it) => {
                               const Icon = it.icon;

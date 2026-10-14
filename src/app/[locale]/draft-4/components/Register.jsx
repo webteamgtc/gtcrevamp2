@@ -15,8 +15,7 @@ export function Register() {
         ))}
       </div>
       <div className="container-x relative mx-auto max-w-5xl text-center">
-        <span className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">{t('eyebrow')}</span>
-        <h2 className="mt-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-5xl">
+        <h2 className="heading-section is-dark">
           <WordReveal text={t('title')} />
         </h2>
         <Reveal delay={0.2}>
