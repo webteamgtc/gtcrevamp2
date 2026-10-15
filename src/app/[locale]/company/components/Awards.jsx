@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight, Trophy } from 'lucide-react';
 import ArrowLink from '@/components/shared/ArrowLink';
 import { Reveal, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
-import { SectionIntro } from './parts';
+import { SectionIntro } from '@/components/shared/SectionIntro';
 
 const AUTO_MS = 4500;
 
