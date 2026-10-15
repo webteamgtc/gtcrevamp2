@@ -8,26 +8,14 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronDown, CircleAlert, CircleCheck, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
-import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import { cn } from '@/lib/utils';
+import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, flagFor, dialFor, useGtcCountries } from './formKit';
 
 const LOGIN_URL = 'https://web.mygtc.app/user?redirect=%252Fdashboard';
 const TERMS_URL = 'https://www.gtcfx.com/terms';
 const PRIVACY_URL = 'https://www.gtcfx.com/privacy';
 
 const EMPTY = { firstname: '', lastname: '', email: '', otp: '', password: '', country: '', phone: '', partnerCode: '', terms: false };
-
-const LETTERS = /^[A-Za-z\s]+$/;
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-async function post(url, body) {
-  const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
-  let data = null;
-  try {
-    data = await res.json();
-  } catch {}
-  return data ?? {};
-}
 
 function splitName(fullName) {
   const parts = fullName.trim().split(/\s+/).filter(Boolean);
@@ -43,33 +31,11 @@ function readUrlParams() {
   return { partner, locked: !!(q.get('code') || q.get('ref')), deepLink: q.get('deep_link_value') || '' };
 }
 
-/* ---------- small field primitives (compact) ---------- */
-
-const box = 'flex h-11 items-center gap-2.5 rounded-xl border bg-white px-3.5 transition-all focus-within:ring-4';
-const input = 'h-full w-full min-w-0 bg-transparent text-sm text-ink outline-none placeholder:text-ink/35';
-
-function boxState(err) {
-  return err ? 'border-down/60 focus-within:border-down focus-within:ring-down/10' : 'border-brand/15 focus-within:border-brand focus-within:ring-brand/10';
-}
-
-function Field({ id, label, required, error, hint, children, className }) {
-  return (
-    <div className={cn('min-w-0', className)}>
-      <label htmlFor={id} className="mb-1.5 block text-xs font-medium text-ink/65">
-        {label} {required && <span className="text-down">*</span>}
-      </label>
-      {children}
-      {error ? <p className="mt-1 text-[11px] text-down">{error}</p> : hint ? <p className="mt-1 text-[11px] text-ink/40">{hint}</p> : null}
-    </div>
-  );
-}
-
 export function LiveAccountForm() {
   const t = useTranslations('tradingPage.liveForm');
   const [values, setValues] = useState(EMPTY);
   const [touched, setTouched] = useState({});
-  const [countries, setCountries] = useState([]);
-  const [countriesFailed, setCountriesFailed] = useState(false);
+  const { countries, failed: countriesFailed, suggested } = useGtcCountries();
   const [showPw, setShowPw] = useState(false);
   const [partnerOpen, setPartnerOpen] = useState(false);
   const [partnerLocked, setPartnerLocked] = useState(false);
@@ -90,31 +56,13 @@ export function LiveAccountForm() {
     setDeepLink(dl);
   }, []);
 
-  // GTC country list; preselect the visitor's region from the browser locale when it matches
+  // preselect the visitor's country once the list arrives
   useEffect(() => {
-    let alive = true;
-    post('/api/gtc/get-country')
-      .then((res) => {
-        if (!alive) return;
-        if (res?.code === 200 && Array.isArray(res.data)) {
-          const list = [...res.data].sort((a, b) => a.name.localeCompare(b.name));
-          setCountries(list);
-          let region = '';
-          try {
-            region = new Intl.Locale(navigator.language).maximize().region || '';
-          } catch {}
-          const match = list.find((c) => c.code === region);
-          if (match) setValues((v) => (v.country ? v : { ...v, country: match.name }));
-        } else setCountriesFailed(true);
-      })
-      .catch(() => alive && setCountriesFailed(true));
-    return () => {
-      alive = false;
-    };
-  }, []);
+    if (suggested) setValues((v) => (v.country ? v : { ...v, country: suggested.name }));
+  }, [suggested]);
 
   const selected = countries.find((c) => c.name === values.country);
-  const dial = selected?.phone_code ? String(selected.phone_code).replace(/\D/g, '') : '';
+  const dial = dialFor(selected);
   const phoneDigits = values.phone.replace(/\D/g, '');
 
   const errors = useMemo(() => {
@@ -286,7 +234,7 @@ export function LiveAccountForm() {
             <span className={cn(box, boxState(err('phone')))} dir="ltr">
               <span className="flex shrink-0 items-center gap-1.5 border-e border-brand/10 pe-2.5 text-sm text-ink/70">
                 <span className="text-base leading-none" aria-hidden>
-                  {selected?.code && /^[A-Z]{2}$/.test(selected.code) ? getUnicodeFlagIcon(selected.code) : '🌐'}
+                  {flagFor(selected?.code)}
                 </span>
                 {dial ? `+${dial}` : '+'}
               </span>

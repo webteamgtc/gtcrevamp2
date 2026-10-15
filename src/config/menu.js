@@ -51,7 +51,7 @@ export const MENU = [
     href: '/trading',
     columns: [
       [{ id: 'tradeWith', items: [
-        { id: 'openLive', href: PORTAL.register, icon: UserPlus },
+        { id: 'openLive', href: PORTAL.register, icon: UserPlus, href: '/trading/open-live-account' },
         { id: 'freeDemo', href: PORTAL.demo, icon: MonitorPlay },
         { id: 'fund', href: '/deposit-withdraw', icon: Wallet },
         { id: 'accountTypes', href: '/account-types', icon: Layers },
