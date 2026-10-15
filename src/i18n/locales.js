@@ -1,4 +1,4 @@
-// All website languages. Add a matching /messages/<code>.json for each one.
+// All website languages. Add messages/<code>/common.json (+ page bundles) or messages/<code>.json.
 // Missing keys fall back to English automatically (see request.js).
 //  - code:   URL segment, e.g. /zh-TW/about
 //  - flag:   ISO country code used for the round flag (null = globe icon)

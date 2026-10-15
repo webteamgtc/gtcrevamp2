@@ -96,7 +96,7 @@ export function Markets() {
             const Icon = MARKET_ICONS[i];
             return (
               <TiltCard key={it.name} max={7} className="group shrink-0">
-                <div style={{ height: cardH }} className="relative flex w-[320px] flex-col overflow-hidden rounded-[2rem] border border-brand/10 bg-white p-8 shadow-xl shadow-brand/5 transition-shadow duration-500 group-hover:border-brand/20 group-hover:shadow-2xl group-hover:shadow-brand/10 md:w-[360px]">
+                <div style={{ minHeight: cardH }} className="relative h-full flex w-[320px] flex-col overflow-hidden rounded-[2rem] border border-brand/10 bg-white p-8 shadow-xl shadow-brand/5 transition-shadow duration-500 group-hover:border-brand/20 group-hover:shadow-2xl group-hover:shadow-brand/10 md:w-[360px]">
                   <div className="absolute -end-16 -top-16 size-48 rounded-full bg-brand/15 blur-3xl transition-all duration-700 group-hover:bg-gold/25" />
                   <div className="relative flex items-center justify-between">
                     <span className="grid size-16 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-800 text-white shadow-lg shadow-brand/30 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">

@@ -1,0 +1,430 @@
+{
+  "meta": {
+    "title": "GTCFX | Access Global Markets – Forex & CFD Trading",
+    "description": "Trade forex, metals, commodities, indices and more with GTCFX. Tight spreads, leverage up to 1:2000 and execution in under 10 milliseconds."
+  },
+  "riskBar": "CFDs are highly speculative, leveraged instruments. Trading in CFDs carries a high degree of risk to your capital. Investors should ensure they possess adequate market knowledge or seek independent financial advice before executing trades.",
+  "nav": {
+    "company": "Company",
+    "trading": "Trading",
+    "markets": "Markets",
+    "learn": "Learn",
+    "news": "GTC News",
+    "register": "Register",
+    "login": "Log in",
+    "menu": "Menu",
+    "close": "Close",
+    "groups": {
+      "company": [
+        {
+          "label": "About Us",
+          "desc": "Who we are and what drives us"
+        },
+        {
+          "label": "Why GTCFX",
+          "desc": "What makes our trading different"
+        },
+        {
+          "label": "Global Regulation",
+          "desc": "Our licences and regulated entities"
+        },
+        {
+          "label": "Events",
+          "desc": "Expos, awards and gatherings"
+        }
+      ],
+      "trading": [
+        {
+          "label": "Account Types",
+          "desc": "Standard and ECN accounts"
+        },
+        {
+          "label": "Copy Trading",
+          "desc": "Follow experienced traders"
+        },
+        {
+          "label": "Deposit & Withdraw",
+          "desc": "Funding methods and timings"
+        },
+        {
+          "label": "Trading Instruments",
+          "desc": "Full list of tradable products"
+        },
+        {
+          "label": "Promotions",
+          "desc": "Current offers and campaigns"
+        }
+      ],
+      "markets": [
+        {
+          "label": "Forex CFDs",
+          "desc": "Major, minor and exotic pairs"
+        },
+        {
+          "label": "Metals CFDs",
+          "desc": "Gold, silver and more"
+        },
+        {
+          "label": "Energy CFDs",
+          "desc": "Crude oil and natural gas"
+        },
+        {
+          "label": "Indices CFDs",
+          "desc": "Global stock indices"
+        },
+        {
+          "label": "Shares/Equity CFDs",
+          "desc": "Leading global companies"
+        },
+        {
+          "label": "Crypto CFDs",
+          "desc": "Popular digital assets"
+        },
+        {
+          "label": "Futures CFDs",
+          "desc": "Futures contracts as CFDs"
+        }
+      ],
+      "learn": [
+        {
+          "label": "FAQ",
+          "desc": "Answers to common questions"
+        },
+        {
+          "label": "Help Center",
+          "desc": "Guides and support articles"
+        },
+        {
+          "label": "Contact Us",
+          "desc": "Talk to our support team"
+        }
+      ],
+      "news": [
+        {
+          "label": "Latest News",
+          "desc": "Company announcements"
+        },
+        {
+          "label": "Events",
+          "desc": "Where to meet GTCFX next"
+        }
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "Global Markets. One Connection.",
+    "columns": {
+      "instruments": {
+        "title": "Instruments",
+        "links": [
+          "Forex CFDs",
+          "Energy CFDs",
+          "Indices CFDs",
+          "Metals CFDs",
+          "Shares/Equity CFDs",
+          "Crypto CFDs",
+          "Futures CFDs"
+        ]
+      },
+      "quick": {
+        "title": "Quick Navigation",
+        "links": [
+          "Account Types",
+          "Copy Trading",
+          "Deposit & Withdraw",
+          "Trading Instruments",
+          "Promotions"
+        ]
+      },
+      "platforms": {
+        "title": "Platforms",
+        "links": [
+          "MT4 Platform",
+          "MT5 Platform",
+          "GTC Go - Trade & Invest"
+        ]
+      },
+      "company": {
+        "title": "Company",
+        "links": [
+          "About Us",
+          "Why GTCFX",
+          "Global Regulation",
+          "Events"
+        ]
+      },
+      "support": {
+        "title": "Support",
+        "links": [
+          "FAQ",
+          "Contact Us",
+          "Help Center"
+        ]
+      },
+      "legal": {
+        "title": "Legal",
+        "links": [
+          "Website Disclaimer",
+          "Risk Disclosure",
+          "Restricted Countries",
+          "Deposit & Refund Policy",
+          "KYC & Compliance Policy",
+          "Cookie Policy",
+          "Privacy Policy",
+          "Terms and Conditions"
+        ]
+      }
+    },
+    "riskTitle": "Risk Warning",
+    "risk": [
+      "Trading in derivatives, including rolling spot Foreign Exchange (FX) and Contracts for Difference (CFDs), is highly speculative, carries a substantial degree of risk, and is not appropriate for every investor. Nothing on this website constitutes investment advice or a recommendation, and it has been prepared without regard to your individual objectives, financial circumstances or needs.",
+      "FX and CFDs are complex instruments dealt on a margined basis and carry a high risk of losing money rapidly by reason of leverage, which magnifies gains and losses alike. You may lose part or all of your invested capital, and losses may exceed your initial investment. Before trading, you should consider your objectives, financial position, level of experience and appetite for risk, satisfy yourself that you understand how these products operate, and trade only with funds you can afford to lose. Seek independent financial or tax advice if in any doubt. Past performance is not indicative of future results.",
+      "The entity with which a client contracts will depend on the client's jurisdiction, eligibility, classification and onboarding route. The applicable contracting entity and, where relevant, the product issuer and/or counterparty will be clearly disclosed before the client submits an account application and will be identified in the relevant Client Agreement. Products and services available under one entity may not be available under another entity. Each entity within the GTC Financial Group is a separate legal entity. A licence held by one entity does not extend to any other entity within the group.",
+      "GTC Global Trading Ltd, is a company incorporated in Anjouan, Union of the Comoros (Company No. 16283) and licensed by the Anjouan Offshore Finance Authority under Licence No. L16283/GTC. Its registered address is Boulevard de Coalancanthe, Mutsamudu, Anjouan, Union of the Comoros.",
+      "GTC Global Trade Capital Co. Limited (Company No. 40354) is a company incorporated in Vanuatu. The company holds Class A, Class B and Class C Principal's Licences issued by the Vanuatu Financial Services Commission under the Financial Dealers Licensing Act [CAP. 70]. Its registered address is First Floor, B&P House, Kumul Highway, Port Vila, Vanuatu.",
+      "Services offered through this international website are not available to residents of the United States, Japan, Australia, or in any jurisdiction where the provision of those services would contravene applicable laws, regulations, or sanctions."
+    ],
+    "rights": "All rights reserved.",
+    "cookie": "We use cookies to enhance your experience, analyze website traffic, and remember your preferences. Some cookies are essential, while others help us improve our services and personalize content. By clicking “Accept All,” you consent to our use of cookies.",
+    "cookieAccept": "Accept All",
+    "cookieSettings": "Settings",
+    "backToTop": "Back to top"
+  },
+  "common": {
+    "prev": "Previous",
+    "next": "Next",
+    "scroll": "Scroll to explore"
+  },
+  "app": {
+    "tagline": "Trade & Invest",
+    "watchlist": "Watchlist",
+    "portfolio": "Portfolio",
+    "balance": "Balance",
+    "today": "Today",
+    "buy": "Buy",
+    "sell": "Sell",
+    "filled": "Order filled",
+    "filledSub": "Buy 0.10 lot XAUUSD",
+    "copy": "Copy Trading",
+    "copySub": "Follow top strategies",
+    "download": "Download GTC Go",
+    "appStore": "App Store",
+    "googlePlay": "Google Play",
+    "rating": "Rated by traders worldwide",
+    "tabs": [
+      "Markets",
+      "Trade",
+      "Portfolio",
+      "Profile"
+    ],
+    "onAppStore": "Download on the",
+    "onPlay": "GET IT ON"
+  },
+  "lang": {
+    "title": "Choose your language",
+    "subtitle": "GTCFX is available in {count} languages.",
+    "search": "Search languages",
+    "current": "Current",
+    "all": "All",
+    "regions": {
+      "global": "Global",
+      "mena": "Middle East & South Asia",
+      "asia": "East & Southeast Asia",
+      "europe": "Europe"
+    },
+    "noResults": "No language matches “{q}”.",
+    "rtl": "RTL",
+    "close": "Close",
+    "remember": "Your choice is saved on this device.",
+    "open": "Change language"
+  },
+  "menu": {
+    "groups": {
+      "company": "Company",
+      "trading": "Trading",
+      "markets": "Markets",
+      "learn": "Learn",
+      "news": "GTC News"
+    },
+    "sections": {
+      "about": "About GTCFX",
+      "legal": "Legal information",
+      "help": "Help center",
+      "partner": "Partner with us",
+      "tradeWith": "Trade with GTCFX",
+      "metatrader": "MetaTrader 4/5",
+      "gtcgo": "GTCFX: GTC Go",
+      "products": "Our products",
+      "advantages": "Trading advantages",
+      "tradeMarkets": "Trade markets",
+      "recommendations": "Recommendations",
+      "popularIndices": "Popular indices",
+      "startTrading": "Start trading",
+      "skills": "Build your skills",
+      "helpCentre": "Help centre",
+      "marketUpdates": "Market updates",
+      "companyUpdates": "Company updates"
+    },
+    "links": {
+      "aboutUs": "About Us",
+      "whyGtcfx": "Why GTCFX",
+      "globalPresence": "Global Presence",
+      "events": "Events & Exhibitions",
+      "regulation": "GTCFX Regulation",
+      "awards": "GTCFX Awards",
+      "faqSupport": "FAQ & User Support",
+      "contact": "Contact Us",
+      "partners": "Partners Program",
+      "prime": "GTC Prime",
+      "openLive": "Open Live Account",
+      "freeDemo": "Free Demo Account",
+      "fund": "Fund Your Account",
+      "accountTypes": "Account Types",
+      "security": "Security of Funds",
+      "mt5": "MetaTrader 5",
+      "mt4": "MetaTrader 4",
+      "mtAndroid": "MetaTrader Android",
+      "mtIos": "MetaTrader iPhone/iPad",
+      "gtcGo": "GTC Go",
+      "gtcGoWeb": "GTC Go Web",
+      "gtcGoIos": "GTC Go iPhone/iPad",
+      "gtcGoAndroid": "GTC Go Android",
+      "copyTrading": "Copy Trading",
+      "dynamicLeverage": "Dynamic Leverage",
+      "swapUpdate": "Swap Update",
+      "pamm": "PAMM Account",
+      "vps": "VPS",
+      "forex": "Forex CFDs",
+      "energy": "Energy CFDs",
+      "indices": "Indices CFDs",
+      "metals": "Metals CFDs",
+      "shares": "Shares/Equity CFDs",
+      "crypto": "Crypto CFDs",
+      "futures": "Futures CFDs",
+      "EURUSD": "EURUSD",
+      "GBPUSD": "GBPUSD",
+      "USDJPY": "USDJPY",
+      "USDCHF": "USDCHF",
+      "XAUUSD": "Gold (XAUUSD)",
+      "US30": "Wall Street",
+      "SPX500": "US SP 500",
+      "NAS100": "US Tech 100",
+      "beginners": "For Trading Beginners",
+      "glossary": "A–Z Glossary",
+      "liquidity": "Liquidity & Technology",
+      "essentials": "Trading Essentials",
+      "marketGuides": "Market Guides",
+      "risk": "Risk Management Basics",
+      "technical": "Technical Analysis Basics",
+      "qa": "GTCFX Q&A",
+      "depositFaq": "Account & Deposit FAQs",
+      "platformGuides": "Platform Guides",
+      "outlook": "Daily / Weekly Market Outlook",
+      "calendar": "Economic Calendar",
+      "earnings": "Earnings & Dividends Calendar",
+      "holidays": "Market Holidays",
+      "companyNews": "Company News",
+      "awardsMedia": "Awards & Media",
+      "companyOverview": "Company Overview"
+    },
+    "promos": {
+      "company": {
+        "title": "Find Your Account",
+        "text": "Choose the right account for your needs.",
+        "cta": "See Account Guide"
+      },
+      "trading": {
+        "title": "Platform Downloads",
+        "text": "Scan to get GTC Go on your phone.",
+        "cta": "Download"
+      },
+      "markets": {
+        "title": "Register Now",
+        "text": "Open a live account today and start trading with GTCFX. Get access to our award-winning trading platforms, market analysis, and educational resources.",
+        "cta": "Open Live Account"
+      },
+      "learn": {
+        "title": "Traders' Insight",
+        "text": "Get daily market commentary and insights from industry leaders and IBKR analysts across global asset classes.",
+        "cta": "Explore Insights"
+      },
+      "news": {
+        "title": "Fund in Your Trading Currency",
+        "text": "Deposit and trade in up to 29 currencies with flexible funding options.",
+        "cta": "Explore Funding"
+      }
+    },
+    "downloads": {
+      "mt4": "MetaTrader 4",
+      "mt5": "MetaTrader 5",
+      "gtcgo": "GTCFX: GTC Go",
+      "scan": "Scan to download"
+    },
+    "accountsVisual": {
+      "standard": "Standard",
+      "ecn": "ECN",
+      "from": "from"
+    },
+    "live": "Live",
+    "allLinks": "{count} links",
+    "back": "Back",
+    "openMenu": "Open menu",
+    "mobileCta": "Start trading in minutes",
+    "currencies": "currencies",
+    "desc": {
+      "aboutUs": "Who we are and what drives us",
+      "whyGtcfx": "What makes our trading different",
+      "globalPresence": "Our offices and markets worldwide",
+      "events": "Expos, summits and gatherings",
+      "regulation": "Our licences and regulated entities",
+      "awards": "Industry recognition we've earned",
+      "faqSupport": "Answers and help from our team",
+      "contact": "Talk to our support team",
+      "partners": "Earn as an introducing broker",
+      "prime": "Premium service for active traders",
+      "openLive": "Start trading in minutes",
+      "freeDemo": "Practise with virtual funds",
+      "fund": "Deposits, withdrawals and timings",
+      "accountTypes": "Standard and ECN accounts",
+      "security": "How we protect client money",
+      "mt5": "Advanced multi-asset platform",
+      "mt4": "The classic trading platform",
+      "mtAndroid": "MetaTrader on Android",
+      "mtIos": "MetaTrader on iPhone and iPad",
+      "gtcGo": "Our all-in-one trading app",
+      "gtcGoWeb": "Trade in your browser",
+      "gtcGoIos": "GTC Go for iPhone and iPad",
+      "gtcGoAndroid": "GTC Go for Android",
+      "copyTrading": "Follow experienced traders",
+      "dynamicLeverage": "Leverage that adapts to your positions",
+      "swapUpdate": "Latest overnight swap rates",
+      "pamm": "Managed trading accounts",
+      "vps": "Run EAs around the clock",
+      "forex": "Major, minor and exotic pairs",
+      "energy": "Crude oil and natural gas",
+      "indices": "Global stock indices",
+      "metals": "Gold, silver and more",
+      "shares": "Leading global companies",
+      "crypto": "Popular digital assets",
+      "futures": "Futures contracts as CFDs",
+      "beginners": "Your first steps in trading",
+      "glossary": "Trading terms explained",
+      "liquidity": "How our pricing and execution work",
+      "essentials": "Core concepts every trader needs",
+      "marketGuides": "How each market moves",
+      "risk": "Protect your capital",
+      "technical": "Read charts and patterns",
+      "qa": "Common questions answered",
+      "depositFaq": "Accounts, funding and payments",
+      "platformGuides": "Set up and use our platforms",
+      "outlook": "What's moving the markets",
+      "calendar": "Key economic releases",
+      "earnings": "Company results and payouts",
+      "holidays": "Trading hours and closures",
+      "companyNews": "Announcements from GTCFX",
+      "awardsMedia": "Press coverage and awards",
+      "companyOverview": "GTCFX at a glance"
+    },
+    "eyebrow": "GTCFX"
+  }
+}
