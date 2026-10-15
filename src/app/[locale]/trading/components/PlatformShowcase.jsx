@@ -36,6 +36,7 @@ const BLOCKS = [
   }
 ];
 
+
 /** Trading Platforms: dark band with two tilting cards, each with a floating device, glow and live chips. */
 export function PlatformShowcase() {
   const t = useTranslations('tradingPage.platforms');
