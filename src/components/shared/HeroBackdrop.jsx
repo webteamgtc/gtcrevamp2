@@ -43,3 +43,17 @@ export default function HeroTradingBackdrop() {
     </div>
   );
 }
+
+/** Light variant: soft drifting navy/gold blobs, a faded grid and the dotted world map. */
+export function LightHeroBackdrop() {
+  return (
+    <div dir="ltr" className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#eef1fb] via-[#f6f7fc] to-white" />
+      <motion.div className="absolute -start-[10%] -top-[20%] size-[max(50vw,420px)] max-w-[760px] rounded-full bg-brand/15 blur-[120px]" animate={{ x: [0, 90, 0], y: [0, 50, 0] }} transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }} />
+      <motion.div className="absolute -end-[10%] top-[10%] size-[max(40vw,360px)] max-w-[620px] rounded-full bg-gold/20 blur-[120px]" animate={{ x: [0, -80, 0], y: [0, 60, 0] }} transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }} />
+      <div className="bg-grid-light absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_30%,transparent_80%)]" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/world-dots.svg" alt="" className="absolute -start-20 top-24 w-[720px] opacity-[0.12]" />
+    </div>
+  );
+}

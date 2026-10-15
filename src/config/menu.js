@@ -14,7 +14,9 @@ import {
 export const PORTAL = {
   register: '#register',
   login: '#login',
-  demo: '#register'
+  demo: '#register',
+  // client portal (log in / deposit)
+  clientPortal: 'https://web.mygtc.app/user?redirect=%252Fdashboard'
 };
 
 export const MENU = [
@@ -52,7 +54,7 @@ export const MENU = [
     columns: [
       [{ id: 'tradeWith', items: [
         { id: 'openLive', href: PORTAL.register, icon: UserPlus, href: '/trading/open-live-account' },
-        { id: 'freeDemo', href: PORTAL.demo, icon: MonitorPlay },
+        { id: 'freeDemo', href: PORTAL.demo, icon: MonitorPlay , href: '/trading/free-demo-account' },
         { id: 'fund', href: '/deposit-withdraw', icon: Wallet },
         { id: 'accountTypes', href: '/account-types', icon: Layers },
         { id: 'security', href: '/security-of-funds', icon: ShieldCheck }
