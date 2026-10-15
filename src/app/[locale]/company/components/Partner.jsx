@@ -4,7 +4,7 @@ import { ArrowUpRight, Handshake, Crown } from 'lucide-react';
 import NavLink from '@/components/shared/nav/NavLink';
 import { Stagger, StaggerItem, TiltCard } from '@/components/motion';
 import { cn } from '@/lib/utils';
-import { SectionIntro } from './parts';
+import { SectionIntro } from '@/components/shared/SectionIntro';
 import { NetworkVisual, LiquidityVisual } from './partnerVisuals';
 
 const TABS = [

@@ -1,0 +1,580 @@
+{
+  "tradingPage": {
+    "meta": {
+      "title": "Trade with GTCFX | Demo Account & Global CFD Markets",
+      "description": "Open a free demo account with $100,000 virtual funds. Trade forex, metals, indices and crypto on MT4, MT5 and GTC Go."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading"
+    },
+    "hero": {
+      "title": "Trade with GTCFX",
+      "subtitle": "Open Live Account"
+    },
+    "liveForm": {
+      "title": "Apply live trading account",
+      "subtitle": "You're applying live account, please fill the form carefully",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "emailPlaceholder": "Please input real email to receive application result",
+      "code": "Email verification code",
+      "codePlaceholder": "Please enter email verification code",
+      "getCode": "Get code",
+      "password": "Password",
+      "passwordHint": "At least 8 characters with letters and numbers",
+      "country": "Country of Residence",
+      "phone": "Phone",
+      "partner": "Partner code",
+      "optional": "(optional)",
+      "confirmIntro": "By creating an account I confirm:",
+      "confirm1Start": "(1) You confirm that you are 18 years of age or older and agree to our",
+      "terms": "Terms and Conditions",
+      "and": "and",
+      "privacy": "Privacy Policy",
+      "confirm2": "(2) I agree that GTCFX may contact me within a reasonable time;",
+      "confirm3": "(3) My phone number is not on the Do Not Call Register (DNCR). I declare that I am not a Politically Exposed Person (PEP), nor have I ever held any significant public office. I also confirm that I have never been convicted of any offense related to money laundering, fraud, bribery, corruption, or any other criminal offense, and that I am not currently subject to any ongoing regulatory or legal proceedings.",
+      "submit": "Register",
+      "haveAccount": "Already have an account?",
+      "login": "Click here to login",
+      "countryLoading": "Loading countries...",
+      "countrySelect": "Country Selection",
+      "sendingCode": "Sending...",
+      "resendCode": "Resend",
+      "registering": "Submitting...",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "errors": {
+        "firstName": "First name is required",
+        "firstNameLetters": "First name can only contain letters",
+        "lastName": "Last name is required",
+        "lastNameLetters": "Last name can only contain letters",
+        "email": "Email is required",
+        "emailInvalid": "Invalid email address",
+        "emailRegistered": "This email is already registered",
+        "otpRequired": "OTP is required",
+        "otpLength": "OTP must be 6 digits",
+        "passwordRequired": "Password is required",
+        "passwordMin": "At least 8 characters",
+        "passwordPattern": "Must contain letters and numbers",
+        "country": "Country is required",
+        "validCountry": "Please select a valid country",
+        "phone": "Phone is required",
+        "phoneInvalid": "Invalid phone number",
+        "terms": "You must accept the declaration"
+      },
+      "toast": {
+        "otpSent": "OTP sent successfully!",
+        "codeError": "Failed to send verification code",
+        "registrationSuccess": "Registration successful!",
+        "registrationFailed": "Registration failed"
+      }
+    },
+    "demo": {
+      "titleA": "Start With A Demo.",
+      "titleB": "Switch When Ready.",
+      "lead": "Trade CFDs on Forex, Metals, Indices and more in a risk-free environment.",
+      "text": "Sign up once to unlock your GTCFX demo trading account. No documentation or deposit is required until you choose to go live. A real account is automatically created for you, so you can begin risk-free demo trading right away from the 'Accounts' section in GTCFX Direct.",
+      "stats": [
+        {
+          "value": "50",
+          "unit": "k",
+          "title": "Virtual Funds",
+          "text": "Risk-free practice capital"
+        },
+        {
+          "value": "180",
+          "unit": "d",
+          "title": "Account Lifespan",
+          "text": "Extended practice window"
+        },
+        {
+          "value": "USD",
+          "unit": "",
+          "title": "Virtual Funds",
+          "text": "Base Currencies"
+        }
+      ],
+      "features": [
+        {
+          "title": "All Platforms",
+          "text": "Desktop, web & mobile",
+          "tag": "Any device"
+        },
+        {
+          "title": "Real-time Pricing",
+          "text": "Live market data feeds",
+          "tag": "Live"
+        },
+        {
+          "title": "Top Up Anytime",
+          "text": "Instant balance reload via your GTCFX client portal",
+          "tag": ""
+        }
+      ]
+    },
+    "fund": {
+      "title": "Fund Your Account",
+      "text": "The GTCFX Wallet allows you to transfer funds between your wallet and trading accounts instantly, giving you the flexibility to manage your capital according to your trading needs. Funds held in the Wallet are not subject to market risks, so it is a great way to manage risk and exposure.",
+      "cta": "Open a Live Account"
+    },
+    "accountTypes": {
+      "title": "Account Types",
+      "description": "Four account tiers built around different trading styles, experience levels, and market access needs. Compare conditions and find the one that fits how you trade.",
+      "toggle": "Show only those that are different",
+      "rows": [
+        "Minimum Deposit",
+        "Leverage",
+        "Spreads",
+        "Commission",
+        "Execution",
+        "Bank Access"
+      ],
+      "upTo": "Up to",
+      "accounts": [
+        {
+          "id": "standard",
+          "name": "Standard Account",
+          "values": [
+            "No minimum deposit",
+            "1:2000 ***",
+            "Average spreads 1.0 pips",
+            "0 Commission Charges",
+            "Secure, instant and fast execution",
+            "Direct access to top tier banks"
+          ],
+          "cta": "Open Standard Account"
+        },
+        {
+          "id": "ecn",
+          "name": "ECN Account",
+          "values": [
+            "Minimum deposits from $3,000",
+            "1:2000 ***",
+            "Raw spreads 0.0 pips",
+            "Commission $5 / standard lot",
+            "Secure, instant and fast execution",
+            "Direct access to top tier banks"
+          ],
+          "cta": "Open ECN Account"
+        }
+      ]
+    },
+    "platforms": {
+      "title": "Trading Platforms",
+      "mt4": {
+        "title": "MT4 Trading Platform",
+        "text": "MetaTrader 4, often referred to as MT4, is a widely used and highly popular trading platform in the world of forex (foreign exchange) trading. It was developed by MetaQuotes Software and has become a standard choice for both novice and experienced traders.",
+        "cta": "Open a Demo Account"
+      },
+      "mt5": {
+        "title": "MT5 Trading Platform",
+        "text": "MetaTrader 5 is the next-generation multi-asset platform built for traders who need more. Faster execution, more timeframes, advanced order types, and native support for stocks and futures alongside forex and CFDs — all in one terminal.",
+        "cta": "Open a Demo Account"
+      }
+    },
+    "download": {
+      "title": "Download Trading App",
+      "text": "Trading with us gives you the best opportunity to invest your money in a smart and profitable way.",
+      "cta": "Open a Demo Account"
+    },
+    "leverage": {
+      "title": "Dynamic Leverage",
+      "subtitle": "Trade larger positions with smarter exposure control.",
+      "text": "Leverage is one of the most important features of forex and CFD trading. It is a powerful tool that allows traders to gain greater exposure by opening positions that are significantly larger than the amount required to open the trade. To open positions, a trader is only required to have the margin requirement present in their trading account.",
+      "cta": "Open Account",
+      "cards": [
+        {
+          "title": "Greater Market Exposure",
+          "text": "Control larger positions with smaller capital and take advantage of more trading opportunities."
+        },
+        {
+          "title": "Amplify Potential Returns",
+          "text": "Leverage can magnify profits when the market moves in your favor."
+        },
+        {
+          "title": "Understand Your Risk Exposure",
+          "text": "Leverage magnifies both potential gains and potential losses. Understanding your exposure before entering a position is essential to managing your risk effectively."
+        },
+        {
+          "title": "Flexible Leverage Options",
+          "text": "Select the leverage that fits your strategy. Higher leverage increases both exposure and risk — our tools help you manage both."
+        }
+      ]
+    },
+    "swap": {
+      "title": "Swap Update",
+      "text": "Discover the latest swap rates and updates for Forex, Metals, Commodity, Energy, and Indices. Stay ahead in the markets with real-time insights and expert analysis at GTCFX. Maximize your trading potential today!",
+      "cta": "Open Account"
+    },
+    "advantages": {
+      "title": "Trading Advantages",
+      "pamm": {
+        "title": "PAMM Account",
+        "text": "A PAMM (Percentage Allocation Management Module) account is a popular investment tool in the world of forex trading. It is a specialized form of a managed account that allows individual investors to allocate their funds to a professional trader or money manager, who then trades on their behalf.",
+        "cta": "Open Account"
+      }
+    },
+    "vpsPricing": {
+      "title": "VPS Pricing",
+      "subtitle": "Wondering about the cost of our VPS service? We've got you covered.",
+      "subscribe": "Subscribe Now",
+      "vatNote": "ALL PRICES ARE SUBJECT TO VAT",
+      "perMonth": "/month",
+      "badges": [
+        {
+          "id": "setup",
+          "label": "Instant Setup"
+        },
+        {
+          "id": "uptime",
+          "label": "99.9% Uptime"
+        },
+        {
+          "id": "support",
+          "label": "24/7 Support"
+        },
+        {
+          "id": "root",
+          "label": "Full Root Access"
+        }
+      ],
+      "plans": [
+        {
+          "id": "bronze",
+          "name": "BRONZE",
+          "price": "40.00",
+          "description": "Steady performance for casual EA traders. Get started with ease.",
+          "features": [
+            "1 vCPU",
+            "2,560MB RAM",
+            "30GB SSD Storage",
+            "FREE with minimum balance of $5,000"
+          ]
+        },
+        {
+          "id": "silver",
+          "name": "SILVER",
+          "price": "70.00",
+          "description": "Balanced power for active traders running multiple EAs.",
+          "features": [
+            "1 vCPU",
+            "4,096MB RAM",
+            "50GB SSD Storage",
+            "FREE with minimum balance of $7,500"
+          ]
+        },
+        {
+          "id": "gold",
+          "name": "GOLD",
+          "price": "120.00",
+          "description": "Maximum resources for demanding strategies and heavy workloads.",
+          "features": [
+            "4 vCPU",
+            "6,656MB RAM",
+            "75GB SSD Storage",
+            "FREE with minimum balance of $10,000"
+          ]
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Still need assistance?",
+      "title": "Didn't Find What You Were Looking For?",
+      "description": "Submit an enquiry or contact our support team using one of the channels above. Our team can assist with account, platform, payment and general service-related matters. GTCFX provides general and administrative support only through this page. Nothing communicated through our support channels constitutes investment, legal or tax advice.",
+      "live": "Open Live Account",
+      "demo": "Open Free Demo Account"
+    }
+  },
+  "openLiveAccountPage": {
+    "meta": {
+      "title": "Open a Live Trading Account | GTCFX",
+      "description": "Open your GTCFX live trading account in 3 minutes. Regulated multi-asset broker with spreads from 0.0 pips, leverage up to 1:2000 and sub-10ms execution."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Open Live Account"
+    },
+    "hero": {
+      "badge": "Live markets · 24/5 Trading",
+      "title": "Open your trading account with GTCFX",
+      "text": "A regulated multi-asset broker built for serious traders. Trade 7+ markets with institutional-grade execution.",
+      "pills": [
+        {
+          "label": "Regulated",
+          "value": "multi-jurisdiction"
+        },
+        {
+          "label": "Spreads from",
+          "value": "0.0"
+        },
+        {
+          "label": "Leverage up to",
+          "value": "1:2000"
+        },
+        {
+          "label": "Execution",
+          "value": "< 10ms"
+        }
+      ],
+      "ctaLive": "Open Live Account",
+      "ctaDemo": "Open Free Demo Account",
+      "trust": [
+        "Multi-regulated",
+        "Segregated funds",
+        "Fast execution",
+        "24/7 support"
+      ],
+      "card": {
+        "pair": "EUR/USD",
+        "timeframe": "M15",
+        "live": "LIVE",
+        "bid": "Bid",
+        "ask": "Ask",
+        "volume": "Volume",
+        "volumeValue": "2.4M",
+        "spread": "Spread",
+        "spreadValue": "0.0",
+        "pips": "pips",
+        "traders": "Active traders",
+        "tradersValue": "142k+",
+        "execution": "Execution",
+        "executionValue": "8",
+        "msAvg": "ms avg"
+      }
+    },
+    "regulation": {
+      "eyebrow": "Regulation",
+      "title": "Trade with a [globally regulated] broker.",
+      "description": "GTCFX operates under multiple regulatory licences worldwide, ensuring transparency, security, and fair trading conditions for every client.",
+      "items": [
+        {
+          "title": "Regulated Operations",
+          "text": "Licensed and supervised by recognized financial authorities across multiple jurisdictions."
+        },
+        {
+          "title": "Fund Security",
+          "text": "Client funds fully segregated from corporate accounts, held with tier-1 banking partners."
+        },
+        {
+          "title": "Industry Recognition",
+          "text": "Recipient of multiple international awards for execution quality, transparency, and service."
+        },
+        {
+          "title": "Global Coverage",
+          "text": "Serving traders across 90+ countries with localized support and infrastructure."
+        }
+      ]
+    },
+    "accounts": {
+      "eyebrow": "Account Type",
+      "title": "Choose [your account.]",
+      "description": "Compare ECN, Standard, and Pro accounts side by side. Pick the tier that matches your experience, deposit size, and trading style.",
+      "recommended": "Recommended",
+      "minDeposit": "min deposit",
+      "rows": [
+        "Spreads from",
+        "Commission",
+        "Max leverage",
+        "Platforms",
+        "Swap-free option"
+      ],
+      "cta": "Open now",
+      "compare": "View full account comparison",
+      "items": [
+        {
+          "id": "standard",
+          "name": "Standard",
+          "tagline": "Most clients · everyday trading",
+          "deposit": "$0",
+          "values": [
+            "1.0 pips",
+            "None",
+            "1:2000",
+            "MT4 / MT5",
+            "Available on request"
+          ],
+          "swap": true
+        },
+        {
+          "id": "ecn",
+          "name": "ECN",
+          "tagline": "Active traders · scalpers · EAs",
+          "deposit": "$3000",
+          "values": [
+            "0.0 pips",
+            "$5 / lot",
+            "1:500",
+            "MT4 / MT5",
+            "No"
+          ],
+          "swap": false
+        }
+      ]
+    },
+    "onboarding": {
+      "eyebrow": "Onboarding",
+      "title": "Open an account in 3 minutes. Trade today.",
+      "reviewTime": "Review time",
+      "steps": [
+        {
+          "title": "Basic information",
+          "text": "Name, email, phone. We'll verify your details and create your secure trading profile.",
+          "value": "< 2 min"
+        },
+        {
+          "title": "Verify identity (KYC)",
+          "text": "Upload ID and proof of address. We review and approve most accounts in under 24 hours.",
+          "value": "~24 hours"
+        },
+        {
+          "title": "Deposit & trade",
+          "text": "Fund your account with 10+ payment methods. Start trading the moment funds arrive.",
+          "value": "$100"
+        }
+      ]
+    },
+    "platforms": {
+      "eyebrow": "Platforms",
+      "title": "Trade on the [platform you prefer.]",
+      "description": "Web, desktop, mobile — every platform connects to the same execution engine.",
+      "items": [
+        {
+          "id": "gtcgo",
+          "title": "GTC Go",
+          "text": "Our flagship native mobile app. Built ground-up for the modern trader.",
+          "tags": [
+            "iOS",
+            "Android",
+            "Biometric",
+            "Push alerts"
+          ]
+        },
+        {
+          "id": "mt5",
+          "title": "MT5",
+          "text": "Next-gen multi-asset platform with advanced tools.",
+          "tags": [
+            "38 indicators",
+            "EA support",
+            "Multi-asset"
+          ]
+        },
+        {
+          "id": "mt4",
+          "title": "MT4",
+          "text": "The classic FX platform. Reliable, fast, familiar.",
+          "tags": [
+            "30 indicators",
+            "Stable",
+            "Time-tested"
+          ]
+        },
+        {
+          "id": "web",
+          "title": "WebTrader",
+          "text": "No downloads. Trade directly from your browser.",
+          "tags": [
+            "Browser",
+            "Zero install",
+            "Cross-OS"
+          ]
+        }
+      ]
+    },
+    "why": {
+      "eyebrow": "Why GTCFX",
+      "title": "Built for traders who [read the tape.]",
+      "description": "Real spreads. Real execution. Real liquidity. No marketing tricks.",
+      "spreads": {
+        "title": "Ultra-low spreads",
+        "text": "EURUSD spreads compressed to institutional levels on ECN accounts.",
+        "value": "0.0",
+        "unit": "pips from"
+      },
+      "execution": {
+        "title": "Lightning execution",
+        "text": "Server-side architecture optimized for sub-10ms order fulfillment.",
+        "value": "<10",
+        "unit": "ms avg"
+      },
+      "liquidity": {
+        "title": "Deep liquidity",
+        "text": "Direct connections to tier-1 liquidity providers — no requotes, ever."
+      },
+      "deposits": {
+        "title": "Flexible deposits",
+        "text": "10+ payment methods. Instant credit. Zero fees on most channels."
+      },
+      "support": {
+        "title": "24/7 multilingual support",
+        "text": "Real human support — wherever you are, whenever markets are open.",
+        "languages": [
+          "English",
+          "العربية",
+          "中文"
+        ]
+      }
+    },
+    "toolkit": {
+      "eyebrow": "Why GTCFX",
+      "title": "Your complete [trading toolkit.]",
+      "description": "Real spreads. Real execution. Real liquidity. No marketing tricks.",
+      "items": [
+        {
+          "id": "calculator",
+          "title": "Trading Calculator",
+          "text": "Estimate spreads, margin requirements, and potential profit/loss before you trade.",
+          "cta": "Open calculator",
+          "href": "/trading-calculator"
+        },
+        {
+          "id": "calendar",
+          "title": "Economic Calendar",
+          "text": "Track every market-moving release. Filtered by impact, region, and currency.",
+          "cta": "View calendar",
+          "href": "/economic-calendar"
+        },
+        {
+          "id": "vps",
+          "title": "Free VPS",
+          "text": "Eligible accounts get free VPS hosting — ideal for running EAs 24/7 with low latency.",
+          "cta": "Check eligibility",
+          "href": "/trading#vps"
+        },
+        {
+          "id": "analysis",
+          "title": "Market Analysis",
+          "text": "Daily commentary from GTCFX analysts. Setups, levels, and macro context.",
+          "cta": "Read latest",
+          "href": "/market-analysis"
+        },
+        {
+          "id": "academy",
+          "title": "Trading Academy",
+          "text": "Structured curriculum from zero to advanced. Video, articles, and live sessions.",
+          "cta": "Start learning",
+          "href": "/academy"
+        },
+        {
+          "id": "app",
+          "title": "GTC Go App",
+          "text": "Trade, deposit, withdraw, and monitor your account — all from your phone.",
+          "cta": "Download app",
+          "href": "/trading#download"
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Open Your Live Account",
+      "title": "The market is [moving.] Are you in?",
+      "description": "Open a live account in minutes — or test the waters with a free demo. No pressure, no hidden fees.",
+      "live": "Open Live Account",
+      "demo": "Try Free Demo",
+      "riskTitle": "Risk warning.",
+      "risk": "CFD trading involves significant risk and may result in the loss of your entire invested capital. Ensure you fully understand the risks before trading. Past performance is not indicative of future results. Trading is not suitable for all investors."
+    }
+  }
+}

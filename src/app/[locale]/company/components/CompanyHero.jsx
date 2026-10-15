@@ -1,13 +1,13 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { ChevronRight, Users, Layers, ChartNoAxesCombined, Languages } from 'lucide-react';
-import { Link } from '@/i18n/navigation';
+import { Users, Layers, ChartNoAxesCombined, Languages } from 'lucide-react';
+import Breadcrumb from '@/components/shared/Breadcrumb';
 import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
 import { Stagger, StaggerItem, CountUp, EASE } from '@/components/motion';
-import { AccentTitle } from './parts';
-import HeroTradingBackdrop from './HeroTradingBackdrop';
+import { AccentTitle } from '@/components/shared/SectionIntro';
+import HeroTradingBackdrop from '@/components/shared/HeroBackdrop';
 
 const STAT_ICONS = [Users, Layers, Languages, ChartNoAxesCombined];
 
@@ -22,21 +22,7 @@ export function CompanyHero() {
       <HeroTradingBackdrop />
 
       <div className="container-x relative text-center">
-        <nav aria-label="Breadcrumb" className="flex justify-center">
-          <ol className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/60 backdrop-blur">
-            <li>
-              <Link href="/" className="transition-colors hover:text-gold-200">
-                {tb('home')}
-              </Link>
-            </li>
-            <li aria-hidden>
-              <ChevronRight className="size-3.5 rtl:-scale-x-100" />
-            </li>
-            <li aria-current="page" className="text-gold-200">
-              {tb('company')}
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumb items={[{ label: tb('home'), href: '/' }, { label: tb('company') }]} />
 
         {/* h1 + intro render visible straight away (good LCP); only a light slide-in */}
         <motion.h1 className="heading-page mx-auto mt-7 max-w-4xl" initial={{ y: 18 }} animate={{ y: 0 }} transition={{ duration: 0.8, ease: EASE }}>

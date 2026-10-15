@@ -6,7 +6,7 @@ import { Boxes, Scale, TrendingUp } from 'lucide-react';
 import ArrowLink from '@/components/shared/ArrowLink';
 import { Reveal, Stagger, StaggerItem, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
-import { AccentTitle } from './parts';
+import { AccentTitle } from '@/components/shared/SectionIntro';
 
 const POINTS = [
   { id: 'multiplier', Icon: TrendingUp },

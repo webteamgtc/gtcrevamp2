@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { Leaf, HeartHandshake, Landmark } from 'lucide-react';
 import { Stagger, StaggerItem } from '@/components/motion';
 import { cn } from '@/lib/utils';
-import { SectionIntro } from './parts';
+import { SectionIntro } from '@/components/shared/SectionIntro';
 
 const PANELS = [
   { id: 'environment', Icon: Leaf, letter: 'E', tint: 'from-brand-50 via-white to-brand-50/40', chip: 'from-brand to-brand-700 shadow-brand/30' },
