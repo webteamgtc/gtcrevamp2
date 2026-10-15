@@ -576,5 +576,199 @@
       "riskTitle": "Risk warning.",
       "risk": "CFD trading involves significant risk and may result in the loss of your entire invested capital. Ensure you fully understand the risks before trading. Past performance is not indicative of future results. Trading is not suitable for all investors."
     }
+  },
+  "freeDemoAccount": {
+    "meta": {
+      "title": "Free Demo Account | Practice Risk-Free with GTCFX",
+      "description": "Open a free GTCFX demo account in 30 seconds. $50,000 virtual capital, real market spreads and 7+ trading markets on MT4, MT5 and WebTrader. No verification required."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Free Demo Account"
+    },
+    "hero": {
+      "badge": "Free Demo Account · No Verification Required",
+      "title": "Start Trading [Risk-Free in 30 Seconds]",
+      "text": "Practice with virtual funds in real market conditions. No deposit, no risk — just the full GTCFX trading experience while you build confidence in your strategy.",
+      "points": [
+        "$50,000 virtual capital",
+        "Real market spreads",
+        "7+ trading markets"
+      ],
+      "highlights": [
+        "No Verification Required",
+        "Instant Activation",
+        "Lifetime Validity"
+      ]
+    },
+    "form": {
+      "title": "Open your Free Demo Account",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Smith",
+      "email": "Email",
+      "emailPlaceholder": "you@email.com",
+      "phone": "Phone Number",
+      "getCode": "Get Code",
+      "code": "Verification code",
+      "codePlaceholder": "Enter the code",
+      "accountType": "Account Type",
+      "accountTypes": [
+        {
+          "id": "mt5",
+          "label": "MT5 Demo Account"
+        },
+        {
+          "id": "mt4",
+          "label": "MT4 Demo Account"
+        }
+      ],
+      "country": "Country",
+      "countryLoading": "Loading countries...",
+      "countrySelect": "Select your country",
+      "consentStart": "By clicking Submit, I confirm that: (1) I have read and agree to the",
+      "agreements": "Client Agreements",
+      "consentEnd": "(2) I consent to GTCFX contacting me at reasonable times; and (3) my number is not on the Do Not Call Register (DNCR).",
+      "submit": "Start Trading Now",
+      "submitting": "Submitting...",
+      "errors": {
+        "fullName": "Full name is required",
+        "fullNameLetters": "Name can only contain letters",
+        "email": "Email is required",
+        "emailInvalid": "Invalid email address",
+        "phone": "Phone number is required",
+        "phoneInvalid": "Invalid phone number",
+        "country": "Country is required",
+        "consent": "Please accept the declaration"
+      }
+    },
+    "why": {
+      "eyebrow": "Why Trade With Demo",
+      "title": "Everything you need to [trade like it's real]",
+      "description": "A demo built to mirror live trading — same prices, same execution, same opportunities. Zero risk.",
+      "items": [
+        {
+          "title": "Real Market Quotes",
+          "text": "Identical bid/ask, depth, and execution as our live accounts — not simulated noise."
+        },
+        {
+          "title": "$50,000 Virtual Funds",
+          "text": "Sufficient capital to test scalping, swing, and EA strategies under real conditions."
+        },
+        {
+          "title": "All Platforms Supported",
+          "text": "Trade on MT4, MT5, or WebTrader — desktop, mobile, or browser. One account, every device."
+        },
+        {
+          "title": "7+ Trading Markets",
+          "text": "Forex, Metals, Indices, Shares, Crypto & more — explore every market from one terminal."
+        }
+      ]
+    },
+    "workflow": {
+      "eyebrow": "Workflow",
+      "title": "Launch your lab in [four steps.]",
+      "description": "A professional set-up flow — designed so your demo environment closely mirrors how you intend to trade live.",
+      "steps": [
+        {
+          "title": "Register an account",
+          "text": "Sign up with email in under 60 seconds. No deposit, no KYC required for demo activation."
+        },
+        {
+          "title": "Select platform & parameters",
+          "text": "Choose MT4, MT5, or GTC Trader. Configure virtual capital, leverage, base currency, and instruments."
+        },
+        {
+          "title": "Download & configure",
+          "text": "Install on desktop or mobile, attach EAs, indicators, and templates that mirror your live workflow."
+        },
+        {
+          "title": "Run strategy tests",
+          "text": "Trade real markets with virtual capital. Track equity curves, drawdown, and performance metrics."
+        }
+      ]
+    },
+    "tips": {
+      "eyebrow": "Tips",
+      "title": "Demo account [management tips.]",
+      "description": "Most traders use demo accounts wrong — they treat them as games. Here is how serious traders extract real intelligence.",
+      "items": [
+        {
+          "title": "Mirror your real capital, not your fantasy capital",
+          "text": "Set virtual funds to match the deposit you would actually trade live. Risk behaviour at $5,000 is fundamentally different from $500,000."
+        },
+        {
+          "title": "Keep a structured trade journal",
+          "text": "Log every entry rationale, exit reasoning, and emotional state. A demo without a journal is just noise — with one, it's calibration data."
+        },
+        {
+          "title": "Track edge metrics, not just P/L",
+          "text": "Win rate, average R-multiple, max drawdown, and consistency curve matter more than absolute returns over short windows."
+        },
+        {
+          "title": "Know when to graduate to live",
+          "text": "When your edge is stable across 60+ trades and you can replicate execution with discipline — it's time to scale into real capital."
+        }
+      ],
+      "note": {
+        "badge": "Editor's Note",
+        "title": "Demo Isn't Training Wheels. It's A Wind Tunnel.",
+        "text": "The traders who succeed long-term use demo environments to stress-test ideas before they cost money. The market doesn't reward effort — it rewards prepared, validated systems.",
+        "quote": "“The strategy you build in the lab is the one you'll trust at 3 AM on a volatile open.”",
+        "cta": "Open Live Account"
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Common questions, [answered.]",
+      "description": "Everything you need to know about the GTCFX demo account before you click \"open.\"",
+      "items": [
+        {
+          "q": "Does the demo account have an expiry date?",
+          "a": "No. Your GTCFX demo account never expires. You can use it for as long as you like, return after months away, and pick up exactly where you left off."
+        },
+        {
+          "q": "Are spreads on the demo identical to the live account?",
+          "a": "Yes. The demo streams the same bid/ask prices, depth and execution as our live accounts, so the spreads you see are real market spreads."
+        },
+        {
+          "q": "How do I reset my demo balance?",
+          "a": "You can top up or reload your virtual balance at any time from your GTCFX client portal."
+        },
+        {
+          "q": "Which platforms are supported?",
+          "a": "MT4, MT5 and WebTrader — on desktop, mobile or in your browser. One account works on every device."
+        },
+        {
+          "q": "Do I need to verify my identity to open a demo?",
+          "a": "No. A demo account needs no documents, no deposit and no KYC — just sign up with your email and start trading."
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Ready For The Real Thing?",
+      "title": "Built confidence in your demo? Now turn your strategy into [real returns.]",
+      "description": "Upgrade when you are ready — same platforms, tighter spreads, and dedicated support from your first live trade.",
+      "live": "Open Live Account",
+      "demo": "Continue with Demo",
+      "stats": [
+        {
+          "value": "24ms",
+          "label": "Execution"
+        },
+        {
+          "value": "0.0 pip",
+          "label": "Spreads from"
+        },
+        {
+          "value": "7+",
+          "label": "Instruments"
+        },
+        {
+          "value": "24/7",
+          "label": "Support"
+        }
+      ]
+    }
   }
 }
