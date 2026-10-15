@@ -770,5 +770,194 @@
         }
       ]
     }
+  },
+  "depositPage": {
+    "meta": {
+      "title": "Deposit Funds | Fast, Zero-Fee Deposits with GTCFX",
+      "description": "Fund your GTCFX account instantly with 10+ payment methods — cards, bank transfer, e-wallets, crypto, Apple Pay and Google Pay. $0 deposit fees."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Deposit"
+    },
+    "hero": {
+      "badge": "Trusted & Regulated",
+      "title": "Fund Your Account [Instantly]",
+      "text": "Fast, secure, zero-fee deposits & withdrawals. Support for 10+ payment methods — funds arrive in your trading account in seconds.",
+      "stats": [
+        {
+          "value": "$0",
+          "label": "Deposit Fees"
+        },
+        {
+          "value": "10+",
+          "label": "Payment Methods"
+        },
+        {
+          "value": "Instant",
+          "label": "Processing Time"
+        }
+      ],
+      "ctaDeposit": "Deposit Now",
+      "ctaOpen": "Open Account",
+      "card": {
+        "title": "Quick Deposit",
+        "verified": "Verified",
+        "free": "Free",
+        "noFees": "No deposit fees",
+        "ssl": "256-bit SSL",
+        "methods": [
+          {
+            "id": "card",
+            "name": "Visa / Mastercard",
+            "meta": "Instant · Min $50"
+          },
+          {
+            "id": "crypto",
+            "name": "USDT Crypto",
+            "meta": "Instant · Min $50"
+          },
+          {
+            "id": "mobile",
+            "name": "Apple / Google Pay",
+            "meta": "Instant · Min $50"
+          },
+          {
+            "id": "wallet",
+            "name": "Skrill / Neteller",
+            "meta": "Instant · Min $50"
+          }
+        ]
+      }
+    },
+    "methods": {
+      "eyebrow": "Payments",
+      "title": "Choose your [payment method]",
+      "description": "Fund your account using cards, bank transfer, e-wallets, or mobile payments — with transparent fees and fast processing times.",
+      "labels": {
+        "lowest": "lowest",
+        "received": "funds received",
+        "cost": "cost"
+      },
+      "cta": "payment",
+      "items": [
+        {
+          "id": "card",
+          "name": "Credit Card/Debit Card",
+          "sub": "Visa · Mastercard",
+          "lowest": "$0",
+          "received": "immediate",
+          "cost": "free"
+        },
+        {
+          "id": "bank",
+          "name": "bank transfer",
+          "sub": "International wire transfer",
+          "lowest": "$0",
+          "received": "1–3 days",
+          "cost": "free"
+        },
+        {
+          "id": "ewallet",
+          "name": "e-wallet",
+          "sub": "Skrill · Neteller",
+          "lowest": "$0",
+          "received": "1–3 days",
+          "cost": "free"
+        },
+        {
+          "id": "crypto",
+          "name": "Cryptocurrency",
+          "sub": "USDT (TRC20)",
+          "lowest": "$0",
+          "received": "immediate",
+          "cost": "free"
+        },
+        {
+          "id": "apple",
+          "name": "Apple Pay",
+          "sub": "iOS · macOS",
+          "lowest": "$0",
+          "received": "immediate",
+          "cost": "free"
+        },
+        {
+          "id": "google",
+          "name": "Google Pay",
+          "sub": "Android · Chrome",
+          "lowest": "$0",
+          "received": "immediate",
+          "cost": "free"
+        }
+      ]
+    },
+    "how": {
+      "eyebrow": "How It Works",
+      "title": "How do I [deposit funds?]",
+      "description": "Deposit funds in three steps, the whole process takes no more than two minutes.",
+      "step": "Step",
+      "steps": [
+        {
+          "title": "Login account",
+          "text": "Visit mygtcfx.com and log in using your account and password."
+        },
+        {
+          "title": "Click to deposit",
+          "text": "Click 'Deposit' in the top menu or wallet icon to access the deposit page."
+        },
+        {
+          "title": "Select method and confirm.",
+          "text": "Choose a payment method, enter the amount, and follow the prompts to complete the payment. Funds will be credited instantly."
+        }
+      ],
+      "flow": [
+        "mygtcfx.com",
+        "Choose payment method",
+        "Enter amount",
+        "Funds received ✓"
+      ],
+      "pdf": "Download the complete tutorial PDF"
+    },
+    "security": {
+      "eyebrow": "Security & Trust",
+      "title": "Your Funds Are Protected at [Every Step]",
+      "description": "Understand the key rules for fund operations to ensure the security and compliance of your account.",
+      "items": [
+        {
+          "title": "Segregated Client Accounts",
+          "text": "Client funds are held in top-tier, regulated banks — completely separate from GTCFX's operating capital. Your money is ring-fenced and protected at all times."
+        },
+        {
+          "title": "3D Secure & Encrypted Payments",
+          "text": "Every online transaction is secured with 3D Secure technology and end-to-end encryption, adding multiple layers of fraud protection."
+        },
+        {
+          "title": "Verified Withdrawals Only",
+          "text": "Funds are always returned to the verified source of deposit, following strict AML procedures to safeguard against unauthorized withdrawals."
+        },
+        {
+          "title": "Multi-Jurisdiction Regulation",
+          "text": "GTCFX operates under regulatory oversight across multiple jurisdictions, ensuring compliance with the highest global financial standards."
+        }
+      ],
+      "panel": {
+        "title": "Institutional-Grade [Fund Safety]",
+        "points": [
+          "Client funds held in segregated accounts at regulated, tier-1 banks — never merged with company funds",
+          "In the event of insolvency, your money and assets are fully shielded from creditors",
+          "Norton-secured transactions with advanced fraud monitoring on every payment",
+          "Zero fees charged by GTCFX on all deposits and withdrawals, across every method"
+        ],
+        "cta": "Open Live Account"
+      }
+    },
+    "cta": {
+      "title": "Ready to [Fund Your Account?]",
+      "description": "Join thousands of traders who trust GTCFX for fast, secure, and fee-free deposits. Get started in minutes.",
+      "live": "Open Live Account",
+      "login": "Login & Deposit",
+      "risk": "Trading CFDs involves significant risk of loss. Please ensure you understand the risks involved."
+    }
   }
 }
