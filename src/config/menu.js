@@ -48,6 +48,7 @@ export const MENU = [
   },
   {
     id: 'trading',
+    href: '/trading',
     columns: [
       [{ id: 'tradeWith', items: [
         { id: 'openLive', href: PORTAL.register, icon: UserPlus },
