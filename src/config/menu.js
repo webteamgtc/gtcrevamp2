@@ -48,6 +48,7 @@ export const MENU = [
     ],
     promo: { id: 'company', href: '/account-types', visual: 'accounts' }
   },
+  
   {
     id: 'trading',
     href: '/trading',
