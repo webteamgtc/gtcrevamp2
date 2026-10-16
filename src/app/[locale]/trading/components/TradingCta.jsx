@@ -24,8 +24,7 @@ export function TradingCta() {
 
             <div className="relative grid items-center gap-8 lg:grid-cols-[1.4fr_auto] lg:gap-14">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-200">{t('eyebrow')}</p>
-                <h2 className="heading-section mt-3">
+                <h2 className="heading-section">
                   <AccentTitle text={t('title')} words={2} />
                 </h2>
                 <p className="mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-white/65 md:text-[15px]">{t('description')}</p>

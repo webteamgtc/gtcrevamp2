@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds a static, relative-path preview of the drafts into ./preview (for sharing a review link).
+# Builds a static, relative-path preview of the site into ./preview (for sharing a review link).
 set -e
 cd "$(dirname "$0")/.."
 mv src/proxy.js /tmp/gtc-proxy.js
@@ -8,15 +8,30 @@ rm -rf out preview
 STATIC_EXPORT=1 npx next build --webpack
 mkdir -p preview
 cp -r out/_next out/images out/icon.png preview/ 2>/dev/null || true
-# Draft 4 (the chosen homepage) in every language
-for d in out/*/draft-4; do l=$(basename $(dirname $d)); mkdir -p preview/$l/draft-4; cp $d/index.html preview/$l/draft-4/; done
+# Homepage in every language (flattened to /<l>/home/)
+for l in $(ls -d out/*/ | xargs -n1 basename); do [ -f out/$l/index.html ] && [ -d out/$l/company ] && mkdir -p preview/$l/home && cp out/$l/index.html preview/$l/home/; done
 # Company hub in every language
 for d in out/*/company; do l=$(basename $(dirname $d)); mkdir -p preview/$l/company; cp $d/index.html preview/$l/company/; done
+# Trading pages in every language
+# (open-live-account is flattened to /<l>/open-live-account/ so every page sits two folders deep)
+for d in out/*/trading; do l=$(basename $(dirname $d)); mkdir -p preview/$l/trading preview/$l/open-live-account; cp $d/index.html preview/$l/trading/; cp $d/open-live-account/index.html preview/$l/open-live-account/ 2>/dev/null || true; done
+# About Us (flattened to /<l>/about-us/)
+for d in out/*/company/about-us; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/about-us; cp $d/index.html preview/$l/about-us/; done
+# Why GTC Group (flattened to /<l>/why-gtc-group/)
+for d in out/*/company/why-gtc-group; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/why-gtc-group; cp $d/index.html preview/$l/why-gtc-group/; done
+# Global Presence (flattened to /<l>/global-presence/)
+for d in out/*/company/global-presence; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/global-presence; cp $d/index.html preview/$l/global-presence/; done
+# Events & Exhibitions (flattened to /<l>/events-and-exhibitions/)
+for d in out/*/company/events-and-exhibitions; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/events-and-exhibitions; cp $d/index.html preview/$l/events-and-exhibitions/; done
+# Regulations (flattened to /<l>/regulations/)
+for d in out/*/company/regulations; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/regulations; cp $d/index.html preview/$l/regulations/; done
+# Contact Us (flattened to /<l>/contact-us/)
+for d in out/*/company/contact-us; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/contact-us; cp $d/index.html preview/$l/contact-us/; done
 # award images: the real ones from public/awards, or preview stand-ins
 mkdir -p preview/awards
 if ls public/awards/*.webp >/dev/null 2>&1; then cp public/awards/*.webp preview/awards/; else cp preview-hub/awards/*.webp preview/awards/ 2>/dev/null || true; fi
 cp public/ceo.webp preview/
-# every draft page sits two folders deep, so ../../ points to the preview root
+# every page sits two folders deep, so ../../ points to the preview root
 # CSS files live in _next/static/css/, so their font URLs point to ../media/
 find preview -name '*.css' | while read f; do sed -i 's#/__GTC__/_next/static/media/#../media/#g' "$f"; done
 find preview -name '*.html' -o -name '*.js' | while read f; do
@@ -42,3 +57,4 @@ for f in glob.glob('preview/**/*.js', recursive=True):
     if '�' in s:
         open(f, 'w', encoding='utf-8').write(s.replace('�', '\\uFFFD'))
 PY
+

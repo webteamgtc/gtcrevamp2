@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUp, ChevronDown, Cookie } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SOCIALS } from './icons';
@@ -13,14 +13,9 @@ const COLS = ['instruments', 'quick', 'platforms', 'company', 'support', 'legal'
 export default function Footer({ theme = 'light', layout = 'stacked' }) {
   const t = useTranslations('footer');
   const dark = theme === 'dark';
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end end'] });
-  const wmY = useTransform(scrollYProgress, [0, 1], ['40%', '0%']);
-  const wmOpacity = useTransform(scrollYProgress, [0.4, 1], [0, 1]);
 
   return (
     <footer
-      ref={ref}
       className={cn('relative overflow-hidden pt-20', dark ? 'bg-ink text-white' : 'bg-[#f6f7fb] text-ink')}
     >
       <div className={cn('absolute inset-0 opacity-60', dark ? 'bg-grid-dark' : 'bg-grid-light', 'mask-fade-y')} />

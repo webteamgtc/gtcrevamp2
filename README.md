@@ -1,13 +1,13 @@
-# GTCFX Website — Homepage Drafts
+# GTCFX Website
 
-Three homepage design directions for the new GTCFX website.
+The new gtcfx.com, built page by page.
 
-| Route | Draft |
+| Route | Page |
 | --- | --- |
-| `/en` | Drafts index (links to all three) |
-| `/en/draft-1` | **Light — "Clarity"**: white and soft-gray surfaces, navy structure, gold highlights |
-| `/en/draft-2` | **Dark — "Midnight"**: black and midnight navy, glowing gold accents |
-| `/en/draft-3` | **Fusion**: alternating dark, white, gray and navy sections |
+| `/en` | Homepage |
+| `/en/company` | Company hub |
+| `/en/company/about-us` · `why-gtc-group` · `global-presence` · `events-and-exhibitions` · `regulations` · `contact-us` | Company pages |
+| `/en/trading` · `/en/trading/open-live-account` | Trading pages |
 
 Replace `en` with `ar` to preview the Arabic right-to-left version.
 
@@ -47,7 +47,7 @@ The language switcher, routes, `hreflang` links and static pages all pick up the
 
 ```
 messages/                 en.json, ar.json (+ the other 20 languages)
-src/app/[locale]/         layout + pages (draft-1, draft-2, draft-3)
+src/app/[locale]/         layout, homepage (components/), company/ and trading/ pages
 src/i18n/                 locales list, routing, request config, navigation helpers
 src/proxy.js              locale detection / redirect (Next 16 "proxy" = middleware)
 src/components/motion/    reusable animations (Reveal, WordReveal, CountUp, Marquee,
@@ -55,7 +55,6 @@ src/components/motion/    reusable animations (Reveal, WordReveal, CountUp, Marq
 src/components/shared/    Header (mega menu, language switcher, mobile drawer), Footer,
                           live ticker, device mockups and charts, form, icons
 src/components/ui/        shadcn-style Button and Accordion
-src/components/drafts/    Draft1.jsx, Draft2.jsx, Draft3.jsx, DraftsIndex.jsx
 ```
 
 ## Placeholders to replace before launch

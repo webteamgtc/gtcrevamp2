@@ -21,7 +21,7 @@
           "desc": "Who we are and what drives us"
         },
         {
-          "label": "Why GTCFX",
+          "label": "Why GTC Group",
           "desc": "What makes our trading different"
         },
         {
@@ -148,7 +148,7 @@
         "title": "Company",
         "links": [
           "About Us",
-          "Why GTCFX",
+          "Why GTC Group",
           "Global Regulation",
           "Events"
         ]
@@ -267,10 +267,10 @@
     },
     "links": {
       "aboutUs": "About Us",
-      "whyGtcfx": "Why GTCFX",
+      "whyGtcfx": "Why GTC Group",
       "globalPresence": "Global Presence",
       "events": "Events & Exhibitions",
-      "regulation": "GTCFX Regulation",
+      "regulation": "Regulations",
       "awards": "GTCFX Awards",
       "faqSupport": "FAQ & User Support",
       "contact": "Contact Us",
@@ -324,8 +324,7 @@
       "earnings": "Earnings & Dividends Calendar",
       "holidays": "Market Holidays",
       "companyNews": "Company News",
-      "awardsMedia": "Awards & Media",
-      "companyOverview": "Company Overview"
+      "awardsMedia": "Awards & Media"
     },
     "promos": {
       "company": {
@@ -422,9 +421,36 @@
       "earnings": "Company results and payouts",
       "holidays": "Trading hours and closures",
       "companyNews": "Announcements from GTCFX",
-      "awardsMedia": "Press coverage and awards",
-      "companyOverview": "GTCFX at a glance"
+      "awardsMedia": "Press coverage and awards"
     },
     "eyebrow": "GTCFX"
+  },
+  "stats": {
+    "items": [
+      {
+        "value": 985000,
+        "prefix": "",
+        "suffix": "+",
+        "label": "Served Clients"
+      },
+      {
+        "value": 7,
+        "prefix": "",
+        "suffix": "+",
+        "label": "Trading Markets"
+      },
+      {
+        "value": 20,
+        "prefix": "",
+        "suffix": "+",
+        "label": "Languages Supported"
+      },
+      {
+        "value": 850,
+        "prefix": "$",
+        "suffix": " Billion",
+        "label": "Monthly Trades"
+      }
+    ]
   }
 }

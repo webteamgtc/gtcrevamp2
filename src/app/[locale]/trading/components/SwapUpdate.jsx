@@ -37,10 +37,10 @@ function SwapVisual() {
         </motion.svg>
         {/* the two coins orbit and trade places */}
         <motion.div className="absolute inset-0" animate={{ rotate: [0, 180, 180, 360, 360] }} transition={{ duration: 6, repeat: Infinity, times: [0, 0.35, 0.5, 0.85, 1], ease: 'easeInOut' }}>
-          <motion.span className="absolute left-[18%] top-[18%] grid size-20 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 text-white shadow-xl shadow-brand/40 md:size-24" animate={{ rotate: [0, -180, -180, -360, -360] }} transition={{ duration: 6, repeat: Infinity, times: [0, 0.35, 0.5, 0.85, 1], ease: 'easeInOut' }}>
+          <motion.span className="absolute start-[18%] top-[18%] grid size-20 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 text-white shadow-xl shadow-brand/40 md:size-24" animate={{ rotate: [0, -180, -180, -360, -360] }} transition={{ duration: 6, repeat: Infinity, times: [0, 0.35, 0.5, 0.85, 1], ease: 'easeInOut' }}>
             <Euro className="size-9" strokeWidth={2.4} />
           </motion.span>
-          <motion.span className="absolute bottom-[18%] right-[18%] grid size-16 place-items-center rounded-full bg-gradient-to-br from-white to-brand-50 text-brand shadow-xl shadow-brand/20 ring-1 ring-brand/10 md:size-20" animate={{ rotate: [0, -180, -180, -360, -360] }} transition={{ duration: 6, repeat: Infinity, times: [0, 0.35, 0.5, 0.85, 1], ease: 'easeInOut' }}>
+          <motion.span className="absolute bottom-[18%] end-[18%] grid size-16 place-items-center rounded-full bg-gradient-to-br from-white to-brand-50 text-brand shadow-xl shadow-brand/20 ring-1 ring-brand/10 md:size-20" animate={{ rotate: [0, -180, -180, -360, -360] }} transition={{ duration: 6, repeat: Infinity, times: [0, 0.35, 0.5, 0.85, 1], ease: 'easeInOut' }}>
             <DollarSign className="size-8" strokeWidth={2.6} />
           </motion.span>
         </motion.div>

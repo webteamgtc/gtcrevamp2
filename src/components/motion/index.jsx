@@ -133,7 +133,7 @@ export function TextGenerate({ text, className, delay = 0, stagger = 0.035 }) {
 }
 
 /* ---------- CountUp: animated number when in view ---------- */
-export function CountUp({ value, prefix = '', suffix = '', duration = 2.2, className, locale = 'en-US' }) {
+export function CountUp({ value, prefix = '', suffix = '', duration = 2.2, className, locale = 'en-US', grouping = true }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const [display, setDisplay] = useState(0);
@@ -150,7 +150,7 @@ export function CountUp({ value, prefix = '', suffix = '', duration = 2.2, class
   return (
     <span ref={ref} className={cn('tabular-nums', className)}>
       {prefix}
-      {Number(display).toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
+      {Number(display).toLocaleString(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: grouping })}
       {suffix}
     </span>
   );

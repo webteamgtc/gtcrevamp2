@@ -21,7 +21,7 @@
           "desc": "من نحن وما الذي يحركنا"
         },
         {
-          "label": "لماذا GTCFX",
+          "label": "لماذا مجموعة GTC",
           "desc": "ما الذي يميز تداولنا"
         },
         {
@@ -148,7 +148,7 @@
         "title": "الشركة",
         "links": [
           "من نحن",
-          "لماذا GTCFX",
+          "لماذا مجموعة GTC",
           "التراخيص العالمية",
           "الفعاليات"
         ]
@@ -267,10 +267,10 @@
     },
     "links": {
       "aboutUs": "من نحن",
-      "whyGtcfx": "لماذا GTCFX",
+      "whyGtcfx": "لماذا مجموعة GTC",
       "globalPresence": "حضورنا العالمي",
       "events": "الفعاليات والمعارض",
-      "regulation": "تراخيص GTCFX",
+      "regulation": "اللوائح التنظيمية",
       "awards": "جوائز GTCFX",
       "faqSupport": "الأسئلة الشائعة والدعم",
       "contact": "اتصل بنا",
@@ -320,8 +320,7 @@
       "earnings": "مفكرة الأرباح والتوزيعات",
       "holidays": "عطلات السوق",
       "companyNews": "أخبار الشركة",
-      "awardsMedia": "الجوائز والإعلام",
-      "companyOverview": "نظرة عامة على الشركة"
+      "awardsMedia": "الجوائز والإعلام"
     },
     "promos": {
       "company": {
@@ -418,9 +417,36 @@
       "earnings": "نتائج الشركات والتوزيعات",
       "holidays": "ساعات التداول والإغلاقات",
       "companyNews": "إعلانات GTCFX",
-      "awardsMedia": "التغطية الإعلامية والجوائز",
-      "companyOverview": "GTCFX في لمحة"
+      "awardsMedia": "التغطية الإعلامية والجوائز"
     },
     "eyebrow": "GTCFX"
+  },
+  "stats": {
+    "items": [
+      {
+        "value": 985000,
+        "prefix": "",
+        "suffix": "+",
+        "label": "عميل تمت خدمته"
+      },
+      {
+        "value": 7,
+        "prefix": "",
+        "suffix": "+",
+        "label": "أسواق تداول"
+      },
+      {
+        "value": 20,
+        "prefix": "",
+        "suffix": "+",
+        "label": "لغة مدعومة"
+      },
+      {
+        "value": 850,
+        "prefix": "$",
+        "suffix": " مليار",
+        "label": "حجم التداول الشهري"
+      }
+    ]
   }
 }

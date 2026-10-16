@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useInView } from 'motion/react';
 import { ChevronLeft, ChevronRight, Trophy } from 'lucide-react';
 import ArrowLink from '@/components/shared/ArrowLink';
-import { Reveal, EASE } from '@/components/motion';
+import { Reveal } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 

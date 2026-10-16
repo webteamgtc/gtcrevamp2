@@ -24,13 +24,6 @@ export function OlaCta() {
       <BandLine />
 
       <div className="container-x relative mx-auto max-w-4xl text-center">
-        <Reveal y={12}>
-          <p className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-gold-200">
-            <span className="h-px w-6 bg-gold-200" aria-hidden />
-            {t('eyebrow')}
-            <span className="h-px w-6 bg-gold-200" aria-hidden />
-          </p>
-        </Reveal>
         <Reveal y={16} delay={0.05}>
           <h2 className="heading-section mx-auto mt-5 max-w-2xl">
             <AccentTitle text={t('title')} accentClassName="text-gradient-gold" />

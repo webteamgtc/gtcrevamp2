@@ -38,13 +38,13 @@ export function Eyebrow({ children, dark = false, className }) {
  * Section intro used across inner pages.
  * layout 'center' (title + text centred) or 'split' (title start, text end)
  */
-export function SectionIntro({ title, sub, eyebrow, description, layout = 'center', dark = false, className, children }) {
+// `eyebrow` is accepted but not shown: agreed design rule — no small titles above headings
+export function SectionIntro({ title, sub, eyebrow: _eyebrow, description, layout = 'center', dark = false, className, children }) {
   const muted = dark ? 'text-white/60' : 'text-ink/60';
   if (layout === 'split') {
     return (
       <div className={cn('grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-16', dark && 'is-dark', className)}>
         <Reveal y={16}>
-          {eyebrow && <Eyebrow dark={dark} className="mb-3">{eyebrow}</Eyebrow>}
           <h2 className="heading-section">
             <AccentTitle text={title} />
           </h2>
@@ -60,7 +60,6 @@ export function SectionIntro({ title, sub, eyebrow, description, layout = 'cente
   return (
     <div className={cn('mx-auto max-w-3xl text-center', dark && 'is-dark', className)}>
       <Reveal y={16}>
-        {eyebrow && <Eyebrow dark={dark} className="mb-4">{eyebrow}</Eyebrow>}
         <h2 className="heading-section">
           <AccentTitle text={title} />
         </h2>

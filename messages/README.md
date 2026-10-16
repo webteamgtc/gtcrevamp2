@@ -7,9 +7,10 @@ For each locale, split copy by page or shared scope:
 ```
 messages/
   en/
-    common.json       # nav, footer, menu, meta, riskBar, lang picker, …
+    common.json       # shared on every page: nav, menu, footer, meta, riskBar, lang picker, stats, …
     homepage.json     # hero, features, markets, drafts, register, …
-    companyPage.json  # /company — root key `companyPage`
+    companyPage.json  # Company section: `companyPage` (/company) + one root key per subpage, e.g. `aboutUsPage`
+    tradingPage.json  # Trading section: `tradingPage`, `openLiveAccountPage`, …
   ar/
     common.json
     homepage.json
@@ -21,13 +22,6 @@ Components keep using the same namespaces, e.g. `useTranslations('companyPage')`
 ## Legacy single file
 
 `messages/<locale>.json` still works. It is merged **under** folder bundles (folder overrides legacy for the same keys). Use this for languages that only override part of the site.
-
-## Regenerate splits from a monolith
-
-```bash
-node scripts/split-messages.mjs en
-node scripts/split-messages.mjs ar
-```
 
 ## Adding a new page or namespace
 
@@ -60,3 +54,7 @@ Same `useTranslations('adeela')`.
 Copy the file for other locales (`messages/ar/adeela.json`, etc.). Do not put flat keys in `common.json` / `homepage.json` (those files export many namespaces at once).
 
 Files under `messages/en/` are read from disk on each request (no dev restart needed after adding a JSON file). Restart only if you change `loadMessages.js`.
+
+## Rule: one file per menu section
+
+Each parent page and all its subpages share one file (`companyPage.json`, `tradingPage.json`, …), with one top-level key per page. Shared content (header, menu, footer, risk warning, stats) lives in `common.json`. Never reuse a top-level key in two files.

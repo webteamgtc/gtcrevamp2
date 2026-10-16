@@ -4,7 +4,7 @@ import { SITE_URL } from '@/lib/seo';
 export const dynamic = 'force-static';
 
 // add each finished page here (path without the locale)
-const PAGES = ['/company'];
+const PAGES = ['', '/company', '/company/about-us', '/company/why-gtc-group', '/company/global-presence', '/company/events-and-exhibitions', '/company/regulations', '/company/contact-us', '/trading', '/trading/open-live-account'];
 
 export default function sitemap() {
   return PAGES.flatMap((path) =>

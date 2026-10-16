@@ -23,20 +23,19 @@ export const MENU = [
     href: '/company', // clicking "Company" in the top bar opens the Company page
     columns: [
       [{ id: 'about', items: [
-        { id: 'companyOverview', href: '/company', icon: Landmark },
         { id: 'aboutUs', href: '/company/about-us', icon: Building2 },
-        { id: 'whyGtcfx', href: '/why-gtcfx', icon: Sparkles },
-        { id: 'globalPresence', href: '/global-presence', icon: Globe },
-        { id: 'events', href: '/events', icon: CalendarDays }
+        { id: 'whyGtcfx', href: '/company/why-gtc-group', icon: Sparkles },
+        { id: 'globalPresence', href: '/company/global-presence', icon: Globe },
+        { id: 'events', href: '/company/events-and-exhibitions', icon: CalendarDays }
       ] }],
       [{ id: 'legal', items: [
-        { id: 'regulation', href: '/regulation', icon: ShieldCheck },
+        { id: 'regulation', href: '/company/regulations', icon: ShieldCheck },
         { id: 'awards', href: '/awards', icon: Award }
       ] }],
       [
         { id: 'help', items: [
           { id: 'faqSupport', href: '/faq', icon: Headset },
-          { id: 'contact', href: '/contact', icon: MessageCircle }
+          { id: 'contact', href: '/company/contact-us', icon: MessageCircle }
         ] },
         { id: 'partner', items: [
           { id: 'partners', href: '/partners', icon: Handshake },
@@ -51,7 +50,7 @@ export const MENU = [
     href: '/trading',
     columns: [
       [{ id: 'tradeWith', items: [
-        { id: 'openLive', href: PORTAL.register, icon: UserPlus, href: '/trading/open-live-account' },
+        { id: 'openLive', href: '/trading/open-live-account', icon: UserPlus },
         { id: 'freeDemo', href: PORTAL.demo, icon: MonitorPlay },
         { id: 'fund', href: '/deposit-withdraw', icon: Wallet },
         { id: 'accountTypes', href: '/account-types', icon: Layers },
@@ -147,7 +146,7 @@ export const MENU = [
       ] }],
       [{ id: 'companyUpdates', items: [
         { id: 'companyNews', href: '/news/company', icon: Megaphone },
-        { id: 'events', href: '/events', icon: CalendarDays },
+        { id: 'events', href: '/company/events-and-exhibitions', icon: CalendarDays },
         { id: 'awardsMedia', href: '/awards', icon: Trophy }
       ] }]
     ],
