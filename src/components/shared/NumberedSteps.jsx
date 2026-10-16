@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 /**
  * Numbered steps in a row: navy number tiles joined by a dashed line with a travelling gold pulse.
- * steps = [{ title, text }]. `ringClass` should match the section background (keeps the tile cut-out clean).
+ * steps = [{ title, text, tag? }]. `ringClass` should match the section background (keeps the tile cut-out clean).
  */
 export default function NumberedSteps({ steps, ringClass = 'ring-[#eef0f5]', className }) {
   const n = steps.length;
@@ -35,6 +35,7 @@ export default function NumberedSteps({ steps, ringClass = 'ring-[#eef0f5]', cla
             </motion.span>
             <h3 className="heading-card mt-7 max-w-[15rem]">{s.title}</h3>
             <p className="mt-3 max-w-[17rem] text-[15px] leading-relaxed text-ink/60">{s.text}</p>
+            {s.tag && <span className="mt-4 inline-flex rounded-full bg-brand-50 px-3.5 py-1.5 text-xs font-semibold text-brand ring-1 ring-brand/10">{s.tag}</span>}
           </StaggerItem>
         ))}
       </Stagger>

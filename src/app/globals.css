@@ -242,3 +242,11 @@
 
 @keyframes acc-down { from { height: 0; opacity: 0; } to { height: var(--radix-accordion-content-height); opacity: 1; } }
 @keyframes acc-up { from { height: var(--radix-accordion-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
+
+/* vertical marquee columns (GTC Go showcase) */
+.vmarquee-track { animation: vmarquee-up var(--vm-duration, 42s) linear infinite; will-change: transform; }
+.vmarquee-track--down { animation-name: vmarquee-down; }
+@media (hover: hover) and (pointer: fine) { .vmarquee:hover .vmarquee-track { animation-play-state: paused; } }
+@keyframes vmarquee-up { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -50%, 0); } }
+@keyframes vmarquee-down { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0); } }
+@media (prefers-reduced-motion: reduce) { .vmarquee { height: auto !important; overflow: visible !important; } .vmarquee-track { animation: none !important; transform: none !important; } .vmarquee-track > [aria-hidden="true"] { display: none; } }

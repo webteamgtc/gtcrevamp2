@@ -13,8 +13,10 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
  *
  *   <CtaBand eyebrow="…" title="The market is [moving.]" description="…"
  *            primary={{ label, href }} secondary={{ label, href }} riskTitle="Risk warning." risk="…" />
+ *
+ * layout="split": copy on the start side, the two buttons stacked on the end side (+ optional `note` under them).
  */
-export default function CtaBand({ id, eyebrow, title, description, primary, secondary, riskTitle, risk }) {
+export default function CtaBand({ id, eyebrow, title, description, primary, secondary, riskTitle, risk, note, layout = 'center' }) {
   return (
     <section id={id} className="is-dark relative overflow-hidden bg-gradient-to-b from-brand-800 via-brand-900 to-brand-950 py-16 text-white md:py-24">
       <div className="bg-grid-dark mask-radial absolute inset-0 opacity-60" aria-hidden />
@@ -26,6 +28,30 @@ export default function CtaBand({ id, eyebrow, title, description, primary, seco
       <motion.span className="absolute -end-24 -top-24 size-96 rounded-full bg-gold/20 blur-[110px]" animate={{ opacity: [0.5, 0.9, 0.5] }} transition={{ duration: 6, repeat: Infinity }} aria-hidden />
       <BandLine />
 
+      {layout === 'split' ? (
+        <div className="container-x relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+          <Reveal y={16}>
+            {eyebrow && <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-200">{eyebrow}</p>}
+            <h2 className="heading-section mt-4">
+              <AccentTitle text={title} accentClassName="text-gradient-gold" />
+            </h2>
+            {description && <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{description}</p>}
+          </Reveal>
+          <Reveal y={16} delay={0.12} className="flex flex-col gap-3 lg:ms-auto lg:w-full lg:max-w-sm">
+            {primary && (
+              <ArrowLink href={primary.href} variant="gold" className="justify-between">
+                {primary.label}
+              </ArrowLink>
+            )}
+            {secondary && (
+              <NavLink href={secondary.href} className="inline-flex h-13 items-center justify-center rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
+                {secondary.label}
+              </NavLink>
+            )}
+            {note && <p className="text-center text-xs text-white/50 lg:text-start">{note}</p>}
+          </Reveal>
+        </div>
+      ) : (
       <div className="container-x relative mx-auto max-w-4xl text-center">
         {eyebrow && (
           <Reveal y={12}>
@@ -67,6 +93,7 @@ export default function CtaBand({ id, eyebrow, title, description, primary, seco
           </Reveal>
         )}
       </div>
+      )}
     </section>
   );
 }

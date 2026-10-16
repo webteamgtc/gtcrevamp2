@@ -7,7 +7,7 @@ import { Reveal, EASE } from '@/components/motion';
 import { AU, MU, ZA, VU, KH } from 'country-flag-icons/react/3x2';
 import { cn } from '@/lib/utils';
 import { SectionIntro } from '@/components/shared/SectionIntro';
-import { useScrollSteps } from './useScrollSteps';
+import { useScrollSteps } from '@/components/shared/useScrollSteps';
 
 const AUTO_MS = 6500;
 
