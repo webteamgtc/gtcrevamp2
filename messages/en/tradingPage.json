@@ -959,5 +959,341 @@
       "login": "Login & Deposit",
       "risk": "Trading CFDs involves significant risk of loss. Please ensure you understand the risks involved."
     }
+  },
+  "accountTypesPage": {
+    "meta": {
+      "title": "Account Types | Standard & ECN Trading Accounts | GTCFX",
+      "description": "Compare GTCFX Standard and ECN accounts — spreads from 0.0 pips, leverage up to 1:2000, no minimum deposit on Standard and sub-30ms execution on ECN."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Account Types"
+    },
+    "hero": {
+      "badge": "Trading Accounts",
+      "title": "Find the trading account [that fits] you best.",
+      "text": "From Dubai to London, Singapore to Hong Kong — GTCFX is honored by the institutions and authorities that define each region. Every award is a reflection of the trust we've earned.",
+      "ctaLive": "Open Live Account",
+      "ctaDemo": "Try Demo Account First",
+      "stats": [
+        {
+          "value": "2",
+          "label": "Account Types"
+        },
+        {
+          "value": "7+",
+          "label": "Trading Markets"
+        },
+        {
+          "value": "0.0",
+          "label": "Min. Spread (Pips)"
+        },
+        {
+          "value": "1:2000",
+          "label": "Max. Leverage"
+        }
+      ],
+      "card": {
+        "pair": "EUR / USD · LIVE",
+        "brand": "GTC",
+        "tagline": "Built for traders, by traders",
+        "spread": "0.0 pip",
+        "spreadLabel": "Min. spread",
+        "execution": "<30ms",
+        "executionLabel": "Execution"
+      }
+    },
+    "compare": {
+      "eyebrow": "Compare Accounts",
+      "title": "Two accounts. [One that's yours.]",
+      "description": "Each tier is calibrated for a different style of trader — from first deposit to institutional volume. Side-by-side, side-by-mind.",
+      "recommended": "Recommended",
+      "swapLabel": "Swap-free option",
+      "cta": "Open now",
+      "accounts": [
+        {
+          "id": "standard",
+          "name": "Standard Account",
+          "tagline": "Most clients · everyday trading",
+          "features": [
+            "No minimum deposit",
+            "Leverage up to 1:2000 ***",
+            "Average spreads 1.0 Pips",
+            "0 Commission Charges",
+            "Secure, instant and fast execution",
+            "Direct access to top tier banks",
+            "Access to 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more",
+            "No dealing desk intervention",
+            "Negative balance protection",
+            "No trading restrictions",
+            "No requotes",
+            "No rejections",
+            "Meta Trader (MT) trading platform",
+            "MAM, PAMM, API available"
+          ],
+          "swap": "Available on request",
+          "swapAvailable": true
+        },
+        {
+          "id": "ecn",
+          "name": "ECN Account",
+          "tagline": "Active traders · scalpers · EAs",
+          "features": [
+            "Minimum deposits from $3,000",
+            "Leverage up to 1:500 ***",
+            "Raw spreads 0.0 Pips",
+            "Commission $5/standard lot",
+            "Secure, instant and fast execution",
+            "Direct access to top tier banks",
+            "Access to 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more",
+            "No dealing desk intervention",
+            "Negative balance protection",
+            "No trading restrictions",
+            "No requotes",
+            "No rejections",
+            "Meta Trader (MT) trading platform",
+            "MAM, PAMM, API available",
+            "Offering tier 1 liquidity with ECN technology",
+            "Market analysis",
+            "Free advance trading tools and signals",
+            "Sub-30ms execution"
+          ],
+          "swap": "No",
+          "swapAvailable": false
+        }
+      ],
+      "footnote": "*** The above applicable only for GTC Global Ltd, (FSCM) & GTC Global Trade Capital Co, (VFSC) Clients.",
+      "noticeTitle": "Notice:",
+      "notice": "Every account has a standard limit of 300 active orders (open positions and pending orders combined). This limit may be dynamically reduced based on account risk. New orders will be blocked if the limit is exceeded.",
+      "differences": "Key differences",
+      "shared": "Included in both accounts"
+    },
+    "detail": {
+      "eyebrow": "The Detail",
+      "title": "A closer look at [each tier.]",
+      "description": "Pricing matters. So does fit. Here's the trader each account was designed for, and what's actually under the hood.",
+      "cta": "Open Live Account",
+      "minDeposit": "Min deposit",
+      "from": "From",
+      "tiers": [
+        {
+          "id": "ecn",
+          "label": "Account 01 / ECN",
+          "tier": "Tier 01",
+          "code": "ECN",
+          "short": "ECN",
+          "title": "Raw market access. [Zero-pip spreads.]",
+          "text": "For experienced and active traders — scalpers, algorithmic systems, EAs — where every fractional pip and millisecond counts.",
+          "features": [
+            {
+              "title": "True market depth pricing",
+              "text": "Direct liquidity from tier-1 providers, no dealing desk."
+            },
+            {
+              "title": "Spreads from 0.0 pips",
+              "text": "Trade at the rawest interbank pricing available."
+            },
+            {
+              "title": "Sub-30ms execution",
+              "text": "Built for high-frequency strategies that can't tolerate slippage."
+            }
+          ],
+          "quote": "My EA runs on ECN. The raw spread and fast fills made the upgrade worth it within the first week.",
+          "deposit": "$3000",
+          "spread": "0.0pip"
+        },
+        {
+          "id": "standard",
+          "label": "Account 02 / Standard",
+          "tier": "Tier 02",
+          "code": "Standard",
+          "short": "STD",
+          "title": "Start simple, [scale steady.]",
+          "text": "Built for everyday trading — no minimum deposit, zero commission, and the full GTCFX platform from day one.",
+          "features": [
+            {
+              "title": "Low entry, $0 minimum",
+              "text": "Test the waters without overcommitting capital."
+            },
+            {
+              "title": "Commission-free trading",
+              "text": "Spread-only pricing — predictable and easy to understand."
+            },
+            {
+              "title": "Full platform access",
+              "text": "MT4, MT5, web and mobile — the same as our VIP traders."
+            }
+          ],
+          "quote": "Sara just finished a six-week course on technical analysis. She deposits $250 and trades EURUSD twice a week — Standard fits.",
+          "deposit": "$0",
+          "spread": "0.0pip"
+        }
+      ]
+    },
+    "tools": {
+      "eyebrow": "The Details",
+      "title": "Platforms & [Tools]",
+      "description": "Trade on industry-leading platforms with the research, signals, and analysis tools you need to make informed decisions.",
+      "items": [
+        {
+          "id": "mt4",
+          "title": "MetaTrader 4",
+          "text": "The industry standard. Robust EAs and indicators."
+        },
+        {
+          "id": "mt5",
+          "title": "MetaTrader 5",
+          "text": "Multi-asset. Faster execution. Modern timeframes."
+        },
+        {
+          "id": "web",
+          "title": "WebTrader",
+          "text": "No download required. Trade from any browser."
+        },
+        {
+          "id": "signals",
+          "title": "Signals & Analysis",
+          "text": "Daily market commentary, signals, & research desk."
+        },
+        {
+          "id": "vps",
+          "title": "Free VPS Hosting",
+          "text": "Run EAs 24/7 with ultra-low latency to our servers."
+        },
+        {
+          "id": "api",
+          "title": "API Access",
+          "text": "Direct programmatic access for institutional flow."
+        },
+        {
+          "id": "support",
+          "title": "24/7 Support",
+          "text": "Multilingual desk available whenever markets are open."
+        },
+        {
+          "id": "manager",
+          "title": "Dedicated Manager",
+          "text": "A single point of contact who knows your trading."
+        }
+      ]
+    },
+    "steps": {
+      "eyebrow": "Open In Three Steps",
+      "title": "From signup to [first] trade, in minutes.",
+      "meta": [
+        "Avg. completion ~7 min",
+        "KYC fully digital"
+      ],
+      "step": "Step",
+      "items": [
+        {
+          "title": "Trading Conditions",
+          "text": "Spreads, swaps, leverage and margin requirements."
+        },
+        {
+          "title": "Account Management",
+          "text": "Profile updates, password resets and settings."
+        },
+        {
+          "title": "Account Security",
+          "text": "2FA, suspicious activity and protection tips."
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Take the first step",
+      "title": "Start Your [Investment Journey] Today.",
+      "description": "Join thousands of investors who trust GTCFX to protect and grow their capital across global markets — with full transparency and no hidden agenda.",
+      "live": "Open Live Account"
+    }
+  },
+  "compensationFundPage": {
+    "meta": {
+      "title": "Compensation Fund | Financial Commission Dispute Resolution | GTCFX",
+      "description": "GTC Global Ltd and GTC Global Trade Capital Ltd are members of the Financial Commission — independent dispute resolution and up to €20,000 compensation per client."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Compensation Fund"
+    },
+    "hero": {
+      "badge": "Client Protection",
+      "title": "Financial Commission Dispute Resolution and [Compensation Fund]",
+      "text": "Both GTC Global Ltd and GTC Global Trade Capital Ltd jointed Financial Commission as official members — Financial Commission, an international organization dedicated to resolving financial service disputes in the foreign exchange industry and providing traders with additional financial protection.",
+      "ctaVisit": "Visit the Financial Commission now",
+      "ctaPdf": "Download PDF file"
+    },
+    "about": {
+      "whatTitle": "What is the Financial Commission?",
+      "whatText": "As a neutral third-party commission, the Financial Commission impartially reviews and resolves transaction disputes, offering a simpler and faster solution compared to industry regulators and judicial proceedings. Independent of any party, the commission ensures that dispute resolution is swift, efficient, fair, and credible.",
+      "bringTitle": "What does it bring to traders?",
+      "bring": [
+        "Fast, fair, and transparent dispute resolution",
+        "Additional funding is provided by the Compensation Fund.",
+        "A fully independent third-party external dispute resolution (EDR) institution."
+      ]
+    },
+    "managed": {
+      "eyebrow": "How It Works",
+      "title": "How are the [funds managed?]",
+      "description": "The Compensation Fund is a compensation mechanism maintained by the Financial Commission for eligible clients of its members. According to the Financial Commission's Rules, the Fund is held in a separate bank account and may be used to satisfy an eligible Award if a member fails or refuses to comply with that Award, or ceases to be a member before paying it. Any payment is subject to the applicable Rules, compensation limits and available fund balance. The Fund is not an insurance policy, deposit-guarantee scheme or general protection against trading losses or broker insolvency. It applies only to eligible claims made against the specific legal entity that holds Financial Commission membership.",
+      "steps": [
+        {
+          "title": "Member monthly fee",
+          "text": "Monthly membership dues are collected from participating broker members."
+        },
+        {
+          "title": "Special allocation",
+          "text": "10% of monthly membership dues are allocated to the Compensation Fund."
+        },
+        {
+          "title": "Independent account storage",
+          "text": "Funds are held in a separate bank account, independent from member operations."
+        },
+        {
+          "title": "By the Financial Commission",
+          "text": "Used only when a member refuses to adhere to a Financial Commission judgment."
+        }
+      ]
+    },
+    "numbers": {
+      "eyebrow": "By The Numbers",
+      "title": "Funding sources and [maximum coverage]",
+      "funding": {
+        "badge": "Funding Source",
+        "value": "10%",
+        "text": "The Compensation Fund is continuously funded by the Financial Commission at 10% of its monthly membership fees to ensure its stable operation."
+      },
+      "coverage": {
+        "badge": "Max Coverage",
+        "value": "€20,000",
+        "text": "Each client is guaranteed up to €20,000 in compensation in the event of a Financial Commission ruling."
+      }
+    },
+    "scope": {
+      "eyebrow": "Coverage Scope",
+      "title": "Under what circumstances is [protection guaranteed?]",
+      "description": "The fund applies only to formal rulings made by the Financial Commission, and the clearly defined coverage ensures that the safeguard mechanism is transparent and predictable.",
+      "coveredTitle": "Coverage",
+      "covered": [
+        "The official ruling issued by the Financial Commission",
+        "Financial compensation when a member refuses to comply with a ruling",
+        "The maximum compensation amount is €20,000 per client."
+      ],
+      "excludedTitle": "Scope of Inapplicability",
+      "excluded": [
+        "Losses arising from traders' independent trading",
+        "Financial problems for all clients due to brokerage firm bankruptcy",
+        "Disputes not adjudicated by the Financial Commission"
+      ]
+    },
+    "cta": {
+      "eyebrow": "Get Started Today",
+      "title": "Want to learn more about [fund protection details?]",
+      "description": "Explore our help resources or review the client agreement for full details on fund protection, dispute resolution, and compensation eligibility.",
+      "live": "Open Live Account"
+    }
   }
 }
