@@ -14,7 +14,9 @@ import {
 export const PORTAL = {
   register: '#register',
   login: '#login',
-  demo: '#register'
+  demo: '#register',
+  // client portal (log in / deposit)
+  clientPortal: 'https://web.mygtc.app/user?redirect=%252Fdashboard'
 };
 
 export const MENU = [
@@ -45,23 +47,24 @@ export const MENU = [
     ],
     promo: { id: 'company', href: '/account-types', visual: 'accounts' }
   },
+  
   {
     id: 'trading',
     href: '/trading',
     columns: [
       [{ id: 'tradeWith', items: [
         { id: 'openLive', href: '/trading/open-live-account', icon: UserPlus },
-        { id: 'freeDemo', href: PORTAL.demo, icon: MonitorPlay },
-        { id: 'fund', href: '/deposit-withdraw', icon: Wallet },
-        { id: 'accountTypes', href: '/account-types', icon: Layers },
-        { id: 'security', href: '/security-of-funds', icon: ShieldCheck }
+        { id: 'freeDemo', href: '/trading/free-demo-account', icon: MonitorPlay },
+        { id: 'fund', href: '/trading/deposit', icon: Wallet },
+        { id: 'accountTypes', href: '/trading/account-types', icon: Layers },
+        { id: 'security', href: '/trading/compensation-fund', icon: ShieldCheck }
       ] }],
       [
         { id: 'metatrader', items: [
-          { id: 'mt5', href: '/platforms/mt5', icon: Monitor },
-          { id: 'mt4', href: '/platforms/mt4', icon: Monitor },
-          { id: 'mtAndroid', href: '/platforms/metatrader-android', icon: Smartphone },
-          { id: 'mtIos', href: '/platforms/metatrader-ios', icon: Tablet }
+          { id: 'mt5', href: '/trading/mt5-platform', icon: Monitor },
+          { id: 'mt4', href: '/trading/mt4-platform', icon: Monitor },
+          { id: 'mtAndroid', href: '/trading/metatrader-for-andriod', icon: Smartphone },
+          { id: 'mtIos', href: '/trading/metatrader-for-ipad', icon: Tablet }
         ] },
         { id: 'products', items: [
           { id: 'dynamicLeverage', href: '/dynamic-leverage', icon: Gauge },
@@ -70,10 +73,10 @@ export const MENU = [
       ],
       [
         { id: 'gtcgo', items: [
-          { id: 'gtcGo', href: '/platforms/gtc-go', icon: AppWindow },
-          { id: 'gtcGoWeb', href: '/platforms/gtc-go-web', icon: Globe },
-          { id: 'gtcGoIos', href: '/platforms/gtc-go-ios', icon: Tablet },
-          { id: 'gtcGoAndroid', href: '/platforms/gtc-go-android', icon: Smartphone },
+          { id: 'gtcGo', href: '/trading/gtc-go-app', icon: AppWindow },
+          { id: 'gtcGoWeb', href: '/trading/gtc-go-web', icon: Globe },
+          { id: 'gtcGoIos', href: '/trading/gtc-go-app-ipad', icon: Tablet },
+          { id: 'gtcGoAndroid', href: '/trading/gtc-go-app-andriod', icon: Smartphone },
           { id: 'copyTrading', href: '/copy-trading', icon: Users }
         ] },
         { id: 'advantages', items: [
