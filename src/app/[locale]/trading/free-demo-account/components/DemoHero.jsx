@@ -13,9 +13,9 @@ const HIGHLIGHT_ICONS = [CircleCheck, Zap, History];
 
 /**
  * Free demo hero: copy + pills + trust row on the start side, the demo form on the end side.
- * tone 'light' (default) or 'dark' (same look as the open-live-account hero).
+ * tone 'dark' (default, same look as the open-live-account hero) or 'light'.
  */
-export function DemoHero({ tone = 'light' }) {
+export function DemoHero({ tone = 'dark' }) {
   const t = useTranslations('freeDemoAccount.hero');
   const tb = useTranslations('freeDemoAccount.breadcrumb');
   const points = t.raw('points');
