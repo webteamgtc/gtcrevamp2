@@ -1,5 +1,5 @@
 import { ChevronRight } from 'lucide-react';
-import { Link } from '@/i18n/navigation';
+import NavLink from '@/components/shared/nav/NavLink';
 import { cn } from '@/lib/utils';
 
 /**
@@ -26,9 +26,9 @@ export default function Breadcrumb({ items, tone = 'dark', className }) {
                   {it.label}
                 </span>
               ) : (
-                <Link href={it.href} className={cn('transition-colors', light ? 'hover:text-brand' : 'hover:text-gold-200')}>
+                <NavLink href={it.href} className={cn('transition-colors', light ? 'hover:text-brand' : 'hover:text-gold-200')}>
                   {it.label}
-                </Link>
+                </NavLink>
               )}
               {!last && <ChevronRight className="size-3.5 rtl:-scale-x-100" aria-hidden />}
             </li>

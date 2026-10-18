@@ -61,7 +61,7 @@ export const MARKETS = [
   },
   {
     id: 'crypto',
-    href: '/markets/crypto',
+    href: '/markets/crypto-cfds',
     icon: Bitcoin,
     symbols: [
       { s: 'BTCUSD', n: 'Bitcoin', d: 1 },
@@ -71,7 +71,7 @@ export const MARKETS = [
   },
   {
     id: 'futures',
-    href: '/markets/futures',
+    href: '/markets/future-cfds',
     icon: Wheat,
     symbols: [
       { s: 'COFFEE', n: 'Coffee', d: 2 },

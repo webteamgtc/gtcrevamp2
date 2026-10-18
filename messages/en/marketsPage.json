@@ -109,6 +109,962 @@
       "demo": "Open Demo Account",
       "riskTitle": "Risk warning.",
       "risk": "CFD trading involves significant risk and may result in the loss of your entire invested capital. Ensure you fully understand the risks before trading. Past performance is not indicative of future results. Trading is not suitable for all investors."
+    },
+    "detail": {
+      "markets": "Markets",
+      "labels": {
+        "name": "Name",
+        "sell": "Sell",
+        "buy": "Buy",
+        "change": "Change, %",
+        "spread": "Spread",
+        "dailyChange": "Daily change",
+        "dayHigh": "Day high",
+        "dayLow": "Day low",
+        "live": "Live",
+        "sellNow": "Sell now",
+        "buyNow": "Buy now",
+        "search": "Search instruments",
+        "searchPlaceholder": "Search by symbol or name",
+        "showMore": "Show all {count}",
+        "showLess": "Show fewer",
+        "noResults": "No instruments match “{query}”.",
+        "viewDetails": "View details",
+        "open": "Open {symbol}",
+        "waiting": "Waiting for live price",
+        "range": "Today's range",
+        "instruments": "{count} instruments",
+        "all": "All"
+      },
+      "platforms": {
+        "title": "Download Trading [Platforms]",
+        "description": "Trade on desktop, web or mobile with industry-leading platforms synced to your GTCFX account.",
+        "items": [
+          {
+            "id": "mt4",
+            "name": "MT4",
+            "text": "The world's most trusted trading platform. Advanced charts, automated trading and one-click execution.",
+            "os": [
+              "Windows",
+              "Mac",
+              "Web"
+            ],
+            "cta": "Get MT4",
+            "href": "/trading/mt4-platform",
+            "features": [
+              "Expert Advisors",
+              "9 timeframes",
+              "One-click trading"
+            ]
+          },
+          {
+            "id": "mt5",
+            "name": "MT5",
+            "text": "More timeframes, depth of market and superior analytical tools.",
+            "os": [
+              "Windows",
+              "Mac",
+              "Web",
+              "Linux"
+            ],
+            "cta": "Get MT5",
+            "href": "/trading/mt5-platform",
+            "features": [
+              "21 timeframes",
+              "Depth of market",
+              "Economic calendar"
+            ]
+          },
+          {
+            "id": "go",
+            "name": "GTC Go App",
+            "badge": "New",
+            "text": "Trade on the go with an intuitive mobile interface, real-time alerts and biometric login.",
+            "os": [
+              "iOS",
+              "Android"
+            ],
+            "cta": "Get GTC Go",
+            "href": "/trading/gtc-go-app",
+            "features": [
+              "Biometric login",
+              "Price alerts",
+              "Full sync with desktop"
+            ]
+          }
+        ],
+        "note": "Full sync with your desktop accounts."
+      },
+      "overview": {
+        "title": "All Markets [At A Glance]",
+        "description": "Compare spreads, leverage and trading hours across GTCFX market categories.",
+        "headers": {
+          "market": "Market",
+          "instruments": "Instruments",
+          "spread": "Spread from",
+          "leverage": "Max leverage",
+          "hours": "Trading hours"
+        },
+        "rows": [
+          {
+            "id": "forex",
+            "name": "Forex",
+            "instruments": "70+",
+            "spread": "0.0 pips",
+            "leverage": "1:2000",
+            "hours": "Near 24h",
+            "popular": true,
+            "href": "/markets/forex"
+          },
+          {
+            "id": "energy",
+            "name": "Energy",
+            "instruments": "6+",
+            "spread": "0.03 pips",
+            "leverage": "1:1000",
+            "hours": "Mon–Fri ~23h",
+            "href": "/markets/energy"
+          },
+          {
+            "id": "indices",
+            "name": "Indices",
+            "instruments": "81+",
+            "spread": "0.4 pips",
+            "leverage": "1:125",
+            "hours": "Near 24h",
+            "href": "/markets/indices"
+          },
+          {
+            "id": "metals",
+            "name": "Metals",
+            "instruments": "6+",
+            "spread": "0.22 pips",
+            "leverage": "1:2000",
+            "hours": "Near 24h",
+            "href": "/markets/metals"
+          },
+          {
+            "id": "futures",
+            "name": "Commodities",
+            "instruments": "40+",
+            "spread": "0.03 pips",
+            "leverage": "1:2000",
+            "hours": "Near 24h",
+            "href": "/markets/future-cfds"
+          }
+        ],
+        "popular": "Most popular",
+        "note": "Max leverage shown is Tier 1 from our official schedule. Leverage reduces as position size increases.",
+        "noteLink": "View full dynamic leverage",
+        "noteHref": "/dynamic-leverage"
+      },
+      "cta": {
+        "start": "Start Trading Now",
+        "live": "Open Live Account",
+        "demo": "Try Demo Account",
+        "noAccount": "No account yet?",
+        "riskTitle": "Risk warning.",
+        "risk": "CFD trading involves significant risk and may result in the loss of your entire invested capital. Ensure you fully understand the risks before trading. Past performance is not indicative of future results. Trading is not suitable for all investors."
+      }
+    },
+    "pages": {
+      "forex": {
+        "meta": {
+          "title": "Forex CFD Trading | 70+ Currency Pairs, Spreads from 0.0 | GTCFX",
+          "description": "Trade 70+ major, minor and exotic forex pairs with GTCFX: spreads from 0.0 pips, leverage up to 1:2000, live quotes and fast execution on MT4, MT5 and GTC Go."
+        },
+        "name": "Forex",
+        "hero": {
+          "title": "Trade Forex CFDs [70+ Pairs]",
+          "text": "Access the world's largest financial market with tight spreads, deep liquidity and fast execution across major, minor and exotic currency pairs.",
+          "stats": [
+            {
+              "value": "70+",
+              "label": "Currency pairs"
+            },
+            {
+              "value": "0.0",
+              "label": "Spreads from"
+            },
+            {
+              "value": "1:2000",
+              "label": "Leverage"
+            },
+            {
+              "value": "24/7",
+              "label": "Support"
+            }
+          ]
+        },
+        "quotes": {
+          "title": "Live Forex CFDs [Quotes]",
+          "description": "Real-time bid/ask prices on currency pairs, updated continuously during market hours."
+        },
+        "why": {
+          "title": "Why Trade Forex CFDs [With GTCFX?]",
+          "description": "A powerful forex trading platform with tight spreads, deep liquidity and fast execution across major, minor and exotic pairs.",
+          "cards": [
+            {
+              "icon": "cpu",
+              "title": "<10ms",
+              "text": "Ultra-low latency execution with direct market routing."
+            },
+            {
+              "icon": "zap",
+              "title": "ECN Zero Spread",
+              "text": "Spreads from 0.0 pips with transparent commission."
+            },
+            {
+              "icon": "chart",
+              "title": "1:2000 Leverage",
+              "text": "Flexible margin trading with professional risk management tools."
+            },
+            {
+              "icon": "pairs",
+              "title": "70+ FX Pairs",
+              "text": "Access major, minor and exotic currency pairs worldwide."
+            }
+          ],
+          "panel": {
+            "title": "Built for speed & transparency",
+            "text": "GTCFX provides a reliable forex trading platform with ECN execution, tier-1 liquidity and transparent pricing, delivering institutional-grade trading conditions with fast execution and greater clarity on trading costs.",
+            "chips": [
+              {
+                "icon": "shield",
+                "label": "No requotes"
+              },
+              {
+                "icon": "layers",
+                "label": "Tier-1 liquidity"
+              },
+              {
+                "icon": "server",
+                "label": "99.9% uptime"
+              }
+            ],
+            "stat": {
+              "value": "$7.5T+",
+              "label": "Daily forex volume",
+              "sub": "Global forex market (BIS, 2022)"
+            }
+          }
+        },
+        "cta": {
+          "title": "Didn't Find What You Were [Looking For?]",
+          "description": "Access real-time prices, ultra-low spreads and 1:2000 leverage, all in one platform."
+        }
+      },
+      "indices": {
+        "meta": {
+          "title": "Indices CFD Trading | 81+ Global Indices | GTCFX",
+          "description": "Trade 81+ global stock indices with GTCFX, from the S&P 500 and Nasdaq 100 to the FTSE 100 and Nikkei 225, with live quotes and fast execution."
+        },
+        "name": "Indices",
+        "hero": {
+          "title": "Trade Indices CFDs [81+ Indices]",
+          "text": "Take a position on whole economies in one trade: the S&P 500, Nasdaq 100, FTSE 100, DAX 40, Nikkei 225 and more, with competitive spreads and fast execution.",
+          "stats": [
+            {
+              "value": "81+",
+              "label": "Global indices"
+            },
+            {
+              "value": "0.4",
+              "label": "Spreads from (pips)"
+            },
+            {
+              "value": "1:125",
+              "label": "Max leverage"
+            },
+            {
+              "value": "24/7",
+              "label": "Support"
+            }
+          ]
+        },
+        "quotes": {
+          "title": "Live Indices [Quotes]",
+          "description": "Real-time bid/ask prices on the world's leading stock indices, updated continuously during market hours."
+        },
+        "why": {
+          "title": "Why Trade Indices [With GTCFX?]",
+          "description": "Broad market exposure with a single position, backed by fast execution and transparent pricing.",
+          "cards": [
+            {
+              "icon": "cpu",
+              "title": "<10ms",
+              "text": "Ultra-low latency execution with direct market routing."
+            },
+            {
+              "icon": "zap",
+              "title": "ECN Zero Spread",
+              "text": "Spreads from 0.0 pips with transparent commission."
+            },
+            {
+              "icon": "chart",
+              "title": "1:2000 Leverage",
+              "text": "Flexible margin trading with professional risk management tools."
+            },
+            {
+              "icon": "globe",
+              "title": "81+ Indices",
+              "text": "US, European and Asian benchmarks in one account."
+            }
+          ],
+          "panel": {
+            "title": "One trade, a whole market",
+            "text": "Indices let you trade the overall direction of a market instead of picking single stocks, with long and short positions and transparent pricing on every contract.",
+            "chips": [
+              {
+                "icon": "shield",
+                "label": "No requotes"
+              },
+              {
+                "icon": "layers",
+                "label": "Tier-1 liquidity"
+              },
+              {
+                "icon": "server",
+                "label": "99.9% uptime"
+              }
+            ],
+            "stat": {
+              "value": "81+",
+              "label": "Global indices",
+              "sub": "US, Europe and Asia-Pacific"
+            }
+          }
+        },
+        "cta": {
+          "title": "Ready To Trade [Global Indices?]",
+          "description": "Live prices, competitive spreads and fast execution on MT4, MT5 and GTC Go."
+        }
+      },
+      "shares": {
+        "meta": {
+          "title": "Share CFD Trading | Trade Global Stocks | GTCFX",
+          "description": "Trade CFDs on leading global companies with GTCFX: go long or short on Apple, NVIDIA, Tesla and more with live quotes and fast execution."
+        },
+        "name": "Shares",
+        "hero": {
+          "title": "Trade Share CFDs on [Global Leaders]",
+          "text": "Go long or short on the world's best-known companies without owning the underlying stock, with live prices and fast execution.",
+          "stats": [
+            {
+              "value": "<10ms",
+              "label": "Execution speed"
+            },
+            {
+              "value": "Long & short",
+              "label": "Both directions"
+            },
+            {
+              "value": "MT4 · MT5",
+              "label": "Platforms"
+            },
+            {
+              "value": "24/7",
+              "label": "Support"
+            }
+          ]
+        },
+        "quotes": {
+          "title": "Live Share CFDs [Quotes]",
+          "description": "Real-time bid/ask prices on leading global stocks, updated continuously during market hours."
+        },
+        "why": {
+          "title": "Why Trade Share CFDs [With GTCFX?]",
+          "description": "Trade the companies you know with flexible position sizes and transparent pricing.",
+          "cards": [
+            {
+              "icon": "cpu",
+              "title": "<10ms",
+              "text": "Ultra-low latency execution with direct market routing."
+            },
+            {
+              "icon": "zap",
+              "title": "ECN Zero Spread",
+              "text": "Spreads from 0.0 pips with transparent commission."
+            },
+            {
+              "icon": "chart",
+              "title": "1:2000 Leverage",
+              "text": "Flexible margin trading with professional risk management tools."
+            },
+            {
+              "icon": "building",
+              "title": "Global leaders",
+              "text": "Big-name US and international stocks in one account."
+            }
+          ],
+          "panel": {
+            "title": "Trade companies, not just markets",
+            "text": "Share CFDs let you act on earnings, product launches and news on individual companies, going long when you expect a rise and short when you expect a fall.",
+            "chips": [
+              {
+                "icon": "shield",
+                "label": "No requotes"
+              },
+              {
+                "icon": "layers",
+                "label": "Tier-1 liquidity"
+              },
+              {
+                "icon": "server",
+                "label": "99.9% uptime"
+              }
+            ],
+            "stat": {
+              "value": "Long & short",
+              "label": "Trade both directions",
+              "sub": "No need to own the shares"
+            }
+          }
+        },
+        "cta": {
+          "title": "Ready To Trade [Share CFDs?]",
+          "description": "Live prices and fast execution on the world's leading companies."
+        }
+      },
+      "futures": {
+        "meta": {
+          "title": "Futures CFD Trading | Soft Commodities & More | GTCFX",
+          "description": "Trade futures CFDs with GTCFX on coffee, cocoa, sugar, wheat and more, with competitive spreads, flexible leverage and fast execution."
+        },
+        "name": "Futures",
+        "hero": {
+          "title": "Trade Futures CFDs [With Confidence]",
+          "text": "Trade leading futures contracts such as coffee, cocoa, sugar and grains as CFDs, with competitive spreads, flexible leverage and fast execution.",
+          "stats": [
+            {
+              "value": "40+",
+              "label": "Instruments"
+            },
+            {
+              "value": "0.03",
+              "label": "Spreads from (pips)"
+            },
+            {
+              "value": "1:2000",
+              "label": "Max leverage"
+            },
+            {
+              "value": "24/7",
+              "label": "Support"
+            }
+          ]
+        },
+        "quotes": {
+          "title": "Live Futures CFDs [Quotes]",
+          "description": "Real-time bid/ask prices on futures contracts, updated continuously during market hours."
+        },
+        "why": {
+          "title": "Why Trade Futures CFDs [With GTCFX?]",
+          "description": "Access global commodity futures without managing contract rollovers yourself.",
+          "cards": [
+            {
+              "icon": "cpu",
+              "title": "<10ms",
+              "text": "Ultra-low latency execution with direct market routing."
+            },
+            {
+              "icon": "zap",
+              "title": "ECN Zero Spread",
+              "text": "Spreads from 0.0 pips with transparent commission."
+            },
+            {
+              "icon": "chart",
+              "title": "1:2000 Leverage",
+              "text": "Flexible margin trading with professional risk management tools."
+            },
+            {
+              "icon": "wheat",
+              "title": "40+ Instruments",
+              "text": "Soft commodities, grains and more in one account."
+            }
+          ],
+          "panel": {
+            "title": "Futures, made simpler",
+            "text": "Futures CFDs give you exposure to commodity price moves with flexible position sizes, without physical delivery and with transparent pricing.",
+            "chips": [
+              {
+                "icon": "shield",
+                "label": "No requotes"
+              },
+              {
+                "icon": "layers",
+                "label": "Tier-1 liquidity"
+              },
+              {
+                "icon": "server",
+                "label": "99.9% uptime"
+              }
+            ],
+            "stat": {
+              "value": "40+",
+              "label": "Instruments",
+              "sub": "Softs, grains and more"
+            }
+          }
+        },
+        "cta": {
+          "title": "Ready To Trade [Futures CFDs?]",
+          "description": "Competitive spreads, flexible leverage and fast execution on every contract."
+        }
+      },
+      "energy": {
+        "meta": {
+          "title": "Energy CFD Trading | Crude Oil & Natural Gas | GTCFX",
+          "description": "Trade Brent, WTI crude oil and natural gas CFDs with GTCFX: tight spreads, live quotes, deep liquidity and rapid execution on MT4, MT5 and GTC Go."
+        },
+        "name": "Energy",
+        "hero": {
+          "title": "Trade [Energy] with Precision",
+          "text": "Access global energy markets with tight spreads, deep liquidity and rapid execution across crude oil, natural gas and refined products.",
+          "cta": "Start Trading Now",
+          "stats": [
+            {
+              "value": "0.0",
+              "label": "Min spread (pips)"
+            },
+            {
+              "value": "1:2000",
+              "label": "Max leverage"
+            },
+            {
+              "value": "<10ms",
+              "label": "Execution speed"
+            },
+            {
+              "value": "24/7",
+              "label": "Live support"
+            }
+          ]
+        },
+        "quotes": {
+          "title": "Live Energy [Quotes]",
+          "description": "Energy instruments available on GTCFX: crude oil, natural gas and related products."
+        },
+        "why": {
+          "title": "Why Trade Energy [With GTCFX?]",
+          "description": "A professional energy trading platform built for serious traders: fast, regulated, cost-efficient and available on multiple platforms.",
+          "cards": [
+            {
+              "icon": "zap",
+              "title": "Ultra-fast execution",
+              "text": "NDD, no dealing desk, zero manual intervention.",
+              "pill": "< 10 ms"
+            },
+            {
+              "icon": "trend",
+              "title": "Tight spreads",
+              "text": "ECN accounts from 0.0 pips with raw pricing.",
+              "pill": "From 0.0"
+            },
+            {
+              "icon": "shield",
+              "title": "Multi-regulated",
+              "text": "Licensed by 5 financial authorities worldwide.",
+              "pill": "5 licences"
+            },
+            {
+              "icon": "chat",
+              "title": "24/7 support",
+              "text": "Arabic, English and Chinese client service.",
+              "pill": "AR · EN · ZH"
+            },
+            {
+              "icon": "devices",
+              "title": "Multi-platform",
+              "text": "MT4, MT5 and the GTC Go app.",
+              "pill": "MT4 · MT5 · App"
+            }
+          ],
+          "stats": [
+            {
+              "value": "985,000+",
+              "label": "Global clients"
+            },
+            {
+              "value": "Est. 2012",
+              "label": "14+ years of trust"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Common Questions About [Energy]",
+          "description": "Industry-leading execution, multi-jurisdiction regulation and segregated client funds, built for traders who demand excellence.",
+          "items": [
+            {
+              "q": "What energy instruments can I trade?",
+              "a": "Crude oil (Brent and WTI), natural gas and related energy products. The live quotes table above shows every energy instrument available on your account."
+            },
+            {
+              "q": "What is an Energy CFD?",
+              "a": "An energy CFD is a derivative that lets you gain exposure to price movements in energy commodities such as crude oil and natural gas without owning the physical asset. You can go long when you expect prices to rise or short when you expect them to fall, using leverage to manage your exposure."
+            },
+            {
+              "q": "What spreads are available on energy products?",
+              "a": "Spreads on energy start from 0.03 pips and vary with market conditions. The live table on this page shows the current buy and sell prices."
+            },
+            {
+              "q": "What leverage is available for energy trading?",
+              "a": "Maximum leverage on energy is up to 1:1000 at Tier 1 and reduces as position size increases. See the dynamic leverage page for the full schedule."
+            },
+            {
+              "q": "What are the trading hours for energy markets?",
+              "a": "Energy markets trade Monday to Friday for about 23 hours a day, with a short daily break. Holiday hours can differ."
+            }
+          ]
+        },
+        "cta": {
+          "title": "Ready To Trade [Energy?]",
+          "description": "Open a live account in minutes, or practise risk-free with our demo account. No deposit required to start."
+        }
+      },
+      "metals": {
+        "meta": {
+          "title": "Metals CFD Trading | Gold, Silver & Platinum | GTCFX",
+          "description": "Trade gold, silver, platinum and palladium CFDs with GTCFX: gold spreads from 4c, leverage up to 1:2000 and live quotes."
+        },
+        "name": "Metals",
+        "hero": {
+          "title": "Trade [Gold & Metals] with Precision",
+          "text": "Trade gold, silver, platinum and palladium with ultra-competitive spreads, deep liquidity and fast execution.",
+          "cta": "Start Trading Now",
+          "stats": [
+            {
+              "value": "0.22",
+              "label": "Spreads from (pips)"
+            },
+            {
+              "value": "1:2000",
+              "label": "Max leverage"
+            },
+            {
+              "value": "<10ms",
+              "label": "Execution speed"
+            },
+            {
+              "value": "24/7",
+              "label": "Live support"
+            }
+          ]
+        },
+        "quotes": {
+          "title": "Live Metals [Quotes]",
+          "description": "Precious metals available on GTCFX: gold, silver, platinum and palladium."
+        },
+        "why": {
+          "title": "Why Trade Metals [With GTCFX?]",
+          "description": "Trade the market's classic safe havens on a fast, regulated and cost-efficient platform.",
+          "cards": [
+            {
+              "icon": "zap",
+              "title": "Ultra-fast execution",
+              "text": "NDD, no dealing desk, zero manual intervention.",
+              "pill": "< 10 ms"
+            },
+            {
+              "icon": "trend",
+              "title": "Tight spreads",
+              "text": "ECN accounts from 0.0 pips with raw pricing.",
+              "pill": "Gold from 4c"
+            },
+            {
+              "icon": "shield",
+              "title": "Multi-regulated",
+              "text": "Licensed by 5 financial authorities worldwide.",
+              "pill": "5 licences"
+            },
+            {
+              "icon": "chat",
+              "title": "24/7 support",
+              "text": "Arabic, English and Chinese client service.",
+              "pill": "AR · EN · ZH"
+            },
+            {
+              "icon": "devices",
+              "title": "Multi-platform",
+              "text": "MT4, MT5 and the GTC Go app.",
+              "pill": "MT4 · MT5 · App"
+            }
+          ],
+          "stats": [
+            {
+              "value": "985,000+",
+              "label": "Global clients"
+            },
+            {
+              "value": "Est. 2012",
+              "label": "14+ years of trust"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Common Questions About [Metals]",
+          "description": "Industry-leading execution, multi-jurisdiction regulation and segregated client funds, built for traders who demand excellence.",
+          "items": [
+            {
+              "q": "What metals instruments can I trade?",
+              "a": "Gold, silver, platinum and palladium against the US dollar. The live quotes table above shows every metal available on your account."
+            },
+            {
+              "q": "What is a Metals CFD?",
+              "a": "A metals CFD lets you trade the price of gold, silver and other metals without owning or storing the physical metal. You can go long or short and use leverage to manage your exposure."
+            },
+            {
+              "q": "What spreads are available on metals products?",
+              "a": "Metal spreads start from 0.22 pips, with gold from 4c, and vary with market conditions. The live table on this page shows current prices."
+            },
+            {
+              "q": "What leverage is available for metals trading?",
+              "a": "Maximum leverage on metals is up to 1:2000 at Tier 1 and reduces as position size increases. See the dynamic leverage page for the full schedule."
+            },
+            {
+              "q": "What are the trading hours for metals markets?",
+              "a": "Metals trade nearly 24 hours a day, Monday to Friday, with a short daily break. Holiday hours can differ."
+            }
+          ]
+        },
+        "cta": {
+          "title": "Ready To Trade [Gold & Metals?]",
+          "description": "Open a live account in minutes, or practise risk-free with our demo account. No deposit required to start."
+        }
+      },
+      "crypto": {
+        "meta": {
+          "title": "Crypto CFD Trading | Bitcoin, Ethereum & More | GTCFX",
+          "description": "Trade Bitcoin, Ethereum, Solana and other crypto CFDs with GTCFX, with no wallet needed, live quotes and fast execution."
+        },
+        "name": "Crypto",
+        "hero": {
+          "title": "Trade [Crypto CFDs] with Precision",
+          "text": "Trade Bitcoin, Ethereum and other leading cryptocurrencies with no wallet or exchange account needed, going long or short with fast execution.",
+          "cta": "Start Trading Now",
+          "stats": [
+            {
+              "value": "No wallet",
+              "label": "Needed"
+            },
+            {
+              "value": "Long & short",
+              "label": "Both directions"
+            },
+            {
+              "value": "<10ms",
+              "label": "Execution speed"
+            },
+            {
+              "value": "24/7",
+              "label": "Live support"
+            }
+          ]
+        },
+        "quotes": {
+          "title": "Live Crypto [Quotes]",
+          "description": "Crypto CFDs available on GTCFX: Bitcoin, Ethereum and other leading coins."
+        },
+        "why": {
+          "title": "Why Trade Crypto [With GTCFX?]",
+          "description": "Trade crypto price moves on a regulated platform, without managing wallets or exchange accounts.",
+          "cards": [
+            {
+              "icon": "zap",
+              "title": "Ultra-fast execution",
+              "text": "NDD, no dealing desk, zero manual intervention.",
+              "pill": "< 10 ms"
+            },
+            {
+              "icon": "trend",
+              "title": "Tight spreads",
+              "text": "ECN accounts from 0.0 pips with raw pricing.",
+              "pill": "Tight spreads"
+            },
+            {
+              "icon": "shield",
+              "title": "Multi-regulated",
+              "text": "Licensed by 5 financial authorities worldwide.",
+              "pill": "5 licences"
+            },
+            {
+              "icon": "chat",
+              "title": "24/7 support",
+              "text": "Arabic, English and Chinese client service.",
+              "pill": "AR · EN · ZH"
+            },
+            {
+              "icon": "devices",
+              "title": "Multi-platform",
+              "text": "MT4, MT5 and the GTC Go app.",
+              "pill": "MT4 · MT5 · App"
+            }
+          ],
+          "stats": [
+            {
+              "value": "985,000+",
+              "label": "Global clients"
+            },
+            {
+              "value": "Est. 2012",
+              "label": "14+ years of trust"
+            }
+          ]
+        },
+        "faq": {
+          "title": "Common Questions About [Crypto]",
+          "description": "Industry-leading execution, multi-jurisdiction regulation and segregated client funds, built for traders who demand excellence.",
+          "items": [
+            {
+              "q": "What crypto instruments can I trade?",
+              "a": "Bitcoin, Ethereum, Solana, Ripple and other leading cryptocurrencies against the US dollar. The live quotes table above shows every crypto CFD on your account."
+            },
+            {
+              "q": "What is a Crypto CFD?",
+              "a": "A crypto CFD lets you trade the price of a cryptocurrency without buying the coin, so you need no wallet or exchange account. You can go long or short, and leverage lets you manage your exposure; crypto prices can be very volatile."
+            },
+            {
+              "q": "What spreads are available on crypto products?",
+              "a": "Spreads on crypto CFDs vary with market conditions and volatility. The live table on this page shows the current buy and sell prices."
+            },
+            {
+              "q": "What leverage is available for crypto trading?",
+              "a": "Leverage on crypto CFDs is set by our official schedule and reduces as position size increases. See the dynamic leverage page for details."
+            },
+            {
+              "q": "What are the trading hours for crypto markets?",
+              "a": "Crypto CFD trading hours are shown in each instrument's specification on your platform. Holiday hours can differ."
+            }
+          ]
+        },
+        "cta": {
+          "title": "Ready To Trade [Crypto?]",
+          "description": "Open a live account in minutes, or practise risk-free with our demo account. No deposit required to start."
+        }
+      }
+    },
+    "symbol": {
+      "meta": {
+        "title": "{symbol} Live Price & Chart · {name} | GTCFX",
+        "description": "Trade {symbol} ({name}) CFDs with GTCFX: live bid and ask prices, spread, swaps, contract specifications and a real-time chart."
+      },
+      "liveQuote": "Live quote",
+      "brand": "GTCFX · {market}",
+      "sell": "Sell",
+      "buy": "Buy",
+      "bid": "Bid",
+      "ask": "Ask",
+      "sellNow": "Sell now",
+      "buyNow": "Buy now",
+      "spread": "Spread",
+      "pips": "pips",
+      "points": "points",
+      "dayHigh": "Day high",
+      "dayLow": "Day low",
+      "swapLong": "Swap long",
+      "swapShort": "Swap short",
+      "range": "Today's range",
+      "trade": "Trade {symbol}",
+      "chartLabel": "Candlestick chart of the price",
+      "chartLoading": "Loading chart…",
+      "chartWaiting": "Waiting for live prices…",
+      "ohlc": {
+        "o": "O",
+        "h": "H",
+        "l": "L",
+        "c": "C"
+      },
+      "timeframes": {
+        "label": "Chart timeframe",
+        "1": "1m",
+        "15": "15m",
+        "30": "30m",
+        "60": "1h",
+        "240": "4h",
+        "1440": "1d"
+      },
+      "disclaimer": "Past performance is not a reliable indicator of future results. Prices are indicative and may differ from market prices.",
+      "specs": {
+        "title": "Trading specifications",
+        "heading": "Trading [specifications]",
+        "description": "Contract details for this instrument on GTCFX accounts.",
+        "contractSize": "Contract size",
+        "minLot": "Min. lot",
+        "tickSize": "Tick size",
+        "valuePerPip": "Value per pip",
+        "leverage": "Leverage",
+        "marginRate": "Margin rate",
+        "tripleSwap": "Triple swap day",
+        "hours": "Trading hours"
+      },
+      "tabs": {
+        "specs": "Specifications",
+        "about": "About",
+        "related": "Related instruments"
+      },
+      "about": {
+        "title": "About {symbol}",
+        "text": "{symbol} ({name}) is available as a CFD in the {market} market on GTCFX. Trade with competitive spreads, flexible leverage and fast execution on MT4, MT5 and the GTC Go app.",
+        "chips": {
+          "forex": [
+            "Most liquid market",
+            "Tight spreads",
+            "24/5 trading"
+          ],
+          "energy": [
+            "Global demand",
+            "Tight spreads",
+            "Long or short"
+          ],
+          "indices": [
+            "Whole-market exposure",
+            "Low spreads",
+            "Long or short"
+          ],
+          "metals": [
+            "Safe-haven asset",
+            "Tight spreads",
+            "Long or short"
+          ],
+          "shares": [
+            "Global companies",
+            "No ownership needed",
+            "Long or short"
+          ],
+          "crypto": [
+            "No wallet needed",
+            "Long or short",
+            "High volatility"
+          ],
+          "futures": [
+            "Commodity exposure",
+            "Long or short",
+            "Diversification"
+          ]
+        }
+      },
+      "hours": {
+        "forex": "24/5",
+        "energy": "Mon–Fri, ~23h a day",
+        "indices": "Exchange hours",
+        "metals": "Mon–Fri, ~23h a day",
+        "shares": "Exchange hours",
+        "crypto": "See the platform",
+        "futures": "Exchange hours"
+      },
+      "related": "More {market}",
+      "unlock": {
+        "title": "Unlock Global Markets With A [Reliable CFD Broker]",
+        "text": "Access global markets with powerful trading tools designed for a fast and seamless trading experience.",
+        "note": "Prefer working across several screens? The desktop version is designed for multi-monitor setups.",
+        "imageAlt": "The GTC trading app on a desktop monitor, laptop, tablet and phones",
+        "windows": "Windows",
+        "mac": "macOS",
+        "linux": "Linux",
+        "web": "WebTrader",
+        "download": "Download",
+        "openBrowser": "Open in browser"
+      }
     }
   }
 }
