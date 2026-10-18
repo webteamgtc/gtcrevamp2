@@ -234,9 +234,6 @@
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
 
-@keyframes acc-down { from { height: 0; opacity: 0; } to { height: var(--radix-accordion-content-height); opacity: 1; } }
-@keyframes acc-up { from { height: var(--radix-accordion-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
-
 /* vertical marquee columns (GTC Go showcase) */
 .vmarquee-track { animation: vmarquee-up var(--vm-duration, 42s) linear infinite; will-change: transform; }
 .vmarquee-track--down { animation-name: vmarquee-down; }
@@ -244,3 +241,15 @@
 @keyframes vmarquee-up { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -50%, 0); } }
 @keyframes vmarquee-down { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .vmarquee { height: auto !important; overflow: visible !important; } .vmarquee-track { animation: none !important; transform: none !important; } .vmarquee-track > [aria-hidden="true"] { display: none; } }
+
+/* Section reveal on scroll — values come from src/config/reveal.js (set as CSS variables) */
+[data-reveal]:not([data-reveal='in']) {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 64px), 0) scale(var(--reveal-s, 0.96));
+}
+[data-reveal] {
+  transition: opacity var(--reveal-d, 1.4s) var(--reveal-ease, ease), transform var(--reveal-d, 1.4s) var(--reveal-ease, ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal], [data-reveal]:not([data-reveal='in']) { opacity: 1; transform: none; transition: none; }
+}

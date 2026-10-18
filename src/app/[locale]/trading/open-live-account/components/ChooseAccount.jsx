@@ -24,7 +24,7 @@ export function ChooseAccount() {
       <div className="absolute left-1/2 top-24 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-white/70 blur-[90px]" aria-hidden />
 
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Stagger className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2 md:gap-8" stagger={0.12}>
           {items.map((acc, i) => {

@@ -9,6 +9,8 @@ import { SectionHeading } from '@/components/shared/blocks';
 import { getDir } from '@/i18n/locales';
 import { TiltCard } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import NavLink from '@/components/shared/nav/NavLink';
+import { MARKET_LINKS } from '@/config/menu';
 
 export function Markets() {
   const t = useTranslations('markets');
@@ -111,12 +113,12 @@ export function Markets() {
                     <div className="mt-5 h-14">
                       <AreaChart seed={i + 4} color={i % 2 ? '#b68756' : '#5565bd'} className="h-full" />
                     </div>
-                    <a href="#" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                    <NavLink href={MARKET_LINKS[i]} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand">
                       {t('cta')}
                       <span className="grid size-8 place-items-center rounded-full bg-brand-50 text-brand transition-all group-hover:rotate-45 group-hover:bg-gold group-hover:text-white">
                         <ArrowUpRight className="size-4" />
                       </span>
-                    </a>
+                    </NavLink>
                   </div>
                 </div>
               </TiltCard>

@@ -10,7 +10,7 @@ import { ArrowUpRight, Download } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { MENU } from '@/config/menu';
 import { cn } from '@/lib/utils';
-import { useTicker, FlashPrice, Sparkline } from '../ticker';
+import { useTicker, FlashPrice, Sparkline, pct } from '../ticker';
 import { CandleChart, AreaChart } from '../devices';
 import { StoreBadges } from '../GtcGoPhone';
 import { EASE } from '../../motion';
@@ -169,8 +169,7 @@ function LiveList({ sec, onNavigate, dark }) {
                     <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} />
                   </span>
                   <span className={cn('font-semibold', up ? 'text-up' : 'text-down')} dir="ltr">
-                    {up ? '+' : ''}
-                    {r.change.toFixed(2)}%
+                                        {pct(r.change)}
                   </span>
                 </span>
               </span>

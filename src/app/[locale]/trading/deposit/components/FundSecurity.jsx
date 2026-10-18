@@ -35,7 +35,7 @@ export function FundSecurity() {
     <section id="security" className="relative overflow-hidden bg-white py-14 text-ink md:py-24">
       <div className="absolute -start-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <div className="mt-12 grid items-stretch gap-6 md:mt-14 lg:grid-cols-[1.15fr_1fr] lg:gap-8">
           <Stagger className="grid gap-4" stagger={0.1}>
@@ -64,7 +64,7 @@ export function FundSecurity() {
               <ShieldOrb />
 
               <h3 className="heading-title relative max-w-[15rem]">
-                <AccentTitle text={t('panel.title')} accentClassName="text-gradient-gold" />
+                <AccentTitle text={t('panel.title')} />
               </h3>
               <ul className="relative mt-8 flex-1 space-y-5 border-t border-white/10 pt-7">
                 {points.map((p, i) => (

@@ -4,7 +4,7 @@ import GtcGoPage from '../common-gtc-components/components/GtcGoPage';
 import { mtBreadcrumbLd as breadcrumbFor, mtMetadata as metadataFor } from '../common-metatrader/metaPage';
 
 const NS = 'gtcGoAndroidPage';
-const PATH = '/trading/gtc-go-app-andriod';
+const PATH = '/trading/gtc-go-app-android';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;

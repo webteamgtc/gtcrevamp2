@@ -7,6 +7,8 @@ import { Reveal } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { ACCOUNT_KEYS, ACCOUNT_DETAIL_KEYS, ACCOUNT_DETAIL_ICONS } from './accounts.constants';
 import { AccountsCompareDialog } from './AccountsCompareDialog';
+import NavLink from '@/components/shared/nav/NavLink';
+import { PORTAL } from '@/config/menu';
 
 export function Accounts() {
   const t = useTranslations('accounts');
@@ -130,7 +132,7 @@ export function Accounts() {
                         );
                       })}
                     </dl>
-                    <Button size="lg" className="mt-5 w-full" variant={standard ? 'primary' : 'outline'} as="a" href="#register">
+                    <Button size="lg" className="mt-5 w-full" variant={standard ? 'primary' : 'outline'} as={NavLink} href={PORTAL.register}>
                       {t('open')}
                     </Button>
                   </div>

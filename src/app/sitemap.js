@@ -4,7 +4,30 @@ import { SITE_URL } from '@/lib/seo';
 export const dynamic = 'force-static';
 
 // add each finished page here (path without the locale)
-const PAGES = ['', '/company', '/company/about-us', '/company/why-gtc-group', '/company/global-presence', '/company/events-and-exhibitions', '/company/regulations', '/company/contact-us', '/trading', '/trading/open-live-account'];
+const PAGES = [
+  '',
+  '/company',
+  '/company/about-us',
+  '/company/why-gtc-group',
+  '/company/global-presence',
+  '/company/events-and-exhibitions',
+  '/company/regulations',
+  '/company/contact-us',
+  '/trading',
+  '/trading/open-live-account',
+  '/trading/free-demo-account',
+  '/trading/deposit',
+  '/trading/account-types',
+  '/trading/compensation-fund',
+  '/trading/mt5-platform',
+  '/trading/mt4-platform',
+  '/trading/metatrader-for-android',
+  '/trading/metatrader-for-ipad',
+  '/trading/gtc-go-app',
+  '/trading/gtc-go-app-ipad',
+  '/trading/gtc-go-app-android',
+  '/markets'
+];
 
 export default function sitemap() {
   return PAGES.flatMap((path) =>

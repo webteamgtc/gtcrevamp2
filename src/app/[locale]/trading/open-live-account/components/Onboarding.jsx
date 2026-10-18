@@ -15,7 +15,7 @@ export function Onboarding() {
     <section id="onboarding" className="relative overflow-hidden bg-white py-14 text-ink md:py-24">
       <div className="absolute -start-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} />
+        <SectionIntro title={t('title')} />
 
         <div className="relative mt-14 md:mt-16">
           {/* connecting line (desktop) */}

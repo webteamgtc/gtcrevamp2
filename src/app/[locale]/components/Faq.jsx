@@ -1,4 +1,5 @@
 'use client';
+import NavLink from '@/components/shared/nav/NavLink';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
@@ -21,10 +22,10 @@ export function Faq() {
           <SectionHeading title={t('titleA')} titleB={t('titleB')} align="start" className="max-w-xl" />
           <Reveal y={12} delay={0.12} className="max-w-[375px] justify-self-start pb-1 lg:justify-self-end lg:text-end">
             <p className="text-base leading-[1.8] text-ink/60">{t('subtitle')}</p>
-            <a href="#" className="mt-3 inline-flex items-center gap-2 py-2 text-sm font-semibold text-brand transition hover:text-brand-700">
+            <NavLink href="/company/contact-us" className="mt-3 inline-flex items-center gap-2 py-2 text-sm font-semibold text-brand transition hover:text-brand-700">
               <Headphones className="size-[19px] text-gold" strokeWidth={1.75} />
               {t('contact')}
-            </a>
+            </NavLink>
           </Reveal>
         </div>
 

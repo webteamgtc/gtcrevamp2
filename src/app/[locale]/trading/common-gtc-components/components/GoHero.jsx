@@ -54,10 +54,10 @@ export function AppHero({ ns = 'gtcGoApp' }) {
             <motion.div initial={{ opacity: 0, scale: 0.6, rotate: -12 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 180, damping: 14 }} className="inline-block">
               <AppTile className="text-xl" />
             </motion.div>
-            <motion.h1 className="heading-page mt-7" initial={{ y: 24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}>
+            <motion.h1 className="heading-page mt-7" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}>
               <AccentTitle text={t('title')} />
             </motion.h1>
-            <motion.p className="mt-5 text-lg text-white/75 md:text-2xl" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.6 }}>
+            <motion.p className="mt-5 text-lg text-white/75 md:text-2xl" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.25, duration: 0.6 }}>
               {t('subtitle')}
             </motion.p>
             <StoreButtons className="mt-10 justify-center lg:justify-start" delay={0.35} />
@@ -140,10 +140,10 @@ export function DeviceHero({ ns, device }) {
           <motion.span initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.1 }} className="mx-auto grid size-16 place-items-center rounded-2xl bg-white/10 text-gold-200 ring-1 ring-white/15 backdrop-blur">
             <OsIcon className="size-8" />
           </motion.span>
-          <motion.h1 className="heading-page mt-7" initial={{ y: 24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: EASE }}>
+          <motion.h1 className="heading-page mt-7" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8, ease: EASE }}>
             <AccentTitle text={t('title')} />
           </motion.h1>
-          <motion.p className="mx-auto mt-6 max-w-3xl text-pretty text-base leading-relaxed text-white/75 md:text-xl" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+          <motion.p className="mx-auto mt-6 max-w-3xl text-pretty text-base leading-relaxed text-white/75 md:text-xl" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
             {t('text')}
           </motion.p>
           <motion.div className="mt-10 flex justify-center" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}>

@@ -29,17 +29,11 @@ export function AccentTitle({ text, words = 1, accentClassName = 'heading-accent
   );
 }
 
-/** Small spaced-out label above a section title. */
-export function Eyebrow({ children, dark = false, className }) {
-  return <p className={cn('text-xs font-bold uppercase tracking-[0.24em]', dark ? 'text-gold-200' : 'text-brand', className)}>{children}</p>;
-}
-
 /**
  * Section intro used across inner pages.
  * layout 'center' (title + text centred) or 'split' (title start, text end)
  */
-// `eyebrow` is accepted but not shown: agreed design rule — no small titles above headings
-export function SectionIntro({ title, sub, eyebrow: _eyebrow, description, layout = 'center', dark = false, className, children }) {
+export function SectionIntro({ title, sub, description, layout = 'center', dark = false, className, children }) {
   const muted = dark ? 'text-white/60' : 'text-ink/60';
   if (layout === 'split') {
     return (

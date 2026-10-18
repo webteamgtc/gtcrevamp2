@@ -16,6 +16,17 @@ const nextConfig = {
       }
     ]
   },
+  // old misspelled URLs ("andriod") → corrected routes
+  ...(isExport
+    ? {}
+    : {
+        async redirects() {
+          return ['metatrader-for', 'gtc-go-app'].flatMap((p) => [
+            { source: `/:locale/trading/${p}-andriod`, destination: `/:locale/trading/${p}-android`, permanent: true },
+            { source: `/trading/${p}-andriod`, destination: `/trading/${p}-android`, permanent: true }
+          ]);
+        }
+      }),
   ...(isExport ? { output: 'export', trailingSlash: true, assetPrefix: '/__GTC__', env: { NEXT_PUBLIC_STATIC_EXPORT: '1' } } : {})
 };
 

@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { ChartNoAxesColumn, DollarSign, Gauge, LayoutGrid, Quote, Receipt, Waves, Zap } from 'lucide-react';
+import { ChartNoAxesColumn, DollarSign, LayoutGrid, Quote, Receipt, Waves, Zap } from 'lucide-react';
 import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
 import { Reveal, Stagger, StaggerItem, TiltCard } from '@/components/motion';
@@ -68,7 +68,7 @@ export function TierDetail() {
       <div className="absolute -end-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="absolute -start-40 bottom-0 size-[420px] rounded-full bg-gold/10 blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <div className="mt-14 divide-y divide-brand/10">
           {tiers.map((tier, i) => {

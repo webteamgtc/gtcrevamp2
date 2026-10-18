@@ -57,7 +57,7 @@ export function Tips() {
       <div className="absolute -start-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="absolute -end-40 bottom-0 size-[420px] rounded-full bg-gold/10 blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <div className="mt-12 grid items-start gap-10 md:mt-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
           {/* timeline */}

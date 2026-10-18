@@ -70,7 +70,7 @@ export function CoverageScope() {
       <div className="bg-dots-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="absolute left-1/2 top-24 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-white/70 blur-[90px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Reveal y={24} className="mt-12 md:mt-14">
           <div className="relative grid overflow-hidden rounded-[2rem] border border-brand/10 bg-white shadow-[0_40px_100px_-50px_rgba(41,59,147,0.45)] md:grid-cols-2">

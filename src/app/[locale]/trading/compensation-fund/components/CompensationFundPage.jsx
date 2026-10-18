@@ -17,7 +17,7 @@ import { CoverageScope } from './CoverageScope';
 
 function CfCta() {
   const t = useTranslations('compensationFundPage.cta');
-  return <CtaBand id="learn-more" eyebrow={t('eyebrow')} title={t('title')} description={t('description')} primary={{ label: t('live'), href: PORTAL.register }} />;
+  return <CtaBand id="learn-more" title={t('title')} description={t('description')} primary={{ label: t('live'), href: PORTAL.register }} />;
 }
 
 export default function CompensationFundPage() {

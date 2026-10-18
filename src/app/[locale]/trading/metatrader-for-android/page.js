@@ -4,7 +4,7 @@ import MetaTraderPage from '../common-metatrader/components/MetaTraderPage';
 import { mtBreadcrumbLd, mtMetadata } from '../common-metatrader/metaPage';
 
 const NS = 'metatraderAndroidPage';
-const PATH = '/trading/metatrader-for-andriod';
+const PATH = '/trading/metatrader-for-android';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;

@@ -2,31 +2,25 @@
 # Builds a static, relative-path preview of the site into ./preview (for sharing a review link).
 set -e
 cd "$(dirname "$0")/.."
+# static export can't include the proxy or API routes: park them for the build
 mv src/proxy.js /tmp/gtc-proxy.js
-trap 'mv /tmp/gtc-proxy.js src/proxy.js' EXIT
+mv src/app/api /tmp/gtc-api
+trap 'mv /tmp/gtc-proxy.js src/proxy.js; mv /tmp/gtc-api src/app/api' EXIT
 rm -rf out preview
 STATIC_EXPORT=1 npx next build --webpack
 mkdir -p preview
 cp -r out/_next out/images out/icon.png preview/ 2>/dev/null || true
 # Homepage in every language (flattened to /<l>/home/)
 for l in $(ls -d out/*/ | xargs -n1 basename); do [ -f out/$l/index.html ] && [ -d out/$l/company ] && mkdir -p preview/$l/home && cp out/$l/index.html preview/$l/home/; done
-# Company hub in every language
-for d in out/*/company; do l=$(basename $(dirname $d)); mkdir -p preview/$l/company; cp $d/index.html preview/$l/company/; done
-# Trading pages in every language
-# (open-live-account is flattened to /<l>/open-live-account/ so every page sits two folders deep)
-for d in out/*/trading; do l=$(basename $(dirname $d)); mkdir -p preview/$l/trading preview/$l/open-live-account; cp $d/index.html preview/$l/trading/; cp $d/open-live-account/index.html preview/$l/open-live-account/ 2>/dev/null || true; done
-# About Us (flattened to /<l>/about-us/)
-for d in out/*/company/about-us; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/about-us; cp $d/index.html preview/$l/about-us/; done
-# Why GTC Group (flattened to /<l>/why-gtc-group/)
-for d in out/*/company/why-gtc-group; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/why-gtc-group; cp $d/index.html preview/$l/why-gtc-group/; done
-# Global Presence (flattened to /<l>/global-presence/)
-for d in out/*/company/global-presence; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/global-presence; cp $d/index.html preview/$l/global-presence/; done
-# Events & Exhibitions (flattened to /<l>/events-and-exhibitions/)
-for d in out/*/company/events-and-exhibitions; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/events-and-exhibitions; cp $d/index.html preview/$l/events-and-exhibitions/; done
-# Regulations (flattened to /<l>/regulations/)
-for d in out/*/company/regulations; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/regulations; cp $d/index.html preview/$l/regulations/; done
-# Contact Us (flattened to /<l>/contact-us/)
-for d in out/*/company/contact-us; do l=$(basename $(dirname $(dirname $d))); mkdir -p preview/$l/contact-us; cp $d/index.html preview/$l/contact-us/; done
+# Every other page, flattened to /<l>/<last-segment>/ so all pages sit two folders deep
+# (keep in sync with PREVIEW_PAGES in src/components/shared/nav/NavLink.jsx)
+PAGES="company trading trading/open-live-account trading/free-demo-account trading/deposit trading/account-types trading/compensation-fund trading/mt5-platform trading/mt4-platform trading/metatrader-for-android trading/metatrader-for-ipad trading/gtc-go-app trading/gtc-go-app-ipad trading/gtc-go-app-android company/about-us company/why-gtc-group company/global-presence company/events-and-exhibitions company/regulations company/contact-us markets"
+for l in $(ls -d out/*/ | xargs -n1 basename); do
+  [ -d out/$l/company ] || continue
+  for p in $PAGES; do
+    [ -f out/$l/$p/index.html ] && mkdir -p preview/$l/$(basename $p) && cp out/$l/$p/index.html preview/$l/$(basename $p)/
+  done
+done
 # award images: the real ones from public/awards, or preview stand-ins
 mkdir -p preview/awards
 if ls public/awards/*.webp >/dev/null 2>&1; then cp public/awards/*.webp preview/awards/; else cp preview-hub/awards/*.webp preview/awards/ 2>/dev/null || true; fi

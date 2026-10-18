@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { BarChart3, Briefcase, Check, LineChart, User, Wifi, BatteryFull, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useTicker, FlashPrice, Sparkline, UpDown, fmt } from './ticker';
+import { useTicker, FlashPrice, Sparkline, UpDown, fmt, pct } from './ticker';
 import { CandleChart, AreaChart } from './devices';
 import { CountUp, EASE } from '../motion';
 
@@ -136,7 +136,7 @@ function Watch({ t, dark }) {
             <Sparkline data={r.hist} up={r.dir > 0} width={46} height={18} />
             <div className="text-end text-[11px] font-bold">
               <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} />
-              <div className={cn('text-[8px]', r.change >= 0 ? 'text-up' : 'text-down')}>{r.change >= 0 ? '+' : ''}{r.change.toFixed(2)}%</div>
+              <div className={cn('text-[8px]', r.change >= 0 ? 'text-up' : 'text-down')}>{pct(r.change)}</div>
             </div>
           </motion.div>
         ))}

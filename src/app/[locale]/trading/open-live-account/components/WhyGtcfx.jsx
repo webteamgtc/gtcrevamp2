@@ -63,7 +63,7 @@ export function WhyGtcfx() {
     <section id="why" className="relative overflow-hidden bg-[#eef0f5] py-14 text-ink md:py-24">
       <div className="bg-dots-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Stagger className="mt-12 grid gap-5 md:mt-14 md:grid-cols-2" stagger={0.1}>
           {/* spreads */}

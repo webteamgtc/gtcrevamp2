@@ -5,7 +5,7 @@ import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
 import BandLine from '@/components/shared/BandLine';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion';
-import { AccentTitle, Eyebrow } from '@/components/shared/SectionIntro';
+import { AccentTitle } from '@/components/shared/SectionIntro';
 
 /** Navy closing band: copy + both buttons on one side, four stat tiles on the other. */
 export function DemoCta() {
@@ -20,9 +20,8 @@ export function DemoCta() {
 
       <div className="container-x relative grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <Reveal y={16}>
-          <Eyebrow dark>{t('eyebrow')}</Eyebrow>
-          <h2 className="heading-section mt-4">
-            <AccentTitle text={t('title')} accentClassName="text-gradient-gold" />
+          <h2 className="heading-section">
+            <AccentTitle text={t('title')} />
           </h2>
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{t('description')}</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">

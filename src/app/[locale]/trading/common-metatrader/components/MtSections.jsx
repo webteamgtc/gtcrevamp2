@@ -13,7 +13,7 @@ import FaqAccordion from '@/components/shared/FaqAccordion';
 import NumberedSteps from '@/components/shared/NumberedSteps';
 import CtaBand from '@/components/shared/CtaBand';
 import StatValue from '@/components/shared/StatValue';
-import { AccentTitle, Eyebrow, SectionIntro } from '@/components/shared/SectionIntro';
+import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, EASE } from '@/components/motion';
 import { useScrollSteps } from '@/components/shared/useScrollSteps';
 import { cn } from '@/lib/utils';
@@ -48,11 +48,11 @@ export function Capabilities({ ns, version }) {
       <div className="absolute -end-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="absolute -start-40 top-1/2 size-[420px] rounded-full bg-gold/10 blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <div className="mt-12 grid gap-5 md:mt-14 lg:grid-cols-[300px_1fr] lg:gap-6" {...s.hover}>
           {/* tabs */}
-          <div role="tablist" aria-label={t('eyebrow')} className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+          <div role="tablist" aria-label={t('tabsLabel')} className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
             {items.map((it, k) => {
               const on = k === s.index;
               const tg = splitTag(it.tag);
@@ -140,7 +140,7 @@ export function CrossDevice({ ns, version }) {
     <section id="devices" className="relative overflow-hidden bg-[#eef0f5] py-14 text-ink md:py-24">
       <div className="bg-dots-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
         <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 md:mt-14 lg:grid-cols-4" stagger={0.08}>
           {items.map((d, i) => {
             const Icon = DEVICE_ICONS[d.id] ?? WindowsIcon;
@@ -243,7 +243,7 @@ export function BetterEdge({ ns }) {
       <div className="absolute -start-24 bottom-0 size-96 rounded-full bg-brand/40 blur-[120px]" aria-hidden />
 
       <div className="container-x relative">
-        <SectionIntro dark eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro dark title={t('title')} description={t('description')} />
 
         <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 md:mt-14 lg:grid-cols-4" stagger={0.1}>
           {items.map((s, i) => {
@@ -285,7 +285,7 @@ export function ThreeSteps({ ns }) {
       <div className="bg-dots-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="absolute left-1/2 top-24 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-white/70 blur-[90px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
         <NumberedSteps steps={t.raw('items')} className="mt-14 md:mt-16" />
       </div>
     </section>
@@ -301,8 +301,7 @@ export function MtFaq({ ns }) {
       <div className="absolute -start-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="container-x relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal y={16} className="lg:sticky lg:top-28 lg:self-start">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <h2 className="heading-section mt-4">
+          <h2 className="heading-section">
             <AccentTitle text={t('title')} />
           </h2>
           <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-ink/60 md:text-base">{t('description')}</p>
@@ -325,7 +324,7 @@ export function MtCta({ ns, version }) {
     <CtaBand
       id="download"
       layout="split"
-      eyebrow={t('eyebrow')}
+     
       title={t('title')}
       description={t('description')}
       primary={{ label: t('primary'), href: links.windows }}

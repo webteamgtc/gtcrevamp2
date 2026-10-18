@@ -6,13 +6,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'motion/react';
-import { Check, Globe, Smartphone } from 'lucide-react';
+import { Check, Globe } from 'lucide-react';
 import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
 import BandLine from '@/components/shared/BandLine';
 import GtcGoPhone from '@/components/shared/GtcGoPhone';
-import { AccentTitle, Eyebrow, SectionIntro } from '@/components/shared/SectionIntro';
-import { useTicker, FlashPrice, Sparkline } from '@/components/shared/ticker';
+import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
+import { useTicker, FlashPrice, Sparkline, pct } from '@/components/shared/ticker';
 import { Reveal, Stagger, StaggerItem, TiltCard, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { AppleIcon, LinuxIcon, WindowsIcon } from '../../common-metatrader/components/brandIcons';
@@ -45,8 +45,7 @@ function AssetTiles() {
                 <div className="flex items-center justify-between gap-1">
                   <span className="text-[11px] font-bold text-white">{r.s}</span>
                   <span className={cn('rounded-full px-1.5 py-0.5 text-[9px] font-semibold', up ? 'bg-up/20 text-green-300' : 'bg-down/20 text-red-300')}>
-                    {up ? '+' : ''}
-                    {r.change.toFixed(2)}%
+                                        {pct(r.change)}
                   </span>
                 </div>
                 <div className="text-[9px] text-white/45">{r.n}</div>
@@ -295,7 +294,7 @@ export function Pillars({ ns = 'gtcGoApp' }) {
     <section id="pillars" className="relative overflow-hidden bg-[#f6f7fb] py-14 md:py-24">
       <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Reveal className="relative mt-10 md:mt-14" y={40}>
           {/* top / bottom fades */}
@@ -333,12 +332,8 @@ export function GetTheApp({ ns = 'gtcGoApp' }) {
 
       <div className="container-x relative grid items-center gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
         <Reveal y={16}>
-          <Eyebrow dark className="inline-flex items-center gap-2">
-            <Smartphone className="size-4" />
-            {t('eyebrow')}
-          </Eyebrow>
-          <h2 className="heading-section mt-4">
-            <AccentTitle text={t('title')} accentClassName="text-gradient-gold" />
+          <h2 className="heading-section">
+            <AccentTitle text={t('title')} />
           </h2>
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{t('text')}</p>
 

@@ -9,9 +9,10 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronDown, CircleAlert, CircleCheck, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { PORTAL } from '@/config/menu';
 import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, flagFor, dialFor, useGtcCountries } from './formKit';
 
-const LOGIN_URL = 'https://web.mygtc.app/user?redirect=%252Fdashboard';
+const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
 const PRIVACY_URL = 'https://www.gtcfx.com/privacy';
 

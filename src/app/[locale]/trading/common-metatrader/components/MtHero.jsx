@@ -10,7 +10,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { CandleChart, PhoneMockup, TabletMockup } from '@/components/shared/devices';
-import { useTicker, FlashPrice } from '@/components/shared/ticker';
+import { useTicker, FlashPrice, pct, fmt } from '@/components/shared/ticker';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { MT_LINKS } from './links';
@@ -43,14 +43,13 @@ function TerminalCard() {
               </span>
               <span>
                 <span className="block text-sm font-bold text-brand">EUR / USD</span>
-                <span className="block text-[11px] text-ink/45">M15 · ASK {eur.ask.toFixed(5)}</span>
+                <span className="block text-[11px] text-ink/45">M15 · ASK {fmt(eur.ask, 5)}</span>
               </span>
             </div>
             <span className="text-end">
               <FlashPrice value={eur.bid} decimals={5} dir={eur.dir} tick={eur.tick} className="text-xl font-bold text-ink" />
               <span className={cn('block text-[11px] font-semibold', up ? 'text-up' : 'text-down')}>
-                {up ? '+' : ''}
-                {eur.change.toFixed(2)}%
+                                {pct(eur.change)}
               </span>
             </span>
           </div>
@@ -128,7 +127,7 @@ export function PlatformHero({ ns, version }) {
             <motion.h1 className="heading-page mt-6" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
               <AccentTitle text={t('title')} />
             </motion.h1>
-            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
+            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
               {t('text')}
             </motion.p>
             <motion.div className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
@@ -191,10 +190,10 @@ export function DeviceHero({ ns, device }) {
           <motion.h1 className="heading-page mt-7" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
             <AccentTitle text={t('title')} />
           </motion.h1>
-          <motion.p className="mt-4 text-xl font-semibold text-white md:text-2xl" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.6 }}>
+          <motion.p className="mt-4 text-xl font-semibold text-white md:text-2xl" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.12, duration: 0.6 }}>
             {t('subtitle')}
           </motion.p>
-          <motion.p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/65 md:text-lg" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+          <motion.p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/65 md:text-lg" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
             {t('text')}
           </motion.p>
           <motion.div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>

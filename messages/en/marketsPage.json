@@ -1,0 +1,114 @@
+{
+  "marketsPage": {
+    "meta": {
+      "title": "Trading Markets | Forex, Metals, Energy, Indices, Shares & Crypto CFDs | GTCFX",
+      "description": "Trade forex, gold and metals, energy, global indices, shares, crypto and futures CFDs with GTCFX: spreads from 0.0 pips, leverage up to 1:2000 and fast execution on MT4, MT5 and GTC Go."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Markets"
+    },
+    "hero": {
+      "title": "Trade the World's [Top Markets]",
+      "text": "Access forex, metals, energy, indices, shares, crypto and futures with ultra-competitive spreads, leverage up to 1:2000 and instant execution.",
+      "ctaLive": "Open Live Account",
+      "ctaDemo": "Try a Free Demo",
+      "tapeLabel": "Live prices"
+    },
+    "instruments": {
+      "title": "Market [Instruments]",
+      "description": "Seven asset classes, one account. Hover or tap a market to see its live price.",
+      "learnMore": "Learn more",
+      "sell": "Sell",
+      "buy": "Buy",
+      "spread": "Spread",
+      "low": "Low",
+      "high": "High",
+      "dayRange": "Today's range",
+      "open": "Open {market}",
+      "waiting": "Waiting for live price",
+      "items": {
+        "forex": {
+          "name": "Forex CFDs",
+          "text": "Tight spreads from 0.0 pips and leverage up to 1:2000 on majors, minors and exotics, with no trading restrictions."
+        },
+        "metals": {
+          "name": "Metal CFDs",
+          "text": "Trade gold, silver and platinum with ultra-competitive spreads, with gold starting at just 4c."
+        },
+        "energy": {
+          "name": "Energy CFDs",
+          "text": "Capitalise on global energy price movements in crude oil and natural gas with tight spreads."
+        },
+        "indices": {
+          "name": "Indices",
+          "text": "Take positions on 81 global indices, from the S&P 500 to the FTSE 100 and Nikkei 225."
+        },
+        "shares": {
+          "name": "Share CFDs",
+          "text": "Go long or short on the world's best-known companies without owning the underlying stock."
+        },
+        "crypto": {
+          "name": "Crypto CFDs",
+          "text": "Trade Bitcoin, Ethereum and other leading cryptocurrencies, with no wallet or exchange account needed."
+        },
+        "futures": {
+          "name": "Futures CFDs",
+          "text": "Trade leading futures contracts with competitive spreads, flexible leverage and fast execution."
+        }
+      }
+    },
+    "news": {
+      "title": "Market [News]",
+      "description": "Guides, market hours and analysis from the GTCFX team.",
+      "viewAll": "View all news",
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "calendar": {
+      "title": "Economic [Calendar]",
+      "description": "Upcoming data releases, central bank decisions and the markets they move, updated in real time.",
+      "loading": "Loading live data…",
+      "provider": "Market data by TradingView",
+      "cards": [
+        {
+          "id": "calendar",
+          "link": "View economic calendar",
+          "href": "/news/economic-calendar"
+        },
+        {
+          "id": "hours",
+          "link": "View trading hours",
+          "href": "/markets/trading-hours"
+        },
+        {
+          "id": "holidays",
+          "link": "View holiday hours",
+          "href": "/news/market-holidays"
+        }
+      ],
+      "sessions": {
+        "title": "Forex sessions",
+        "open": "Open",
+        "closed": "Closed",
+        "opensIn": "Opens in {time}",
+        "closesIn": "Closes in {time}",
+        "note": "Typical local session hours. The forex market trades 24 hours a day, Monday to Friday.",
+        "cities": {
+          "sydney": "Sydney",
+          "tokyo": "Tokyo",
+          "london": "London",
+          "newYork": "New York"
+        }
+      }
+    },
+    "cta": {
+      "title": "Start Your Investment [Journey Today.]",
+      "description": "Join thousands of traders who trust GTCFX across global markets, with full transparency and no hidden agenda.",
+      "live": "Open Live Account",
+      "demo": "Open Demo Account",
+      "riskTitle": "Risk warning.",
+      "risk": "CFD trading involves significant risk and may result in the loss of your entire invested capital. Ensure you fully understand the risks before trading. Past performance is not indicative of future results. Trading is not suitable for all investors."
+    }
+  }
+}

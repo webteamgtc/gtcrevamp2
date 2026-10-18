@@ -4,10 +4,12 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTicker, FlashPrice, Sparkline, UpDown, fmt } from '@/components/shared/ticker';
+import { useTicker, FlashPrice, Sparkline, UpDown, fmt, pct } from '@/components/shared/ticker';
 import { CandleChart } from '@/components/shared/devices';
 import { Reveal, WordReveal, Magnetic, Marquee, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import NavLink from '@/components/shared/nav/NavLink';
+import { PORTAL } from '@/config/menu';
 
 function Meteors({ count = 14 }) {
   const [items, setItems] = useState([]);
@@ -84,12 +86,12 @@ export function Hero() {
 
         <Reveal delay={0.7} y={16} className="mt-10 flex flex-wrap justify-center gap-3">
           <Magnetic>
-            <Button size="lg" variant="gold" as="a" href="#register">
+            <Button size="lg" variant="gold" as={NavLink} href={PORTAL.register}>
               {t('ctaLive')} <ArrowRight className="rtl:-scale-x-100" />
             </Button>
           </Magnetic>
           <Magnetic>
-            <Button size="lg" variant="outlineLight" as="a" href="#register">
+            <Button size="lg" variant="outlineLight" as={NavLink} href={PORTAL.demo}>
               {t('ctaDemo')}
             </Button>
           </Magnetic>
@@ -197,7 +199,7 @@ function Terminal() {
               <Sparkline data={x.hist} up={x.dir > 0} width={70} height={26} />
               <div className="text-end">
                 <FlashPrice value={x.bid} decimals={x.d} dir={x.dir} tick={x.tick} className="font-bold" />
-                <div className={cn('text-xs', x.change >= 0 ? 'text-up' : 'text-down')}>{x.change >= 0 ? '+' : ''}{x.change.toFixed(2)}%</div>
+                <div className={cn('text-xs', x.change >= 0 ? 'text-up' : 'text-down')}>{pct(x.change)}</div>
               </div>
             </motion.button>
           ))}
@@ -220,7 +222,7 @@ function TapeMarquee() {
           <span className="font-semibold text-white/80">{r.s}</span>
           <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} className="text-white" />
           <span className={cn('flex items-center text-xs', r.dir > 0 ? 'text-up' : 'text-down')}>
-            <UpDown dir={r.dir} /> {Math.abs(r.change).toFixed(2)}%
+            <UpDown dir={r.dir} /> {pct(r.change, true)}
           </span>
         </span>
       ))}

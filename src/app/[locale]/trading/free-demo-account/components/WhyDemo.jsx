@@ -170,7 +170,7 @@ export function WhyDemo() {
       <div className="absolute -end-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="absolute -start-40 bottom-0 size-[420px] rounded-full bg-gold/10 blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Stagger className="mt-12 grid gap-5 md:mt-14 md:grid-cols-2 lg:grid-cols-12" stagger={0.1}>
           {items.map((it, i) => {

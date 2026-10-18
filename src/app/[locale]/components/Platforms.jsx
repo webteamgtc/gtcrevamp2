@@ -8,6 +8,8 @@ import { LaptopMockup, PhoneMockup, TabletMockup } from '@/components/shared/dev
 import { SectionHeading, Ambient } from '@/components/shared/blocks';
 import { Reveal, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import NavLink from '@/components/shared/nav/NavLink';
+import { PLATFORM_LINKS } from '@/config/menu';
 
 const PLATFORM_DEVICES = {
   mt4: { className: 'start-[2%] bottom-[64px] z-10', node: () => <TabletMockup className="w-[300px] lg:w-[330px]" symbol="XAUUSD" price="4,158.99" seed={11} /> },
@@ -109,7 +111,7 @@ export function Platforms() {
                       </motion.li>
                     ))}
                   </ul>
-                  <Button size="lg" className="mt-8 w-full sm:w-auto" as="a" href="#">
+                  <Button size="lg" className="mt-8 w-full sm:w-auto" as={NavLink} href={PLATFORM_LINKS[it.key]}>
                     <Download /> {it.cta}
                   </Button>
                 </motion.div>

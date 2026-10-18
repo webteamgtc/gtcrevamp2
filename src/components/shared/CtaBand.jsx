@@ -8,15 +8,15 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
 
 /**
  * Full-width navy closing band used at the end of inner pages:
- * pulsing gold rings, the price line, an optional eyebrow, title ([accent] supported),
+ * pulsing gold rings, the price line, title ([accent] supported),
  * description, primary + secondary buttons and an optional risk warning.
  *
- *   <CtaBand eyebrow="…" title="The market is [moving.]" description="…"
+ *   <CtaBand title="The market is [moving.]" description="…"
  *            primary={{ label, href }} secondary={{ label, href }} riskTitle="Risk warning." risk="…" />
  *
  * layout="split": copy on the start side, the two buttons stacked on the end side (+ optional `note` under them).
  */
-export default function CtaBand({ id, eyebrow, title, description, primary, secondary, riskTitle, risk, note, layout = 'center' }) {
+export default function CtaBand({ id, title, description, primary, secondary, riskTitle, risk, note, layout = 'center' }) {
   return (
     <section id={id} className="is-dark relative overflow-hidden bg-gradient-to-b from-brand-800 via-brand-900 to-brand-950 py-16 text-white md:py-24">
       <div className="bg-grid-dark mask-radial absolute inset-0 opacity-60" aria-hidden />
@@ -31,9 +31,8 @@ export default function CtaBand({ id, eyebrow, title, description, primary, seco
       {layout === 'split' ? (
         <div className="container-x relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
           <Reveal y={16}>
-            {eyebrow && <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-200">{eyebrow}</p>}
-            <h2 className="heading-section mt-4">
-              <AccentTitle text={title} accentClassName="text-gradient-gold" />
+            <h2 className="heading-section">
+              <AccentTitle text={title} />
             </h2>
             {description && <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{description}</p>}
           </Reveal>
@@ -53,18 +52,9 @@ export default function CtaBand({ id, eyebrow, title, description, primary, seco
         </div>
       ) : (
       <div className="container-x relative mx-auto max-w-4xl text-center">
-        {eyebrow && (
-          <Reveal y={12}>
-            <p className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-gold-200">
-              <span className="h-px w-6 bg-gold-200" aria-hidden />
-              {eyebrow}
-              <span className="h-px w-6 bg-gold-200" aria-hidden />
-            </p>
-          </Reveal>
-        )}
         <Reveal y={16} delay={0.05}>
-          <h2 className="heading-section mx-auto mt-5 max-w-2xl">
-            <AccentTitle text={title} accentClassName="text-gradient-gold" />
+          <h2 className="heading-section mx-auto max-w-2xl">
+            <AccentTitle text={title} />
           </h2>
         </Reveal>
         {description && (

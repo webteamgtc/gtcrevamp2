@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { MessageCircleQuestion } from 'lucide-react';
 import FaqAccordion from '@/components/shared/FaqAccordion';
-import { AccentTitle, Eyebrow } from '@/components/shared/SectionIntro';
+import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal } from '@/components/motion';
 
 /** Floating question bubble in orbit rings (decorative). */
@@ -32,8 +32,7 @@ export function DemoFaq() {
       <div className="absolute -end-40 top-10 size-[460px] rounded-full bg-white/70 blur-[100px]" aria-hidden />
       <div className="container-x relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal y={16} className="text-center lg:sticky lg:top-28 lg:self-start lg:text-start">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <h2 className="heading-section mt-4">
+          <h2 className="heading-section">
             <AccentTitle text={t('title')} />
           </h2>
           <p className="mx-auto mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-ink/60 md:text-base lg:mx-0">{t('description')}</p>

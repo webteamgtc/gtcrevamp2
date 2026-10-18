@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const GTC_REG_URL = `https://web.mygtc.app/api/pub/reg`;
+const GTC_REG_URL = `${process.env.GTC_PORTAL_API || "https://web.mygtc.app/api/pub"}/reg`;
 
 export async function POST(req) {
   try {

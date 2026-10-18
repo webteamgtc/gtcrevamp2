@@ -7,4 +7,4 @@ export const MT_LINKS = {
   mt5: { windows: '#', linux: '#', mac: '#', ios: '#', android: '#', web: '#' }
 };
 
-export const CONTACT_HREF = '/company#help';
+export const CONTACT_HREF = '/company/contact-us#help';

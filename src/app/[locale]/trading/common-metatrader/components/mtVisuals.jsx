@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { Zap } from 'lucide-react';
-import { useTicker, FlashPrice, fmt } from '@/components/shared/ticker';
+import { useTicker, FlashPrice, pct } from '@/components/shared/ticker';
 import { CountUp } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
@@ -251,8 +251,7 @@ export function MarketWatch() {
                     <span className="text-end">
                       <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} className="text-xs font-bold text-ink" />
                       <span className={cn('block text-[9px] font-semibold', r.change >= 0 ? 'text-up' : 'text-down')}>
-                        {r.change >= 0 ? '+' : ''}
-                        {fmt(r.change, 2)}%
+                                                {pct(r.change)}
                       </span>
                     </span>
                   </div>

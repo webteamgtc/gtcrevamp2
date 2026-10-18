@@ -3,7 +3,7 @@
  * One page component for every GTC Go page.
  *
  *   <GtcGoPage ns="gtcGoApp" />                                 // /trading/gtc-go-app
- *   <GtcGoPage ns="gtcGoAndroidPage" device="android" />        // /trading/gtc-go-app-andriod
+ *   <GtcGoPage ns="gtcGoAndroidPage" device="android" />        // /trading/gtc-go-app-android
  *   <GtcGoPage ns="gtcGoIosPage" device="ios" />                // /trading/gtc-go-app-ipad
  *
  * `ns` holds the hero text; the body always reads `bodyNs` (default 'gtcGoApp').

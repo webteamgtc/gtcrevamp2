@@ -10,14 +10,39 @@ import {
   CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Bitcoin, Landmark, Wheat
 } from 'lucide-react';
 
-// external links — replace with the real client-portal URLs
+// account entry points: live application form (/trading hero), demo form, client portal log-in
+const CLIENT_PORTAL = 'https://web.mygtc.app/user?redirect=%252Fdashboard';
 export const PORTAL = {
-  register: '#register',
-  login: '#login',
-  demo: '#register',
-  // client portal (log in / deposit)
-  clientPortal: 'https://web.mygtc.app/user?redirect=%252Fdashboard'
+  register: '/trading#apply',
+  login: CLIENT_PORTAL,
+  demo: '/trading/free-demo-account',
+  clientPortal: CLIENT_PORTAL
 };
+
+/** Footer link targets, in the same order as footer.columns.<id>.links in messages/<locale>/common.json */
+export const FOOTER_LINKS = {
+  instruments: ['/markets/forex', '/markets/energy', '/markets/indices', '/markets/metals', '/markets/shares', '/markets/crypto', '/markets/futures'],
+  quick: ['/trading/account-types', '/copy-trading', '/trading/deposit', '/markets', '/promotions'],
+  platforms: ['/trading/mt4-platform', '/trading/mt5-platform', '/trading/gtc-go-app'],
+  company: ['/company/about-us', '/company/why-gtc-group', '/company/regulations', '/company/events-and-exhibitions'],
+  support: ['/faq', '/company/contact-us', '/company/contact-us#help'],
+  legal: [
+    '/legal/website-disclaimer',
+    '/legal/risk-disclosure',
+    '/legal/restricted-countries',
+    '/legal/deposit-refund-policy',
+    '/legal/kyc-compliance-policy',
+    '/legal/cookie-policy',
+    '/legal/privacy-policy',
+    '/legal/terms-and-conditions'
+  ]
+};
+
+/** Homepage market cards, in the same order as markets.items in homepage.json */
+export const MARKET_LINKS = ['/markets/forex', '/markets/metals', '/markets/energy', '/markets/indices', '/markets/commodities', '/markets/shares', '/markets/crypto', '/markets/futures'];
+
+/** Homepage platform slides by key */
+export const PLATFORM_LINKS = { gtcgo: '/trading/gtc-go-app', mt5: '/trading/mt5-platform', mt4: '/trading/mt4-platform' };
 
 export const MENU = [
   {
@@ -45,7 +70,7 @@ export const MENU = [
         ] }
       ]
     ],
-    promo: { id: 'company', href: '/account-types', visual: 'accounts' }
+    promo: { id: 'company', href: '/trading/account-types', visual: 'accounts' }
   },
   
   {
@@ -63,7 +88,7 @@ export const MENU = [
         { id: 'metatrader', items: [
           { id: 'mt5', href: '/trading/mt5-platform', icon: Monitor },
           { id: 'mt4', href: '/trading/mt4-platform', icon: Monitor },
-          { id: 'mtAndroid', href: '/trading/metatrader-for-andriod', icon: Smartphone },
+          { id: 'mtAndroid', href: '/trading/metatrader-for-android', icon: Smartphone },
           { id: 'mtIos', href: '/trading/metatrader-for-ipad', icon: Tablet }
         ] },
         { id: 'products', items: [
@@ -76,7 +101,7 @@ export const MENU = [
           { id: 'gtcGo', href: '/trading/gtc-go-app', icon: AppWindow },
           { id: 'gtcGoWeb', href: '/trading/gtc-go-web', icon: Globe },
           { id: 'gtcGoIos', href: '/trading/gtc-go-app-ipad', icon: Tablet },
-          { id: 'gtcGoAndroid', href: '/trading/gtc-go-app-andriod', icon: Smartphone },
+          { id: 'gtcGoAndroid', href: '/trading/gtc-go-app-android', icon: Smartphone },
           { id: 'copyTrading', href: '/copy-trading', icon: Users }
         ] },
         { id: 'advantages', items: [
@@ -89,6 +114,7 @@ export const MENU = [
   },
   {
     id: 'markets',
+    href: '/markets', // clicking "Markets" in the top bar opens the Markets page
     columns: [
       [{ id: 'tradeMarkets', items: [
         { id: 'forex', href: '/markets/forex', icon: Globe },
@@ -153,6 +179,6 @@ export const MENU = [
         { id: 'awardsMedia', href: '/awards', icon: Trophy }
       ] }]
     ],
-    promo: { id: 'news', href: '/deposit-withdraw', visual: 'currencies' }
+    promo: { id: 'news', href: '/trading/deposit', visual: 'currencies' }
   }
 ];

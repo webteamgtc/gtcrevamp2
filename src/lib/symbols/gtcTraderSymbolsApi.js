@@ -120,16 +120,6 @@ export async function fetchSymbolInfo({
   return data[key] ?? data;
 }
 
-/** Format 6-letter FX symbols as XXX/YYY for display. */
-export function formatDisplaySymbol(symbol = "") {
-  // if (typeof symbol !== "string") return "";
-  // if (symbol.includes("/")) return symbol;
-  // if (/^[A-Z]{6}$/.test(symbol)) {
-  //   return `${symbol.slice(0, 3)}/${symbol.slice(3)}`;
-  // }
-  return symbol;
-}
-
 /** Map symbol/index list item to MarketLiveQuotesSection row shape. */
 export function mapSymbolToQuoteRow(item) {
   const rawSymbol = item?.symbol ?? "";

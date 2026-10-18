@@ -150,12 +150,12 @@ export function PaymentMethods() {
       <div className="absolute -end-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="absolute -start-40 bottom-0 size-[420px] rounded-full bg-gold/10 blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Reveal y={24} className="mt-12 md:mt-14">
           <div className="grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             {/* method list */}
-            <div role="tablist" aria-label={t('eyebrow')} className="no-scrollbar -mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+            <div role="tablist" aria-label={t('tabsLabel')} className="no-scrollbar -mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
               {items.map((it, i) => {
                 const { Icon: ItIcon } = LOOK[it.id] ?? LOOK.card;
                 const on = active === i;
