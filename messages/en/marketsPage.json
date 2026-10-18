@@ -950,10 +950,6 @@
       },
       "liveQuote": "Live quote",
       "brand": "GTCFX · {market}",
-      "sell": "Sell",
-      "buy": "Buy",
-      "bid": "Bid",
-      "ask": "Ask",
       "sellNow": "Sell now",
       "buyNow": "Buy now",
       "spread": "Spread",
@@ -964,7 +960,6 @@
       "swapLong": "Swap long",
       "swapShort": "Swap short",
       "range": "Today's range",
-      "trade": "Trade {symbol}",
       "chartLabel": "Candlestick chart of the price",
       "chartLoading": "Loading chart…",
       "chartWaiting": "Waiting for live prices…",
@@ -985,7 +980,6 @@
       },
       "disclaimer": "Past performance is not a reliable indicator of future results. Prices are indicative and may differ from market prices.",
       "specs": {
-        "title": "Trading specifications",
         "heading": "Trading [specifications]",
         "description": "Contract details for this instrument on GTCFX accounts.",
         "contractSize": "Contract size",
@@ -996,11 +990,6 @@
         "marginRate": "Margin rate",
         "tripleSwap": "Triple swap day",
         "hours": "Trading hours"
-      },
-      "tabs": {
-        "specs": "Specifications",
-        "about": "About",
-        "related": "Related instruments"
       },
       "about": {
         "title": "About {symbol}",

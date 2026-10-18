@@ -11,10 +11,12 @@ import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { useMarket, usePageT, spreadOf, rangePos, changeTone, useSymbolHref, LiveDot } from './shared';
 
-const PAGE = 10;
+/** rows shown before "Show all": 12 cards fill the 4-column grid (3 rows); the watchlist shows 10 */
+const CARDS_PAGE = 12;
+const LIST_PAGE = 10;
 
-/** Live rows + search + "show all" state shared by the three layouts. */
-function useQuoteList() {
+/** Live rows + search + "show all" state shared by both layouts. */
+function useQuoteList(page) {
   const { symbols } = useMarket();
   const rows = useLiveRows(symbols, 1000);
   const [q, setQ] = useState('');
@@ -23,7 +25,7 @@ function useQuoteList() {
     const s = q.trim().toLowerCase();
     return s ? rows.filter((r) => r.s.toLowerCase().includes(s) || r.n.toLowerCase().includes(s)) : rows;
   }, [rows, q]);
-  return { rows, q, setQ, all, setAll, filtered, shown: all || q ? filtered : filtered.slice(0, PAGE) };
+  return { rows, q, setQ, all, setAll, filtered, page, shown: all || q ? filtered : filtered.slice(0, page) };
 }
 
 function SearchBox({ q, setQ, className }) {
@@ -39,7 +41,7 @@ function SearchBox({ q, setQ, className }) {
 
 function MoreButton({ list }) {
   const t = useTranslations('marketsPage.detail.labels');
-  if (list.q || list.filtered.length <= PAGE) return null;
+  if (list.q || list.filtered.length <= list.page) return null;
   return (
     <div className="mt-8 flex justify-center">
       <button type="button" onClick={() => list.setAll((a) => !a)} className="inline-flex items-center gap-2 rounded-full border border-brand/15 bg-white px-6 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white">
@@ -68,7 +70,7 @@ function Intro({ list, center = true }) {
 /** Cards — a grid of live tiles with a sparkline built from incoming ticks; tiles lift on hover. */
 export function QuotesCards() {
   const href = useSymbolHref();
-  const list = useQuoteList();
+  const list = useQuoteList(CARDS_PAGE);
   return (
     <section className="relative bg-white py-14 text-ink md:py-24">
       <div className="container-x">
@@ -110,7 +112,7 @@ export function QuotesCards() {
 export function QuotesWatchlist() {
   const t = useTranslations('marketsPage.detail.labels');
   const href = useSymbolHref();
-  const list = useQuoteList();
+  const list = useQuoteList(LIST_PAGE);
   const [sel, setSel] = useState(0);
   const r = list.shown[sel] ?? list.shown[0] ?? list.rows[0];
   const pos = rangePos(r);

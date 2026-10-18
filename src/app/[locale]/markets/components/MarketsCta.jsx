@@ -31,7 +31,7 @@ function Risk() {
   );
 }
 
-/** B · Split — the screenshot layout: copy on the start side, buttons on the end side, live prices along the bottom. */
+/** Split — the screenshot layout: copy on the start side, buttons on the end side, live prices along the bottom. */
 export function CtaSplit() {
   const t = useTranslations('marketsPage.cta');
   const rows = useLiveRows(MARKETS_LEAD, 1500);

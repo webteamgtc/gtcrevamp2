@@ -253,3 +253,8 @@
 @media (prefers-reduced-motion: reduce) {
   [data-reveal], [data-reveal]:not([data-reveal='in']) { opacity: 1; transform: none; transition: none; }
 }
+
+/* Symbol page hero: decorative candles drifting sideways (strip is drawn twice, so -50% loops seamlessly) */
+@keyframes candle-drift { to { transform: translateX(-50%); } }
+.candle-drift { animation: candle-drift var(--drift, 60s) linear infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .candle-drift { animation: none; } }

@@ -1,9 +1,9 @@
 'use client';
-/** Template B hero (even pages: Energy, Metals, Crypto) */
-import { useMemo, useState } from 'react';
+/** Template B hero (even pages: Energy, Metals, Crypto): centred copy over three live price cards. */
+import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight, Play } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Play } from 'lucide-react';
 import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
@@ -13,7 +13,7 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
 import { useLiveRows, FlashPrice, Sparkline, fmt, pct } from '@/components/shared/ticker';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
-import { useMarket, usePageT, MarketCrumb, LiveDot, spreadOf, rangePos, changeTone, useSymbolHref } from './shared';
+import { useMarket, usePageT, MarketCrumb, changeTone, useSymbolHref } from './shared';
 
 const Stat = ({ value }) => (String(value).includes(',') ? value : <StatValue value={value} />);
 
@@ -62,75 +62,6 @@ const Shell = ({ children, className }) => (
     <div className="container-x relative">{children}</div>
   </section>
 );
-
-/** Live quote card (sell/buy, spread, daily change, day high/low, range) with symbol tabs. */
-export function LiveQuoteCard({ list, className }) {
-  const t = useTranslations('marketsPage.detail.labels');
-  const href = useSymbolHref();
-  const rows = useLiveRows(list, 800);
-  const [i, setI] = useState(0);
-  const r = rows[i] ?? rows[0];
-  const pos = rangePos(r);
-  return (
-    <div className={cn('relative mx-auto w-full max-w-[480px]', className)}>
-      <div className="mb-3 flex flex-wrap gap-2" dir="ltr">
-        {rows.map((x, k) => (
-          <button key={x.s} type="button" onClick={() => setI(k)} aria-pressed={k === i} className={cn('relative rounded-full px-4 py-1.5 text-xs font-bold transition-colors', k === i ? 'text-white' : 'bg-white/10 text-white/75 hover:text-white')}>
-            {k === i && <motion.span layoutId="quote-card-tab" className="absolute inset-0 rounded-full bg-brand ring-1 ring-white/20" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
-            <span className="relative">{x.s}</span>
-          </button>
-        ))}
-      </div>
-      <div className="relative overflow-hidden rounded-[1.75rem] bg-white p-5 text-ink shadow-[0_40px_100px_-30px_rgba(41,59,147,0.75)] md:p-6">
-        <div className="flex items-center justify-between" dir="ltr">
-          <NavLink href={href(r.s)} prefetch={false} className="group inline-flex items-center gap-2 text-2xl font-bold hover:text-brand">
-            {r.s} <ArrowRight className="size-4 opacity-0 transition-opacity group-hover:opacity-100" />
-          </NavLink>
-          <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wide text-up">
-            <LiveDot /> {t('live')}
-          </span>
-        </div>
-        <p className="text-xs text-ink/50">{r.n}</p>
-        <AnimatePresence mode="wait">
-          <motion.div key={r.s} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.3 }}>
-            <div dir="ltr" className="mt-5 grid grid-cols-2 gap-3">
-              <NavLink href={PORTAL.register} className="group rounded-2xl border border-down/20 bg-down/[0.06] p-4 transition-colors hover:bg-down/10">
-                <span className="text-xs font-bold uppercase text-down">{t('sell')}</span>
-                <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} className="mt-1 block text-2xl font-bold text-ink" />
-                <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-down">▸ {t('sellNow')}</span>
-              </NavLink>
-              <NavLink href={PORTAL.register} className="group rounded-2xl border border-up/20 bg-up/[0.06] p-4 transition-colors hover:bg-up/10">
-                <span className="text-xs font-bold uppercase text-up">{t('buy')}</span>
-                <FlashPrice value={r.ask} decimals={r.d} dir={r.dir} tick={r.tick} className="mt-1 block text-2xl font-bold text-ink" />
-                <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-up">{t('buyNow')} ▸</span>
-              </NavLink>
-            </div>
-            <dl dir="ltr" className="mt-3 grid grid-cols-2 gap-3">
-              {[
-                [t('spread'), spreadOf(r), ''],
-                [t('dailyChange'), pct(r.change), changeTone(r.change)],
-                [t('dayHigh'), fmt(r.high, r.d), ''],
-                [t('dayLow'), fmt(r.low, r.d), '']
-              ].map(([l, v, c]) => (
-                <div key={l} className="rounded-xl bg-[#f6f7fb] px-3.5 py-3">
-                  <dt className="text-[11px] font-medium uppercase tracking-wide text-ink/50">{l}</dt>
-                  <dd className={cn('mt-0.5 text-base font-bold tabular-nums', c)}>{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className="mt-4">
-              <p className="text-xs font-medium text-ink/55">{t('range')}</p>
-              <div dir="ltr" className="relative mt-2 h-2 rounded-full bg-gradient-to-r from-down via-[#e5e7f0] to-up">
-                {pos != null && <motion.span className="absolute top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-brand shadow" animate={{ left: `${pos}%` }} transition={{ type: 'spring', stiffness: 120, damping: 20 }} />}
-              </div>
-              {!r.live && <p className="mt-2 text-center text-[11px] text-ink/40">{t('waiting')}</p>}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
 
 /** Spotlight — centred copy, then three large live price cards that rise in, with sparklines; stats underneath. */
 export function HeroSpotlightB() {
