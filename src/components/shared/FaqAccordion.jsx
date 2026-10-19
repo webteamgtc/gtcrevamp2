@@ -5,8 +5,32 @@ import { Plus } from 'lucide-react';
 import { Stagger, StaggerItem, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
+/** Answer body: `a` (string or array of paragraphs), optional bullet `list` and a closing `note`. */
+function Answer({ item }) {
+  const paras = Array.isArray(item.a) ? item.a : item.a ? [item.a] : [];
+  return (
+    <>
+      {paras.map((p, k) => (
+        <p key={k}>{p}</p>
+      ))}
+      {item.list?.length > 0 && (
+        <ul className="space-y-2">
+          {item.list.map((li) => (
+            <li key={li} className="flex gap-3">
+              <span className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
+              <span>{li}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {item.note && <p className="rounded-xl bg-brand-50/70 px-4 py-3 text-sm text-ink/65 ring-1 ring-brand/10">{item.note}</p>}
+    </>
+  );
+}
+
 /**
- * Single-open FAQ list: items = [{ q, a }]. The first item starts open.
+ * Single-open FAQ list: items = [{ q, a, list?, note? }] — `a` may be a string or an array of paragraphs.
+ * The first item starts open.
  * `numbered` shows 01, 02… badges; the open item gets a gold accent bar and a soft lift.
  */
 export default function FaqAccordion({ items, defaultOpen = 0, numbered = false, className }) {
@@ -38,9 +62,9 @@ export default function FaqAccordion({ items, defaultOpen = 0, numbered = false,
               <AnimatePresence initial={false}>
                 {on && (
                   <motion.div id={panel} role="region" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4, ease: EASE }}>
-                    <motion.p initial={{ y: -6 }} animate={{ y: 0 }} transition={{ duration: 0.4, ease: EASE }} className={cn('pb-6 pe-5 text-[15px] leading-relaxed text-ink/60 md:pe-7', numbered ? 'ps-[4.75rem] md:ps-[5.25rem]' : 'ps-5 md:ps-7')}>
-                      {it.a}
-                    </motion.p>
+                    <motion.div initial={{ y: -6 }} animate={{ y: 0 }} transition={{ duration: 0.4, ease: EASE }} className={cn('space-y-3 pb-6 pe-5 text-[15px] leading-relaxed text-ink/60 md:pe-7', numbered ? 'ps-[4.75rem] md:ps-[5.25rem]' : 'ps-5 md:ps-7')}>
+                      <Answer item={it} />
+                    </motion.div>
                   </motion.div>
                 )}
               </AnimatePresence>

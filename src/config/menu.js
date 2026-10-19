@@ -105,7 +105,7 @@ export const MENU = [
           { id: 'copyTrading', href: '/copy-trading', icon: Users }
         ] },
         { id: 'advantages', items: [
-          { id: 'pamm', href: '/pamm', icon: ChartPie },
+          { id: 'pamm', href: '/trading/pamm-account', icon: ChartPie },
           { id: 'vps', href: '/vps', icon: Server }
         ] }
       ]
