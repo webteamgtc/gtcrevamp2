@@ -18,6 +18,9 @@ const LOCALE_MAP = { 'zh-TW': 'zh-Hant-TW', zh: 'zh-Hans' };
 
 export const strapiConfigured = () => Boolean(BASE);
 
+/** next-intl locale → Strapi locale code. */
+export const strapiLocale = (locale) => LOCALE_MAP[locale] ?? locale;
+
 /** Encode a nested object as Strapi query string: { filters: { endDate: { $gte: '2026-01-01' } } } → filters[endDate][$gte]=… */
 export function toQuery(obj, prefix = '') {
   const parts = [];
@@ -34,7 +37,7 @@ export function toQuery(obj, prefix = '') {
 /** GET /api/{path}?{query} — returns the parsed JSON body or null. */
 export async function strapiGet(path, { query, locale, tags } = {}) {
   if (!BASE) return null;
-  const q = toQuery({ ...query, ...(locale ? { locale: LOCALE_MAP[locale] ?? locale } : {}) });
+  const q = toQuery({ ...query, ...(locale ? { locale: strapiLocale(locale) } : {}) });
   try {
     const res = await fetch(`${BASE}/api/${path}${q ? `?${q}` : ''}`, {
       headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {},
