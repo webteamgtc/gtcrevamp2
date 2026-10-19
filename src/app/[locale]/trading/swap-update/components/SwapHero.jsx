@@ -130,7 +130,7 @@ function InstrumentRow({ it, live, max, labels, delay }) {
             <FlashPrice value={live.bid} decimals={live.d} dir={live.dir} tick={live.tick} className="block text-sm font-bold tabular-nums" />
             <span className={cn('text-[10px] font-semibold', up ? 'text-up' : 'text-down')}>
               {up ? '+' : ''}
-              {live.change.toFixed(2)}%
+              {live?.change?.toFixed(2)}%
             </span>
           </span>
         )}
