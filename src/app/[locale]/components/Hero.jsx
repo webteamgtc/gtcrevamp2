@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTicker, FlashPrice, Sparkline, UpDown, fmt, pct } from '@/components/shared/ticker';
+import { useLiveRows, TICKER_GROUPS, TAB_GROUPS, FlashPrice, Sparkline, UpDown, fmt, pct } from '@/components/shared/ticker';
+import { useSymbolGroups } from '@/lib/hooks/useSymbolGroups';
+import { useKlineCandles } from '@/lib/hooks/useKlineCandles';
 import { CandleChart } from '@/components/shared/devices';
 import { Reveal, WordReveal, Magnetic, Marquee, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
@@ -118,33 +120,64 @@ export function Hero() {
   );
 }
 
+// API category name → index in the translated `hero.tabs` array (same order as the symbols API).
+const TYPE_LABEL_INDEX = { metals: 0, energy: 1, 'fx minors': 2, stock: 3, future: 4 };
+const EMPTY_ROW = { s: '', label: '—', n: '', d: 2, bid: null, ask: null, dir: 1, change: null, hist: [], tick: 0 };
+
+/** Tabs + symbols from the symbols API; falls back to the static TICKER_GROUPS if the API is unavailable. */
+function useTerminalGroups(tabLabels) {
+  const { groups, loading } = useSymbolGroups(4);
+  return useMemo(() => {
+    if (groups.length) {
+      return {
+        loading: false,
+        groups: groups.map((g) => ({ ...g, label: tabLabels[TYPE_LABEL_INDEX[g.type.toLowerCase()]] ?? g.type }))
+      };
+    }
+    if (loading) return { loading: true, groups: [] };
+    return {
+      loading: false,
+      groups: TICKER_GROUPS.slice(0, TAB_GROUPS).map((items, i) => ({ key: `static-${i}`, type: tabLabels[i], label: tabLabels[i] ?? items[0].n, items }))
+    };
+  }, [groups, loading, tabLabels]);
+}
+
+const NO_ITEMS = [];
+
 function Terminal() {
   const t = useTranslations('hero');
-  const tabs = t.raw('tabs');
+  const tabLabels = t.raw('tabs');
+  const { groups, loading } = useTerminalGroups(tabLabels);
   const [tab, setTab] = useState(0);
-  const rows = useTicker(tab);
   const [sel, setSel] = useState(0);
-  const r = rows[sel] ?? rows[0];
+  const group = groups[tab] ?? groups[0];
+  const rows = useLiveRows(group?.items ?? NO_ITEMS);
+  const r = rows[sel] ?? rows[0] ?? EMPTY_ROW;
+  const { candles, loading: chartLoading } = useKlineCandles(r.s, { date: 60, count: 48, livePrice: r.bid });
   return (
     <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-b from-[#12152a] to-[#0b0d18] p-2 text-start shadow-[0_40px_120px_-20px_rgba(41,59,147,0.6)]">
       <div className="flex items-center gap-2 border-b border-white/5 px-4 py-3">
         <span className="size-3 rounded-full bg-[#ff5f57]" />
         <span className="size-3 rounded-full bg-[#febc2e]" />
         <span className="size-3 rounded-full bg-[#28c840]" />
-        <div className="no-scrollbar ms-4 flex gap-1 overflow-x-auto">
-          {tabs.map((l, i) => (
-            <button
-              key={l}
-              onClick={() => {
-                setTab(i);
-                setSel(0);
-              }}
-              className={cn('relative whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium', tab === i ? 'text-ink' : 'text-white/50 hover:text-white')}
-            >
-              {tab === i && <motion.span layoutId="d2-tab" className="absolute inset-0 rounded-lg bg-gold" transition={{ type: 'spring', stiffness: 400, damping: 32 }} />}
-              <span className="relative">{l}</span>
-            </button>
-          ))}
+        <div className="no-scrollbar ms-4 flex gap-1 overflow-x-auto" role="tablist">
+          {loading
+            ? [64, 56, 72, 52].map((w, i) => <span key={i} className="h-7 shrink-0 animate-pulse rounded-lg bg-white/10" style={{ width: w }} />)
+            : groups.map((g, i) => (
+                <button
+                  key={g.key}
+                  role="tab"
+                  aria-selected={tab === i}
+                  onClick={() => {
+                    setTab(i);
+                    setSel(0);
+                  }}
+                  className={cn('relative whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium', tab === i ? 'text-ink' : 'text-white/50 hover:text-white')}
+                >
+                  {tab === i && <motion.span layoutId="d2-tab" className="absolute inset-0 rounded-lg bg-gold" transition={{ type: 'spring', stiffness: 400, damping: 32 }} />}
+                  <span className="relative">{g.label}</span>
+                </button>
+              ))}
         </div>
         <span className="ms-auto hidden items-center gap-2 text-xs text-white/50 sm:flex">
           <span className="size-2 animate-pulse rounded-full bg-up" /> {t('liveLabel')}
@@ -154,9 +187,9 @@ function Terminal() {
         <div className="rounded-2xl bg-white/[0.03] p-5">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <div className="text-sm text-white/50">{r.n}</div>
+              <div className="min-h-5 text-sm text-white/50">{r.n}</div>
               <div className="mt-1 flex items-center gap-2 text-2xl font-bold md:text-3xl">
-                {r.s} <UpDown dir={r.dir} className="mt-1" />
+                {r.label ?? r.s} <UpDown dir={r.dir} className="mt-1" />
               </div>
             </div>
             <div className="flex gap-6 text-sm">
@@ -172,9 +205,21 @@ function Terminal() {
           </div>
           <div className="mt-4 h-56 md:h-72">
             <AnimatePresence mode="wait">
-              <motion.div key={`${tab}-${sel}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-full">
-                <CandleChart n={48} seed={tab * 10 + sel + 3} dark className="h-full" />
-              </motion.div>
+              {candles.length ? (
+                <motion.div key={r.s} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-full">
+                  <CandleChart data={candles} dark trigger="mount" className="h-full" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="chart-empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className={cn('grid h-full place-items-center rounded-xl bg-white/[0.02] text-xs text-white/30', (loading || chartLoading) && 'animate-pulse')}
+                >
+                  {!loading && !chartLoading && '—'}
+                </motion.div>
+              )}
             </AnimatePresence>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2">
@@ -183,6 +228,8 @@ function Terminal() {
           </div>
         </div>
         <div className="space-y-2">
+          {loading &&
+            Array.from({ length: 4 }, (_, i) => <div key={i} className="h-[74px] animate-pulse rounded-2xl border border-white/5 bg-white/[0.03]" />)}
           {rows.map((x, i) => (
             <motion.button
               key={x.s}
@@ -192,9 +239,9 @@ function Terminal() {
               transition={{ delay: 1.2 + i * 0.08 }}
               className={cn('flex w-full items-center justify-between rounded-2xl border p-4 text-start transition-all', sel === i ? 'border-gold/50 bg-gold/10' : 'border-white/5 bg-white/[0.03] hover:bg-white/[0.06]')}
             >
-              <div>
-                <div className="font-semibold">{x.s}</div>
-                <div className="text-xs text-white/40">{x.n}</div>
+              <div className="min-w-0">
+                <div className="font-semibold">{x.label ?? x.s}</div>
+                <div className="max-w-[9rem] truncate text-xs text-white/40" title={x.n}>{x.n}</div>
               </div>
               <Sparkline data={x.hist} up={x.dir > 0} width={70} height={26} />
               <div className="text-end">
@@ -210,16 +257,38 @@ function Terminal() {
   );
 }
 
+const STATIC_TAPE = [...TICKER_GROUPS[0], ...TICKER_GROUPS[2], ...TICKER_GROUPS[4]];
+
+/** Symbols of every API category (first `perType` each, de-duplicated); static list if the API is unavailable. */
+function useTapeItems(perType = 6) {
+  const { groups, loading } = useSymbolGroups(perType);
+  return useMemo(() => {
+    if (!groups.length) return { loading, items: loading ? NO_ITEMS : STATIC_TAPE };
+    const seen = new Set();
+    const items = groups.flatMap((g) => g.items).filter((x) => !seen.has(x.s) && seen.add(x.s));
+    return { loading: false, items };
+  }, [groups, loading]);
+}
+
 function TapeMarquee() {
-  const rows = useTicker(0, 2000);
-  const rows2 = useTicker(2, 2200);
-  const rows3 = useTicker(4, 2400);
-  const all = [...rows, ...rows2, ...rows3];
+  const { loading, items } = useTapeItems(6);
+  const all = useLiveRows(items, 2000);
+
+  if (loading) {
+    return (
+      <div className="mask-fade-x flex justify-center gap-12 overflow-hidden" aria-hidden>
+        {Array.from({ length: 8 }, (_, i) => (
+          <span key={i} className="h-5 w-40 shrink-0 animate-pulse rounded bg-white/10" />
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <Marquee duration={45} gap="3rem" className="mask-fade-x">
+    <Marquee duration={Math.max(45, all.length * 3)} gap="3rem" className="mask-fade-x">
       {all.map((r) => (
-        <span key={r.s} className="flex items-center gap-3 text-sm">
-          <span className="font-semibold text-white/80">{r.s}</span>
+        <span key={r.s} className="flex items-center gap-3 whitespace-nowrap text-sm">
+          <span className="font-semibold text-white/80">{r.label ?? r.s}</span>
           <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} className="text-white" />
           <span className={cn('flex items-center text-xs', r.dir > 0 ? 'text-up' : 'text-down')}>
             <UpDown dir={r.dir} /> {pct(r.change, true)}

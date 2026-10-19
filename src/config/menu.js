@@ -92,8 +92,8 @@ export const MENU = [
           { id: 'mtIos', href: '/trading/metatrader-for-ipad', icon: Tablet }
         ] },
         { id: 'products', items: [
-          { id: 'dynamicLeverage', href: '/dynamic-leverage', icon: Gauge },
-          { id: 'swapUpdate', href: '/swap-update', icon: RefreshCw }
+          { id: 'dynamicLeverage', href: '/company/dynamic-leverage', icon: Gauge },
+          { id: 'swapUpdate', href: '/trading/swap-update', icon: RefreshCw }
         ] }
       ],
       [

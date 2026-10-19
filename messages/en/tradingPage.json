@@ -1951,5 +1951,90 @@
       "text": "Trade smarter with GTCGO on your iPhone and iPad. Experience fast execution, real-time market access, and a secure mobile trading environment designed to keep you in control wherever your journey takes you.",
       "cta": "GTC Go iPhone/iPad"
     }
+  },
+  "swapUpdatePage": {
+    "meta": {
+      "title": "Swap Rates & Trading Costs | GTCFX",
+      "description": "Daily overnight swap rates for Forex, Metals, Crypto and Indices at GTCFX — transparent spreads, zero hidden fees and zero requotes."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Swap Update"
+    },
+    "hero": {
+      "badge": "Cost Transparency Commitment",
+      "title": "Every cost, [crystal clear] to you.",
+      "text": "GTCFX promises: transparent spreads, daily-updated overnight interest, zero hidden fees, and zero requotes — because real trading confidence starts with real numbers.",
+      "points": [
+        "Real-time spread display, no hidden markup",
+        "Overnight interest updated daily, tracked to market rates",
+        "No requotes — what you see is what you get"
+      ],
+      "live": "Open Live Account",
+      "demo": "Open Free Demo Account",
+      "dashboard": {
+        "title": "Live Cost Dashboard",
+        "live": "LIVE",
+        "avgLabel": "Today's Avg Spread",
+        "avgValue": "0.8",
+        "avgUnit": "pips",
+        "benchmark": "EURUSD benchmark",
+        "vsIndustry": "33% vs industry avg",
+        "longSwap": "Long swap/lot",
+        "shortSwap": "Short swap/lot",
+        "updated": "Last updated",
+        "instruments": [
+          {
+            "symbol": "EURUSD",
+            "name": "FX Major",
+            "spread": "0.8",
+            "unit": "pips spread",
+            "long": "+$1.20",
+            "short": "-$2.80"
+          },
+          {
+            "symbol": "XAUUSD",
+            "name": "Gold Spot",
+            "spread": "18",
+            "unit": "pts spread",
+            "long": "+$5.20",
+            "short": "-$8.10"
+          }
+        ],
+        "chips": [
+          "No requotes",
+          "Zero hidden fees"
+        ]
+      }
+    },
+    "table": {
+      "eyebrow": "Swap Table",
+      "title": "Daily Swap Rates Across [All Markets]",
+      "description": "Overnight swap rates for Forex, Metal, Crypto, and Indices. Searchable by symbol.",
+      "tabs": {
+        "Forex": "Forex",
+        "Metal": "Metal",
+        "Crypto": "Crypto",
+        "Indices": "Indices"
+      },
+      "search": "Search symbol...",
+      "updated": "Last updated: Today 00:00 GMT",
+      "columns": {
+        "symbol": "Symbol",
+        "type": "Swap Type",
+        "long": "Swap Long",
+        "short": "Swap Short"
+      },
+      "empty": "No symbols match your search."
+    },
+    "cta": {
+      "title": "Ready to start [trading?]",
+      "description": "Open a live account in minutes — or practice with a free demo. Transparent costs, no hidden fees.",
+      "live": "Open Live Account",
+      "demo": "Free Demo Account",
+      "riskTitle": "Risk Warning:",
+      "risk": "Trading CFDs involves significant risk of loss. Please ensure you fully understand the risks before trading."
+    }
   }
 }

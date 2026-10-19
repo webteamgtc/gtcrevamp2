@@ -1408,5 +1408,338 @@
       "live": "Open Live Account",
       "demo": "Open Free Demo Account"
     }
+  },
+  "dynamicLeveragePage": {
+    "meta": {
+      "title": "Dynamic Leverage & Margin Conditions | GTCFX",
+      "description": "Every instrument, every margin requirement, every leverage tier at GTCFX — dynamic leverage schedules, fixed leverage periods, HMR and FAQs."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "company": "Company",
+      "current": "Dynamic Leverage"
+    },
+    "hero": {
+      "badge": "Transparent Trading Conditions",
+      "title": "Leverage & [Margin Conditions.]",
+      "text": "Every instrument, every margin requirement, every leverage tier — laid out so you can size your positions with precision instead of guesswork.",
+      "links": [
+        {
+          "label": "Forex",
+          "tab": "forex"
+        },
+        {
+          "label": "Indices",
+          "tab": "futureIndex"
+        },
+        {
+          "label": "Metals",
+          "tab": "metals"
+        },
+        {
+          "label": "Calculator",
+          "href": "/company#leverage"
+        },
+        {
+          "label": "Stocks",
+          "tab": "cashIndex"
+        }
+      ],
+      "sheet": {
+        "title": "Live · Margin Sheet",
+        "status": "Streaming",
+        "rows": [
+          {
+            "symbol": "EURUSD",
+            "terms": "1:2000 · 0.05%"
+          },
+          {
+            "symbol": "USDJPY",
+            "terms": "1:2000 · 0.05%"
+          },
+          {
+            "symbol": "XAUUSD",
+            "terms": "1:2000 · 0.05%"
+          },
+          {
+            "symbol": "US500",
+            "terms": "1:125 · 0.800%"
+          },
+          {
+            "symbol": "US30",
+            "terms": "1:125 · 0.800%"
+          }
+        ],
+        "maxLabel": "Max Leverage",
+        "maxValue": "1:2000"
+      }
+    },
+    "glance": {
+      "eyebrow": "At a glance",
+      "count": "4 key figures",
+      "items": [
+        {
+          "tag": "01 · Max Leverage",
+          "value": "1:2000",
+          "text": "Available under specific regulations* entities for eligible account types.",
+          "fill": 60
+        },
+        {
+          "tag": "02 · Trading Markets",
+          "value": "7+",
+          "text": "Forex, Metals, Indices, Shares, Crypto & more.",
+          "fill": 70
+        },
+        {
+          "tag": "03 · Licences",
+          "value": "5",
+          "text": "FSCA · VFSC · FCA · ASIC · FSC — five regulated entities worldwide.",
+          "fill": 80
+        },
+        {
+          "tag": "04 · Margin Alerts",
+          "value": "24 / 7",
+          "text": "Real-time push notifications when free margin falls below your alert threshold.",
+          "fill": 90
+        }
+      ]
+    },
+    "schedule": {
+      "eyebrow": "Section 02 — Instrument Schedule",
+      "title": "Dynamic Leverage [Details]",
+      "description": "Dynamic leverage at GTCFX automatically adjusts based on your trading positions. This model is applied per instrument, meaning your leverage decreases as your trading volume increases. This approach enables you to optimize your trading potential.",
+      "search": "Search by symbol or name",
+      "showing": "Showing {shown} of {total} tiers · {category}",
+      "empty": "No instruments match your search.",
+      "defaultTab": "futureIndex",
+      "tabs": {
+        "forex": "Forex",
+        "metals": "Metals",
+        "energies": "Energies",
+        "cashIndex": "Cash Index",
+        "futureIndex": "Future Index"
+      },
+      "loading": "Loading leverage schedule…",
+      "error": "The leverage schedule could not be loaded. Please refresh the page or try again later."
+    },
+    "basics": {
+      "eyebrow": "The basics",
+      "title": "What Is Leverage [Really?]",
+      "description": "Three short concepts. No jargon. Once you grasp these, you understand the foundation of every leveraged trade you'll ever place.",
+      "items": [
+        {
+          "tag": "i. Definition",
+          "title": "Leverage, defined",
+          "text": "A multiplier that lets you control a position larger than the cash in your account, using your broker's borrowed capital as the rest.",
+          "example": "With $1,000 at 1:100 leverage, you control a $100,000 position."
+        },
+        {
+          "tag": "ii. Margin",
+          "title": "Margin, explained",
+          "text": "The portion of your own funds locked as collateral to open and maintain a position. Higher leverage means a smaller margin requirement.",
+          "example": "At 1 : 100, a $100,000 trade requires only 1% margin — just $1,000."
+        },
+        {
+          "tag": "iii. Risk",
+          "title": "The double-edged sword",
+          "text": "Leverage scales gains and losses equally. A 1% adverse move on a 1:100 position can erase your entire margin. Trade with care.",
+          "example": "Risk warning: leveraged trading may result in losses. Use stop-loss orders."
+        }
+      ]
+    },
+    "fixed": {
+      "title": "Fixed Leverage [Schedule]",
+      "description": "The following fixed leverage rules apply to all trades during specified market conditions:",
+      "weekend": {
+        "title": "Weekend Transition Periods",
+        "before": {
+          "title": "Before Friday Market Close (3 hours)",
+          "rows": [
+            {
+              "time": "02:00",
+              "zone": "China (GMT+8)",
+              "tz": "china"
+            },
+            {
+              "time": "21:00",
+              "zone": "Server (GMT+3)",
+              "tz": "server"
+            },
+            {
+              "time": "22:00",
+              "zone": "UAE (GMT+4)",
+              "tz": "uae"
+            }
+          ]
+        },
+        "after": {
+          "title": "After Monday Market Open (1 hour)",
+          "rows": [
+            {
+              "time": "06:00",
+              "zone": "China (GMT+8)",
+              "tz": "china"
+            },
+            {
+              "time": "07:00",
+              "zone": "XAUUSD cutoff (China (GMT+8))",
+              "tz": "china",
+              "cutoff": true
+            },
+            {
+              "time": "01:00",
+              "zone": "Server (GMT+3)",
+              "tz": "server"
+            },
+            {
+              "time": "02:00",
+              "zone": "XAUUSD cutoff (Server (GMT+3))",
+              "tz": "server",
+              "cutoff": true
+            },
+            {
+              "time": "02:00",
+              "zone": "UAE (GMT+4)",
+              "tz": "uae"
+            },
+            {
+              "time": "03:00",
+              "zone": "XAUUSD cutoff (UAE (GMT+4))",
+              "tz": "uae",
+              "cutoff": true
+            }
+          ]
+        }
+      },
+      "legend": {
+        "china": "China (GMT+8)",
+        "server": "Server (GMT+3)",
+        "uae": "UAE (GMT+4)"
+      },
+      "news": {
+        "title": "Economic News Events",
+        "points": [
+          "15 minutes before high-impact news releases",
+          "15 minutes after news releases",
+          "During periods of expected extreme volatility"
+        ]
+      },
+      "notes": {
+        "title": "Important Notes",
+        "points": [
+          "Margin calculations remain fixed after the period ends",
+          "Existing positions are not affected",
+          "Applies to all instruments and account types"
+        ]
+      },
+      "rollover": {
+        "title": "Daily Night Rollover Period",
+        "label": "Every trading day:",
+        "time": "23:30 – 00:15 (Server Time)",
+        "sub": "From Monday night to Friday night",
+        "lines": [
+          "During this short time window, leverage is automatically reduced.",
+          "Lower leverage means more margin is required to hold the same trade size."
+        ]
+      },
+      "hmr": {
+        "title": "HMR:",
+        "points": [
+          "does not modify trade entry price",
+          "does not widen spreads by itself",
+          "does not manually close trades",
+          "does not affect positions opened before the HMR period"
+        ],
+        "lines": [
+          "However, because margin requirements temporarily increase, your margin level (%) may fall.",
+          "If your margin level reaches the stop-out level, the platform will automatically close positions according to normal platform risk rules."
+        ],
+        "strong": "After the HMR period ends, margin requirements automatically return to normal."
+      },
+      "notice": {
+        "title": "High Margin Requirement (HMR) Notice",
+        "text": "During specific market risk periods (daily rollover and major economic announcements), the platform temporarily increases the margin required to open new trades."
+      }
+    },
+    "faq": {
+      "title": "FAQ's On Tiered [Margin/Leverage]",
+      "items": [
+        {
+          "q": "How does tiered leverage work?",
+          "a": "Tiered leverage reduces the leverage ratio as the size of the trade increases. For example, a small position might have a leverage of 1:2000, but as the position size grows, the leverage might drop to 1:200, 1:100, or even lower, requiring more margin to maintain the trade."
+        },
+        {
+          "q": "Can tiered leverage affect my trading strategy?",
+          "a": "Yes. Larger positions move into higher tiers with lower leverage, so they need more margin. Plan your position sizes with the tier tables above so your strategy stays within the margin you have available."
+        },
+        {
+          "q": "Is tiered leverage the same for all assets?",
+          "a": "No. Each instrument has its own tier schedule, lot ranges and margin percentages, as shown in the Dynamic Leverage Details tables for each asset class."
+        },
+        {
+          "q": "What happens if I can't meet the margin requirements due to tiered leverage?",
+          "a": "If your free margin is not enough, you may not be able to open the new position. If your margin level falls to the stop-out level, positions may be closed automatically according to normal platform risk rules."
+        },
+        {
+          "q": "Is tiered leverage applied automatically?",
+          "a": "Yes. Leverage is adjusted automatically per instrument based on your total position size — you do not need to change any settings."
+        },
+        {
+          "q": "How can I calculate the margin required with tiered leverage?",
+          "a": "Margin = Position Value ÷ Leverage. Find the tier your position falls into in the tables above and apply that tier’s margin percentage to the position value."
+        },
+        {
+          "q": "What is High Margin Requirement (HMR)?",
+          "a": "During specific market risk periods (daily rollover and major economic announcements), the platform temporarily increases the margin required to open new trades."
+        },
+        {
+          "q": "Why does my margin level drop even if price did not move?",
+          "a": "Because margin requirements temporarily increase during HMR periods, your margin level (%) may fall even when the price has not moved."
+        },
+        {
+          "q": "Will my trade be closed because of HMR?",
+          "a": "HMR does not manually close trades. However, if your margin level reaches the stop-out level, the platform will automatically close positions according to normal platform risk rules."
+        },
+        {
+          "q": "Are existing trades affected?",
+          "a": "HMR does not affect positions opened before the HMR period. Existing positions are not affected."
+        },
+        {
+          "q": "Does HMR widen spreads?",
+          "a": "No. HMR does not widen spreads by itself and does not modify trade entry prices."
+        },
+        {
+          "q": "Does HMR apply to all instruments?",
+          "a": "Yes. The fixed leverage rules apply to all instruments and account types during the specified market conditions."
+        },
+        {
+          "q": "Why is Gold affected the most?",
+          "a": "Gold (XAUUSD) is highly sensitive to market opens and major news, so it has its own extended cutoff after the Monday market open, as shown in the Weekend Transition Periods schedule."
+        },
+        {
+          "q": "How long does HMR last?",
+          "a": "Only for the specified periods: the daily rollover window (23:30 – 00:15 server time), the weekend transition periods, and 15 minutes before and after high-impact news releases. After the period ends, margin requirements automatically return to normal."
+        },
+        {
+          "q": "Can I avoid HMR?",
+          "a": "You can plan around it by avoiding opening new positions during the rollover window, weekend transition periods and high-impact news releases, and by keeping enough free margin in your account."
+        },
+        {
+          "q": "Is this common in the industry?",
+          "a": "Yes. Raising margin requirements during rollover, market opens and major news is a widely used risk-management practice among brokers."
+        },
+        {
+          "q": "Why wasn’t I notified individually?",
+          "a": "HMR periods follow a fixed, published schedule that applies to all clients, which is why it is set out on this page. You can also set margin alerts to receive push notifications when your free margin falls below your threshold."
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Start trading",
+      "title": "Trade on the [best] conditions in the room.",
+      "description": "Open a live account in three minutes, or test every leverage tier risk-free in a demo with USD 100,000 of virtual funds.",
+      "live": "Open Live Account",
+      "demo": "Try Demo Account"
+    }
   }
 }

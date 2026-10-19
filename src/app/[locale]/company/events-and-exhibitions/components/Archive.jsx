@@ -15,7 +15,7 @@ function Gallery({ event, t }) {
   const go = (d) => setI((x) => (x + d + photos.length) % photos.length);
   const current = photos[i] ? { ...event, cover: photos[i] } : event;
   return (
-    <div>
+    <div className="min-w-0">
       <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-brand-950 shadow-xl shadow-brand/15">
         <AnimatePresence mode="wait">
           <motion.div key={i} className="absolute inset-0" initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, ease: EASE }}>
@@ -143,7 +143,7 @@ export function Archive({ archive }) {
                           <motion.div key="body" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.5, ease: EASE }} className="overflow-hidden">
                             <div className="grid gap-8 border-t border-brand/10 p-4 md:p-6 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
                               <Gallery event={e} t={t} />
-                              <div>
+                              <div className="min-w-0">
                                 <h3 className="heading-title">{e.title}</h3>
                                 <p className="mt-2 flex items-start gap-2 text-sm text-ink/55 lg:hidden">
                                   <MapPin className="mt-0.5 size-4 shrink-0 text-gold-700" />

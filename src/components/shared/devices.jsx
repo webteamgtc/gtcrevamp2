@@ -26,8 +26,9 @@ export function makeCandles(n = 32, seed = 7, start = 100) {
 }
 
 /** Animated candlestick chart — candles grow in one after another */
-export function CandleChart({ n = 32, seed = 7, className, dark = false, animateIn = true, showLine = true, trigger = 'view' }) {
-  const candles = useMemo(() => makeCandles(n, seed), [n, seed]);
+/** `data` ([{ o, h, l, c }]) draws real candles; without it a seeded demo series is drawn. */
+export function CandleChart({ n = 32, seed = 7, data, className, dark = false, animateIn = true, showLine = true, trigger = 'view' }) {
+  const candles = useMemo(() => (data?.length ? data : makeCandles(n, seed)), [data, n, seed]);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.1 });
   const show = !animateIn || trigger === 'mount' || inView;
@@ -35,8 +36,8 @@ export function CandleChart({ n = 32, seed = 7, className, dark = false, animate
   const H = 160;
   const min = Math.min(...candles.map((c) => c.l));
   const max = Math.max(...candles.map((c) => c.h));
-  const y = (v) => H - ((v - min) / (max - min)) * (H - 10) - 5;
-  const cw = W / n;
+  const y = (v) => H - ((v - min) / (max - min || 1)) * (H - 10) - 5;
+  const cw = W / candles.length;
   const line = candles.map((c, i) => `${i ? 'L' : 'M'}${(i * cw + cw / 2).toFixed(1)},${y(c.c).toFixed(1)}`).join(' ');
 
   return (

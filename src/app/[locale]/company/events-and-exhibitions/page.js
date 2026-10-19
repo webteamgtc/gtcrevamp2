@@ -12,8 +12,8 @@ export async function generateMetadata({ params }) {
 }
 
 /**
- * Events come from Strapi (collection `events`, see docs/strapi-events.md) and are cached for
- * STRAPI_REVALIDATE seconds; without STRAPI_URL the page renders the sample events in src/data.
+ * Events come from Strapi (`future-events` → hero, `comments` → archive; see src/lib/events.js) and are
+ * cached for STRAPI_REVALIDATE seconds; without STRAPI_URL the page renders the sample events in src/data.
  */
 export default async function Page({ params }) {
   const { locale } = await params;
