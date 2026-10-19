@@ -6,34 +6,58 @@ import { ArrowDown, ArrowRight, ArrowUp, ExternalLink } from 'lucide-react';
 import { MARKETS } from '@/config/markets';
 import NavLink from '@/components/shared/nav/NavLink';
 import { SectionIntro } from '@/components/shared/SectionIntro';
-import { useLiveRows, fmt } from '@/components/shared/ticker';
+import { buildInstrumentWidget, useMarketsInstrumentsData } from '@/lib/hooks/useMarketsInstrumentsData';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
-/** Spread in pips for FX (5/3-decimal quotes), otherwise in price points. */
-function spreadLabel(r) {
-  if (r.bid == null || r.ask == null) return '—';
-  const diff = r.ask - r.bid;
-  if (r.d === 5 || r.d === 3) return (diff * 10 ** (r.d - 1)).toFixed(1);
-  return diff.toFixed(r.d);
+/** Placeholder while the market's symbols load. */
+function QuoteSkeleton() {
+  return (
+    <div className="mt-6 space-y-3 rounded-2xl border border-brand/10 bg-[#f8f9fd] p-4" aria-hidden>
+      <div className="h-5 w-28 animate-pulse rounded bg-brand-100/60" />
+      <div className="grid grid-cols-2 gap-2">
+        <div className="h-16 animate-pulse rounded-xl bg-brand-100/60" />
+        <div className="h-16 animate-pulse rounded-xl bg-brand-100/60" />
+      </div>
+      <div className="h-2 animate-pulse rounded-full bg-brand-100/60" />
+    </div>
+  );
 }
 
-/** Live quote panel for the open market: sell / spread / buy, today's low–high and where the price sits in that range. */
-function QuotePanel({ market, symbol }) {
+/**
+ * Live quote panel for the open market: the first 3 API symbols of the market as tabs, then
+ * sell / spread / buy, today's low–high and where the price sits in that range.
+ * Only real API symbols + live quotes are shown — no demo values.
+ */
+function QuotePanel({ market, apiRows, liveQuotes }) {
   const t = useTranslations('marketsPage.instruments');
-  const rows = useLiveRows(market.symbols, 900);
-  const r = rows[symbol] ?? rows[0];
-  const range = r.low != null && r.high != null && r.high > r.low && r.bid != null ? Math.min(100, Math.max(0, ((r.bid - r.low) / (r.high - r.low)) * 100)) : null;
+  const [sel, setSel] = useState(0);
+  const rows = apiRows.slice(0, 3);
+  const w = buildInstrumentWidget(rows[Math.min(sel, rows.length - 1)], liveQuotes);
   const name = t(`items.${market.id}.name`);
 
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.35, ease: EASE }} className="mt-6 rounded-2xl border border-brand/10 bg-[#f8f9fd] p-4">
+      {rows.length > 1 && (
+        <div dir="ltr" role="tablist" className="mb-4 flex flex-wrap gap-1.5">
+          {rows.map((r, k) => {
+            const on = k === Math.min(sel, rows.length - 1);
+            return (
+              <button key={r.rawSymbol || k} type="button" role="tab" aria-selected={on} onClick={(e) => { e.stopPropagation(); setSel(k); }} className={cn('relative rounded-full px-3 py-1 text-xs font-semibold transition-colors', on ? 'text-white' : 'bg-white text-brand ring-1 ring-brand/10 hover:ring-brand/30')}>
+                {on && <motion.span layoutId={`inst-sym-${market.id}`} className="absolute inset-0 rounded-full bg-brand" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
+                <span className="relative">{r.symbol}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
           <p className="truncate text-base font-bold text-ink" dir="ltr">
-            {r.s}
+            {w.symbol}
           </p>
-          <p className="text-xs text-ink/50">{r.n}</p>
+          <p className="truncate text-xs text-ink/50">{w.name}</p>
         </div>
         <NavLink href={market.href} aria-label={t('open', { market: name })} className="grid size-9 shrink-0 place-items-center rounded-xl text-brand ring-1 ring-brand/15 transition-colors hover:bg-brand hover:text-white">
           <ExternalLink className="size-4" />
@@ -44,7 +68,7 @@ function QuotePanel({ market, symbol }) {
         <div className="rounded-xl bg-down px-3 py-2.5 text-white">
           <span className="text-[11px] font-bold uppercase tracking-wide opacity-85">{t('sell')}</span>
           <div className="mt-1 flex items-center justify-between gap-2">
-            <span className="truncate text-base font-bold tabular-nums 2xl:text-lg">{fmt(r.bid, r.d)}</span>
+            <span className="truncate text-base font-bold tabular-nums 2xl:text-lg">{w.sellPrice}</span>
             <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-white/90 text-down">
               <ArrowDown className="size-3.5" strokeWidth={2.5} />
             </span>
@@ -56,7 +80,7 @@ function QuotePanel({ market, symbol }) {
             <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-white/90 text-up">
               <ArrowUp className="size-3.5" strokeWidth={2.5} />
             </span>
-            <span className="truncate text-base font-bold tabular-nums 2xl:text-lg">{fmt(r.ask, r.d)}</span>
+            <span className="truncate text-base font-bold tabular-nums 2xl:text-lg">{w.buyPrice}</span>
           </div>
         </div>
       </div>
@@ -64,31 +88,33 @@ function QuotePanel({ market, symbol }) {
       <div className="mt-4">
         <div className="flex items-center justify-between gap-2 text-[11px] text-ink/50">
           <span>
-            {t('low')} <b dir="ltr" className="font-semibold text-ink/70">{fmt(r.low, r.d)}</b>
+            {t('low')} <b dir="ltr" className="font-semibold text-ink/70">{w.low}</b>
           </span>
           <span className="rounded-full bg-white px-2 py-0.5 font-semibold text-brand ring-1 ring-brand/10">
-            {t('spread')} <span dir="ltr">{spreadLabel(r)}</span>
+            {t('spread')} <span dir="ltr">{w.spread}</span>
           </span>
           <span>
-            {t('high')} <b dir="ltr" className="font-semibold text-ink/70">{fmt(r.high, r.d)}</b>
+            {t('high')} <b dir="ltr" className="font-semibold text-ink/70">{w.high}</b>
           </span>
         </div>
         <div dir="ltr" title={t('dayRange')} className="relative mt-2.5 h-2 rounded-full bg-gradient-to-r from-down via-[#e5e7f0] to-up">
-          {range != null && <motion.span className="absolute top-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-brand shadow" animate={{ left: `${range}%` }} transition={{ type: 'spring', stiffness: 120, damping: 20 }} />}
+          {w.rangePercent != null && <motion.span className="absolute top-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-brand shadow" animate={{ left: `${w.rangePercent}%` }} transition={{ type: 'spring', stiffness: 120, damping: 20 }} />}
         </div>
-        {!r.live && <p className="mt-3 text-center text-[11px] text-ink/40">{t('waiting')}</p>}
+        {!w.live && <p className="mt-3 text-center text-[11px] text-ink/40">{t('waiting')}</p>}
       </div>
     </motion.div>
   );
 }
 
 /**
- * Market Instruments: 7 tall slats; the hovered (or tapped) one widens to show its text and live quote.
+ * Market Instruments: 7 tall slats; the hovered (or tapped) one widens to show its text and live quote
+ * (only for markets the symbols API returns symbols for).
  * On mobile the slats stack and work as an accordion.
  */
 export function Instruments() {
   const t = useTranslations('marketsPage.instruments');
   const [i, setI] = useState(0);
+  const { symbolsByKey, liveQuotes, loading } = useMarketsInstrumentsData();
   return (
     <section className="relative bg-white py-14 text-ink md:py-24">
       <div className="container-x">
@@ -123,9 +149,15 @@ export function Instruments() {
                         <h3 className="heading-card">{t(`items.${m.id}.name`)}</h3>
                       </div>
                       <p className="mt-4 max-w-md text-pretty text-[15px] leading-relaxed text-ink/60">{t(`items.${m.id}.text`)}</p>
-                      <div className="max-w-md">
-                        <QuotePanel market={m} symbol={0} />
-                      </div>
+                      {loading ? (
+                        <div className="max-w-md">
+                          <QuoteSkeleton />
+                        </div>
+                      ) : symbolsByKey[m.id]?.length ? (
+                        <div className="max-w-md">
+                          <QuotePanel market={m} apiRows={symbolsByKey[m.id]} liveQuotes={liveQuotes} />
+                        </div>
+                      ) : null}
                       <NavLink href={m.href} className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-brand hover:text-gold-700">
                         {t('learnMore')} <ArrowRight className="size-4 rtl:-scale-x-100" />
                       </NavLink>

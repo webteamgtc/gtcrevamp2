@@ -30,10 +30,8 @@ export function useSymbolQuotesWs(symbols = []) {
       return undefined;
     }
 
-    const unsubscribe = quotesWsManager.subscribe(symbolList, setQuotes);
-    quotesWsManager.updateSymbols(symbolList);
-
-    return unsubscribe;
+    // subscribe() registers this listener's symbols, (re)syncs the socket subscription and returns the cleanup
+    return quotesWsManager.subscribe(symbolList, setQuotes);
   }, [symbolKey]);
 
   return quotes;
