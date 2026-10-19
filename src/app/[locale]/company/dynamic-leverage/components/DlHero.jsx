@@ -52,7 +52,7 @@ function MarginSheet() {
                   <span className="w-24 text-end">
                     {live ? <FlashPrice value={live.bid} decimals={live.d} dir={live.dir} tick={live.tick} className="block text-[15px] font-bold" /> : <span className="block font-bold">—</span>}
                     <span className={cn('text-[11px] font-semibold', up ? 'text-up' : 'text-down')}>
-                      {live ? `${up ? '+' : ''}${live.change.toFixed(2)}%` : '—'}
+                      {live ? `${up ? '+' : ''}${live?.change?.toFixed(2)}%` : '—'}
                     </span>
                   </span>
                 </motion.div>
