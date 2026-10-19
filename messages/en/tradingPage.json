@@ -2535,5 +2535,290 @@
         "toastSubmitted": "Application submitted successfully"
       }
     }
+  },
+  "copyTradingPage": {
+    "meta": {
+      "title": "Copy Trading — Follow the Best Traders | GTCFX",
+      "description": "Follow experienced traders, automatically copy their trades and keep control of your funds and risk settings with GTCFX copy trading."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Copy Trading"
+    },
+    "hero": {
+      "badge": "Live Copy Trading",
+      "title": "[Copy] Trading is now easier and smarter",
+      "text": "Discover a flexible copy trading platform that lets you follow experienced traders, automatically copy their trades, and maintain control over your funds and risk settings with greater transparency.",
+      "cta": "Start Copy Trading",
+      "pairs": [
+        {
+          "pair": "GBP/USD",
+          "change": "+0.92%"
+        },
+        {
+          "pair": "AUD/USD",
+          "change": "+1.20%"
+        },
+        {
+          "pair": "EUR/USD",
+          "change": "+0.68%"
+        },
+        {
+          "pair": "USD/JPY",
+          "change": "+0.35%"
+        }
+      ]
+    },
+    "what": {
+      "eyebrow": "What is Copy Trading",
+      "title": "Follow the [Best Traders]",
+      "description": "No experience needed. Connect with experienced traders and automatically copy their trades through a flexible copy trading platform.",
+      "steps": [
+        {
+          "title": "Choose a trader",
+          "text": "Browse trader profiles, review performance, and select a strategy that fits your goals."
+        },
+        {
+          "title": "Copy automatically",
+          "text": "Once connected, trades are copied automatically without the need to manage each position manually."
+        },
+        {
+          "title": "Monitor & control",
+          "text": "Track results, manage allocations, and maintain flexibility with full visibility of your account."
+        }
+      ]
+    },
+    "rating": {
+      "eyebrow": "Top Performing",
+      "title": "Top Performing [Traders]",
+      "description": "Follow the strategies of elite traders and stay ahead of the market.",
+      "features": [
+        {
+          "title": "Real Performance",
+          "text": "Verified results from real trading accounts."
+        },
+        {
+          "title": "Risk Managed",
+          "text": "Strict risk control for long-term stability."
+        },
+        {
+          "title": "Data Driven",
+          "text": "Transparent metrics for informed decisions."
+        },
+        {
+          "title": "Top Traders Only",
+          "text": "Curated selection of elite performing traders."
+        }
+      ],
+      "card": {
+        "pnl": "30 Days PNL (USD)",
+        "roi": "30 Days ROI",
+        "aum": "AUM",
+        "mdd": "30 Days MDD",
+        "sharpe": "Sharpe Ratio",
+        "mock": "Mock",
+        "copy": "Copy"
+      },
+      "table": {
+        "rank": "Rank",
+        "trader": "Trader",
+        "pnl": "30D PNL",
+        "roi": "ROI",
+        "trend": "Trend",
+        "aum": "AUM",
+        "sharpe": "Sharpe",
+        "copy": "Copy",
+        "empty": "No traders to show right now.",
+        "error": "Trader rankings could not be loaded. Please try again later."
+      },
+      "pagination": {
+        "previous": "Previous page",
+        "next": "Next page",
+        "of": "of"
+      },
+      "sort": {
+        "label": "Sort by",
+        "rank": "Rank",
+        "pnl": "Top PNL",
+        "roi": "Top ROI",
+        "sharpe": "Sharpe"
+      }
+    },
+    "how": {
+      "eyebrow": "How it works",
+      "title": "Start copy trading in [3 simple steps]",
+      "description": "Getting started is easy. Set up your account, choose a trader, and begin copying in a smooth and transparent experience.",
+      "steps": [
+        {
+          "title": "Open a live account",
+          "text": "Create a GTCFX live account and complete the setup to start using the copy trading platform."
+        },
+        {
+          "title": "Choose the right trader",
+          "text": "Review trader profiles, performance, and trading style before selecting who to follow."
+        },
+        {
+          "title": "Start copying strategy",
+          "text": "Allocate capital, activate copying, and track performance directly from your dashboard."
+        }
+      ]
+    },
+    "disclosure": {
+      "title": "Provider and Risk Disclosure",
+      "text": "The copy trading system is provided by GTC Global Trading Ltd, which acts as the system operator and not as a provider of trading signals or strategies. GTC Global Trading Ltd does not create, endorse, recommend or guarantee any signal, strategy or the performance of any strategy provider made available through the system. Copy trading involves significant risk, does not guarantee profits and may not be suitable for all investors. Before using this service, you should carefully consider your financial circumstances, investment objectives, trading experience and risk tolerance, and seek independent professional advice where appropriate. Past performance is not a reliable indicator of future results. Any decision to follow a strategy provider remains your own."
+    },
+    "detail": {
+      "meta": {
+        "title": "Trader Profile — Copy Trading | GTCFX",
+        "description": "Verified performance, risk metrics, trading markets and position history of a GTCFX copy-trading strategy provider."
+      },
+      "breadcrumb": {
+        "home": "Home",
+        "trading": "Trading",
+        "copyTrading": "Copy Trading"
+      },
+      "hero": {
+        "leverage": "1x to {leverage}x leverage",
+        "daysTrading": "Days Trading",
+        "winRate": "Win Rate",
+        "closedTrades": "Closed Trades",
+        "sharpe": "Sharpe Ratio",
+        "mdd": "Max Drawdown",
+        "roiAll": "Return (All time)",
+        "totalPnl": "Total PnL",
+        "copy": "Copy",
+        "mock": "Mock",
+        "back": "All traders"
+      },
+      "account": {
+        "title": "Account summary",
+        "balance": "Balance",
+        "equity": "Equity",
+        "floatingPnl": "Floating PnL",
+        "freeMargin": "Free margin",
+        "margin": "Margin",
+        "credit": "Credit",
+        "updated": "Updated"
+      },
+      "performance": {
+        "title": "Performance",
+        "ranges": {
+          "7D": "7D",
+          "30D": "30D",
+          "90D": "90D",
+          "ALL": "All"
+        },
+        "roi": "ROI",
+        "pnl": "PnL",
+        "copierPnl": "Copier PnL",
+        "sharpe": "Sharpe Ratio",
+        "mdd": "MDD",
+        "winRate": "Win Rate",
+        "winPositions": "Win Positions",
+        "totalPositions": "Total Positions",
+        "noData": "Not enough history for this period."
+      },
+      "stats": {
+        "title": "Overview",
+        "updated": "Updated: {date}",
+        "tabs": {
+          "key": "Key stats",
+          "risk": "Risk",
+          "daily": "Daily",
+          "trading": "Trading",
+          "account": "Account"
+        },
+        "labels": {
+          "winRate": "Win rate",
+          "closedTrades": "Closed trades",
+          "profitDays": "Profit days",
+          "lossDays": "Loss days",
+          "returnAll": "Return (All time)",
+          "returnQuarter": "Return (Quarter)",
+          "returnMonth": "Return (Month)",
+          "returnWeek": "Return (Week)",
+          "returnDay": "Return (Day)",
+          "maxDrawdown": "Max drawdown",
+          "downsideDeviation": "Downside deviation",
+          "dailyVolatility": "Daily return volatility",
+          "returnVolatility": "Return volatility",
+          "recoveryFactor": "Recovery factor",
+          "absoluteGain": "Absolute gain",
+          "maxDailyProfit": "Max daily profit",
+          "maxDailyLoss": "Max daily loss",
+          "avgDailyProfit": "Avg daily profit",
+          "avgDailyLoss": "Avg daily loss",
+          "geoWeekly": "Geometric avg (weekly)",
+          "geoMonthly": "Geometric avg (monthly)",
+          "volumeMonth": "Volume (month)",
+          "returnCalendarMonth": "Return (calendar month)",
+          "balance": "Balance",
+          "equity": "Equity",
+          "floatingPnl": "Floating PnL",
+          "margin": "Margin",
+          "freeMargin": "Free margin",
+          "credit": "Credit"
+        }
+      },
+      "activity": {
+        "tabs": {
+          "returns": "Return",
+          "markets": "Trading Markets",
+          "history": "History"
+        },
+        "returns": {
+          "title": "Monthly returns",
+          "subtitle": "Return change by month",
+          "empty": "No monthly data yet."
+        },
+        "markets": {
+          "title": "Trading markets",
+          "subtitle": "Share of trades by instrument",
+          "trades": "trades",
+          "won": "Won",
+          "lost": "Lost",
+          "summaryTitle": "Trading summary",
+          "empty": "No market data yet.",
+          "stats": {
+            "bestTrade": "Best trade",
+            "worstTrade": "Worst trade",
+            "largestTrade": "Largest trade (lots)",
+            "tradesWon": "Trades won",
+            "tradesLost": "Trades lost",
+            "totalProfit": "Total profit",
+            "avgTradeSize": "Avg trade size",
+            "avgProfitWin": "Avg profit (won)",
+            "avgLossLost": "Avg loss (lost)",
+            "avgPnlTrade": "Avg PnL per trade",
+            "avgPnlLot": "Avg PnL per lot"
+          }
+        },
+        "history": {
+          "title": "Position History",
+          "subtitle": "Closed positions summary",
+          "columns": {
+            "symbol": "Symbol",
+            "volume": "Volume",
+            "openTime": "Open time",
+            "closeTime": "Close time",
+            "prices": "Prices",
+            "profit": "Profit"
+          },
+          "open": "Open:",
+          "close": "Close:",
+          "pts": "pts",
+          "range": "{from}–{to} of {total}",
+          "previous": "Previous page",
+          "next": "Next page",
+          "empty": "No history found."
+        }
+      },
+      "error": {
+        "title": "Trader not found",
+        "text": "This profile could not be loaded. It may have been removed, or the ratings service is temporarily unavailable.",
+        "back": "Back to all traders"
+      }
+    }
   }
 }
