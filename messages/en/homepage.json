@@ -1,22 +1,4 @@
 {
-  "drafts": {
-    "title": "GTCFX Homepage Drafts",
-    "subtitle": "Three design directions for the new GTCFX homepage. Open each one to review the layout and animations.",
-    "d1": {
-      "name": "Draft 1 — Light",
-      "desc": "Clean white and soft gray surfaces with navy and gold accents."
-    },
-    "d2": {
-      "name": "Draft 2 — Dark",
-      "desc": "Deep black and midnight navy with glowing gold highlights."
-    },
-    "d3": {
-      "name": "Draft 3 — Fusion",
-      "desc": "Light, dark and gray sections alternating for strong rhythm."
-    },
-    "open": "Open draft",
-    "language": "Preview in Arabic (RTL)"
-  },
   "hero": {
     "badge": "Trusted · Regulated · Global",
     "title": "Access Global Markets with GTCFX",
@@ -35,11 +17,7 @@
     ],
     "bid": "Bid",
     "ask": "Ask",
-    "spreadLabel": "Spreads from",
-    "leverageLabel": "Leverage up to",
-    "executionLabel": "Execution",
-    "pricesNote": "Indicative prices for demonstration.",
-    "appBadge": "New · GTC Go app"
+    "pricesNote": "Indicative prices for demonstration."
   },
   "features": {
     "titleA": "Unlock Global Markets",
@@ -127,37 +105,7 @@
         "text": "Trade futures contracts as CFDs with transparent conditions and fast execution."
       }
     ],
-    "topInstruments": "Popular instruments",
-    "live": "Live",
-    "tradeCta": "Trade {name}"
-  },
-  "stats": {
-    "items": [
-      {
-        "value": 985000,
-        "prefix": "",
-        "suffix": "+",
-        "label": "Served Clients"
-      },
-      {
-        "value": 7,
-        "prefix": "",
-        "suffix": "+",
-        "label": "Trading Markets"
-      },
-      {
-        "value": 20,
-        "prefix": "",
-        "suffix": "+",
-        "label": "Languages Supported"
-      },
-      {
-        "value": 850,
-        "prefix": "$",
-        "suffix": " Billion",
-        "label": "Monthly Trades"
-      }
-    ]
+    "live": "Live"
   },
   "platforms": {
     "eyebrow": "Platforms",
@@ -191,7 +139,6 @@
       "iOS · Android",
       "One-click trading"
     ],
-    "stageHint": "Choose a platform",
     "perks": [
       "<10ms execution",
       "Leverage up to 1:2000",
@@ -280,11 +227,6 @@
         "a": "Margin is the amount required to open and maintain a leveraged position. It is calculated from the trade size, the instrument price and the leverage applied to your account."
       }
     ],
-    "chatAgent": "GTC Support",
-    "online": "Online now",
-    "chatHello": "Hi there! How can we help you today?",
-    "chatTyping": "Support is typing…",
-    "supportHours": "24/5 support",
     "languages": "20+ languages",
     "questions": "Questions"
   },

@@ -36,11 +36,7 @@
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
   --animate-marquee-reverse: marquee-reverse var(--marquee-duration, 40s) linear infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-float-slow: float 9s ease-in-out infinite;
-  --animate-spin-slow: spin 18s linear infinite;
-  --animate-gradient: gradient-pan 8s ease infinite;
   --animate-shimmer: shimmer 2.4s linear infinite;
-  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
   --animate-beam: beam 6s linear infinite;
 
   @keyframes marquee {
@@ -55,17 +51,9 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-14px); }
   }
-  @keyframes gradient-pan {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
   @keyframes shimmer {
     from { background-position: 200% 0; }
     to { background-position: -200% 0; }
-  }
-  @keyframes pulse-ring {
-    0% { transform: scale(0.8); opacity: 0.7; }
-    100% { transform: scale(2.4); opacity: 0; }
   }
   @keyframes beam {
     to { --beam-angle: 360deg; }
@@ -194,11 +182,6 @@
     animation: var(--animate-shimmer);
     animation-duration: 6s;
   }
-  .text-gradient-brand {
-    background: linear-gradient(100deg, #293b93 0%, #5565bd 45%, #b68756 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-
   /* Rotating conic border (border beam) */
   .border-beam { position: relative; isolation: isolate; }
   .border-beam::before {
@@ -224,6 +207,17 @@
   }
   @media (prefers-reduced-motion: reduce) { .beam-drop::before, .border-beam::before { animation: none; } }
 
+  /* animated dot grid (Why GTC Group → "What makes GTCFX different"): a wave rolls out from the centre */
+  .dot-wave { transform-box: fill-box; transform-origin: center; animation: dot-wave 3.6s ease-in-out infinite; }
+  @keyframes dot-wave {
+    0%, 100% { opacity: 0.18; transform: scale(1); }
+    40% { opacity: 1; transform: scale(1.7); }
+  }
+  @media (prefers-reduced-motion: reduce) { .dot-wave { animation: none; opacity: 0.4; } }
+
+  /* Global Presence hero, option C: licence cards turning on a ring */
+  @keyframes ring-spin { from { transform: rotateY(0deg); } to { transform: rotateY(-360deg); } }
+
   .shine { position: relative; overflow: hidden; }
   .shine::after {
     content: ""; position: absolute; inset: 0;
@@ -240,9 +234,6 @@
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
 
-@keyframes acc-down { from { height: 0; opacity: 0; } to { height: var(--radix-accordion-content-height); opacity: 1; } }
-@keyframes acc-up { from { height: var(--radix-accordion-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
-
 /* vertical marquee columns (GTC Go showcase) */
 .vmarquee-track { animation: vmarquee-up var(--vm-duration, 42s) linear infinite; will-change: transform; }
 .vmarquee-track--down { animation-name: vmarquee-down; }
@@ -250,3 +241,20 @@
 @keyframes vmarquee-up { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -50%, 0); } }
 @keyframes vmarquee-down { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .vmarquee { height: auto !important; overflow: visible !important; } .vmarquee-track { animation: none !important; transform: none !important; } .vmarquee-track > [aria-hidden="true"] { display: none; } }
+
+/* Section reveal on scroll — values come from src/config/reveal.js (set as CSS variables) */
+[data-reveal]:not([data-reveal='in']) {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 64px), 0) scale(var(--reveal-s, 0.96));
+}
+[data-reveal] {
+  transition: opacity var(--reveal-d, 1.4s) var(--reveal-ease, ease), transform var(--reveal-d, 1.4s) var(--reveal-ease, ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal], [data-reveal]:not([data-reveal='in']) { opacity: 1; transform: none; transition: none; }
+}
+
+/* Symbol page hero: decorative candles drifting sideways (strip is drawn twice, so -50% loops seamlessly) */
+@keyframes candle-drift { to { transform: translateX(-50%); } }
+.candle-drift { animation: candle-drift var(--drift, 60s) linear infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .candle-drift { animation: none; } }

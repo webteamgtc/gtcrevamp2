@@ -17,7 +17,7 @@ export function PlatformsTools() {
     <section id="tools" className="relative overflow-hidden bg-[#eef0f5] py-14 text-ink md:py-24">
       <div className="bg-dots-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 md:mt-14 lg:grid-cols-4" stagger={0.06}>
           {items.map((it, i) => {

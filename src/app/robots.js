@@ -4,7 +4,7 @@ export const dynamic = 'force-static';
 
 export default function robots() {
   return {
-    rules: [{ userAgent: '*', allow: '/', disallow: ['/*/draft-1', '/*/draft-2', '/*/draft-3', '/*/draft-4', '/*/draft-5'] }],
+    rules: [{ userAgent: '*', allow: '/' }],
     sitemap: `${SITE_URL}/sitemap.xml`
   };
 }

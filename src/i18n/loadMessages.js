@@ -1,8 +1,8 @@
 /**
  * Load translations from messages/<locale>/*.json (any file in the locale folder).
  *
- * Read from disk at request time so new/edited JSON files work in dev without
- * a rebuild (and so paths work on Windows).
+ * Read from disk (cached in production; re-read in dev so new/edited JSON files work
+ * without a restart).
  *
  * Namespace rules (see messages/README.md):
  *  - Flat keys in adeela.json → namespace `adeela` (filename without .json)
@@ -94,8 +94,18 @@ async function importLegacyLocaleFile(locale) {
  * @param {string} locale
  * @returns {Promise<Record<string, unknown>>}
  */
+const cache = new Map();
+const CACHE = process.env.NODE_ENV === 'production'; // dev re-reads files so edits show up without a restart
+
 export async function loadLocaleMessages(locale) {
   if (!routing.locales.includes(locale)) locale = routing.defaultLocale;
+  if (CACHE && cache.has(locale)) return cache.get(locale);
+  const result = await readLocaleMessages(locale);
+  if (CACHE) cache.set(locale, result);
+  return result;
+}
+
+async function readLocaleMessages(locale) {
 
   const { messages: folderMessages, loaded: loadedFromFolder } = loadFolderMessages(locale);
   const legacy = await importLegacyLocaleFile(locale);
@@ -104,8 +114,3 @@ export async function loadLocaleMessages(locale) {
   if (!legacy) return folderMessages;
   return merge(legacy, folderMessages);
 }
-
-export const ROUTE_MESSAGE_BUNDLES = {
-  '/': ['common', 'homepage'],
-  '/company': ['common', 'homepage', 'companyPage']
-};

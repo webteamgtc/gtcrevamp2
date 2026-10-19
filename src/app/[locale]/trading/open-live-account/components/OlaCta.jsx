@@ -8,7 +8,7 @@ export function OlaCta() {
   return (
     <CtaBand
       id="open-account"
-      eyebrow={t('eyebrow')}
+     
       title={t('title')}
       description={t('description')}
       primary={{ label: t('live'), href: PORTAL.register }}

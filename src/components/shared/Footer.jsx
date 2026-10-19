@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUp, ChevronDown, Cookie } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SOCIALS } from './icons';
+import NavLink from './nav/NavLink';
+import { FOOTER_LINKS } from '@/config/menu';
 import { StoreBadges } from './GtcGoPhone';
 import { Stagger, StaggerItem, Reveal, EASE } from '../motion';
 
@@ -13,14 +15,9 @@ const COLS = ['instruments', 'quick', 'platforms', 'company', 'support', 'legal'
 export default function Footer({ theme = 'light', layout = 'stacked' }) {
   const t = useTranslations('footer');
   const dark = theme === 'dark';
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end end'] });
-  const wmY = useTransform(scrollYProgress, [0, 1], ['40%', '0%']);
-  const wmOpacity = useTransform(scrollYProgress, [0.4, 1], [0, 1]);
 
   return (
     <footer
-      ref={ref}
       className={cn('relative overflow-hidden pt-20', dark ? 'bg-ink text-white' : 'bg-[#f6f7fb] text-ink')}
     >
       <div className={cn('absolute inset-0 opacity-60', dark ? 'bg-grid-dark' : 'bg-grid-light', 'mask-fade-y')} />
@@ -61,7 +58,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
                 const col = t.raw(`columns.${c}`);
                 return (
                   <StaggerItem key={c}>
-                    <FooterColumn title={col.title} links={col.links} dark={dark} />
+                    <FooterColumn title={col.title} links={col.links} hrefs={FOOTER_LINKS[c]} dark={dark} />
                   </StaggerItem>
                 );
               })}
@@ -105,7 +102,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
             const col = t.raw(`columns.${c}`);
             return (
               <StaggerItem key={c}>
-                <FooterColumn title={col.title} links={col.links} dark={dark} />
+                <FooterColumn title={col.title} links={col.links} hrefs={FOOTER_LINKS[c]} dark={dark} />
               </StaggerItem>
             );
           })}
@@ -154,7 +151,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
   );
 }
 
-function FooterColumn({ title, links, dark }) {
+function FooterColumn({ title, links, hrefs = [], dark }) {
   const [open, setOpen] = useState(false);
   return (
     <div className={cn('border-b py-4 sm:border-0 sm:py-0', dark ? 'border-white/10' : 'border-brand/10')}>
@@ -163,12 +160,12 @@ function FooterColumn({ title, links, dark }) {
         <ChevronDown className={cn('size-4 text-gold transition-transform sm:hidden', open && 'rotate-180')} />
       </button>
       <ul className={cn('mt-4 space-y-3 overflow-hidden text-[15px] sm:block', open ? 'block' : 'hidden')}>
-        {links.map((l) => (
+        {links.map((l, i) => (
           <li key={l}>
-            <a href="#" className={cn('group relative inline-flex items-center transition-colors', dark ? 'text-white/70 hover:text-white' : 'text-ink/70 hover:text-brand')}>
+            <NavLink href={hrefs[i]} className={cn('group relative inline-flex items-center transition-colors', dark ? 'text-white/70 hover:text-white' : 'text-ink/70 hover:text-brand')}>
               <span className="absolute -start-3 size-1.5 scale-0 rounded-full bg-gold transition-transform group-hover:scale-100" />
               <span className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">{l}</span>
-            </a>
+            </NavLink>
           </li>
         ))}
       </ul>

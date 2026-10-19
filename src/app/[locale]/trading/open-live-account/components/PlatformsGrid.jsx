@@ -26,7 +26,7 @@ export function PlatformsGrid() {
       <div className="bg-grid-dark mask-radial absolute inset-0 opacity-70" aria-hidden />
 
       <div className="container-x relative">
-        <SectionIntro dark eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro dark title={t('title')} description={t('description')} />
 
         <Stagger className="mt-12 grid gap-5 md:mt-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]" stagger={0.1}>
           {items.map((p, i) => {

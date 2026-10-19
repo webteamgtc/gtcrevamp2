@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Bell, Calendar, Camera, ChevronLeft, Clock3, Cloud, Copy, Folder, Headphones, Home, Image as ImageIcon, LayoutGrid, LineChart, Mail, Map as MapIcon, Minus, Newspaper, Plus, Search, Send, Shield, Wallet } from 'lucide-react';
 import { CandleChart, LaptopMockup, PhoneMockup, TabletMockup } from '@/components/shared/devices';
-import { useTicker, FlashPrice, Sparkline, fmt } from '@/components/shared/ticker';
+import { useTicker, FlashPrice, Sparkline, fmt, pct } from '@/components/shared/ticker';
 import { CountUp, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
@@ -202,7 +202,7 @@ export function WelcomeScreen() {
             <span>
               <span className="block font-bold">{r.s}</span>
               <span className={cn('text-[7px]', r.change >= 0 ? 'text-up' : 'text-down')}>
-                {r.change >= 0 ? '↗' : '↘'} {Math.abs(r.change).toFixed(2)}%
+                {r.change >= 0 ? '↗' : '↘'} {pct(r.change, true)}
               </span>
             </span>
             <span className="flex gap-3 font-semibold">
@@ -382,8 +382,7 @@ export function ChartScreen() {
           <span className="block text-[9px] font-bold">XAUUSD</span>
           <FlashPrice value={gold.bid} decimals={2} dir={gold.dir} tick={gold.tick} className="text-base font-bold" />
           <span className={cn('block text-[7px]', gold.change >= 0 ? 'text-up' : 'text-down')}>
-            {gold.change >= 0 ? '+' : ''}
-            {gold.change.toFixed(2)}%
+            {pct(gold.change)}
           </span>
         </span>
         <span className="grid grid-cols-2 gap-x-2 text-[6.5px] text-ink/45">

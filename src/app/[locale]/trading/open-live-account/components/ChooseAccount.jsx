@@ -24,7 +24,7 @@ export function ChooseAccount() {
       <div className="absolute left-1/2 top-24 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-white/70 blur-[90px]" aria-hidden />
 
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} />
+        <SectionIntro title={t('title')} description={t('description')} />
 
         <Stagger className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2 md:gap-8" stagger={0.12}>
           {items.map((acc, i) => {
@@ -57,7 +57,7 @@ export function ChooseAccount() {
                     <span className={cn('grid size-12 place-items-center rounded-2xl ring-1 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110', featured ? 'bg-white/10 text-white ring-white/20' : 'bg-brand-50 text-brand ring-brand/10')}>
                       <Icon className="size-5" />
                     </span>
-                    <h3 className="mt-6 text-2xl font-bold">{acc.name}</h3>
+                    <h3 className={cn('heading-title mt-6', featured && 'is-dark')}>{acc.name}</h3>
                     <p className={cn('mt-1 text-sm', featured ? 'text-white/70' : 'text-ink/55')}>{acc.tagline}</p>
                     <div className="mt-6 flex items-baseline gap-2">
                       <span dir="ltr" className="text-4xl font-bold tracking-tight">

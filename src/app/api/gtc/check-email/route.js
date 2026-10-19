@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const GTC_CHECK_EMAIL_URL = `https://web.mygtc.app/api/pub/check_email`;
+const GTC_CHECK_EMAIL_URL = `${process.env.GTC_PORTAL_API || "https://web.mygtc.app/api/pub"}/check_email`;
 
 export async function POST(req) {
   try {

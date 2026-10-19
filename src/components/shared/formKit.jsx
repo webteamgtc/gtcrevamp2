@@ -8,7 +8,8 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import { cn } from '@/lib/utils';
 
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-export const LETTERS_RE = /^[A-Za-z\s]+$/;
+// letters in any script (Arabic, Chinese, accents…) plus spaces, apostrophes, dots and hyphens
+export const LETTERS_RE = /^[\p{L}\p{M}\s'’.-]+$/u;
 
 /** POST JSON and always resolve to an object (empty on network / parse errors). */
 export async function post(url, body) {

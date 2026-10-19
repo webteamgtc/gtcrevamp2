@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { ArrowLeftRight, Clock3, Fingerprint, ShieldHalf, UserCog } from 'lucide-react';
 import { Reveal, EASE } from '@/components/motion';
-import { AccentTitle, Eyebrow } from '@/components/shared/SectionIntro';
+import { AccentTitle } from '@/components/shared/SectionIntro';
 
 const ICONS = [ArrowLeftRight, UserCog, ShieldHalf];
 
@@ -47,8 +47,7 @@ export function OpenSteps() {
       <div className="container-x relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         {/* start side */}
         <Reveal y={16} className="lg:sticky lg:top-28 lg:self-start">
-          <Eyebrow>{t('eyebrow')}</Eyebrow>
-          <h2 className="heading-section mt-4">
+          <h2 className="heading-section">
             <AccentTitle text={t('title')} />
           </h2>
 

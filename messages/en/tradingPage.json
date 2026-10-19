@@ -280,7 +280,6 @@
       ]
     },
     "cta": {
-      "eyebrow": "Still need assistance?",
       "title": "Didn't Find What You Were Looking For?",
       "description": "Submit an enquiry or contact our support team using one of the channels above. Our team can assist with account, platform, payment and general service-related matters. GTCFX provides general and administrative support only through this page. Nothing communicated through our support channels constitutes investment, legal or tax advice.",
       "live": "Open Live Account",
@@ -346,7 +345,6 @@
       }
     },
     "regulation": {
-      "eyebrow": "Regulation",
       "title": "Trade with a [globally regulated] broker.",
       "description": "GTCFX operates under multiple regulatory licences worldwide, ensuring transparency, security, and fair trading conditions for every client.",
       "items": [
@@ -369,7 +367,6 @@
       ]
     },
     "accounts": {
-      "eyebrow": "Account Type",
       "title": "Choose [your account.]",
       "description": "Compare ECN, Standard, and Pro accounts side by side. Pick the tier that matches your experience, deposit size, and trading style.",
       "recommended": "Recommended",
@@ -415,7 +412,6 @@
       ]
     },
     "onboarding": {
-      "eyebrow": "Onboarding",
       "title": "Open an account in 3 minutes. Trade today.",
       "reviewTime": "Review time",
       "steps": [
@@ -437,7 +433,6 @@
       ]
     },
     "platforms": {
-      "eyebrow": "Platforms",
       "title": "Trade on the [platform you prefer.]",
       "description": "Web, desktop, mobile — every platform connects to the same execution engine.",
       "items": [
@@ -485,7 +480,6 @@
       ]
     },
     "why": {
-      "eyebrow": "Why GTCFX",
       "title": "Built for traders who [read the tape.]",
       "description": "Real spreads. Real execution. Real liquidity. No marketing tricks.",
       "spreads": {
@@ -519,7 +513,6 @@
       }
     },
     "toolkit": {
-      "eyebrow": "Why GTCFX",
       "title": "Your complete [trading toolkit.]",
       "description": "Real spreads. Real execution. Real liquidity. No marketing tricks.",
       "items": [
@@ -568,7 +561,6 @@
       ]
     },
     "cta": {
-      "eyebrow": "Open Your Live Account",
       "title": "The market is [moving.] Are you in?",
       "description": "Open a live account in minutes — or test the waters with a free demo. No pressure, no hidden fees.",
       "live": "Open Live Account",
@@ -643,7 +635,6 @@
       }
     },
     "why": {
-      "eyebrow": "Why Trade With Demo",
       "title": "Everything you need to [trade like it's real]",
       "description": "A demo built to mirror live trading — same prices, same execution, same opportunities. Zero risk.",
       "items": [
@@ -666,7 +657,6 @@
       ]
     },
     "workflow": {
-      "eyebrow": "Workflow",
       "title": "Launch your lab in [four steps.]",
       "description": "A professional set-up flow — designed so your demo environment closely mirrors how you intend to trade live.",
       "steps": [
@@ -689,7 +679,6 @@
       ]
     },
     "tips": {
-      "eyebrow": "Tips",
       "title": "Demo account [management tips.]",
       "description": "Most traders use demo accounts wrong — they treat them as games. Here is how serious traders extract real intelligence.",
       "items": [
@@ -719,7 +708,6 @@
       }
     },
     "faq": {
-      "eyebrow": "FAQ",
       "title": "Common questions, [answered.]",
       "description": "Everything you need to know about the GTCFX demo account before you click \"open.\"",
       "items": [
@@ -746,7 +734,6 @@
       ]
     },
     "cta": {
-      "eyebrow": "Ready For The Real Thing?",
       "title": "Built confidence in your demo? Now turn your strategy into [real returns.]",
       "description": "Upgrade when you are ready — same platforms, tighter spreads, and dedicated support from your first live trade.",
       "live": "Open Live Account",
@@ -832,7 +819,6 @@
       }
     },
     "methods": {
-      "eyebrow": "Payments",
       "title": "Choose your [payment method]",
       "description": "Fund your account using cards, bank transfer, e-wallets, or mobile payments — with transparent fees and fast processing times.",
       "labels": {
@@ -890,10 +876,10 @@
           "received": "immediate",
           "cost": "free"
         }
-      ]
+      ],
+      "tabsLabel": "Payments"
     },
     "how": {
-      "eyebrow": "How It Works",
       "title": "How do I [deposit funds?]",
       "description": "Deposit funds in three steps, the whole process takes no more than two minutes.",
       "step": "Step",
@@ -920,7 +906,6 @@
       "pdf": "Download the complete tutorial PDF"
     },
     "security": {
-      "eyebrow": "Security & Trust",
       "title": "Your Funds Are Protected at [Every Step]",
       "description": "Understand the key rules for fund operations to ensure the security and compliance of your account.",
       "items": [
@@ -1005,7 +990,6 @@
       }
     },
     "compare": {
-      "eyebrow": "Compare Accounts",
       "title": "Two accounts. [One that's yours.]",
       "description": "Each tier is calibrated for a different style of trader — from first deposit to institutional volume. Side-by-side, side-by-mind.",
       "recommended": "Recommended",
@@ -1070,7 +1054,6 @@
       "shared": "Included in both accounts"
     },
     "detail": {
-      "eyebrow": "The Detail",
       "title": "A closer look at [each tier.]",
       "description": "Pricing matters. So does fit. Here's the trader each account was designed for, and what's actually under the hood.",
       "cta": "Open Live Account",
@@ -1132,7 +1115,6 @@
       ]
     },
     "tools": {
-      "eyebrow": "The Details",
       "title": "Platforms & [Tools]",
       "description": "Trade on industry-leading platforms with the research, signals, and analysis tools you need to make informed decisions.",
       "items": [
@@ -1179,7 +1161,6 @@
       ]
     },
     "steps": {
-      "eyebrow": "Open In Three Steps",
       "title": "From signup to [first] trade, in minutes.",
       "meta": [
         "Avg. completion ~7 min",
@@ -1202,7 +1183,6 @@
       ]
     },
     "cta": {
-      "eyebrow": "Take the first step",
       "title": "Start Your [Investment Journey] Today.",
       "description": "Join thousands of investors who trust GTCFX to protect and grow their capital across global markets — with full transparency and no hidden agenda.",
       "live": "Open Live Account"
@@ -1236,7 +1216,6 @@
       ]
     },
     "managed": {
-      "eyebrow": "How It Works",
       "title": "How are the [funds managed?]",
       "description": "The Compensation Fund is a compensation mechanism maintained by the Financial Commission for eligible clients of its members. According to the Financial Commission's Rules, the Fund is held in a separate bank account and may be used to satisfy an eligible Award if a member fails or refuses to comply with that Award, or ceases to be a member before paying it. Any payment is subject to the applicable Rules, compensation limits and available fund balance. The Fund is not an insurance policy, deposit-guarantee scheme or general protection against trading losses or broker insolvency. It applies only to eligible claims made against the specific legal entity that holds Financial Commission membership.",
       "steps": [
@@ -1259,7 +1238,6 @@
       ]
     },
     "numbers": {
-      "eyebrow": "By The Numbers",
       "title": "Funding sources and [maximum coverage]",
       "funding": {
         "badge": "Funding Source",
@@ -1273,7 +1251,6 @@
       }
     },
     "scope": {
-      "eyebrow": "Coverage Scope",
       "title": "Under what circumstances is [protection guaranteed?]",
       "description": "The fund applies only to formal rulings made by the Financial Commission, and the clearly defined coverage ensures that the safeguard mechanism is transparent and predictable.",
       "coveredTitle": "Coverage",
@@ -1290,7 +1267,6 @@
       ]
     },
     "cta": {
-      "eyebrow": "Get Started Today",
       "title": "Want to learn more about [fund protection details?]",
       "description": "Explore our help resources or review the client agreement for full details on fund protection, dispute resolution, and compensation eligibility.",
       "live": "Open Live Account"
@@ -1324,7 +1300,6 @@
       "mac": "macOS"
     },
     "capabilities": {
-      "eyebrow": "Platform Capabilities",
       "title": "Everything you need. [Nothing you don't.]",
       "description": "MT4 has earned its reputation as the world's most trusted retail platform — and GTCFX delivers it with institutional-grade liquidity, deep market access, and a setup that's been engineered for performance from the first tick.",
       "items": [
@@ -1443,10 +1418,10 @@
             }
           ]
         }
-      ]
+      ],
+      "tabsLabel": "Platform Capabilities"
     },
     "devices": {
-      "eyebrow": "Cross-Device",
       "title": "Trade from [anywhere.]",
       "description": "Your portfolio doesn't sleep, and neither should your access to it. MT4 syncs seamlessly across desktop, mobile, and tablet — pick up exactly where you left off, on any device.",
       "items": [
@@ -1481,7 +1456,6 @@
       ]
     },
     "edge": {
-      "eyebrow": "Why GTCFX MT4",
       "title": "The same platform. [A better edge.]",
       "description": "MT4 is the platform. GTCFX is the infrastructure underneath it — tier-1 liquidity providers, redundant equinix data centers in NY, London and Tokyo, and a support team who actually trade.",
       "items": [
@@ -1508,7 +1482,6 @@
       ]
     },
     "steps": {
-      "eyebrow": "Get Started",
       "title": "Three steps. [One trader.]",
       "description": "From sign-up to your first live trade in under fifteen minutes. No paperwork shuffles, no opaque approvals — just real markets, opened.",
       "items": [
@@ -1530,7 +1503,6 @@
       ]
     },
     "faq": {
-      "eyebrow": "FAQ",
       "title": "Questions? [Asked. Answered.]",
       "description": "The most common questions traders ask before downloading MT4 on GTCFX. Don't see yours? Our team is one click away — 24 hours a day during market hours.",
       "contact": "Contact our trading desk",
@@ -1558,7 +1530,6 @@
       ]
     },
     "cta": {
-      "eyebrow": "Ready when you are",
       "title": "Download MT4. [Begin your trading journey.]",
       "description": "The world's most trusted trading platform. The execution infrastructure built for serious traders. One free download stands between you and the markets.",
       "primary": "Download MT4 — Free",
@@ -1594,7 +1565,6 @@
       "mac": "macOS"
     },
     "capabilities": {
-      "eyebrow": "Platform Capabilities",
       "title": "Everything you need. [Nothing you don't.]",
       "description": "MT5 has earned its reputation as the next-generation multi-asset platform — and GTCFX delivers it with institutional-grade liquidity, deep market access, and a setup engineered for performance from the first tick.",
       "items": [
@@ -1713,10 +1683,10 @@
             }
           ]
         }
-      ]
+      ],
+      "tabsLabel": "Platform Capabilities"
     },
     "devices": {
-      "eyebrow": "Cross-Device",
       "title": "Trade from [anywhere.]",
       "description": "Your portfolio doesn't sleep, and neither should your access to it. MT5 syncs seamlessly across desktop, mobile, and tablet — pick up exactly where you left off, on any device.",
       "items": [
@@ -1751,7 +1721,6 @@
       ]
     },
     "edge": {
-      "eyebrow": "Why GTCFX MT5",
       "title": "The same platform. [A better edge.]",
       "description": "MT5 is the platform. GTCFX is the infrastructure underneath it — tier-1 liquidity providers, redundant equinix data centers in NY, London and Tokyo, and a support team who actually trade.",
       "items": [
@@ -1778,7 +1747,6 @@
       ]
     },
     "steps": {
-      "eyebrow": "Get Started",
       "title": "Three steps. [One trader.]",
       "description": "From sign-up to your first live trade in under fifteen minutes. No paperwork shuffles, no opaque approvals — just real markets, opened.",
       "items": [
@@ -1800,7 +1768,6 @@
       ]
     },
     "faq": {
-      "eyebrow": "FAQ",
       "title": "Questions? [Asked. Answered.]",
       "description": "The most common questions traders ask before downloading MT5 on GTCFX. Don't see yours? Our team is one click away — 24 hours a day during market hours.",
       "contact": "Contact our trading desk",
@@ -1832,7 +1799,6 @@
       ]
     },
     "cta": {
-      "eyebrow": "Ready when you are",
       "title": "Download MT5. [Begin your trading journey.]",
       "description": "The next-generation multi-asset platform. The execution infrastructure built for serious traders. One free download stands between you and the markets.",
       "primary": "Download MT5 — Free",
@@ -1917,7 +1883,6 @@
       }
     },
     "pillars": {
-      "eyebrow": "Built for serious traders",
       "title": "Everything you need. [Nothing you don't.]",
       "description": "Four pillars. One app. From order entry to portfolio oversight, GTC Go ships the tools professionals expect — refined for the rhythm of a thumb.",
       "items": [
@@ -1944,7 +1909,6 @@
       ]
     },
     "getApp": {
-      "eyebrow": "Get The App",
       "title": "Let trading [live alongside you.]",
       "text": "One mobile trading app. Half a minute to get started. Stay connected to the markets wherever you go.",
       "points": [
@@ -1986,6 +1950,91 @@
       "title": "IOS [(iPhone & iPad)]",
       "text": "Trade smarter with GTCGO on your iPhone and iPad. Experience fast execution, real-time market access, and a secure mobile trading environment designed to keep you in control wherever your journey takes you.",
       "cta": "GTC Go iPhone/iPad"
+    }
+  },
+  "swapUpdatePage": {
+    "meta": {
+      "title": "Swap Rates & Trading Costs | GTCFX",
+      "description": "Daily overnight swap rates for Forex, Metals, Crypto and Indices at GTCFX — transparent spreads, zero hidden fees and zero requotes."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Swap Update"
+    },
+    "hero": {
+      "badge": "Cost Transparency Commitment",
+      "title": "Every cost, [crystal clear] to you.",
+      "text": "GTCFX promises: transparent spreads, daily-updated overnight interest, zero hidden fees, and zero requotes — because real trading confidence starts with real numbers.",
+      "points": [
+        "Real-time spread display, no hidden markup",
+        "Overnight interest updated daily, tracked to market rates",
+        "No requotes — what you see is what you get"
+      ],
+      "live": "Open Live Account",
+      "demo": "Open Free Demo Account",
+      "dashboard": {
+        "title": "Live Cost Dashboard",
+        "live": "LIVE",
+        "avgLabel": "Today's Avg Spread",
+        "avgValue": "0.8",
+        "avgUnit": "pips",
+        "benchmark": "EURUSD benchmark",
+        "vsIndustry": "33% vs industry avg",
+        "longSwap": "Long swap/lot",
+        "shortSwap": "Short swap/lot",
+        "updated": "Last updated",
+        "instruments": [
+          {
+            "symbol": "EURUSD",
+            "name": "FX Major",
+            "spread": "0.8",
+            "unit": "pips spread",
+            "long": "+$1.20",
+            "short": "-$2.80"
+          },
+          {
+            "symbol": "XAUUSD",
+            "name": "Gold Spot",
+            "spread": "18",
+            "unit": "pts spread",
+            "long": "+$5.20",
+            "short": "-$8.10"
+          }
+        ],
+        "chips": [
+          "No requotes",
+          "Zero hidden fees"
+        ]
+      }
+    },
+    "table": {
+      "eyebrow": "Swap Table",
+      "title": "Daily Swap Rates Across [All Markets]",
+      "description": "Overnight swap rates for Forex, Metal, Crypto, and Indices. Searchable by symbol.",
+      "tabs": {
+        "Forex": "Forex",
+        "Metal": "Metal",
+        "Crypto": "Crypto",
+        "Indices": "Indices"
+      },
+      "search": "Search symbol...",
+      "updated": "Last updated: Today 00:00 GMT",
+      "columns": {
+        "symbol": "Symbol",
+        "type": "Swap Type",
+        "long": "Swap Long",
+        "short": "Swap Short"
+      },
+      "empty": "No symbols match your search."
+    },
+    "cta": {
+      "title": "Ready to start [trading?]",
+      "description": "Open a live account in minutes — or practice with a free demo. Transparent costs, no hidden fees.",
+      "live": "Open Live Account",
+      "demo": "Free Demo Account",
+      "riskTitle": "Risk Warning:",
+      "risk": "Trading CFDs involves significant risk of loss. Please ensure you fully understand the risks before trading."
     }
   }
 }

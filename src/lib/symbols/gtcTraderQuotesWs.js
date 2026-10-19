@@ -103,8 +103,7 @@ export function mapWsTickToQuote(tick, digits = 5) {
 class QuotesWsManager {
   constructor() {
     this.ws = null;
-    this.refCount = 0;
-    this.listeners = new Set();
+    this.listeners = new Map();
     this.quotes = {};
     this.subscribed = new Set();
     this.pendingSymbols = new Set();
@@ -112,22 +111,32 @@ class QuotesWsManager {
     this.reconnectDelay = 2000;
   }
 
+  /**
+   * Subscribe a listener to a set of symbols. Several components can subscribe at once;
+   * the socket is subscribed to the union of everyone's symbols.
+   */
   subscribe(symbols, listener) {
-    this.refCount += 1;
-    this.listeners.add(listener);
+    const own = new Set(symbols.filter(Boolean).map((s) => String(s).replace(/\//g, "")));
+    this.listeners.set(listener, own);
     listener({ ...this.quotes });
-
-    const next = new Set(symbols.filter(Boolean).map((s) => String(s).replace(/\//g, "")));
-    this.pendingSymbols = next;
+    this.recomputeSymbols();
     this.ensureConnection();
 
     return () => {
       this.listeners.delete(listener);
-      this.refCount -= 1;
-      if (this.refCount <= 0) {
+      if (this.listeners.size === 0) {
         this.teardown();
+      } else {
+        this.recomputeSymbols();
       }
     };
+  }
+
+  recomputeSymbols() {
+    const all = new Set();
+    this.listeners.forEach((set) => set.forEach((s) => all.add(s)));
+    this.pendingSymbols = all;
+    this.syncSubscriptions();
   }
 
   ensureConnection() {
@@ -160,7 +169,8 @@ class QuotesWsManager {
 
     this.ws.onclose = () => {
       this.ws = null;
-      if (this.refCount > 0) {
+      this.subscribed.clear();
+      if (this.listeners.size > 0) {
         this.scheduleReconnect();
       }
     };
@@ -197,16 +207,9 @@ class QuotesWsManager {
     }
   }
 
-  updateSymbols(symbols) {
-    this.pendingSymbols = new Set(
-      symbols.filter(Boolean).map((s) => String(s).replace(/\//g, ""))
-    );
-    this.syncSubscriptions();
-  }
-
   notify() {
     const snapshot = { ...this.quotes };
-    this.listeners.forEach((listener) => listener(snapshot));
+    this.listeners.forEach((_, listener) => listener(snapshot));
   }
 
   teardown() {
@@ -223,7 +226,6 @@ class QuotesWsManager {
     this.pendingSymbols.clear();
     this.quotes = {};
     this.listeners.clear();
-    this.refCount = 0;
   }
 }
 

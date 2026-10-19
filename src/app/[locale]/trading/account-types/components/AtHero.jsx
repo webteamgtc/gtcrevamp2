@@ -8,7 +8,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import StatValue from '@/components/shared/StatValue';
-import { useTicker, FlashPrice } from '@/components/shared/ticker';
+import { useTicker, FlashPrice, pct } from '@/components/shared/ticker';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
@@ -36,7 +36,7 @@ function BrandCard() {
               <div className="mt-1 flex items-baseline gap-2">
                 <FlashPrice value={eur.bid} decimals={4} dir={eur.dir} tick={eur.tick} className="text-2xl font-bold text-brand-900" />
                 <span className={cn('text-xs font-bold', up ? 'text-up' : 'text-down')}>
-                  {up ? '▲' : '▼'} {Math.abs(eur.change).toFixed(2)}%
+                  {up ? '▲' : '▼'} {pct(eur.change, true)}
                 </span>
               </div>
             </div>
@@ -112,7 +112,7 @@ export function AtHero() {
             <motion.h1 className="heading-page mt-6" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
               <AccentTitle text={t('title')} />
             </motion.h1>
-            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
+            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
               {t('text')}
             </motion.p>
 

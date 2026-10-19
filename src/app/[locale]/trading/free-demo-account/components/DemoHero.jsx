@@ -56,7 +56,7 @@ export function DemoHero({ tone = 'dark' }) {
             <motion.h1 className={cn('heading-page mt-6 max-w-2xl lg:max-w-none', light && 'text-ink')} initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
               <AccentTitle text={t('title')} />
             </motion.h1>
-            <motion.p className={cn('mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed md:text-lg lg:mx-0', light ? 'text-ink/60' : 'text-white/65')} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
+            <motion.p className={cn('mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed md:text-lg lg:mx-0', light ? 'text-ink/60' : 'text-white/65')} initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
               {t('text')}
             </motion.p>
 

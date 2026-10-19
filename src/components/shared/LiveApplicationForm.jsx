@@ -9,9 +9,10 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronDown, CircleAlert, CircleCheck, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { PORTAL } from '@/config/menu';
 import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, flagFor, dialFor, useGtcCountries } from './formKit';
 
-const LOGIN_URL = 'https://web.mygtc.app/user?redirect=%252Fdashboard';
+const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
 const PRIVACY_URL = 'https://www.gtcfx.com/privacy';
 
@@ -147,10 +148,6 @@ export function LiveAccountForm() {
       const res = await post('/api/gtc/reg', payload);
       if (res?.code === 200) {
         setNotice({ type: 'ok', text: res?.message || t('toast.registrationSuccess') });
-        try {
-          const { password, otp, ...safe } = values; // never persist secrets
-          localStorage.setItem('user', JSON.stringify({ ...safe, firstname, lastname }));
-        } catch {}
         setValues((v) => ({ ...EMPTY, country: v.country, partnerCode: partnerLocked ? v.partnerCode : '' }));
         setTouched({});
         setCodeSent(false);
@@ -165,7 +162,7 @@ export function LiveAccountForm() {
   return (
     <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white text-ink shadow-[0_40px_100px_-30px_rgba(41,59,147,0.6)]">
       <div className="bg-gradient-to-r from-brand via-brand-800 to-brand-950 px-5 py-4 text-white md:px-7">
-        <h2 className="text-base font-bold tracking-tight md:text-lg">{t('title')}</h2>
+        <h2 className="heading-card is-dark">{t('title')}</h2>
         <p className="mt-1 text-xs text-white/75 md:text-sm">{t('subtitle')}</p>
       </div>
 

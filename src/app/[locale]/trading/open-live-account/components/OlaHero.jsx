@@ -9,7 +9,7 @@ import NavLink from '@/components/shared/nav/NavLink';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
-import { useTicker, fmt } from '@/components/shared/ticker';
+import { useTicker, fmt, pct } from '@/components/shared/ticker';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
@@ -28,7 +28,7 @@ function LiveQuoteCard() {
 
   const W = 320;
   const H = 120;
-  const data = row.hist;
+  const data = row.hist.length > 1 ? row.hist : [0, 0]; // flat line until live ticks arrive
   const min = Math.min(...data);
   const max = Math.max(...data);
   const pts = data.map((v, i) => [(i / (data.length - 1)) * W, H - ((v - min) / (max - min || 1)) * (H - 12) - 6]);
@@ -67,7 +67,7 @@ function LiveQuoteCard() {
             </div>
             <span className={cn('rounded-full px-2.5 py-1 text-xs font-bold', up ? 'bg-up/10 text-up' : 'bg-down/10 text-down')}>
               {up ? '+' : '−'}
-              {Math.abs(row.change).toFixed(2)}%
+              {pct(row.change, true)}
             </span>
           </div>
 
@@ -157,7 +157,7 @@ export function OlaHero() {
             <motion.h1 className="heading-page mt-6 max-w-2xl lg:max-w-none" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
               <AccentTitle text={t('title')} />
             </motion.h1>
-            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
+            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
               {t('text')}
             </motion.p>
 

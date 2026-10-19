@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const GTC_GET_CODE_URL = `https://web.mygtc.app/api/pub/get_code`;
+const GTC_GET_CODE_URL = `${process.env.GTC_PORTAL_API || "https://web.mygtc.app/api/pub"}/get_code`;
 
 export async function POST(req) {
   try {

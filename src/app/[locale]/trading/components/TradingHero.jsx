@@ -13,7 +13,7 @@ export function TradingHero() {
   const tb = useTranslations('tradingPage.breadcrumb');
 
   return (
-    <section className="is-dark relative overflow-hidden pb-16 pt-36 md:pb-24 md:pt-44">
+    <section id="apply" className="is-dark relative scroll-mt-20 overflow-hidden pb-16 pt-36 md:pb-24 md:pt-44">
       <HeroTradingBackdrop />
 
       <div className="container-x relative">
@@ -24,7 +24,7 @@ export function TradingHero() {
             <motion.h1 className="heading-page max-w-xl lg:max-w-none" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
               <AccentTitle text={t('title')} words={1} />
             </motion.h1>
-            <motion.p className="mt-4 text-xl font-semibold text-gold-200 md:text-2xl" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.6 }}>
+            <motion.p className="mt-4 text-xl font-semibold text-gold-200 md:text-2xl" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.12, duration: 0.6 }}>
               {t('subtitle')}
             </motion.p>
             <Reveal y={24} delay={0.35} className="relative mt-12 hidden md:block">

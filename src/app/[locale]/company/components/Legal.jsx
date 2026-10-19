@@ -112,7 +112,7 @@ export function Legal() {
         </div>
 
         <Reveal y={12} className="mt-8 flex justify-center">
-          <ArrowLink href="/regulation">{t('viewMore')}</ArrowLink>
+          <ArrowLink href="/company/regulations">{t('viewMore')}</ArrowLink>
         </Reveal>
       </div>
       </div>

@@ -55,7 +55,7 @@ export function ByNumbers() {
       <div className="absolute -end-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="absolute -start-40 bottom-0 size-[420px] rounded-full bg-gold/10 blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} />
+        <SectionIntro title={t('title')} />
 
         <Stagger className="mt-12 grid gap-6 md:mt-14 md:grid-cols-2" stagger={0.15}>
           <StaggerItem className="h-full">

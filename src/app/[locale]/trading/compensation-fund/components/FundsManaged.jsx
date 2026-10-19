@@ -11,7 +11,7 @@ export function FundsManaged() {
       <div className="bg-dots-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="absolute left-1/2 top-24 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-white/70 blur-[90px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro eyebrow={t('eyebrow')} title={t('title')} description={t('description')} className="max-w-4xl [&_p]:max-w-4xl" />
+        <SectionIntro title={t('title')} description={t('description')} className="max-w-4xl [&_p]:max-w-4xl" />
         <NumberedSteps steps={t.raw('steps')} className="mt-14 md:mt-16" />
       </div>
     </section>

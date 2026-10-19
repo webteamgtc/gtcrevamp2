@@ -17,7 +17,7 @@ import { OpenSteps } from './OpenSteps';
 
 function AtCta() {
   const t = useTranslations('accountTypesPage.cta');
-  return <CtaBand id="start" eyebrow={t('eyebrow')} title={t('title')} description={t('description')} primary={{ label: t('live'), href: PORTAL.register }} />;
+  return <CtaBand id="start" title={t('title')} description={t('description')} primary={{ label: t('live'), href: PORTAL.register }} />;
 }
 
 export default function AccountTypesPage() {
