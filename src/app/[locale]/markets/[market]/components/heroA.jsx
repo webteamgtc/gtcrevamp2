@@ -72,6 +72,7 @@ export function HeroOrbitA() {
   const rows = useLiveRows(ring, 1000);
   const [focus, setFocus] = useState(0);
   useEffect(() => {
+    if (ring.length < 2) return undefined;
     const id = setInterval(() => setFocus((f) => (f + 1) % ring.length), 2600);
     return () => clearInterval(id);
   }, [ring.length]);
@@ -105,9 +106,15 @@ export function HeroOrbitA() {
           <div className="absolute inset-[27%] grid place-items-center rounded-full bg-[radial-gradient(circle_at_35%_30%,#5b6ed2,#293b93_55%,#141d4d)] shadow-[0_0_80px_rgba(91,110,210,0.55),inset_0_-12px_30px_rgba(0,0,0,0.4)]">
             <div className="text-center">
               {MIcon && <MIcon className="mx-auto size-6 text-gold-200" />}
-              <p className="mt-2 text-xs font-semibold text-white/60">{r.s}</p>
-              <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} className="text-2xl font-bold text-white md:text-3xl" />
-              <p className={cn('mt-1 text-xs font-semibold tabular-nums', changeTone(r.change, true))}>{r.live ? pct(r.change) : t('waiting')}</p>
+              {r ? (
+                <>
+                  <p className="mt-2 text-xs font-semibold text-white/60">{r.s}</p>
+                  <FlashPrice value={r.bid} decimals={r.d} dir={r.dir} tick={r.tick} className="text-2xl font-bold text-white md:text-3xl" />
+                  <p className={cn('mt-1 text-xs font-semibold tabular-nums', changeTone(r.change, true))}>{r.live ? pct(r.change) : t('waiting')}</p>
+                </>
+              ) : (
+                <p className="mt-2 px-6 text-xs font-semibold text-white/60">{t('noSymbols')}</p>
+              )}
             </div>
           </div>
         </div>

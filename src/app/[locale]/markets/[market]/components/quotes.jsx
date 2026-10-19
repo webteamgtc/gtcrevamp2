@@ -62,7 +62,17 @@ function Intro({ list, center = true }) {
   return (
     <div className={cn('flex flex-col gap-6', !center && 'lg:flex-row lg:items-end lg:justify-between')}>
       <SectionIntro layout={center ? 'center' : 'split'} title={t('quotes.title')} description={t('quotes.description')} className={center ? '' : 'flex-1'} />
-      <SearchBox q={list.q} setQ={list.setQ} className={center ? 'mx-auto w-full max-w-md' : 'w-full lg:max-w-xs'} />
+      {list.rows.length > 0 && <SearchBox q={list.q} setQ={list.setQ} className={center ? 'mx-auto w-full max-w-md' : 'w-full lg:max-w-xs'} />}
+    </div>
+  );
+}
+
+/** Shown instead of the list when the symbols API has nothing for this market (no placeholder prices). */
+function NoSymbols() {
+  const t = useTranslations('marketsPage.detail.labels');
+  return (
+    <div className="mt-10 rounded-3xl border border-dashed border-brand/20 bg-[#f8f9fd] px-6 py-14 text-center md:mt-12">
+      <p className="text-sm font-medium text-ink/55">{t('noSymbols')}</p>
     </div>
   );
 }
@@ -75,7 +85,8 @@ export function QuotesCards() {
     <section className="relative bg-white py-14 text-ink md:py-24">
       <div className="container-x">
         <Intro list={list} center={false} />
-        {list.shown.length === 0 && <Empty q={list.q} />}
+        {list.rows.length === 0 && <NoSymbols />}
+        {list.rows.length > 0 && list.shown.length === 0 && <Empty q={list.q} />}
         <motion.div layout className="mt-10 grid gap-4 sm:grid-cols-2 md:mt-12 lg:grid-cols-3 xl:grid-cols-4">
           <AnimatePresence initial={false}>
             {list.shown.map((r) => (
@@ -120,6 +131,9 @@ export function QuotesWatchlist() {
     <section className="relative bg-white py-14 text-ink md:py-24">
       <div className="container-x">
         <Intro list={list} center={false} />
+        {list.rows.length === 0 ? (
+          <NoSymbols />
+        ) : (
         <div className="mt-10 grid gap-6 md:mt-12 lg:grid-cols-[1fr_1.1fr]">
           <div className="overflow-hidden rounded-3xl border border-brand/10">
             {list.shown.length === 0 && <Empty q={list.q} />}
@@ -182,6 +196,7 @@ export function QuotesWatchlist() {
             </div>
           )}
         </div>
+        )}
         <MoreButton list={list} />
       </div>
     </section>

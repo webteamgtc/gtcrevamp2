@@ -1,8 +1,9 @@
 'use client';
 /**
  * /markets/<slug> — one component for all 7 market pages.
- * Template A (Forex, Indices, Shares, Futures): dark hero (orbit) → white quote cards → gray why (hub) → dark platforms → navy CTA band
- * Template B (Energy, Metals, Crypto):          dark hero (spotlight) → white watchlist → gray overview cards → white why (tabs) → dark FAQ (split) → navy CTA (split + live)
+ * Template A (Forex, Indices, Shares):          dark hero (orbit) → white quote cards → gray why (hub) → dark platforms → navy CTA band
+ * Template B (Energy, Metals, Crypto, Futures): dark hero (spotlight) → white watchlist → gray overview cards → white why (tabs)
+ *                                               → navy promo band → dark FAQ (split) → navy CTA (split + live)
  */
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
@@ -16,12 +17,13 @@ import { WhyTabsB } from './whyB';
 import { PlatformCards } from './platforms';
 import { OverviewCards } from './overview';
 import { FaqSplit } from './faq';
+import { PromoBand } from './promo';
 import { CtaCentered, CtaSplitLive } from './cta';
 
 /** Section order per template. The CTA is shared with the symbol pages (MARKET_CTA in ./cta). */
 const SECTIONS = {
   A: [HeroOrbitA, QuotesCards, WhyHubA, PlatformCards, CtaCentered],
-  B: [HeroSpotlightB, QuotesWatchlist, OverviewCards, WhyTabsB, FaqSplit, CtaSplitLive]
+  B: [HeroSpotlightB, QuotesWatchlist, OverviewCards, WhyTabsB, PromoBand, FaqSplit, CtaSplitLive]
 };
 
 export default function MarketPage({ page, symbols }) {
