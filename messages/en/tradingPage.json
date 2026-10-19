@@ -713,23 +713,23 @@
       "items": [
         {
           "q": "Does the demo account have an expiry date?",
-          "a": "No. Your GTCFX demo account never expires. You can use it for as long as you like, return after months away, and pick up exactly where you left off."
+          "a": "No. Your CFD demo account never expires at GTCFX, so you can return anytime and continue practicing from where you left off."
         },
         {
           "q": "Are spreads on the demo identical to the live account?",
-          "a": "Yes. The demo streams the same bid/ask prices, depth and execution as our live accounts, so the spreads you see are real market spreads."
+          "a": "Spreads on your CFD demo trading account are designed to closely mirror live market conditions, using real-time market quotes and the same pricing engine. Minor variations may occur because demo trading does not interact with real liquidity or live order flow like a funded account."
         },
         {
           "q": "How do I reset my demo balance?",
-          "a": "You can top up or reload your virtual balance at any time from your GTCFX client portal."
+          "a": "You can reset the $50,000 virtual balance in your demo trading account anytime from your account dashboard, allowing you to start fresh when testing a new strategy or practice cycle."
         },
         {
           "q": "Which platforms are supported?",
-          "a": "MT4, MT5 and WebTrader — on desktop, mobile or in your browser. One account works on every device."
+          "a": "Your online trading demo account works across our three supported platforms: MetaTrader 4, MetaTrader 5, and GTC Go, our proprietary web and mobile platform. Practice on desktop, web, or mobile with instant cross-device sync, so your progress stays with you wherever you trade."
         },
         {
           "q": "Do I need to verify my identity to open a demo?",
-          "a": "No. A demo account needs no documents, no deposit and no KYC — just sign up with your email and start trading."
+          "a": "No. Opening a free CFD demo account with GTCFX requires no identity verification, deposit, or documents. Complete your details and start practicing with $50,000 in virtual capital in under 30 seconds."
         }
       ]
     },
@@ -1509,23 +1509,23 @@
       "items": [
         {
           "q": "What is MetaTrader 4?",
-          "a": "MetaTrader 4 (MT4) is one of the most widely used trading platforms in the retail forex and CFD industry, known for its stability, simplicity, and strong support for automated trading. It's built around forex trading but also supports CFDs on other instruments depending on your broker's offering."
+          "a": "MetaTrader 4 (MT4) is a widely used trading platform for forex and CFD markets, recognized for its stability, user-friendly interface, advanced charting tools, and support for automated trading through Expert Advisors (EAs). The MT 4 trading platform allows traders to analyze markets, execute trades, and manage positions across multiple instruments."
         },
         {
           "q": "Does MT4 support automated trading (Expert Advisors)?",
-          "a": "Yes. MT4 runs Expert Advisors written in MQL4. You can build your own in the built-in editor, import community EAs, backtest them in the Strategy Tester and keep them running 24/7 on a VPS."
+          "a": "Yes. The MT4 trading platform supports Expert Advisors (EAs) written in MQL4, allowing traders to automate strategies, run custom indicators, and backtest systems using historical data before deploying them in live markets."
         },
         {
           "q": "Which devices is MT4 available on?",
-          "a": "Windows, macOS, iPhone & iPad, Android phones and tablets, and WebTrader in your browser. The same GTCFX login works across all of them."
+          "a": " MT4 is available as a desktop application (Windows), a web-based platform accessible from any browser, and mobile apps for iOS and Android — allowing you to manage trades and monitor the market across devices with synced account access."
         },
         {
           "q": "Is MT4 suitable for beginners?",
-          "a": "Yes. MT4's layout is simple to learn, and you can practise on a free demo account with virtual funds before trading live."
+          "a": "MT4's interface is generally considered straightforward and beginner-friendly, with one-click trading, customizable charts, and a large library of community-built indicators and EAs — while still offering enough depth for experienced traders running algorithmic strategies."
         },
         {
           "q": "How do I download and install MT4?",
-          "a": "Choose your platform above, download and install the app, then log in with the GTCFX server credentials from your client portal. It takes about two minutes."
+          "a": "You can download the MetaTrader 4 platform from your GTCFX account portal after registration, or install the mobile app through the relevant app store. Once installed, log in with your account credentials to start trading on your live or demo account."
         }
       ]
     },
@@ -1774,27 +1774,28 @@
       "items": [
         {
           "q": "What is MetaTrader 5?",
-          "a": "MetaTrader 5 (MT5) is the newer, more advanced successor to MT4, offering an expanded set of order types, additional timeframes, a built-in economic calendar, and support for a broader range of asset classes beyond forex — including stocks, commodities, and indices, depending on your broker's offering."
+          "a": "MetaTrader 5 (MT5) is a multi-asset trading platform and the more advanced successor to MT4. The MT5 platform offers expanded order types, additional timeframes, an integrated economic calendar, and access to a broader range of markets, including forex, stocks, commodities, and indices, depending on your broker's offering."
         },
         {
           "q": "What's the difference between MT4 and MT5?",
-          "a": "MT5 adds more timeframes (21 vs 9), more indicators, six order types including Buy/Sell Stop Limit, depth of market, an economic calendar, MQL5 and multi-asset backtesting. MT4 stays the simpler, forex-focused classic."
+          "a": "MT5 offers more built-in technical indicators and timeframes, a more advanced strategy tester with multi-threaded backtesting, an integrated economic calendar, and support for hedging and netting account modes. MT4 remains popular for its simplicity, lighter resource use, and extensive Expert Advisor ecosystem, while MT5 provides a broader toolkit and multi-asset support. For a detailed comparison, see our {mt4Mt5GuideLink}.",
+          "guideLinkText": "MT4 vs MT5 trading platform guide"
         },
         {
           "q": "Can I run Expert Advisors on MT5?",
-          "a": "Yes. MT5 runs Expert Advisors written in MQL5, with a faster Strategy Tester and access to the MQL5 marketplace. MT4 (MQL4) EAs need to be converted to MQL5 first."
+          "a": "Yes. MT5 supports Expert Advisors written in MQL5, which is not directly compatible with MQL4 code — EAs and custom indicators built for MT4 generally need to be rewritten or converted to work on MT5."
         },
         {
           "q": "Does MT5 support hedging?",
-          "a": "Yes. MT5 supports hedging mode, so you can hold buy and sell positions on the same instrument at the same time."
+          "a": "Yes. MT5 supports both netting and hedging account types. With hedging mode enabled, you can hold simultaneous long and short positions on the same instrument — useful for advanced strategies like grid trading, lock-and-hedge, and multi-timeframe position management. Contact support@gtcfx.com to confirm which mode is available on your account type."
         },
         {
           "q": "Which devices is MT5 available on?",
-          "a": "Windows, macOS, iPhone & iPad, Android phones and tablets, and WebTrader in your browser. The same GTCFX login works across all of them."
+          "a": "MT5 is available as a desktop application for Windows, a web-based trading platform accessible from any browser without downloads, and mobile apps for iOS and Android. Download MetaTrader 5 to access your account, manage positions, and monitor the markets across devices with a consistent trading experience."
         },
         {
           "q": "Should I choose MT5 over MT4?",
-          "a": "Choose MT5 if you want more asset classes, deeper analytics or depth of market. Choose MT4 if you rely on existing MQL4 EAs or prefer a simpler forex-focused platform. You can try both on a free demo."
+          "a": "It depends on your trading style. If you rely on a specific MT4-only EA or prefer MT4's lighter, simpler interface, MT4 may suit you better. If you want a broader range of tradable instruments, faster backtesting, or more advanced order types, MT5 is generally the stronger choice. Many traders use both simultaneously depending on the strategy."
         }
       ]
     },
@@ -2035,6 +2036,504 @@
       "demo": "Free Demo Account",
       "riskTitle": "Risk Warning:",
       "risk": "Trading CFDs involves significant risk of loss. Please ensure you fully understand the risks before trading."
+    }
+  },
+  "pammPage": {
+    "meta": {
+      "title": "PAMM Account — Institutional-Grade Asset Management | GTCFX",
+      "description": "GTCFX PAMM: institutional-grade asset management infrastructure for professional traders to manage global investor capital, with automatic proportional distribution on MT4 / MT5."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "PAMM Account"
+    },
+    "hero": {
+      "badge": "GTCFX PAMM — Institutional Grade",
+      "title": "Turn Your Trading Edge Into [a Business]",
+      "text": "GTCFX PAMM — institutional-grade asset management infrastructure built for professional traders who want to manage global investor capital at scale.",
+      "cta": "Open Live Account",
+      "dashboard": {
+        "title": "Manager Dashboard",
+        "rows": [
+          {
+            "label": "AUM",
+            "value": "$4,280,000",
+            "tone": "brand"
+          },
+          {
+            "label": "Monthly Return",
+            "value": "+12.4%",
+            "tone": "up"
+          },
+          {
+            "label": "Active Investors",
+            "value": "238",
+            "tone": "ink"
+          },
+          {
+            "label": "Performance Fee Earned",
+            "value": "$52,640",
+            "tone": "brand"
+          },
+          {
+            "label": "Platform",
+            "value": "MT4 / MT5",
+            "tone": "ink"
+          }
+        ]
+      }
+    },
+    "what": {
+      "eyebrow": "Understanding PAMM",
+      "title": "What is [PAMM?]",
+      "description": "Percentage Allocation Management Module — a technology that allows multiple investors to pool capital under one expert trader.",
+      "steps": [
+        {
+          "title": "Investors Deposit",
+          "text": "Multiple investors fund the PAMM pool, each with their own allocation"
+        },
+        {
+          "title": "Manager Trades Centrally",
+          "text": "One expert handles strategy, execution, and risk management"
+        },
+        {
+          "title": "Proportional Distribution",
+          "text": "All P&L automatically allocated by each investor's share percentage"
+        }
+      ],
+      "callout": "<b>PAMM (Percentage Allocation Management Module)</b> allows multiple investors to pool capital into a single managed account. A professional money manager executes all trades from the master account, and all profits and losses are <b>automatically distributed</b> to each investor in proportion to their contribution — with full transparency and regulatory oversight."
+    },
+    "leaderboard": {
+      "eyebrow": "Top Fund Managers",
+      "title": "Verified Performance [Leaderboard]",
+      "description": "All data independently verified. Filter by return, drawdown, or AUM to find your match.",
+      "filters": [
+        "All",
+        "Highest Return",
+        "Lowest Drawdown",
+        "Largest AUM"
+      ],
+      "labels": {
+        "return": "12-Month Return",
+        "drawdown": "Max Drawdown",
+        "aum": "AUM",
+        "investors": "Investors",
+        "fee": "Performance Fee:",
+        "min": "Min:",
+        "copy": "Copy This Manager"
+      },
+      "managers": [
+        {
+          "initials": "APX",
+          "name": "Alpha Pro X",
+          "strategy": "Swing · Multi-pair",
+          "color": "#6C63FF",
+          "return": "+38.4%",
+          "drawdown": "-6.1%",
+          "aum": "$1.2M",
+          "investors": 847,
+          "fee": "20%",
+          "min": "$500",
+          "featured": true
+        },
+        {
+          "initials": "SGF",
+          "name": "SafeGrowth FX",
+          "strategy": "Conservative · Low risk",
+          "color": "#22B573",
+          "return": "+19.8%",
+          "drawdown": "-2.9%",
+          "aum": "$3.4M",
+          "investors": 1203,
+          "fee": "15%",
+          "min": "$200",
+          "featured": false
+        },
+        {
+          "initials": "SGF",
+          "name": "SafeGrowth FX",
+          "strategy": "Conservative · Low risk",
+          "color": "#22B573",
+          "return": "+52.1%",
+          "drawdown": "-14.3%",
+          "aum": "$680M",
+          "investors": 392,
+          "fee": "25%",
+          "min": "$1,000",
+          "featured": false
+        },
+        {
+          "initials": "NVA",
+          "name": "Nova Capital",
+          "strategy": "Scalping · Intraday",
+          "color": "#F59E0B",
+          "return": "+29.5%",
+          "drawdown": "-8.7%",
+          "aum": "$920M",
+          "investors": 561,
+          "fee": "20%",
+          "min": "$300",
+          "featured": false
+        },
+        {
+          "initials": "ZNT",
+          "name": "Zenit Traders",
+          "strategy": "Trend-following · Daily",
+          "color": "#3B82F6",
+          "return": "+44.2%",
+          "drawdown": "-11.0%",
+          "aum": "$2.1M",
+          "investors": 978,
+          "fee": "22%",
+          "min": "$500",
+          "featured": false
+        },
+        {
+          "initials": "FXM",
+          "name": "FX Maestro",
+          "strategy": "Balanced · Medium risk",
+          "color": "#EF4444",
+          "return": "+33.7%",
+          "drawdown": "-9.2%",
+          "aum": "$1.7M",
+          "investors": 714,
+          "fee": "18%",
+          "min": "$250",
+          "featured": false
+        }
+      ]
+    },
+    "steps": {
+      "eyebrow": "Get Started",
+      "title": "Three Steps to [Passive Income]",
+      "description": "From opening an account to earning returns — it takes less than 10 minutes to set up.",
+      "items": [
+        {
+          "title": "Open & Fund Account",
+          "text": "Register your GTCFX account and make a deposit. Min. $200 to start."
+        },
+        {
+          "title": "Browse Managers",
+          "text": "Filter by return, risk level, and strategy. Review verified historical data."
+        },
+        {
+          "title": "Set Allocation & Limits",
+          "text": "Choose how much to allocate and set your maximum acceptable drawdown."
+        },
+        {
+          "title": "Earn Automatically",
+          "text": "Profits are credited to your account each settlement cycle. Monitor in real time."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Common [questions]",
+      "description": "Everything you need to know about GTCFX PAMM before getting started.",
+      "items": [
+        {
+          "q": "How long does the fund manager application review take?",
+          "a": "Applications are typically reviewed within 3–5 business days after all required documents and KYC verification are submitted. Once approved, you can set up your PAMM account and receive email updates throughout the process."
+        },
+        {
+          "q": "How are performance fees settled, and what is the cycle?",
+          "a": "For PAMM accounts, performance fees are calculated as a percentage of the profits generated for investors. Fund managers set their own rates, up to a maximum of 50%, with fees automatically settled at the end of each settlement cycle and charged only on profits, not total AUM."
+        },
+        {
+          "q": "Which trading platforms does GTCFX PAMM support?",
+          "a": "GTCFX PAMM supports both MetaTrader 4 and MetaTrader 5, giving fund managers flexible PAMM trading platforms to choose from based on their trading strategy and preferences."
+        },
+        {
+          "q": "Who provides the GTCFX PAMM service?",
+          "a": "The GTCFX PAMM service is provided by GTC Global Trading Ltd, a company incorporated in Anjouan, Union of the Comoros (Company No. 16283). GTC Global Trading Ltd is the contracting entity for eligible PAMM clients, subject to the applicable Client Agreement, PAMM Agreement, eligibility requirements and jurisdictional restrictions. GTC Global Trading Ltd holds Licence No. L16283/GTC issued by the Anjouan Offshore Finance Authority. The licence does not constitute an endorsement of any PAMM Manager, trading strategy or past performance."
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Get started today",
+      "title": "Ready to build your asset [management business?]",
+      "description": "Join hundreds of professional fund managers on GTCFX PAMM — where your trading expertise becomes a scalable, revenue-generating enterprise.",
+      "live": "Open Live Account",
+      "investor": "Join as PAMM Investor"
+    }
+  },
+  "vpsHostingPage": {
+    "meta": {
+      "title": "VPS Hosting Services — Co-located Trading VPS | GTCFX",
+      "description": "Professional-grade, co-located trading VPS from GTCFX: <1ms latency, 99.99% uptime, Windows Server with MT4/MT5 pre-installed — free for qualified traders."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "VPS Hosting Services"
+    },
+    "hero": {
+      "badge": "Co-located Infrastructure",
+      "title": "Professional Grade Trading [Infrastructure] — Global Co-located VPS",
+      "text": "Trade without interruption. Our VPS keeps your platform running 24/6 — even when your device is off. No missed trades, no downtime, no delays.",
+      "apply": "Apply for VPS Hosting",
+      "pricing": "View Pricing",
+      "status": {
+        "title": "// Live Server Status — Equinix NY4",
+        "tiles": [
+          {
+            "value": "< 1ms",
+            "label": "GTCFX ping",
+            "tone": "brand"
+          },
+          {
+            "value": "99.97%",
+            "label": "Uptime (30d)",
+            "tone": "ink"
+          },
+          {
+            "value": "1 Gbps",
+            "label": "Dedicated BW",
+            "tone": "brand"
+          },
+          {
+            "value": "LIVE",
+            "label": "Node status",
+            "tone": "up"
+          }
+        ],
+        "footer": "All systems operational",
+        "nodes": "4 active nodes"
+      },
+      "stats": [
+        {
+          "value": "99.99%",
+          "label": "Uptime Guarantee"
+        },
+        {
+          "value": "<1ms",
+          "label": "Server Latency"
+        },
+        {
+          "value": "24/7",
+          "label": "Always Running"
+        },
+        {
+          "value": "Free",
+          "label": "For Qualified Traders"
+        }
+      ]
+    },
+    "plans": {
+      "eyebrow": "Configuration Plans",
+      "title": "Choose Your [VPS Plan]",
+      "description": "Three tiers engineered for different trading intensities. All plans include Windows Server and pre-installed MT4/MT5.",
+      "popular": "Most Popular",
+      "perMonth": "/month",
+      "thresholdTitle": "Free Threshold",
+      "subscribe": "Subscribe Now",
+      "items": [
+        {
+          "id": "bronze",
+          "tier": "Bronze",
+          "name": "Bronze",
+          "price": "$40.00",
+          "free": "FREE with minimum balance of $5,000",
+          "features": [
+            {
+              "icon": "cpu",
+              "value": "1 vCPU",
+              "label": "Processing power"
+            },
+            {
+              "icon": "ram",
+              "value": "2,560MB RAM",
+              "label": "Memory"
+            },
+            {
+              "icon": "ssd",
+              "value": "30 GB SSD",
+              "label": "Storage"
+            },
+            {
+              "icon": "os",
+              "value": "Windows Server",
+              "label": "Operating system"
+            },
+            {
+              "icon": "mt",
+              "value": "MT4/MT5",
+              "label": "Pre-installed"
+            }
+          ],
+          "threshold": "Maintain a minimum balance of $5,000 to use at no cost."
+        },
+        {
+          "id": "silver",
+          "tier": "Silver",
+          "name": "Silver",
+          "price": "$70.00",
+          "free": "FREE with minimum balance of $7,500",
+          "features": [
+            {
+              "icon": "cpu",
+              "value": "1 vCPU",
+              "label": "Processing power"
+            },
+            {
+              "icon": "ram",
+              "value": "4,096MB RAM",
+              "label": "Memory"
+            },
+            {
+              "icon": "ssd",
+              "value": "50 GB SSD",
+              "label": "Storage"
+            },
+            {
+              "icon": "os",
+              "value": "Windows Server",
+              "label": "Operating system"
+            },
+            {
+              "icon": "mt",
+              "value": "MT4/MT5",
+              "label": "Pre-installed"
+            }
+          ],
+          "threshold": "Maintain a minimum balance of $7,500 to use at no cost.",
+          "popular": true
+        },
+        {
+          "id": "gold",
+          "tier": "Gold",
+          "name": "Gold",
+          "price": "$120.00",
+          "free": "FREE with minimum balance of $10,000",
+          "features": [
+            {
+              "icon": "cpu",
+              "value": "4 vCPU",
+              "label": "Processing power"
+            },
+            {
+              "icon": "ram",
+              "value": "6,656MB RAM",
+              "label": "Memory"
+            },
+            {
+              "icon": "ssd",
+              "value": "75 GB SSD",
+              "label": "Storage"
+            },
+            {
+              "icon": "os",
+              "value": "Windows Server",
+              "label": "Operating system"
+            },
+            {
+              "icon": "mt",
+              "value": "MT4/MT5",
+              "label": "Pre-installed"
+            }
+          ],
+          "threshold": "Maintain a minimum balance of $10,000 to use at no cost."
+        }
+      ]
+    },
+    "compare": {
+      "eyebrow": "Why VPS?",
+      "title": "Your PC vs a Professional [Trading Server]",
+      "description": "A VPS runs your trading platform on a dedicated remote server — not your local machine — ensuring 24/7 operation regardless of power cuts, internet issues, or hardware failures.",
+      "without": {
+        "title": "Without VPS",
+        "sub": "Running EA on your local computer",
+        "points": [
+          "EA depends entirely on your computer staying on and connected",
+          "Internet cut or PC shutdown = EA stops immediately",
+          "Latency affected by your local network provider",
+          "System crash or power outage causes missed trades and lost opportunities"
+        ]
+      },
+      "with": {
+        "title": "With GTCFX VPS",
+        "sub": "EA runs on dedicated server infrastructure",
+        "points": [
+          "EA runs on professional server hardware - 24/7 without interruption",
+          "Internet loss or PC shutdown — EA keeps running perfectly",
+          "Server co-located with exchange, ultra-low latency",
+          "Enterprise-grade stability - never miss a signal"
+        ]
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Frequently Asked [Questions]",
+      "description": "Everything you need to know about GTCFX VPS hosting before you apply.",
+      "items": [
+        {
+          "q": "Can I set up an MT4 | MT5 VPS on my Mac?",
+          "a": "Absolutely. GTCFX VPS hosting can be accessed from your Mac, allowing your MT4 or MT5 platform to run on a dedicated remote server. Simply complete the sign-up process and connect to your VPS from your Mac, just as you would from a Windows PC."
+        },
+        {
+          "q": "How does a Forex VPS actually work?",
+          "a": "A VPS for forex trading provides a dedicated, stable environment for running trading platforms and automated strategies 24/7, with low-latency connectivity for more reliable execution."
+        },
+        {
+          "q": "Who qualifies for free VPS hosting?",
+          "a": "Eligible traders who meet the minimum account balance for their selected plan can receive VPS hosting for trading at no additional cost. Contact our team to verify your eligibility."
+        },
+        {
+          "q": "Which trading platforms are supported?",
+          "a": "Our VPS supports MetaTrader 4 and MetaTrader 5, providing full access to charts, indicators, Expert Advisors, and other essential trading features for CFD and forex trading."
+        }
+      ]
+    },
+    "apply": {
+      "eyebrow": "Get Started Today",
+      "title": "Apply for Your GTCFX [Trading Server]",
+      "text": "Join thousands of EA traders who run their strategies on GTCFX VPS. Fill in your details and we'll have your server ready within minutes.",
+      "form": {
+        "title": "VPS Application Form",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "platform": "Preferred Trading Platform",
+        "platformSelect": "Please Select One",
+        "platforms": [
+          {
+            "label": "MT4",
+            "value": "mt4"
+          },
+          {
+            "label": "MT5",
+            "value": "mt5"
+          }
+        ],
+        "account": "Account Number",
+        "accountPlaceholder": "Enter Your Account Number",
+        "package": "Select Package",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "country": "Country Of Residence",
+        "countrySelect": "Please Select One",
+        "countryLoading": "Loading countries…",
+        "submit": "Submit Application",
+        "submitting": "Submitting…",
+        "errors": {
+          "firstName": "First Name is required",
+          "lastName": "Last Name is required",
+          "platform": "Platform is required",
+          "account": "Account Number is required",
+          "email": "Email Address is required",
+          "emailInvalid": "Please enter a valid email address",
+          "phone": "Phone Number is required",
+          "phoneInvalid": "Please enter a valid phone number",
+          "country": "Country is required",
+          "countryLoad": "Couldn't load countries",
+          "generic": "Something went wrong. Please try again.",
+          "minLimit": "Minimum 2 characters",
+          "accountMin": "Minimum 6 numbers",
+          "accountMax": "Maximum 9 numbers",
+          "package": "Please select a VPS plan"
+        },
+        "toastSubmitted": "Application submitted successfully"
+      }
     }
   }
 }
