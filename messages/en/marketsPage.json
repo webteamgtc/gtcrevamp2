@@ -134,7 +134,8 @@
         "waiting": "Waiting for live price",
         "range": "Today's range",
         "instruments": "{count} instruments",
-        "all": "All"
+        "all": "All",
+        "noSymbols": "No symbols available right now."
       },
       "platforms": {
         "title": "Download Trading [Platforms]",
@@ -533,24 +534,25 @@
         },
         "name": "Futures",
         "hero": {
-          "title": "Trade Futures CFDs [With Confidence]",
-          "text": "Trade leading futures contracts such as coffee, cocoa, sugar and grains as CFDs, with competitive spreads, flexible leverage and fast execution.",
+          "title": "Trade [Futures CFDs] with Precision",
+          "text": "Trade futures CFDs across major global markets with competitive spreads, flexible leverage, and institutional-grade execution — without taking physical delivery of the underlying asset.",
+          "cta": "Start Trading Now",
           "stats": [
             {
-              "value": "40+",
-              "label": "Instruments"
-            },
-            {
-              "value": "0.03",
-              "label": "Spreads from (pips)"
+              "value": "0.0",
+              "label": "Min spread (pips)"
             },
             {
               "value": "1:2000",
               "label": "Max leverage"
             },
             {
+              "value": "<10ms",
+              "label": "Execution speed"
+            },
+            {
               "value": "24/7",
-              "label": "Support"
+              "label": "Live support"
             }
           ]
         },
@@ -560,56 +562,74 @@
         },
         "why": {
           "title": "Why Trade Futures CFDs [With GTCFX?]",
-          "description": "Access global commodity futures without managing contract rollovers yourself.",
+          "description": "Trade with confidence through futures CFD trading backed by fast execution, competitive spreads, and flexible trading conditions.",
           "cards": [
             {
-              "icon": "cpu",
-              "title": "<10ms",
-              "text": "Ultra-low latency execution with direct market routing."
-            },
-            {
               "icon": "zap",
-              "title": "ECN Zero Spread",
-              "text": "Spreads from 0.0 pips with transparent commission."
+              "title": "Ultra-fast execution",
+              "text": "NDD, no dealing desk, zero manual intervention.",
+              "pill": "< 10 ms"
             },
             {
-              "icon": "chart",
-              "title": "1:2000 Leverage",
-              "text": "Flexible margin trading with professional risk management tools."
+              "icon": "trend",
+              "title": "Tight spreads",
+              "text": "ECN accounts from 0.0 pips with raw pricing.",
+              "pill": "From 0.0"
             },
             {
-              "icon": "wheat",
-              "title": "40+ Instruments",
-              "text": "Soft commodities, grains and more in one account."
+              "icon": "shield",
+              "title": "Multi-regulated",
+              "text": "Licensed by 5 financial authorities worldwide.",
+              "pill": "5 licences"
+            },
+            {
+              "icon": "chat",
+              "title": "24/7 support",
+              "text": "Arabic, English and Chinese client service.",
+              "pill": "AR · EN · ZH"
+            },
+            {
+              "icon": "devices",
+              "title": "Multi-platform",
+              "text": "MT4, MT5 and the GTC Go app.",
+              "pill": "MT4 · MT5 · App"
             }
           ],
-          "panel": {
-            "title": "Futures, made simpler",
-            "text": "Futures CFDs give you exposure to commodity price moves with flexible position sizes, without physical delivery and with transparent pricing.",
-            "chips": [
-              {
-                "icon": "shield",
-                "label": "No requotes"
-              },
-              {
-                "icon": "layers",
-                "label": "Tier-1 liquidity"
-              },
-              {
-                "icon": "server",
-                "label": "99.9% uptime"
-              }
-            ],
-            "stat": {
-              "value": "40+",
-              "label": "Instruments",
-              "sub": "Softs, grains and more"
+          "stats": [
+            {
+              "value": "985,000+",
+              "label": "Global clients"
+            },
+            {
+              "value": "Est. 2012",
+              "label": "14+ years of trust"
             }
-          }
+          ]
         },
         "cta": {
           "title": "Ready To Trade [Futures CFDs?]",
-          "description": "Competitive spreads, flexible leverage and fast execution on every contract."
+          "description": "Open a live account in minutes, or practise risk-free with our unlimited demo account. No deposit required to start."
+        },
+        "promo": {
+          "text": "Gain exposure to major global futures markets through futures CFDs, with the flexibility to take long or short positions. Trade with competitive spreads, flexible leverage, and efficient execution."
+        },
+        "faq": {
+          "title": "Common Questions About [Futures CFDs]",
+          "description": "Industry-leading execution, multi-jurisdiction regulation and segregated client funds, built for traders who demand excellence.",
+          "items": [
+            {
+              "q": "Do Futures CFDs require physical delivery?",
+              "a": "No. Futures CFDs are cash-settled: you trade on the price movements of the underlying futures contract without ever taking or making physical delivery of the asset."
+            },
+            {
+              "q": "What is a Futures CFD?",
+              "a": "A Futures CFD is a derivative that allows you to trade on the price movements of futures-based instruments without owning the underlying futures contract or asset. You can take long or short positions depending on whether you expect prices to rise or fall."
+            },
+            {
+              "q": "What leverage is available for Futures CFDs?",
+              "a": "Leverage on Futures CFDs depends on the instrument, account type and jurisdiction, and reduces as position size increases. See our Dynamic Leverage schedule for the tiers that apply to each instrument."
+            }
+          ]
         }
       },
       "energy": {
@@ -695,31 +715,39 @@
           "title": "Common Questions About [Energy]",
           "description": "Industry-leading execution, multi-jurisdiction regulation and segregated client funds, built for traders who demand excellence.",
           "items": [
-            {
-              "q": "What energy instruments can I trade?",
-              "a": "Crude oil (Brent and WTI), natural gas and related energy products. The live quotes table above shows every energy instrument available on your account."
-            },
-            {
-              "q": "What is an Energy CFD?",
-              "a": "An energy CFD is a derivative that lets you gain exposure to price movements in energy commodities such as crude oil and natural gas without owning the physical asset. You can go long when you expect prices to rise or short when you expect them to fall, using leverage to manage your exposure."
-            },
-            {
-              "q": "What spreads are available on energy products?",
-              "a": "Spreads on energy start from 0.03 pips and vary with market conditions. The live table on this page shows the current buy and sell prices."
-            },
-            {
-              "q": "What leverage is available for energy trading?",
-              "a": "Maximum leverage on energy is up to 1:1000 at Tier 1 and reduces as position size increases. See the dynamic leverage page for the full schedule."
-            },
-            {
-              "q": "What are the trading hours for energy markets?",
-              "a": "Energy markets trade Monday to Friday for about 23 hours a day, with a short daily break. Holiday hours can differ."
-            }
-          ]
+        {
+          "q": "What energy instruments can I trade?",
+          "a": "GTCFX offers a range of energy CFDs, including WTI Crude Oil, Brent Crude Oil, and Natural Gas. These instruments allow you to take positions on energy price movements without owning the underlying commodities, with the flexibility to go long or short depending on your market view."
+        },
+        {
+          "q": "What is an Energy CFD?",
+          "a": "An energy CFD is a derivative that allows you to gain exposure to price movements in energy commodities such as crude oil and natural gas without owning the physical asset. Traders can go long when they expect prices to rise or go short when they expect prices to fall, while using leverage to manage their market exposure."
+        },
+        {
+          "q": "What spreads are available on energy products?",
+          "a": "Spreads on Energy CFDs vary by instrument and market conditions. View our full spreads table for current pricing."
+        },
+        {
+          "q": "What leverage is available for energy trading?",
+          "a": "Leverage on Energy CFDs is available up to 1:1000 (Tier 1 on crude oil) depending on instrument, account type, and jurisdiction. Natural gas and other energy products may have lower maximum leverage — see our Dynamic Leverage schedule for full details."
+        },
+        {
+          "q": "What are the trading hours for energy markets?",
+          "a": "Energy CFDs are available to trade approximately 23 hours per day, Monday to Friday, subject to market conditions."
+        }
+      ]
         },
         "cta": {
           "title": "Ready To Trade [Energy?]",
           "description": "Open a live account in minutes, or practise risk-free with our demo account. No deposit required to start."
+        },
+        "promo": {
+          "text": "Trade crude oil, natural gas, and other energy CFDs to access the world's most active commodity markets. Go long or short with flexible leverage and razor-thin spreads.",
+          "highlights": [
+            "WTI spread from 0.03",
+            "Leverage up to 1:2000",
+            "Near 24-hour trading"
+          ]
         }
       },
       "metals": {
@@ -804,32 +832,32 @@
         "faq": {
           "title": "Common Questions About [Metals]",
           "description": "Industry-leading execution, multi-jurisdiction regulation and segregated client funds, built for traders who demand excellence.",
-          "items": [
-            {
-              "q": "What metals instruments can I trade?",
-              "a": "Gold, silver, platinum and palladium against the US dollar. The live quotes table above shows every metal available on your account."
-            },
-            {
-              "q": "What is a Metals CFD?",
-              "a": "A metals CFD lets you trade the price of gold, silver and other metals without owning or storing the physical metal. You can go long or short and use leverage to manage your exposure."
-            },
-            {
-              "q": "What spreads are available on metals products?",
-              "a": "Metal spreads start from 0.22 pips, with gold from 4c, and vary with market conditions. The live table on this page shows current prices."
-            },
-            {
-              "q": "What leverage is available for metals trading?",
-              "a": "Maximum leverage on metals is up to 1:2000 at Tier 1 and reduces as position size increases. See the dynamic leverage page for the full schedule."
-            },
-            {
-              "q": "What are the trading hours for metals markets?",
-              "a": "Metals trade nearly 24 hours a day, Monday to Friday, with a short daily break. Holiday hours can differ."
-            }
-          ]
+        "items": [
+        {
+          "q": "What spreads do you offer on metals?",
+          "a": "GTCFX offers Gold (XAUUSD) CFD spreads from 0.03 pips — equivalent to approximately 4 cents per ounce. Silver (XAGUSD) spreads are also highly competitive. Spreads are floating and reflect live market conditions. Actual spreads may widen during periods of low liquidity or high volatility."
+        },
+        {
+          "q": "What is a metal CFD?",
+          "a": "A metal CFD is a derivative that allows you to trade on the price movements of metals such as gold, silver, platinum, and palladium without owning the underlying physical asset. You can take long or short positions depending on whether you expect prices to rise or fall, although losses are possible in either direction."
+        },
+        {
+          "q": "What leverage do you offer on precious metals?",
+          "a": "GTCFX offers leverage on Precious Metal CFDs up to 1:2000 for eligible clients of GTC Global Ltd (FSC Mauritius) and GTC Global Trade Capital Co. (VFSC Vanuatu). Leverage amplifies both potential gains and potential losses — please ensure you understand the risks before trading with leverage."
+        }
+      ]
         },
         "cta": {
           "title": "Ready To Trade [Gold & Metals?]",
           "description": "Open a live account in minutes, or practise risk-free with our demo account. No deposit required to start."
+        },
+        "promo": {
+          "text": "Trade gold, silver, and other precious metal CFDs to hedge inflation and diversify your portfolio. Access deep liquidity with competitive spreads and flexible leverage.",
+          "highlights": [
+            "Gold spread from 0.22",
+            "Leverage up to 1:2000",
+            "Near 24-hour trading"
+          ]
         }
       },
       "crypto": {
@@ -914,32 +942,32 @@
         "faq": {
           "title": "Common Questions About [Crypto]",
           "description": "Industry-leading execution, multi-jurisdiction regulation and segregated client funds, built for traders who demand excellence.",
-          "items": [
-            {
-              "q": "What crypto instruments can I trade?",
-              "a": "Bitcoin, Ethereum, Solana, Ripple and other leading cryptocurrencies against the US dollar. The live quotes table above shows every crypto CFD on your account."
-            },
-            {
-              "q": "What is a Crypto CFD?",
-              "a": "A crypto CFD lets you trade the price of a cryptocurrency without buying the coin, so you need no wallet or exchange account. You can go long or short, and leverage lets you manage your exposure; crypto prices can be very volatile."
-            },
-            {
-              "q": "What spreads are available on crypto products?",
-              "a": "Spreads on crypto CFDs vary with market conditions and volatility. The live table on this page shows the current buy and sell prices."
-            },
-            {
-              "q": "What leverage is available for crypto trading?",
-              "a": "Leverage on crypto CFDs is set by our official schedule and reduces as position size increases. See the dynamic leverage page for details."
-            },
-            {
-              "q": "What are the trading hours for crypto markets?",
-              "a": "Crypto CFD trading hours are shown in each instrument's specification on your platform. Holiday hours can differ."
-            }
-          ]
+       "items": [
+        {
+          "q": "Do I need a crypto wallet to trade?",
+          "a": "No. When trading cryptocurrency CFDs, you trade on the price movements of digital assets without buying, holding, or storing the underlying cryptocurrencies. This means no crypto wallet is required, and positions are settled directly in your account currency."
+        },
+        {
+          "q": "What is a Crypto CFD?",
+          "a": "A Crypto CFD is a derivative that allows you to gain exposure to cryptocurrency price movements without buying, owning, or storing the underlying digital assets. Traders can take long or short positions based on their market outlook, while using leverage according to the applicable trading conditions."
+        },
+        {
+          "q": "What leverage do you offer?",
+          "a": "Leverage up to 1:2000 may be available on selected crypto CFDs, subject to account type and regional regulations. Crypto markets are highly volatile — manage risk carefully."
+        }
+      ]
         },
         "cta": {
           "title": "Ready To Trade [Crypto?]",
           "description": "Open a live account in minutes, or practise risk-free with our demo account. No deposit required to start."
+        },
+        "promo": {
+          "text": "Trade leading cryptocurrency CFDs around the clock — speculate on price moves without a wallet. Go long or short with transparent pricing and flexible leverage.",
+          "highlights": [
+            "BTC spread from 15.70",
+            "Leverage up to 1:2000",
+            "24/7 market access"
+          ]
         }
       }
     },

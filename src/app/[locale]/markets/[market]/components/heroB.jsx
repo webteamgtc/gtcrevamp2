@@ -1,5 +1,5 @@
 'use client';
-/** Template B hero (even pages: Energy, Metals, Crypto): centred copy over three live price cards. */
+/** Template B hero (Energy, Metals, Crypto, Futures): centred copy over up to three live price cards (only real API symbols). */
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
@@ -76,7 +76,8 @@ export function HeroSpotlightB() {
       <div className="mt-12">
         <Copy center />
       </div>
-      <div dir="ltr" className="mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-3">
+      {rows.length > 0 && (
+      <div dir="ltr" className={cn('mx-auto mt-14 grid max-w-5xl gap-4', rows.length === 1 ? 'max-w-sm' : rows.length === 2 ? 'max-w-3xl md:grid-cols-2' : 'md:grid-cols-3')}>
         {rows.map((r, k) => (
           <motion.div key={r.s} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 + k * 0.12, duration: 0.8, ease: EASE }} whileHover={{ y: -6 }}>
             <NavLink href={href(r.s)} prefetch={false} className={cn('group relative block overflow-hidden rounded-3xl p-5 ring-1 transition-colors', k === 1 ? 'bg-white text-ink ring-white' : 'bg-white/[0.06] text-white ring-white/10 backdrop-blur hover:bg-white/[0.1]')}>
@@ -99,6 +100,7 @@ export function HeroSpotlightB() {
           </motion.div>
         ))}
       </div>
+      )}
       <StatRow center className="mx-auto mt-14 max-w-4xl" />
     </Shell>
   );

@@ -6,13 +6,16 @@ import { formatQuotePrice } from "@/lib/symbols/gtcTraderQuotesWs";
 import { getRowLiveQuote, useSymbolQuotesWs } from "./useSymbolQuotesWs";
 import { PAGE_TYPES } from "./useMarketLiveQuotes";
 
-/** API symbol type per markets hub instrument card. */
+/**
+ * API symbol type per markets hub instrument card (keys match MARKETS ids in src/config/markets.js).
+ * The symbols API has no Index / Crypto types, so those markets keep the demo feed.
+ */
 export const INSTRUMENT_API_TYPES = {
   forex: "FX Minors",
-  energy: "Energy",
   metals: "Metals",
-  indices: "Index",
-  "future-cfds": "Future",
+  energy: "Energy",
+  shares: "Stock",
+  futures: "Future",
 };
 
 async function loadSymbolsForType(type, pageSize = 3) {
@@ -206,8 +209,16 @@ export function buildInstrumentWidget(symbolRow, liveQuotes) {
 
   return {
     symbol: symbolRow.symbol,
+    name: symbolRow.name,
+    live: Boolean(quote),
     sellPrice: quote?.sell ?? "—",
     buyPrice: quote?.buy ?? "—",
+    spread: quote?.spread ?? "—",
+    /** where the mid price sits in today's low–high range, 0–100 (null until both are known) */
+    rangePercent:
+      sellNum != null && buyNum != null && dayLow != null && dayHigh != null && dayHigh > dayLow
+        ? Math.min(100, Math.max(0, (((sellNum + buyNum) / 2 - dayLow) / (dayHigh - dayLow)) * 100))
+        : null,
     lotSize: symbolRow.lotSize ?? "0.01",
     low: dayLow != null ? formatQuotePrice(dayLow, symbolRow.digits) : "—",
     high: dayHigh != null ? formatQuotePrice(dayHigh, symbolRow.digits) : "—",

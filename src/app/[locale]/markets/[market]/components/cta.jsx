@@ -73,6 +73,7 @@ export function CtaSplitLive() {
           </div>
         </Reveal>
       </div>
+      {rows.length > 0 && (
       <div dir="ltr" className="mt-12 flex flex-wrap gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
         {rows.map((r) => (
           <NavLink key={r.s} href={href(r.s)} prefetch={false} className="min-w-[45%] flex-1 bg-brand-950/60 px-4 py-3 transition-colors hover:bg-brand-900 sm:min-w-[30%] lg:min-w-0">
@@ -81,6 +82,7 @@ export function CtaSplitLive() {
           </NavLink>
         ))}
       </div>
+      )}
       <Risk />
     </Shell>
   );

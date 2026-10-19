@@ -102,11 +102,11 @@ export const MENU = [
           { id: 'gtcGoWeb', href: '/trading/gtc-go-web', icon: Globe },
           { id: 'gtcGoIos', href: '/trading/gtc-go-app-ipad', icon: Tablet },
           { id: 'gtcGoAndroid', href: '/trading/gtc-go-app-android', icon: Smartphone },
-          { id: 'copyTrading', href: '/copy-trading', icon: Users }
+          { id: 'copyTrading', href: '/trading/copy-trading', icon: Users }
         ] },
         { id: 'advantages', items: [
           { id: 'pamm', href: '/trading/pamm-account', icon: ChartPie },
-          { id: 'vps', href: '/vps', icon: Server }
+          { id: 'vps', href: '/trading/vps-hosting-services', icon: Server }
         ] }
       ]
     ],
