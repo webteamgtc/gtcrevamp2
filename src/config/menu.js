@@ -25,7 +25,7 @@ export const FOOTER_LINKS = {
   quick: ['/trading/account-types', '/copy-trading', '/trading/deposit', '/markets', '/promotions'],
   platforms: ['/trading/mt4-platform', '/trading/mt5-platform', '/trading/gtc-go-app'],
   company: ['/company/about-us', '/company/why-gtc-group', '/company/regulations', '/company/events-and-exhibitions'],
-  support: ['/faq', '/company/contact-us', '/company/contact-us#help'],
+  support: ['/company/faqs', '/company/contact-us', '/company/contact-us#help'],
   legal: [
     '/legal/website-disclaimer',
     '/legal/risk-disclosure',
@@ -61,7 +61,7 @@ export const MENU = [
       ] }],
       [
         { id: 'help', items: [
-          { id: 'faqSupport', href: '/faq', icon: Headset },
+          { id: 'faqSupport', href: '/company/faqs', icon: Headset },
           { id: 'contact', href: '/company/contact-us', icon: MessageCircle }
         ] },
         { id: 'partner', items: [
@@ -158,8 +158,8 @@ export const MENU = [
         { id: 'technical', href: '/knowledge-to-learn/technical-analysis', icon: ChartCandlestick }
       ] }],
       [{ id: 'helpCentre', items: [
-        { id: 'qa', href: '/faq', icon: CircleHelp },
-        { id: 'depositFaq', href: '/faq/account-deposit', icon: FileQuestion },
+        { id: 'qa', href: '/company/faqs', icon: CircleHelp },
+        { id: 'depositFaq', href: '/company/faqs#questions', icon: FileQuestion },
         { id: 'platformGuides', href: '/knowledge-to-learn/platform-guide', icon: Monitor }
       ] }]
     ],

@@ -58,7 +58,7 @@ function serviceAccount() {
   try {
     return JSON.parse(readFileSync(credentialsFilePath(), 'utf8'));
   } catch {
-    throw new Error('Google Drive service account is not configured (see src/lib/platform-guide/googleDrive.js).');
+    throw new Error('Google Drive service account is not configured: set GOOGLE_SERVICE_ACCOUNT_JSON (or GOOGLE_DRIVE_CLIENT_EMAIL + GOOGLE_DRIVE_PRIVATE_KEY) in the environment.');
   }
 }
 
