@@ -22,8 +22,11 @@ export const courseHref = (course) => `${HUB_PATH}/${course}`;
 export const sectionHref = (course, section) => `${courseHref(course)}/${section}`;
 export const articleHref = (course, section, article) => `${sectionHref(course, section)}/${encodeURIComponent(article)}`;
 
-/** Hub card key → course URL (null when that material has no course). */
+/** Hub cards that open a page other than a course. */
+const MATERIAL_PAGES = { strategyBlueprints: `${HUB_PATH}/platform-guide` };
+
+/** Hub card key → course / page URL (null when that material has no page). */
 export function materialHref(key) {
   const course = Object.keys(COURSES).find((c) => COURSES[c].material === key);
-  return course ? courseHref(course) : null;
+  return course ? courseHref(course) : (MATERIAL_PAGES[key] ?? null);
 }

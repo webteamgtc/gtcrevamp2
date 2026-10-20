@@ -160,7 +160,7 @@ export const MENU = [
       [{ id: 'helpCentre', items: [
         { id: 'qa', href: '/faq', icon: CircleHelp },
         { id: 'depositFaq', href: '/faq/account-deposit', icon: FileQuestion },
-        { id: 'platformGuides', href: '/learn/platform-guides', icon: Monitor }
+        { id: 'platformGuides', href: '/knowledge-to-learn/platform-guide', icon: Monitor }
       ] }]
     ],
     promo: { id: 'learn', href: '/insights', visual: 'insight' }

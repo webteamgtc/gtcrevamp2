@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
  *  2. forwards it to the Zapier webhook (CRM),
  *  3. e-mails the support team through Mailgun (src/config/nodemailer.js).
  * Succeeds when at least one channel accepts it, so a lead is never lost to a single outage.
- * Requires MAILGUN_API_KEY (and optionally MAILGUN_USERNAME / MAILGUN_API_URL) in the environment.
+ * Env: VPS_ZAPIER_HOOK_URL (Zapier catch hook) and MAILGUN_API_KEY (optionally MAILGUN_USERNAME / MAILGUN_API_URL).
  */
-const ZAPIER_HOOK = "https://hooks.zapier.com/hooks/catch/16420445/38odhxb/";
+const ZAPIER_HOOK = process.env.VPS_ZAPIER_HOOK_URL?.trim();
 const MAIL_TO = "support@gtcfx.com";
 const MAIL_CC = "mohammad.zeeshan@gtcfx.com";
 const SUBJECT = "VPS Hosting - New Application Submitted";
@@ -174,6 +174,7 @@ async function sendEmail(d) {
 }
 
 async function sendZapier(d) {
+  if (!ZAPIER_HOOK) throw new Error("VPS_ZAPIER_HOOK_URL is not set");
   const res = await fetch(ZAPIER_HOOK, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

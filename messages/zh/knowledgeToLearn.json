@@ -1,0 +1,36 @@
+{
+  "platformGuidePage": {
+    "hero": {
+      "title": "GTCFX 平台指南",
+      "description": "充分利用您的 GTCFX 账户，了解我们平台工具与功能的全部要点。",
+      "primaryCta": "开通真实账户"
+    },
+    "cta": {
+      "titleLine1": "交易全球",
+      "titleAccent": "市场。",
+      "description": "开通真实账户，进入 7+ 个市场，涵盖外汇、贵金属、指数、股票、加密货币等 — 选择全球信赖的经纪商。",
+      "primaryCta": "开通真实账户"
+    },
+    "subTabs": {
+      "png": "PNG",
+      "pdf": "PDF",
+      "video": "视频"
+    },
+    "languageFilter": {
+      "ariaLabel": "按语言筛选指南",
+      "closeMenu": "关闭语言菜单"
+    },
+    "platforms": {
+      "gtcgo": "GTCFX：GTC Go 应用教程",
+      "gettingStarted": "GTCFX 客户门户教程"
+    },
+    "downloadPdf": "下载 PDF",
+    "viewPdf": "查看 PDF",
+    "showAll": "显示全部",
+    "loadError": "无法加载平台指南内容，请稍后重试。",
+    "emptyPng": "暂无可用的 PNG 指南。",
+    "emptyPdf": "暂无可用的 PDF 指南。",
+    "backToGuides": "返回平台指南",
+    "moreGuides": "更多[指南]"
+  }
+}

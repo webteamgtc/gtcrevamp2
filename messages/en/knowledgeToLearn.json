@@ -433,5 +433,46 @@
       "subtitle": "Step-by-step platform guides from install to first trade",
       "psychologyLink": "Knowledge to Trade"
     }
+  },
+  "platformGuidePage": {
+    "hero": {
+      "title": "GTCFX Platform Guides",
+      "description": "Get the most from your GTCFX account, and discover everything you need to know about our platform's tools and features.",
+      "primaryCta": "Open Live Account"
+    },
+    "cta": {
+      "titleLine1": "Trade the World's",
+      "titleAccent": "markets.",
+      "description": "Open a live account and access 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more — from a broker trusted globally.",
+      "primaryCta": "Open Live Account"
+    },
+    "subTabs": {
+      "png": "PNG",
+      "pdf": "PDF",
+      "video": "Video"
+    },
+    "languageFilter": {
+      "ariaLabel": "Filter guides by language",
+      "closeMenu": "Close language menu"
+    },
+    "platforms": {
+      "gtcgo": "GTCFX: GTC Go App Tutorial",
+      "gettingStarted": "GTCFX Client Portal Tutorial"
+    },
+    "downloadPdf": "Download PDF",
+    "viewPdf": "View PDF",
+    "showAll": "Show All",
+    "loadError": "Unable to load platform guide content. Please try again later.",
+    "emptyPng": "No PNG guides available yet.",
+    "emptyPdf": "No PDF guides available yet.",
+    "emptyVideo": "No tutorial videos available yet.",
+    "watchVideo": "Watch video",
+    "closeVideo": "Close video",
+    "backToGuides": "Back to platform guides",
+    "moreGuides": "More [guides]",
+    "meta": {
+      "title": "GTCFX Platform Guides | GTC Go & Client Portal Tutorials",
+      "description": "Get the most from your GTCFX account, and discover everything you need to know about our platform's tools and features."
+    }
   }
 }
