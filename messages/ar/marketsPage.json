@@ -810,7 +810,18 @@
         "waiting": "في انتظار السعر المباشر",
         "range": "نطاق اليوم",
         "instruments": "{count} أداة",
-        "all": "الكل"
+        "all": "الكل",
+        "noSymbols": "لا توجد رموز متاحة حالياً.",
+        "symbol": "الرمز",
+        "trend": "الاتجاه",
+        "action": "تداول",
+        "pageRange": "{from}–{to} من {total}",
+        "prevPage": "السابق",
+        "nextPage": "التالي",
+        "perPage": "{count} في الصفحة",
+        "gainers": "الرابحون",
+        "losers": "الخاسرون",
+        "pageOf": "صفحة {page} من {total}"
       },
       "platforms": {
         "title": "حمّل [منصات] التداول",

@@ -150,7 +150,7 @@
   .heading-display { font-size: 2.3rem; line-height: 1.05; letter-spacing: -0.03em; }
   .heading-page    { font-size: 1.75rem; line-height: 1.12; letter-spacing: -0.025em; } /* inner-page hero: same scale as section titles */
   .heading-section { font-size: 1.75rem; line-height: 1.15; letter-spacing: -0.025em; }
-  .heading-title   { font-size: 1.375rem; line-height: 1.2;  letter-spacing: -0.025em; }
+  .heading-title   { font-size: 1.15rem; line-height: 1.2;  letter-spacing: -0.025em; }
   .heading-card    { font-size: 1.25rem; line-height: 1.3; letter-spacing: -0.015em; }
   .heading-small   { font-size: 1rem; line-height: 1.4; }
   .heading-label   { color: var(--heading-label); font-size: 0.75rem; line-height: 1.4; letter-spacing: 0.18em; text-transform: uppercase; }
@@ -160,7 +160,8 @@
     .heading-section { font-size: 1.875rem; }
   }
   @media (min-width: 768px) {
-    .heading-title { font-size: 1.875rem; }
+    .heading-title { font-size: 1.25rem; }
+    .heading-title { font-weight: 600; }
   }
   @media (min-width: 1024px) {
     .heading-display { font-size: 3.9rem; }
@@ -241,18 +242,6 @@
 @keyframes vmarquee-up { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -50%, 0); } }
 @keyframes vmarquee-down { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0); } }
 @media (prefers-reduced-motion: reduce) { .vmarquee { height: auto !important; overflow: visible !important; } .vmarquee-track { animation: none !important; transform: none !important; } .vmarquee-track > [aria-hidden="true"] { display: none; } }
-
-/* Section reveal on scroll — values come from src/config/reveal.js (set as CSS variables) */
-[data-reveal]:not([data-reveal='in']) {
-  opacity: 0;
-  transform: translate3d(0, var(--reveal-y, 64px), 0) scale(var(--reveal-s, 0.96));
-}
-[data-reveal] {
-  transition: opacity var(--reveal-d, 1.4s) var(--reveal-ease, ease), transform var(--reveal-d, 1.4s) var(--reveal-ease, ease);
-}
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal], [data-reveal]:not([data-reveal='in']) { opacity: 1; transform: none; transition: none; }
-}
 
 /* Symbol page hero: decorative candles drifting sideways (strip is drawn twice, so -50% loops seamlessly) */
 @keyframes candle-drift { to { transform: translateX(-50%); } }

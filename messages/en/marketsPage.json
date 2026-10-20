@@ -135,7 +135,17 @@
         "range": "Today's range",
         "instruments": "{count} instruments",
         "all": "All",
-        "noSymbols": "No symbols available right now."
+        "noSymbols": "No symbols available right now.",
+        "symbol": "Symbol",
+        "trend": "Trend",
+        "action": "Trade",
+        "pageRange": "{from}–{to} of {total}",
+        "prevPage": "Previous",
+        "nextPage": "Next",
+        "perPage": "{count} per page",
+        "gainers": "Gainers",
+        "losers": "Losers",
+        "pageOf": "Page {page} of {total}"
       },
       "platforms": {
         "title": "Download Trading [Platforms]",
