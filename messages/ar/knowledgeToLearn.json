@@ -1,0 +1,39 @@
+{
+  "platformGuidePage": {
+    "hero": {
+      "title": "أدلة منصة GTCFX",
+      "description": "استفد إلى أقصى حد من حساب GTCFX واكتشف كل ما تحتاج معرفته عن أدوات وميزات منصتنا.",
+      "primaryCta": "فتح حساب حقيقي"
+    },
+    "cta": {
+      "titleLine1": "تداول في",
+      "titleAccent": "أسواق العالم.",
+      "description": "افتح حساباً حقيقياً وادخل إلى أكثر من 7 أسواق تشمل الفوركس والمعادن والمؤشرات والأسهم والعملات الرقمية وغيرها — لدى وسيط موثوق عالمياً.",
+      "primaryCta": "فتح حساب حقيقي"
+    },
+    "subTabs": {
+      "png": "PNG",
+      "pdf": "PDF",
+      "video": "فيديو"
+    },
+    "languageFilter": {
+      "ariaLabel": "تصفية الأدلة حسب اللغة",
+      "closeMenu": "إغلاق قائمة اللغات"
+    },
+    "platforms": {
+      "gtcgo": "GTCFX: دليل تطبيق GTC Go",
+      "gettingStarted": "GTCFX: دليل بوابة العملاء"
+    },
+    "downloadPdf": "تحميل PDF",
+    "viewPdf": "عرض PDF",
+    "showAll": "عرض الكل",
+    "loadError": "تعذر تحميل محتوى دليل المنصة. يرجى المحاولة مرة أخرى لاحقاً.",
+    "emptyPng": "لا تتوفر أدلة PNG بعد.",
+    "emptyPdf": "لا تتوفر أدلة PDF بعد.",
+    "emptyVideo": "لا تتوفر فيديوهات تعليمية حتى الآن.",
+    "watchVideo": "شاهد الفيديو",
+    "closeVideo": "أغلق الفيديو",
+    "backToGuides": "العودة إلى أدلة المنصة",
+    "moreGuides": "المزيد من [الأدلة]"
+  }
+}
