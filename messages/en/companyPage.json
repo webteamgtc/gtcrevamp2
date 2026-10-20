@@ -1795,5 +1795,126 @@
       "live": "Open Live Account",
       "demo": "Try Demo Account"
     }
+  },
+  "faqsPage": {
+    "meta": {
+      "title": "FAQs | GTCFX Help Center",
+      "description": "Find answers about accounts, deposits, platforms, verification, and support."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "company": "Company",
+      "current": "FAQs"
+    },
+    "hero": {
+      "badge": "GTCFX Help Center · 24/7 Support",
+      "title": "Hello, how can we [help you] today?",
+      "description": "Browse guides on accounts, deposits, platforms and trading conditions — answers in seconds, not hours.",
+      "searchPlaceholder": "Search articles, guides and FAQs... (e.g. 'how to withdraw')",
+      "searchAriaLabel": "Help center search",
+      "searchButton": "Search",
+      "popularLabel": "Popular:",
+      "popularTopics": {
+        "deposit": "Deposit & Withdrawal",
+        "openAccount": "Open an account",
+        "mt5": "MT5 Download",
+        "verification": "Verification"
+      },
+      "floatingBadges": {
+        "deposits": "Deposits",
+        "openAccount": "Open Account",
+        "mt5Setup": "MT5 Setup",
+        "security": "Security"
+      },
+      "stats": [
+        {
+          "value": "450+",
+          "label": "Help Articles"
+        },
+        {
+          "value": "98%",
+          "label": "Resolution Rate"
+        },
+        {
+          "value": "< 2 min",
+          "label": "Avg. Chat Wait"
+        },
+        {
+          "value": "24/7",
+          "label": "Live Support"
+        }
+      ]
+    },
+    "categories": {
+      "title": "Find what you need [by category]",
+      "description": "Eight curated knowledge hubs covering everything from account opening to advanced trading conditions.",
+      "cards": {
+        "accountOpening": {
+          "title": "Account Opening",
+          "description": "Open a Live or Demo account in minutes. Complete guides on registration, KYC verification and account types.",
+          "tags": [
+            "Registration",
+            "KYC Documents"
+          ]
+        },
+        "deposits": {
+          "title": "Deposits & Withdrawals",
+          "description": "Funding methods, processing times and limits."
+        },
+        "platforms": {
+          "title": "Trading Platforms",
+          "description": "MT4, MT5 and mobile app setup & troubleshooting."
+        },
+        "conditions": {
+          "title": "Trading Conditions",
+          "description": "Spreads, swaps, leverage and margin requirements."
+        },
+        "management": {
+          "title": "Account Management",
+          "description": "Profile updates, password resets and settings."
+        },
+        "security": {
+          "title": "Account Security",
+          "description": "2FA, suspicious activity and protection tips."
+        },
+        "regulation": {
+          "title": "Regulation & Compliance",
+          "description": "Licences, policies, fund safety and disclosures."
+        }
+      }
+    },
+    "topQuestions": {
+      "title": "Quick answers to [common questions]",
+      "description": "Browse by category. If you can't find what you're looking for, our team is one click away.",
+      "empty": "No FAQs available at the moment.",
+      "loadingAria": "Loading FAQs"
+    },
+    "humanSupport": {
+      "title": "Still need help? [Connect] with our team",
+      "description": "Our multilingual support team is available around the clock during market hours. Choose the channel that works best for you.",
+      "cards": {
+        "liveChat": {
+          "title": "Live Chat",
+          "description": "Connect with a support agent instantly through our live chat, fastest way to get answers in real-time.",
+          "meta": "Online every time · 24/7"
+        },
+        "email": {
+          "title": "Email Support",
+          "description": "Send us a detailed message and receive a thorough response from our specialists, ideal for complex queries.",
+          "meta": "support@gtcfx.com"
+        },
+        "phone": {
+          "title": "Phone Support",
+          "description": "Speak directly with our team. Available in multiple languages for premium account holders and partners.",
+          "meta": "+44 800 048 8461"
+        }
+      }
+    },
+    "cta": {
+      "title": "Didn't find what you [were looking for?]",
+      "description": "Submit an enquiry or contact our support team using one of the channels above. Our team can assist with account, platform, payment and general service-related matters. GTCFX provides general and administrative support only through this page. Nothing communicated through our support channels constitutes investment, legal or tax advice.",
+      "openLiveAccount": "Open Live Account",
+      "openDemoAccount": "Open Free Demo Account"
+    }
   }
 }
