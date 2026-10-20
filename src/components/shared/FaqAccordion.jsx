@@ -43,7 +43,7 @@ export default function FaqAccordion({ items, defaultOpen = 0, numbered = false,
         const on = open === i;
         const panel = `${uid}-p${i}`;
         return (
-          <StaggerItem key={it.q}>
+          <StaggerItem key={`${i}-${it.q}`}>
             <motion.div layout transition={{ duration: 0.4, ease: EASE }} className={cn('relative overflow-hidden rounded-2xl border bg-white transition-[border-color,box-shadow] duration-500', on ? 'border-brand/20 shadow-xl shadow-brand/10' : 'border-brand/10 hover:border-brand/25 hover:shadow-md')}>
               {on && <motion.span layoutId={`${uid}-bar`} className="absolute inset-y-0 start-0 w-1 bg-gradient-to-b from-gold to-brand" aria-hidden />}
               <h3>
