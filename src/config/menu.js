@@ -143,18 +143,19 @@ export const MENU = [
   },
   {
     id: 'learn',
+    href: '/knowledge-to-learn', // clicking "Learn" in the top bar opens the Knowledge hub
     columns: [
       [{ id: 'startTrading', items: [
-        { id: 'beginners', href: '/learn/beginners', icon: Rocket },
+        { id: 'beginners', href: '/knowledge-to-learn/for-trading-beginners', icon: Rocket },
         { id: 'freeDemo', href: PORTAL.demo, icon: MonitorPlay },
-        { id: 'glossary', href: '/learn/glossary', icon: BookA },
-        { id: 'liquidity', href: '/learn/liquidity-technology', icon: Network }
+        { id: 'glossary', href: '/knowledge-to-learn/trading-glossary', icon: BookA },
+        { id: 'liquidity', href: '/knowledge-to-learn/liquidity-technology', icon: Network }
       ] }],
       [{ id: 'skills', items: [
-        { id: 'essentials', href: '/learn/trading-essentials', icon: BookOpen },
-        { id: 'marketGuides', href: '/learn/market-guides', icon: Map },
-        { id: 'risk', href: '/learn/risk-management', icon: ShieldAlert },
-        { id: 'technical', href: '/learn/technical-analysis', icon: ChartCandlestick }
+        { id: 'essentials', href: '/knowledge-to-learn/ebooks-guides', icon: BookOpen },
+        { id: 'marketGuides', href: '/knowledge-to-learn/webinars-live', icon: Map },
+        { id: 'risk', href: '/knowledge-to-learn/platform-walkthroughs', icon: ShieldAlert },
+        { id: 'technical', href: '/knowledge-to-learn/technical-analysis', icon: ChartCandlestick }
       ] }],
       [{ id: 'helpCentre', items: [
         { id: 'qa', href: '/faq', icon: CircleHelp },
