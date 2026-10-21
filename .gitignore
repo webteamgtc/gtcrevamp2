@@ -25,3 +25,9 @@ yarn-error.log*
 
 # service-account keys
 /secrets/
+
+# local / generated (never commit)
+preview/
+.cursor/
+.turbo
+*.tsbuildinfo
