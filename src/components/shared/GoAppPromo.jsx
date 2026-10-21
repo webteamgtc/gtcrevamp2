@@ -8,10 +8,10 @@ import GtcGoPhone from '@/components/shared/GtcGoPhone';
 import StatValue from '@/components/shared/StatValue';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, TiltCard, EASE } from '@/components/motion';
-import StoreButtons from '../../trading/common-gtc-components/components/StoreButtons';
+import StoreButtons from '@/app/[locale]/trading/common-gtc-components/components/StoreButtons';
 
 /** QR to the GTC Go page on this site (built after mount, so it uses the current origin). */
-function GoQr({ label }) {
+export function GoQr({ label }) {
   const [url, setUrl] = useState('');
   useEffect(() => setUrl(`${window.location.origin}/trading/gtc-go-app`), []);
   return (
@@ -22,10 +22,13 @@ function GoQr({ label }) {
   );
 }
 
-/** Navy GTC Go band: copy, store buttons + QR, three stats; the live app phone on the other side. */
-export function GoAppPromo() {
-  const t = useTranslations('knowledgePage.gtcGoPromo');
-  const stats = t.raw('stats');
+/**
+ * Navy GTC Go band: copy, store buttons + QR, optional stats; the live app phone on the other side.
+ * `ns` = translation namespace with { title, description, qrLabel, stats? }.
+ */
+export function GoAppPromo({ ns = 'knowledgePage.gtcGoPromo' }) {
+  const t = useTranslations(ns);
+  const stats = t.has('stats') ? t.raw('stats') : [];
   return (
     <section id="gtc-go" className="is-dark relative overflow-hidden bg-gradient-to-b from-brand-800 via-brand-900 to-brand-950 py-16 text-white md:py-24">
       <div className="bg-grid-dark mask-radial absolute inset-0 opacity-60" aria-hidden />
@@ -41,16 +44,18 @@ export function GoAppPromo() {
             <StoreButtons tone="white" />
             <GoQr label={t('qrLabel')} />
           </div>
-          <Stagger className="mt-10 grid max-w-lg grid-cols-3 gap-3" stagger={0.1}>
-            {stats.map((s) => (
-              <StaggerItem key={s.label} className="rounded-2xl bg-white/[0.06] px-4 py-4 text-center ring-1 ring-white/10 backdrop-blur">
-                <div dir="ltr" className="text-gradient-gold text-2xl font-bold">
-                  <StatValue value={s.value} />
-                </div>
-                <div className="mt-1 text-xs text-white/55">{s.label}</div>
-              </StaggerItem>
-            ))}
-          </Stagger>
+          {stats.length > 0 && (
+            <Stagger className="mt-10 grid max-w-lg grid-cols-3 gap-3" stagger={0.1}>
+              {stats.map((s) => (
+                <StaggerItem key={s.label} className="rounded-2xl bg-white/[0.06] px-4 py-4 text-center ring-1 ring-white/10 backdrop-blur">
+                  <div dir="ltr" className="text-gradient-gold text-2xl font-bold">
+                    <StatValue value={s.value} />
+                  </div>
+                  <div className="mt-1 text-xs text-white/55">{s.label}</div>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          )}
         </Reveal>
 
         <div className="relative mx-auto flex w-full max-w-[420px] justify-center py-6">

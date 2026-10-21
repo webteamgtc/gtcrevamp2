@@ -30,13 +30,16 @@ export function text(html) {
 const stripSymbols = (s) => s.replace(/^[^\p{L}\p{N}]+/u, '').trim();
 
 /** Remove scripts, styles, external links, inline styles/handlers, comments and javascript: URLs. */
-export function cleanHtml(html) {
+// `keepStyles`: keep inline style="" (designed CMS layouts, e.g. GTC News posts); handlers / scripts still go.
+export function cleanHtml(html, { keepStyles = false } = {}) {
+  const attrs = keepStyles ? /\son[a-z]+\s*=\s*(".*?"|'.*?'|[^\s>]+)/gi : /\s(?:on[a-z]+|style)\s*=\s*(".*?"|'.*?'|[^\s>]+)/gi;
   return String(html ?? '')
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/<(script|style)[\s\S]*?<\/\1>/gi, '')
     .replace(/<link\b[^>]*>/gi, '')
     .replace(/<(iframe|object|embed)(?![^>]*\b(?:youtube\.com|youtube-nocookie\.com|player\.vimeo\.com)\b)[\s\S]*?(?:<\/\1>|\/>)/gi, '')
-    .replace(/\s(?:on[a-z]+|style)\s*=\s*(".*?"|'.*?'|[^\s>]+)/gi, '')
+    .replace(attrs, '')
+    .replace(/url\(\s*(["']?)\s*javascript:[^)]*\)/gi, 'none')
     .replace(/(href|src)\s*=\s*(["'])\s*javascript:[^"']*\2/gi, '$1="#"')
     .trim();
 }

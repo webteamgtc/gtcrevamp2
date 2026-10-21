@@ -8,7 +8,7 @@ import Footer from '@/components/shared/Footer';
 import { ScrollProgress } from '@/components/motion';
 import { MarketsHero } from './MarketsHero';
 import { Instruments } from './Instruments';
-import { MarketNews } from './MarketNews';
+import NewsCarousel from '@/components/shared/news/NewsCarousel';
 import { EconomicCalendar } from './EconomicCalendar';
 import { MarketsCta } from './MarketsCta';
 
@@ -20,7 +20,7 @@ export default function MarketsPage({ news }) {
       <main>
         <MarketsHero />
         <Instruments />
-        <MarketNews articles={news} />
+        <NewsCarousel articles={news} />
         <EconomicCalendar />
         <MarketsCta />
       </main>

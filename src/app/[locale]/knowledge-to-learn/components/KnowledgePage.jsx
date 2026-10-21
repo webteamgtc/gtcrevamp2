@@ -11,7 +11,7 @@ import { ScrollProgress } from '@/components/motion';
 import { PORTAL } from '@/config/menu';
 import { KnowledgeHero } from './KnowledgeHero';
 import { MaterialsGrid } from './MaterialsGrid';
-import { GoAppPromo } from './GoAppPromo';
+import { GoAppPromo } from '@/components/shared/GoAppPromo';
 import { DemoAccountBand } from './DemoAccountBand';
 import { QandA } from './QandA';
 
