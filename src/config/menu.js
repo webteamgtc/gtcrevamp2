@@ -57,7 +57,7 @@ export const MENU = [
       ] }],
       [{ id: 'legal', items: [
         { id: 'regulation', href: '/company/regulations', icon: ShieldCheck },
-        { id: 'awards', href: '/awards', icon: Award }
+        { id: 'awards', href: '/company/awards', icon: Award }
       ] }],
       [
         { id: 'help', items: [
@@ -178,7 +178,7 @@ export const MENU = [
       [{ id: 'companyUpdates', items: [
         { id: 'companyNews', href: '/gtc-news/company-news', icon: Megaphone },
         { id: 'events', href: '/company/events-and-exhibitions', icon: CalendarDays },
-        { id: 'awardsMedia', href: '/awards', icon: Trophy }
+        { id: 'awardsMedia', href: '/company/awards', icon: Trophy }
       ] }]
     ],
     promo: { id: 'news', href: '/trading/deposit', visual: 'currencies' }

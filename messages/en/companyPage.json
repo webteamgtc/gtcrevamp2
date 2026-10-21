@@ -1947,5 +1947,151 @@
       "openLiveAccount": "Open Live Account",
       "openDemoAccount": "Open Free Demo Account"
     }
+  },
+  "awardsPage": {
+    "meta": {
+      "title": "Awards & Recognition | GTCFX",
+      "description": "GTCFX has been recognised by leading industry expos and award bodies across the Middle East, Asia and beyond. See our international awards by year."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "company": "Company",
+      "current": "Awards"
+    },
+    "hero": {
+      "title": "Recognition [Without Borders]",
+      "text": "From Dubai to Doha, Muscat to Asia, GTCFX is recognised by leading industry institutions across global markets.",
+      "primary": "Open Account",
+      "secondary": "Try Demo Account",
+      "stats": [
+        {
+          "value": "52+",
+          "label": "International awards"
+        },
+        {
+          "value": "14",
+          "label": "Cities honoured"
+        },
+        {
+          "value": "04",
+          "label": "Regions covered"
+        }
+      ],
+      "featured": "Featured award"
+    },
+    "issuers": [
+      "World Finance",
+      "Finance Magnates",
+      "Dubai Forex Expo",
+      "UK Finance"
+    ],
+    "issuersTitle": "Recognised by",
+    "gallery": {
+      "title": "Recognised in [Every Market]",
+      "text": "Filter by year to find the recognition closest to you. Each award shows who gave it, the year and the city where it was presented.",
+      "all": "All awards",
+      "viewMore": "View more",
+      "viewLess": "Show fewer",
+      "items": [
+        {
+          "title": "Best Liquidity Provider Globally",
+          "by": "Awarded by SmartVision Expo Oman",
+          "year": "2025",
+          "city": "Muscat",
+          "region": "Middle East",
+          "image": "/awards/1.webp"
+        },
+        {
+          "title": "Best Liquidity Provider",
+          "by": "Awarded by Qatar Financial Expo and Awards Doha",
+          "year": "2025",
+          "city": "Doha",
+          "region": "Middle East",
+          "image": "/awards/2.webp"
+        },
+        {
+          "title": "Best Forex Introducing Broker",
+          "by": "Awarded by WIKI Expo Dubai Award",
+          "year": "2024",
+          "city": "Dubai",
+          "region": "Middle East",
+          "image": "/awards/3.webp"
+        },
+        {
+          "title": "Most Trusted Forex Broker",
+          "by": "Awarded by BrokerView Expo Abu Dhabi Award",
+          "year": "2024",
+          "city": "Abu Dhabi",
+          "region": "Middle East",
+          "image": "/awards/4.webp"
+        },
+        {
+          "title": "Worldwide Leading Broker",
+          "by": "Awarded by Forex Traders Summit Dubai",
+          "year": "2024",
+          "city": "Dubai",
+          "region": "Middle East",
+          "image": "/awards/5.webp"
+        },
+        {
+          "title": "Best Forex Trading Platform Asia",
+          "by": "Awarded by AETC",
+          "year": "2024",
+          "city": "",
+          "region": "Asia",
+          "image": "/awards/6.webp"
+        },
+        {
+          "title": "Recognition Award",
+          "by": "Awarded during National Day 2024",
+          "year": "2024",
+          "city": "",
+          "region": "Middle East",
+          "image": "/awards/7.webp"
+        },
+        {
+          "title": "Industry Recognition",
+          "by": "Awarded for outstanding achievement",
+          "year": "2024",
+          "city": "",
+          "region": "Global",
+          "image": "/awards/8.webp"
+        },
+        {
+          "title": "Industry Recognition",
+          "by": "Awarded by UF Awards",
+          "year": "2025",
+          "city": "",
+          "region": "Global",
+          "image": "/awards/9.webp"
+        }
+      ]
+    },
+    "map": {
+      "title": "A Trophy in [Every Region]",
+      "text": "Our awards come from the cities where our clients trade: the UAE, Qatar, Oman, across Asia and from global award bodies.",
+      "awards": "{count, plural, one {# award} other {# awards}}"
+    },
+    "cta": {
+      "title": "Wherever You Trade, We're [Already Recognised]",
+      "text": "Join traders worldwide and experience a service recognised by the institutions that matter.",
+      "steps": [
+        {
+          "title": "Register",
+          "text": "Sign up in minutes with your email, set your password and tell us where you trade from."
+        },
+        {
+          "title": "Create an account",
+          "text": "Complete verification, choose your account type and unlock MT4, MT5 and the GTC Go app."
+        },
+        {
+          "title": "Make a deposit",
+          "text": "Fund securely by card, bank transfer or e-wallet, then trade forex, indices and other CFDs."
+        }
+      ],
+      "note": "No obligation. Start with a demo to practise risk-free before going live.",
+      "primary": "Open Live Account",
+      "secondary": "Try Demo Account"
+    }
   }
 }
