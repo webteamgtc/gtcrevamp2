@@ -167,15 +167,16 @@ export const MENU = [
   },
   {
     id: 'news',
+    href:"/gtc-news",
     columns: [
       [{ id: 'marketUpdates', items: [
-        { id: 'outlook', href: '/news/market-outlook', icon: Newspaper },
-        { id: 'calendar', href: '/news/economic-calendar', icon: CalendarClock },
-        { id: 'earnings', href: '/news/earnings-dividends', icon: Coins },
+        { id: 'outlook', href: '/gtc-news/market-daily-updates', icon: Newspaper },
+        { id: 'calendar', href: '/gtc-news/economic-calendar', icon: CalendarClock },
+        { id: 'earnings', href: '/gtc-news/earnings-calendar', icon: Coins },
         { id: 'holidays', href: '/news/market-holidays', icon: CalendarX }
       ] }],
       [{ id: 'companyUpdates', items: [
-        { id: 'companyNews', href: '/news/company', icon: Megaphone },
+        { id: 'companyNews', href: '/gtc-news/company-news', icon: Megaphone },
         { id: 'events', href: '/company/events-and-exhibitions', icon: CalendarDays },
         { id: 'awardsMedia', href: '/awards', icon: Trophy }
       ] }]

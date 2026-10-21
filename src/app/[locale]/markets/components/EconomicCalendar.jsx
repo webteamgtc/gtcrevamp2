@@ -10,13 +10,14 @@ import { cn } from '@/lib/utils';
 
 /** TradingView economic calendar embed (no API key; renders into an iframe). */
 const TV_SRC = 'https://s3.tradingview.com/external-embedding/embed-widget-events.js';
-const tvConfig = (locale) => ({ colorTheme: 'dark', isTransparent: true, width: '100%', height: '100%', locale, importanceFilter: '0,1', countryFilter: 'us,eu,gb,jp,cn,au,ca,ch,de,nz' });
+const tvConfig = (locale, theme) => ({ colorTheme: theme, isTransparent: true, width: '100%', height: '100%', locale, importanceFilter: '0,1', countryFilter: 'us,eu,gb,jp,cn,au,ca,ch,de,nz' });
 
 /**
  * Loads the TradingView widget only when the panel scrolls near the viewport (keeps the page fast:
  * no third-party script on first paint). Fixed height, so nothing shifts when it appears.
  */
-function TradingViewWidget({ locale, loadingLabel }) {
+export function TradingViewWidget({ locale, loadingLabel, theme = 'dark' }) {
+  const light = theme === 'light';
   const box = useRef(null);
   const [near, setNear] = useState(false);
   const [ready, setReady] = useState(false);
@@ -37,7 +38,7 @@ function TradingViewWidget({ locale, loadingLabel }) {
     s.src = TV_SRC;
     s.async = true;
     s.type = 'text/javascript';
-    s.innerHTML = JSON.stringify(tvConfig(locale));
+    s.innerHTML = JSON.stringify(tvConfig(locale, theme));
     el.appendChild(s);
     const mo = new MutationObserver(() => {
       const f = el.querySelector('iframe');
@@ -48,18 +49,18 @@ function TradingViewWidget({ locale, loadingLabel }) {
       mo.disconnect();
       el.innerHTML = '';
     };
-  }, [locale, near]);
+  }, [locale, near, theme]);
 
   return (
     <div className="relative h-[520px] md:h-[600px]">
       {!ready && (
         <div className="absolute inset-0 flex flex-col gap-3 p-5" aria-hidden>
           {Array.from({ length: 8 }).map((_, i) => (
-            <span key={i} className="h-11 animate-pulse rounded-xl bg-white/[0.06]" style={{ animationDelay: `${i * 80}ms` }} />
+            <span key={i} className={cn('h-11 animate-pulse rounded-xl', light ? 'bg-ink/[0.05]' : 'bg-white/[0.06]')} style={{ animationDelay: `${i * 80}ms` }} />
           ))}
         </div>
       )}
-      {!ready && <p className="absolute inset-x-0 bottom-5 text-center text-xs text-white/40">{loadingLabel}</p>}
+      {!ready && <p className={cn('absolute inset-x-0 bottom-5 text-center text-xs', light ? 'text-ink/40' : 'text-white/40')}>{loadingLabel}</p>}
       <div ref={box} className={cn('tradingview-widget-container size-full transition-opacity duration-500', ready ? 'opacity-100' : 'opacity-0')} />
     </div>
   );
