@@ -10,7 +10,17 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ChevronDown, CircleAlert, CircleCheck, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { PORTAL } from '@/config/menu';
-import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, flagFor, dialFor, useGtcCountries } from './formKit';
+import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, dialFor, useGtcCountries } from './formKit';
+
+/* PhoneInput (react-phone-number-input) restyled to match the other fields */
+const phoneCls =
+  '[&_.PhoneInput]:flex [&_.PhoneInput]:h-full [&_.PhoneInput]:w-full [&_.PhoneInput]:items-center [&_.PhoneInput]:gap-2.5 ' +
+  '[&_.PhoneInputCountry]:me-0 [&_.PhoneInputCountry]:border-e [&_.PhoneInputCountry]:border-brand/10 [&_.PhoneInputCountry]:pe-2.5 ' +
+  '[&_.PhoneInputCountryIcon]:shadow-none [&_.PhoneInputCountryIcon--border]:bg-transparent [&_.PhoneInputCountryIcon--border]:shadow-none ' +
+  '[&_.PhoneInputCountrySelectArrow]:text-ink/50 [&_.PhoneInputCountrySelectArrow]:opacity-80 ' +
+  '[&_.PhoneInputInput]:h-full [&_.PhoneInputInput]:min-w-0 [&_.PhoneInputInput]:flex-1 [&_.PhoneInputInput]:border-0 [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:text-sm [&_.PhoneInputInput]:text-ink [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:placeholder:text-ink/35';
 
 const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
@@ -32,8 +42,13 @@ function readUrlParams() {
   return { partner, locked: !!(q.get('code') || q.get('ref')), deepLink: q.get('deep_link_value') || '' };
 }
 
-export function LiveAccountForm() {
+/**
+ * `title` / `subtitle` override the card header (defaults: tradingPage.liveForm.title / subtitle).
+ * `variant="page"` is the roomier layout used on /live-account-application; the default suits a hero column.
+ */
+export function LiveAccountForm({ title, subtitle, variant = 'compact', className }) {
   const t = useTranslations('tradingPage.liveForm');
+  const page = variant === 'page';
   const [values, setValues] = useState(EMPTY);
   const [touched, setTouched] = useState({});
   const { countries, failed: countriesFailed, suggested } = useGtcCountries();
@@ -64,7 +79,13 @@ export function LiveAccountForm() {
 
   const selected = countries.find((c) => c.name === values.country);
   const dial = dialFor(selected);
-  const phoneDigits = values.phone.replace(/\D/g, '');
+  // phone holds an international number ("+971501234567") from PhoneInput; just a dial code counts as empty
+  const phoneEmpty = !values.phone || /^\+\d{0,4}$/.test(values.phone);
+
+  // picking a country (or the preselected one) starts the phone with its dial code, unless a number was typed
+  useEffect(() => {
+    if (dial) setValues((v) => (!v.phone || /^\+\d{0,4}$/.test(v.phone) ? { ...v, phone: `+${dial}` } : v));
+  }, [dial]);
 
   const errors = useMemo(() => {
     const e = {};
@@ -80,11 +101,11 @@ export function LiveAccountForm() {
     else if (values.password.length < 8) e.password = t('errors.passwordMin');
     else if (!/^(?=.*[A-Za-z])(?=.*\d)/.test(values.password)) e.password = t('errors.passwordPattern');
     if (!values.country) e.country = t('errors.country');
-    if (!phoneDigits) e.phone = t('errors.phone');
-    else if (phoneDigits.length < 5 || phoneDigits.length + dial.length > 15) e.phone = t('errors.phoneInvalid');
+    if (phoneEmpty) e.phone = t('errors.phone');
+    else if (!isValidPhoneNumber(values.phone)) e.phone = t('errors.phoneInvalid');
     if (!values.terms) e.terms = t('errors.terms');
     return e;
-  }, [values, phoneDigits, dial, t]);
+  }, [values, phoneEmpty, t]);
 
   const err = (k) => (touched[k] ? errors[k] : undefined);
   const set = (k) => (e) => setValues((v) => ({ ...v, [k]: e?.target ? (e.target.type === 'checkbox' ? e.target.checked : e.target.value) : e }));
@@ -131,10 +152,10 @@ export function LiveAccountForm() {
     const payload = {
       code: values.otp,
       is_company: 0,
-      area: dial,
+      area: parsePhoneNumber(values.phone)?.countryCallingCode || dial,
       country: selected.name,
       email: values.email.trim(),
-      phone: `+${dial}${phoneDigits.replace(new RegExp(`^${dial}`), '')}`,
+      phone: values.phone,
       password: values.password,
       lastname,
       firstname,
@@ -148,7 +169,7 @@ export function LiveAccountForm() {
       const res = await post('/api/gtc/reg', payload);
       if (res?.code === 200) {
         setNotice({ type: 'ok', text: res?.message || t('toast.registrationSuccess') });
-        setValues((v) => ({ ...EMPTY, country: v.country, partnerCode: partnerLocked ? v.partnerCode : '' }));
+        setValues((v) => ({ ...EMPTY, country: v.country, phone: dial ? `+${dial}` : '', partnerCode: partnerLocked ? v.partnerCode : '' }));
         setTouched({});
         setCodeSent(false);
       } else setNotice({ type: 'error', text: res?.message || t('toast.registrationFailed') });
@@ -160,14 +181,16 @@ export function LiveAccountForm() {
   };
 
   return (
-    <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white text-ink shadow-[0_40px_100px_-30px_rgba(41,59,147,0.6)]">
-      <div className="bg-gradient-to-r from-brand via-brand-800 to-brand-950 px-5 py-4 text-white md:px-7">
-        <h2 className="heading-card is-dark">{t('title')}</h2>
-        <p className="mt-1 text-xs text-white/75 md:text-sm">{t('subtitle')}</p>
+    <div className={cn('overflow-hidden rounded-[1.75rem] border border-white/10 bg-white text-ink shadow-[0_40px_100px_-30px_rgba(41,59,147,0.6)]', className)}>
+      <div className={cn('relative overflow-hidden bg-gradient-to-r from-brand via-brand-800 to-brand-950 text-white', page ? 'px-6 py-6 text-center md:px-10 md:py-7' : 'px-5 py-4 md:px-7')}>
+        {page && <span className="bg-grid-dark absolute inset-0 opacity-40" aria-hidden />}
+        {page && <motion.span className="absolute -end-10 -top-16 size-48 rounded-full bg-gold/25 blur-3xl" animate={{ opacity: [0.4, 0.9, 0.4] }} transition={{ duration: 6, repeat: Infinity }} aria-hidden />}
+        <h2 className={cn('relative is-dark', page ? 'heading-title' : 'heading-card')}>{title ?? t('title')}</h2>
+        <p className={cn('relative mt-1 text-white/75', page ? 'text-sm' : 'text-xs md:text-sm')}>{subtitle ?? t('subtitle')}</p>
       </div>
 
-      <form className="space-y-3.5 p-5 md:p-6" onSubmit={onSubmit} noValidate>
-        <div className="grid gap-x-3.5 gap-y-3.5 sm:grid-cols-2">
+      <form className={cn(page ? 'space-y-5 p-6 md:p-10' : 'space-y-3.5 p-5 md:p-6')} onSubmit={onSubmit} noValidate>
+        <div className={cn('grid sm:grid-cols-2', page ? 'gap-x-5 gap-y-5' : 'gap-x-3.5 gap-y-3.5')}>
           {/* names */}
           <Field id="lf-first" label={t('firstName')} required error={err('firstname')}>
             <span className={cn(box, boxState(err('firstname')))}>
@@ -228,14 +251,17 @@ export function LiveAccountForm() {
 
           {/* phone + partner code */}
           <Field id="lf-phone" label={t('phone')} required error={err('phone')}>
-            <span className={cn(box, boxState(err('phone')))} dir="ltr">
-              <span className="flex shrink-0 items-center gap-1.5 border-e border-brand/10 pe-2.5 text-sm text-ink/70">
-                <span className="text-base leading-none" aria-hidden>
-                  {flagFor(selected?.code)}
-                </span>
-                {dial ? `+${dial}` : '+'}
-              </span>
-              <input id="lf-phone" type="tel" className={input} value={values.phone} onChange={(e) => set('phone')(e.target.value.replace(/[^\d\s-]/g, ''))} onBlur={blur('phone')} autoComplete="tel-national" inputMode="tel" />
+            <span className={cn(box, boxState(err('phone')), phoneCls)} dir="ltr">
+              <PhoneInput
+                id="lf-phone"
+                name="phone"
+                international
+                defaultCountry={selected?.code || suggested?.code || 'AE'}
+                value={values.phone || undefined}
+                onChange={(v) => set('phone')(v ?? '')}
+                onBlur={blur('phone')}
+                autoComplete="tel"
+              />
             </span>
           </Field>
           <div className="min-w-0">
@@ -261,7 +287,7 @@ export function LiveAccountForm() {
         <div>
           <label className="flex cursor-pointer gap-2.5 rounded-xl bg-[#f6f7fb] p-3 text-[11.5px] leading-relaxed text-ink/65 ring-1 ring-brand/5">
             <input type="checkbox" checked={values.terms} onChange={set('terms')} onBlur={blur('terms')} className="mt-0.5 size-4 shrink-0 cursor-pointer accent-[#293b93]" />
-            <span className="max-h-28 space-y-1 overflow-y-auto pe-1">
+            <span className={cn('space-y-1 pe-1', !page && 'max-h-28 overflow-y-auto')}>
               <span className="block font-medium text-ink/80">{t('confirmIntro')}</span>
               <span className="block">
                 {t('confirm1Start')}{' '}
@@ -296,7 +322,7 @@ export function LiveAccountForm() {
           )}
         </AnimatePresence>
 
-        <button type="submit" disabled={loading} className="shine inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-brand-900 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:opacity-60">
+        <button type="submit" disabled={loading} className={cn('shine inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-900 font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:opacity-60', page ? 'h-12 text-base' : 'h-11 text-sm')}>
           {loading && <LoaderCircle className="size-4 animate-spin" />}
           {loading ? t('registering') : t('submit')}
         </button>
