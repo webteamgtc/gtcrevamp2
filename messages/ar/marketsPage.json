@@ -74,17 +74,17 @@
         {
           "id": "calendar",
           "link": "عرض التقويم الاقتصادي",
-          "href": "/news/economic-calendar"
+          "href": "/gtc-news/economic-calendar"
         },
         {
           "id": "hours",
           "link": "عرض ساعات التداول",
-          "href": "/markets/trading-hours"
+          "href": "/gtc-news/market-holidays#trading-hours"
         },
         {
           "id": "holidays",
           "link": "عرض مواعيد العطلات",
-          "href": "/news/market-holidays"
+          "href": "/gtc-news/market-holidays"
         }
       ],
       "sessions": {
