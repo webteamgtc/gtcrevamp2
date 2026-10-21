@@ -7,7 +7,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
-import { ChevronDown, CircleAlert, CircleCheck, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { ChevronDown, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { PORTAL } from '@/config/menu';
 import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
@@ -43,6 +44,8 @@ function readUrlParams() {
 }
 
 /**
+ * Messages (code sent, already registered, registration result…) are shown as react-toastify toasts —
+ * the page must render <Toaster /> (src/components/shared/Toaster.jsx).
  * `title` / `subtitle` override the card header (defaults: tradingPage.liveForm.title / subtitle).
  * `variant="page"` is the roomier layout used on /live-account-application; the default suits a hero column.
  */
@@ -59,7 +62,6 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
   const [otpLoading, setOtpLoading] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [notice, setNotice] = useState(null); // { type: 'ok' | 'error', text }
 
   // URL params (read after mount so the page can stay statically rendered)
   useEffect(() => {
@@ -114,24 +116,23 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
   const sendCode = async () => {
     setTouched((tc) => ({ ...tc, email: true }));
     if (errors.email) {
-      setNotice({ type: 'error', text: errors.email });
+      toast.error(errors.email);
       return;
     }
     setOtpLoading(true);
-    setNotice(null);
     try {
       const check = await post('/api/gtc/check-email', { email: values.email.trim() });
       if (!(check?.code === 200 && /available/i.test(check?.message || ''))) {
-        setNotice({ type: 'error', text: check?.message || t('errors.emailRegistered') });
+        toast.error(check?.message || t('errors.emailRegistered'));
         return;
       }
       const res = await post('/api/gtc/get-code', { email: values.email.trim(), type: '0' });
       if (res?.code === 200) {
         setCodeSent(true);
-        setNotice({ type: 'ok', text: res?.message || t('toast.otpSent') });
-      } else setNotice({ type: 'error', text: res?.message || t('toast.codeError') });
+        toast.success(res?.message || t('toast.otpSent'));
+      } else toast.error(res?.message || t('toast.codeError'));
     } catch {
-      setNotice({ type: 'error', text: t('toast.codeError') });
+      toast.error(t('toast.codeError'));
     } finally {
       setOtpLoading(false);
     }
@@ -142,7 +143,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
     setTouched(Object.fromEntries(Object.keys(EMPTY).map((k) => [k, true])));
     if (Object.keys(errors).length) return;
     if (!selected) {
-      setNotice({ type: 'error', text: t('errors.validCountry') });
+      toast.error(t('errors.validCountry'));
       return;
     }
 
@@ -164,17 +165,16 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
     };
 
     setLoading(true);
-    setNotice(null);
     try {
       const res = await post('/api/gtc/reg', payload);
       if (res?.code === 200) {
-        setNotice({ type: 'ok', text: res?.message || t('toast.registrationSuccess') });
+        toast.success(res?.message || t('toast.registrationSuccess'));
         setValues((v) => ({ ...EMPTY, country: v.country, phone: dial ? `+${dial}` : '', partnerCode: partnerLocked ? v.partnerCode : '' }));
         setTouched({});
         setCodeSent(false);
-      } else setNotice({ type: 'error', text: res?.message || t('toast.registrationFailed') });
+      } else toast.error(res?.message || t('toast.registrationFailed'));
     } catch {
-      setNotice({ type: 'error', text: t('toast.registrationFailed') });
+      toast.error(t('toast.registrationFailed'));
     } finally {
       setLoading(false);
     }
@@ -306,21 +306,6 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
           </label>
           {err('terms') && <p className="mt-1 text-[11px] text-down">{err('terms')}</p>}
         </div>
-
-        <AnimatePresence>
-          {notice && (
-            <motion.p
-              role={notice.type === 'error' ? 'alert' : 'status'}
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className={cn('flex items-start gap-2 rounded-xl px-3 py-2.5 text-xs font-medium', notice.type === 'ok' ? 'bg-up/10 text-up' : 'bg-down/10 text-down')}
-            >
-              {notice.type === 'ok' ? <CircleCheck className="mt-px size-4 shrink-0" /> : <CircleAlert className="mt-px size-4 shrink-0" />}
-              {notice.text}
-            </motion.p>
-          )}
-        </AnimatePresence>
 
         <button type="submit" disabled={loading} className={cn('shine inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-900 font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:opacity-60', page ? 'h-12 text-base' : 'h-11 text-sm')}>
           {loading && <LoaderCircle className="size-4 animate-spin" />}
