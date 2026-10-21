@@ -338,5 +338,245 @@
       "openCta": "Open Live Account",
       "demoCta": "Try Demo Account"
     }
+  },
+  "marketHolidaysPage": {
+    "meta": {
+      "title": "Market Holidays & Trading Hours",
+      "description": "Check forex and CFD trading hours, market holidays, and schedule updates. Plan your trades with GTCFX's comprehensive market calendar."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "news": "GTC News",
+      "current": "Market Holidays"
+    },
+    "hero": {
+      "badge": "Trading Accounts",
+      "headingPrefix": "Find the trading account",
+      "headingAccent": "that fits",
+      "headingSuffix": "you best.",
+      "sub": "From Dubai to London, Singapore to Hong Kong — GTCFX is honored by the institutions and authorities that define each region. Every award is a reflection of the trust we've earned.",
+      "openCta": "Open live account",
+      "demoCta": "Try Demo Account First",
+      "tickerCategories": [
+        "FX",
+        "Gold",
+        "Index",
+        "Crypto"
+      ],
+      "stats": [
+        "Currency Pairs",
+        "Market Hours",
+        "Avg Execution",
+        "Countries Served"
+      ],
+      "statValues": [
+        "96+",
+        "24/5",
+        "<10ms",
+        "100+"
+      ],
+      "live": "Live"
+    },
+    "tradingHours": {
+      "eyebrow": "Market schedule",
+      "heading": "Forex & CFD Trading Hours",
+      "sub": "View the latest trading hours for Forex, Metals, Commodities, and other financial instruments. GTCFX provides updated market session times to help you plan your trades effectively. Please note these times provided are subject to change. For the most accurate and real-time session details, please refer to your trading terminal or check the specifications of each instrument.",
+      "timezoneBadge": "Timezone: GMT+0",
+      "tabsLabel": "Instrument categories",
+      "modeLabel": "Hours type",
+      "pricing": "Pricing",
+      "trading": "Trading",
+      "pricingHint": "Pricing hours show when live market prices are available.",
+      "tradingHint": "Trading hours show when you can open and close positions.",
+      "footnote": "Schedules are indicative and may change during market holidays or daylight saving adjustments.",
+      "tabs": {
+        "fx": "FX",
+        "goldSilver": "Gold & Silver",
+        "crudeOil": "Crude Oil",
+        "crypto": "Crypto",
+        "cashIndices": "Cash Indices",
+        "stocks": "Stocks"
+      },
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "daysShort": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "daysFull": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "symbolsHeader": "Symbols",
+      "open": "Open",
+      "close": "Close",
+      "today": "Today",
+      "openNow": "Open now",
+      "closedNow": "Closed now",
+      "symbols": {
+        "fx": [
+          "Majors",
+          "Cross & Exotics",
+          "JPY Symbols",
+          "Indices — EU",
+          "Indices — US",
+          "Metals — Gold/Silver"
+        ],
+        "goldSilver": [
+          "Gold (XAUUSD)",
+          "Silver (XAGUSD)"
+        ],
+        "crudeOil": [
+          "WTI",
+          "Brent"
+        ],
+        "crypto": [
+          "BTC/USD",
+          "ETH/USD"
+        ],
+        "cashIndices": [
+          "US30",
+          "NAS100",
+          "SPX500"
+        ],
+        "stocks": [
+          "US Stocks",
+          "EU Stocks"
+        ]
+      }
+    },
+    "holidayCalendar": {
+      "heading": "Holiday Hours & Notices",
+      "sub": "Market holidays may affect trading hours. Review upcoming closures and early-close schedules below.",
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "dayLabels": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "prevMonthAria": "Previous month",
+      "nextMonthAria": "Next month",
+      "legend": {
+        "today": "Today",
+        "holiday": "Holiday",
+        "selected": "Selected"
+      },
+      "upcomingHeading": "Upcoming Holidays",
+      "holidays": [
+        {
+          "name": "Australia Queen's Birthday",
+          "market": "ASX",
+          "badge": "Early Close"
+        },
+        {
+          "name": "Juneteenth",
+          "market": "US Markets",
+          "badge": "Closed"
+        },
+        {
+          "name": "Today — Normal Hours",
+          "market": "All Markets",
+          "badge": "Open"
+        },
+        {
+          "name": "Independence Day (US)",
+          "market": "US Markets",
+          "badge": "Closed"
+        }
+      ],
+      "loadingAria": "Loading holiday schedule",
+      "noEventsOnDate": "No market events on this date.",
+      "noUpcoming": "No upcoming holidays scheduled.",
+      "hint": "Tap a highlighted date on the calendar to filter",
+      "thisMonth": "This month",
+      "stats": {
+        "dates": "Dates",
+        "notices": "Notices",
+        "earlyClose": "Early close"
+      },
+      "closed": "Closed",
+      "earlyClose": "Early close",
+      "showAll": "Show all",
+      "selectedDateHint": "Events on the selected date",
+      "noMonthEvents": "No market notices this month.",
+      "nextUp": "Next up",
+      "more": "more",
+      "view": "View",
+      "noticeCount": "{count, plural, one {# market notice} other {# market notices}}"
+    },
+    "instruments": {
+      "eyebrow": "ASSET CLASSES",
+      "heading": "Tradeable Instruments",
+      "sub": "Access global markets across multiple asset classes with competitive spreads.",
+      "closed": "Closed now",
+      "items": [
+        {
+          "title": "Forex — FX Pairs",
+          "hours": "Mon-Fri: 00:00-23:59 GMT",
+          "status": "Open Now"
+        },
+        {
+          "title": "Metals — Gold & Silver",
+          "hours": "Mon-Fri: 00:00-23:59 GMT",
+          "status": "Open Now"
+        },
+        {
+          "title": "Energies — Oil & Gas",
+          "hours": "Mon-Fri: 00:00-23:00 GMT",
+          "status": "Open Now"
+        },
+        {
+          "title": "Cash Indices",
+          "hours": "Varies by exchange",
+          "status": "Most Open"
+        },
+        {
+          "title": "Cryptocurrencies",
+          "hours": "24/7 — Always Open",
+          "status": "Always Open"
+        },
+        {
+          "title": "US & EU Shares",
+          "hours": "NYSE, NASDAQ, LSE, XETRA",
+          "status": "Pre-Market"
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Stay Ahead of Market Changes",
+      "sub": "Trading hours and holiday schedules are subject to change. Always verify in your terminal before placing a trade.",
+      "hoursBadge": "⚠️ Hours may vary on holidays",
+      "liquidityBadge": "📉 Reduced liquidity possible",
+      "openCta": "Open an Account",
+      "contactCta": "Contact Support"
+    }
   }
 }
