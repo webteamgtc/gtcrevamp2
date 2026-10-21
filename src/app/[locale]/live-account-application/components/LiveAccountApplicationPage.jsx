@@ -10,6 +10,7 @@ import { motion } from 'motion/react';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import { LiveAccountForm } from '@/components/shared/LiveApplicationForm';
+import Toaster from '@/components/shared/Toaster';
 import { Reveal, ScrollProgress } from '@/components/motion';
 import LiveAccountApplicationHeroSection from './LiveAccountApplicationHeroSection';
 import LiveAccountApplicationSidebar from './LiveAccountApplicationSidebar';
@@ -38,6 +39,7 @@ export default function LiveAccountApplicationPage({ accountKey, showAccount }) 
         </section>
       </main>
       <Footer theme="dark" />
+      <Toaster />
     </div>
   );
 }

@@ -5,6 +5,7 @@
  */
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
+import Toaster from '@/components/shared/Toaster';
 import { ScrollProgress } from '@/components/motion';
 import { TradingHero } from './TradingHero';
 import { DemoAccount } from './DemoAccount';
@@ -37,6 +38,7 @@ export default function TradingPage() {
         <TradingCta />
       </main>
       <Footer theme="dark" />
+      <Toaster />
     </div>
   );
 }
