@@ -1,6 +1,7 @@
 'use client';
 /**
- * Opening intro: an outlined "GTCFX" wordmark fills with colour from left to right, then fades away.
+ * Opening intro: on a white screen a gold ring draws itself around the GTCFX logo while a navy dot
+ * orbits it, then the intro fades away to reveal the page.
  *
  *  - plays once per browser session, never for visitors who turn off animations (decided before paint by
  *    the inline script in introScript.js → <html data-intro="play|skip">)
@@ -12,6 +13,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
+import { logoSrc } from '@/components/shared/Logo';
 
 const MIN_MS = 1300;
 const MAX_MS = 2400;
@@ -29,6 +31,50 @@ function finish() {
   document.documentElement.dataset.intro = 'done';
   window.__gtcIntroDone = true;
   window.dispatchEvent(new Event('gtc:intro-done'));
+}
+
+/** The official colour logo (174 × 62). */
+function LogoImg({ className }) {
+  // eslint-disable-next-line @next/next/no-img-element -- must paint immediately, no optimiser round-trip
+  return <img src={logoSrc(false)} alt="" width={174} height={62} fetchPriority="high" decoding="sync" className={className} draggable={false} />;
+}
+
+/** White full-screen layer; `out` = fading away. */
+function Screen({ label, out, onDone, children }) {
+  return (
+    <motion.div
+      id="gtc-intro"
+      role="status"
+      aria-label={label}
+      className="fixed inset-0 z-[200] place-items-center bg-white"
+      animate={{ opacity: out ? 0 : 1 }}
+      transition={{ duration: 0.5, ease: EASE }}
+      onAnimationComplete={() => out && onDone()}
+    >
+      <motion.div className="relative grid place-items-center" dir="ltr" aria-hidden animate={{ scale: out ? 1.05 : 1 }} transition={{ duration: 0.5, ease: EASE }}>
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/** Gold ring drawing round the logo, navy dot in orbit. */
+function Ring(p) {
+  return (
+    <Screen {...p}>
+      <svg viewBox="0 0 300 300" className="absolute size-[260px] md:size-[300px]">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(41,59,147,0.08)" strokeWidth="2" />
+        <motion.circle cx="150" cy="150" r="140" fill="none" stroke="#b68756" strokeWidth="2.5" strokeLinecap="round" transform="rotate(-90 150 150)" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }} />
+        <motion.g animate={{ rotate: 360 }} transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }}>
+          <circle cx="150" cy="150" r="140" fill="none" />
+          <circle cx="150" cy="10" r="5" fill="#293b93" />
+        </motion.g>
+      </svg>
+      <motion.span className="block" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15, ease: EASE }}>
+        <LogoImg className="h-auto w-40 md:w-44" />
+      </motion.span>
+    </Screen>
+  );
 }
 
 export default function IntroLoader() {
@@ -55,27 +101,14 @@ export default function IntroLoader() {
   }, []);
 
   if (phase === 'gone') return null;
-  const out = phase === 'leave';
   return (
-    <motion.div
-      id="gtc-intro"
-      role="status"
-      aria-label={t('loading')}
-      className="fixed inset-0 z-[200] place-items-center bg-brand-950"
-      animate={{ opacity: out ? 0 : 1 }}
-      transition={{ duration: 0.5, ease: EASE }}
-      onAnimationComplete={() => {
-        if (!out) return;
+    <Ring
+      label={t('loading')}
+      out={phase === 'leave'}
+      onDone={() => {
         finish();
         setPhase('gone');
       }}
-    >
-      <motion.p className="relative text-5xl font-bold tracking-[0.08em] md:text-7xl" dir="ltr" aria-hidden animate={{ scale: out ? 1.06 : 1 }} transition={{ duration: 0.5, ease: EASE }}>
-        <span className="text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]">GTCFX</span>
-        <motion.span className="absolute inset-0 text-white" initial={{ clipPath: 'inset(0 100% 0 0)' }} animate={{ clipPath: 'inset(0 0% 0 0)' }} transition={{ duration: 1, delay: 0.15, ease: [0.65, 0, 0.35, 1] }}>
-          GTC<span className="text-gold">FX</span>
-        </motion.span>
-      </motion.p>
-    </motion.div>
+    />
   );
 }

@@ -8,6 +8,8 @@ const PREVIEW_PAGES = {
   '/': 'home',
   '/company': 'company',
   '/company/about-us': 'about-us',
+  '/company/awards': 'awards',
+  '/gtc-news/market-holidays': 'market-holidays',
   '/company/why-gtc-group': 'why-gtc-group',
   '/company/global-presence': 'global-presence',
   '/company/events-and-exhibitions': 'events-and-exhibitions',
@@ -75,7 +77,8 @@ export default function NavLink({ href, children, prefetch, ...rest }) {
 export function useIsActive() {
   let pathname = usePathname();
   // review build: "/forex/index.html" -> "/markets/forex", so the highlight matches the prerendered HTML
-  if (PREVIEW) {
+  // (only for flattened review URLs — while the pages are prerendered the pathname is already the real route)
+  if (PREVIEW && pathname.endsWith('/index.html')) {
     const slug = pathname.split('/').filter(Boolean).find((x) => x !== 'index.html');
     const route = Object.keys(PREVIEW_PAGES).find((k) => PREVIEW_PAGES[k] === slug);
     if (route) pathname = route;

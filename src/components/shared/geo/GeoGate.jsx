@@ -5,107 +5,17 @@
  *  - UAE visitors (any language) and /en-ae: CAT 1 (full site) or CAT 5 (marketing page only) — remembered 30 days, changeable from the footer
  *  - visitor on another region's site (e.g. a South African on /en-intl): small "go to your region?" note
  */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight, Check, ChevronDown, CircleX, Globe, MapPin, ShieldAlert, X } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, Globe, MapPin, X } from 'lucide-react';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { getLocale } from '@/i18n/locales';
 import { COOKIES, CAT5_LOCALE, CAT5_PATH, REGION_LOCALES, regionForCountry } from '@/config/regions';
 import { cn } from '@/lib/utils';
-import { readCookie, writeCookie, useCountry, whenIntroLeaving, useScrollLock, localeHref } from './geoClient';
-
-const EASE = [0.22, 1, 0.36, 1];
-
-/** Full-screen blocking dialog: dimmed, blurred page behind; focus kept inside; Esc does nothing (a choice is required). */
-function Gate({ labelledBy, wide = false, children }) {
-  const ref = useRef(null);
-  useScrollLock(true);
-  useEffect(() => {
-    const el = ref.current;
-    el?.querySelector('button')?.focus({ preventScroll: true });
-    const onKey = (e) => {
-      if (e.key !== 'Tab' || !el) return;
-      const f = [...el.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])')].filter((x) => !x.disabled);
-      if (!f.length) return;
-      const [a, b] = [f[0], f[f.length - 1]];
-      if (e.shiftKey && document.activeElement === a) (e.preventDefault(), b.focus());
-      else if (!e.shiftKey && document.activeElement === b) (e.preventDefault(), a.focus());
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, []);
-  return (
-    <motion.div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#070b24]/75 p-4 backdrop-blur-md" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
-      <motion.div
-        ref={ref}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={labelledBy}
-        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 12, scale: 0.98 }}
-        transition={{ duration: 0.45, ease: EASE }}
-        className={cn('relative my-8 w-full rounded-[2rem] bg-white text-ink shadow-[0_40px_120px_-30px_rgba(0,0,0,0.6)]', wide ? 'max-w-3xl p-6 sm:p-10' : 'max-w-md p-7 text-center sm:p-10')}
-      >
-        {children}
-      </motion.div>
-    </motion.div>
-  );
-}
-
-const IconTile = ({ tone = 'navy', children }) => (
-  <span className={cn('mx-auto grid size-16 place-items-center rounded-2xl text-white ring-8', tone === 'red' ? 'bg-gradient-to-br from-red-600 to-red-800 ring-red-50' : 'bg-gradient-to-br from-brand to-brand-900 ring-brand-50')}>{children}</span>
-);
-
-/* ------------------------------------------------------------------ US */
-
-function UsNotice({ onAccept }) {
-  const t = useTranslations('geo.us');
-  const [restricted, setRestricted] = useState(false);
-  return (
-    <Gate labelledBy="geo-us-title">
-      <AnimatePresence mode="wait" initial={false}>
-        {!restricted ? (
-          <motion.div key="notice" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }} transition={{ duration: 0.3, ease: EASE }}>
-            <IconTile>
-              <ShieldAlert className="size-7" />
-            </IconTile>
-            <h2 id="geo-us-title" className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-gold-700">
-              {t('eyebrow')}
-            </h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-ink/70 sm:text-base">{t('text')}</p>
-            <div className="mt-8 grid grid-cols-2 gap-3">
-              <button type="button" onClick={onAccept} className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-brand px-5 text-base font-semibold text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand-700">
-                {t('accept')} <ArrowRight className="size-4 rtl:-scale-x-100" />
-              </button>
-              <button type="button" onClick={() => setRestricted(true)} className="inline-flex h-13 items-center justify-center rounded-full border border-brand/15 px-5 text-base font-semibold text-ink/70 transition-colors hover:border-brand/40 hover:text-ink">
-                {t('reject')}
-              </button>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div key="restricted" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3, ease: EASE }}>
-            <IconTile tone="red">
-              <CircleX className="size-7" />
-            </IconTile>
-            <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-red-700">{t('restrictedEyebrow')}</p>
-            <h2 id="geo-us-title" className="heading-title mt-3">
-              {t('restrictedTitle')}
-            </h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-ink/65">{t('restrictedText')}</p>
-            <button type="button" onClick={onAccept} className="mt-8 inline-flex h-13 w-full items-center justify-center rounded-full bg-brand px-6 text-base font-semibold text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand-700">
-              {t('acceptToVisit')}
-            </button>
-            <button type="button" onClick={() => setRestricted(false)} className="mt-4 text-sm font-medium text-ink/55 underline-offset-4 hover:text-brand hover:underline">
-              {t('back')}
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Gate>
-  );
-}
+import { readCookie, writeCookie, useCountry, whenIntroLeaving, localeHref } from './geoClient';
+import { Gate, EASE } from './Gate';
+import UsNotice from './UsNotice';
 
 /* ------------------------------------------------------------------ UAE */
 

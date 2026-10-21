@@ -160,7 +160,7 @@ export function Awards() {
         </div>
 
         <Reveal y={12} className="mt-10 flex justify-center">
-          <ArrowLink href="/awards">{t('viewMore')}</ArrowLink>
+          <ArrowLink href="/company/awards">{t('viewMore')}</ArrowLink>
         </Reveal>
       </div>
     </section>

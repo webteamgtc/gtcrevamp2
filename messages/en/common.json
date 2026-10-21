@@ -489,15 +489,22 @@
   "riskBarUs": "Trading CFDs involves significant risk and may result in the loss of your invested capital. You should carefully consider whether trading is appropriate for your financial circumstances and obtain independent financial advice where necessary. GTCFX services are not offered to residents of the United States or in jurisdictions where the distribution or use of such services is prohibited by applicable laws or regulations.",
   "geo": {
     "us": {
-      "eyebrow": "Important notice",
+      "title": "Before you [continue]",
       "text": "By continuing, you confirm that you understand the risks of trading CFDs, that you are not relying solely on this site for financial advice, and that you are not a resident or citizen of the United States, where GTCFX does not provide CFD trading services.",
+      "points": [
+        "Trading CFDs carries a high level of risk",
+        "This website is not financial advice",
+        "Not available to US residents or citizens"
+      ],
+      "readFull": "Full notice",
       "accept": "Accept",
       "reject": "Reject",
       "restrictedEyebrow": "Access restricted",
       "restrictedTitle": "You can't use this website",
       "restrictedText": "You can't use this website without accepting the risk disclaimer. Please accept to continue visiting the site.",
       "acceptToVisit": "Accept to visit website",
-      "back": "Back to disclaimer"
+      "back": "Back to disclaimer",
+      "note": "Your answer is remembered on this device for 30 days."
     },
     "uae": {
       "eyebrow": "Welcome to GTCFX UAE",

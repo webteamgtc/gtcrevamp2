@@ -57,7 +57,7 @@ export const MENU = [
       ] }],
       [{ id: 'legal', items: [
         { id: 'regulation', href: '/company/regulations', icon: ShieldCheck },
-        { id: 'awards', href: '/awards', icon: Award }
+        { id: 'awards', href: '/company/awards', icon: Award }
       ] }],
       [
         { id: 'help', items: [
@@ -173,12 +173,12 @@ export const MENU = [
         { id: 'outlook', href: '/gtc-news/market-daily-updates', icon: Newspaper },
         { id: 'calendar', href: '/gtc-news/economic-calendar', icon: CalendarClock },
         { id: 'earnings', href: '/gtc-news/earnings-calendar', icon: Coins },
-        { id: 'holidays', href: '/news/market-holidays', icon: CalendarX }
+        { id: 'holidays', href: '/gtc-news/market-holidays', icon: CalendarX }
       ] }],
       [{ id: 'companyUpdates', items: [
         { id: 'companyNews', href: '/gtc-news/company-news', icon: Megaphone },
         { id: 'events', href: '/company/events-and-exhibitions', icon: CalendarDays },
-        { id: 'awardsMedia', href: '/awards', icon: Trophy }
+        { id: 'awardsMedia', href: '/company/awards', icon: Trophy }
       ] }]
     ],
     promo: { id: 'news', href: '/trading/deposit', visual: 'currencies' }
