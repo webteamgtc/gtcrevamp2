@@ -5,7 +5,7 @@ import { Check, CircleCheck, History, Zap } from 'lucide-react';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop, { LightHeroBackdrop } from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
-import { DemoAccountForm } from '@/components/shared/DemoAccountForm';
+import { DemoAccountForm } from '@/components/shared/MainIBForm';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
