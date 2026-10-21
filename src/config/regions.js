@@ -31,6 +31,7 @@ export const COOKIES = {
   geoTest: 'gtc_geo_test', // ?geo= override while testing
   usAccepted: 'gtc_us_notice', // US visitor accepted the important notice
   uaeCategory: 'gtc_uae_cat', // UAE visitor's choice: '1' or '5'
+  uaeAck: 'gtc_uae_ack', // when the UAE visitor accepted the important-information statement
   regionDismissed: 'gtc_region_ok' // visitor chose to stay on another region's site
 };
 export const REMEMBER_DAYS = 30;
@@ -41,3 +42,6 @@ export const CAT5_LOCALE = 'en-ae';
 
 /** Contact details on the CAT 5 marketing page (same as the Contact Us page). */
 export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '+44 800 048 8461' };
+
+/** CAT 5 enquiry form → POST /api/uae-enquiry (e-mails UAE_ENQUIRY_EMAIL, optionally a Zapier hook). */
+export const CAT5_SERVICES = ['lead', 'digital', 'event', 'brand', 'partner', 'insight', 'other'];

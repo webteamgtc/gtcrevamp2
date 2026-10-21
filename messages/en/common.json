@@ -523,6 +523,20 @@
           "Speak to our team"
         ]
       },
+      "ack": {
+        "label": "I confirm that I have read and understood the statement below, that I am accessing this website from the United Arab Emirates on my own initiative, and that the category I have selected applies to me.",
+        "more": "Read the full statement",
+        "less": "Hide the statement",
+        "title": "Important information for UAE residents",
+        "points": [
+          "This website is provided for general information only. Nothing on it is an offer, solicitation or recommendation to buy or sell any financial product or service in the United Arab Emirates, and nothing on it is investment advice.",
+          "Financial products and services are made available in the UAE only where permitted by the UAE Capital Market Authority (CMA) and other applicable laws, and only to persons who meet the relevant client classification requirements.",
+          "The category you select here does not by itself make you eligible for any product or service. Your classification is assessed and confirmed by GTCFX during onboarding.",
+          "Category 5 (marketing) visitors are shown marketing and introduction information only. No trading, investment or account-opening services are offered to them.",
+          "Derivatives and leveraged products, such as CFDs, carry a high level of risk and can result in losses exceeding your initial deposit. They are not suitable for all investors."
+        ],
+        "error": "Please confirm you have read and understood the statement to continue."
+      },
       "continue": "Continue",
       "note": "Your choice is remembered on this device for 30 days.",
       "disclaimerTitle": "Please note",

@@ -173,7 +173,7 @@ export const MENU = [
         { id: 'outlook', href: '/gtc-news/market-daily-updates', icon: Newspaper },
         { id: 'calendar', href: '/gtc-news/economic-calendar', icon: CalendarClock },
         { id: 'earnings', href: '/gtc-news/earnings-calendar', icon: Coins },
-        { id: 'holidays', href: '/gtc-news/market-holidays', icon: CalendarX }
+        { id: 'holidays', href: '/news/market-holidays', icon: CalendarX }
       ] }],
       [{ id: 'companyUpdates', items: [
         { id: 'companyNews', href: '/gtc-news/company-news', icon: Megaphone },

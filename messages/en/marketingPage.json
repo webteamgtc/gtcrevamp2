@@ -1,25 +1,40 @@
 {
   "marketingPage": {
     "meta": {
-      "title": "GTCFX UAE | Global Markets, One Trusted Partner",
-      "description": "General information about GTCFX, a multi-regulated global broker since 2012. For marketing purposes only."
+      "title": "GTCFX UAE | Marketing & Lead Generation Services",
+      "description": "Marketing, lead generation, events and partnership services from GTCFX UAE. Information only — no trading or investment services are offered on this page."
     },
-    "notice": "Marketing information only. This page does not offer trading services or account opening.",
+    "notice": "Category 5 · Marketing and introduction services only. No trading or investment services are offered on this page.",
     "changeCategory": "Change investor category",
+    "cta": "Book a consultation",
     "hero": {
-      "title": "Global Markets, [One Trusted Partner]",
-      "text": "GTCFX is a multi-regulated financial group serving traders in more than 100 countries since 2012. Discover who we are and what we stand for.",
-      "primary": "Speak to our team",
-      "secondary": "Email us"
+      "badge": "GTCFX UAE · Marketing & Lead Generation",
+      "title": "Marketing That [Brings You Clients]",
+      "text": "From targeted campaigns and events to qualified, consent-based leads, our UAE team helps brands and partners reach the right audience and grow with confidence.",
+      "primary": "Book a consultation",
+      "secondary": "Explore our services",
+      "cards": [
+        {
+          "icon": "lead",
+          "title": "New enquiry received",
+          "text": "From a LinkedIn campaign"
+        },
+        {
+          "icon": "event",
+          "title": "Seminar registration",
+          "text": "Dubai roadshow"
+        },
+        {
+          "icon": "report",
+          "title": "Weekly report ready",
+          "text": "Campaign insights"
+        }
+      ]
     },
-    "stats": [
+    "trust": [
       {
-        "value": "2012",
-        "label": "Serving traders since"
-      },
-      {
-        "value": "985,000+",
-        "label": "Traders worldwide"
+        "value": "Since 2012",
+        "label": "Part of GTC Group"
       },
       {
         "value": "100+",
@@ -27,70 +42,151 @@
       },
       {
         "value": "5",
-        "label": "Regulated entities"
+        "label": "Regulated group entities"
+      },
+      {
+        "value": "Multilingual",
+        "label": "Arabic, English & more"
       }
     ],
-    "about": {
-      "title": "Who [we are]",
-      "text": "GTC Group brings together regulated entities across several jurisdictions, each operating under its own licence and local rules. Our focus has always been the same: transparent conditions, dependable technology and people you can talk to.",
+    "services": {
+      "title": "Everything You Need to [Grow]",
+      "text": "One team for strategy, campaigns, events and partnerships, with clear reporting at every step.",
+      "items": [
+        {
+          "icon": "lead",
+          "title": "Lead Generation",
+          "text": "Qualified, consent-based leads from targeted campaigns, verified and handed over with full source tracking."
+        },
+        {
+          "icon": "digital",
+          "title": "Digital Marketing",
+          "text": "Search, social and content campaigns built around your audience and measured from first click to enquiry."
+        },
+        {
+          "icon": "event",
+          "title": "Events & Seminars",
+          "text": "Expos, seminars and roadshows across the UAE that put your brand in front of the right people."
+        },
+        {
+          "icon": "brand",
+          "title": "Brand & Content",
+          "text": "Videos, articles and creative that explain your offering clearly, in Arabic and English."
+        },
+        {
+          "icon": "partner",
+          "title": "Partnerships & Affiliates",
+          "text": "Introducer and affiliate programmes with clear terms, fair rewards and transparent reporting."
+        },
+        {
+          "icon": "insight",
+          "title": "Research & Insights",
+          "text": "Audience research and campaign analytics that show what works and where to invest next."
+        }
+      ]
+    },
+    "process": {
+      "title": "How We [Work Together]",
+      "text": "A simple, transparent process from first call to results.",
+      "steps": [
+        {
+          "title": "Discover",
+          "text": "We learn about your goals, audience and budget."
+        },
+        {
+          "title": "Plan",
+          "text": "You get a clear plan: channels, timeline and success measures."
+        },
+        {
+          "title": "Launch",
+          "text": "Campaigns, content and events go live, managed by our team."
+        },
+        {
+          "title": "Report & grow",
+          "text": "Regular reports and recommendations to improve results."
+        }
+      ]
+    },
+    "why": {
+      "title": "Why Partner With [GTCFX UAE]",
       "items": [
         {
           "icon": "shield",
-          "title": "Regulation first",
-          "text": "Every entity in the group operates under its own licence, with clear disclosures."
+          "title": "Regulated-group standards",
+          "text": "Backed by GTC Group, operating since 2012 with regulated entities in several jurisdictions."
         },
         {
           "icon": "globe",
-          "title": "Global reach, local care",
-          "text": "Teams across several regions, speaking our clients' languages."
+          "title": "Regional reach",
+          "text": "A multilingual team with reach across the UAE, the wider region and 100+ countries."
         },
         {
-          "icon": "chat",
-          "title": "Real people",
-          "text": "Multilingual support from a team that knows the markets."
+          "icon": "report",
+          "title": "Data you can see",
+          "text": "Every campaign is tracked and reported, so you always know where results come from."
+        },
+        {
+          "icon": "check",
+          "title": "Compliance-first marketing",
+          "text": "Content and campaigns prepared with applicable UAE marketing and data-protection rules in mind."
         }
       ]
     },
-    "markets": {
-      "title": "Markets [we cover]",
-      "text": "A broad range of global markets, explained by our team.",
-      "items": [
-        "Forex",
-        "Metals",
-        "Energy",
-        "Indices",
-        "Shares",
-        "Crypto"
-      ]
-    },
-    "platforms": {
-      "title": "Technology [you can rely on]",
-      "text": "Industry-standard platforms and our own app, built for speed and stability.",
-      "items": [
-        {
-          "name": "MetaTrader 4",
-          "text": "The world's best-known trading platform."
-        },
-        {
-          "name": "MetaTrader 5",
-          "text": "More timeframes and deeper market analysis."
-        },
-        {
-          "name": "GTC Go",
-          "text": "Our own app for mobile and desktop."
-        }
-      ]
-    },
-    "contact": {
-      "title": "Talk to [our team]",
-      "text": "Have a question about GTCFX? Our team is happy to tell you more.",
+    "form": {
+      "title": "Let's Grow [Together]",
+      "text": "Tell us about your goals and our UAE team will get back to you to arrange a consultation.",
+      "points": [
+        "Free first consultation",
+        "A plan tailored to your goals",
+        "No obligation"
+      ],
+      "name": "Full name",
+      "company": "Company (optional)",
       "email": "Email",
       "phone": "Phone",
-      "emailCta": "Send us an email",
-      "phoneCta": "Call us"
+      "service": "I'm interested in",
+      "servicePlaceholder": "Choose a service",
+      "message": "Message (optional)",
+      "messagePlaceholder": "Tell us briefly about your goals",
+      "consent": "I agree to be contacted by GTCFX UAE about its marketing services. My details will be used only for this enquiry.",
+      "submit": "Request a consultation",
+      "sending": "Sending…",
+      "success": "Thank you! Our UAE team has received your enquiry and will contact you shortly.",
+      "error": "Sorry, something went wrong. Please try again or email us at {email}.",
+      "errors": {
+        "name": "Please enter your name",
+        "email": "Please enter a valid email",
+        "phone": "Please enter a valid phone number",
+        "service": "Please choose a service",
+        "consent": "Please agree to be contacted"
+      },
+      "otherService": "Something else",
+      "orContact": "Prefer to talk now?"
     },
-    "risk": {
-      "title": "Risk Warning"
+    "faq": {
+      "title": "Frequently Asked [Questions]",
+      "items": [
+        {
+          "q": "What does Category 5 mean on this page?",
+          "a": "This page covers GTCFX UAE's marketing and introduction services only. No trading, investment or account-opening services are offered here."
+        },
+        {
+          "q": "Who do you work with?",
+          "a": "Brands, partners, introducers and event organisers who want to reach a relevant audience in the UAE and the wider region."
+        },
+        {
+          "q": "How do you generate leads?",
+          "a": "Through targeted campaigns, content and events. Every lead is collected with clear consent and handled in line with applicable data-protection rules."
+        },
+        {
+          "q": "How soon can a campaign start?",
+          "a": "It depends on the scope. We agree the timeline with you during planning, before anything goes live."
+        }
+      ]
+    },
+    "footer": {
+      "title": "Important information",
+      "text": "GTCFX UAE provides marketing and introduction services only. Nothing on this page is an offer of, or invitation to use, trading or investment services, and nothing on it is investment advice."
     }
   }
 }

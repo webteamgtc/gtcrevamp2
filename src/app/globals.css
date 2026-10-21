@@ -326,9 +326,9 @@
 .learn-article td:first-child { color: var(--color-ink); font-weight: 600; }
 
 /* Opening intro (src/components/shared/intro/IntroLoader.jsx): shown only when <html data-intro="play">.
-   Fallback: if scripts fail, it fades away by itself after 4.5 s. */
+   Fallback: if scripts fail, it fades away by itself after 3.5 s. */
 #gtc-intro { display: none; }
-html[data-intro='play'] #gtc-intro { display: grid; animation: gtc-intro-fallback 0.6s ease 4.5s forwards; }
+html[data-intro='play'] #gtc-intro { display: grid; animation: gtc-intro-fallback 0.5s ease 3.5s forwards; }
 @keyframes gtc-intro-fallback { to { opacity: 0; visibility: hidden; } }
 
 /* Cookie notice (Footer.jsx → CookieBanner): in the HTML from the start, slides up with the page.

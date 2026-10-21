@@ -1,6 +1,6 @@
 'use client';
 /**
- * Region rules shown after the intro (settings: src/config/regions.js, copy: common.json → geo):
+ * Region rules, opened as the intro fades out (settings: src/config/regions.js, copy: common.json → geo):
  *  - US visitors: "Important notice" — must accept to use the site (remembered 30 days)
  *  - UAE visitors (any language) and /en-ae: CAT 1 (full site) or CAT 5 (marketing page only) — remembered 30 days, changeable from the footer
  *  - visitor on another region's site (e.g. a South African on /en-intl): small "go to your region?" note
@@ -8,12 +8,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight, Check, CircleX, Globe, MapPin, ShieldAlert, X } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, CircleX, Globe, MapPin, ShieldAlert, X } from 'lucide-react';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { getLocale } from '@/i18n/locales';
 import { COOKIES, CAT5_LOCALE, CAT5_PATH, REGION_LOCALES, regionForCountry } from '@/config/regions';
 import { cn } from '@/lib/utils';
-import { readCookie, writeCookie, useCountry, whenIntroDone, useScrollLock, localeHref } from './geoClient';
+import { readCookie, writeCookie, useCountry, whenIntroLeaving, useScrollLock, localeHref } from './geoClient';
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -112,7 +112,15 @@ function UsNotice({ onAccept }) {
 function UaeCategory({ onChoose }) {
   const t = useTranslations('geo.uae');
   const [pick, setPick] = useState(null);
+  const [ack, setAck] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [tried, setTried] = useState(false);
   const cats = ['1', '5'];
+  const go = () => {
+    if (!pick) return;
+    if (!ack) return setTried(true);
+    onChoose(pick);
+  };
   return (
     <Gate labelledBy="geo-uae-title" wide>
       <div className="text-center">
@@ -135,7 +143,7 @@ function UaeCategory({ onChoose }) {
               role="radio"
               aria-checked={on}
               onClick={() => setPick(c)}
-              onDoubleClick={() => onChoose(c)}
+              onDoubleClick={() => ack && onChoose(c)}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.15 + i * 0.08, ease: EASE }}
@@ -158,8 +166,9 @@ function UaeCategory({ onChoose }) {
           );
         })}
       </div>
-      <div className="mt-8 flex flex-col items-center gap-3">
-        <button type="button" disabled={!pick} onClick={() => onChoose(pick)} className="inline-flex h-13 w-full max-w-xs items-center justify-center gap-2 rounded-full bg-brand px-6 text-base font-semibold text-white shadow-lg shadow-brand/30 transition-all hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none">
+      <Acknowledge t={t} checked={ack} onChange={(v) => (setAck(v), v && setTried(false))} open={open} onToggle={() => setOpen((o) => !o)} error={tried && !ack} />
+      <div className="mt-6 flex flex-col items-center gap-3">
+        <button type="button" disabled={!pick} onClick={go} className={cn(!ack && 'opacity-60', 'inline-flex h-13 w-full max-w-xs items-center justify-center gap-2 rounded-full bg-brand px-6 text-base font-semibold text-white shadow-lg shadow-brand/30 transition-all hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none')}>
           {t('continue')} <ArrowRight className="size-4 rtl:-scale-x-100" />
         </button>
         <p className="text-xs text-ink/50">{t('note')}</p>
@@ -169,6 +178,46 @@ function UaeCategory({ onChoose }) {
         {t('disclaimer')}
       </p>
     </Gate>
+  );
+}
+
+/**
+ * UAE acknowledgement (DRAFT wording for compliance, common.json → geo.uae.ack): must be ticked before continuing.
+ * The full statement opens below the tick box; the date it was accepted is kept with the category choice.
+ */
+function Acknowledge({ t, checked, onChange, open, onToggle, error }) {
+  return (
+    <div className={cn('mt-6 rounded-2xl border p-4 transition-colors', error ? 'border-down/50 bg-down/5' : checked ? 'border-brand/30 bg-brand-50/60' : 'border-brand/10 bg-[#f6f8fc]')}>
+      <label className="flex cursor-pointer items-start gap-3">
+        <input id="geo-uae-ack" type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="peer sr-only" aria-invalid={error} aria-describedby={error ? 'geo-uae-ack-err' : undefined} />
+        <span className={cn('mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border-2 transition-colors peer-focus-visible:ring-4 peer-focus-visible:ring-brand/20', checked ? 'border-brand bg-brand text-white' : error ? 'border-down/60 bg-white' : 'border-brand/30 bg-white')} aria-hidden>
+          {checked && <Check className="size-3.5" strokeWidth={3} />}
+        </span>
+        <span className="text-[13px] leading-relaxed text-ink/75">{t('ack.label')}</span>
+      </label>
+      <button type="button" onClick={onToggle} aria-expanded={open} aria-controls="geo-uae-statement" className="ms-8 mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline">
+        {open ? t('ack.less') : t('ack.more')} <ChevronDown className={cn('size-3.5 transition-transform', open && 'rotate-180')} />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div id="geo-uae-statement" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: EASE }} className="overflow-hidden">
+            <div className="ms-8 mt-3 max-h-48 overflow-y-auto pe-2">
+              <p className="text-xs font-semibold text-ink/80">{t('ack.title')}</p>
+              <ol className="mt-2 list-decimal space-y-1.5 ps-4 text-xs leading-relaxed text-ink/60">
+                {t.raw('ack.points').map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ol>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {error && (
+        <p id="geo-uae-ack-err" role="alert" className="ms-8 mt-2 text-xs text-down">
+          {t('ack.error')}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -215,7 +264,7 @@ export default function GeoGate() {
 
   useEffect(() => {
     let alive = true;
-    whenIntroDone().then(() => alive && setReady(true));
+    whenIntroLeaving().then(() => alive && setReady(true));
     return () => {
       alive = false;
     };
@@ -238,6 +287,7 @@ export default function GeoGate() {
   };
   const chooseCat = (c) => {
     writeCookie(COOKIES.uaeCategory, c);
+    writeCookie(COOKIES.uaeAck, new Date().toISOString());
     if (c === '5') window.location.assign(localeHref(CAT5_LOCALE, CAT5_PATH));
     else next();
   };

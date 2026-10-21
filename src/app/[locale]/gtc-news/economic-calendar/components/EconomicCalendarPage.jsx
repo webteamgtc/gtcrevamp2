@@ -18,7 +18,6 @@ import { EASE, Reveal, ScrollProgress, Stagger, StaggerItem } from '@/components
 import { cn } from '@/lib/utils';
 import { TRADINGVIEW_LOCALE } from '@/config/markets';
 import { PORTAL } from '@/config/menu';
-import { NEWS_PATH } from '@/lib/news-path';
 import { TradingViewWidget } from '@/app/[locale]/markets/components/EconomicCalendar';
 import CalendarHero, { jumpTo } from './CalendarHero';
 
@@ -103,8 +102,8 @@ function HolidaysVisual({ dark }) {
 
 const RESOURCES = {
   calendar: { Icon: CalendarClock, Visual: CalendarVisual, action: () => jumpTo('calendar-widget') },
-  hours: { Icon: Clock3, Visual: HoursVisual, href: `${NEWS_PATH}/market-holidays#trading-hours`, dark: true },
-  holidays: { Icon: CalendarX, Visual: HolidaysVisual, href: `${NEWS_PATH}/market-holidays#holiday-hours` }
+  hours: { Icon: Clock3, Visual: HoursVisual, href: '/markets', dark: true },
+  holidays: { Icon: CalendarX, Visual: HolidaysVisual, href: '/news/market-holidays' }
 };
 
 function ResourceCard({ card, index }) {

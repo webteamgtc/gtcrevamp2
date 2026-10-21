@@ -52,17 +52,24 @@ export function localeHref(locale, path) {
   return `../../${locale}/${slug}/index.html`;
 }
 
-/** UAE: forget the CAT 1 / CAT 5 choice and show the choice again. */
+/** UAE: forget the CAT 1 / CAT 5 choice (and the acknowledgement) and show the choice again. */
 export function resetUaeCategory() {
   deleteCookie(COOKIES.uaeCategory);
+  deleteCookie(COOKIES.uaeAck);
   window.location.assign(localeHref(CAT5_LOCALE, ''));
 }
 
-/** Resolves once the opening intro has finished (or immediately when it was skipped). */
-export function whenIntroDone() {
+/**
+ * Resolves as soon as the opening intro starts fading out (or immediately when it was skipped), so a popup
+ * can open underneath it and the intro dissolves straight into it.
+ */
+export function whenIntroLeaving() {
   if (typeof window === 'undefined') return Promise.resolve();
-  if (window.__gtcIntroDone || document.documentElement.dataset.intro !== 'play') return Promise.resolve();
-  return new Promise((resolve) => window.addEventListener('gtc:intro-done', resolve, { once: true }));
+  if (window.__gtcIntroLeaving || window.__gtcIntroDone || document.documentElement.dataset.intro !== 'play') return Promise.resolve();
+  return new Promise((resolve) => {
+    window.addEventListener('gtc:intro-leave', resolve, { once: true });
+    window.addEventListener('gtc:intro-done', resolve, { once: true });
+  });
 }
 
 /** Locks page scroll while a blocking dialog is open. */

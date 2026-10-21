@@ -74,17 +74,17 @@
         {
           "id": "calendar",
           "link": "View economic calendar",
-          "href": "/gtc-news/economic-calendar"
+          "href": "/news/economic-calendar"
         },
         {
           "id": "hours",
           "link": "View trading hours",
-          "href": "/gtc-news/market-holidays#trading-hours"
+          "href": "/markets/trading-hours"
         },
         {
           "id": "holidays",
           "link": "View holiday hours",
-          "href": "/gtc-news/market-holidays"
+          "href": "/news/market-holidays"
         }
       ],
       "sessions": {
