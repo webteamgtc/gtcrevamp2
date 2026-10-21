@@ -11,7 +11,7 @@
  */
 import fs from 'fs';
 import path from 'path';
-import { routing } from './routing';
+import { LOCALES, langOf } from './locales';
 
 const messagesRoot = path.join(process.cwd(), 'messages');
 
@@ -98,7 +98,9 @@ const cache = new Map();
 const CACHE = process.env.NODE_ENV === 'production'; // dev re-reads files so edits show up without a restart
 
 export async function loadLocaleMessages(locale) {
-  if (!routing.locales.includes(locale)) locale = routing.defaultLocale;
+  // folder = language: regional English (en-intl, en-ae…) reads messages/en
+  const folders = new Set(LOCALES.map((l) => langOf(l.code)));
+  locale = folders.has(locale) ? locale : folders.has(langOf(locale)) ? langOf(locale) : 'en';
   if (CACHE && cache.has(locale)) return cache.get(locale);
   const result = await readLocaleMessages(locale);
   if (CACHE) cache.set(locale, result);
@@ -114,3 +116,20 @@ async function readLocaleMessages(locale) {
   if (!legacy) return folderMessages;
   return merge(legacy, folderMessages);
 }
+
+/**
+ * Top-level namespaces a messages file provides, e.g. namespacesOf('companyPage') → ['companyPage', 'aboutUsPage', …].
+ * Read from the English folder (every language uses the same keys).
+ */
+const nsCache = new Map();
+export function namespacesOf(file) {
+  if (nsCache.has(file)) return nsCache.get(file);
+  let keys = [];
+  try {
+    const raw = JSON.parse(fs.readFileSync(path.join(messagesRoot, 'en', `${file}.json`), 'utf8'));
+    keys = Object.keys(namespaceBundlePart(`${file}.json`, raw) || {});
+  } catch {}
+  nsCache.set(file, keys);
+  return keys;
+}
+

@@ -1,0 +1,256 @@
+'use client';
+/**
+ * Region rules shown after the intro (settings: src/config/regions.js, copy: common.json → geo):
+ *  - US visitors: "Important notice" — must accept to use the site (remembered 30 days)
+ *  - UAE visitors (any language) and /en-ae: CAT 1 (full site) or CAT 5 (marketing page only) — remembered 30 days, changeable from the footer
+ *  - visitor on another region's site (e.g. a South African on /en-intl): small "go to your region?" note
+ */
+import { useEffect, useRef, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { AnimatePresence, motion } from 'motion/react';
+import { ArrowRight, Check, CircleX, Globe, MapPin, ShieldAlert, X } from 'lucide-react';
+import { AccentTitle } from '@/components/shared/SectionIntro';
+import { getLocale } from '@/i18n/locales';
+import { COOKIES, CAT5_LOCALE, CAT5_PATH, REGION_LOCALES, regionForCountry } from '@/config/regions';
+import { cn } from '@/lib/utils';
+import { readCookie, writeCookie, useCountry, whenIntroDone, useScrollLock, localeHref } from './geoClient';
+
+const EASE = [0.22, 1, 0.36, 1];
+
+/** Full-screen blocking dialog: dimmed, blurred page behind; focus kept inside; Esc does nothing (a choice is required). */
+function Gate({ labelledBy, wide = false, children }) {
+  const ref = useRef(null);
+  useScrollLock(true);
+  useEffect(() => {
+    const el = ref.current;
+    el?.querySelector('button')?.focus({ preventScroll: true });
+    const onKey = (e) => {
+      if (e.key !== 'Tab' || !el) return;
+      const f = [...el.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])')].filter((x) => !x.disabled);
+      if (!f.length) return;
+      const [a, b] = [f[0], f[f.length - 1]];
+      if (e.shiftKey && document.activeElement === a) (e.preventDefault(), b.focus());
+      else if (!e.shiftKey && document.activeElement === b) (e.preventDefault(), a.focus());
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+  return (
+    <motion.div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#070b24]/75 p-4 backdrop-blur-md" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
+      <motion.div
+        ref={ref}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={labelledBy}
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 12, scale: 0.98 }}
+        transition={{ duration: 0.45, ease: EASE }}
+        className={cn('relative my-8 w-full rounded-[2rem] bg-white text-ink shadow-[0_40px_120px_-30px_rgba(0,0,0,0.6)]', wide ? 'max-w-3xl p-6 sm:p-10' : 'max-w-md p-7 text-center sm:p-10')}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const IconTile = ({ tone = 'navy', children }) => (
+  <span className={cn('mx-auto grid size-16 place-items-center rounded-2xl text-white ring-8', tone === 'red' ? 'bg-gradient-to-br from-red-600 to-red-800 ring-red-50' : 'bg-gradient-to-br from-brand to-brand-900 ring-brand-50')}>{children}</span>
+);
+
+/* ------------------------------------------------------------------ US */
+
+function UsNotice({ onAccept }) {
+  const t = useTranslations('geo.us');
+  const [restricted, setRestricted] = useState(false);
+  return (
+    <Gate labelledBy="geo-us-title">
+      <AnimatePresence mode="wait" initial={false}>
+        {!restricted ? (
+          <motion.div key="notice" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }} transition={{ duration: 0.3, ease: EASE }}>
+            <IconTile>
+              <ShieldAlert className="size-7" />
+            </IconTile>
+            <h2 id="geo-us-title" className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-gold-700">
+              {t('eyebrow')}
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-ink/70 sm:text-base">{t('text')}</p>
+            <div className="mt-8 grid grid-cols-2 gap-3">
+              <button type="button" onClick={onAccept} className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-brand px-5 text-base font-semibold text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand-700">
+                {t('accept')} <ArrowRight className="size-4 rtl:-scale-x-100" />
+              </button>
+              <button type="button" onClick={() => setRestricted(true)} className="inline-flex h-13 items-center justify-center rounded-full border border-brand/15 px-5 text-base font-semibold text-ink/70 transition-colors hover:border-brand/40 hover:text-ink">
+                {t('reject')}
+              </button>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div key="restricted" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3, ease: EASE }}>
+            <IconTile tone="red">
+              <CircleX className="size-7" />
+            </IconTile>
+            <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-red-700">{t('restrictedEyebrow')}</p>
+            <h2 id="geo-us-title" className="heading-title mt-3">
+              {t('restrictedTitle')}
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-ink/65">{t('restrictedText')}</p>
+            <button type="button" onClick={onAccept} className="mt-8 inline-flex h-13 w-full items-center justify-center rounded-full bg-brand px-6 text-base font-semibold text-white shadow-lg shadow-brand/30 transition-colors hover:bg-brand-700">
+              {t('acceptToVisit')}
+            </button>
+            <button type="button" onClick={() => setRestricted(false)} className="mt-4 text-sm font-medium text-ink/55 underline-offset-4 hover:text-brand hover:underline">
+              {t('back')}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Gate>
+  );
+}
+
+/* ------------------------------------------------------------------ UAE */
+
+function UaeCategory({ onChoose }) {
+  const t = useTranslations('geo.uae');
+  const [pick, setPick] = useState(null);
+  const cats = ['1', '5'];
+  return (
+    <Gate labelledBy="geo-uae-title" wide>
+      <div className="text-center">
+        <p className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-1.5 text-xs font-semibold text-brand">
+          <MapPin className="size-3.5" /> {t('eyebrow')}
+        </p>
+        <h2 id="geo-uae-title" className="heading-title mt-4">
+          <AccentTitle text={t('title')} />
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-ink/65">{t('text')}</p>
+      </div>
+      <div role="radiogroup" aria-labelledby="geo-uae-title" className="mt-8 grid gap-4 sm:grid-cols-2">
+        {cats.map((c, i) => {
+          const on = pick === c;
+          const pts = t.raw(`cat${c}.points`);
+          return (
+            <motion.button
+              key={c}
+              type="button"
+              role="radio"
+              aria-checked={on}
+              onClick={() => setPick(c)}
+              onDoubleClick={() => onChoose(c)}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.15 + i * 0.08, ease: EASE }}
+              className={cn('group relative overflow-hidden rounded-3xl border-2 p-6 text-start outline-none transition-all duration-300 focus-visible:ring-4 focus-visible:ring-brand/20', on ? 'border-brand bg-gradient-to-b from-brand-50 to-white shadow-[0_24px_60px_-30px_rgba(41,59,147,0.6)]' : 'border-brand/10 hover:-translate-y-0.5 hover:border-brand/30')}
+            >
+              <span className="flex items-center justify-between">
+                <span className={cn('rounded-full px-3 py-1 text-xs font-bold tracking-wide', c === '1' ? 'bg-brand text-white' : 'bg-gold text-white')}>{t(`cat${c}.badge`)}</span>
+                <span className={cn('grid size-6 place-items-center rounded-full border-2 transition-colors', on ? 'border-brand bg-brand text-white' : 'border-brand/20')}>{on && <Check className="size-3.5" strokeWidth={3} />}</span>
+              </span>
+              <span className="heading-card mt-4 block">{t(`cat${c}.title`)}</span>
+              <span className="mt-2 block text-sm leading-relaxed text-ink/60">{t(`cat${c}.text`)}</span>
+              <span className="mt-4 block space-y-1.5">
+                {pts.map((p) => (
+                  <span key={p} className="flex items-center gap-2 text-sm text-ink/75">
+                    <Check className={cn('size-4 shrink-0', c === '1' ? 'text-brand' : 'text-gold-700')} /> {p}
+                  </span>
+                ))}
+              </span>
+            </motion.button>
+          );
+        })}
+      </div>
+      <div className="mt-8 flex flex-col items-center gap-3">
+        <button type="button" disabled={!pick} onClick={() => onChoose(pick)} className="inline-flex h-13 w-full max-w-xs items-center justify-center gap-2 rounded-full bg-brand px-6 text-base font-semibold text-white shadow-lg shadow-brand/30 transition-all hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none">
+          {t('continue')} <ArrowRight className="size-4 rtl:-scale-x-100" />
+        </button>
+        <p className="text-xs text-ink/50">{t('note')}</p>
+      </div>
+      <p className="mt-6 rounded-2xl bg-[#f6f8fc] px-4 py-3 text-xs leading-relaxed text-ink/55">
+        <strong className="me-1 text-ink/70">{t('disclaimerTitle')}:</strong>
+        {t('disclaimer')}
+      </p>
+    </Gate>
+  );
+}
+
+/* ------------------------------------------------------------------ region suggestion */
+
+function RegionSuggest({ country, target, onClose }) {
+  const t = useTranslations('geo.region');
+  const locale = useLocale();
+  let name = country;
+  try {
+    name = new Intl.DisplayNames(['en'], { type: 'region' }).of(country) || country;
+  } catch {}
+  const go = () => window.location.assign(localeHref(target));
+  return (
+    <motion.div role="status" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 24 }} transition={{ duration: 0.4, ease: EASE }} className="fixed inset-x-4 top-28 z-[90] mx-auto max-w-md rounded-2xl bg-white p-4 text-ink shadow-[0_24px_70px_-20px_rgba(0,0,0,0.45)] ring-1 ring-brand/10 md:inset-x-auto md:bottom-6 md:start-6 md:top-auto md:mx-0 md:w-[26rem]" dir={locale.startsWith('ar') ? 'rtl' : undefined}>
+      <div className="flex items-start gap-3">
+        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand">
+          <Globe className="size-5" />
+        </span>
+        <p className="flex-1 text-sm leading-relaxed text-ink/75">{t('text', { country: name })}</p>
+        <button type="button" onClick={onClose} aria-label={t('stay')} className="grid size-8 place-items-center rounded-full text-ink/40 hover:bg-brand-50 hover:text-ink">
+          <X className="size-4" />
+        </button>
+      </div>
+      <div className="mt-3 flex justify-end gap-2">
+        <button type="button" onClick={onClose} className="rounded-full px-4 py-2 text-sm font-semibold text-ink/60 hover:text-ink">
+          {t('stay')}
+        </button>
+        <button type="button" onClick={go} className="rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+          {t('switch', { region: getLocale(target).label })}
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ gate */
+
+export default function GeoGate() {
+  const locale = useLocale();
+  const country = useCountry();
+  const [ready, setReady] = useState(false);
+  const [step, setStep] = useState(null); // 'us' | 'uae' | 'region' | null
+
+  useEffect(() => {
+    let alive = true;
+    whenIntroDone().then(() => alive && setReady(true));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!ready || !country) return;
+    if (country === 'US' && readCookie(COOKIES.usAccepted) !== '1') return setStep('us');
+    if ((country === 'AE' || locale === CAT5_LOCALE) && !readCookie(COOKIES.uaeCategory)) return setStep('uae');
+    const home = regionForCountry(country);
+    if (REGION_LOCALES.includes(locale) && home !== locale && home !== 'en-intl' && readCookie(COOKIES.regionDismissed) !== locale) return setStep('region');
+    setStep(null);
+  }, [ready, country, locale]);
+
+  const next = () => setStep(null);
+  const acceptUs = () => {
+    writeCookie(COOKIES.usAccepted, '1');
+    // continue with the next rule (e.g. UAE category) if any
+    setStep((country === 'AE' || locale === CAT5_LOCALE) && !readCookie(COOKIES.uaeCategory) ? 'uae' : null);
+  };
+  const chooseCat = (c) => {
+    writeCookie(COOKIES.uaeCategory, c);
+    if (c === '5') window.location.assign(localeHref(CAT5_LOCALE, CAT5_PATH));
+    else next();
+  };
+  const stayHere = () => {
+    writeCookie(COOKIES.regionDismissed, locale);
+    next();
+  };
+
+  return (
+    <AnimatePresence>
+      {step === 'us' && <UsNotice key="us" onAccept={acceptUs} />}
+      {step === 'uae' && <UaeCategory key="uae" onChoose={chooseCat} />}
+      {step === 'region' && <RegionSuggest key="region" country={country} target={regionForCountry(country)} onClose={stayHere} />}
+    </AnimatePresence>
+  );
+}

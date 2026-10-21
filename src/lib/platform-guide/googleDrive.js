@@ -14,6 +14,7 @@
  */
 import { readFileSync } from 'fs';
 import { createSign } from 'crypto';
+import { langOf } from '@/i18n/locales';
 
 const DRIVE_API = 'https://www.googleapis.com/drive/v3';
 const FOLDER_MIME = 'application/vnd.google-apps.folder';
@@ -224,7 +225,7 @@ export async function getPlatformGuides(platform, locale) {
   const root = PLATFORM_DRIVE_FOLDERS[platform];
   if (!root) throw new Error(`Google Drive folder id for "${platform}" is not set (GOOGLE_DRIVE_*_FOLDER_ID).`);
   const data = await getPlatformGuideFromDrive(root, locale);
-  if (locale !== 'en' && !data.png.length && !data.pdf.length) {
+  if (langOf(locale) !== 'en' && !data.png.length && !data.pdf.length) {
     return { ...(await getPlatformGuideFromDrive(root, 'en')), resolvedLocale: 'en', fallbackUsed: true };
   }
   return { ...data, resolvedLocale: locale, fallbackUsed: false };

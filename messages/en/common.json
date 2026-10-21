@@ -188,7 +188,40 @@
     "cookie": "We use cookies to enhance your experience, analyze website traffic, and remember your preferences. Some cookies are essential, while others help us improve our services and personalize content. By clicking “Accept All,” you consent to our use of cookies.",
     "cookieAccept": "Accept All",
     "cookieSettings": "Settings",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "notices": {
+      "za": {
+        "title": "Risk Warning",
+        "paras": [
+          "Trading in derivatives, including rolling spot Foreign Exchange (FX) and Contracts for Difference (CFDs), is highly speculative, carries a substantial degree of risk, and is not appropriate for every investor. Nothing on this website constitutes investment advice or a recommendation, and it has been prepared without regard to your individual objectives, financial circumstances or needs.",
+          "FX and CFDs are complex instruments dealt on a margined basis and carry a high risk of losing money rapidly by reason of leverage, which magnifies gains and losses alike. You may lose part or all of your invested capital, and losses may exceed your initial investment. Before trading, you should consider your objectives, financial position, level of experience and appetite for risk, satisfy yourself that you understand how these products operate, and trade only with funds you can afford to lose. Seek independent financial or tax advice if in any doubt. Past performance is not indicative of future results.",
+          "This website is operated by GTC Global SA (Pty) Ltd (Company No. 2020/810937/07), the licensed financial services provider for clients resident in South Africa (FSP No. 51545). Its registered address is 18 Cavendish Road, Claremont, Cape Town, Western Cape, 7708, South Africa. It is licensed and regulated by South Africa's Financial Sector Conduct Authority (FSCA). The company is neither a market maker nor a product issuer and acts solely as an intermediary under the Financial Advisory and Intermediary Services Act, 2002 (FAIS), between the client and GTC Global Trading Ltd, the product supplier and principal counterparty to all client transactions.",
+          "GTC Global Trading Ltd is a company incorporated in Anjouan, Union of the Comoros (Company No. 16283) and licensed by the Anjouan Offshore Finance Authority under Licence No. L162831GTC. Its registered address is Boulevard de Coalancanthe, Mutsamudu, Anjouan, Union of the Comoros.",
+          "Services offered through this website are not available to residents of the United States, Japan, Australia, or in any jurisdiction where the provision of those services would contravene applicable laws, regulations, or sanctions."
+        ]
+      },
+      "vu": {
+        "title": "Risk Warning",
+        "paras": [
+          "Trading in derivatives, including rolling spot Foreign Exchange (FX) and Contracts for Difference (CFDs), is highly speculative, carries a substantial degree of risk, and is not appropriate for every investor. Nothing on this website constitutes investment advice or a recommendation, and it has been prepared without regard to your individual objectives, financial circumstances or needs.",
+          "FX and CFDs are complex instruments dealt on a margined basis and carry a high risk of losing money rapidly by reason of leverage, which magnifies gains and losses alike. You may lose part or all of your invested capital, and losses may exceed your initial investment. Before trading, you should consider your objectives, financial position, level of experience and appetite for risk, satisfy yourself that you understand how these products operate, and trade only with funds you can afford to lose. Seek independent financial or tax advice if in any doubt. Past performance is not indicative of future results.",
+          "The entity with which a client contracts will depend on the client's jurisdiction, eligibility, classification and onboarding route. The applicable contracting entity and, where relevant, the product issuer and/or counterparty will be clearly disclosed before the client submits an account application and will be identified in the relevant Client Agreement. Products and services available under one entity may not be available under another entity. Each entity within the GTC Financial Group is a separate legal entity. A licence held by one entity does not extend to any other entity within the group.",
+          "GTC Global Trade Capital Co. Limited (Company No. 40354) is a company incorporated in Vanuatu. The company holds Class A, Class B and Class C Principal's Licences issued by the Vanuatu Financial Services Commission under the Financial Dealers Licensing Act [CAP. 70]. Its registered address is First Floor, B&P House, Kumul Highway, Port Vila, Vanuatu.",
+          "Services offered through this international website are not available to residents of the United States, Japan, Australia, or in any jurisdiction where the provision of those services would contravene applicable laws, regulations, or sanctions."
+        ]
+      },
+      "mu": {
+        "title": "Risk Warning",
+        "paras": [
+          "Trading in derivatives, including rolling spot Foreign Exchange (FX) and Contracts for Difference (CFDs), is highly speculative, carries a substantial degree of risk, and is not appropriate for every investor. Nothing on this website constitutes investment advice or a recommendation, and it has been prepared without regard to your individual objectives, financial circumstances or needs.",
+          "FX and CFDs are complex instruments dealt on a margined basis and carry a high risk of losing money rapidly by reason of leverage, which magnifies gains and losses alike. You may lose part or all of your invested capital, and losses may exceed your initial investment. Before trading, you should consider your objectives, financial position, level of experience and appetite for risk, satisfy yourself that you understand how these products operate, and trade only with funds you can afford to lose. Seek independent financial or tax advice if in any doubt. Past performance is not indicative of future results.",
+          "The entity with which a client contracts will depend on the client's jurisdiction, eligibility, classification and onboarding route. The applicable contracting entity and, where relevant, the product issuer and/or counterparty will be clearly disclosed before the client submits an account application and will be identified in the relevant Client Agreement. Products and services available under one entity may not be available under another entity. Each entity within the GTC Financial Group is a separate legal entity. A licence held by one entity does not extend to any other entity within the group.",
+          "GTC Global Ltd is a company incorporated in Mauritius (Company No. C188049), holding a Global Business Licence, and authorised and regulated by the Financial Services Commission, Mauritius (FSC) as an Investment Dealer (Full Service Dealer, excluding Underwriting) / SEC-2.1B, Licence No. GB22200292, pursuant to Section 29 of the Securities Act 2005, Rule 4 of the Securities (Licensing) Rules 2007, and the Financial Services (Consolidated Licensing and Fees) Rules 2008. Its registered office and principal place of business is Ground Floor, The Catalyst, Silicon Avenue, 40 Cybercity, 72201 Ebene, Republic of Mauritius.",
+          "Services offered through this international website are not available to residents of the United States, Japan, Australia, or in any jurisdiction where the provision of those services would contravene applicable laws, regulations, or sanctions."
+        ]
+      }
+    },
+    "changeCategory": "Change investor category"
   },
   "common": {
     "prev": "Previous",
@@ -452,5 +485,56 @@
         "label": "Monthly Trades"
       }
     ]
+  },
+  "riskBarUs": "Trading CFDs involves significant risk and may result in the loss of your invested capital. You should carefully consider whether trading is appropriate for your financial circumstances and obtain independent financial advice where necessary. GTCFX services are not offered to residents of the United States or in jurisdictions where the distribution or use of such services is prohibited by applicable laws or regulations.",
+  "geo": {
+    "us": {
+      "eyebrow": "Important notice",
+      "text": "By continuing, you confirm that you understand the risks of trading CFDs, that you are not relying solely on this site for financial advice, and that you are not a resident or citizen of the United States, where GTCFX does not provide CFD trading services.",
+      "accept": "Accept",
+      "reject": "Reject",
+      "restrictedEyebrow": "Access restricted",
+      "restrictedTitle": "You can't use this website",
+      "restrictedText": "You can't use this website without accepting the risk disclaimer. Please accept to continue visiting the site.",
+      "acceptToVisit": "Accept to visit website",
+      "back": "Back to disclaimer"
+    },
+    "uae": {
+      "eyebrow": "Welcome to GTCFX UAE",
+      "title": "Choose how you'd like to [continue]",
+      "text": "To show you the right information, please tell us which investor category applies to you. You can change this at any time.",
+      "cat1": {
+        "badge": "CAT 1",
+        "title": "Category 1",
+        "text": "Access the full GTCFX website: markets, trading accounts, platforms and account opening.",
+        "points": [
+          "Full website and services",
+          "Account opening available",
+          "Live prices and trading tools"
+        ]
+      },
+      "cat5": {
+        "badge": "CAT 5",
+        "title": "Category 5",
+        "text": "View general information about GTCFX for marketing purposes only. No trading services are offered on this page.",
+        "points": [
+          "Marketing information only",
+          "No account opening",
+          "Speak to our team"
+        ]
+      },
+      "continue": "Continue",
+      "note": "Your choice is remembered on this device for 30 days.",
+      "disclaimerTitle": "Please note",
+      "disclaimer": "The categories shown are for information purposes and do not by themselves determine your eligibility. Eligibility is confirmed during onboarding in line with applicable UAE regulations."
+    },
+    "region": {
+      "text": "You appear to be in {country}. Visit the website for your region?",
+      "switch": "Go to {region}",
+      "stay": "Stay here"
+    },
+    "intro": {
+      "loading": "Loading GTCFX"
+    }
   }
 }

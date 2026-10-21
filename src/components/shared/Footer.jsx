@@ -1,6 +1,6 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUp, ChevronDown, Cookie } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -9,11 +9,18 @@ import NavLink from './nav/NavLink';
 import { FOOTER_LINKS } from '@/config/menu';
 import { StoreBadges } from './GtcGoPhone';
 import { Stagger, StaggerItem, Reveal, EASE } from '../motion';
+import { FOOTER_NOTICE_REGIONS, CAT5_LOCALE, regionOf } from '@/config/regions';
+import { resetUaeCategory, useCountry } from './geo/geoClient';
 
 const COLS = ['instruments', 'quick', 'platforms', 'company', 'support', 'legal'];
 
 export default function Footer({ theme = 'light', layout = 'stacked' }) {
   const t = useTranslations('footer');
+  const locale = useLocale();
+  const country = useCountry();
+  // legal notice for the visitor's regional site (South Africa, Mauritius, Vanuatu have their own)
+  const region = regionOf(locale);
+  const notice = FOOTER_NOTICE_REGIONS.includes(region) ? t.raw(`notices.${region}`) : { title: t('riskTitle'), paras: t.raw('risk') };
   const dark = theme === 'dark';
 
   return (
@@ -113,16 +120,23 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
 
         {/* Risk warning */}
         <Reveal className={cn('border-t py-10', dark ? 'border-white/10' : 'border-brand/10')} y={16}>
-          <h3 className={cn('heading-label', dark && 'is-dark')}>{t('riskTitle')}</h3>
+          <h3 className={cn('heading-label', dark && 'is-dark')}>{notice.title}</h3>
           <div className={cn('mt-4 space-y-3 text-[13px] leading-relaxed', dark ? 'text-white/55' : 'text-ink/60')}>
-            {t.raw('risk').map((p, i) => (
+            {notice.paras.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
         </Reveal>
 
         <div className={cn('flex flex-col items-start justify-between gap-4 border-t py-6 text-sm sm:flex-row sm:items-center', dark ? 'border-white/10 text-white/50' : 'border-brand/10 text-ink/50')}>
-          <p>© {new Date().getFullYear()} GTCFX. {t('rights')}</p>
+          <p>
+            © {new Date().getFullYear()} GTCFX. {t('rights')}
+            {(locale === CAT5_LOCALE || country === 'AE') && (
+              <button type="button" onClick={resetUaeCategory} className={cn('ms-3 underline underline-offset-4 transition-colors', dark ? 'hover:text-white' : 'hover:text-brand')}>
+                {t('changeCategory')}
+              </button>
+            )}
+          </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className={cn('group inline-flex items-center gap-2 rounded-full border px-4 py-2 font-medium transition-all hover:border-gold', dark ? 'border-white/15 text-white' : 'border-brand/15 text-brand')}
@@ -173,30 +187,27 @@ function FooterColumn({ title, links, hrefs = [], dark }) {
   );
 }
 
+/**
+ * Cookie notice. It is part of the server HTML and slides up with the page (CSS), instead of appearing
+ * later from a script: a late banner becomes the page's "largest contentful paint" and hurts Core Web Vitals.
+ * Visitors who already answered never see it (hidden before paint via <html data-cookie="ok">, see introScript.js).
+ */
 function CookieBanner({ dark }) {
   const t = useTranslations('footer');
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    let dismissed = false;
-    try {
-      dismissed = localStorage.getItem('gtc-cookie') === '1';
-    } catch {}
-    if (dismissed) return;
-    const id = setTimeout(() => setShow(true), 1800);
-    return () => clearTimeout(id);
-  }, []);
+  const [show, setShow] = useState(true);
   const close = () => {
     setShow(false);
     try {
       localStorage.setItem('gtc-cookie', '1');
     } catch {}
+    setTimeout(() => (document.documentElement.dataset.cookie = 'ok'), 600);
   };
   return (
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ y: 120, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          id="gtc-cookie"
+          initial={false}
           exit={{ y: 120, opacity: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
           className="fixed inset-x-3 bottom-3 z-[60] md:inset-x-auto md:end-6 md:bottom-6 md:max-w-md"

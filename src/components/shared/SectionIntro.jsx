@@ -1,5 +1,5 @@
 'use client';
-import { Reveal } from '@/components/motion';
+import { Reveal, HeroIn } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
 /**
@@ -32,36 +32,38 @@ export function AccentTitle({ text, words = 1, accentClassName = 'heading-accent
 /**
  * Section intro used across inner pages.
  * layout 'center' (title + text centred) or 'split' (title start, text end)
+ * instant: for an intro that can be the first thing on screen — slides in on load instead of fading in on scroll
  */
-export function SectionIntro({ title, sub, description, layout = 'center', dark = false, className, children }) {
+export function SectionIntro({ title, sub, description, layout = 'center', dark = false, instant = false, className, children }) {
+  const R = instant ? HeroIn : Reveal;
   const muted = dark ? 'text-white/60' : 'text-ink/60';
   if (layout === 'split') {
     return (
       <div className={cn('grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-16', dark && 'is-dark', className)}>
-        <Reveal y={16}>
+        <R y={16}>
           <h2 className="heading-section">
             <AccentTitle text={title} />
           </h2>
           {sub && <p className="mt-3 text-base font-semibold text-brand md:text-lg">{sub}</p>}
-        </Reveal>
-        <Reveal y={12} delay={0.1}>
+        </R>
+        <R y={12} delay={0.1}>
           <p className={cn('text-pretty text-[15px] leading-relaxed md:text-base', muted)}>{description}</p>
           {children}
-        </Reveal>
+        </R>
       </div>
     );
   }
   return (
     <div className={cn('mx-auto max-w-3xl text-center', dark && 'is-dark', className)}>
-      <Reveal y={16}>
+      <R y={16}>
         <h2 className="heading-section">
           <AccentTitle text={title} />
         </h2>
-      </Reveal>
+      </R>
       {description && (
-        <Reveal y={12} delay={0.1}>
+        <R y={12} delay={0.1}>
           <p className={cn('mx-auto mt-5 max-w-2xl text-pretty text-[15px] leading-relaxed md:text-base', muted)}>{description}</p>
-        </Reveal>
+        </R>
       )}
       {children}
     </div>

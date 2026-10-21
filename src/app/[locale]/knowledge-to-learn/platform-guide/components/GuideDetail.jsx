@@ -38,7 +38,7 @@ function Hero({ platform, item }) {
               <Icon className="size-3.5" /> {t(`subTabs.${item.type}`)}
             </span>
           </motion.div>
-          <motion.h1 dir="auto" className="heading-page mt-5 max-w-4xl text-balance" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.75, ease: EASE, delay: 0.05 }}>
+          <motion.h1 dir="auto" className="heading-page mt-5 max-w-4xl text-balance" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE, delay: 0.05 }}>
             {item.title}
           </motion.h1>
           {item.type === 'pdf' && (

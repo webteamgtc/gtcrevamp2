@@ -8,6 +8,7 @@
  * (p, lists, emphasis, links) — the CMS HTML carries editor wrappers and inline styles.
  */
 import { strapiGet } from './strapi';
+import { langOf } from '@/i18n/locales';
 
 const PAGE = 100;
 const ALLOWED = new Set(['a', 'b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'u', 'ul']);
@@ -65,7 +66,7 @@ async function getAll(path, query, locale) {
  * empty categories dropped). Never throws: resolves to [] when Strapi is unreachable.
  */
 export async function getFaqGroups(locale) {
-  const tries = locale && locale !== 'en' ? [locale, 'en'] : ['en'];
+  const tries = locale && langOf(locale) !== 'en' ? [langOf(locale), 'en'] : ['en'];
   for (const loc of tries) {
     const [cats, faqs] = await Promise.all([
       getAll('faqs-categories', { fields: ['name', 'slug'] }, loc),

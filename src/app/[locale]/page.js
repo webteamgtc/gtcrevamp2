@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { pageMetadata, organizationLd, JsonLd } from '@/lib/seo';
+import ClientMessages from '@/i18n/ClientMessages';
 import HomePage from './components/HomePage';
 
 export async function generateMetadata({ params }) {
@@ -14,7 +15,10 @@ export default async function Page({ params }) {
   return (
     <>
       <JsonLd data={organizationLd()} />
-      <HomePage />
+      {/* the homepage's texts only (see src/i18n/ClientMessages.jsx) */}
+      <ClientMessages files={['homepage']}>
+        <HomePage />
+      </ClientMessages>
     </>
   );
 }

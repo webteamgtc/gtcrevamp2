@@ -23,7 +23,8 @@ export default function EventsPage({ upcoming, archive }) {
       <Header theme="dark" />
       <main>
         <EventsHero events={upcoming} index={index} setIndex={setIndex} />
-        <Archive archive={archive} />
+        {/* with no upcoming events the archive is the first thing on screen, so its intro shows on load */}
+        <Archive archive={archive} first={!upcoming?.length} />
         <ShowUp />
         <MediaResources />
         <EventsCta />

@@ -7,6 +7,7 @@ import { SectionIntro } from '@/components/shared/SectionIntro';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { EventImage } from './EventImage';
+import { intlLocale } from '@/i18n/locales';
 
 /** Main photo + thumbnails strip. Falls back to the cover / branded poster when there is no gallery. */
 function Gallery({ event, t }) {
@@ -49,7 +50,7 @@ function Gallery({ event, t }) {
 /** Day + month badge on the timeline rail. */
 function DateBadge({ date, locale, active }) {
   const d = new Date(`${date}T00:00:00Z`);
-  locale = locale === 'en' ? 'en-GB' : locale;
+  locale = intlLocale(locale);
   const day = new Intl.DateTimeFormat(locale, { day: '2-digit', timeZone: 'UTC' }).format(d);
   const mon = new Intl.DateTimeFormat(locale, { month: 'short', timeZone: 'UTC' }).format(d);
   return (
@@ -63,7 +64,7 @@ function DateBadge({ date, locale, active }) {
 }
 
 /** White section: past events by year, as a timeline of expandable rows. */
-export function Archive({ archive }) {
+export function Archive({ archive, first = false }) {
   const t = useTranslations('eventsPage.archive');
   const locale = useLocale();
   const [year, setYear] = useState(archive[0]?.year);
@@ -79,7 +80,7 @@ export function Archive({ archive }) {
     <section id="archive" className="relative scroll-mt-24 overflow-hidden bg-white py-14 text-ink md:py-24">
       <div className="absolute -end-40 top-20 size-[460px] rounded-full bg-brand/[0.06] blur-[120px]" aria-hidden />
       <div className="container-x relative">
-        <SectionIntro title={t('title')} description={t('description')} />
+        <SectionIntro instant={first} title={t('title')} description={t('description')} />
 
         {archive.length > 0 && (
           <div className="mt-10 flex justify-center">

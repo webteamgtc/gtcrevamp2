@@ -17,6 +17,7 @@ import { dateLocale } from './events';
 import { cleanHtml, parseLesson } from './learnArticle';
 import { SAMPLE_NEWS } from '@/data/news.sample';
 import { NEWS_PATH, newsArticleHref } from './news-path';
+import { langOf } from '@/i18n/locales';
 
 /** Categories that are not news feeds (or are shown in their own section). */
 const HIDDEN = new Set(['favourite', 'fundamental', 'weekly-forecast']);
@@ -61,7 +62,7 @@ export function normaliseArticle(raw, locale = 'en') {
 }
 
 async function getBlogs(locale, query) {
-  const tries = locale && locale !== 'en' ? [locale, 'en'] : ['en'];
+  const tries = locale && langOf(locale) !== 'en' ? [langOf(locale), 'en'] : ['en'];
   for (const loc of tries) {
     const json = await strapiGet('blogs', { locale: loc, tags: ['blogs'], query: { sort: ['publishedAt:desc'], ...query } }); // not Published: that display date is empty on most posts
     if (Array.isArray(json?.data) && json.data.length) return { rows: json.data, total: Number(json.meta?.pagination?.total ?? json.data.length), locale: loc };
@@ -73,7 +74,7 @@ async function getBlogs(locale, query) {
 
 /** News categories with posts → [{ slug, name, count }] (tab order, hidden feeds removed). */
 export async function getNewsCategories(locale) {
-  const tries = locale && locale !== 'en' ? [locale, 'en'] : ['en'];
+  const tries = locale && langOf(locale) !== 'en' ? [langOf(locale), 'en'] : ['en'];
   for (const loc of tries) {
     const json = await strapiGet('categories', { locale: loc, tags: ['categories'], query: { fields: ['name', 'slug'], pagination: { pageSize: 100 } } });
     const cats = (json?.data ?? []).map(attrs).filter((c) => c.slug && !HIDDEN.has(c.slug));

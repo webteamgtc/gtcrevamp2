@@ -42,7 +42,7 @@ export default function GtcGoPhone({ className, dark = false, interval = 3600 })
           </span>
         </div>
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={screen}
             initial={{ opacity: 0, x: 40, scale: 0.98 }}
@@ -96,7 +96,7 @@ function Splash({ t }) {
           transition={{ duration: 2.4, delay: k * 0.6, repeat: Infinity, ease: 'easeOut' }}
         />
       ))}
-      <motion.div initial={{ scale: 0.6, rotate: -20, opacity: 0 }} animate={{ scale: 1, rotate: 0, opacity: 1 }} transition={{ type: 'spring', stiffness: 160, damping: 12 }} className="relative grid size-20 place-items-center rounded-[1.6rem] bg-white shadow-2xl">
+      <motion.div initial={{ scale: 0.6, rotate: -20 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 160, damping: 12 }} className="relative grid size-20 place-items-center rounded-[1.6rem] bg-white shadow-2xl">
         <span className="text-2xl font-black tracking-tighter text-brand">GTC</span>
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="relative mt-5 text-xl font-bold">

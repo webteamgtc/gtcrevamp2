@@ -10,6 +10,7 @@
  */
 import { strapiGet, toImage } from './strapi';
 import { cleanHtml, parseLesson } from './learnArticle';
+import { langOf } from '@/i18n/locales';
 
 export { cleanHtml };
 
@@ -23,7 +24,7 @@ const rel = (r) => {
 
 /** GET a collection for `locale`, falling back to English when nothing comes back. */
 async function getWithFallback(path, query, locale) {
-  const tries = locale && locale !== 'en' ? [locale, 'en'] : ['en'];
+  const tries = locale && langOf(locale) !== 'en' ? [langOf(locale), 'en'] : ['en'];
   for (const loc of tries) {
     const json = await strapiGet(path, { query, locale: loc, tags: [path] });
     if (Array.isArray(json?.data) && json.data.length) return { rows: json.data, meta: json.meta, locale: loc };

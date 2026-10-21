@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { langOf } from '@/i18n/locales';
 
 /** Same-origin proxy (src/app/api/leverage/route.js) for the S3 leverage JSON. */
 const LEVERAGE_API = "/api/leverage";
@@ -58,7 +59,7 @@ export function filterCategorySections(sections, query) {
 
 async function fetchLeverageJson(locale) {
   const response = await fetch(
-    `${LEVERAGE_API}?locale=${encodeURIComponent(locale)}`
+    `${LEVERAGE_API}?locale=${encodeURIComponent(langOf(locale))}`
   );
 
   if (!response.ok) {

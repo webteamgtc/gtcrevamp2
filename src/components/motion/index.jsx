@@ -43,6 +43,18 @@ export function Reveal({
   );
 }
 
+/* ---------- HeroIn: above-the-fold content that slides in on load but is never hidden ----------
+   Use it instead of Reveal in page heroes: Reveal starts at opacity 0 until scripts run, which delays the
+   page's Largest Contentful Paint (Core Web Vitals). HeroIn only moves, so the text paints immediately. */
+export function HeroIn({ children, className, delay = 0, y = 16, duration = 0.8, as = 'div', ...rest }) {
+  const Comp = motion[as] ?? motion.div;
+  return (
+    <Comp className={className} initial={{ y }} animate={{ y: 0 }} transition={{ duration, delay, ease: EASE }} {...rest}>
+      {children}
+    </Comp>
+  );
+}
+
 /* ---------- Stagger: children animate one after another ---------- */
 export function Stagger({ children, className, stagger = 0.09, delay = 0, amount = 0.2, as = 'div' }) {
   const Comp = motion[as] ?? motion.div;

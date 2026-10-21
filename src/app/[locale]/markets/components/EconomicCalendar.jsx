@@ -7,6 +7,7 @@ import NavLink from '@/components/shared/nav/NavLink';
 import BandLine from '@/components/shared/BandLine';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { cn } from '@/lib/utils';
+import { intlLocale } from '@/i18n/locales';
 
 /** TradingView economic calendar embed (no API key; renders into an iframe). */
 const TV_SRC = 'https://s3.tradingview.com/external-embedding/embed-widget-events.js';
@@ -120,7 +121,7 @@ function SessionClock({ s, now }) {
   const d = Math.floor(left / 1440);
   const time = `${d ? `${d}d ` : ''}${Math.floor((left % 1440) / 60)}h ${String(left % 60).padStart(2, '0')}m`;
   const progress = open ? ((mins - s.open * 60) / ((s.close - s.open) * 60)) * 100 : 0;
-  const clock = new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : locale, { timeZone: s.tz, hour: '2-digit', minute: '2-digit' }).format(now);
+  const clock = new Intl.DateTimeFormat(intlLocale(locale), { timeZone: s.tz, hour: '2-digit', minute: '2-digit' }).format(now);
   return (
     <div className={cn('rounded-3xl border p-5 transition-colors', open ? 'border-up/40 bg-up/[0.06]' : 'border-white/10 bg-white/[0.04]')}>
       <div className="flex items-center justify-between">

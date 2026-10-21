@@ -12,6 +12,7 @@ import MegaMenu from './nav/MegaMenu';
 import MobileNav from './nav/MobileNav';
 import NavLink, { useIsActive } from './nav/NavLink';
 import { EASE } from '../motion';
+import { useCountry } from './geo/geoClient';
 
 const IDS = MENU.map((g) => g.id);
 
@@ -25,6 +26,7 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
   const tn = useTranslations('nav');
   const tm = useTranslations('menu');
   const tr = useTranslations();
+  const country = useCountry(); // US visitors see the US risk warning
   const isActive = useIsActive();
   const [open, setOpen] = useState(null);
   const [dirn, setDirn] = useState(1);
@@ -160,7 +162,7 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
           )}
         >
           <div className="container-x py-2 backdrop-blur">
-            <p className="line-clamp-2">{tr('riskBar')}</p>
+            <p className="line-clamp-2">{tr(country === 'US' ? 'riskBarUs' : 'riskBar')}</p>
           </div>
         </div>
 

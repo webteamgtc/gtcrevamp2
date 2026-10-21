@@ -5,11 +5,24 @@ cd "$(dirname "$0")/.."
 # static export can't include the proxy or API routes: park them for the build
 mv src/proxy.js /tmp/gtc-proxy.js
 mv src/app/api /tmp/gtc-api
-# …and can't render pages on demand: symbol pages are limited to the prebuilt ones
-SYM='src/app/[locale]/markets/[market]/[symbol]/page.js'
-cp "$SYM" /tmp/gtc-symbol-page.js
-sed -i 's/^export const dynamicParams = true;/export const dynamicParams = false;/' "$SYM"
-trap 'mv /tmp/gtc-proxy.js src/proxy.js; mv /tmp/gtc-api src/app/api; mv /tmp/gtc-symbol-page.js "$SYM"' EXIT
+# …and has no CMS/API access, so routes whose pages come from Strapi or the symbols API (news articles,
+# Learn sections, platform guides, leaderboard, symbol pages) are set aside for the preview build.
+# KEEP = dynamic routes built from local data.
+KEEP='src/app/[locale]/markets/[market] src/app/[locale]/knowledge-to-learn/trading-glossary/[letter]'
+PARK=/tmp/gtc-park; rm -rf "$PARK"; mkdir -p "$PARK"
+mapfile -t DYN < <(find 'src/app/[locale]' -mindepth 1 -type d -name '[[]*[]]' | awk '{ print length, $0 }' | sort -n | cut -d' ' -f2-)
+i=0
+for d in "${DYN[@]}"; do
+  [ -e "$d" ] || continue # already set aside with a parent folder
+  case " $KEEP " in *" $d "*) continue ;; esac
+  i=$((i+1)); mkdir -p "$PARK/$i"; echo "$d" > "$PARK/$i/path"; mv "$d" "$PARK/$i/dir"
+done
+restore() {
+  mv /tmp/gtc-proxy.js src/proxy.js; mv /tmp/gtc-api src/app/api
+  for n in "$PARK"/*; do [ -d "$n/dir" ] && mv "$n/dir" "$(cat "$n/path")"; done
+  rm -rf "$PARK"
+}
+trap restore EXIT
 rm -rf out preview
 STATIC_EXPORT=1 npx next build --webpack
 mkdir -p preview
@@ -18,7 +31,7 @@ cp -r out/_next out/images out/icon.png preview/ 2>/dev/null || true
 for l in $(ls -d out/*/ | xargs -n1 basename); do [ -f out/$l/index.html ] && [ -d out/$l/company ] && mkdir -p preview/$l/home && cp out/$l/index.html preview/$l/home/; done
 # Every other page, flattened to /<l>/<last-segment>/ so all pages sit two folders deep
 # (keep in sync with PREVIEW_PAGES in src/components/shared/nav/NavLink.jsx)
-PAGES="company trading trading/open-live-account trading/free-demo-account trading/deposit trading/account-types trading/compensation-fund trading/mt5-platform trading/mt4-platform trading/metatrader-for-android trading/metatrader-for-ipad trading/gtc-go-app trading/gtc-go-app-ipad trading/gtc-go-app-android company/about-us company/why-gtc-group company/global-presence company/events-and-exhibitions company/regulations company/contact-us markets markets/forex markets/energy markets/indices markets/metals markets/shares markets/crypto-cfds markets/future-cfds markets/forex/eurusd markets/forex/gbpusd markets/forex/usdjpy markets/forex/usdchf markets/metals/xauusd markets/indices/us30 markets/indices/spx500 markets/indices/nas100"
+PAGES="company trading trading/open-live-account trading/free-demo-account trading/deposit trading/account-types trading/compensation-fund trading/mt5-platform trading/mt4-platform trading/metatrader-for-android trading/metatrader-for-ipad trading/gtc-go-app trading/gtc-go-app-ipad trading/gtc-go-app-android company/about-us company/why-gtc-group company/global-presence company/events-and-exhibitions company/regulations company/contact-us markets markets/forex markets/energy markets/indices markets/metals markets/shares markets/crypto-cfds markets/future-cfds markets/forex/eurusd markets/forex/gbpusd markets/forex/usdjpy markets/forex/usdchf markets/metals/xauusd markets/indices/us30 markets/indices/spx500 markets/indices/nas100 marketing"
 for l in $(ls -d out/*/ | xargs -n1 basename); do
   [ -d out/$l/company ] || continue
   for p in $PAGES; do
