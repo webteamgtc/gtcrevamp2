@@ -15,6 +15,7 @@ import { AE, PK, AF, IN, TR, UZ, CN, TW, VN, TH, MY, ID, PH, ES, FR, IT, PT, RU 
 const Flags = { AE, PK, AF, IN, TR, UZ, CN, TW, VN, TH, MY, ID, PH, ES, FR, IT, PT, RU };
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { LOCALES, REGIONS, getLocale } from '@/i18n/locales';
+import { COOKIES, REGION_LOCALES, REMEMBER_DAYS } from '@/config/regions';
 import { cn } from '@/lib/utils';
 import { EASE } from '../motion';
 
@@ -121,6 +122,8 @@ export default function LanguagePicker({ dark = false, className, onOpenChange, 
   const choose = (code) => {
     setOpen(false);
     if (code === locale) return;
+    // picking a regional English site on purpose: the proxy must not send the visitor back to their own region
+    if (REGION_LOCALES.includes(code)) document.cookie = `${COOKIES.regionDismissed}=${code}; path=/; max-age=${60 * 60 * 24 * REMEMBER_DAYS}; SameSite=Lax`;
     if (process.env.NEXT_PUBLIC_STATIC_EXPORT === '1') {
       window.location.href = window.location.pathname.replace(`/${locale}/`, `/${code}/`);
     } else {
@@ -264,6 +267,7 @@ export default function LanguagePicker({ dark = false, className, onOpenChange, 
       >
         {list.map((l) => {
           const on = l.code === locale;
+          if(l.hideInLanguageSelector) return null;
           return (
             <motion.li key={l.code} role="option" aria-selected={on} variants={{ h: { opacity: 0, y: 8 }, s: { opacity: 1, y: 0, transition: { duration: 0.3, ease: EASE } } }}>
               <button
