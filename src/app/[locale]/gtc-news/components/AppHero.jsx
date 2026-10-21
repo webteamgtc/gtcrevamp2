@@ -50,10 +50,10 @@ export default function AppHero() {
         <Breadcrumb className="lg:justify-start" items={[{ label: tb('home'), href: '/' }, { label: tb('current') }]} />
         <div className="mt-10 grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
           <div className="text-center lg:text-start">
-            <motion.h1 className="heading-page text-balance" initial={{ y: 24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: EASE }}>
+            <motion.h1 className="heading-page text-balance" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.8, ease: EASE }}>
               <AccentTitle text={t('title')} />
             </motion.h1>
-            <motion.p className="mx-auto mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
+            <motion.p className="mx-auto mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
               {t('description')}
             </motion.p>
 
@@ -80,7 +80,7 @@ export default function AppHero() {
             <div className="absolute inset-[10%] rounded-full bg-brand/45 blur-3xl" />
             <motion.div className="absolute inset-[2%] rounded-full border border-dashed border-white/15" animate={{ rotate: 360 }} transition={{ duration: 70, repeat: Infinity, ease: 'linear' }} />
             <Candles />
-            <motion.div className="absolute inset-x-[20%] top-[4%]" initial={{ y: 80, rotate: 10, opacity: 0 }} animate={{ y: 0, rotate: -6, opacity: 1 }} transition={{ duration: 1.1, ease: EASE, delay: 0.2 }}>
+            <motion.div className="absolute inset-x-[20%] top-[4%]" initial={{ y: 80, rotate: 10 }} animate={{ y: 0, rotate: -6 }} transition={{ duration: 1.1, ease: EASE, delay: 0.2 }}>
               <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
                 <GtcGoPhone className="w-full drop-shadow-[0_40px_60px_rgba(0,0,0,0.5)]" />
               </motion.div>

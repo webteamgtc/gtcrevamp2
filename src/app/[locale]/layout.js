@@ -4,12 +4,14 @@ import '@fontsource/ibm-plex-sans-arabic/600.css';
 import '@fontsource/ibm-plex-sans-arabic/700.css';
 import '../globals.css';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { hasLocale } from 'next-intl';
+import ClientMessages from '@/i18n/ClientMessages';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Providers from '@/components/Providers';
 import { routing } from '@/i18n/routing';
-import { getDir } from '@/i18n/locales';
+import { getDir, hreflangOf } from '@/i18n/locales';
 import { SITE_URL } from '@/lib/seo';
+import { INTRO_SCRIPT } from '@/components/shared/intro/introScript';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -23,7 +25,7 @@ export async function generateMetadata({ params }) {
     title: t('title'),
     description: t('description'),
     alternates: {
-      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`]))
+      languages: Object.fromEntries(routing.locales.map((l) => [hreflangOf(l), `/${l}`]))
     }
   };
 }
@@ -34,11 +36,15 @@ export default async function LocaleLayout({ children, params }) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} dir={getDir(locale)} suppressHydrationWarning>
+    <html lang={hreflangOf(locale)} dir={getDir(locale)} suppressHydrationWarning>
+      <head>
+        {/* decides before the first paint whether the opening intro plays (once per session) */}
+        <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
+      </head>
       <body className="min-h-screen bg-white text-ink">
-        <NextIntlClientProvider>
+        <ClientMessages>
           <Providers>{children}</Providers>
-        </NextIntlClientProvider>
+        </ClientMessages>
       </body>
     </html>
   );

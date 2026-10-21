@@ -4,7 +4,7 @@
  * - breadcrumbLd(): BreadcrumbList structured data
  * Set NEXT_PUBLIC_SITE_URL in .env for the live domain.
  */
-import { LOCALES, DEFAULT_LOCALE } from '@/i18n/locales';
+import { LOCALES, DEFAULT_LOCALE, hreflangOf } from '@/i18n/locales';
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gtcfx.com').replace(/\/$/, '');
 export const OG_IMAGE = 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/logo/main-logo.webp';
@@ -15,7 +15,7 @@ export function localeUrl(locale, path = '') {
 }
 
 export function pageMetadata({ locale, path = '', title, description }) {
-  const languages = Object.fromEntries(LOCALES.map((l) => [l.code, localeUrl(l.code, path)]));
+  const languages = Object.fromEntries(LOCALES.map((l) => [hreflangOf(l.code), localeUrl(l.code, path)]));
   languages['x-default'] = localeUrl(DEFAULT_LOCALE, path);
   return {
     title,

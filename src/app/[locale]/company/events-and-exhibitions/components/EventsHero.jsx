@@ -13,9 +13,10 @@ import { TiltCard, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { EventImage } from './EventImage';
 import { EventRegisterForm } from './EventRegisterForm';
+import { intlLocale } from '@/i18n/locales';
 
 /* ---------------- shared helpers ---------------- */
-const dl = (locale) => (locale === 'en' ? 'en-GB' : locale);
+const dl = (locale) => intlLocale(locale);
 const fmt = (date, locale, opts) => new Intl.DateTimeFormat(dl(locale), { timeZone: 'UTC', ...opts }).format(new Date(`${date}T00:00:00Z`));
 
 function useCountdown(start, end) {

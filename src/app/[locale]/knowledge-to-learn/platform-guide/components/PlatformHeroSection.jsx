@@ -52,10 +52,10 @@ export default function PlatformHeroSection() {
         <Breadcrumb className="lg:justify-start" items={[{ label: tk('home'), href: '/' }, { label: tk('current'), href: HUB_PATH }, { label: t('title') }]} />
         <div className="mt-10 grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div className="text-center lg:text-start">
-            <motion.h1 className="heading-page text-balance" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.75, ease: EASE }}>
+            <motion.h1 className="heading-page text-balance" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
               {t('title')}
             </motion.h1>
-            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
+            <motion.p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
               {t('description')}
             </motion.p>
             <motion.div className="mt-9 flex justify-center lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>

@@ -1,0 +1,96 @@
+{
+  "marketingPage": {
+    "meta": {
+      "title": "GTCFX UAE | Global Markets, One Trusted Partner",
+      "description": "General information about GTCFX, a multi-regulated global broker since 2012. For marketing purposes only."
+    },
+    "notice": "Marketing information only. This page does not offer trading services or account opening.",
+    "changeCategory": "Change investor category",
+    "hero": {
+      "title": "Global Markets, [One Trusted Partner]",
+      "text": "GTCFX is a multi-regulated financial group serving traders in more than 100 countries since 2012. Discover who we are and what we stand for.",
+      "primary": "Speak to our team",
+      "secondary": "Email us"
+    },
+    "stats": [
+      {
+        "value": "2012",
+        "label": "Serving traders since"
+      },
+      {
+        "value": "985,000+",
+        "label": "Traders worldwide"
+      },
+      {
+        "value": "100+",
+        "label": "Countries reached"
+      },
+      {
+        "value": "5",
+        "label": "Regulated entities"
+      }
+    ],
+    "about": {
+      "title": "Who [we are]",
+      "text": "GTC Group brings together regulated entities across several jurisdictions, each operating under its own licence and local rules. Our focus has always been the same: transparent conditions, dependable technology and people you can talk to.",
+      "items": [
+        {
+          "icon": "shield",
+          "title": "Regulation first",
+          "text": "Every entity in the group operates under its own licence, with clear disclosures."
+        },
+        {
+          "icon": "globe",
+          "title": "Global reach, local care",
+          "text": "Teams across several regions, speaking our clients' languages."
+        },
+        {
+          "icon": "chat",
+          "title": "Real people",
+          "text": "Multilingual support from a team that knows the markets."
+        }
+      ]
+    },
+    "markets": {
+      "title": "Markets [we cover]",
+      "text": "A broad range of global markets, explained by our team.",
+      "items": [
+        "Forex",
+        "Metals",
+        "Energy",
+        "Indices",
+        "Shares",
+        "Crypto"
+      ]
+    },
+    "platforms": {
+      "title": "Technology [you can rely on]",
+      "text": "Industry-standard platforms and our own app, built for speed and stability.",
+      "items": [
+        {
+          "name": "MetaTrader 4",
+          "text": "The world's best-known trading platform."
+        },
+        {
+          "name": "MetaTrader 5",
+          "text": "More timeframes and deeper market analysis."
+        },
+        {
+          "name": "GTC Go",
+          "text": "Our own app for mobile and desktop."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Talk to [our team]",
+      "text": "Have a question about GTCFX? Our team is happy to tell you more.",
+      "email": "Email",
+      "phone": "Phone",
+      "emailCta": "Send us an email",
+      "phoneCta": "Call us"
+    },
+    "risk": {
+      "title": "Risk Warning"
+    }
+  }
+}

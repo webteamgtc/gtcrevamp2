@@ -8,7 +8,7 @@ import { useLiveRows, TICKER_GROUPS, TAB_GROUPS, FlashPrice, Sparkline, UpDown, 
 import { useSymbolGroups } from '@/lib/hooks/useSymbolGroups';
 import { useKlineCandles } from '@/lib/hooks/useKlineCandles';
 import { CandleChart } from '@/components/shared/devices';
-import { Reveal, WordReveal, Magnetic, Marquee, EASE } from '@/components/motion';
+import { HeroIn, WordReveal, Magnetic, Marquee, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
 import { PORTAL } from '@/config/menu';
@@ -82,11 +82,11 @@ export function Hero() {
           <WordReveal text={t('titleB')} immediate delay={0.3} wordClassName="heading-accent" />
         </h1>
 
-        <Reveal delay={0.55} y={16}>
+        <HeroIn delay={0.55}>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/60">{t('subtitle')}</p>
-        </Reveal>
+        </HeroIn>
 
-        <Reveal delay={0.7} y={16} className="mt-10 flex flex-wrap justify-center gap-3">
+        <HeroIn delay={0.7} className="mt-10 flex flex-wrap justify-center gap-3">
           <Magnetic>
             <Button size="lg" variant="gold" as={NavLink} href={PORTAL.register}>
               {t('ctaLive')} <ArrowRight className="rtl:-scale-x-100" />
@@ -97,7 +97,7 @@ export function Hero() {
               {t('ctaDemo')}
             </Button>
           </Magnetic>
-        </Reveal>
+        </HeroIn>
 
         {/* Terminal that flattens as you scroll */}
         <div className="relative mx-auto mt-16 max-w-6xl" style={{ perspective: 1400 }}>

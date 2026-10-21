@@ -15,6 +15,7 @@
  *   year, dateLabel, place, status: 'upcoming' | 'live' | 'past' }
  */
 import { strapiGet, strapiConfigured, strapiLocale, toImage } from './strapi';
+import { intlLocale, langOf } from '@/i18n/locales';
 
 const UPCOMING_COLLECTION = process.env.STRAPI_FUTURE_EVENTS_COLLECTION || 'future-events';
 const ARCHIVE_COLLECTION = process.env.STRAPI_EVENTS_COLLECTION || 'comments';
@@ -114,7 +115,7 @@ export function parseDateRange(text) {
 
 /** "30–31 October 2026" in the page language (UTC so server and browser agree). */
 // "en" would give US order (October 30 – 31); the site uses day-month-year
-export const dateLocale = (locale) => (locale === 'en' ? 'en-GB' : locale);
+export const dateLocale = (locale) => intlLocale(locale);
 
 export function formatRange(start, end, locale) {
   try {
@@ -150,7 +151,7 @@ export function normaliseUpcoming(raw, locale) {
     city: label(a.city),
     country: label(a.country),
     booth: boothFrom(en.title) || boothFrom(en.descreption),
-    role: a.translated && locale === 'en' ? roleFrom(en.title) || roleFrom(en.descreption) : '',
+    role: a.translated && langOf(locale) === 'en' ? roleFrom(en.title) || roleFrom(en.descreption) : '',
     featured: false,
     registrationOpen: true,
     cover: toImage(image, 'large'),

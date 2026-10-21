@@ -281,7 +281,7 @@ export default function LanguagePicker({ dark = false, className, onOpenChange, 
                   <span className={cn('block truncate text-[15px] font-semibold leading-tight', on ? c.nameOn : c.name)}>
                     <bdi>{l.native}</bdi>
                   </span>
-                  <span className={cn('block truncate text-xs', c.sub)}>{l.code === 'en' ? t('regions.global') : l.label}</span>
+                  <span className={cn('block truncate text-xs', c.sub)}>{l.code === 'en-intl' ? t('regions.global') : l.label}</span>
                 </span>
                 {l.dir === 'rtl' && <span className={cn('rounded-md px-1.5 py-0.5 text-[10px] font-bold', c.rtl)}>{t('rtl')}</span>}
                 {on ? (

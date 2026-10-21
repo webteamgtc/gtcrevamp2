@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { CONTACT } from '@/config/events';
 import { mapDots, project } from '../../regulations/components/mapDots';
 import { TicketForm } from './TicketForm';
+import { intlLocale } from '@/i18n/locales';
 
 /* ---------------- How can we help + ticket form (white) ---------------- */
 const P_ICONS = { responsive: Clock, multilingual: Languages, data: ShieldCheck };
@@ -138,7 +139,7 @@ function LocalTime({ tz, locale }) {
     return () => clearInterval(id);
   }, []);
   if (!now) return <span>--:--</span>;
-  return <span dir="ltr">{new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : locale, { hour: '2-digit', minute: '2-digit', timeZone: tz }).format(now)}</span>;
+  return <span dir="ltr">{new Intl.DateTimeFormat(intlLocale(locale), { hour: '2-digit', minute: '2-digit', timeZone: tz }).format(now)}</span>;
 }
 export function Offices() {
   const t = useTranslations('contactPage.offices');

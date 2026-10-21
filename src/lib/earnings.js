@@ -8,6 +8,7 @@
  */
 import { inflateRawSync } from 'zlib';
 import { strapiGet, mediaUrl } from './strapi';
+import { langOf } from '@/i18n/locales';
 
 const REVALIDATE = Number(process.env.STRAPI_REVALIDATE ?? 300);
 
@@ -102,7 +103,7 @@ const rel = (r) => {
  * Rows keep the spreadsheet order, sorted by its first date column (newest first) when there is one.
  */
 export async function getEarningsCalendar(locale = 'en') {
-  for (const loc of locale && locale !== 'en' ? [locale, 'en'] : ['en']) {
+  for (const loc of locale && langOf(locale) !== 'en' ? [langOf(locale), 'en'] : ['en']) {
     const json = await strapiGet('earnings', { locale: loc, tags: ['earnings'], query: { sort: ['date:desc', 'createdAt:desc'], populate: { data: { fields: ['url', 'name', 'ext'] } }, pagination: { pageSize: 1 } } });
     const entry = json?.data?.[0];
     if (!entry) continue;

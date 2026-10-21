@@ -9,6 +9,7 @@
  * Every helper resolves to `null` when Strapi is not configured or the request fails,
  * so pages can fall back to local sample content instead of breaking the build.
  */
+import { langOf } from '@/i18n/locales';
 const BASE = process.env.STRAPI_URL?.replace(/\/$/, '');
 const TOKEN = process.env.STRAPI_TOKEN;
 const REVALIDATE = Number(process.env.STRAPI_REVALIDATE ?? 300);
@@ -19,7 +20,12 @@ const LOCALE_MAP = { 'zh-TW': 'zh-Hant-TW', zh: 'zh-Hans' };
 export const strapiConfigured = () => Boolean(BASE);
 
 /** next-intl locale → Strapi locale code. */
-export const strapiLocale = (locale) => LOCALE_MAP[locale] ?? locale;
+export const strapiLocale = (locale) => {
+  const lang = langOf(locale); // en-ae, en-za… → en
+  return LOCALE_MAP[lang] ?? lang;
+};
+/** Same mapping; strapiFaqs.js imports it under this name. */
+export const mapStrapiLocale = strapiLocale;
 
 /** Encode a nested object as Strapi query string: { filters: { endDate: { $gte: '2026-01-01' } } } → filters[endDate][$gte]=… */
 export function toQuery(obj, prefix = '') {

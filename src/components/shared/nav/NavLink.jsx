@@ -41,7 +41,8 @@ const PREVIEW_PAGES = {
   '/markets/metals/xauusd': 'xauusd',
   '/markets/indices/us30': 'us30',
   '/markets/indices/spx500': 'spx500',
-  '/markets/indices/nas100': 'nas100'
+  '/markets/indices/nas100': 'nas100',
+  '/marketing': 'marketing'
 };
 
 /** Internal routes use the locale-aware Link; '#…' and full URLs use a plain <a>. */

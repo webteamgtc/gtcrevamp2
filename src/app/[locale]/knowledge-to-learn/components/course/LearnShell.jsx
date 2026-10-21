@@ -48,11 +48,11 @@ export function LearnHero({ crumbs, back, kicker, title, subtitle, aside, childr
               </NavLink>
             )}
             {kicker}
-            <motion.h1 className="heading-page mt-5 max-w-4xl text-balance" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.75, ease: EASE }}>
+            <motion.h1 className="heading-page mt-5 max-w-4xl text-balance" initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.75, ease: EASE }}>
               <AccentTitle text={title} />
             </motion.h1>
             {subtitle && (
-              <motion.p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
+              <motion.p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0" initial={{ y: 10 }} animate={{ y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
                 {subtitle}
               </motion.p>
             )}

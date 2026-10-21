@@ -2,6 +2,7 @@ import { getRequestConfig } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { routing } from './routing';
 import { loadLocaleMessages } from './loadMessages';
+import { langOf } from './locales';
 
 // Deep-merge so any key missing from a language falls back to English.
 function merge(base, extra) {
@@ -20,7 +21,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
   const en = await loadLocaleMessages('en');
-  if (locale === 'en') return { locale, messages: en };
-  const own = await loadLocaleMessages(locale);
+  const lang = langOf(locale); // regional English (en-ae, en-za…) uses the English messages
+  if (lang === 'en') return { locale, messages: en };
+  const own = await loadLocaleMessages(lang);
   return { locale, messages: merge(en, own) };
 });
