@@ -6,6 +6,7 @@
  */
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
+import Toaster from '@/components/shared/Toaster';
 import { ScrollProgress } from '@/components/motion';
 import { DemoHero } from './DemoHero';
 import { WhyDemo } from './WhyDemo';
@@ -28,6 +29,7 @@ export default function FreeDemoAccountPage() {
         <DemoCta />
       </main>
       <Footer theme="dark" />
+      <Toaster />
     </div>
   );
 }

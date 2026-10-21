@@ -148,7 +148,8 @@ export default function ArticlePage({ course, ns, section, article, articles }) 
                 ))}
               </div>
             ) : (
-              <Reveal y={16}>
+              // amount={0}: long articles are taller than the viewport, so a % threshold would keep them hidden
+              <Reveal y={16} amount={0}>
                 <div className="learn-article" dangerouslySetInnerHTML={{ __html: article.html }} />
               </Reveal>
             )}

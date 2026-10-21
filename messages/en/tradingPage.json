@@ -625,13 +625,30 @@
       "submitting": "Submitting...",
       "errors": {
         "fullName": "Full name is required",
-        "fullNameLetters": "Name can only contain letters",
         "email": "Email is required",
         "emailInvalid": "Invalid email address",
         "phone": "Phone number is required",
         "phoneInvalid": "Invalid phone number",
         "country": "Country is required",
-        "consent": "Please accept the declaration"
+        "consent": "Please accept the declaration",
+        "emailNoPlus": "Email cannot contain a plus sign (+)",
+        "emailBlockedDomain": "Temporary or disposable email addresses are not allowed",
+        "otpRequired": "OTP is required",
+        "otpLength": "OTP must be 6 digits"
+      },
+      "codeSent": "OTP has been sent to your phone number via WhatsApp",
+      "verified": "Phone number verified",
+      "verifyPhoneRequired": "Please verify your phone number with OTP before submitting.",
+      "toast": {
+        "otpSent": "OTP sent successfully",
+        "otpVerified": "OTP verified successfully",
+        "otpFailed": "OTP verification failed",
+        "error": "An error occurred",
+        "mt5Success": "MT5 account created.",
+        "mt5Failed": "MT5 account creation failed.",
+        "emailSuccess": "Confirmation email sent.",
+        "emailFailed": "Failed to send confirmation email.",
+        "genericError": "Something went wrong. Please try again."
       }
     },
     "why": {
