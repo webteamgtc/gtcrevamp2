@@ -13,6 +13,7 @@ import { getDir, hreflangOf } from '@/i18n/locales';
 import { SITE_URL } from '@/lib/seo';
 import { INTRO_SCRIPT } from '@/components/shared/intro/introScript';
 import ThirdPartyScripts from '@/lib/ThirdPartyScripts';
+import ConvrsChatScript from '@/config/ConvrsChatScript';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -50,6 +51,8 @@ export default async function LocaleLayout({ children, schema, params }) {
         </ClientMessages>
         {/* site-wide analytics / ads tags (off in local development) */}
         <ThirdPartyScripts />
+        {/* Convrs live chat widget (loads when the browser is idle) */}
+        <ConvrsChatScript />
       </body>
     </html>
   );
