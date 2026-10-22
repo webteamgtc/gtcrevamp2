@@ -108,7 +108,6 @@ export function Markets() {
                   </div>
                   <div className="relative mt-auto">
                     <h3 className="heading-title mt-3">{it.cardTitle}</h3>
-                    {it.title && it.title !== it.cardTitle?.replace(/\s*\n\s*/g, ' ') && <p className="mt-3 text-sm font-semibold text-ink/80">{it.title}</p>}
                     <p className="mt-1.5 text-ink/60">{it.description}</p>
                     <div className="mt-5 h-14">
                       <AreaChart seed={i + 4} color={i % 2 ? '#b68756' : '#5565bd'} className="h-full" />
