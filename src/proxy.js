@@ -11,7 +11,9 @@ import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHea
  *  3. sends a regional English URL of another region to the visitor's own one, same path
  *     (UAE → /en-ae, South Africa → /en-za, Mauritius → /en-mu, Vanuatu → /en-vu, everyone else incl. US → /en-intl)
  *  4. keeps UAE CAT 5 visitors on the marketing page
- *  5. hands over to next-intl, and stores the country in cookies the popups / forms read
+ *  5. hands over to next-intl, and stores the country in the `gtc_country` cookie — the single source the
+ *     client reads (useCountry for popups/header, useLocationDetail for forms), so the browser normally
+ *     never calls an IP service itself
  * Rules and cookie names: src/config/regions.js
  */
 const intl = createMiddleware(routing);
@@ -47,7 +49,8 @@ async function lookupIp(request) {
  * Visitor country, first match wins:
  *   ?geo=XX (test deployments; ?geo=clear removes it) → saved test override
  *   → CDN header (Vercel x-vercel-ip-country, Cloudflare cf-ipcountry)
- *   → cookies (ipinfo result from useLocationDetail / an earlier lookup, then our own country cookie)
+ *   → cookies (gtcfx_geo_country: an earlier lookup here or the browser fallback in useLocationDetail,
+ *      then gtc_country from the previous request)
  *   → ipinfo lookup of the request IP
  */
 async function countryOf(request) {

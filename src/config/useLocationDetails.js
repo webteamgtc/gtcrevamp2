@@ -1,23 +1,28 @@
 'use client';
 /**
- * Visitor location from ipinfo.io (client side), shared by every component on the page:
+ * Visitor country for client components (forms preselect the phone / country with it):
  *   const { countryCode, countryData, locationReady } = useLocationDetail();
- *   countryCode  — ISO 3166-1 alpha-2, upper case ("AE"), or null while unknown
- *   countryData  — the ipinfo payload ({ ip, city, region, country, timezone, … }) or null
- *   locationReady — true once the lookup finished (or a cached / cookie value was used)
+ *   countryCode   — ISO 3166-1 alpha-2, upper case ("AE"), or null while unknown
+ *   countryData   — { country, source } where source is 'proxy' | 'cookie' | 'ipinfo' (+ ipinfo fields when looked up)
+ *   locationReady — true once the country is known or the lookup gave up
  *
- * One request per page load (in-memory cache + in-flight de-duplication); the country is also stored in
- * the geo cookie (src/lib/geo/resolveCountryFromRequest.js) so later visits start with it immediately.
- * Values are only read after mount, so server and browser render the same first HTML.
+ * Source of truth is the server: src/proxy.js works out the country on every page request (CDN header,
+ * ?geo= test override, or its own IP lookup) and writes it to the `gtc_country` cookie — so normally this hook
+ * just reads that cookie and makes no network request.
+ * Only when no country is known yet (e.g. localhost, where the server sees a local IP) does it ask ipinfo.io
+ * from the browser, once per page load, and saves the answer in the geo cookie; the proxy reads that cookie
+ * on the next request, so the lookup isn't repeated.
+ * Cookies are read after mount, so server and browser render the same first HTML.
  */
 import { useEffect, useState } from 'react';
-import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, readGeoCountryCookie } from '@/lib/geo/resolveCountryFromRequest';
+import { COOKIES } from '@/config/regions';
+import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE } from '@/lib/geo/resolveCountryFromRequest';
 
 const GEO_URL = 'https://ipinfo.io/json';
 const TIMEOUT = 5000;
 
-let cachedGeoData = null;
-let geoFetchPromise = null;
+let cached = null; // ipinfo answer ({ countryCode, countryData }) for the rest of the page's life
+let lookup = null; // in-flight ipinfo request shared by every component
 
 /** "ae" → "AE"; anything that isn't a two-letter code → null. */
 export const normaliseCountry = (code) => {
@@ -25,45 +30,60 @@ export const normaliseCountry = (code) => {
   return /^[A-Z]{2}$/.test(c) ? c : null;
 };
 
-function persistGeoCountryCookie(countryCode) {
-  if (typeof document === 'undefined' || !countryCode) return;
-  document.cookie = `${GEO_COUNTRY_COOKIE}=${encodeURIComponent(countryCode)}; path=/; max-age=${GEO_COUNTRY_MAX_AGE}; SameSite=Lax`;
+function readCookie(name) {
+  const hit = document.cookie.split('; ').find((c) => c.startsWith(`${name}=`));
+  if (!hit) return null;
+  try {
+    return decodeURIComponent(hit.slice(name.length + 1));
+  } catch {
+    return null;
+  }
 }
 
-function fetchGeoInfo() {
-  if (cachedGeoData) return Promise.resolve(cachedGeoData);
-  if (!geoFetchPromise) {
-    geoFetchPromise = fetch(GEO_URL, { signal: AbortSignal.timeout(TIMEOUT), headers: { Accept: 'application/json' } })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data && normaliseCountry(data.country)) cachedGeoData = data;
-        return cachedGeoData;
-      })
-      .catch(() => null)
-      .finally(() => {
-        geoFetchPromise = null;
-      });
-  }
-  return geoFetchPromise;
+/** Country already known without a request: the proxy's cookie, then a saved lookup. */
+function knownCountry() {
+  const fromProxy = normaliseCountry(readCookie(COOKIES.country));
+  if (fromProxy) return { countryCode: fromProxy, countryData: { country: fromProxy, source: 'proxy' } };
+  const saved = normaliseCountry(readCookie(GEO_COUNTRY_COOKIE));
+  if (saved) return { countryCode: saved, countryData: { country: saved, source: 'cookie' } };
+  return null;
 }
+
+/** Browser-side fallback; the result is saved where the proxy (and later page loads) will find it. */
+function lookupCountry() {
+  lookup ??= fetch(GEO_URL, { signal: AbortSignal.timeout(TIMEOUT), headers: { Accept: 'application/json' } })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => {
+      const country = normaliseCountry(data?.country);
+      if (!country) return null;
+      document.cookie = `${GEO_COUNTRY_COOKIE}=${country}; path=/; max-age=${GEO_COUNTRY_MAX_AGE}; SameSite=Lax`;
+      return { countryCode: country, countryData: { ...data, country, source: 'ipinfo' } };
+    })
+    .catch(() => null)
+    .finally(() => {
+      lookup = null;
+    });
+  return lookup;
+}
+
+const EMPTY = { countryCode: null, countryData: null, locationReady: false };
 
 export const useLocationDetail = () => {
-  const [state, setState] = useState({ countryCode: null, countryData: null, locationReady: false });
+  const [state, setState] = useState(EMPTY);
 
   useEffect(() => {
     let alive = true;
-
-    // fast path: cached lookup or the geo cookie from an earlier visit / the server
-    const known = normaliseCountry(cachedGeoData?.country) ?? normaliseCountry(readGeoCountryCookie());
-    if (known) setState({ countryCode: known, countryData: cachedGeoData, locationReady: true });
-
-    fetchGeoInfo().then((data) => {
+    // cookies first (cheap, and they follow the proxy on every navigation), then this page's ipinfo answer
+    const known = knownCountry() ?? cached;
+    if (known) {
+      setState({ ...known, locationReady: true });
+      return undefined;
+    }
+    lookupCountry().then((result) => {
       if (!alive) return;
-      const country = normaliseCountry(data?.country) ?? known;
-      if (country && country !== normaliseCountry(readGeoCountryCookie())) persistGeoCountryCookie(country);
-      setState({ countryCode: country, countryData: data ?? null, locationReady: true });
+      if (result) cached = result;
+      setState(result ? { ...result, locationReady: true } : { ...EMPTY, locationReady: true });
     });
-
     return () => {
       alive = false;
     };
