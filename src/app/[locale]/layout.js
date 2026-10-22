@@ -12,6 +12,7 @@ import { routing } from '@/i18n/routing';
 import { getDir, hreflangOf } from '@/i18n/locales';
 import { SITE_URL } from '@/lib/seo';
 import { INTRO_SCRIPT } from '@/components/shared/intro/introScript';
+import ThirdPartyScripts from '@/lib/ThirdPartyScripts';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -45,6 +46,8 @@ export default async function LocaleLayout({ children, params }) {
         <ClientMessages>
           <Providers>{children}</Providers>
         </ClientMessages>
+        {/* site-wide analytics / ads tags (off in local development) */}
+        <ThirdPartyScripts />
       </body>
     </html>
   );
