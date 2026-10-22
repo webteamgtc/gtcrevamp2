@@ -1,7 +1,8 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { RegisterForm, Steps } from '@/components/shared/blocks';
+import { Steps } from '@/components/shared/blocks';
+import CommonLeadForm from '@/components/shared/CommonLeadForm';
 import { Reveal, WordReveal } from '@/components/motion';
 
 export function Register() {
@@ -26,7 +27,7 @@ export function Register() {
         </div>
         <Reveal y={40} className="mt-12">
           <div className="border-beam rounded-[2rem] bg-[#10132a]/90 p-5 text-start shadow-2xl backdrop-blur-xl md:p-7">
-            <RegisterForm dark wide />
+            <CommonLeadForm dark wide />
           </div>
         </Reveal>
       </div>

@@ -557,5 +557,63 @@
     "intro": {
       "loading": "Loading GTCFX"
     }
+  },
+  "leadForm": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "country": "Country of residence",
+    "countrySelect": "Select your country",
+    "countryLoading": "Loading countries…",
+    "phone": "Phone number",
+    "sendOtp": "Send code",
+    "sendingOtp": "Sending…",
+    "otpLabel": "Verification code",
+    "otpHint": "Enter the 6-digit code we sent to your WhatsApp",
+    "verified": "Verified",
+    "disclaimerTitle": "Disclaimer:",
+    "disclaimerBefore": "By submitting this form you confirm that you have read and agree to the",
+    "clientAgreement": "Client Agreement",
+    "disclaimerAfter": ", and that GTCFX may contact you about your enquiry.",
+    "termsPrefix": "I agree to the",
+    "termsLink": "Terms and Conditions",
+    "submit": "Create Account",
+    "submitting": "Submitting…",
+    "offers": {
+      "level1": "Level 1",
+      "level2": "Level 2",
+      "level3": "Level 3",
+      "level4": "Level 4",
+      "level5": "Level 5",
+      "premium": "Premium",
+      "eliteRaw": "Elite Raw"
+    },
+    "errors": {
+      "firstName": "First name is required",
+      "lastName": "Last name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "emailNoPlus": "Email cannot contain a plus sign (+)",
+      "emailBlockedDomain": "Temporary or disposable email addresses are not allowed",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Invalid phone number",
+      "phoneCountryMismatch": "Phone number does not match the selected country",
+      "countryRequired": "Country is required",
+      "otpRequired": "Verification code is required",
+      "otpLength": "The code must be 6 digits",
+      "termsRequired": "You must agree to the terms"
+    },
+    "toast": {
+      "verifyPhoneFirst": "Please verify your phone number first",
+      "invalidEmail": "Invalid email address. Please use a valid email.",
+      "otpSent": "Verification code sent",
+      "otpSendFailed": "Failed to send the verification code",
+      "otpVerified": "Verified successfully",
+      "otpInvalid": "Invalid verification code",
+      "otpVerifyFailed": "Verification failed",
+      "success": "Thank you! We will contact you soon",
+      "genericError": "Something went wrong"
+    },
+    "countrySearch": "Search country…"
   }
 }
