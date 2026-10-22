@@ -6,7 +6,7 @@
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, Check, ShieldCheck } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import NavLink from '@/components/shared/nav/NavLink';
 import RingCard from '@/components/shared/RingCard';
 import FaqAccordion from '@/components/shared/FaqAccordion';
@@ -328,7 +328,7 @@ export function MtCta({ ns, version }) {
       title={t('title')}
       description={t('description')}
       primary={{ label: t('primary'), href: links.windows }}
-      secondary={{ label: t('secondary'), href: PORTAL.register }}
+      secondary={{ label: t('secondary'), href: LIVE_ACCOUNT_HREF }}
       note={t('note')}
     />
   );

@@ -2,12 +2,12 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ChartPie, Presentation, Scale, SlidersHorizontal, TrendingUp } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { CountUp, Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import OrbitChip from '@/components/shared/OrbitChip';
 import { LeverageArc } from './tradingVisuals';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const LEVELS = ['1:50', '1:100', '1:500', '1:1000'];
 const CARD_ICONS = [ChartPie, TrendingUp, Presentation, SlidersHorizontal];
@@ -33,9 +33,9 @@ export function DynamicLeverage() {
             </h2>
             <p className="mt-4 max-w-md text-lg font-semibold leading-snug text-ink/80">{t('subtitle')}</p>
             <p className="mt-5 max-w-lg text-pretty text-[15px] leading-relaxed text-ink/60 md:text-base">{t('text')}</p>
-            <ArrowLink href={PORTAL.register} variant="primary" className="mt-8">
+            <LiveAccountButton variant="primary" className="mt-8">
               {t('cta')}
-            </ArrowLink>
+            </LiveAccountButton>
           </Reveal>
 
           <Reveal y={30} delay={0.1}>

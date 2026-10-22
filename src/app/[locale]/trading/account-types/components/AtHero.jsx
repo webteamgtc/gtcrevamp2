@@ -1,8 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import NavLink from '@/components/shared/nav/NavLink';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
@@ -11,6 +10,7 @@ import StatValue from '@/components/shared/StatValue';
 import { useTicker, FlashPrice, pct } from '@/components/shared/ticker';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const BARS = [28, 40, 34, 52, 44, 62, 50, 72, 60, 80, 68, 76];
 
@@ -117,9 +117,9 @@ export function AtHero() {
             </motion.p>
 
             <motion.div className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('ctaLive')}
-              </ArrowLink>
+              </LiveAccountButton>
               <NavLink href="/trading/free-demo-account" className="inline-flex h-13 items-center rounded-full border border-white/20 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
                 {t('ctaDemo')}
               </NavLink>

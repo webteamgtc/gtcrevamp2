@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowLeft, ChevronRight, LogIn, User, X } from 'lucide-react';
-import { MENU, PORTAL } from '@/config/menu';
+import { MENU, PORTAL, LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { getDir } from '@/i18n/locales';
 import { cn } from '@/lib/utils';
 import Logo from '../Logo';
@@ -122,7 +122,7 @@ export default function MobileNav({ open, onClose }) {
                       <div className="bg-grid-dark absolute inset-0 opacity-40" aria-hidden />
                       <p className="relative text-lg font-bold">{t('mobileCta')}</p>
                       <div className="relative mt-4 grid grid-cols-2 gap-2">
-                        <NavLink href={PORTAL.register} onClick={onClose} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-gold text-sm font-semibold">
+                        <NavLink href={LIVE_ACCOUNT_HREF} onClick={onClose} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-gold text-sm font-semibold">
                           <User className="size-4" /> {tn('register')}
                         </NavLink>
                         <NavLink href={PORTAL.login} onClick={onClose} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-white/10 text-sm font-semibold ring-1 ring-white/20">

@@ -11,7 +11,7 @@ import FaqAccordion from '@/components/shared/FaqAccordion';
 import NumberedSteps from '@/components/shared/NumberedSteps';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { ScrollProgress } from '@/components/motion';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { PammHero } from './PammHero';
 import { WhatIsPamm } from './WhatIsPamm';
 import { Leaderboard } from './Leaderboard';
@@ -53,7 +53,7 @@ export default function PammPage() {
         <Leaderboard />
         <PammSteps />
         <PammFaq />
-        <CtaBand id="start" eyebrow={t('eyebrow')} title={t('title')} description={t('description')} primary={{ label: t('live'), href: PORTAL.register }} secondary={{ label: t('investor'), href: PORTAL.register }} />
+        <CtaBand id="start" eyebrow={t('eyebrow')} title={t('title')} description={t('description')} primary={{ label: t('live'), href: LIVE_ACCOUNT_HREF }} secondary={{ label: t('investor'), href: LIVE_ACCOUNT_HREF }} />
       </main>
       <Footer theme="dark" />
     </div>

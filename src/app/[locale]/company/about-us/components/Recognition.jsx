@@ -2,10 +2,10 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Award } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { Reveal, EASE } from '@/components/motion';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /** Dark band: awards as an animated list; each row lights up on hover. */
 export function Recognition() {
@@ -49,9 +49,9 @@ export function Recognition() {
         </ul>
 
         <Reveal y={12} className="mt-10 flex justify-center">
-          <ArrowLink href={PORTAL.register} variant="gold">
+          <LiveAccountButton variant="gold">
             {t('cta')}
-          </ArrowLink>
+          </LiveAccountButton>
         </Reveal>
       </div>
     </section>

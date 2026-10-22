@@ -5,7 +5,6 @@
  */
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import NavLink from '@/components/shared/nav/NavLink';
@@ -15,6 +14,7 @@ import { EASE } from '@/components/motion';
 import { PORTAL } from '@/config/menu';
 import { NEWS_PATH } from '@/lib/news-path';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 // `s` = feed symbol, `n` = display name; order matches hero.tickerCategories
 const QUOTES = [
@@ -77,9 +77,9 @@ export default function MarketHolidaysHeroSection() {
               {t('hero.sub')}
             </motion.p>
             <motion.div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-              <Button size="lg" variant="gold" as={NavLink} href={PORTAL.register}>
-                {t('hero.openCta')} <ArrowRight className="rtl:-scale-x-100" />
-              </Button>
+              <LiveAccountButton look="button" size="lg" variant="gold">
+                {t('hero.openCta')}
+              </LiveAccountButton>
               <Button size="lg" variant="outlineLight" as={NavLink} href={PORTAL.demo}>
                 {t('hero.demoCta')}
               </Button>

@@ -2,10 +2,10 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { DollarSign, Euro } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { Reveal } from '@/components/motion';
 import { AccentTitle } from '@/components/shared/SectionIntro';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const NODES = [
   [8, 30],
@@ -60,9 +60,9 @@ export function SwapUpdate() {
             <AccentTitle text={t('title')} />
           </h2>
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-ink/60 md:text-base">{t('text')}</p>
-          <ArrowLink href={PORTAL.register} className="mt-8">
+          <LiveAccountButton variant="primary" className="mt-8">
             {t('cta')}
-          </ArrowLink>
+          </LiveAccountButton>
         </Reveal>
         <Reveal y={28} delay={0.1}>
           <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#f3f5fb] to-[#eaedf6] p-6 ring-1 ring-brand/10 md:p-8">

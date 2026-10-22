@@ -6,10 +6,9 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
-import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
 import BandLine from '@/components/shared/BandLine';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -20,6 +19,7 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, ScrollProgress, Stagger, StaggerItem, EASE } from '@/components/motion';
 import StoreButtons from '../../../trading/common-gtc-components/components/StoreButtons';
 import { SHARED_NS } from '../../courses';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 export function LearnShell({ children }) {
   return (
@@ -139,9 +139,9 @@ export function LearnCta() {
           </h2>
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{t('description')}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ArrowLink href={PORTAL.register} variant="gold">
+            <LiveAccountButton variant="gold">
               {t('openLiveAccount')}
-            </ArrowLink>
+            </LiveAccountButton>
             <NavLink href="/trading/free-demo-account" className="inline-flex h-13 items-center rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
               {t('tryDemoFirst')}
             </NavLink>

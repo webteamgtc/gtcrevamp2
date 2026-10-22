@@ -7,8 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'motion/react';
 import { Check, Globe } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import BandLine from '@/components/shared/BandLine';
 import GtcGoPhone from '@/components/shared/GtcGoPhone';
 import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
@@ -19,6 +18,7 @@ import { AppleIcon, LinuxIcon, WindowsIcon } from '../../common-metatrader/compo
 import StoreButtons from './StoreButtons';
 import { AppTile, ChartChip, DeviceCluster, ExecutionChip, HomeScreenPhone, PILLAR_SCREENS } from './goVisuals';
 import { GO_LINKS } from './links';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /* ------------------------------------------------------------ one app, every asset class */
 
@@ -203,9 +203,9 @@ export function Workstation({ ns = 'gtcGoApp' }) {
           </h2>
           <p className="mx-auto mt-6 max-w-3xl text-pretty text-lg leading-relaxed text-ink/80">{t('lead')}</p>
           <p className="mx-auto mt-4 max-w-3xl text-pretty text-base leading-relaxed text-ink/60 md:text-lg">{t('text')}</p>
-          <ArrowLink href={PORTAL.register} className="mt-9">
+          <LiveAccountButton variant="primary" className="mt-9">
             {t('cta')}
-          </ArrowLink>
+          </LiveAccountButton>
         </Reveal>
 
         <div ref={ref} className="relative mt-14 md:mt-20">

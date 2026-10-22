@@ -1,11 +1,11 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import BandLine from '@/components/shared/BandLine';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal } from '@/components/motion';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /** Navy band (same family as the Company / About CTAs): headline + text, one action. */
 export function WhyCta() {
@@ -28,9 +28,9 @@ export function WhyCta() {
                 <p className="mx-auto mt-4 max-w-2xl text-pretty text-[15px] leading-relaxed text-white/70 md:text-base lg:mx-0">{t('text')}</p>
               </div>
               <div className="flex justify-center">
-                <ArrowLink href={PORTAL.register} variant="gold">
+                <LiveAccountButton variant="gold">
                   {t('live')}
-                </ArrowLink>
+                </LiveAccountButton>
               </div>
             </div>
           </div>

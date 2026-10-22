@@ -8,7 +8,7 @@ import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import CtaBand from '@/components/shared/CtaBand';
 import { ScrollProgress } from '@/components/motion';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { KnowledgeHero } from './KnowledgeHero';
 import { MaterialsGrid } from './MaterialsGrid';
 import { GoAppPromo } from '@/components/shared/GoAppPromo';
@@ -27,7 +27,7 @@ export default function KnowledgePage() {
         <GoAppPromo />
         <DemoAccountBand />
         <QandA />
-        <CtaBand id="start" title={t('title')} description={t('description')} primary={{ label: t('openAccount'), href: PORTAL.register }} secondary={{ label: t('contactUs'), href: '/company/contact-us' }} />
+        <CtaBand id="start" title={t('title')} description={t('description')} primary={{ label: t('openAccount'), href: LIVE_ACCOUNT_HREF }} secondary={{ label: t('contactUs'), href: '/company/contact-us' }} />
       </main>
       <Footer theme="dark" />
     </div>

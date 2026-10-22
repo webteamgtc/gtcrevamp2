@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLiveRows, TICKER_GROUPS, TAB_GROUPS, FlashPrice, Sparkline, UpDown, fmt, pct } from '@/components/shared/ticker';
 import { useSymbolGroups } from '@/lib/hooks/useSymbolGroups';
@@ -12,6 +11,7 @@ import { HeroIn, WordReveal, Magnetic, Marquee, EASE } from '@/components/motion
 import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
 import { PORTAL } from '@/config/menu';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 function Meteors({ count = 14 }) {
   const [items, setItems] = useState([]);
@@ -88,9 +88,9 @@ export function Hero() {
 
         <HeroIn delay={0.7} className="mt-10 flex flex-wrap justify-center gap-3">
           <Magnetic>
-            <Button size="lg" variant="gold" as={NavLink} href={PORTAL.register}>
-              {t('ctaLive')} <ArrowRight className="rtl:-scale-x-100" />
-            </Button>
+            <LiveAccountButton look="button" size="lg" variant="gold">
+              {t('ctaLive')}
+            </LiveAccountButton>
           </Magnetic>
           <Magnetic>
             <Button size="lg" variant="outlineLight" as={NavLink} href={PORTAL.demo}>

@@ -4,7 +4,6 @@ import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Droplet } from 'lucide-react';
 import { PORTAL } from '@/config/menu';
 import { MARKETS_TAPE } from '@/config/markets';
-import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
@@ -12,6 +11,7 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
 import { useLiveRows, FlashPrice, pct } from '@/components/shared/ticker';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /** Glossy market "coins" floating in an arc; the centre one is the biggest. depth = parallax strength. */
 const ORBS = [
@@ -115,9 +115,9 @@ export function MarketsHero() {
             {t('text')}
           </motion.p>
           <motion.div className="mt-9 flex flex-wrap items-center justify-center gap-3" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-            <ArrowLink href={PORTAL.register} variant="gold">
+            <LiveAccountButton variant="gold">
               {t('ctaLive')}
-            </ArrowLink>
+            </LiveAccountButton>
             <NavLink href={PORTAL.demo} className="inline-flex h-13 items-center rounded-full border border-white/20 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
               {t('ctaDemo')}
             </NavLink>

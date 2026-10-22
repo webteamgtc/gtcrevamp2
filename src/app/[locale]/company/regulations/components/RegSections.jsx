@@ -12,13 +12,13 @@ import { PORTAL } from '@/config/menu';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import NavLink from '@/components/shared/nav/NavLink';
-import ArrowLink from '@/components/shared/ArrowLink';
 import BandLine from '@/components/shared/BandLine';
 import { SectionIntro, AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, Marquee, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { Flag } from './Flag';
 import { RegGlobe } from './RegGlobe';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const GEO = { southAfrica: [18.4, -33.9], comoros: [44.4, -12.2], mauritius: [57.5, -20.2], cambodia: [104.9, 11.6], australia: [151.2, -33.9], vanuatu: [168.3, -17.7] };
 
@@ -294,9 +294,9 @@ export function RegCta() {
                 <AccentTitle text={t('title')} />
               </h2>
               <div className="relative mt-8 flex flex-wrap gap-3">
-                <ArrowLink href={PORTAL.register} variant="gold">
+                <LiveAccountButton variant="gold">
                   {t('live')}
-                </ArrowLink>
+                </LiveAccountButton>
                 <NavLink href={PORTAL.demo} className="inline-flex h-13 items-center rounded-full border border-white/25 px-6 font-semibold text-white hover:bg-white hover:text-brand-900">
                   {t('demo')}
                 </NavLink>

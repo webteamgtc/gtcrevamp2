@@ -7,12 +7,12 @@ import { motion } from 'motion/react';
 import { ArrowRight, CreditCard, MapPin, UserPlus, Wallet } from 'lucide-react';
 import { PORTAL } from '@/config/menu';
 import NavLink from '@/components/shared/nav/NavLink';
-import ArrowLink from '@/components/shared/ArrowLink';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import BandLine from '@/components/shared/BandLine';
 import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /* ------------------------------------------------------------------ data */
 
@@ -65,9 +65,9 @@ export function HeroActions({ className }) {
   const t = useTranslations('awardsPage.hero');
   return (
     <div className={cn('flex flex-wrap gap-3', className)}>
-      <ArrowLink href={PORTAL.register} variant="gold">
+      <LiveAccountButton variant="gold">
         {t('primary')}
-      </ArrowLink>
+      </LiveAccountButton>
       <NavLink href={PORTAL.demo} className="inline-flex h-12 items-center rounded-full border border-white/20 px-6 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-brand-900 md:h-13 md:text-base">
         {t('secondary')}
       </NavLink>
@@ -265,9 +265,9 @@ export function AwardsCta() {
             </Stagger>
             <p className="relative mx-auto mt-8 max-w-2xl text-center text-sm text-white/55">{t('note')}</p>
             <div className="relative mt-6 flex flex-wrap justify-center gap-3">
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('primary')}
-              </ArrowLink>
+              </LiveAccountButton>
               <NavLink href={PORTAL.demo} className="inline-flex h-12 items-center rounded-full border border-white/20 px-6 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-brand-900 md:h-13 md:text-base">
                 {t('secondary')}
               </NavLink>

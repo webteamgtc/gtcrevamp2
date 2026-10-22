@@ -13,7 +13,7 @@ import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import NavLink from '@/components/shared/nav/NavLink';
 import { Button } from '@/components/ui/button';
 import { CountUp, EASE } from '@/components/motion';
-import { PORTAL, PLATFORM_LINKS } from '@/config/menu';
+import { PLATFORM_LINKS, LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { NEWS_PATH } from '@/lib/news-path';
 import { cn } from '@/lib/utils';
 import { intlLocale } from '@/i18n/locales';
@@ -165,7 +165,7 @@ function CalendarCard({ events, generatedAt }) {
                   <span dir="ltr" className="hidden text-end text-xs tabular-nums text-white/45 sm:block">
                     {r.previous}
                   </span>
-                  <NavLink href={PORTAL.register} className="hidden justify-center rounded-full bg-white/[0.07] px-3 py-1.5 text-[11px] font-semibold text-gold-200 ring-1 ring-white/10 transition-colors hover:bg-gold hover:text-white hover:ring-gold sm:inline-flex">
+                  <NavLink href={LIVE_ACCOUNT_HREF} className="hidden justify-center rounded-full bg-white/[0.07] px-3 py-1.5 text-[11px] font-semibold text-gold-200 ring-1 ring-white/10 transition-colors hover:bg-gold hover:text-white hover:ring-gold sm:inline-flex">
                     {t('card.tradeCta')}
                   </NavLink>
                 </motion.li>

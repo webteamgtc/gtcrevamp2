@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Download } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
-import NavLink from '@/components/shared/nav/NavLink';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
@@ -15,6 +13,7 @@ import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { MT_LINKS } from './links';
 import { AndroidIcon, AppleIcon, LinuxIcon, WindowsIcon } from './brandIcons';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const TF = ['M1', 'M5', 'M15', 'H1', 'H4', 'D1'];
 const MACD = [8, 12, 6, 4, 3, 2, 5, 9, 14, 11, 7, 4, 3, 2, 3, 6, 10, 16, 13, 6, 4, 8, 14, 18, 20, 17];
@@ -134,9 +133,9 @@ export function PlatformHero({ ns, version }) {
               <ArrowLink href={links.windows} variant="gold">
                 {t('ctaDownload')}
               </ArrowLink>
-              <NavLink href={PORTAL.register} className="inline-flex h-13 items-center rounded-full border border-white/20 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
+              <LiveAccountButton look="button" variant="outlineLight" arrow={false}>
                 {t('ctaLive')}
-              </NavLink>
+              </LiveAccountButton>
             </motion.div>
             <motion.ul className="mt-9 flex flex-wrap justify-center gap-2.5 border-t border-white/10 pt-6 lg:justify-start" initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.45 } } }}>
               {pills.map((p) => (

@@ -8,10 +8,9 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { Building2, Cable, CheckCircle2, Cpu, Gauge, Handshake, Layers, LineChart, Network, Package, ShieldCheck, Users, Wallet, Zap } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
-import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
 import BandLine from '@/components/shared/BandLine';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -23,6 +22,7 @@ import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
 import { Reveal, ScrollProgress, Stagger, StaggerItem, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { HUB_PATH } from '../../courses';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const NS = 'liquidityTechnologyPage';
 
@@ -77,9 +77,9 @@ function Hero() {
               {t('subTitle')}
             </motion.p>
             <motion.div className="mt-9 flex justify-center lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('liveAccount')}
-              </ArrowLink>
+              </LiveAccountButton>
             </motion.div>
             <Stagger className="mt-10 grid grid-cols-2 gap-3 border-t border-white/10 pt-8 sm:grid-cols-4" stagger={0.08} delay={0.35}>
               {stats.map((s) => (
@@ -432,7 +432,7 @@ export default function LiquidityPage() {
         <WhoServe />
         <DirectAccess />
         <WhatWeOffer />
-        <CtaBand id="start" title={tc('title')} description={tc('text')} primary={{ label: tc('live'), href: PORTAL.register }} />
+        <CtaBand id="start" title={tc('title')} description={tc('text')} primary={{ label: tc('live'), href: LIVE_ACCOUNT_HREF }} />
       </main>
       <Footer theme="dark" />
     </div>

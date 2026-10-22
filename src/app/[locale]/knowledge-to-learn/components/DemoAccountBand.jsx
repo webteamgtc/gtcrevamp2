@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Gauge, Layers, Scale, Zap } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import NavLink from '@/components/shared/nav/NavLink';
 import { LaptopMockup, PhoneMockup } from '@/components/shared/devices';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const ICONS = { tightestSpread: Gauge, bestLeverage: Scale, tradingInstrument: Layers, ultraFastExecution: Zap };
 
@@ -93,7 +93,7 @@ export function DemoAccountBand() {
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-ink/60 md:text-lg lg:mx-0">{t('description')}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
-              <ArrowLink href={PORTAL.register}>{t('openLiveAccount')}</ArrowLink>
+              <LiveAccountButton variant="primary">{t('openLiveAccount')}</LiveAccountButton>
               <NavLink href="/trading/free-demo-account" className="inline-flex h-13 items-center rounded-full border border-brand/20 bg-white px-7 text-base font-semibold text-brand transition-colors hover:bg-brand hover:text-white">
                 {t('openDemoAccount')}
               </NavLink>

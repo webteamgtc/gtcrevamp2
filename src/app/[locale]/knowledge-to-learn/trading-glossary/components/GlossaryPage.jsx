@@ -8,7 +8,7 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { BookA, Flame, Search, X } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import CtaBand from '@/components/shared/CtaBand';
@@ -193,7 +193,7 @@ export default function GlossaryPage({ glossary, initialLetter = 'A' }) {
           </>
         )}
 
-        <CtaBand id="start" title={t('cta.heading')} description={t('cta.footnote')} primary={{ label: t('cta.primary'), href: PORTAL.register }} secondary={{ label: t('cta.secondary'), href: '/trading/free-demo-account' }} />
+        <CtaBand id="start" title={t('cta.heading')} description={t('cta.footnote')} primary={{ label: t('cta.primary'), href: LIVE_ACCOUNT_HREF }} secondary={{ label: t('cta.secondary'), href: '/trading/free-demo-account' }} />
       </main>
       <Footer theme="dark" />
     </div>

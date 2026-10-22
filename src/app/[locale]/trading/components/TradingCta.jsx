@@ -2,11 +2,11 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
 import { Reveal } from '@/components/motion';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import BandLine from '@/components/shared/BandLine';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /** Same compact navy band as the company page: copy on one side, the two account buttons on the other. */
 export function TradingCta() {
@@ -30,9 +30,9 @@ export function TradingCta() {
                 <p className="mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-white/65 md:text-[15px]">{t('description')}</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <ArrowLink href={PORTAL.register} variant="gold" className="justify-between">
+                <LiveAccountButton variant="gold" className="justify-between">
                   {t('live')}
-                </ArrowLink>
+                </LiveAccountButton>
                 <NavLink href={PORTAL.demo} className="inline-flex h-13 items-center justify-center rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
                   {t('demo')}
                 </NavLink>

@@ -2,12 +2,11 @@
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, useScroll, useSpring } from 'motion/react';
-import { ArrowRight, Box, Check, Info, Layers, Minus, Sparkles } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import NavLink from '@/components/shared/nav/NavLink';
+import { Box, Check, Info, Layers, Minus, Sparkles } from 'lucide-react';
 import { Reveal, Stagger, StaggerItem, EASE } from '@/components/motion';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const ICONS = { standard: Box, ecn: Layers };
 
@@ -41,12 +40,9 @@ function AccountHead({ acc, featured, recommended, cta }) {
           <p className={cn('mt-0.5 text-sm', featured ? 'text-white/70' : 'text-ink/55')}>{acc.tagline}</p>
         </div>
       </div>
-      <NavLink
-        href={PORTAL.register}
-        className={cn('relative mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full text-[15px] font-semibold transition-all', featured ? 'bg-gold text-white shadow-lg shadow-gold/30 hover:bg-gold-600' : 'bg-brand text-white shadow-lg shadow-brand/25 hover:bg-brand-800')}
-      >
-        {cta} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 rtl:-scale-x-100" />
-      </NavLink>
+      <LiveAccountButton look="button" account={`${acc.id}-account`} variant={featured ? 'gold' : 'primary'} className="relative mt-6 h-12 w-full text-[15px]">
+        {cta}
+      </LiveAccountButton>
     </motion.div>
   );
 }

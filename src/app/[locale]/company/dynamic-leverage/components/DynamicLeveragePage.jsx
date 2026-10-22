@@ -8,7 +8,7 @@ import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import CtaBand from '@/components/shared/CtaBand';
 import { ScrollProgress } from '@/components/motion';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { DlHero } from './DlHero';
 import { Schedule } from './Schedule';
 import { Basics } from './Basics';
@@ -27,7 +27,7 @@ export default function DynamicLeveragePage() {
         <Basics />
         <FixedSchedule />
         <DlFaq />
-        <CtaBand id="start" eyebrow={t('eyebrow')} title={t('title')} description={t('description')} primary={{ label: t('live'), href: PORTAL.register }} secondary={{ label: t('demo'), href: '/trading/free-demo-account' }} />
+        <CtaBand id="start" eyebrow={t('eyebrow')} title={t('title')} description={t('description')} primary={{ label: t('live'), href: LIVE_ACCOUNT_HREF }} secondary={{ label: t('demo'), href: '/trading/free-demo-account' }} />
       </main>
       <Footer theme="dark" />
     </div>

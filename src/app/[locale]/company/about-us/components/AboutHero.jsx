@@ -1,12 +1,12 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { PORTAL } from '@/config/menu';
+
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import ArrowLink from '@/components/shared/ArrowLink';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Stagger, StaggerItem, EASE } from '@/components/motion';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 // pins on the globe: [longitude offset °, latitude °] — they travel round as the globe turns
 const PINS = [
@@ -103,9 +103,9 @@ export function AboutHero() {
             </motion.h1>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0">{t('description')}</p>
             <motion.div className="mt-9 flex justify-center lg:justify-start" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6, ease: EASE }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('cta')}
-              </ArrowLink>
+              </LiveAccountButton>
             </motion.div>
 
             <Stagger className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 text-start sm:grid-cols-4" stagger={0.08} delay={0.4}>

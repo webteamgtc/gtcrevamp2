@@ -9,7 +9,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDownRight, ArrowUpRight, BarChart3, CalendarClock, Gauge, Headset, Layers, ListChecks, Scale, Search, ShieldAlert, Wallet, X } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import CtaBand from '@/components/shared/CtaBand';
@@ -429,7 +429,7 @@ export default function EarningsPage({ calendar }) {
         <ScreenerSection />
         <GuideSection />
         <FaqSection />
-        <CtaBand id="start" title={tc('title')} description={tc('text')} primary={{ label: tc('live'), href: PORTAL.register }} />
+        <CtaBand id="start" title={tc('title')} description={tc('text')} primary={{ label: tc('live'), href: LIVE_ACCOUNT_HREF }} />
       </main>
       <Footer theme="dark" />
     </div>

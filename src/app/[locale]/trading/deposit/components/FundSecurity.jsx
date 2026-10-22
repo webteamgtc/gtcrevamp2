@@ -2,11 +2,11 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Check, Landmark, LockKeyhole, ShieldCheck, Undo2 } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import RingCard from '@/components/shared/RingCard';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const ICONS = [Landmark, LockKeyhole, Undo2, ShieldCheck];
 
@@ -76,9 +76,9 @@ export function FundSecurity() {
                   </motion.li>
                 ))}
               </ul>
-              <ArrowLink href={PORTAL.register} variant="light" className="relative mt-9 self-start">
+              <LiveAccountButton variant="light" className="relative mt-9 self-start">
                 {t('panel.cta')}
-              </ArrowLink>
+              </LiveAccountButton>
             </div>
           </Reveal>
         </div>

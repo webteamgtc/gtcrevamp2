@@ -2,13 +2,13 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ShieldCheck } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import ArrowLink from '@/components/shared/ArrowLink';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Stagger, StaggerItem, CountUp, EASE } from '@/components/motion';
 import { LicenceRing } from './HeroVisuals';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 export function GpHero() {
   const t = useTranslations('globalPresencePage.hero');
@@ -29,9 +29,9 @@ export function GpHero() {
             </motion.h1>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0">{t('description')}</p>
             <motion.div className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6, ease: EASE }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('primary')}
-              </ArrowLink>
+              </LiveAccountButton>
               <a href="#entities" className="inline-flex h-13 items-center rounded-full border border-white/20 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-brand-900">
                 {t('secondary')}
               </a>

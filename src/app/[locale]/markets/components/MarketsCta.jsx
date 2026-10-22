@@ -3,12 +3,12 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { PORTAL } from '@/config/menu';
 import { MARKETS_LEAD } from '@/config/markets';
-import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
 import BandLine from '@/components/shared/BandLine';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { useLiveRows, FlashPrice } from '@/components/shared/ticker';
 import { Reveal } from '@/components/motion';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 function CtaShell({ children }) {
   return (
@@ -45,9 +45,9 @@ export function CtaSplit() {
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{t('description')}</p>
         </Reveal>
         <Reveal y={16} delay={0.1} className="flex flex-col gap-3 lg:ms-auto lg:w-full lg:max-w-sm">
-          <ArrowLink href={PORTAL.register} variant="gold" className="justify-between">
+          <LiveAccountButton variant="gold" className="justify-between">
             {t('live')}
-          </ArrowLink>
+          </LiveAccountButton>
           <NavLink href={PORTAL.demo} className="inline-flex h-13 items-center justify-center rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
             {t('demo')}
           </NavLink>
@@ -80,9 +80,9 @@ export function MarketsCta() {
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{t('description')}</p>
         </Reveal>
         <Reveal y={16} delay={0.1} className="flex flex-col gap-3 lg:ms-auto lg:w-full lg:max-w-sm">
-          <ArrowLink href={PORTAL.register} variant="gold" className="justify-between">
+          <LiveAccountButton variant="gold" className="justify-between">
             {t('live')}
-          </ArrowLink>
+          </LiveAccountButton>
           <NavLink href={PORTAL.demo} className="inline-flex h-13 items-center justify-center rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
             {t('demo')}
           </NavLink>

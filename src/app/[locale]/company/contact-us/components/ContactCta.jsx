@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ArrowRight, Rocket, MonitorPlay } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+import { PORTAL, LIVE_ACCOUNT_HREF } from '@/config/menu';
 import NavLink from '@/components/shared/nav/NavLink';
 import BandLine from '@/components/shared/BandLine';
 import { AccentTitle } from '@/components/shared/SectionIntro';
@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 export function ContactCta() {
   const t = useTranslations('contactPage.cta');
   const actions = [
-    { key: 'live', href: PORTAL.register, Icon: Rocket, primary: true },
+    { key: 'live', href: LIVE_ACCOUNT_HREF, Icon: Rocket, primary: true },
     { key: 'demo', href: PORTAL.demo, Icon: MonitorPlay, primary: false }
   ];
   return (
