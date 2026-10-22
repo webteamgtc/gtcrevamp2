@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
+import Toaster from '@/components/shared/Toaster';
 import { ScrollProgress } from '@/components/motion';
 import { EventsHero } from './EventsHero';
 import { Archive } from './Archive';
@@ -30,6 +31,7 @@ export default function EventsPage({ upcoming, archive }) {
         <EventsCta />
       </main>
       <Footer theme="dark" />
+      <Toaster />
     </div>
   );
 }

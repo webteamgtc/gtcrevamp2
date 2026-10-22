@@ -2,6 +2,7 @@
 
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
+import Toaster from '@/components/shared/Toaster';
 import { HeadingStyle } from '@/components/shared/blocks';
 import { ScrollProgress } from '@/components/motion';
 import { Hero } from './Hero';
@@ -32,6 +33,7 @@ export default function HomePage() {
           <Register />
         </main>
         <Footer theme="dark" />
+        <Toaster />
       </HeadingStyle.Provider>
     </div>
   );

@@ -1,8 +1,8 @@
 'use client';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { ArrowRight, Check, UserRound } from 'lucide-react';
+import { UserRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Reveal, WordReveal, EASE } from '../motion';
 
@@ -152,77 +152,7 @@ export function Portrait({ initials, className, dark = false, tone = 'brand' }) 
   );
 }
 
-/** Lead-capture registration form */
-export function RegisterForm({ dark = false, className, wide = false }) {
-  const t = useTranslations('register');
-  const [done, setDone] = useState(false);
-  const field = cn(
-    'peer h-14 w-full rounded-2xl border px-4 pt-4 text-[15px] outline-none transition-all placeholder-transparent focus:ring-4',
-    dark
-      ? 'border-white/15 bg-white/5 text-white focus:border-gold focus:ring-gold/15'
-      : 'border-brand/15 bg-white text-ink focus:border-brand focus:ring-brand/10'
-  );
-  const label = cn(
-    'pointer-events-none absolute start-4 top-1.5 text-[11px] font-medium transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-[15px] peer-focus:top-1.5 peer-focus:text-[11px]',
-    dark ? 'text-white/50 peer-focus:text-gold' : 'text-ink/50 peer-focus:text-brand'
-  );
-  const inputs = wide
-    ? [
-        ['firstName', 'text', 'col-span-1'],
-        ['lastName', 'text', 'col-span-1'],
-        ['email', 'email', 'col-span-2 md:col-span-1'],
-        ['phone', 'tel', 'col-span-1'],
-        ['country', 'text', 'col-span-1']
-      ]
-    : [
-        ['firstName', 'text', 'col-span-1'],
-        ['lastName', 'text', 'col-span-1'],
-        ['email', 'email', 'col-span-2'],
-        ['phone', 'tel', 'col-span-2 sm:col-span-1'],
-        ['country', 'text', 'col-span-2 sm:col-span-1']
-      ];
-  return (
-    <form
-      id="register-form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setDone(true);
-      }}
-      className={cn('grid grid-cols-2 gap-3', wide && 'md:grid-cols-3', className)}
-    >
-      {inputs.map(([name, type, span], i) => (
-        <motion.div
-          key={name}
-          className={cn('relative', span)}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 + i * 0.07, duration: 0.6, ease: EASE }}
-        >
-          <input id={`rf-${name}`} name={name} type={type} placeholder={t(name)} className={field} required />
-          <label htmlFor={`rf-${name}`} className={label}>
-            {t(name)}
-          </label>
-        </motion.div>
-      ))}
-      <motion.button
-        type="submit"
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.98 }}
-        className={cn(
-          'shine group col-span-2 mt-2 inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r bg-[length:200%_auto] font-semibold text-white shadow-xl transition-[background-position] duration-700 hover:bg-right',
-          dark ? 'from-gold-600 via-gold to-gold-600 shadow-gold/25' : 'from-brand via-brand-500 to-brand shadow-brand/30',
-          wide && 'md:col-span-1 md:mt-0'
-        )}
-      >
-        {done ? <Check className="size-5" /> : null}
-        {t('submit')}
-        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1" />
-      </motion.button>
-      <p className={cn('col-span-2 text-center text-xs', wide && 'md:col-span-3', dark ? 'text-white/45' : 'text-ink/45')}>{t('consent')}</p>
-    </form>
-  );
-}
+/* The lead / registration form lives in ./CommonLeadForm.jsx */
 
 /** 4-step onboarding line that draws itself */
 export function Steps({ dark = false }) {

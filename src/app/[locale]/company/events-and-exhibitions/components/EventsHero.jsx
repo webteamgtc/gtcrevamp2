@@ -12,7 +12,7 @@ import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { TiltCard, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { EventImage } from './EventImage';
-import { EventRegisterForm } from './EventRegisterForm';
+import CommonLeadForm from '@/components/shared/CommonLeadForm';
 import { intlLocale } from '@/i18n/locales';
 
 /* ---------------- shared helpers ---------------- */
@@ -55,11 +55,28 @@ function Shell({ children, tb, ev }) {
   );
 }
 
+/** "Meet our team" card for the selected event, with the shared lead form (WhatsApp-verified, Salesforce lead). */
 function FormColumn({ ev }) {
+  const t = useTranslations('eventsPage.form');
   if (!ev?.registrationOpen) return null;
   return (
     <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.9, ease: EASE }} className="lg:sticky lg:top-28">
-      <EventRegisterForm event={ev} />
+      {/* no overflow-hidden on the card itself, so the country list can open past its edge */}
+      <div className="rounded-[1.75rem] border border-white/10 bg-white text-ink shadow-[0_40px_100px_-30px_rgba(41,59,147,0.6)]">
+        <div className="relative overflow-hidden rounded-t-[1.75rem] bg-gradient-to-r from-brand via-brand-800 to-brand-950 px-5 py-4 text-white md:px-7">
+          <span className="absolute -end-10 -top-10 size-32 rounded-full bg-gold/30 blur-2xl" aria-hidden />
+          <h2 className="heading-card is-dark relative">{t('title')}</h2>
+          <AnimatePresence mode="wait">
+            <motion.p key={ev.id} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="relative mt-1 text-xs text-white/75 md:text-sm">
+              {t('subtitle', { event: ev.shortTitle || ev.title || '' })}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+        <div className="p-5 md:p-6">
+          {/* key: a new event starts with a fresh form */}
+          <CommonLeadForm key={ev.id} defaultCampaign={ev.slug || ev.id} />
+        </div>
+      </div>
     </motion.div>
   );
 }
