@@ -38,8 +38,17 @@ export const FOOTER_LINKS = {
   ]
 };
 
-/** Homepage market cards, in the same order as markets.items in homepage.json */
-export const MARKET_LINKS = ['/markets/forex', '/markets/metals', '/markets/energy', '/markets/indices', '/markets/future-cfds', '/markets/shares', '/markets/crypto-cfds', '/markets/future-cfds'];
+/** Homepage market cards, by key of markets.markets in homepage.json (no commodities page yet → futures) */
+export const MARKET_LINKS = {
+  energy: '/markets/energy',
+  commodities: '/markets/future-cfds',
+  forex: '/markets/forex',
+  indices: '/markets/indices',
+  metals: '/markets/metals',
+  'shares-equity-cfds': '/markets/shares',
+  'crypto-cfds': '/markets/crypto-cfds',
+  'future-cfds': '/markets/future-cfds'
+};
 
 /** Homepage platform slides by key */
 export const PLATFORM_LINKS = { gtcgo: '/trading/gtc-go-app', mt5: '/trading/mt5-platform', mt4: '/trading/mt4-platform' };

@@ -58,54 +58,60 @@
     "maxLeverage": "Max leverage"
   },
   "markets": {
-    "eyebrow": "Markets",
-    "titleA": "Trade The Leading",
-    "titleB": "Global CFDs Markets",
-    "cta": "View More",
-    "hint": "Drag or tap a card to explore",
-    "items": [
-      {
-        "name": "Forex",
+    "titleLine1": "Trade the Leading",
+    "titleLine2": "Global CFDs Markets",
+    "viewMore": "View more",
+    "selectMarketAria": "Select {label}",
+    "markets": {
+      "energy": {
+        "label": "Energy",
+        "cardTitle": "Energy\nTrading",
+        "title": "Explore Global Energy Markets",
+        "description": "Access energy market opportunities with competitive trading conditions and flexible market access."
+      },
+      "commodities": {
+        "label": "Commodity CFDs",
+        "cardTitle": "Commodities\nTrading",
+        "title": "Diversify With Commodities",
+        "description": "Explore commodity CFD markets with flexible trading conditions and market access."
+      },
+      "forex": {
+        "label": "Forex",
+        "cardTitle": "Forex Trading\nMade Simple",
         "title": "Forex Trading Made Simple",
-        "text": "Trade currency pairs with tight spreads, fast execution, and low margin requirements."
+        "description": "Trade currency pairs with tight spreads, fast execution, and low margin requirements."
       },
-      {
-        "name": "Metals",
+      "indices": {
+        "label": "Indices",
+        "cardTitle": "Indices\nTrading",
+        "title": "Trade Leading Global Indices",
+        "description": "Access major global index markets from one professional trading account."
+      },
+      "metals": {
+        "label": "Metals",
+        "cardTitle": "Metals\nTrading",
         "title": "Trade Precious Metals",
-        "text": "Trade gold, silver and other metals with competitive pricing and flexible leverage."
+        "description": "Explore gold, silver, and other metals through a professional trading environment."
       },
-      {
-        "name": "Energy",
-        "title": "Power Up with Energy",
-        "text": "Access crude oil and natural gas markets and react quickly to global supply and demand."
+      "shares-equity-cfds": {
+        "label": "Shares/Equity CFDs",
+        "cardTitle": "Shares & Equity\nCFDs Trading",
+        "title": "Trade Shares & Equity CFDs",
+        "description": "Access global equity opportunities with flexible market."
       },
-      {
-        "name": "Indices",
-        "title": "Trade Global Indices",
-        "text": "Gain exposure to the world's leading stock indices in a single position."
+      "crypto-cfds": {
+        "label": "Crypto CFDs",
+        "cardTitle": "Crypto CFDs\nTrading",
+        "title": "Explore Crypto CFDs",
+        "description": "Trade selected cryptocurrency CFDs through one secure."
       },
-      {
-        "name": "Commodity CFDs",
-        "title": "Diversify with Commodities",
-        "text": "Trade soft and hard commodities to broaden your portfolio across global markets."
-      },
-      {
-        "name": "Shares/Equity",
-        "title": "Trade Leading Shares",
-        "text": "Take positions on the price movements of well-known global companies."
-      },
-      {
-        "name": "Crypto",
-        "title": "Trade Crypto CFDs",
-        "text": "Trade popular digital assets as CFDs without needing a crypto wallet."
-      },
-      {
-        "name": "Futures",
-        "title": "Futures CFDs",
-        "text": "Trade futures contracts as CFDs with transparent conditions and fast execution."
+      "future-cfds": {
+        "label": "Futures CFDs",
+        "cardTitle": "Futures CFDs\nTrading",
+        "title": "Trade Futures CFDs",
+        "description": "Explore futures-based CFD markets with flexible trading options on a reliable CFD trading platform."
       }
-    ],
-    "live": "Live"
+    }
   },
   "platforms": {
     "eyebrow": "Platforms",
@@ -357,8 +363,8 @@
       }
     },
     "meta": {
-      "title": "Delete Account",
-      "description": "Securely submit your GTCFX trading account deletion request."
+      "title": "Account Deletion | Close Your Trading Account | GTCFX",
+      "description": "Submit a request to securely close your GTCFX trading account by verifying your identity and account details."
     },
     "breadcrumb": {
       "home": "Home",

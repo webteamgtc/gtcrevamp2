@@ -1,8 +1,8 @@
 {
   "tradingPage": {
     "meta": {
-      "title": "Trade with GTCFX | Demo Account & Global CFD Markets",
-      "description": "Open a free demo account with $100,000 virtual funds. Trade forex, metals, indices and crypto on MT4, MT5 and GTC Go."
+      "title": "Trading Account Options | Choose Your Perfect Account | GTCFX",
+      "description": "Explore GTCFX account options including Standard, ECN, VIP, demo, PAMM/MAM, and more. Find the trading account that fits your style and goals."
     },
     "breadcrumb": {
       "home": "Home",
@@ -288,8 +288,8 @@
   },
   "openLiveAccountPage": {
     "meta": {
-      "title": "Open a Live Trading Account | GTCFX",
-      "description": "Open your GTCFX live trading account in 3 minutes. Regulated multi-asset broker with spreads from 0.0 pips, leverage up to 1:2000 and sub-10ms execution."
+      "title": "Open a CFD Account | CFD Trading Account | GTCFX",
+      "description": "Open a CFD trading account with GTCFX and access forex, indices, metals, and more. Start trading global markets with competitive conditions and 24/7 support."
     },
     "breadcrumb": {
       "home": "Home",
@@ -571,8 +571,8 @@
   },
   "freeDemoAccount": {
     "meta": {
-      "title": "Free Demo Account | Practice Risk-Free with GTCFX",
-      "description": "Open a free GTCFX demo account in 30 seconds. $50,000 virtual capital, real market spreads and 7+ trading markets on MT4, MT5 and WebTrader. No verification required."
+      "title": "Free Demo Trading Account | Forex & CFD Demo Account | GTCFX",
+      "description": "Open a free demo trading account with GTCFX and get $50,000 in virtual capital. Practice forex and CFD trading to build experience without risking real money."
     },
     "breadcrumb": {
       "home": "Home",
@@ -777,8 +777,8 @@
   },
   "depositPage": {
     "meta": {
-      "title": "Deposit Funds | Fast, Zero-Fee Deposits with GTCFX",
-      "description": "Fund your GTCFX account instantly with 10+ payment methods — cards, bank transfer, e-wallets, crypto, Apple Pay and Google Pay. $0 deposit fees."
+      "title": "Deposit Funds | Fast & Secure Trading Account Payments | GTCFX",
+      "description": "Deposit funds into your GTCFX trading account with fast and secure payment methods. Enjoy seamless transactions and multiple funding options."
     },
     "breadcrumb": {
       "home": "Home",
@@ -964,8 +964,8 @@
   },
   "accountTypesPage": {
     "meta": {
-      "title": "Account Types | Standard & ECN Trading Accounts | GTCFX",
-      "description": "Compare GTCFX Standard and ECN accounts — spreads from 0.0 pips, leverage up to 1:2000, no minimum deposit on Standard and sub-30ms execution on ECN."
+      "title": "Forex Trading Account Types | Compare & Choose | GTCFX",
+      "description": "Compare Forex and CFD trading account types at GTCFX. Choose the right account with competitive spreads, fast execution, and flexible conditions."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1207,8 +1207,8 @@
   },
   "compensationFundPage": {
     "meta": {
-      "title": "Compensation Fund | Financial Commission Dispute Resolution | GTCFX",
-      "description": "GTC Global Ltd and GTC Global Trade Capital Ltd are members of the Financial Commission — independent dispute resolution and up to €20,000 compensation per client."
+      "title": "Client Fund Protection | Secure Forex & CFD Trading | GTCFX",
+      "description": "Your funds are protected with GTCFX. As a member of the Financial Commission, clients are eligible for compensation fund coverage up to $20,000."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1291,8 +1291,8 @@
   },
   "mt4Page": {
     "meta": {
-      "title": "MetaTrader 4 (MT4) Platform | Download MT4 | GTCFX",
-      "description": "Download MetaTrader 4 with GTCFX — advanced charting, Expert Advisors, one-click trading and 7+ markets on Windows, macOS, iOS and Android."
+      "title": "MT4 Trading Platform | Metatrader 4 CFD Trading | GTCFX",
+      "description": "Trade Forex and CFDs with GTCFX, a trusted MT4 broker offering fast execution, competitive spreads and powerful tools for automated trading. Start trading now!"
     },
     "breadcrumb": {
       "home": "Home",
@@ -1556,8 +1556,8 @@
   },
   "mt5Page": {
     "meta": {
-      "title": "MetaTrader 5 (MT5) Platform | Download MT5 | GTCFX",
-      "description": "Download MetaTrader 5 with GTCFX — 38+ indicators, 21 timeframes, MQL5, six order types and stocks, futures and forex in one terminal."
+      "title": "MetaTrader 5 Platform | CFD Trading with MT5 | GTCFX",
+      "description": "Explore multi-asset Forex and CFD trading with GTCFX on the MT5 trading platform, with spreads from 0.0 pips, advanced tools and fast execution."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1826,8 +1826,8 @@
   },
   "metatraderIpadPage": {
     "meta": {
-      "title": "MetaTrader for iPhone & iPad | GTCFX",
-      "description": "Trade with GTCFX MetaTrader on your iPhone or iPad — real-time quotes, advanced charting and one-tap trading. Download MT4 or MT5 for iOS."
+      "title": "MetaTrader for iPhone & iPad | MT4 & MT5 for iOS | GTCFX",
+      "description": "Trade Forex and CFDs on iPhone and iPad with MetaTrader 4 and 5. Access real-time prices, advanced charts and powerful mobile trading tools with GTCFX."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1844,8 +1844,8 @@
   },
   "metatraderAndroidPage": {
     "meta": {
-      "title": "MetaTrader for Android | GTCFX",
-      "description": "Trade with GTCFX MetaTrader on Android — real-time quotes, advanced charting and one-tap trading. Download MT4 or MT5 for Android."
+      "title": "MetaTrader for Android | MetaTrader 4 & 5 Android | GTCFX",
+      "description": "Trade Forex and CFDs on Android with MetaTrader 4 and 5 from GTCFX. Access real-time prices, advanced charts and powerful mobile trading tools wherever you go."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1862,8 +1862,8 @@
   },
   "gtcGoApp": {
     "meta": {
-      "title": "GTC Go App — Trade Anytime, Anywhere | GTCFX",
-      "description": "Trade 27,000+ instruments across forex, gold, oil, indices and metals with the GTC Go app for iOS and Android. Fast execution, smart tools, full control."
+      "title": "GTC Go | CFD Mobile Trading App & Platform | GTCFX",
+      "description": "Download GTC Go, a CFD trading app for iOS and Android. This mobile trading app supports 7+ trading markets, live quotes, 50+ indicators, and price alerts."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1940,8 +1940,8 @@
   },
   "gtcGoAndroidPage": {
     "meta": {
-      "title": "GTC Go for Android | GTCFX",
-      "description": "Trade on the move with the GTC Go Android app — seamless access to global markets, advanced trading tools and a responsive mobile experience."
+      "title": "GTC Go for Android | CFD Trading App Download | GTCFX",
+      "description": "Download GTC Go for Android, a powerful CFD trading app with real-time quotes, fast execution and access to thousands of global markets from your mobile device."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1956,8 +1956,8 @@
   },
   "gtcGoIosPage": {
     "meta": {
-      "title": "GTC Go for iPhone & iPad | GTCFX",
-      "description": "Trade smarter with GTC Go on your iPhone and iPad — fast execution, real-time market access and a secure mobile trading environment."
+      "title": "GTC Go for iPhone & iPad | CFD Trading App for iOS | GTCFX",
+      "description": "Trade CFDs on iPhone and iPad with GTC Go, GTCFX's CFD trading app for iOS. Access 27,000+ instruments, real-time quotes and fast execution in one mobile app."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1972,8 +1972,8 @@
   },
   "swapUpdatePage": {
     "meta": {
-      "title": "Swap Rates & Trading Costs | GTCFX",
-      "description": "Daily overnight swap rates for Forex, Metals, Crypto and Indices at GTCFX — transparent spreads, zero hidden fees and zero requotes."
+      "title": "CFD Swap Rates | Daily Swap Rates Table | GTCFX",
+      "description": "View daily updated CFD swap rates and forex overnight fees across multiple markets. Check long and short swap rates in our easy-to-use swap rates table."
     },
     "breadcrumb": {
       "home": "Home",
@@ -2057,8 +2057,8 @@
   },
   "pammPage": {
     "meta": {
-      "title": "PAMM Account — Institutional-Grade Asset Management | GTCFX",
-      "description": "GTCFX PAMM: institutional-grade asset management infrastructure for professional traders to manage global investor capital, with automatic proportional distribution on MT4 / MT5."
+      "title": "PAMM Account | Multi-Asset PAMM Broker | GTCFX",
+      "description": "Explore multi-asset PAMM accounts with GTCFX. Invest with professional managers or manage investor funds with flexible performance fees and a powerful platform."
     },
     "breadcrumb": {
       "home": "Home",
@@ -2277,8 +2277,8 @@
   },
   "vpsHostingPage": {
     "meta": {
-      "title": "VPS Hosting Services — Co-located Trading VPS | GTCFX",
-      "description": "Professional-grade, co-located trading VPS from GTCFX: <1ms latency, 99.99% uptime, Windows Server with MT4/MT5 pre-installed — free for qualified traders."
+      "title": "Forex VPS Hosting | Low-Latency Trading VPS | GTCFX",
+      "description": "Run MT4 and MT5 24/7 with GTCFX Forex VPS Hosting, featuring < 1 ms server latency, 99.99% uptime and reliable infrastructure for automated trading."
     },
     "breadcrumb": {
       "home": "Home",
@@ -2555,8 +2555,8 @@
   },
   "copyTradingPage": {
     "meta": {
-      "title": "Copy Trading — Follow the Best Traders | GTCFX",
-      "description": "Follow experienced traders, automatically copy their trades and keep control of your funds and risk settings with GTCFX copy trading."
+      "title": "Copy Trading Platform | Multi-asset CFD | GTCFX",
+      "description": "Automate your CFD trading with GTCFX’s copy trading platform. Follow experienced traders and copy strategies across forex, commodities, indices, and more."
     },
     "breadcrumb": {
       "home": "Home",

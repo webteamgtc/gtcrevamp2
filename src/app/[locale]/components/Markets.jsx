@@ -15,7 +15,7 @@ import { MARKET_LINKS } from '@/config/menu';
 export function Markets() {
   const t = useTranslations('markets');
   const tc = useTranslations('common');
-  const items = t.raw('items');
+  const items = Object.entries(t.raw('markets')).map(([key, m]) => ({ key, ...m }));
   const rtl = getDir(useLocale()) === 'rtl';
   const ref = useRef(null);
   const rowRef = useRef(null);
@@ -85,7 +85,7 @@ export function Markets() {
       >
       <div className="relative">
         <div ref={headRef} className="container-x relative flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading title={t('titleA')} titleB={t('titleB')} align="start" />
+          <SectionHeading title={t('titleLine1')} titleB={t('titleLine2')} align="start" />
           <div className={cn('w-48', dist === 0 && 'invisible')}>
             <div className="text-xs text-ink/45">{tc('scroll')}</div>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-brand/10">
@@ -95,9 +95,9 @@ export function Markets() {
         </div>
         <motion.div ref={rowRef} style={{ x, marginTop: pin ? ROW_GAP : 48 }} className="relative flex w-max gap-6 px-[max(1.25rem,calc((100vw-1280px)/2+2rem))]">
           {items.map((it, i) => {
-            const Icon = MARKET_ICONS[i];
+            const Icon = MARKET_ICONS[it.key] ?? MARKET_ICONS.forex;
             return (
-              <TiltCard key={it.name} max={7} className="group shrink-0">
+              <TiltCard key={it.key} max={7} className="group shrink-0">
                 <div style={{ minHeight: cardH }} className="relative h-full flex w-[320px] flex-col overflow-hidden rounded-[2rem] border border-brand/10 bg-white p-8 shadow-xl shadow-brand/5 transition-shadow duration-500 group-hover:border-brand/20 group-hover:shadow-2xl group-hover:shadow-brand/10 md:w-[360px]">
                   <div className="absolute -end-16 -top-16 size-48 rounded-full bg-brand/15 blur-3xl transition-all duration-700 group-hover:bg-gold/25" />
                   <div className="relative flex items-center justify-between">
@@ -107,14 +107,13 @@ export function Markets() {
                     <span className="text-6xl font-bold text-brand/[0.07]">0{i + 1}</span>
                   </div>
                   <div className="relative mt-auto">
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gold-700">{it.name}</span>
-                    <h3 className="heading-title mt-3">{it.title}</h3>
-                    <p className="mt-3 text-ink/60">{it.text}</p>
+                    <h3 className="heading-title mt-3">{it.cardTitle}</h3>
+                    <p className="mt-1.5 text-ink/60">{it.description}</p>
                     <div className="mt-5 h-14">
                       <AreaChart seed={i + 4} color={i % 2 ? '#b68756' : '#5565bd'} className="h-full" />
                     </div>
-                    <NavLink href={MARKET_LINKS[i]} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand">
-                      {t('cta')}
+                    <NavLink href={MARKET_LINKS[it.key] ?? '/markets'} aria-label={t('selectMarketAria', { label: it.label })} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                      {t('viewMore')}
                       <span className="grid size-8 place-items-center rounded-full bg-brand-50 text-brand transition-all group-hover:rotate-45 group-hover:bg-gold group-hover:text-white">
                         <ArrowUpRight className="size-4" />
                       </span>

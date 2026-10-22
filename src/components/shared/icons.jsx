@@ -16,7 +16,17 @@ import {
 } from 'lucide-react';
 
 export const FEATURE_ICONS = [HandCoins, ArrowLeftRight, Zap, Gauge, MonitorSmartphone, ShieldCheck];
-export const MARKET_ICONS = [Globe, Gem, Flame, ChartColumn, Wheat, Building2, Bitcoin, CalendarClock];
+/** Homepage market cards, by key of markets.markets in homepage.json */
+export const MARKET_ICONS = {
+  energy: Flame,
+  commodities: Wheat,
+  forex: Globe,
+  indices: ChartColumn,
+  metals: Gem,
+  'shares-equity-cfds': Building2,
+  'crypto-cfds': Bitcoin,
+  'future-cfds': CalendarClock
+};
 
 const P = { fill: 'currentColor', 'aria-hidden': true };
 

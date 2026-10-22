@@ -1,8 +1,8 @@
 {
   "knowledgePage": {
     "meta": {
-      "title": "Knowledge to Trade | Educational Materials | GTCFX",
-      "description": "Guides, tutorials, FAQs and educational resources to trade with confidence — structured learning for every stage of your trading journey."
+      "title": "Knowledge to Learn | Trading Education | GTCFX",
+      "description": "Structured trading education, platform guides, and learning resources for every stage of your trading journey with GTCFX."
     },
     "breadcrumb": {
       "home": "Home",
@@ -270,8 +270,8 @@
   },
   "glossaryPage": {
     "meta": {
-      "title": "Trading Glossary A–Z | Forex & CFD Terms Explained | GTCFX",
-      "description": "Explore key trading terms and find answers to common questions about GTCFX's products, services, and trading conditions."
+      "title": "Forex Trading Glossary | Key Terms & Definitions | GTCFX",
+      "description": "Learn essential Forex and trading terms with the GTCFX glossary. Understand financial markets and improve your trading knowledge."
     },
     "breadcrumb": {
       "current": "Trading Glossary"
@@ -296,8 +296,8 @@
   },
   "liquidityTechnologyPage": {
     "meta": {
-      "title": "Liquidity & Technology | Tier-1 Liquidity, Connectivity & Risk Solutions | GTCFX",
-      "description": "GTC Prime with advanced infrastructure and comprehensive expertise offers tailor-made pricing sourced from tier 1 banks with DMA execution."
+      "title": "Liquidity & Trading Technology | GTC Prime | GTCFX",
+      "description": "Access institutional-grade liquidity and advanced trading technology with GTC Prime. Benefit from deep liquidity pools and reliable execution."
     },
     "breadcrumb": {
       "current": "Liquidity & Technology"

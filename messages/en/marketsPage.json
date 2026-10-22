@@ -1,8 +1,8 @@
 {
   "marketsPage": {
     "meta": {
-      "title": "Trading Markets | Forex, Metals, Energy, Indices, Shares & Crypto CFDs | GTCFX",
-      "description": "Trade forex, gold and metals, energy, global indices, shares, crypto and futures CFDs with GTCFX: spreads from 0.0 pips, leverage up to 1:2000 and fast execution on MT4, MT5 and GTC Go."
+      "title": "CFD Trading Markets | Forex, Energy, Metals & More | GTCFX",
+      "description": "Explore global CFD trading markets with GTCFX, including Forex, Energy, Indices, Metals, Shares, Crypto and Futures, with competitive trading conditions and Tier-1 liquidity."
     },
     "breadcrumb": {
       "home": "Home",
@@ -281,8 +281,8 @@
     "pages": {
       "forex": {
         "meta": {
-          "title": "Forex CFD Trading | 70+ Currency Pairs, Spreads from 0.0 | GTCFX",
-          "description": "Trade 70+ major, minor and exotic forex pairs with GTCFX: spreads from 0.0 pips, leverage up to 1:2000, live quotes and fast execution on MT4, MT5 and GTC Go."
+          "title": "Forex Trading Online | Forex CFD Trading | GTCFX",
+          "description": "Trade 70+ forex pairs online with GTCFX. Enjoy competitive spreads, fast ECN execution, and a reliable forex trading platform. View live forex CFD prices."
         },
         "name": "Forex",
         "hero": {
@@ -367,8 +367,8 @@
       },
       "indices": {
         "meta": {
-          "title": "Indices CFD Trading | 81+ Global Indices | GTCFX",
-          "description": "Trade 81+ global stock indices with GTCFX, from the S&P 500 and Nasdaq 100 to the FTSE 100 and Nikkei 225, with live quotes and fast execution."
+          "title": "Trade Index CFDs | Indices Trading Online | GTCFX",
+          "description": "Trade 20+ global index CFDs online with GTCFX, including the S&P 500, NASDAQ, DAX, etc. Gain exposure to major equity markets on one indices trading platform."
         },
         "name": "Indices",
         "hero": {
@@ -453,8 +453,8 @@
       },
       "shares": {
         "meta": {
-          "title": "Share CFD Trading | Trade Global Stocks | GTCFX",
-          "description": "Trade CFDs on leading global companies with GTCFX: go long or short on Apple, NVIDIA, Tesla and more with live quotes and fast execution."
+          "title": "Trade Stock CFDs Online | Share CFD Broker | GTCFX",
+          "description": "GTCFX offers share CFDs with real-time pricing & flexible leverage. Open an account for stock CFD trading on top companies like SpaceX, Canon, and more."
         },
         "name": "Shares",
         "hero": {
@@ -539,8 +539,8 @@
       },
       "futures": {
         "meta": {
-          "title": "Futures CFD Trading | Soft Commodities & More | GTCFX",
-          "description": "Trade futures CFDs with GTCFX on coffee, cocoa, sugar, wheat and more, with competitive spreads, flexible leverage and fast execution."
+          "title": "Futures CFD Trading Online | GTCFX",
+          "description": "Trade futures CFDs on S&P 500, Nasdaq 100, and more with GTCFX, featuring competitive spreads, fast execution, and no physical delivery. Start trading today!"
         },
         "name": "Futures",
         "hero": {
@@ -644,8 +644,8 @@
       },
       "energy": {
         "meta": {
-          "title": "Energy CFD Trading | Crude Oil & Natural Gas | GTCFX",
-          "description": "Trade Brent, WTI crude oil and natural gas CFDs with GTCFX: tight spreads, live quotes, deep liquidity and rapid execution on MT4, MT5 and GTC Go."
+          "title": "Energy CFD Trading | Oil & Gas Online Trading | GTCFX",
+          "description": "Trade crude oil and natural gas CFDs with GTCFX. Access real-time pricing, tight spreads, and fast execution on our global energy trading platform."
         },
         "name": "Energy",
         "hero": {
@@ -762,8 +762,8 @@
       },
       "metals": {
         "meta": {
-          "title": "Metals CFD Trading | Gold, Silver & Platinum | GTCFX",
-          "description": "Trade gold, silver, platinum and palladium CFDs with GTCFX: gold spreads from 4c, leverage up to 1:2000 and live quotes."
+          "title": "Metal Trading Platform | Trade CFDs on Gold, Silver | GTCFX",
+          "description": "Trade gold, silver, platinum, and other metal CFDs with GTCFX, a multi-regulated precious metals trading platform offering tight spreads and <10ms execution."
         },
         "name": "Metals",
         "hero": {
@@ -872,8 +872,8 @@
       },
       "crypto": {
         "meta": {
-          "title": "Crypto CFD Trading | Bitcoin, Ethereum & More | GTCFX",
-          "description": "Trade Bitcoin, Ethereum, Solana and other crypto CFDs with GTCFX, with no wallet needed, live quotes and fast execution."
+          "title": "Crypto CFD Trading | Bitcoin & Ethereum CFDs | GTCFX",
+          "description": "Trade Bitcoin, Ethereum, and other popular cryptocurrency CFDs with GTCFX. Get competitive spreads, 24/7 market access, and powerful platforms."
         },
         "name": "Crypto",
         "hero": {

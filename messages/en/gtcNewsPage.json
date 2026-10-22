@@ -1,7 +1,7 @@
 {
   "gtcNewsPage": {
     "meta": {
-      "title": "GTC News | GTCFX Trading",
+      "title": "GTC News | Market Insights & Company Updates | GTCFX",
       "description": "Get the latest market insights, company news, and trading updates from GTCFX."
     },
     "breadcrumb": {
@@ -70,8 +70,8 @@
   },
   "earningsCalendarPage": {
     "meta": {
-      "title": "Earnings & Dividends Calendar | GTCFX",
-      "description": "Our earnings & dividends calendar below shows the next earnings releases as well as the dividend dates for every share and index CFD you can trade with GTC. We also recommend checking this calendar before trading stocks and indices."
+      "title": "Earnings & Dividends Calendar | Stocks & Indices CFDs | GTCFX",
+      "description": "Track upcoming earnings reports and dividend dates for stocks and indices CFDs. Stay prepared for market movements with the GTCFX earnings calendar."
     },
     "breadcrumb": {
       "home": "Home",
@@ -224,8 +224,8 @@
   },
   "economicCalendarPage": {
     "meta": {
-      "title": "Economic Calendar — Live Forex & Market Events",
-      "description": "Track high-impact economic events, central bank decisions and data releases with a real-time economic calendar, forecasts and previous values — free from GTCFX."
+      "title": "Real-Time Economic Calendar | High-Impact Events | GTCFX",
+      "description": "Track real-time economic events for Forex and CFD trading with GTCFX. Check actual, forecast and prior data, impact levels, currencies and release times."
     },
     "breadcrumb": {
       "home": "Home",
@@ -341,8 +341,8 @@
   },
   "marketHolidaysPage": {
     "meta": {
-      "title": "Market Holidays & Trading Hours",
-      "description": "Check forex and CFD trading hours, market holidays, and schedule updates. Plan your trades with GTCFX's comprehensive market calendar."
+      "title": "Market Holidays | Trading Hours & Schedule | GTCFX",
+      "description": "View upcoming market holidays and trading schedule changes. Plan your trades around global exchange closures with GTCFX."
     },
     "breadcrumb": {
       "home": "Home",
