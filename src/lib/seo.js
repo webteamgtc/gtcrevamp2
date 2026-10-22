@@ -48,37 +48,7 @@ export function breadcrumbLd(locale, crumbs) {
   };
 }
 
-export function organizationLd() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FinancialService',
-    name: 'GTCFX',
-    url: SITE_URL,
-    logo: OG_IMAGE,
-    foundingDate: '2012'
-  };
-}
-
-/** schema.org Event entries for upcoming events (helps them show in search). */
-export function eventsLd(locale, events, pageUrlPath) {
-  return {
-    '@context': 'https://schema.org',
-    '@graph': events.map((e) => ({
-      '@type': 'Event',
-      name: e.title,
-      description: e.summary,
-      startDate: e.startDate,
-      endDate: e.endDate,
-      eventStatus: 'https://schema.org/EventScheduled',
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      location: { '@type': 'Place', name: e.venue || e.city, address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: e.country || undefined } },
-      ...(e.cover?.url ? { image: [e.cover.url] } : {}),
-      organizer: { '@type': 'Organization', name: 'GTCFX', url: SITE_URL },
-      url: localeUrl(locale, pageUrlPath)
-    }))
-  };
-}
-
 export function JsonLd({ data }) {
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  // "<" → \u003c so a "</script>" inside the data cannot close the tag early (Next.js JSON-LD guide)
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />;
 }

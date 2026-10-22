@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
-import { getNewsCategories, getNewsPage, NEWS_PATH } from '@/lib/news';
+import { pageMetadata } from '@/lib/seo';
+import { getNewsCategories, getNewsPage } from '@/lib/news';
 import { newsCategoryHref } from '@/lib/news-path';
 import CategoryPage from '../components/CategoryPage';
 
@@ -26,17 +26,6 @@ export default async function Page({ params }) {
   const data = await load(locale, slug);
   if (!data) notFound();
   setRequestLocale(locale);
-  const [{ articles, total }, t] = await Promise.all([getNewsPage(locale, { category: slug, pageSize: 12 }), getTranslations({ locale, namespace: 'gtcNewsPage.breadcrumb' })]);
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('home'), path: '' },
-          { name: t('current'), path: NEWS_PATH },
-          { name: data.category.name, path: newsCategoryHref(slug) }
-        ])}
-      />
-      <CategoryPage category={data.category} categories={data.categories} initial={articles} total={total} />
-    </>
-  );
+  const { articles, total } = await getNewsPage(locale, { category: slug, pageSize: 12 });
+  return <CategoryPage category={data.category} categories={data.categories} initial={articles} total={total} />;
 }

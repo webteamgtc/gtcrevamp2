@@ -1,7 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
-import { JsonLd } from '@/lib/seo';
 import MetaTraderPage from '../common-metatrader/components/MetaTraderPage';
-import { mtBreadcrumbLd, mtMetadata } from '../common-metatrader/metaPage';
+import { mtMetadata } from '../common-metatrader/metaPage';
 
 const NS = 'metatraderIpadPage';
 const PATH = '/trading/metatrader-for-ipad';
@@ -14,10 +13,5 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return (
-    <>
-      <JsonLd data={await mtBreadcrumbLd(locale, NS, PATH)} />
-      <MetaTraderPage ns="metatraderIpadPage" bodyNs="mt4Page" version="mt4" device="ios" />
-    </>
-  );
+  return <MetaTraderPage ns="metatraderIpadPage" bodyNs="mt4Page" version="mt4" device="ios" />;
 }

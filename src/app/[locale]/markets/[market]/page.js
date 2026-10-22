@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import { MARKET_PAGES, marketPageBySlug } from '@/config/marketPages';
 import { getMarketSymbols } from '@/lib/marketSymbols';
 import MarketPage from './components/MarketPage';
@@ -25,28 +25,6 @@ export default async function Page({ params }) {
   const page = marketPageBySlug(market);
   if (!page) notFound();
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'marketsPage' });
   const symbols = await getMarketSymbols(page);
-  const faq = page.template === 'B' ? t.raw(`pages.${page.id}.faq.items`) : null;
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('breadcrumb.home'), path: '' },
-          { name: t('detail.markets'), path: '/markets' },
-          { name: t(`pages.${page.id}.name`), path: `/markets/${page.slug}` }
-        ])}
-      />
-      {faq && (
-        <JsonLd
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
-          }}
-        />
-      )}
-      <MarketPage page={{ slug: page.slug, id: page.id, template: page.template }} symbols={symbols} />
-    </>
-  );
+  return <MarketPage page={{ slug: page.slug, id: page.id, template: page.template }} symbols={symbols} />;
 }

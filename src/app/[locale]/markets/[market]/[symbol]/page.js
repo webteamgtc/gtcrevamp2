@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd, SITE_URL, localeUrl } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import { MARKET_PAGES, marketPageBySlug, symbolHref, PREBUILT_SYMBOLS } from '@/config/marketPages';
 import { getMarketSymbols } from '@/lib/marketSymbols';
 import { getSymbolSpec } from '@/lib/symbolSpec';
@@ -40,32 +40,5 @@ export default async function Page({ params }) {
   setRequestLocale(locale);
   const { page, symbols, sym } = data;
   const spec = await getSymbolSpec(sym.s);
-  const t = await getTranslations({ locale, namespace: 'marketsPage' });
-  const marketName = t(`pages.${page.id}.name`);
-  const path = symbolHref(page.slug, sym.s);
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('breadcrumb.home'), path: '' },
-          { name: t('detail.markets'), path: '/markets' },
-          { name: marketName, path: `/markets/${page.slug}` },
-          { name: sym.s, path }
-        ])}
-      />
-      <JsonLd
-        data={{
-          '@context': 'https://schema.org',
-          '@type': 'FinancialProduct',
-          name: `${sym.s} CFD`,
-          alternateName: sym.n,
-          category: marketName,
-          description: t('symbol.meta.description', { symbol: sym.s, name: sym.n, market: marketName }),
-          url: `${SITE_URL}${localeUrl(locale, path)}`,
-          provider: { '@type': 'Organization', name: 'GTCFX', url: SITE_URL }
-        }}
-      />
-      <SymbolPage page={{ slug: page.slug, id: page.id, template: page.template }} symbols={symbols} sym={sym} spec={spec} />
-    </>
-  );
+  return <SymbolPage page={{ slug: page.slug, id: page.id, template: page.template }} symbols={symbols} sym={sym} spec={spec} />;
 }

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { ALPHABET, getGlossary } from '@/lib/glossary';
 import GlossaryPage from '../components/GlossaryPage';
-import { glossaryMetadata, GlossaryJsonLd } from '../meta';
+import { glossaryMetadata } from '../meta';
 
 export const revalidate = 86400;
 export const dynamicParams = false;
@@ -22,10 +22,5 @@ export default async function Page({ params }) {
   if (!ALPHABET.includes(L)) notFound();
   setRequestLocale(locale);
   const glossary = await getGlossary(locale);
-  return (
-    <>
-      <GlossaryJsonLd locale={locale} glossary={glossary} letter={L} />
-      <GlossaryPage glossary={glossary} initialLetter={L} />
-    </>
-  );
+  return <GlossaryPage glossary={glossary} initialLetter={L} />;
 }

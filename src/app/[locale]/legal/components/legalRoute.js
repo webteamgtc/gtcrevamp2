@@ -6,7 +6,7 @@
  *   export default route.Page;
  */
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import { getLegalDocument } from '@/lib/legalDocuments';
 import LegalDocumentPage from './LegalDocumentPage';
 
@@ -23,18 +23,7 @@ export function legalRoute(slug) {
     const { locale } = await params;
     setRequestLocale(locale);
     const [t, doc] = await Promise.all([getTranslations({ locale, namespace: 'legalPage' }), getLegalDocument(slug, locale)]);
-    return (
-      <>
-        <JsonLd
-          data={breadcrumbLd(locale, [
-            { name: t('breadcrumb.home'), path: '' },
-            { name: t('breadcrumb.legal'), path: '/legal/legal-documents' },
-            { name: t(`docs.${slug}.name`), path }
-          ])}
-        />
-        <LegalDocumentPage slug={slug} doc={doc} />
-      </>
-    );
+    return <LegalDocumentPage slug={slug} doc={doc} />;
   }
 
   return { generateMetadata, Page };

@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import { getLatestNews } from '@/lib/news';
 import MarketsPage from './components/MarketsPage';
 
@@ -18,17 +18,6 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'marketsPage.breadcrumb' });
   const { articles } = await getLatestNews(locale, 5);
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('home'), path: '' },
-          { name: t('current'), path: PATH }
-        ])}
-      />
-      <MarketsPage news={articles} />
-    </>
-  );
+  return <MarketsPage news={articles} />;
 }
