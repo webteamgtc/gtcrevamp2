@@ -210,7 +210,7 @@ function CookieBanner({ dark }) {
           initial={false}
           exit={{ y: 120, opacity: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="fixed inset-x-3 bottom-3 z-[60] md:inset-x-auto md:end-6 md:bottom-6 md:max-w-md"
+          className="fixed inset-x-3 bottom-3 z-[60] md:inset-x-auto md:start-6 md:bottom-6 md:max-w-md"
         >
           <div className={cn('rounded-3xl border p-5 shadow-2xl backdrop-blur-xl', dark ? 'border-white/10 bg-[#11131c]/95 text-white' : 'border-brand/10 bg-white/95 text-ink')}>
             <div className="flex gap-3">
