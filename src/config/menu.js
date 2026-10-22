@@ -30,7 +30,7 @@ export const FOOTER_LINKS = {
     '/legal/website-disclaimer',
     '/legal/risk-disclosure',
     '/legal/restricted-countries',
-    '/legal/deposit-refund-policy',
+    '/legal/deposit-and-refund-policy',
     '/legal/kyc-compliance-policy',
     '/legal/cookie-policy',
     '/legal/privacy-policy',
