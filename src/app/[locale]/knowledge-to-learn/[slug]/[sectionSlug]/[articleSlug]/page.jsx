@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { setRequestLocale } from 'next-intl/server';
+import { pageMetadata } from '@/lib/seo';
 import { getArticle, getSection, getSectionArticles } from '@/lib/learn';
 import ArticlePage from '../../../components/course/ArticlePage';
-import { COURSES, HUB_PATH, articleHref, courseHref, sectionHref } from '../../../courses';
+import { COURSES, articleHref } from '../../../courses';
 
 // Articles come from Strapi: each renders on its first visit, then is cached.
 export const dynamicParams = true;
@@ -39,23 +39,6 @@ export default async function Page({ params }) {
   if (!data) notFound();
   setRequestLocale(locale);
   const { course, section, article } = data;
-  const [articles, tk, tc] = await Promise.all([
-    getSectionArticles(locale, section.slug),
-    getTranslations({ locale, namespace: 'knowledgePage.breadcrumb' }),
-    getTranslations({ locale, namespace: `${course.ns}.courseHeader` })
-  ]);
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: tk('home'), path: '' },
-          { name: tk('current'), path: HUB_PATH },
-          { name: tc('title').replace(/[[\]]/g, ''), path: courseHref(slug) },
-          { name: section.name, path: sectionHref(slug, section.slug) },
-          { name: article.title, path: articleHref(slug, section.slug, article.slug) }
-        ])}
-      />
-      <ArticlePage course={slug} ns={course.ns} section={section} article={article} articles={articles} />
-    </>
-  );
+  const articles = await getSectionArticles(locale, section.slug);
+  return <ArticlePage course={slug} ns={course.ns} section={section} article={article} articles={articles} />;
 }

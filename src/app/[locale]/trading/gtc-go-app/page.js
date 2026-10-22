@@ -1,7 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
-import { JsonLd } from '@/lib/seo';
 import GtcGoPage from '../common-gtc-components/components/GtcGoPage';
-import { mtBreadcrumbLd as breadcrumbFor, mtMetadata as metadataFor } from '../common-metatrader/metaPage';
+import { mtMetadata as metadataFor } from '../common-metatrader/metaPage';
 
 const NS = 'gtcGoApp';
 const PATH = '/trading/gtc-go-app';
@@ -14,10 +13,5 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return (
-    <>
-      <JsonLd data={await breadcrumbFor(locale, NS, PATH)} />
-      <GtcGoPage ns={NS} />
-    </>
-  );
+  return <GtcGoPage ns={NS} />;
 }

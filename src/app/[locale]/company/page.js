@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, organizationLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import CompanyPage from './components/CompanyPage';
 
 const PATH = '/company';
@@ -13,12 +13,5 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'companyPage.breadcrumb' });
-  return (
-    <>
-      <JsonLd data={breadcrumbLd(locale, [{ name: t('home'), path: '' }, { name: t('company'), path: PATH }])} />
-      <JsonLd data={organizationLd()} />
-      <CompanyPage />
-    </>
-  );
+  return <CompanyPage />;
 }

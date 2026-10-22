@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import LiveAccountApplicationPage from './components/LiveAccountApplicationPage';
 
 const PATH = '/live-account-application';
@@ -17,16 +17,5 @@ export default async function Page({ params, searchParams }) {
   // ?account=<slug> picks the hero copy; unknown or missing slugs use the standard account
   const requested = account === 'standard' ? 'standard-account' : account;
   const accountKey = requested && t.has(`accounts.${requested}.title`) ? requested : 'standard-account';
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('breadcrumb.home'), path: '' },
-          { name: t('breadcrumb.trading'), path: '/trading' },
-          { name: t('breadcrumb.current'), path: PATH }
-        ])}
-      />
-      <LiveAccountApplicationPage accountKey={accountKey} showAccount={accountKey !== 'standard-account'} />
-    </>
-  );
+  return <LiveAccountApplicationPage accountKey={accountKey} showAccount={accountKey !== 'standard-account'} />;
 }

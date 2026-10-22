@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function LocaleLayout({ children, params }) {
+export default async function LocaleLayout({ children, schema, params }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
@@ -41,6 +41,8 @@ export default async function LocaleLayout({ children, params }) {
       <head>
         {/* decides before the first paint whether the opening intro plays (once per session) */}
         <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
+        {/* page structured data (JSON-LD) from the @schema slot — see ./@schema/routes.js */}
+        {schema}
       </head>
       <body className="min-h-screen bg-white text-ink">
         <ClientMessages>

@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import PammPage from './components/PammPage';
 
 const NS = 'pammPage';
@@ -14,17 +14,5 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: `${NS}.breadcrumb` });
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('home'), path: '' },
-          { name: t('trading'), path: '/trading' },
-          { name: t('current'), path: PATH }
-        ])}
-      />
-      <PammPage />
-    </>
-  );
+  return <PammPage />;
 }

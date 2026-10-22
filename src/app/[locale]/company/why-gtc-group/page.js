@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, organizationLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import WhyGtcGroupPage from './components/WhyGtcGroupPage';
 
 const PATH = '/company/why-gtc-group';
@@ -13,18 +13,5 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: 'whyGtcGroupPage.breadcrumb' });
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('home'), path: '' },
-          { name: t('company'), path: '/company' },
-          { name: t('current'), path: PATH }
-        ])}
-      />
-      <JsonLd data={organizationLd()} />
-      <WhyGtcGroupPage />
-    </>
-  );
+  return <WhyGtcGroupPage />;
 }

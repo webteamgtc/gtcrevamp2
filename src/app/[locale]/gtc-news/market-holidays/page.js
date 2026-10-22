@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import { getMarketHolidays } from '@/lib/marketHolidays';
 import { NEWS_PATH } from '@/lib/news-path';
 import MarketHolidaysPage from './components/MarketHolidaysPage';
@@ -17,17 +17,6 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const [holidays, t] = await Promise.all([getMarketHolidays(locale), getTranslations({ locale, namespace: 'marketHolidaysPage.breadcrumb' })]);
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(locale, [
-          { name: t('home'), path: '' },
-          { name: t('news'), path: NEWS_PATH },
-          { name: t('current'), path: PATH }
-        ])}
-      />
-      <MarketHolidaysPage holidays={holidays} today={new Date().toISOString().slice(0, 10)} />
-    </>
-  );
+  const holidays = await getMarketHolidays(locale);
+  return <MarketHolidaysPage holidays={holidays} today={new Date().toISOString().slice(0, 10)} />;
 }

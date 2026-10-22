@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, breadcrumbLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import { createSlug, getPlatformGuides, normalizePlatform } from '@/lib/platform-guide/googleDrive';
 import { normalizePlatformGuideLocale } from '@/lib/platform-guide/locales';
 import GuideDetail from '../../components/GuideDetail';
-import { HUB_PATH } from '../../../courses';
-import { GUIDES_PATH, guideHref } from '../../guides';
+import { guideHref } from '../../guides';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic'; // depends on ?lang / ?type; Drive listings are cached in memory
@@ -63,19 +62,5 @@ export default async function Page({ params, searchParams }) {
   const data = await load(p, await searchParams);
   if (!data) notFound();
   setRequestLocale(p.locale);
-  const tk = await getTranslations({ locale: p.locale, namespace: 'knowledgePage.breadcrumb' });
-  const t = await getTranslations({ locale: p.locale, namespace: 'platformGuidePage.hero' });
-  return (
-    <>
-      <JsonLd
-        data={breadcrumbLd(p.locale, [
-          { name: tk('home'), path: '' },
-          { name: tk('current'), path: HUB_PATH },
-          { name: t('title'), path: GUIDES_PATH },
-          { name: data.item.title, path: guideHref(data.platform, data.item).split('?')[0] }
-        ])}
-      />
-      <GuideDetail {...data} />
-    </>
-  );
+  return <GuideDetail {...data} />;
 }

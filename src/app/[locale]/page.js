@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata, organizationLd, JsonLd } from '@/lib/seo';
+import { pageMetadata } from '@/lib/seo';
 import ClientMessages from '@/i18n/ClientMessages';
 import HomePage from './components/HomePage';
 
@@ -14,7 +14,6 @@ export default async function Page({ params }) {
   setRequestLocale(locale);
   return (
     <>
-      <JsonLd data={organizationLd()} />
       {/* the homepage's texts only (see src/i18n/ClientMessages.jsx) */}
       <ClientMessages files={['homepage']}>
         <HomePage />
