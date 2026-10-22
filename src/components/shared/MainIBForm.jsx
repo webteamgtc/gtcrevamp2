@@ -11,12 +11,15 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import PhoneInput, { getCountries, isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { BadgeCheck, ChevronDown, Globe, LoaderCircle, Mail, MonitorSmartphone, ShieldCheck, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { validateBusinessEmail } from '@/lib/emailValidation';
+import { useLocationDetail } from '@/config/useLocationDetails';
 import { EMAIL_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, useGtcCountries } from './formKit';
+
+const PHONE_COUNTRIES = new Set(getCountries()); // ISO codes PhoneInput can show as a flag
 
 const CLIENT_AGREEMENT_PDF = 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/pdf-files/Vanuatu.pdf';
 const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/16420445/3ajp4wk/';
@@ -46,16 +49,25 @@ export function DemoAccountForm({ id = 'demo-form', className }) {
   const locale = useLocale();
   const types = t.raw('accountTypes').filter((o) => GROUPS[o.id]);
   const { countries, failed, suggested } = useGtcCountries();
+  const { countryCode } = useLocationDetail(); // visitor's IP country (ipinfo)
   const [values, setValues] = useState({ ...EMPTY, accountType: types[0]?.id ?? '' });
+  const [countryPicked, setCountryPicked] = useState(false); // the visitor chose a country themselves
   const [touched, setTouched] = useState({});
   const [codeOpen, setCodeOpen] = useState(false);
   const [codeLoading, setCodeLoading] = useState(false);
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Country: IP country first, browser-language guess as a fallback; never overrides the visitor's own choice
+  const ipCountry = useMemo(() => (countryCode ? countries.find((c) => c.code === countryCode) : null), [countries, countryCode]);
   useEffect(() => {
-    if (suggested) setValues((v) => (v.country ? v : { ...v, country: suggested.name }));
-  }, [suggested]);
+    const preferred = ipCountry ?? suggested;
+    if (!preferred || countryPicked) return;
+    setValues((v) => (v.country === preferred.name || (v.country && !ipCountry) ? v : { ...v, country: preferred.name }));
+  }, [ipCountry, suggested, countryPicked]);
+
+  // Phone flag: IP country → browser-language guess → UAE
+  const phoneCountry = [countryCode, suggested?.code].find((c) => c && PHONE_COUNTRIES.has(c)) ?? 'AE';
 
   const phoneValid = Boolean(values.phone) && isValidPhoneNumber(values.phone);
 
@@ -205,7 +217,7 @@ export function DemoAccountForm({ id = 'demo-form', className }) {
         <Field id="df-phone" label={t('phone')} required error={err('phone')}>
           <div className="flex gap-2.5">
             <span className={cn(box, fieldState(err('phone')), phoneCls, 'flex-1')} dir="ltr">
-              <PhoneInput id="df-phone" international countryCallingCodeEditable={false} defaultCountry="AE" value={values.phone || undefined} onChange={setPhone} onBlur={blur('phone')} autoComplete="tel" />
+              <PhoneInput key={phoneCountry} id="df-phone" international countryCallingCodeEditable={false} defaultCountry={phoneCountry} value={values.phone || undefined} onChange={setPhone} onBlur={blur('phone')} autoComplete="tel" />
               {verified && <BadgeCheck className="size-4 shrink-0 text-up" aria-label={t('verified')} />}
             </span>
             <button type="button" onClick={requestCode} disabled={codeLoading || !phoneValid} className="h-11 shrink-0 rounded-xl border border-brand/25 px-4 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-transparent disabled:hover:text-brand">
@@ -257,7 +269,13 @@ export function DemoAccountForm({ id = 'demo-form', className }) {
           <Field id="df-country" label={t('country')} required error={err('country')}>
             <span className={cn(box, fieldState(err('country')), 'relative')}>
               <Globe className="size-4 shrink-0 text-ink/35" />
-              <select id="df-country" value={values.country} onChange={set('country')} onBlur={blur('country')} disabled={!countries.length} className={cn(input, 'cursor-pointer appearance-none pe-6 disabled:cursor-wait', !values.country && 'text-ink/40')}>
+              <select
+                id="df-country"
+                value={values.country}
+                onChange={(e) => {
+                  setCountryPicked(true);
+                  set('country')(e);
+                }} onBlur={blur('country')} disabled={!countries.length} className={cn(input, 'cursor-pointer appearance-none pe-6 disabled:cursor-wait', !values.country && 'text-ink/40')}>
                 <option value="" disabled>
                   {countries.length ? t('countrySelect') : failed ? t('errors.country') : t('countryLoading')}
                 </option>

@@ -7,7 +7,10 @@
  *   /en-mu    Mauritius                                footer: footer.notices.mu
  *   /en-vu    Vanuatu                                  footer: footer.notices.vu
  *
- * A visitor's country comes from Vercel's `x-vercel-ip-country` header (read in src/proxy.js).
+ * A visitor's country is worked out in src/proxy.js: CDN header (Vercel `x-vercel-ip-country`, Cloudflare
+ * `cf-ipcountry`) → geo cookie (ipinfo result saved by useLocationDetail) → server-side ipinfo lookup of the IP.
+ * The proxy sends URLs without a locale, and regional English URLs of another region, to the visitor's region
+ * (same path) — unless they chose to stay (regionDismissed cookie) or are a crawler.
  * Testing from anywhere: add ?geo=US (or AE, ZA, MU, VU, PK…) to any URL on a preview/dev deployment;
  * ?geo=clear removes it. The override is ignored on the production deployment unless GEO_TEST=1.
  */

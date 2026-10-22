@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { MAILGUN_DOMAIN, MAILGUN_FROM, mailgunClient, transporter } from "../../../config/nodemailer";
 
+// user input is escaped before it goes into the email HTML
+const esc = (v) => String(Array.isArray(v) ? v.join(', ') : v ?? '—').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const row = (label, value) => `<tr><th style="padding: 10px; text-align: left; background-color: #f2f2f2; color: #192055;">${label}</th><td style="padding: 10px; border: 1px solid #ddd;">${esc(value)}</td></tr>`;
+const yesNo = (v) => (v ? 'Yes' : 'No');
+
 export async function POST(req) {
   const data = await req.json();
   const mailData = {
@@ -37,29 +42,33 @@ export async function POST(req) {
                               <table class="content-table" style="width: 100%; margin-top: 20px; border-collapse: collapse;">
                                    <tr>
                                       <th style="padding: 10px; text-align: left; background-color: #f2f2f2; color: #192055;">Full Name</th>
-                                      <td style="padding: 10px; border: 1px solid #ddd;">${data?.fullName}</td>
+                                      <td style="padding: 10px; border: 1px solid #ddd;">${esc(data?.fullName)}</td>
                                   </tr>
                                     <tr>
                                       <th style="padding: 10px; text-align: left; background-color: #f2f2f2; color: #192055;">Email</th>
-                                      <td style="padding: 10px; border: 1px solid #ddd;">${data?.email}</td>
+                                      <td style="padding: 10px; border: 1px solid #ddd;">${esc(data?.email)}</td>
                                   </tr>
                                     <tr>
                                       <th style="padding: 10px; text-align: left; background-color: #f2f2f2; color: #192055;">Phone</th>
-                                      <td style="padding: 10px; border: 1px solid #ddd;">${data?.phone}</td>
+                                      <td style="padding: 10px; border: 1px solid #ddd;">${esc(data?.phone)}</td>
                                   </tr>
                                   <tr>
                                       <th style="padding: 10px; text-align: left; background-color: #f2f2f2; color: #192055;">Login ID</th>
-                                      <td style="padding: 10px; border: 1px solid #ddd;">${data?.accounts}</td>
+                                      <td style="padding: 10px; border: 1px solid #ddd;">${esc(data?.accounts)}</td>
                                   </tr>
                                       <tr>
                                       <th style="padding: 10px; text-align: left; background-color: #f2f2f2; color: #192055;">Platform</th>
-                                      <td style="padding: 10px; border: 1px solid #ddd;">${data?.platform}</td>
+                                      <td style="padding: 10px; border: 1px solid #ddd;">${esc(data?.platform)}</td>
                                   </tr>
                                         <tr>
                                       <th style="padding: 10px; text-align: left; background-color: #f2f2f2; color: #192055;">Reason</th>
-                                      <td style="padding: 10px; border: 1px solid #ddd;">${data?.reason}</td>
+                                      <td style="padding: 10px; border: 1px solid #ddd;">${esc(data?.reason)}</td>
                                   </tr>
-                                
+                                  ${row('Date of Birth', data?.dob)}
+                                  ${row('Signature', data?.signature)}
+                                  ${row('Owner confirmed', yesNo(data?.confirmations?.ownerConfirm))}
+                                  ${row('Data removal acknowledged', yesNo(data?.confirmations?.dataRemovalAcknowledge))}
+                                  ${row('Positions closed confirmed', yesNo(data?.confirmations?.positionsClosedConfirm))}
                               </table>                          
                               <p style="line-height: 30px; padding-top: 20px;">
                                   Best Regards,<br/>

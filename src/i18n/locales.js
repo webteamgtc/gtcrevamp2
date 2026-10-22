@@ -12,10 +12,10 @@ export const REGIONS = ['global', 'mena', 'asia', 'europe'];
 
 export const LOCALES = [
   { code: 'en-intl', lang: 'en', hreflang: 'en', label: 'International', native: 'English', region: 'global', flag: null, dir: 'ltr' },
-  { code: 'en-ae', lang: 'en', hreflang: 'en-AE', label: 'United Arab Emirates', native: 'English', region: 'global', flag: 'AE', dir: 'ltr' },
-  { code: 'en-za', lang: 'en', hreflang: 'en-ZA', label: 'South Africa', native: 'English', region: 'global', flag: 'ZA', dir: 'ltr' },
-  { code: 'en-mu', lang: 'en', hreflang: 'en-MU', label: 'Mauritius', native: 'English', region: 'global', flag: 'MU', dir: 'ltr' },
-  { code: 'en-vu', lang: 'en', hreflang: 'en-VU', label: 'Vanuatu', native: 'English', region: 'global', flag: 'VU', dir: 'ltr' },
+  { code: 'en-ae', lang: 'en', hreflang: 'en-AE', label: 'United Arab Emirates', native: 'English', region: 'global', flag: 'AE', dir: 'ltr',hideInLanguageSelector: true },
+  { code: 'en-za', lang: 'en', hreflang: 'en-ZA', label: 'South Africa', native: 'English', region: 'global', flag: 'ZA', dir: 'ltr',hideInLanguageSelector: true },
+  { code: 'en-mu', lang: 'en', hreflang: 'en-MU', label: 'Mauritius', native: 'English', region: 'global', flag: 'MU', dir: 'ltr',hideInLanguageSelector: true },
+  { code: 'en-vu', lang: 'en', hreflang: 'en-VU', label: 'Vanuatu', native: 'English', region: 'global', flag: 'VU', dir: 'ltr',hideInLanguageSelector: true },
 
   { code: 'ar', label: 'Arabic', native: 'العربية', region: 'mena', flag: 'AE', dir: 'rtl' },
   { code: 'ur', label: 'Urdu', native: 'اردو', region: 'mena', flag: 'PK', dir: 'rtl' },

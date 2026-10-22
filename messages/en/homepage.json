@@ -247,5 +247,123 @@
       "Fund",
       "Trade"
     ]
+  },
+  "deleteAccountPage": {
+    "hero": {
+      "badge": "Account Deletion Request",
+      "titleBefore": "Delete Your",
+      "titleHighlight": "Trading Account",
+      "description": "Submit a secure request to permanently delete your trading account. Please review the important notes carefully before continuing."
+    },
+    "beforeYouContinue": {
+      "title": "Before You Continue",
+      "note1": "Account deletion is permanent and may remove access to account history, balances, and platform records.",
+      "note2": "Please ensure all open positions are closed before submitting your request.",
+      "note3": "For security verification, the submitted details must match your registered account information."
+    },
+    "helpfulNotes": {
+      "title": "Helpful Notes",
+      "note1": "Use your registered email address for faster verification.",
+      "note2": "Add all trading account numbers you want to delete.",
+      "note3": "Include your reason if you want the support team to review it."
+    },
+    "formCard": {
+      "titleBefore": "Trading",
+      "titleHighlight": "Account",
+      "titleAfter": "Deletion Request Form",
+      "description": "Complete the form below and confirm the required statements to proceed."
+    },
+    "form": {
+      "sections": {
+        "personal": "Personal Information",
+        "account": "Account Details",
+        "confirmations": "Confirmations",
+        "signature": "Signature & Verification"
+      },
+      "fields": {
+        "fullNamePlaceholder": "Enter your full name",
+        "emailPlaceholder": "Enter email address",
+        "platformLabel": "Platform",
+        "accountsLabel": "Accounts to Delete",
+        "accountsPlaceholder": "e.g. 502131, 502145, 503201",
+        "reasonLabel": "Reason for Deletion",
+        "reasonOptional": "(optional)",
+        "reasonPlaceholder": "Tell us why you want to delete your account",
+        "signaturePlaceholder": "Type your full name",
+        "fullNameLabel": "Full name",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone number",
+        "phoneOptional": "(optional)",
+        "codeLabel": "Verification code",
+        "signatureLabel": "Signature",
+        "dobLabel": "Date of birth"
+      },
+      "platforms": {
+        "mt4": "MT4",
+        "mt5": "MT5",
+        "both": "Both"
+      },
+      "otp": {
+        "get": "Get OTP",
+        "sending": "Sending...",
+        "resendPrefix": "Resend in",
+        "resendSuffix": "s",
+        "sentToPrefix": "OTP sent to",
+        "verified": "Verified",
+        "instruction": "Enter the 6-digit code to verify your email."
+      },
+      "confirmations": {
+        "c1": "I confirm that I am the rightful owner of the above trading accounts and wish to permanently delete them.",
+        "c2": "I understand that once deleted, all account data, balances, and history may no longer be accessible.",
+        "c3": "I understand that any pending positions must be closed prior to deletion."
+      },
+      "warning": "Please review all information carefully before submitting. This request may result in permanent removal of your trading account access.",
+      "helpText": "Need help instead? Contact support before submitting this request.",
+      "submit": {
+        "submitting": "Submitting...",
+        "ready": "Submit Request",
+        "verifyFirst": "Verify OTP to Submit"
+      },
+      "validation": {
+        "fullNameRequired": "Full name is required",
+        "emailInvalid": "Enter a valid email",
+        "emailRequired": "Email is required",
+        "platformInvalid": "Select a platform",
+        "platformRequired": "Platform is required",
+        "accountsInvalid": "Use numbers separated by commas (e.g. 502131, 502145)",
+        "accountsRequired": "Enter at least one account number",
+        "reasonMax": "Keep reason under 1000 chars",
+        "otpLength": "OTP must be 6 digits",
+        "otpRequired": "OTP is required",
+        "c1": "Please confirm ownership",
+        "c2": "Please acknowledge data removal",
+        "c3": "Please confirm positions will be closed",
+        "signatureRequired": "Signature is required",
+        "dobRequired": "Date of birth is required",
+        "emailNoPlus": "Email cannot contain a plus sign (+)",
+        "emailBlockedDomain": "Temporary or disposable email addresses are not allowed"
+      },
+      "toasts": {
+        "verifyFirst": "Please verify the OTP first.",
+        "submitted": "Your deletion request has been submitted.",
+        "requestFailed": "Request failed",
+        "emailFirst": "Please enter your email first",
+        "emailInvalid": "Invalid email address. Please use a valid email.",
+        "otpSent": "OTP sent",
+        "invalidEmail": "Invalid email address",
+        "otpSendFailed": "Failed to send OTP. Try again.",
+        "emailVerified": "Email verified",
+        "invalidOtp": "Invalid OTP"
+      }
+    },
+    "meta": {
+      "title": "Delete Account",
+      "description": "Securely submit your GTCFX trading account deletion request."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "trading": "Trading",
+      "current": "Delete Account"
+    }
   }
 }

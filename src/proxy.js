@@ -1,60 +1,122 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { COOKIES, CAT5_LOCALE, CAT5_PATH, regionForCountry, REMEMBER_DAYS } from './config/regions';
+import { COOKIES, CAT5_LOCALE, CAT5_PATH, REGION_LOCALES, regionForCountry, REMEMBER_DAYS } from './config/regions';
+import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, isLocalIp } from './lib/geo/resolveCountryFromRequest';
 
 /**
  * Runs before every page:
- *  1. works out the visitor's country (Vercel header, or ?geo= while testing)
+ *  1. works out the visitor's country (see countryOf)
  *  2. sends URLs without a language/region (/, /company, old /en/…) to the visitor's regional site
- *  3. keeps UAE CAT 5 visitors on the marketing page
- *  4. hands over to next-intl, and stores the country in a cookie the popups read
+ *  3. sends a regional English URL of another region to the visitor's own one, same path
+ *     (UAE → /en-ae, South Africa → /en-za, Mauritius → /en-mu, Vanuatu → /en-vu, everyone else incl. US → /en-intl)
+ *  4. keeps UAE CAT 5 visitors on the marketing page
+ *  5. hands over to next-intl, and stores the country in the `gtc_country` cookie — the single source the
+ *     client reads (useCountry for popups/header, useLocationDetail for forms), so the browser normally
+ *     never calls an IP service itself
  * Rules and cookie names: src/config/regions.js
  */
 const intl = createMiddleware(routing);
 const LOCALES = new Set(routing.locales);
+const REGIONAL = new Set(REGION_LOCALES);
 const GEO_TEST = process.env.VERCEL_ENV !== 'production' || process.env.GEO_TEST === '1';
 const COUNTRY_RE = /^[A-Z]{2}$/;
+// crawlers must reach every regional site (they would otherwise always land on /en-intl)
+const BOT_RE = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed/i;
 
-function countryOf(request) {
-  const q = request.nextUrl.searchParams.get('geo')?.toUpperCase();
-  if (GEO_TEST && q && COUNTRY_RE.test(q)) return { country: q, test: q };
-  if (GEO_TEST && q === 'CLEAR') return { country: request.headers.get('x-vercel-ip-country') || '', test: 'clear' };
-  const saved = GEO_TEST ? request.cookies.get(COOKIES.geoTest)?.value : null;
-  if (saved && COUNTRY_RE.test(saved)) return { country: saved };
-  return { country: (request.headers.get('x-vercel-ip-country') || '').toUpperCase() };
+const valid = (c) => {
+  const v = String(c ?? '').trim().toUpperCase();
+  return COUNTRY_RE.test(v) ? v : '';
+};
+
+/** Server-side IP → country (only when no CDN header and no cookie is available, e.g. off Vercel). */
+async function lookupIp(request) {
+  const ip = getClientIp(request);
+  if (isLocalIp(ip)) return '';
+  const token = process.env.IPINFO_TOKEN;
+  try {
+    const res = await fetch(token ? `https://ipinfo.io/${ip}?token=${token}` : `https://ipinfo.io/${ip}/json`, {
+      headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(1500)
+    });
+    return res.ok ? valid((await res.json())?.country) : '';
+  } catch {
+    return '';
+  }
 }
 
-function finish(response, { country, test }) {
+/**
+ * Visitor country, first match wins:
+ *   ?geo=XX (test deployments; ?geo=clear removes it) → saved test override
+ *   → CDN header (Vercel x-vercel-ip-country, Cloudflare cf-ipcountry)
+ *   → cookies (gtcfx_geo_country: an earlier lookup here or the browser fallback in useLocationDetail,
+ *      then gtc_country from the previous request)
+ *   → ipinfo lookup of the request IP
+ */
+async function countryOf(request) {
+  const q = request.nextUrl.searchParams.get('geo')?.toUpperCase();
+  if (GEO_TEST && q && COUNTRY_RE.test(q)) return { country: q, test: q };
+  if (GEO_TEST && q === 'CLEAR') return { country: valid(getCountryFromHeaders(request)), test: 'clear' };
+  const saved = GEO_TEST ? valid(request.cookies.get(COOKIES.geoTest)?.value) : '';
+  if (saved) return { country: saved };
+
+  const fromHeader = valid(getCountryFromHeaders(request));
+  if (fromHeader) return { country: fromHeader };
+  const fromCookie = valid(request.cookies.get(GEO_COUNTRY_COOKIE)?.value) || valid(request.cookies.get(COOKIES.country)?.value);
+  if (fromCookie) return { country: fromCookie };
+  const looked = await lookupIp(request);
+  return { country: looked, lookedUp: Boolean(looked) };
+}
+
+function finish(response, { country, test, lookedUp }) {
   const opts = { path: '/', sameSite: 'lax', secure: process.env.NODE_ENV === 'production' };
   if (country) response.cookies.set(COOKIES.country, country, { ...opts, maxAge: 60 * 60 * 24 });
+  // cache a server-side lookup so it runs at most once a day per visitor
+  if (lookedUp) response.cookies.set(GEO_COUNTRY_COOKIE, country, { ...opts, maxAge: GEO_COUNTRY_MAX_AGE });
   if (test === 'clear') response.cookies.delete(COOKIES.geoTest);
   else if (test) response.cookies.set(COOKIES.geoTest, test, { ...opts, maxAge: 60 * 60 * 24 * REMEMBER_DAYS });
   return response;
 }
 
-export default function proxy(request) {
-  const geo = countryOf(request);
+export default async function proxy(request) {
+  const geo = await countryOf(request);
   const { pathname, search } = request.nextUrl;
   const [, first = '', ...rest] = pathname.split('/');
   const restPath = rest.length ? `/${rest.join('/')}` : '';
-  const redirect = (path) => finish(NextResponse.redirect(new URL(`${path}${search}`, request.url)), geo);
+  const home = regionForCountry(geo.country);
+  const isBot = BOT_RE.test(request.headers.get('user-agent') || '');
+  const redirect = (path) => {
+    // drop ?geo= from the target so the override isn't re-applied on every page
+    const url = new URL(path, request.url);
+    url.search = search;
+    url.searchParams.delete('geo');
+    return finish(NextResponse.redirect(url), geo);
+  };
 
   // 2. no region/language in the URL (or the old /en) → the visitor's regional site,
-  //    unless they picked a language before (next-intl's NEXT_LOCALE cookie)
+  //    unless they picked a non-English language before (next-intl's NEXT_LOCALE cookie)
   if (!LOCALES.has(first)) {
     const picked = request.cookies.get('NEXT_LOCALE')?.value;
-    const target = picked && LOCALES.has(picked) ? picked : regionForCountry(geo.country);
+    const target = picked && LOCALES.has(picked) && !REGIONAL.has(picked) ? picked : home;
     const tail = first === 'en' ? restPath : pathname === '/' ? '' : pathname;
     return redirect(`/${target}${tail}`);
   }
 
-  // 3. UAE CAT 5 (marketing only): every page leads to the marketing page
-  if (request.cookies.get(COOKIES.uaeCategory)?.value === '5' && !(first === CAT5_LOCALE && restPath === CAT5_PATH)) {
+  // 3. another region's English site → the visitor's own region (same page).
+  //    Skipped for crawlers, when the country is unknown, or when the visitor chose to stay on this
+  //    region (GeoGate "stay here" / picking it in the language picker → regionDismissed cookie).
+  //    UAE CAT 5 visitors are handled by rule 4 (their marketing page is always on /en-ae).
+  const cat5 = request.cookies.get(COOKIES.uaeCategory)?.value === '5';
+  if (REGIONAL.has(first) && first !== home && geo.country && !isBot && !cat5 && request.cookies.get(COOKIES.regionDismissed)?.value !== first) {
+    return redirect(`/${home}${restPath}`);
+  }
+
+  // 4. UAE CAT 5 (marketing only): every page leads to the marketing page
+  if (cat5 && !(first === CAT5_LOCALE && restPath === CAT5_PATH)) {
     return redirect(`/${CAT5_LOCALE}${CAT5_PATH}`);
   }
 
-  // 4. normal page
+  // 5. normal page
   return finish(intl(request), geo);
 }
 
