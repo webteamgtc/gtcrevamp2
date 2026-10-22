@@ -3,13 +3,13 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { FileText, Image as ImageIcon, PlayCircle } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import GtcGoPhone from '@/components/shared/GtcGoPhone';
 import { EASE } from '@/components/motion';
 import { HUB_PATH } from '../../courses';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const CHIPS = [
   { key: 'png', Icon: ImageIcon, className: 'start-0 top-[18%]', delay: 0.5, float: 5 },
@@ -59,9 +59,9 @@ export default function PlatformHeroSection() {
               {t('description')}
             </motion.p>
             <motion.div className="mt-9 flex justify-center lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('primaryCta')}
-              </ArrowLink>
+              </LiveAccountButton>
             </motion.div>
           </div>
           <HeroVisual />

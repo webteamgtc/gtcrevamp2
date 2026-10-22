@@ -1,11 +1,11 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import BandLine from '@/components/shared/BandLine';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { AccentTitle } from '@/components/shared/SectionIntro';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /** Navy closing band: copy + both buttons on one side, four stat tiles on the other. */
 export function DemoCta() {
@@ -25,9 +25,9 @@ export function DemoCta() {
           </h2>
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{t('description')}</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <ArrowLink href={PORTAL.register} variant="gold">
+            <LiveAccountButton variant="gold">
               {t('live')}
-            </ArrowLink>
+            </LiveAccountButton>
             <a href="#demo-form" className="inline-flex h-13 items-center justify-center rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
               {t('demo')}
             </a>

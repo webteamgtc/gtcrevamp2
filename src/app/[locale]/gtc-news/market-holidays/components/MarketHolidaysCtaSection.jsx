@@ -3,12 +3,11 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Headset } from 'lucide-react';
-import ArrowLink from '@/components/shared/ArrowLink';
 import BandLine from '@/components/shared/BandLine';
 import NavLink from '@/components/shared/nav/NavLink';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion';
-import { PORTAL } from '@/config/menu';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 export default function MarketHolidaysCtaSection() {
   const t = useTranslations('marketHolidaysPage.cta');
@@ -39,9 +38,9 @@ export default function MarketHolidaysCtaSection() {
           </Stagger>
         </div>
         <Reveal y={16} delay={0.12} className="mx-auto flex w-full max-w-sm flex-col gap-3 lg:me-0">
-          <ArrowLink href={PORTAL.register} variant="gold" className="justify-between">
+          <LiveAccountButton variant="gold" className="justify-between">
             {t('openCta')}
-          </ArrowLink>
+          </LiveAccountButton>
           <NavLink href="/company/contact-us" className="inline-flex h-13 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
             <Headset className="size-4" />
             {t('contactCta')}

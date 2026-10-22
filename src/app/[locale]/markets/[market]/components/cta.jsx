@@ -3,15 +3,15 @@
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { PORTAL } from '@/config/menu';
+import { PORTAL, LIVE_ACCOUNT_HREF } from '@/config/menu';
 import CtaBand from '@/components/shared/CtaBand';
-import ArrowLink from '@/components/shared/ArrowLink';
 import NavLink from '@/components/shared/nav/NavLink';
 import BandLine from '@/components/shared/BandLine';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { useLiveRows, FlashPrice } from '@/components/shared/ticker';
 import { Reveal } from '@/components/motion';
 import { useMarket, usePageT, useSymbolHref } from './shared';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 function Shell({ children }) {
   return (
@@ -38,7 +38,7 @@ function Risk({ className }) {
 export function CtaCentered() {
   const t = usePageT();
   const td = useTranslations('marketsPage.detail.cta');
-  return <CtaBand id="start" title={t('cta.title')} description={t('cta.description')} primary={{ label: td('start'), href: PORTAL.register }} secondary={{ label: td('demo'), href: PORTAL.demo }} riskTitle={td('riskTitle')} risk={td('risk')} />;
+  return <CtaBand id="start" title={t('cta.title')} description={t('cta.description')} primary={{ label: td('start'), href: LIVE_ACCOUNT_HREF }} secondary={{ label: td('demo'), href: PORTAL.demo }} riskTitle={td('riskTitle')} risk={td('risk')} />;
 }
 
 /** Split + live — copy on the start side, buttons on the other, this market's live prices along the bottom. */
@@ -59,14 +59,14 @@ export function CtaSplitLive() {
           <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-white/65 md:text-base">{t('cta.description')}</p>
         </Reveal>
         <Reveal y={16} delay={0.1} className="flex flex-col gap-3 lg:ms-auto lg:w-full lg:max-w-sm">
-          <ArrowLink href={PORTAL.register} variant="gold" className="justify-between">
+          <LiveAccountButton variant="gold" className="justify-between">
             {td('start')}
-          </ArrowLink>
+          </LiveAccountButton>
           <p className="text-center text-xs text-white/50">{td('noAccount')}</p>
           <div className="grid grid-cols-2 gap-3">
-            <NavLink href={PORTAL.register} className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 bg-white/5 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-brand-900">
+            <LiveAccountButton look="button" variant="outlineLight" size="md" arrow={false} className="h-12 px-4">
               {td('live')}
-            </NavLink>
+            </LiveAccountButton>
             <NavLink href={PORTAL.demo} className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 bg-white/5 px-4 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-brand-900">
               {td('demo')}
             </NavLink>

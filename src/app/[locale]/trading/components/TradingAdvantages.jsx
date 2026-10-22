@@ -2,11 +2,11 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Users } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { LaptopMockup, PhoneMockup, TabletMockup } from '@/components/shared/devices';
 import { Reveal } from '@/components/motion';
 import { AccentTitle } from '@/components/shared/SectionIntro';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /** Allocation donut: investors' shares filling in around the manager. */
 function Allocation() {
@@ -55,9 +55,9 @@ export function TradingAdvantages() {
                   <AccentTitle text={t('pamm.title')} />
                 </h3>
                 <p className="relative mt-4 text-pretty text-[15px] leading-relaxed text-ink/60 md:text-base">{t('pamm.text')}</p>
-                <ArrowLink href={PORTAL.register} className="relative mt-8">
+                <LiveAccountButton variant="primary" className="relative mt-8">
                   {t('pamm.cta')}
-                </ArrowLink>
+                </LiveAccountButton>
               </div>
             </motion.article>
           </Reveal>

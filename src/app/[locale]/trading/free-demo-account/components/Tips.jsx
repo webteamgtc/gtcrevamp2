@@ -3,11 +3,11 @@ import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { DollarSign, FastForward, Flag, NotebookPen } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { Reveal } from '@/components/motion';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { EASE } from '@/components/motion';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const TIP_ICONS = [DollarSign, NotebookPen, Flag, FastForward];
 
@@ -115,9 +115,9 @@ export function Tips() {
                   </span>
                   {t('note.quote').replace(/^[“"]|[”"]$/g, '')}
                 </motion.blockquote>
-                <ArrowLink href={PORTAL.register} variant="light" className="relative mt-9 w-full justify-between">
+                <LiveAccountButton variant="light" className="relative mt-9 w-full justify-between">
                   {t('note.cta')}
-                </ArrowLink>
+                </LiveAccountButton>
               </div>
             </div>
           </Reveal>

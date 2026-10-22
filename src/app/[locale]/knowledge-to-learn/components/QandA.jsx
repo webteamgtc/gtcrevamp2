@@ -3,11 +3,11 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { MessageCircleQuestion, Search } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import FaqAccordion from '@/components/shared/FaqAccordion';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { Reveal } from '@/components/motion';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 /** Searchable FAQ: navy panel with stats + CTA on the start side, the filtered accordion on the other. */
 export function QandA() {
@@ -45,9 +45,9 @@ export function QandA() {
                   </div>
                 ))}
               </div>
-              <ArrowLink href={PORTAL.register} variant="gold" className="relative mt-7">
+              <LiveAccountButton variant="gold" className="relative mt-7">
                 {t('openAccountCta')}
-              </ArrowLink>
+              </LiveAccountButton>
             </div>
           </Reveal>
 

@@ -10,7 +10,7 @@ import { motion } from 'motion/react';
 import { Info } from 'lucide-react';
 import NavLink from '@/components/shared/nav/NavLink';
 import { FlashPrice, fmt, pct } from '@/components/shared/ticker';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { LiveDot, rangePos } from '../../components/shared';
@@ -171,7 +171,7 @@ export function QuoteTerminal() {
               ['sellNow', row.bid, 'bg-[#e23b3b] hover:bg-[#c92f2f]'],
               ['buyNow', row.ask, 'bg-[#0ea371] hover:bg-[#0b8a5f]']
             ].map(([k, v, bg]) => (
-              <NavLink key={k} href={PORTAL.register} className={cn('rounded-2xl px-4 py-3.5 text-center shadow-lg transition-colors', bg)}>
+              <NavLink key={k} href={LIVE_ACCOUNT_HREF} className={cn('rounded-2xl px-4 py-3.5 text-center shadow-lg transition-colors', bg)}>
                 <span className="block text-[11px] font-semibold uppercase tracking-wider text-white/85">{t(k)}</span>
                 <span className="mt-0.5 block text-xl font-bold tabular-nums">{fmt(v, f.d)}</span>
               </NavLink>

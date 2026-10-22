@@ -2,11 +2,11 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ChartNoAxesColumn, DollarSign, LayoutGrid, Quote, Receipt, Waves, Zap } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { Reveal, Stagger, StaggerItem, TiltCard } from '@/components/motion';
 import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const FEATURE_ICONS = {
   ecn: [Waves, ChartNoAxesColumn, Zap],
@@ -117,7 +117,7 @@ export function TierDetail() {
                   <div className="w-full max-w-[440px]">
                     <TierCard tier={tier} labels={labels} featured={tier.id === 'standard'} />
                   </div>
-                  <ArrowLink href={PORTAL.register}>{t('cta')}</ArrowLink>
+                  <LiveAccountButton variant="primary">{t('cta')}</LiveAccountButton>
                 </Reveal>
               </div>
             );

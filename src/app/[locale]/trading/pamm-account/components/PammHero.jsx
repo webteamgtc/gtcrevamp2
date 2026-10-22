@@ -2,14 +2,14 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { LayoutDashboard } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { AreaChart } from '@/components/shared/devices';
 import { CountUp, TiltCard, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const TONE = { brand: 'text-brand', up: 'text-up', ink: 'text-ink' };
 const AVATARS = ['from-brand-400 to-brand-700', 'from-gold-200 to-gold-700', 'from-emerald-300 to-emerald-600', 'from-sky-300 to-sky-600', 'from-violet-300 to-violet-600'];
@@ -114,9 +114,9 @@ export function PammHero() {
               {t('text')}
             </motion.p>
             <motion.div className="mt-9 flex justify-center lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('cta')}
-              </ArrowLink>
+              </LiveAccountButton>
             </motion.div>
           </div>
           <ManagerDashboard />

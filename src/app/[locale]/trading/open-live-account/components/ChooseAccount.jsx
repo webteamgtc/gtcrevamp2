@@ -1,13 +1,12 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { ArrowRight, Gem, Network } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+import { Gem, Network } from 'lucide-react';
 import ArrowLink from '@/components/shared/ArrowLink';
-import NavLink from '@/components/shared/nav/NavLink';
 import { CountUp, Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const ICONS = { standard: Network, ecn: Gem };
 const SWAP_ROW = 4;
@@ -82,15 +81,9 @@ export function ChooseAccount() {
                     })}
                   </dl>
 
-                  <NavLink
-                    href={PORTAL.register}
-                    className={cn(
-                      'relative mt-7 inline-flex h-13 items-center justify-center gap-2 rounded-full text-base font-semibold transition-all',
-                      featured ? 'bg-gold text-white shadow-lg shadow-gold/30 hover:bg-gold-600' : 'border border-brand/15 text-ink hover:border-brand hover:bg-brand hover:text-white'
-                    )}
-                  >
-                    {t('cta')} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 rtl:-scale-x-100" />
-                  </NavLink>
+                  <LiveAccountButton look="button" account={`${acc.id}-account`} variant={featured ? 'gold' : 'outline'} className="relative mt-7">
+                    {t('cta')}
+                  </LiveAccountButton>
                 </motion.article>
               </StaggerItem>
             );

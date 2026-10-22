@@ -3,11 +3,11 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Users, Layers, ChartNoAxesCombined, Languages } from 'lucide-react';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { Stagger, StaggerItem, CountUp, EASE } from '@/components/motion';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import HeroTradingBackdrop from '@/components/shared/HeroBackdrop';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const STAT_ICONS = [Users, Layers, Languages, ChartNoAxesCombined];
 
@@ -31,9 +31,9 @@ export function CompanyHero() {
         <p className="mx-auto mt-6 max-w-3xl text-pretty text-base leading-relaxed text-white/65 md:text-lg">{t('hubSection.description')}</p>
 
         <motion.div className="mt-9 flex flex-wrap items-center justify-center gap-4" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6, ease: EASE }}>
-          <ArrowLink href={PORTAL.register} variant="gold">
+          <LiveAccountButton variant="gold">
             {t('hubSection.ctaLive')}
-          </ArrowLink>
+          </LiveAccountButton>
           <a href="#legal" className="inline-flex h-13 items-center rounded-full border border-white/20 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
             {t('hubSection.ctaSecondary')}
           </a>

@@ -3,10 +3,9 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUp, Building2, Gauge, Percent, Scale, Wallet, Zap } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import { Button } from '@/components/ui/button';
 import { Reveal } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const ROW_ICONS = [Wallet, Scale, Gauge, Percent, Zap, Building2];
 const LEVERAGE_ROW = 1;
@@ -87,9 +86,9 @@ export function AccountTypes() {
                         })}
                       </AnimatePresence>
                     </dl>
-                    <Button size="lg" className="mt-5 w-full" variant={standard ? 'primary' : 'outline'} as="a" href={PORTAL.register}>
+                    <LiveAccountButton look="button" account={`${acc.id}-account`} className="mt-5 w-full" variant={standard ? 'primary' : 'outline'} arrow={false}>
                       {acc.cta}
-                    </Button>
+                    </LiveAccountButton>
                   </div>
                 </article>
               </Reveal>

@@ -10,10 +10,14 @@ import {
   CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Bitcoin, Landmark, Wheat
 } from 'lucide-react';
 
-// account entry points: live application form (/trading hero), demo form, client portal log-in
+// account entry points: live account application, demo form, client portal log-in
 const CLIENT_PORTAL = 'https://web.mygtc.app/user?redirect=%252Fdashboard';
+/** Live account application page — every 'Open live account' button goes here (see components/shared/LiveAccountButton). */
+export const LIVE_ACCOUNT_HREF = '/live-account-application';
+/** ?account=<slug> preselects an account on the application page (slugs: liveAccountApplicationPage.accounts). */
+export const liveAccountHref = (account) => (account ? `${LIVE_ACCOUNT_HREF}?account=${encodeURIComponent(account)}` : LIVE_ACCOUNT_HREF);
+
 export const PORTAL = {
-  register: '/trading#apply',
   login: CLIENT_PORTAL,
   demo: '/trading/free-demo-account',
   clientPortal: CLIENT_PORTAL
@@ -148,7 +152,7 @@ export const MENU = [
         { id: 'NAS100', href: '/markets/indices/nas100' }
       ] }]
     ],
-    promo: { id: 'markets', href: PORTAL.register, visual: 'chart' }
+    promo: { id: 'markets', href: LIVE_ACCOUNT_HREF, visual: 'chart' }
   },
   {
     id: 'learn',

@@ -2,13 +2,13 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Headset, ShieldCheck, Zap, CandlestickChart } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import ArrowLink from '@/components/shared/ArrowLink';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Stagger, StaggerItem, CountUp, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const ICONS = { support: Headset, compensation: ShieldCheck, latency: Zap, markets: CandlestickChart };
 
@@ -66,9 +66,9 @@ export function WhyHero() {
             </motion.h1>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0">{t('description')}</p>
             <motion.div className="mt-9 flex justify-center lg:justify-start" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6, ease: EASE }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('cta')}
-              </ArrowLink>
+              </LiveAccountButton>
             </motion.div>
           </div>
 

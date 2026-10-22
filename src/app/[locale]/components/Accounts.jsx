@@ -2,13 +2,11 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { SlidersHorizontal } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Reveal } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { ACCOUNT_KEYS, ACCOUNT_DETAIL_KEYS, ACCOUNT_DETAIL_ICONS } from './accounts.constants';
 import { AccountsCompareDialog } from './AccountsCompareDialog';
-import NavLink from '@/components/shared/nav/NavLink';
-import { PORTAL } from '@/config/menu';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 export function Accounts() {
   const t = useTranslations('accounts');
@@ -132,9 +130,9 @@ export function Accounts() {
                         );
                       })}
                     </dl>
-                    <Button size="lg" className="mt-5 w-full" variant={standard ? 'primary' : 'outline'} as={NavLink} href={PORTAL.register}>
+                    <LiveAccountButton look="button" account={`${item.id}-account`} size="lg" className="mt-5 w-full" variant={standard ? 'primary' : 'outline'} arrow={false}>
                       {t('open')}
-                    </Button>
+                    </LiveAccountButton>
                   </div>
                 </article>
               </Reveal>

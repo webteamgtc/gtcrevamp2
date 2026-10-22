@@ -5,13 +5,13 @@ import { motion } from 'motion/react';
 import { Check, CreditCard, Bitcoin, Smartphone, Wallet, ShieldCheck } from 'lucide-react';
 import { PORTAL } from '@/config/menu';
 import ArrowLink from '@/components/shared/ArrowLink';
-import NavLink from '@/components/shared/nav/NavLink';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { EASE } from '@/components/motion';
 import StatValue from '@/components/shared/StatValue';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const METHOD_ICONS = { card: CreditCard, crypto: Bitcoin, mobile: Smartphone, wallet: Wallet };
 
@@ -127,9 +127,9 @@ export function DepositHero() {
               <ArrowLink href={PORTAL.clientPortal} variant="gold">
                 {t('ctaDeposit')}
               </ArrowLink>
-              <NavLink href={PORTAL.register} className="inline-flex h-13 items-center rounded-full border border-white/20 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
+              <LiveAccountButton look="button" variant="outlineLight" arrow={false}>
                 {t('ctaOpen')}
-              </NavLink>
+              </LiveAccountButton>
             </motion.div>
           </div>
 

@@ -17,7 +17,7 @@ import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
 import { EASE, Reveal, ScrollProgress, Stagger, StaggerItem } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { TRADINGVIEW_LOCALE } from '@/config/markets';
-import { PORTAL } from '@/config/menu';
+import { PORTAL, LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { NEWS_PATH } from '@/lib/news-path';
 import { TradingViewWidget } from '@/app/[locale]/markets/components/EconomicCalendar';
 import CalendarHero, { jumpTo } from './CalendarHero';
@@ -234,7 +234,7 @@ export default function EconomicCalendarPage({ events = [], generatedAt }) {
         <CalendarHero events={events} generatedAt={generatedAt} />
         <CalendarSection />
         <FaqSection />
-        <CtaBand id="start" title={`${tc('headingLine1')} [${tc('headingLine2')}]`} description={tc('sub')} primary={{ label: tc('openCta'), href: PORTAL.register }} secondary={{ label: tc('demoCta'), href: PORTAL.demo }} />
+        <CtaBand id="start" title={`${tc('headingLine1')} [${tc('headingLine2')}]`} description={tc('sub')} primary={{ label: tc('openCta'), href: LIVE_ACCOUNT_HREF }} secondary={{ label: tc('demoCta'), href: PORTAL.demo }} />
       </main>
       <Footer theme="dark" />
     </div>

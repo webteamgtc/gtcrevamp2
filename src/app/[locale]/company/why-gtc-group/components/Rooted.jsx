@@ -2,10 +2,10 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { MapPin, CalendarCheck, Globe2 } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, EASE } from '@/components/motion';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 // stepped tower outline (half-widths from the base up) — a line-art nod to the Dubai skyline
 const TIERS = [
@@ -118,7 +118,7 @@ export function Rooted() {
             ))}
           </Reveal>
           <Reveal y={12} delay={0.25} className="mt-9 flex justify-center lg:justify-start">
-            <ArrowLink href={PORTAL.register}>{t('cta')}</ArrowLink>
+            <LiveAccountButton variant="primary">{t('cta')}</LiveAccountButton>
           </Reveal>
         </div>
         <Reveal y={24} delay={0.1}>

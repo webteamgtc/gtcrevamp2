@@ -2,12 +2,12 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { Check, Clock, Headphones, LockKeyhole, ShieldCheck } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { Stagger, StaggerItem } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { ServerRack } from './tradingVisuals';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const BADGE_ICONS = { setup: Clock, uptime: ShieldCheck, support: Headphones, root: LockKeyhole };
 
@@ -90,9 +90,9 @@ export function VpsPricing() {
                       ))}
                     </ul>
                     <div className="mt-8">
-                      <ArrowLink href={PORTAL.register} variant={featured ? 'gold' : 'primary'} className="w-full justify-between">
+                      <LiveAccountButton variant={featured ? 'gold' : 'primary'} className="w-full justify-between">
                         {t('subscribe')}
-                      </ArrowLink>
+                      </LiveAccountButton>
                       <p className={cn('mt-4 text-center text-[10px] font-semibold uppercase tracking-[0.12em]', featured ? 'text-white/40' : 'text-ink/40')}>{t('vatNote')}</p>
                     </div>
                   </div>

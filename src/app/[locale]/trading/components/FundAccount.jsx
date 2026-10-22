@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowLeftRight, Wallet } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import { Reveal } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { AccentTitle } from '@/components/shared/SectionIntro';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 function Frame({ children, className }) {
   return (
@@ -159,7 +159,7 @@ export function FundAccount() {
             <p className="mt-5 max-w-lg text-pretty text-[15px] leading-relaxed text-ink/60 md:text-base">{t('text')}</p>
           </Reveal>
           <Reveal y={12} delay={0.25} className="mt-10">
-            <ArrowLink href={PORTAL.register}>{t('cta')}</ArrowLink>
+            <LiveAccountButton variant="primary">{t('cta')}</LiveAccountButton>
           </Reveal>
         </div>
       </div>

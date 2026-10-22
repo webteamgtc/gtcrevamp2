@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowDown, BadgePercent, Check, Clock3, Gauge, ShieldCheck, TrendingDown, TrendingUp } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
-import ArrowLink from '@/components/shared/ArrowLink';
+
 import NavLink from '@/components/shared/nav/NavLink';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
@@ -12,6 +11,7 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
 import { useTicker, FlashPrice, Sparkline } from '@/components/shared/ticker';
 import { CountUp, Stagger, StaggerItem, TiltCard, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -278,9 +278,9 @@ export function SwapHero() {
             </Stagger>
 
             <motion.div className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.6 }}>
-              <ArrowLink href={PORTAL.register} variant="gold">
+              <LiveAccountButton variant="gold">
                 {t('live')}
-              </ArrowLink>
+              </LiveAccountButton>
               <NavLink href="/trading/free-demo-account" className="inline-flex h-13 items-center rounded-full border border-white/20 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
                 {t('demo')}
               </NavLink>

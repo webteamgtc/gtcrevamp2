@@ -6,7 +6,7 @@
  */
 import { useCallback, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import CtaBand from '@/components/shared/CtaBand';
@@ -61,7 +61,7 @@ export default function FaqsPage({ groups }) {
         <FaqCategoriesSection countFor={countFor} previewFor={previewFor} onPick={pickGroup} />
         <FaqTopQuestionsSection groups={groups} active={active} onPick={(k) => pickGroup(k, false)} query={query} onClear={() => setQuery('')} />
         <FaqHumanSupportSection />
-        <CtaBand id="start" title={t('title')} description={t('description')} primary={{ label: t('openLiveAccount'), href: PORTAL.register }} secondary={{ label: t('openDemoAccount'), href: '/trading/free-demo-account' }} />
+        <CtaBand id="start" title={t('title')} description={t('description')} primary={{ label: t('openLiveAccount'), href: LIVE_ACCOUNT_HREF }} secondary={{ label: t('openDemoAccount'), href: '/trading/free-demo-account' }} />
       </main>
       <Footer theme="dark" />
     </div>

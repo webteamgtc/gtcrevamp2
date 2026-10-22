@@ -1,9 +1,7 @@
 'use client';
 import { AnimatePresence, motion } from 'motion/react';
-import { Button } from '@/components/ui/button';
 import { EASE } from '@/components/motion';
-import NavLink from '@/components/shared/nav/NavLink';
-import { PORTAL } from '@/config/menu';
+import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
 export function AccountsCompareDialog({ open, onOpenChange, t, items, labels }) {
   return (
@@ -67,9 +65,9 @@ export function AccountsCompareDialog({ open, onOpenChange, t, items, labels }) 
               </table>
             </div>
             <div className="border-t border-brand/10 px-6 py-5 md:px-8">
-              <Button size="lg" className="w-full sm:w-auto" as={NavLink} href={PORTAL.register} onClick={() => onOpenChange(false)}>
+              <LiveAccountButton look="button" size="lg" variant="primary" arrow={false} className="w-full sm:w-auto" onClick={() => onOpenChange(false)}>
                 {t('open')}
-              </Button>
+              </LiveAccountButton>
             </div>
           </motion.div>
           </div>

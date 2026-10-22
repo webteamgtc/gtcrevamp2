@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, LayoutGroup, motion } from 'motion/react';
 import { ArrowRight, Users } from 'lucide-react';
-import { PORTAL } from '@/config/menu';
+import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import NavLink from '@/components/shared/nav/NavLink';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { Reveal, EASE } from '@/components/motion';
@@ -84,7 +84,7 @@ function ManagerCard({ m, labels, rank }) {
         </span>
       </div>
 
-      <NavLink href={PORTAL.register} className={cn('relative mt-4 flex h-11 items-center justify-center gap-2 overflow-hidden rounded-xl text-sm font-semibold transition-colors duration-300', m.featured ? 'bg-brand text-white shadow-lg shadow-brand/25 hover:bg-brand-700' : 'bg-[#f1f3f9] text-brand hover:bg-brand hover:text-white')}>
+      <NavLink href={LIVE_ACCOUNT_HREF} className={cn('relative mt-4 flex h-11 items-center justify-center gap-2 overflow-hidden rounded-xl text-sm font-semibold transition-colors duration-300', m.featured ? 'bg-brand text-white shadow-lg shadow-brand/25 hover:bg-brand-700' : 'bg-[#f1f3f9] text-brand hover:bg-brand hover:text-white')}>
         {labels.copy}
         <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 rtl:-scale-x-100" />
       </NavLink>
