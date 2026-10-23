@@ -79,12 +79,11 @@ function TerminalCard() {
 }
 
 /** Windows / Linux / macOS download segments. */
-export function DownloadBar({ version, labels, className }) {
-  const links = MT_LINKS[version] ?? MT_LINKS.mt4;
+export function DownloadBar({ version, labels, className ,links}) {
   const items = [
     { key: 'windows', Icon: WindowsIcon, label: labels.windows, href: links.windows, primary: true },
-    { key: 'linux', Icon: LinuxIcon, label: labels.linux, href: links.linux },
-    { key: 'mac', Icon: AppleIcon, label: labels.mac, href: links.mac }
+    { key: 'linux', Icon: LinuxIcon, label: labels.linux, href: links.windows },
+    { key: 'mac', Icon: AppleIcon, label: labels.mac, href: links.windows }
   ];
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.7, ease: EASE }} className={cn('mx-auto grid max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-1.5 backdrop-blur-md sm:grid-cols-3', className)}>
@@ -101,13 +100,12 @@ export function DownloadBar({ version, labels, className }) {
 }
 
 /** MT4 / MT5 platform hero: copy + pills on the start side, the live terminal card on the end side, download bar below. */
-export function PlatformHero({ ns, version }) {
+export function PlatformHero({ ns, version, links }) {
   const t = useTranslations(`${ns}.hero`);
   const tb = useTranslations(`${ns}.breadcrumb`);
   const td = useTranslations(`${ns}.downloads`);
   const pills = t.raw('pills');
-  const links = MT_LINKS[version] ?? MT_LINKS.mt4;
-
+  
   return (
     <section className="is-dark relative overflow-hidden bg-ink pb-16 pt-36 text-white md:pb-20 md:pt-44">
       <HeroBackdrop />
@@ -149,14 +147,14 @@ export function PlatformHero({ ns, version }) {
           <TerminalCard />
         </div>
 
-        <DownloadBar version={version} labels={{ windows: td('windows'), linux: td('linux'), mac: td('mac') }} className="mt-14 md:mt-20" />
+        <DownloadBar version={version} links={links} labels={{ windows: td('windows'), linux: td('linux'), mac: td('mac') }} className="mt-14 md:mt-20" />
       </div>
     </section>
   );
 }
 
 /** iPhone / iPad and Android hero: centred copy with floating devices at the sides. */
-export function DeviceHero({ ns, device }) {
+export function DeviceHero({ ns, device,links }) {
   const t = useTranslations(`${ns}.hero`);
   const tb = useTranslations(`${ns}.breadcrumb`);
   const os = device === 'android' ? 'android' : 'ios';
@@ -196,12 +194,12 @@ export function DeviceHero({ ns, device }) {
             {t('text')}
           </motion.p>
           <motion.div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
-            <a href={MT_LINKS.mt4[os]} className="group relative inline-flex h-13 items-center gap-2.5 overflow-hidden rounded-full bg-gold px-7 text-base font-semibold text-white shadow-lg shadow-gold/30 transition-colors hover:bg-gold-600">
+            <a href={links.androidMt4} className="group relative inline-flex h-13 items-center gap-2.5 overflow-hidden rounded-full bg-gold px-7 text-base font-semibold text-white shadow-lg shadow-gold/30 transition-colors hover:bg-gold-600">
               <motion.span className="absolute inset-y-0 -left-1/2 w-1/2 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/30 to-transparent" animate={{ left: ['-50%', '150%'] }} transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 2 }} aria-hidden />
               <span className="relative">{t('ctaMt4')}</span>
               <Download className="relative size-4 transition-transform group-hover:translate-y-0.5" />
             </a>
-            <a href={MT_LINKS.mt5[os]} className="group inline-flex h-13 items-center gap-2.5 rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
+            <a href={links.androidMt5} className="group inline-flex h-13 items-center gap-2.5 rounded-full border border-white/25 bg-white/5 px-7 text-base font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900">
               {t('ctaMt5')}
               <Download className="size-4 transition-transform group-hover:translate-y-0.5" />
             </a>
