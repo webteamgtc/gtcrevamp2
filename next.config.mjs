@@ -25,13 +25,6 @@ const nextConfig = {
             { source: `/:locale/trading/${p}-andriod`, destination: `/:locale/trading/${p}-android`, permanent: true },
             { source: `/trading/${p}-andriod`, destination: `/trading/${p}-android`, permanent: true }
           ]);
-        },
-        // per-locale sitemaps listed in /sitemap.xml (src/lib/sitemap.js)
-        async rewrites() {
-          return [
-            { source: '/sitemap-index.xml', destination: '/sitemap.xml' }, // old sitemap URL (Search Console)
-            { source: '/sitemap-:locale.xml', destination: '/sitemaps/:locale' }
-          ];
         }
       }),
   ...(isExport ? { output: 'export', trailingSlash: true, assetPrefix: '/__GTC__', env: { NEXT_PUBLIC_STATIC_EXPORT: '1' } } : {})

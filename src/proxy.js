@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { COOKIES, CAT5_LOCALE, CAT5_PATH, REGION_LOCALES, regionForCountry, REMEMBER_DAYS } from './config/regions';
+import { COOKIES, CAT5_LOCALE, CAT5_LOCALES, CAT5_PAGES, CAT5_PATH, CAT5_SITE, REGION_LOCALES, regionForCountry, REMEMBER_DAYS } from './config/regions';
 import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, isLocalIp } from './lib/geo/resolveCountryFromRequest';
 
 /**
@@ -10,7 +10,8 @@ import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHea
  *  2. sends URLs without a language/region (/, /company, old /en/…) to the visitor's regional site
  *  3. sends a regional English URL of another region to the visitor's own one, same path
  *     (UAE → /en-ae, South Africa → /en-za, Mauritius → /en-mu, Vanuatu → /en-vu, everyone else incl. US → /en-intl)
- *  4. keeps UAE CAT 5 visitors on the marketing page
+ *  1b. TEMPORARY UAE CAT 5 website (NEXT_PUBLIC_UAE_CAT5_SITE=on): UAE visitors always get it, see cat5Site()
+ *  4. keeps UAE CAT 5 visitors on the marketing page (only while the CAT 5 website switch is off)
  *  5. hands over to next-intl, and stores the country in the `gtc_country` cookie — the single source the
  *     client reads (useCountry for popups/header, useLocationDetail for forms), so the browser normally
  *     never calls an IP service itself
@@ -25,7 +26,9 @@ const COUNTRY_RE = /^[A-Z]{2}$/;
 const BOT_RE = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed/i;
 
 const valid = (c) => {
-  const v = String(c ?? '').trim().toUpperCase();
+  const v = String(c ?? '')
+    .trim()
+    .toUpperCase();
   return COUNTRY_RE.test(v) ? v : '';
 };
 
@@ -78,6 +81,33 @@ function finish(response, { country, test, lookedUp }) {
   return response;
 }
 
+/**
+ * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), on while NEXT_PUBLIC_UAE_CAT5_SITE=on.
+ * UAE visitors (any page, any language):
+ *   /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us (and /ar/…) → shown from src/app/[locale]/marketing/…
+ *   (the address stays the same); /en-ae/marketing/… → its public address; any other page or language → /en-ae
+ *   (or /ar). The CAT 5 category cookie is set, so the CAT 1 / CAT 5 popup never shows.
+ * Everyone else: /…/marketing/… → that language's normal Home; the normal site otherwise.
+ * Returns undefined when the normal rules should run.
+ */
+function cat5Site(request, geo, first, restPath, redirect) {
+  const internal = restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`);
+  if (geo.country !== 'AE') return internal ? redirect(`/${first}`) : undefined;
+  const pages = Object.values(CAT5_PAGES);
+  if (!CAT5_LOCALES.includes(first)) {
+    const ar = first === 'ar' || request.cookies.get('NEXT_LOCALE')?.value === 'ar';
+    return redirect(`/${ar ? 'ar' : CAT5_LOCALE}`);
+  }
+  if (internal) return redirect(`/${first}${pages.find((p) => p.dir === restPath.slice(CAT5_PATH.length))?.path ?? ''}`);
+  const page = pages.find((p) => p.path === restPath);
+  if (!page) return redirect(`/${first}`);
+  const url = new URL(`/${first}${CAT5_PATH}${page.dir}`, request.url);
+  url.search = request.nextUrl.search;
+  const res = finish(NextResponse.rewrite(url), geo);
+  res.cookies.set(COOKIES.uaeCategory, '5', { path: '/', sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 60 * 60 * 24 * REMEMBER_DAYS });
+  return res;
+}
+
 export default async function proxy(request) {
   const geo = await countryOf(request);
   const { pathname, search } = request.nextUrl;
@@ -92,6 +122,12 @@ export default async function proxy(request) {
     url.searchParams.delete('geo');
     return finish(NextResponse.redirect(url), geo);
   };
+
+  // 1b. TEMPORARY UAE CAT 5 website
+  if (CAT5_SITE) {
+    const res = cat5Site(request, geo, first, restPath, redirect);
+    if (res) return res;
+  }
 
   // 2. no region/language in the URL (or the old /en) → the visitor's regional site,
   //    unless they picked a non-English language before (next-intl's NEXT_LOCALE cookie)
@@ -111,9 +147,9 @@ export default async function proxy(request) {
     return redirect(`/${home}${restPath}`);
   }
 
-  // 4. UAE CAT 5 (marketing only): every page leads to the marketing page
-  if (cat5 && !(first === CAT5_LOCALE && restPath === CAT5_PATH)) {
-    return redirect(`/${CAT5_LOCALE}${CAT5_PATH}`);
+  // 4. UAE CAT 5 (popup flow, CAT 5 website switch off): every page leads to the CAT 5 pages (Arabic pages to the Arabic version)
+  if (!CAT5_SITE && cat5 && !(CAT5_LOCALES.includes(first) && (restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`)))) {
+    return redirect(`/${first === 'ar' ? 'ar' : CAT5_LOCALE}${CAT5_PATH}`);
   }
 
   // 5. normal page

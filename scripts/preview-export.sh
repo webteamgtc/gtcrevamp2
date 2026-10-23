@@ -10,7 +10,10 @@ mv src/app/api /tmp/gtc-api
 # KEEP = dynamic routes built from local data.
 KEEP='src/app/[locale]/markets/[market] src/app/[locale]/knowledge-to-learn/trading-glossary/[letter]'
 PARK=/tmp/gtc-park; rm -rf "$PARK"; mkdir -p "$PARK"
-mapfile -t DYN < <(find 'src/app/[locale]' -mindepth 1 -type d -name '[[]*[]]' | awk '{ print length, $0 }' | sort -n | cut -d' ' -f2-)
+# (also the @schema head slot: structured data isn't needed for the review link, and its catch-all can't be exported)
+mapfile -t DYN < <(find 'src/app/[locale]' -mindepth 1 -type d \( -name '[[]*[]]' -o -name '@schema' \) | awk '{ print length, $0 }' | sort -n | cut -d' ' -f2-)
+# pages that read the request (search params etc.) and so can't be exported; not on the review link
+DYN+=('src/app/[locale]/live-account-application')
 i=0
 for d in "${DYN[@]}"; do
   [ -e "$d" ] || continue # already set aside with a parent folder
@@ -31,7 +34,7 @@ cp -r out/_next out/images out/icon.png preview/ 2>/dev/null || true
 for l in $(ls -d out/*/ | xargs -n1 basename); do [ -f out/$l/index.html ] && [ -d out/$l/company ] && mkdir -p preview/$l/home && cp out/$l/index.html preview/$l/home/; done
 # Every other page, flattened to /<l>/<last-segment>/ so all pages sit two folders deep
 # (keep in sync with PREVIEW_PAGES in src/components/shared/nav/NavLink.jsx)
-PAGES="company trading trading/open-live-account trading/free-demo-account trading/deposit trading/account-types trading/compensation-fund trading/mt5-platform trading/mt4-platform trading/metatrader-for-android trading/metatrader-for-ipad trading/gtc-go-app trading/gtc-go-app-ipad trading/gtc-go-app-android company/about-us company/awards company/why-gtc-group gtc-news/market-holidays company/global-presence company/events-and-exhibitions company/regulations company/contact-us markets markets/forex markets/energy markets/indices markets/metals markets/shares markets/crypto-cfds markets/future-cfds markets/forex/eurusd markets/forex/gbpusd markets/forex/usdjpy markets/forex/usdchf markets/metals/xauusd markets/indices/us30 markets/indices/spx500 markets/indices/nas100 marketing"
+PAGES="company trading trading/open-live-account trading/free-demo-account trading/deposit trading/account-types trading/compensation-fund trading/mt5-platform trading/mt4-platform trading/metatrader-for-android trading/metatrader-for-ipad trading/gtc-go-app trading/gtc-go-app-ipad trading/gtc-go-app-android company/about-us company/awards company/why-gtc-group gtc-news/market-holidays company/global-presence company/events-and-exhibitions company/regulations company/contact-us markets markets/forex markets/energy markets/indices markets/metals markets/shares markets/crypto-cfds markets/future-cfds markets/forex/eurusd markets/forex/gbpusd markets/forex/usdjpy markets/forex/usdchf markets/metals/xauusd markets/indices/us30 markets/indices/spx500 markets/indices/nas100 marketing marketing/about marketing/faq marketing/contact"
 for l in $(ls -d out/*/ | xargs -n1 basename); do
   [ -d out/$l/company ] || continue
   for p in $PAGES; do

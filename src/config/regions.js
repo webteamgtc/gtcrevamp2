@@ -41,18 +41,49 @@ export const REMEMBER_DAYS = 30;
 
 /** UAE CAT 5: GTC Financial Consultancy L.L.C page (CMA Category 5). While CAT 5 is chosen, every other page redirects here. */
 export const CAT5_PATH = '/marketing';
+
+/**
+ * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), until the CAT 1 licence arrives.
+ * NEXT_PUBLIC_UAE_CAT5_SITE=on (Vercel env): every visitor with a UAE IP gets the CAT 5 website on the normal
+ * addresses (gtcfx.com/en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, and the same under /ar); every other
+ * page sends them to its Home; no CAT 1 / CAT 5 popup. Set it to off (or remove it) and redeploy to switch back to
+ * the normal UAE site. See src/proxy.js.
+ */
+export const CAT5_SITE = process.env.NEXT_PUBLIC_UAE_CAT5_SITE === 'on';
+/** CAT 5 pages: key → public address (after /<locale>) and the folder it lives in (src/app/[locale]/marketing/…). */
+export const CAT5_PAGES = {
+  home: { path: '', dir: '' },
+  about: { path: '/about-us', dir: '/about' },
+  faq: { path: '/faqs', dir: '/faq' },
+  contact: { path: '/contact-us', dir: '/contact' }
+};
 export const CAT5_LOCALE = 'en-ae';
 /** The CAT 5 page exists in English (/en-ae) and Arabic (/ar). */
 export const CAT5_LOCALES = ['en-ae', 'ar'];
 
-/** Contact details on the CAT 5 page ("Prefer to talk now?" and the form's error message). */
-export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '+44 800 048 8461' };
+/**
+ * Contact details on the CAT 5 site ("Prefer to talk now?", the form's error message). The UAE phone number is
+ * still to come from compliance: while `phone` is empty it is simply not shown. The address text is in
+ * marketingPage.form.address.
+ */
+export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '' };
 
-/** CAT 5 enquiry subjects (= marketingPage.services icons + "other") → POST /api/uae-enquiry. */
-export const CAT5_SERVICES = ['consult', 'introduce', 'promote', 'education', 'other'];
+/** Preferred language options on the CAT 5 enquiry form → POST /api/uae-enquiry. */
+export const CAT5_LANGUAGES = ['ar', 'en'];
 
 /**
- * CAT 5 footer links (GTC Financial Consultancy L.L.C documents). Fill in the URLs; a link without a URL
- * shows as plain text. Labels: marketingPage.footer.links.
+ * CAT 5 footer links (GTC Financial Consultancy L.L.C. documents). Fill in the URLs; a link without a URL
+ * shows as plain text. Labels: marketingPage.footer.links. "Legal Documents" is also the button in
+ * "Your Relationship with GTC Financial Consultancy" (it jumps to the footer links until its URL is set).
  */
-export const CAT5_LEGAL_LINKS = { privacy: '', cookies: '', terms: '', complaints: '' };
+export const CAT5_LEGAL_LINKS = { legalDocuments: '', riskDisclosure: '', complaints: '', privacy: '', cookies: '', terms: '' };
+
+/** "You can verify our licence on the Capital Market Authority's website." → the CMA's site (compliance may give a direct register page). */
+export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/home';
+
+/** CAT 5 footer social links (GTCFX official accounts; to be confirmed by Marketing). Icons: SOCIALS in components/shared/icons. */
+export const CAT5_SOCIAL = [
+  { name: 'LinkedIn', href: 'https://linkedin.com/company/gtcfx-official' },
+  { name: 'Instagram', href: 'https://www.instagram.com/gtcfxofficial/' },
+  { name: 'YouTube', href: 'https://www.youtube.com/channel/UCnKWakjm1b9Bm63xgwNFXHA' }
+];

@@ -1,37 +1,47 @@
 'use client';
 /**
- * GTC Financial Consultancy L.L.C (CAT 5) enquiry → POST /api/uae-enquiry (e-mail via Mailgun and/or Zapier, see that route).
+ * GTC Financial Consultancy L.L.C. (CAT 5) enquiry → POST /api/uae-enquiry (e-mail via Mailgun and/or Zapier, see that route).
  * Sends the page URL and utm_* so the team can see which campaign the enquiry came from.
+ * `split` (Contact Us page): First Name + Last Name, then Email, Country of Residence, Phone Number, Preferred
+ * Language (optional). Home: Full Name, Email, Phone, Country of Residence, Preferred Language.
  */
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, CircleCheck, LoaderCircle, TriangleAlert } from 'lucide-react';
 import { EMAIL_RE, Field, fieldBox, fieldInput, fieldState, post } from '@/components/shared/formKit';
-import { CAT5_CONTACT, CAT5_SERVICES } from '@/config/regions';
+import { CAT5_CONTACT, CAT5_LANGUAGES } from '@/config/regions';
 import { cn } from '@/lib/utils';
 
 const PHONE_RE = /^\+?[\d\s()-]{7,20}$/;
-const EMPTY = { name: '', company: '', email: '', phone: '', service: '', message: '', consent: false, website: '' };
+const EMPTY = { name: '', firstName: '', lastName: '', email: '', phone: '', country: '', language: '', message: '', consent: false, website: '' };
 
-function validate(v, t) {
+function validate(v, t, split) {
   const e = {};
-  if (v.name.trim().length < 2) e.name = t('errors.name');
+  if (split) {
+    if (!v.firstName.trim()) e.firstName = t('errors.firstName');
+    if (!v.lastName.trim()) e.lastName = t('errors.lastName');
+  } else if (v.name.trim().length < 2) e.name = t('errors.name');
   if (!EMAIL_RE.test(v.email.trim())) e.email = t('errors.email');
   if (!PHONE_RE.test(v.phone.trim())) e.phone = t('errors.phone');
-  if (!v.service) e.service = t('errors.service');
+  if (v.country.trim().length < 2) e.country = t('errors.country');
+  if (!CAT5_LANGUAGES.includes(v.language)) e.language = t('errors.language');
   if (!v.consent) e.consent = t('errors.consent');
   return e;
 }
 
-export default function EnquiryForm() {
+export default function EnquiryForm({ split = false }) {
   const t = useTranslations('marketingPage.form');
-  const ts = useTranslations('marketingPage.services');
-  const [v, setV] = useState(EMPTY);
+  const locale = useLocale();
+  const fresh = () => ({ ...EMPTY, language: locale === 'ar' ? 'ar' : 'en' });
+  const [v, setV] = useState(fresh);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
-  const labels = Object.fromEntries(ts.raw('items').map((s) => [s.icon, s.title]));
+  const pick = (k, value) => {
+    setV((p) => ({ ...p, [k]: value }));
+    if (errors[k]) setErrors((p) => ({ ...p, [k]: undefined }));
+  };
   const set = (k) => (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setV((p) => ({ ...p, [k]: value }));
@@ -40,7 +50,7 @@ export default function EnquiryForm() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    const errs = validate(v, t);
+    const errs = validate(v, t, split);
     setErrors(errs);
     if (Object.keys(errs).length) {
       document.getElementById(`enq-${Object.keys(errs)[0]}`)?.focus();
@@ -50,12 +60,13 @@ export default function EnquiryForm() {
     const q = new URLSearchParams(window.location.search);
     const res = await post('/api/uae-enquiry', {
       ...v,
+      name: split ? `${v.firstName.trim()} ${v.lastName.trim()}` : v.name,
       page: window.location.href.split('#')[0],
       utm_source: q.get('utm_source') || '',
       utm_campaign: q.get('utm_campaign') || ''
     }).catch(() => ({}));
     setStatus(res?.ok ? 'success' : 'error');
-    if (res?.ok) setV(EMPTY);
+    if (res?.ok) setV(fresh());
   }
 
   return (
@@ -70,38 +81,73 @@ export default function EnquiryForm() {
           </motion.div>
         ) : (
           <motion.form key="form" onSubmit={onSubmit} noValidate exit={{ opacity: 0 }} className="grid gap-4 sm:grid-cols-2">
-            <Field id="enq-name" label={t('name')} required error={errors.name}>
-              <div className={cn(fieldBox, fieldState(errors.name))}>
-                <input id="enq-name" className={fieldInput} value={v.name} onChange={set('name')} autoComplete="name" aria-invalid={!!errors.name} />
-              </div>
-            </Field>
-            <Field id="enq-company" label={t('company')}>
-              <div className={cn(fieldBox, fieldState())}>
-                <input id="enq-company" className={fieldInput} value={v.company} onChange={set('company')} autoComplete="organization" />
-              </div>
-            </Field>
+            {split ? (
+              <>
+                <Field id="enq-firstName" label={t('firstName')} required error={errors.firstName}>
+                  <div className={cn(fieldBox, fieldState(errors.firstName))}>
+                    <input id="enq-firstName" className={fieldInput} value={v.firstName} onChange={set('firstName')} autoComplete="given-name" aria-invalid={!!errors.firstName} />
+                  </div>
+                </Field>
+                <Field id="enq-lastName" label={t('lastName')} required error={errors.lastName}>
+                  <div className={cn(fieldBox, fieldState(errors.lastName))}>
+                    <input id="enq-lastName" className={fieldInput} value={v.lastName} onChange={set('lastName')} autoComplete="family-name" aria-invalid={!!errors.lastName} />
+                  </div>
+                </Field>
+              </>
+            ) : (
+              <Field id="enq-name" label={t('name')} required error={errors.name} className="sm:col-span-2">
+                <div className={cn(fieldBox, fieldState(errors.name))}>
+                  <input id="enq-name" className={fieldInput} value={v.name} onChange={set('name')} autoComplete="name" aria-invalid={!!errors.name} />
+                </div>
+              </Field>
+            )}
             <Field id="enq-email" label={t('email')} required error={errors.email}>
               <div className={cn(fieldBox, fieldState(errors.email))}>
                 <input id="enq-email" type="email" className={fieldInput} value={v.email} onChange={set('email')} autoComplete="email" dir="ltr" aria-invalid={!!errors.email} />
               </div>
             </Field>
-            <Field id="enq-phone" label={t('phone')} required error={errors.phone}>
-              <div className={cn(fieldBox, fieldState(errors.phone))}>
-                <input id="enq-phone" type="tel" inputMode="tel" className={fieldInput} value={v.phone} onChange={set('phone')} autoComplete="tel" placeholder="+971" dir="ltr" aria-invalid={!!errors.phone} />
-              </div>
-            </Field>
-            <Field id="enq-service" label={t('service')} required error={errors.service} className="sm:col-span-2">
-              <div className={cn(fieldBox, fieldState(errors.service))}>
-                <select id="enq-service" className={cn(fieldInput, 'cursor-pointer', !v.service && 'text-ink/40')} value={v.service} onChange={set('service')} aria-invalid={!!errors.service}>
-                  <option value="" disabled>
-                    {t('servicePlaceholder')}
-                  </option>
-                  {CAT5_SERVICES.map((s) => (
-                    <option key={s} value={s} className="text-ink">
-                      {s === 'other' ? t('otherService') : labels[s]}
-                    </option>
-                  ))}
-                </select>
+            {split ? (
+              <>
+                <Field id="enq-country" label={t('country')} required error={errors.country}>
+                  <div className={cn(fieldBox, fieldState(errors.country))}>
+                    <input id="enq-country" className={fieldInput} value={v.country} onChange={set('country')} autoComplete="country-name" aria-invalid={!!errors.country} />
+                  </div>
+                </Field>
+                <Field id="enq-phone" label={t(split ? 'phoneNumber' : 'phone')} required error={errors.phone}>
+                  <div className={cn(fieldBox, fieldState(errors.phone))}>
+                    <input id="enq-phone" type="tel" inputMode="tel" className={fieldInput} value={v.phone} onChange={set('phone')} autoComplete="tel" placeholder="+971" dir="ltr" aria-invalid={!!errors.phone} />
+                  </div>
+                </Field>
+              </>
+            ) : (
+              <>
+                <Field id="enq-phone" label={t(split ? 'phoneNumber' : 'phone')} required error={errors.phone}>
+                  <div className={cn(fieldBox, fieldState(errors.phone))}>
+                    <input id="enq-phone" type="tel" inputMode="tel" className={fieldInput} value={v.phone} onChange={set('phone')} autoComplete="tel" placeholder="+971" dir="ltr" aria-invalid={!!errors.phone} />
+                  </div>
+                </Field>
+                <Field id="enq-country" label={t('country')} required error={errors.country}>
+                  <div className={cn(fieldBox, fieldState(errors.country))}>
+                    <input id="enq-country" className={fieldInput} value={v.country} onChange={set('country')} autoComplete="country-name" aria-invalid={!!errors.country} />
+                  </div>
+                </Field>
+              </>
+            )}
+            <Field id="enq-language" label={t('language')} required={!split} error={errors.language}>
+              <div role="radiogroup" aria-label={t('language')} className="grid h-12 grid-cols-2 gap-1 rounded-xl border border-brand/15 bg-white p-1">
+                {CAT5_LANGUAGES.map((l) => (
+                  <button
+                    key={l}
+                    id={l === CAT5_LANGUAGES[0] ? 'enq-language' : undefined}
+                    type="button"
+                    role="radio"
+                    aria-checked={v.language === l}
+                    onClick={() => pick('language', l)}
+                    className={cn('rounded-lg text-sm font-semibold transition-colors', v.language === l ? 'bg-brand text-white shadow' : 'text-ink/60 hover:bg-brand-50 hover:text-brand')}
+                  >
+                    {t(`languages.${l}`)}
+                  </button>
+                ))}
               </div>
             </Field>
             <Field id="enq-message" label={t('message')} className="sm:col-span-2">

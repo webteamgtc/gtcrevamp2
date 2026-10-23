@@ -4,9 +4,10 @@ import { CAT5_LOCALES } from '@/config/regions';
 import MarketingPage from './components/MarketingPage';
 
 /**
- * /en-ae/marketing (English) and /ar/marketing (Arabic) — UAE CAT 5 page: GTC Financial Consultancy L.L.C (CMA Category 5).
- * Standalone: no menu, no footer links. While a visitor has chosen CAT 5, every other page redirects here
- * (src/proxy.js). Hidden from search engines. Copy: messages/en/marketingPage.json
+ * UAE CAT 5 website, Home: GTC Financial Consultancy L.L.C. (CMA Category 5), in English (en-ae) and Arabic (ar).
+ * Pages: this one, about/, faq/, contact/. With NEXT_PUBLIC_UAE_CAT5_SITE=on, UAE visitors see them at
+ * /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us (and /ar/…) — src/proxy.js rewrites those addresses here.
+ * Hidden from search engines. Copy: messages/<lang>/marketingPage.json
  */
 export async function generateMetadata({ params }) {
   const { locale } = await params;

@@ -31,9 +31,9 @@ function Answer({ item }) {
 /**
  * Single-open FAQ list: items = [{ q, a, list?, note? }] — `a` may be a string or an array of paragraphs.
  * The first item starts open.
- * `numbered` shows 01, 02… badges; the open item gets a gold accent bar and a soft lift.
+ * `numbered` shows 01, 02… badges (counting from `start` + 1); the open item gets a gold accent bar and a soft lift.
  */
-export default function FaqAccordion({ items, defaultOpen = 0, numbered = false, className }) {
+export default function FaqAccordion({ items, defaultOpen = 0, numbered = false, start = 0, className }) {
   const [open, setOpen] = useState(defaultOpen);
   const uid = useId();
 
@@ -50,7 +50,7 @@ export default function FaqAccordion({ items, defaultOpen = 0, numbered = false,
                 <button type="button" aria-expanded={on} aria-controls={panel} onClick={() => setOpen(on ? -1 : i)} className="group flex w-full items-center gap-4 px-5 py-5 text-start md:px-7">
                   {numbered && (
                     <span className={cn('grid size-10 shrink-0 place-items-center rounded-xl text-xs font-bold tabular-nums transition-all duration-500', on ? 'bg-brand text-white shadow-lg shadow-brand/25' : 'bg-brand-50 text-brand ring-1 ring-brand/10 group-hover:bg-brand/10')}>
-                      {String(i + 1).padStart(2, '0')}
+                      {String(start + i + 1).padStart(2, '0')}
                     </span>
                   )}
                   <span className={cn('flex-1 text-[15px] font-semibold transition-colors md:text-base', on ? 'text-brand' : 'text-ink group-hover:text-brand')}>{it.q}</span>
