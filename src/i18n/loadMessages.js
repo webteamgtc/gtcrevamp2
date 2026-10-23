@@ -1,7 +1,8 @@
 /**
- * Load translations from messages/<locale>/*.json (any file in the locale folder).
+ * Load translations: en / ar / zh from messages/<lang>/*.json (any file in the folder), every other
+ * language from S3 (see BUNDLED_LANGS + fetchS3Messages below).
  *
- * Read from disk (cached in production; re-read in dev so new/edited JSON files work
+ * Local files are read from disk (cached in production; re-read in dev so new/edited JSON files work
  * without a restart).
  *
  * Namespace rules (see messages/README.md):
@@ -14,6 +15,13 @@ import path from 'path';
 import { LOCALES, langOf } from './locales';
 
 const messagesRoot = path.join(process.cwd(), 'messages');
+
+/** Languages shipped with the site in messages/<lang>/; every other language is fetched from S3. */
+export const BUNDLED_LANGS = ['en', 'ar', 'zh'];
+
+/** S3 folder holding <lang>/<file>.json for the other languages (same files + namespaces as messages/en). */
+const S3_BASE = (process.env.MESSAGES_S3_BASE || 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/messages').replace(/\/$/, '');
+const S3_REVALIDATE = 3600; // seconds; cached by Next's fetch cache, so pages stay static
 
 /** Files that export several top-level namespaces (not wrapped by filename). */
 const MULTI_NAMESPACE_FILES = new Set(['common', 'homepage']);
@@ -79,42 +87,68 @@ function loadFolderMessages(locale) {
   return { messages, loaded: files.length > 0 };
 }
 
-async function importLegacyLocaleFile(locale) {
-  const legacyPath = path.join(messagesRoot, `${locale}.json`);
-  if (!fs.existsSync(legacyPath)) return null;
-  try {
-    return JSON.parse(fs.readFileSync(legacyPath, 'utf8'));
-  } catch (err) {
-    console.error(`[i18n] Failed to parse ${legacyPath}:`, err);
-    return null;
+/** One file from S3, or null if it isn't there (S3 answers 403/404) / is invalid / can't be reached. */
+async function fetchS3File(url) {
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json' }, next: { revalidate: S3_REVALIDATE } });
+      if (res.status === 403 || res.status === 404) return null; // not uploaded yet → English
+      if (!res.ok) {
+        console.error(`[i18n] ${url} returned ${res.status}`);
+        return null;
+      }
+      const data = await res.json();
+      return data && typeof data === 'object' && !Array.isArray(data) ? data : null;
+    } catch (err) {
+      if (attempt === 3) {
+        console.error(`[i18n] ${url} failed:`, err);
+        return null;
+      }
+      await new Promise((resolve) => setTimeout(resolve, attempt * 300));
+    }
   }
+  return null;
 }
 
 /**
- * @param {string} locale
- * @returns {Promise<Record<string, unknown>>}
+ * <S3_BASE>/<lang>/<file>.json for every file in messages/en (same layout as the local folders,
+ * e.g. messages/es/common.json). Files not uploaded yet are skipped, so those texts show in English.
  */
+async function fetchS3Messages(lang) {
+  const files = fs.readdirSync(path.join(messagesRoot, 'en')).filter((name) => name.endsWith('.json')).sort();
+  const parts = await Promise.all(files.map((file) => fetchS3File(`${S3_BASE}/${encodeURIComponent(lang)}/${file}`)));
+  return parts.reduce((messages, raw, i) => {
+    const part = raw && namespaceBundlePart(files[i], raw);
+    return part && typeof part === 'object' ? merge(messages, part) : messages;
+  }, {});
+}
+
 const cache = new Map();
 const CACHE = process.env.NODE_ENV === 'production'; // dev re-reads files so edits show up without a restart
 
+/**
+ * Messages for one language (keys it lacks are filled from English in request.js).
+ *  - en / ar / zh: messages/<lang>/*.json
+ *  - others: <S3_BASE>/<lang>/*.json; a local messages/<lang>/ folder, if there is one, overrides it key by key
+ * Regional English (en-intl, en-ae…) is 'en'.
+ * @param {string} locale
+ * @returns {Promise<Record<string, unknown>>}
+ */
 export async function loadLocaleMessages(locale) {
-  // folder = language: regional English (en-intl, en-ae…) reads messages/en
-  const folders = new Set(LOCALES.map((l) => langOf(l.code)));
-  locale = folders.has(locale) ? locale : folders.has(langOf(locale)) ? langOf(locale) : 'en';
-  if (CACHE && cache.has(locale)) return cache.get(locale);
-  const result = await readLocaleMessages(locale);
-  if (CACHE) cache.set(locale, result);
-  return result;
-}
+  const langs = new Set(LOCALES.map((l) => langOf(l.code)));
+  const lang = langs.has(locale) ? locale : langs.has(langOf(locale)) ? langOf(locale) : 'en';
 
-async function readLocaleMessages(locale) {
+  if (BUNDLED_LANGS.includes(lang)) {
+    if (CACHE && cache.has(lang)) return cache.get(lang);
+    const { messages } = loadFolderMessages(lang);
+    if (CACHE) cache.set(lang, messages);
+    return messages;
+  }
 
-  const { messages: folderMessages, loaded: loadedFromFolder } = loadFolderMessages(locale);
-  const legacy = await importLegacyLocaleFile(locale);
-
-  if (!loadedFromFolder) return legacy ?? {};
-  if (!legacy) return folderMessages;
-  return merge(legacy, folderMessages);
+  // not memoised here: the fetch cache refreshes the S3 file every S3_REVALIDATE seconds
+  const remote = await fetchS3Messages(lang);
+  const { messages: local, loaded } = loadFolderMessages(lang);
+  return loaded ? merge(remote, local) : remote;
 }
 
 /**
@@ -132,4 +166,3 @@ export function namespacesOf(file) {
   nsCache.set(file, keys);
   return keys;
 }
-
