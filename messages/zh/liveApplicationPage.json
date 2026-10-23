@@ -1,0 +1,84 @@
+{
+  "liveAccountApplicationPage": {
+    "meta": {
+      "title": "真实账户申请 | 申请GTCFX交易账户",
+      "description": "在线申请GTCFX真实交易账户。填写安全的申请表，与受监管的经纪商一起开始交易全球市场。"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "trading": "交易",
+      "current": "开立真实账户"
+    },
+    "hero": {
+      "eyebrow": "全球多重监管经纪商",
+      "title": "开立[真实账户]"
+    },
+    "accounts": {
+      "standard-account": {
+        "title": "标准账户",
+        "subtitle": "依托机构级基础设施及多重监管保障，开启全球市场交易。"
+      },
+      "ecn-account": {
+        "title": "ECN账户",
+        "subtitle": "为专业交易者提供原始点差及直接市场接入。"
+      },
+      "mam-pamm-account": {
+        "title": "MAM/PAMM账户",
+        "subtitle": "采用先进的分配方式管理多个账户。"
+      },
+      "pro-ecn-account": {
+        "title": "Pro ECN账户",
+        "subtitle": "专业级ECN交易，配备超低延迟执行。"
+      },
+      "raw-spread-account": {
+        "title": "RAW原始点差账户",
+        "subtitle": "以极低加点获取银行间原始点差。"
+      },
+      "vip-account": {
+        "title": "VIP账户",
+        "subtitle": "为高交易量客户提供专属交易条件及个性化服务。"
+      },
+      "corporate-account": {
+        "title": "企业账户",
+        "subtitle": "面向企业客户的机构级交易解决方案。"
+      },
+      "demo-account": {
+        "title": "模拟账户",
+        "subtitle": "使用虚拟资金练习交易。"
+      },
+      "multi-account": {
+        "title": "多账户",
+        "subtitle": "通过一个控制面板管理多个交易账户。"
+      },
+      "mt5-account": {
+        "title": "MT5账户",
+        "subtitle": "在MetaTrader 5上交易，享受多资产接入及先进分析工具。"
+      },
+      "partnership-account": {
+        "title": "合作伙伴账户",
+        "subtitle": "依托机构级基础设施及多重监管保障，开启全球市场交易。"
+      },
+      "pamm-account": {
+        "title": "PAMM账户",
+        "subtitle": "在业绩透明的托管策略之间分配资金。"
+      },
+      "mam-account": {
+        "title": "MAM账户",
+        "subtitle": "采用灵活的分配方式管理多个客户账户。"
+      }
+    },
+    "form": {
+      "title": "申请真实交易账户",
+      "subtitle": "您正在申请真实账户，请仔细填写表单。"
+    },
+    "sidebar": {
+      "needHelp": "需要帮助？",
+      "needHelpText": "对申请有疑问？我们的支持团队随时为您提供帮助。",
+      "labels": {
+        "phone": "电话",
+        "website": "网站",
+        "email": "电子邮箱"
+      }
+    }
+  }
+}

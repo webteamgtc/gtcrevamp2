@@ -1,0 +1,375 @@
+{
+  "hero": {
+    "badge": "值得信赖 · 受监管 · 全球布局",
+    "title": "通过GTCFX进入全球市场",
+    "titleA": "通过GTCFX",
+    "titleB": "进入全球市场",
+    "subtitle": "在安全、专业的差价合约交易平台上交易外汇、贵金属、大宗商品、指数等产品，享受快速、可靠的交易体验。",
+    "ctaLive": "开立真实账户",
+    "ctaDemo": "免费模拟账户",
+    "liveLabel": "实时价格",
+    "tabs": [
+      "贵金属",
+      "能源",
+      "次要货币对",
+      "股票",
+      "期货"
+    ],
+    "bid": "卖出价",
+    "ask": "买入价",
+    "pricesNote": "参考价格，仅供演示。"
+  },
+  "features": {
+    "titleA": "开启全球市场之门",
+    "titleB": "携手可靠的差价合约经纪商",
+    "subtitle": "借助强大的交易工具进入全球市场，享受快速、流畅的交易体验。",
+    "items": [
+      {
+        "eyebrow": "交易条件",
+        "title": "低点差",
+        "text": "享受具有竞争力的点差，优化交易成本，同时参与全球市场。"
+      },
+      {
+        "eyebrow": "灵活交易",
+        "title": "最佳杠杆",
+        "text": "享受最高1:2000的高杠杆，最低保证金要求仅为0.1%。"
+      },
+      {
+        "eyebrow": "快速、安全的交易",
+        "title": "快速执行",
+        "text": "享受低于10毫秒的快速、安全执行，确保您不错过任何交易机会。"
+      },
+      {
+        "eyebrow": "灵活调整的杠杆",
+        "title": "动态杠杆",
+        "text": "动态杠杆根据您的持仓进行调整，为高效交易提供灵活性。"
+      },
+      {
+        "eyebrow": "跨多个市场交易",
+        "title": "24/5交易",
+        "text": "无论身在何处，都可24/5连接全球市场，按自己的时间安排进行交易。"
+      },
+      {
+        "eyebrow": "交易保护",
+        "title": "强制平仓保护",
+        "text": "通过20%的强制平仓保护，在市场波动时保持掌控，让您的持仓在自动平仓前拥有更大的灵活空间。"
+      }
+    ],
+    "maxLeverage": "最高杠杆"
+  },
+  "markets": {
+    "titleLine1": "交易全球主要",
+    "titleLine2": "差价合约市场",
+    "viewMore": "查看更多",
+    "selectMarketAria": "选择{label}",
+    "markets": {
+      "energy": {
+        "label": "能源",
+        "cardTitle": "能源\n交易",
+        "title": "探索全球能源市场",
+        "description": "以具有竞争力的交易条件和灵活的市场接入，把握能源市场机会。"
+      },
+      "commodities": {
+        "label": "大宗商品差价合约",
+        "cardTitle": "大宗商品\n交易",
+        "title": "通过大宗商品实现多元化",
+        "description": "以灵活的交易条件和市场接入，探索大宗商品差价合约市场。"
+      },
+      "forex": {
+        "label": "外汇",
+        "cardTitle": "外汇交易\n轻松上手",
+        "title": "外汇交易轻松上手",
+        "description": "以低点差、快速执行及较低的保证金要求交易货币对。"
+      },
+      "indices": {
+        "label": "指数",
+        "cardTitle": "指数\n交易",
+        "title": "交易全球主要指数",
+        "description": "通过一个专业交易账户，参与全球主要指数市场。"
+      },
+      "metals": {
+        "label": "贵金属",
+        "cardTitle": "贵金属\n交易",
+        "title": "交易贵金属",
+        "description": "通过专业的交易环境，探索黄金、白银及其他金属。"
+      },
+      "shares-equity-cfds": {
+        "label": "股票／股权差价合约",
+        "cardTitle": "股票与股权\n差价合约交易",
+        "title": "交易股票与股权差价合约",
+        "description": "灵活参与市场，把握全球股票机会。"
+      },
+      "crypto-cfds": {
+        "label": "加密货币差价合约",
+        "cardTitle": "加密货币差价合约\n交易",
+        "title": "探索加密货币差价合约",
+        "description": "通过安全的渠道交易精选加密货币差价合约。"
+      },
+      "future-cfds": {
+        "label": "期货差价合约",
+        "cardTitle": "期货差价合约\n交易",
+        "title": "交易期货差价合约",
+        "description": "在可靠的差价合约交易平台上，以灵活的交易选项探索基于期货的差价合约市场。"
+      }
+    }
+  },
+  "platforms": {
+    "eyebrow": "交易平台",
+    "title": "随时随地，在任何设备上交易",
+    "subtitle": "选择适合您风格的平台，支持移动端、桌面端及网页端。",
+    "items": [
+      {
+        "key": "gtcgo",
+        "brand": "GTC Go",
+        "title": "GTC Go——交易与投资",
+        "tagline": "我们的自有应用，让您随时随地交易与投资",
+        "cta": "下载GTC Go"
+      },
+      {
+        "key": "mt5",
+        "brand": "MetaTrader 5",
+        "title": "MT5交易平台",
+        "tagline": "现代交易的先进工具",
+        "cta": "下载MT5平台"
+      },
+      {
+        "key": "mt4",
+        "brand": "MetaTrader 4",
+        "title": "MT4交易平台",
+        "tagline": "值得信赖的经典交易平台",
+        "cta": "下载MT4平台"
+      }
+    ],
+    "features": [
+      "Windows · macOS · 网页端",
+      "iOS · Android",
+      "一键交易"
+    ],
+    "perks": [
+      "<10毫秒执行",
+      "杠杆最高1:2000",
+      "24/5交易"
+    ]
+  },
+  "accounts": {
+    "eyebrow": "适合您的账户",
+    "titleA": "您的交易风格。",
+    "titleB": "您的专属账户。",
+    "title": "选择您的交易账户",
+    "subtitle": "每位交易者都各不相同。找到符合您经验水平、交易风格及目标的账户。",
+    "recommended": "推荐",
+    "open": "开立账户",
+    "compare": "比较账户",
+    "labels": {
+      "minDeposit": "最低入金",
+      "spreads": "点差低至",
+      "commission": "佣金",
+      "leverage": "最高杠杆",
+      "lot": "最小交易手数"
+    },
+    "standard": {
+      "name": "标准账户",
+      "desc": "专为日常交易打造，无最低入金要求、零佣金，开户首日起即可使用完整平台功能。",
+      "minDeposit": "无最低要求",
+      "spreads": "1.0点",
+      "commission": "$0",
+      "leverage": "1:2000",
+      "lot": "0.01"
+    },
+    "ecn": {
+      "name": "ECN",
+      "desc": "为活跃交易者提供原始市场接入，享受0.0点起的点差、低佣金及ECN执行。",
+      "minDeposit": "$3,000",
+      "spreads": "0.0点",
+      "commission": "$5/手",
+      "leverage": "1:500",
+      "lot": "0.01"
+    }
+  },
+  "leaders": {
+    "eyebrow": "领导团队",
+    "title": "认识我们的首席执行官",
+    "subtitle": "引领GTCFX愿景与发展，并践行对每位交易者承诺的团队。",
+    "ceo": {
+      "name": "Charbel Raffoul",
+      "role": "首席执行官",
+      "quote": "我们的使命很简单：为每位交易者提供公平、快速、透明的全球市场接入，并由始终以客户为先的团队提供支持。",
+      "linkedin": "LinkedIn"
+    },
+    "gm": {
+      "name": "总经理姓名",
+      "role": "总经理",
+      "quote": "我们通过可靠的服务、本地支持及帮助客户领先市场的技术，建立长期关系。",
+      "linkedin": "LinkedIn"
+    },
+    "placeholder": "照片"
+  },
+  "faq": {
+    "eyebrow": "随时为您提供帮助",
+    "titleA": "您需要了解的",
+    "titleB": "一切。",
+    "title": "您需要了解的一切",
+    "subtitle": "还有交易方面的问题？请联系我们的客户服务团队获取支持。",
+    "contact": "联系我们",
+    "items": [
+      {
+        "q": "什么是差价合约交易？",
+        "a": "差价合约（CFD）让您无需持有资产，即可对其价格变动作出判断并进行交易。如果您预期价格上涨，可以做多；如果预期价格下跌，可以做空。"
+      },
+      {
+        "q": "我可以通过GTCFX交易哪些市场？",
+        "a": "您可以通过一个账户，交易外汇、贵金属、能源、指数、大宗商品、股票、加密货币及期货的差价合约。"
+      },
+      {
+        "q": "交易中的杠杆是什么？",
+        "a": "杠杆让您用较少的资金控制较大的仓位。它会同时放大收益与亏损，因此应谨慎使用。"
+      },
+      {
+        "q": "点差和佣金如何收取？",
+        "a": "点差是买卖报价之间的差额。标准账户免佣金，点差低至1.0点；ECN账户点差低至0.0点，每手佣金为$5。"
+      },
+      {
+        "q": "什么是保证金，如何计算？",
+        "a": "保证金是开立及维持杠杆仓位所需的资金，根据交易规模、交易品种价格及账户适用的杠杆计算。"
+      }
+    ],
+    "languages": "20多种语言",
+    "questions": "问题"
+  },
+  "register": {
+    "eyebrow": "立即开始",
+    "title": "交易全球市场",
+    "subtitle": "几分钟内开立账户，即可通过GTCFX开始交易。",
+    "firstName": "名字",
+    "lastName": "姓氏",
+    "email": "电子邮箱",
+    "phone": "电话号码",
+    "country": "居住国家",
+    "submit": "创建账户",
+    "consent": "继续操作即表示您同意我们的《条款与条件》和《隐私政策》。",
+    "steps": [
+      "注册",
+      "验证",
+      "入金",
+      "交易"
+    ]
+  },
+  "deleteAccountPage": {
+    "hero": {
+      "badge": "账户删除申请",
+      "titleBefore": "删除您的",
+      "titleHighlight": "交易账户",
+      "description": "安全提交永久删除交易账户的申请。继续前，请仔细阅读重要说明。"
+    },
+    "beforeYouContinue": {
+      "title": "继续前请注意",
+      "note1": "账户删除是永久性的，可能导致您无法再访问账户历史记录、余额及平台记录。",
+      "note2": "提交申请前，请确保所有未平仓仓位均已平仓。",
+      "note3": "为完成安全验证，提交的信息必须与您的账户注册信息一致。"
+    },
+    "helpfulNotes": {
+      "title": "实用提示",
+      "note1": "请使用注册时的电子邮箱，以加快验证。",
+      "note2": "添加您希望删除的所有交易账户号码。",
+      "note3": "如希望支持团队了解您的删除原因，请填写相关说明。"
+    },
+    "formCard": {
+      "titleBefore": "交易",
+      "titleHighlight": "账户",
+      "titleAfter": "删除申请表",
+      "description": "填写下方表单，并确认所需声明后继续。"
+    },
+    "form": {
+      "sections": {
+        "personal": "个人信息",
+        "account": "账户详情",
+        "confirmations": "确认声明",
+        "signature": "签名与验证"
+      },
+      "fields": {
+        "fullNamePlaceholder": "请输入您的姓名",
+        "emailPlaceholder": "请输入电子邮箱地址",
+        "platformLabel": "交易平台",
+        "accountsLabel": "要删除的账户",
+        "accountsPlaceholder": "例如：502131, 502145, 503201",
+        "reasonLabel": "删除原因",
+        "reasonOptional": "（选填）",
+        "reasonPlaceholder": "请告诉我们您希望删除账户的原因",
+        "signaturePlaceholder": "请输入您的姓名",
+        "fullNameLabel": "姓名",
+        "emailLabel": "电子邮箱",
+        "phoneLabel": "电话号码",
+        "phoneOptional": "（选填）",
+        "codeLabel": "验证码",
+        "signatureLabel": "签名",
+        "dobLabel": "出生日期"
+      },
+      "platforms": {
+        "mt4": "MT4",
+        "mt5": "MT5",
+        "both": "两者"
+      },
+      "otp": {
+        "get": "获取验证码",
+        "sending": "正在发送…",
+        "resendPrefix": "重新发送倒计时",
+        "resendSuffix": "秒",
+        "sentToPrefix": "验证码已发送至",
+        "verified": "已验证",
+        "instruction": "请输入6位验证码，以验证您的电子邮箱。"
+      },
+      "confirmations": {
+        "c1": "我确认本人是上述交易账户的合法所有者，并希望将其永久删除。",
+        "c2": "我理解，一旦删除，所有账户数据、余额及历史记录可能无法再访问。",
+        "c3": "我理解，所有尚未了结的仓位均须在删除前平仓。"
+      },
+      "warning": "提交前，请仔细核对所有信息。此申请可能导致您永久失去交易账户的访问权限。",
+      "helpText": "是否需要帮助？提交此申请前，请联系支持团队。",
+      "submit": {
+        "submitting": "正在提交…",
+        "ready": "提交申请",
+        "verifyFirst": "验证验证码后提交"
+      },
+      "validation": {
+        "fullNameRequired": "请填写姓名",
+        "emailInvalid": "请输入有效的电子邮箱地址",
+        "emailRequired": "请填写电子邮箱",
+        "platformInvalid": "选择交易平台",
+        "platformRequired": "请选择交易平台",
+        "accountsInvalid": "请使用英文逗号分隔数字（例如：502131, 502145）",
+        "accountsRequired": "请输入至少一个账户号码",
+        "reasonMax": "删除原因须少于1000个字符",
+        "otpLength": "验证码必须为6位数字",
+        "otpRequired": "请填写验证码",
+        "c1": "请确认账户所有权",
+        "c2": "请确认您了解数据删除的后果",
+        "c3": "请确认将完成平仓",
+        "signatureRequired": "请填写签名",
+        "dobRequired": "请填写出生日期",
+        "emailNoPlus": "电子邮箱地址不能包含加号（+）",
+        "emailBlockedDomain": "不允许使用临时或一次性电子邮箱地址"
+      },
+      "toasts": {
+        "verifyFirst": "请先完成验证码验证。",
+        "submitted": "您的删除申请已提交。",
+        "requestFailed": "申请失败",
+        "emailFirst": "请先输入您的电子邮箱地址",
+        "emailInvalid": "电子邮箱地址无效，请使用有效的电子邮箱地址。",
+        "otpSent": "验证码已发送",
+        "invalidEmail": "电子邮箱地址无效",
+        "otpSendFailed": "验证码发送失败，请重试。",
+        "emailVerified": "电子邮箱已验证",
+        "invalidOtp": "验证码无效"
+      }
+    },
+    "meta": {
+      "title": "账户删除 | 关闭您的交易账户 | GTCFX",
+      "description": "通过验证身份及账户信息，提交安全关闭GTCFX交易账户的申请。"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "trading": "交易",
+      "current": "删除账户"
+    }
+  }
+}

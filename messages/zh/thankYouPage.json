@@ -1,0 +1,55 @@
+{
+  "thankYouPage": {
+    "meta": {
+      "title": "感谢您 - GTCFX",
+      "description": "我们已收到您的请求。"
+    },
+    "badge": "已收到请求",
+    "heading": "感谢您",
+    "heading1": "您的请求已成功接收。",
+    "checkEmail": "请查收邮件，详细信息已发送至您提供的电子邮箱。",
+    "checkEmailHint": "未找到邮件？请查看垃圾邮件或推广邮件文件夹。",
+    "des": "我们已收到您的请求，将尽快与您联系。",
+    "des1": "如有任何疑问，请联系我们的客服团队。",
+    "footer": "感谢您选择GTCFX。",
+    "footer1": "我们期待为您的交易之旅提供支持。",
+    "next": {
+      "title": "[接下来]会发生什么",
+      "steps": [
+        {
+          "title": "已收到请求",
+          "text": "您的信息已由我们妥善保管。"
+        },
+        {
+          "title": "审核请求",
+          "text": "我们的团队将审核您的请求。"
+        },
+        {
+          "title": "与您联系",
+          "text": "我们将尽快与您联系。"
+        }
+      ]
+    },
+    "actions": {
+      "home": "返回首页",
+      "support": "联系客服"
+    },
+    "explore": {
+      "title": "等候期间",
+      "items": {
+        "markets": {
+          "title": "探索市场",
+          "text": "外汇、贵金属、指数等。"
+        },
+        "platform": {
+          "title": "MetaTrader 5",
+          "text": "了解交易平台。"
+        },
+        "calendar": {
+          "title": "经济日历",
+          "text": "了解影响市场走势的因素。"
+        }
+      }
+    }
+  }
+}
