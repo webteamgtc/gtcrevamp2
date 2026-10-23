@@ -39,12 +39,20 @@ export const COOKIES = {
 };
 export const REMEMBER_DAYS = 30;
 
-/** UAE CAT 5: marketing-only landing page. While CAT 5 is chosen, every other page redirects here. */
+/** UAE CAT 5: GTC Financial Consultancy L.L.C page (CMA Category 5). While CAT 5 is chosen, every other page redirects here. */
 export const CAT5_PATH = '/marketing';
 export const CAT5_LOCALE = 'en-ae';
+/** The CAT 5 page exists in English (/en-ae) and Arabic (/ar). */
+export const CAT5_LOCALES = ['en-ae', 'ar'];
 
-/** Contact details on the CAT 5 marketing page (same as the Contact Us page). */
+/** Contact details on the CAT 5 page ("Prefer to talk now?" and the form's error message). */
 export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '+44 800 048 8461' };
 
-/** CAT 5 enquiry form → POST /api/uae-enquiry (e-mails UAE_ENQUIRY_EMAIL, optionally a Zapier hook). */
-export const CAT5_SERVICES = ['lead', 'digital', 'event', 'brand', 'partner', 'insight', 'other'];
+/** CAT 5 enquiry subjects (= marketingPage.services icons + "other") → POST /api/uae-enquiry. */
+export const CAT5_SERVICES = ['consult', 'introduce', 'promote', 'education', 'other'];
+
+/**
+ * CAT 5 footer links (GTC Financial Consultancy L.L.C documents). Fill in the URLs; a link without a URL
+ * shows as plain text. Labels: marketingPage.footer.links.
+ */
+export const CAT5_LEGAL_LINKS = { privacy: '', cookies: '', terms: '', complaints: '' };

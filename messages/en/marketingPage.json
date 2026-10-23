@@ -1,33 +1,29 @@
 {
   "marketingPage": {
     "meta": {
-      "title": "GTCFX UAE | Marketing & Lead Generation Services",
-      "description": "Marketing, lead generation, events and partnership services from GTCFX UAE. Information only — no trading or investment services are offered on this page."
+      "title": "GTC Financial Consultancy | CMA Licensed – Category 5",
+      "description": "GTC Financial Consultancy L.L.C is licensed by the UAE Capital Market Authority (Category 5) to provide financial consultation, introduction and promotion services. Information only – no dealing, brokerage or account-opening services are offered on this website."
     },
-    "notice": "Category 5 · Marketing and introduction services only. No trading or investment services are offered on this page.",
-    "changeCategory": "Change investor category",
-    "cta": "Book a consultation",
+    "notice": "Licensed by the UAE Capital Market Authority – Category 5 (Financial Consultations, Introduction and Promotion), Licence No. 20200000211. No dealing, brokerage or account-opening services are offered on this website.",
+    "version": {
+      "label": "CAT 5",
+      "current": "You are viewing the Category 5 website.",
+      "question": "Would you like to visit the Category 1 website instead?",
+      "action": "Visit the Category 1 website",
+      "language": "Language"
+    },
+    "cta": "Speak to the Team",
     "hero": {
-      "badge": "GTCFX UAE · Marketing & Lead Generation",
-      "title": "Marketing That [Brings You Clients]",
-      "text": "From targeted campaigns and events to qualified, consent-based leads, our UAE team helps brands and partners reach the right audience and grow with confidence.",
-      "primary": "Book a consultation",
-      "secondary": "Explore our services",
+      "badge": "CMA Licensed · Category 5",
+      "title": "Clear, Professional [Financial Guidance] in the UAE",
+      "text": "Our Dubai-based team provides financial consultation, introduction and promotion services within the scope of our CMA Category 5 licence, with clear information and client-focused communication in Arabic and English.",
+      "primary": "Speak to the Team",
+      "secondary": "About our services",
       "cards": [
         {
-          "icon": "lead",
-          "title": "New enquiry received",
-          "text": "From a LinkedIn campaign"
-        },
-        {
           "icon": "event",
-          "title": "Seminar registration",
-          "text": "Dubai roadshow"
-        },
-        {
-          "icon": "report",
-          "title": "Weekly report ready",
-          "text": "Campaign insights"
+          "title": "Seminar & Education",
+          "text": "Dubai, UAE"
         }
       ]
     },
@@ -37,83 +33,73 @@
         "label": "Part of GTC Group"
       },
       {
-        "value": "100+",
-        "label": "Countries reached"
+        "value": "CMA",
+        "label": "Licensed, Category 5"
       },
       {
-        "value": "5",
-        "label": "Regulated group entities"
+        "value": "Dubai",
+        "label": "United Arab Emirates"
       },
       {
         "value": "Multilingual",
-        "label": "Arabic, English & more"
+        "label": "Arabic and English"
       }
     ],
     "services": {
-      "title": "Everything You Need to [Grow]",
-      "text": "One team for strategy, campaigns, events and partnerships, with clear reporting at every step.",
+      "title": "Our [Services]",
+      "text": "Services provided within the scope of our CMA Category 5 licence.",
       "items": [
         {
-          "icon": "lead",
-          "title": "Lead Generation",
-          "text": "Qualified, consent-based leads from targeted campaigns, verified and handed over with full source tracking."
+          "icon": "consult",
+          "title": "Financial Consultations",
+          "text": "General guidance to help you understand financial products and services and the questions to consider before making a decision."
         },
         {
-          "icon": "digital",
-          "title": "Digital Marketing",
-          "text": "Search, social and content campaigns built around your audience and measured from first click to enquiry."
+          "icon": "introduce",
+          "title": "Introduction Services",
+          "text": "We introduce you to licensed financial service providers and tell you who the provider is before any introduction."
         },
         {
-          "icon": "event",
-          "title": "Events & Seminars",
-          "text": "Expos, seminars and roadshows across the UAE that put your brand in front of the right people."
+          "icon": "promote",
+          "title": "Promotion",
+          "text": "Promotion of financial products and services in the UAE."
         },
         {
-          "icon": "brand",
-          "title": "Brand & Content",
-          "text": "Videos, articles and creative that explain your offering clearly, in Arabic and English."
-        },
-        {
-          "icon": "partner",
-          "title": "Partnerships & Affiliates",
-          "text": "Introducer and affiliate programmes with clear terms, fair rewards and transparent reporting."
-        },
-        {
-          "icon": "insight",
-          "title": "Research & Insights",
-          "text": "Audience research and campaign analytics that show what works and where to invest next."
+          "icon": "education",
+          "title": "Education & Events",
+          "text": "Seminars and educational content in Arabic and English that explain financial concepts clearly."
         }
       ]
     },
     "process": {
-      "title": "How We [Work Together]",
-      "text": "A simple, transparent process from first call to results.",
+      "title": "How It [Works]",
+      "text": "A clear and transparent process from your first enquiry.",
       "steps": [
         {
-          "title": "Discover",
-          "text": "We learn about your goals, audience and budget."
+          "title": "Get in touch",
+          "text": "Tell us what you would like to know."
         },
         {
-          "title": "Plan",
-          "text": "You get a clear plan: channels, timeline and success measures."
+          "title": "Understand",
+          "text": "We explain the relevant services, risks and the information you should consider."
         },
         {
-          "title": "Launch",
-          "text": "Campaigns, content and events go live, managed by our team."
+          "title": "Introduce",
+          "text": "We introduce you to a licensed provider and tell you who that provider is."
         },
         {
-          "title": "Report & grow",
-          "text": "Regular reports and recommendations to improve results."
+          "title": "Ongoing support",
+          "text": "Our team remains available to answer your questions."
         }
       ]
     },
     "why": {
-      "title": "Why Partner With [GTCFX UAE]",
+      "title": "Why [GTC Financial Consultancy]",
       "items": [
         {
           "icon": "shield",
-          "title": "Regulated-group standards",
-          "text": "Backed by GTC Group, operating since 2012 with regulated entities in several jurisdictions."
+          "title": "Licensed in the UAE",
+          "text": "Licensed by the UAE Capital Market Authority under Category 5, Licence No. 20200000211."
         },
         {
           "icon": "globe",
@@ -122,34 +108,28 @@
         },
         {
           "icon": "report",
-          "title": "Data you can see",
-          "text": "Every campaign is tracked and reported, so you always know where results come from."
-        },
-        {
-          "icon": "check",
-          "title": "Compliance-first marketing",
-          "text": "Content and campaigns prepared with applicable UAE marketing and data-protection rules in mind."
+          "title": "Clear communication",
+          "text": "Clear and transparent communication, so you know exactly how we can help."
         }
       ]
     },
     "form": {
-      "title": "Let's Grow [Together]",
-      "text": "Tell us about your goals and our UAE team will get back to you to arrange a consultation.",
+      "title": "Get in [Touch]",
+      "text": "Leave your details and our UAE team will contact you.",
       "points": [
-        "Free first consultation",
-        "A plan tailored to your goals",
+        "Quick and easy enquiry",
         "No obligation"
       ],
       "name": "Full name",
       "company": "Company (optional)",
       "email": "Email",
       "phone": "Phone",
-      "service": "I'm interested in",
-      "servicePlaceholder": "Choose a service",
+      "service": "Subject of enquiry",
+      "servicePlaceholder": "Choose a subject",
       "message": "Message (optional)",
       "messagePlaceholder": "Tell us briefly about your goals",
-      "consent": "I agree to be contacted by GTCFX UAE about its marketing services. My details will be used only for this enquiry.",
-      "submit": "Request a consultation",
+      "consent": "I agree that GTC Financial Consultancy L.L.C may contact me by email regarding my enquiry. My data will be processed in line with the Privacy Policy.",
+      "submit": "Submit enquiry",
       "sending": "Sending…",
       "success": "Thank you! Our UAE team has received your enquiry and will contact you shortly.",
       "error": "Sorry, something went wrong. Please try again or email us at {email}.",
@@ -157,7 +137,7 @@
         "name": "Please enter your name",
         "email": "Please enter a valid email",
         "phone": "Please enter a valid phone number",
-        "service": "Please choose a service",
+        "service": "Please choose a subject",
         "consent": "Please agree to be contacted"
       },
       "otherService": "Something else",
@@ -167,26 +147,34 @@
       "title": "Frequently Asked [Questions]",
       "items": [
         {
-          "q": "What does Category 5 mean on this page?",
-          "a": "This page covers GTCFX UAE's marketing and introduction services only. No trading, investment or account-opening services are offered here."
+          "q": "What is GTC Financial Consultancy licensed to do?",
+          "a": "GTC Financial Consultancy L.L.C is licensed by the UAE Capital Market Authority under Category 5 (Licence No. 20200000211) to provide financial consultation, introduction and promotion services. It does not hold client money, does not carry out transactions on behalf of clients and does not open client accounts."
         },
         {
-          "q": "Who do you work with?",
-          "a": "Brands, partners, introducers and event organisers who want to reach a relevant audience in the UAE and the wider region."
+          "q": "Who can use your services?",
+          "a": "Individuals and businesses in the UAE who would like general information about financial products and services, or an introduction to a licensed provider. Any eligibility or client classification is assessed by the provider you are introduced to."
         },
         {
-          "q": "How do you generate leads?",
-          "a": "Through targeted campaigns, content and events. Every lead is collected with clear consent and handled in line with applicable data-protection rules."
+          "q": "How is my personal data used?",
+          "a": "Your data is collected with your consent, used only to respond to your enquiry and handled in line with the UAE Personal Data Protection Law and our Privacy Policy. We do not sell your data."
         },
         {
-          "q": "How soon can a campaign start?",
-          "a": "It depends on the scope. We agree the timeline with you during planning, before anything goes live."
+          "q": "Do you provide personal investment advice?",
+          "a": "No. Our consultations offer general guidance to help you understand financial products and services. We do not make personal recommendations, and any financial decision remains your own. Where necessary, please seek independent professional advice."
         }
       ]
     },
     "footer": {
       "title": "Important information",
-      "text": "GTCFX UAE provides marketing and introduction services only. Nothing on this page is an offer of, or invitation to use, trading or investment services, and nothing on it is investment advice."
+      "text": "GTC Financial Consultancy L.L.C is licensed by the UAE Capital Market Authority (CMA) under Category 5 (Financial Consultations, Introduction and Promotion), Licence No. 20200000211. Registered office: Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates. The Company does not hold client money and does not carry out transactions on behalf of clients. Nothing on this website is an offer, solicitation or personal recommendation, and the information is provided for general purposes only.",
+      "risk": "Financial products carry risk and may not be suitable for everyone. Before making any financial decision, review the relevant product documentation and, where necessary, seek independent professional advice.",
+      "links": {
+        "privacy": "Privacy Policy",
+        "cookies": "Cookie Policy",
+        "terms": "Terms of Use",
+        "complaints": "Complaints"
+      },
+      "copyright": "© 2026 GTC Financial Consultancy L.L.C. All rights reserved."
     }
   }
 }
