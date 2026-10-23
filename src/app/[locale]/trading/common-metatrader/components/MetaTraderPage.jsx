@@ -16,14 +16,14 @@ import { ScrollProgress } from '@/components/motion';
 import { DeviceHero, PlatformHero } from './MtHero';
 import { BetterEdge, Capabilities, CrossDevice, MtCta, MtFaq, ThreeSteps } from './MtSections';
 
-export default function MetaTraderPage({ ns, bodyNs, version = 'mt4', device }) {
+export default function MetaTraderPage({ ns, bodyNs, version = 'mt4', device,links }) {
   const body = bodyNs ?? ns;
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />
       <Header theme="dark" />
       <main>
-        {device ? <DeviceHero ns={ns} device={device} /> : <PlatformHero ns={ns} version={version} />}
+        {device ? <DeviceHero ns={ns} device={device} links={links}/> : <PlatformHero ns={ns} version={version} links={links}/>}
         <Capabilities ns={body} version={version} />
         <CrossDevice ns={body} version={version} />
         <BetterEdge ns={body} />

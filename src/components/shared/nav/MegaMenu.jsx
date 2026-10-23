@@ -249,9 +249,9 @@ function DownloadsVisual({ onNavigate }) {
     <div>
       <ul className="space-y-1">
         {[
-          ['mt4', '/platforms/mt4'],
-          ['mt5', '/platforms/mt5'],
-          ['gtcgo', '/platforms/gtc-go']
+          ['mt4', '/trading/mt4-platform'],
+          ['mt5', '/trading/mt5-platform'],
+          ['gtcgo', '/trading/gtc-go-app']
         ].map(([k, href]) => (
           <li key={k}>
             <NavLink href={href} onClick={onNavigate} className="group -mx-2 flex items-center gap-3 rounded-xl px-2 py-1.5 text-[15px] font-medium text-white/90 transition hover:bg-white/10 hover:text-white">
