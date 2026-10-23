@@ -1,0 +1,206 @@
+{
+  "legalPage": {
+    "breadcrumb": {
+      "home": "首页",
+      "legal": "法律信息"
+    },
+    "docs": {
+      "privacy-policy": {
+        "name": "隐私政策",
+        "summary": "我们如何收集、使用、保护和保留您的个人数据。",
+        "title": "隐私政策 | 数据保护与安全 | GTCFX",
+        "description": "了解GTCFX如何依据全球数据保护标准收集、使用和保护您的个人数据。"
+      },
+      "terms-and-conditions": {
+        "name": "条款与条件",
+        "summary": "规范您使用我们网站及服务的条款。",
+        "title": "条款与条件 | GTCFX",
+        "description": "使用我们的服务前，请阅读GTCFX的条款与条件。点击此处了解GTCFX如何管理数据推送、隐私、安全等事项。"
+      },
+      "risk-disclosure": {
+        "name": "风险披露",
+        "summary": "交易差价合约、外汇等杠杆产品的风险。",
+        "title": "风险披露 | 交易风险说明 | GTCFX",
+        "description": "作出投资决定前，请了解外汇及差价合约交易的相关风险，确保在充分知情的情况下负责任地交易。"
+      },
+      "cookie-policy": {
+        "name": "Cookie政策",
+        "summary": "我们如何在网站上使用Cookie及类似技术。",
+        "title": "Cookie政策 | 您的隐私与数据使用 | GTCFX",
+        "description": "了解GTCFX如何使用Cookie改善您的体验、分析使用情况，并维护安全、高效的网站。"
+      },
+      "deposit-and-refund-policy": {
+        "name": "入金与退款政策",
+        "summary": "入金、出金、退款及支付验证。",
+        "title": "入金与退款政策 | 支付与交易 | GTCFX",
+        "description": "查看GTCFX的入金与退款政策，包括支付方式、处理流程及交易指引。"
+      },
+      "kyc-compliance-policy": {
+        "name": "KYC与合规政策",
+        "summary": "身份验证、文件资料及合规检查。",
+        "title": "KYC与合规政策 | 身份验证 | GTCFX",
+        "description": "了解GTCFX涉及身份验证、监管要求及安全交易实践的KYC与合规流程。"
+      },
+      "website-disclaimer": {
+        "name": "网站免责声明",
+        "summary": "本网站所发布信息的适用范围与限制。",
+        "title": "网站免责声明 | GTCFX",
+        "description": "本网站提供的信息仅供一般参考，不构成投资建议、招揽或推荐。"
+      },
+      "swap-free-terms-and-conditions": {
+        "name": "免隔夜利息条款",
+        "summary": "免隔夜利息账户的资格、费用及规则。",
+        "title": "免隔夜利息条款与条件 | GTCFX",
+        "description": "查看免隔夜利息账户的条款与条件，包括资格要求、使用规则及适用条件。"
+      }
+    },
+    "document": {
+      "contents": "目录",
+      "sections": "{count}个章节",
+      "readTime": "阅读需{minutes}分钟",
+      "progress": "阅读进度",
+      "section": "第{current}节，共{total}节",
+      "keyNotices": "重要通知",
+      "about": "关于本政策",
+      "notes": "请注意",
+      "backToTop": "返回顶部",
+      "allDocuments": "所有法律文件",
+      "contactSupport": "联系支持团队",
+      "related": {
+        "title": "其他[政策]",
+        "description": "在此集中查看适用于您使用GTCFX网站及服务的所有政策。"
+      },
+      "read": "阅读政策",
+      "unavailable": {
+        "title": "此文件暂时不可用",
+        "text": "目前无法加载此政策。请稍后重试，或前往我们的法律文件页面下载PDF版本。"
+      }
+    },
+    "hub": {
+      "meta": {
+        "title": "法律文件 | 政策与客户协议 | GTCFX",
+        "description": "下载适用于所有GTC实体的GTCFX法律文件、客户开户表格、隐私政策、风险披露及监管协议。"
+      },
+      "current": "法律文件",
+      "hero": {
+        "eyebrow": "法律与合规",
+        "title": "法律政策与[客户协议]",
+        "description": "获取GTC Global LTD（毛里求斯）及GTC Global Trade Capital Co. Ltd（瓦努阿图）的法律文件、客户开户表格、隐私政策、风险披露及监管信息。",
+        "entities": "受监管实体",
+        "documents": "PDF文件",
+        "policies": "在线政策",
+        "verified": "官方文件"
+      },
+      "content": {
+        "title": "[按实体]下载",
+        "description": "选择与您签约的GTC实体，查看其相关文件。每份文件均以PDF格式在新标签页中打开。",
+        "tabsLabel": "法律实体",
+        "download": "下载",
+        "pdf": "PDF",
+        "count": "{count}份文件",
+        "footnote": "文件将在新标签页中打开。政策可能定期更新，请始终以最新发布的版本为准。",
+        "entities": {
+          "mauritius": {
+            "label": "GTC Global LTD（毛里求斯）",
+            "short": "毛里求斯"
+          },
+          "vanuatu": {
+            "label": "GTC Global Trade Capital Co.Ltd（瓦努阿图）",
+            "short": "瓦努阿图"
+          }
+        },
+        "open": "打开"
+      },
+      "web": {
+        "title": "[在线]阅读我们的政策",
+        "description": "相同政策以交互式页面呈现，配有目录及清晰的章节编号。"
+      },
+      "cta": {
+        "title": "对[文件有疑问？]",
+        "description": "我们的支持团队可以帮助您找到适用于您所属实体的协议，或解释政策中的任何内容。",
+        "primary": "联系支持团队",
+        "secondary": "受限国家"
+      }
+    },
+    "restricted": {
+      "meta": {
+        "title": "受限国家 | GTCFX服务可用范围",
+        "description": "查看GTCFX服务的受限国家名单，在开立交易账户前确保符合合规要求。"
+      },
+      "current": "受限国家",
+      "hero": {
+        "badge": "服务可用范围",
+        "title": "受限[国家]",
+        "description": "基于监管、合规及风险管理政策，GTC Global Ltd不向某些司法管辖区的居民提供服务。"
+      },
+      "search": {
+        "title": "查询您所在的国家",
+        "placeholder": "输入国家名称…",
+        "clear": "清除",
+        "noMatch": "“{query}”未列入任何受限名单。",
+        "noMatchHint": "能否获得服务仍可能取决于您的资格及开户途径。",
+        "matches": "{count, plural, one {#项匹配结果} other {#项匹配结果}}"
+      },
+      "categories": {
+        "prohibited": {
+          "title": "禁止提供服务的国家",
+          "description": "我们不为这些国家的居民开立账户或提供服务。",
+          "status": "禁止"
+        },
+        "highRisk": {
+          "title": "高风险国家",
+          "description": "这些国家的居民须接受强化尽职调查，且可能不予接纳。",
+          "status": "高风险"
+        },
+        "serviceRestriction": {
+          "title": "服务限制",
+          "description": "我们不向这些国家的居民提供服务。",
+          "status": "受限"
+        }
+      },
+      "count": "{count, plural, one {#个国家} other {#个国家}}",
+      "noteLabel": "说明：",
+      "noteText": "上述名单专门适用于GTC Global Ltd及GTC Global Trade Capital Co. Limited提供的服务。GTC Financial Group旗下其他实体可能在不同的监管框架下运营。更多详情请参阅各实体的网站。",
+      "countries": {
+        "prohibited": [
+          "朝鲜民主主义人民共和国",
+          "伊朗",
+          "缅甸"
+        ],
+        "highRisk": [
+          "刚果民主共和国",
+          "海地",
+          "伊拉克",
+          "肯尼亚",
+          "科威特",
+          "老挝人民民主共和国",
+          "黎巴嫩",
+          "摩纳哥",
+          "尼泊尔",
+          "巴布亚新几内亚",
+          "南苏丹",
+          "叙利亚",
+          "委内瑞拉",
+          "越南",
+          "英属维尔京群岛",
+          "也门"
+        ],
+        "serviceRestriction": [
+          "阿富汗",
+          "俄罗斯",
+          "乌克兰",
+          "以色列",
+          "美国",
+          "澳大利亚",
+          "日本"
+        ]
+      },
+      "cta": {
+        "title": "不确定您是否[可以加入？]",
+        "description": "申请前，请联系我们的支持团队。我们将确认是否有GTC实体能够为您居住的国家提供服务，以及具体由哪家实体提供。",
+        "primary": "联系支持团队",
+        "secondary": "法律文件"
+      }
+    }
+  }
+}
