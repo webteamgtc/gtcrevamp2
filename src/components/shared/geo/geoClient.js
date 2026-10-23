@@ -52,10 +52,16 @@ export function localeHref(locale, path) {
   return `../../${locale}/${slug}/index.html`;
 }
 
-/** UAE: forget the CAT 1 / CAT 5 choice (and the acknowledgement) and show the choice again. */
-export function resetUaeCategory() {
+/**
+ * UAE: forget the CAT 1 / CAT 5 choice (and the acknowledgement) and show the choice again.
+ * `pick` ('1' or '5') pre-selects that category in the popup (the visitor still ticks the box and continues).
+ */
+export function resetUaeCategory(pick) {
   deleteCookie(COOKIES.uaeCategory);
   deleteCookie(COOKIES.uaeAck);
+  try {
+    if (pick === '1' || pick === '5') sessionStorage.setItem('gtc_uae_pick', pick);
+  } catch {}
   window.location.assign(localeHref(CAT5_LOCALE, ''));
 }
 

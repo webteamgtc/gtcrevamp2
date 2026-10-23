@@ -21,7 +21,16 @@ import UsNotice from './UsNotice';
 
 function UaeCategory({ onChoose }) {
   const t = useTranslations('geo.uae');
-  const [pick, setPick] = useState(null);
+  // pre-selected when coming from "Visit Category 1" on the CAT 5 page (geoClient.resetUaeCategory)
+  const [pick, setPick] = useState(() => {
+    try {
+      const p = sessionStorage.getItem('gtc_uae_pick');
+      sessionStorage.removeItem('gtc_uae_pick');
+      return p === '1' || p === '5' ? p : null;
+    } catch {
+      return null;
+    }
+  });
   const [ack, setAck] = useState(false);
   const [open, setOpen] = useState(false);
   const [tried, setTried] = useState(false);

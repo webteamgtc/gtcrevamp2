@@ -1,7 +1,7 @@
 'use client';
 /**
- * CAT 5 consultation request → POST /api/uae-enquiry (e-mail via Mailgun and/or Zapier, see that route).
- * Sends the page URL and utm_* so marketing can see which campaign brought the lead.
+ * GTC Financial Consultancy L.L.C (CAT 5) enquiry → POST /api/uae-enquiry (e-mail via Mailgun and/or Zapier, see that route).
+ * Sends the page URL and utm_* so the team can see which campaign the enquiry came from.
  */
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
