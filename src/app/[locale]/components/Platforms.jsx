@@ -1,23 +1,35 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { Check, Download, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { LaptopMockup, PhoneMockup, TabletMockup } from '@/components/shared/devices';
 import { SectionHeading, Ambient } from '@/components/shared/blocks';
 import { Reveal, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
 import { PLATFORM_LINKS } from '@/config/menu';
 
+// platform screenshots in public/ (intrinsic size: width × height)
+const PLATFORM_IMAGES = {
+  mt4: { src: '/metatrade4.png', alt: 'MetaTrader 4', width: 597, height: 435 },
+  gtcgo: { src: '/gtcgo.png', alt: 'GTC Go', width: 940, height: 590 },
+  mt5: { src: '/metatrade5.png', alt: 'MetaTrader 5', width: 210, height: 411 }
+};
+
+function PlatformImage({ k, className, sizes }) {
+  const img = PLATFORM_IMAGES[k];
+  return <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes={sizes} className={cn('h-auto select-none drop-shadow-2xl', className)} draggable={false} />;
+}
+
 const PLATFORM_DEVICES = {
-  mt4: { className: 'start-[2%] bottom-[64px] z-10', node: () => <TabletMockup className="w-[300px] lg:w-[330px]" symbol="XAUUSD" price="4,158.99" seed={11} /> },
+  mt4: { className: 'start-[2%] bottom-[64px] z-10', node: () => <PlatformImage k="mt4" className="w-[300px] lg:w-[330px]" sizes="330px" /> },
   gtcgo: {
     className: 'start-1/2 -translate-x-1/2 rtl:translate-x-1/2 bottom-[52px] z-20',
-    node: () => <LaptopMockup className="w-[min(100vw-3rem,420px)] lg:w-[470px]" symbol="GBPUSD" price="1.34218" seed={21} />
+    node: () => <PlatformImage k="gtcgo" className="w-[min(100vw-3rem,420px)] lg:w-[470px]" sizes="470px" />
   },
-  mt5: { className: 'end-[3%] bottom-[40px] z-30', node: () => <PhoneMockup className="w-[158px] sm:w-[170px]" symbol="EURUSD" price="1.16035" seed={5} /> }
+  mt5: { className: 'end-[3%] bottom-[40px] z-30', node: () => <PlatformImage k="mt5" className="w-[158px] sm:w-[170px]" sizes="170px" /> }
 };
 
 function platformBadge(key) {
@@ -181,11 +193,11 @@ export function Platforms() {
                 <AnimatePresence mode="wait">
                   <motion.div key={it.key} initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.45, ease: EASE }}>
                     {it.key === 'mt5' ? (
-                      <PhoneMockup className="w-[180px]" symbol="EURUSD" price="1.16035" seed={5} />
+                      <PlatformImage k="mt5" className="w-[180px]" sizes="180px" />
                     ) : it.key === 'mt4' ? (
-                      <TabletMockup className="w-[min(100vw-2.5rem,320px)]" symbol="XAUUSD" price="4,158.99" seed={11} />
+                      <PlatformImage k="mt4" className="w-[min(100vw-2.5rem,320px)]" sizes="320px" />
                     ) : (
-                      <LaptopMockup className="w-[min(100vw-2.5rem,340px)]" symbol="GBPUSD" price="1.34218" seed={21} />
+                      <PlatformImage k="gtcgo" className="w-[min(100vw-2.5rem,340px)]" sizes="340px" />
                     )}
                   </motion.div>
                 </AnimatePresence>
