@@ -79,4 +79,4 @@ export const CAT5_LANGUAGES = ['ar', 'en'];
 export const CAT5_LEGAL_LINKS = { legalDocuments: '', riskDisclosure: '', privacy: '', cookies: '', terms: '' };
 
 /** CMA licensed-companies register (footer “here” + relationship verify line). */
-export const CAT5_CMA_URL = 'https://uaecma.gov.ae/en/open-data/licensed-companies?q=CP-0001204';
+export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/open-data/licensed-companies';
