@@ -35,7 +35,7 @@
           },
           {
             "question": "我可以在 GTCFX 交易哪些市场？",
-            "answer": "根据您的账户类型和地区，您可能可以访问外汇、金属、能源、指数、大宗商品、股票、加密货币 CFD 和期货 CFD。"
+            "answer": "根据您的账户类型和地区，您可能可以访问外汇、金属、能源、指数、大宗商品、股票 和期货 CFD。"
           },
           {
             "question": "什么是交易杠杆？",
@@ -129,18 +129,6 @@
           "Stock CFD",
           "股权 CFD",
           "全球股票 CFD"
-        ]
-      }
-    },
-    "marketsCryptoCfds": {
-      "product": {
-        "name": "GTCFX 加密货币 CFD 交易",
-        "serviceType": "在线加密货币 CFD 交易",
-        "description": "通过 GTCFX 访问加密货币 CFD 市场，包括 Bitcoin 及其他主要加密货币，无需拥有标的数字资产。",
-        "category": [
-          "加密货币 CFD",
-          "Cryptocurrency CFD",
-          "Bitcoin CFD"
         ]
       }
     },
@@ -336,13 +324,12 @@
     "swapUpdate": {
       "dataset": {
         "name": "GTCFX 每日 CFD 隔夜利息",
-        "description": "外汇、金属、加密货币和指数等 CFD 工具的每日隔夜利息，包括各交易品种的多空隔夜利息数值。",
+        "description": "外汇、金属和指数等 CFD 工具的每日隔夜利息，包括各交易品种的多空隔夜利息数值。",
         "keywords": [
           "CFD 隔夜利息",
           "CFD 隔夜利率",
           "外汇 CFD 隔夜利息",
           "金属 CFD 隔夜利息",
-          "加密货币 CFD 隔夜利息",
           "指数 CFD 隔夜利息"
         ]
       }

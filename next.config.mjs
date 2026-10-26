@@ -21,10 +21,17 @@ const nextConfig = {
     ? {}
     : {
         async redirects() {
-          return ['metatrader-for', 'gtc-go-app'].flatMap((p) => [
+          const typoFixes = ['metatrader-for', 'gtc-go-app'].flatMap((p) => [
             { source: `/:locale/trading/${p}-andriod`, destination: `/:locale/trading/${p}-android`, permanent: true },
             { source: `/trading/${p}-andriod`, destination: `/trading/${p}-android`, permanent: true }
           ]);
+          const cryptoCfdsRetired = [
+            { source: '/:locale/markets/crypto-cfds', destination: '/:locale/markets', permanent: true },
+            { source: '/:locale/markets/crypto-cfds/:path*', destination: '/:locale/markets', permanent: true },
+            { source: '/markets/crypto-cfds', destination: '/markets', permanent: true },
+            { source: '/markets/crypto-cfds/:path*', destination: '/markets', permanent: true }
+          ];
+          return [...typoFixes, ...cryptoCfdsRetired];
         },
         // per-locale sitemaps listed in /sitemap.xml (src/lib/sitemap.js)
         async rewrites() {

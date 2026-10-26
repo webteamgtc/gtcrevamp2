@@ -299,7 +299,7 @@
     "hero": {
       "badge": "Live markets · 24/5 Trading",
       "title": "Open your trading account with GTCFX",
-      "text": "A regulated multi-asset broker built for serious traders. Trade 7+ markets with institutional-grade execution.",
+      "text": "A regulated multi-asset broker built for serious traders. Trade 6+ markets with institutional-grade execution.",
       "pills": [
         {
           "label": "Regulated",
@@ -586,7 +586,7 @@
       "points": [
         "$50,000 virtual capital",
         "Real market spreads",
-        "7+ trading markets"
+        "6+ trading markets"
       ],
       "highlights": [
         "No Verification Required",
@@ -668,8 +668,8 @@
           "text": "Trade on MT4, MT5, or WebTrader — desktop, mobile, or browser. One account, every device."
         },
         {
-          "title": "7+ Trading Markets",
-          "text": "Forex, Metals, Indices, Shares, Crypto & more — explore every market from one terminal."
+          "title": "6+ Trading Markets",
+          "text": "Forex, Metals, Indices, Shares & more — explore every market from one terminal."
         }
       ]
     },
@@ -765,7 +765,7 @@
           "label": "Spreads from"
         },
         {
-          "value": "7+",
+          "value": "6+",
           "label": "Instruments"
         },
         {
@@ -984,7 +984,7 @@
           "label": "Account Types"
         },
         {
-          "value": "7+",
+          "value": "6+",
           "label": "Trading Markets"
         },
         {
@@ -1024,7 +1024,7 @@
             "0 Commission Charges",
             "Secure, instant and fast execution",
             "Direct access to top tier banks",
-            "Access to 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more",
+            "Access to 6+ trading markets including Forex, Metals, Indices, Shares & more",
             "No dealing desk intervention",
             "Negative balance protection",
             "No trading restrictions",
@@ -1047,7 +1047,7 @@
             "Commission $5/standard lot",
             "Secure, instant and fast execution",
             "Direct access to top tier banks",
-            "Access to 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more",
+            "Access to 6+ trading markets including Forex, Metals, Indices, Shares & more",
             "No dealing desk intervention",
             "Negative balance protection",
             "No trading restrictions",
@@ -1307,7 +1307,7 @@
       "ctaLive": "Open Live Account",
       "pills": [
         "4.8/5 Trader rating",
-        "7+ Trading Markets",
+        "6+ Trading Markets",
         "0.0 Spreads from"
       ]
     },
@@ -1392,7 +1392,7 @@
         {
           "tag": "04 — Multi-Asset Markets",
           "title": "Trade the entire market on one screen.",
-          "text": "Forex, indices, commodities, crypto, shares — over 200 instruments live in a single MT4 terminal. Switch between asset classes without ever leaving the platform.",
+          "text": "Forex, indices, commodities, shares — over 200 instruments live in a single MT4 terminal. Switch between asset classes without ever leaving the platform.",
           "points": [
             {
               "b": "FX Majors, Minors & Exotics",
@@ -1572,7 +1572,7 @@
       "ctaLive": "Open Live Account",
       "pills": [
         "4.9/5 Trader rating",
-        "7+ Trading Markets",
+        "6+ Trading Markets",
         "0.0 Spreads from"
       ]
     },
@@ -1672,8 +1672,8 @@
               "t": "— gold, silver, oil, natural gas."
             },
             {
-              "b": "Crypto & Futures",
-              "t": "— BTC, ETH, plus futures instruments."
+              "b": "Commodities & Futures",
+              "t": "— energy, metals, and futures instruments."
             }
           ]
         },
@@ -1863,7 +1863,7 @@
   "gtcGoApp": {
     "meta": {
       "title": "GTC Go | CFD Mobile Trading App & Platform | GTCFX",
-      "description": "Download GTC Go, a CFD trading app for iOS and Android. This mobile trading app supports 7+ trading markets, live quotes, 50+ indicators, and price alerts."
+      "description": "Download GTC Go, a CFD trading app for iOS and Android. This mobile trading app supports 6+ trading markets, live quotes, 50+ indicators, and price alerts."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1930,7 +1930,7 @@
       "title": "Let trading [live alongside you.]",
       "text": "One mobile trading app. Half a minute to get started. Stay connected to the markets wherever you go.",
       "points": [
-        "7+ trading markets",
+        "6+ trading markets",
         "Live tick-by-tick quotes",
         "One-tap deposits & withdrawals",
         "50+ technical indicators",
@@ -2029,11 +2029,10 @@
     "table": {
       "eyebrow": "Swap Table",
       "title": "Daily Swap Rates Across [All Markets]",
-      "description": "Overnight swap rates for Forex, Metal, Crypto, and Indices. Searchable by symbol.",
+      "description": "Overnight swap rates for Forex, Metals and Indices. Searchable by symbol.",
       "tabs": {
         "Forex": "Forex",
         "Metal": "Metal",
-        "Crypto": "Crypto",
         "Indices": "Indices"
       },
       "search": "Search symbol...",

@@ -427,7 +427,7 @@
           "value": 7,
           "suffix": "+",
           "label": "Trading Markets",
-          "note": "Forex, Metals, Indices, Shares, Crypto & more"
+          "note": "Forex, Metals, Indices, Shares & more"
         }
       ]
     },
@@ -1517,8 +1517,8 @@
         },
         {
           "tag": "02 · Trading Markets",
-          "value": "7+",
-          "text": "Forex, Metals, Indices, Shares, Crypto & more.",
+          "value": "6+",
+          "text": "Forex, Metals, Indices, Shares & more.",
           "fill": 70
         },
         {

@@ -3,7 +3,7 @@
  * Row: { symbol, label?: index into marketHolidaysPage.tradingHours.symbols.<tab>, always?: trades at weekends too,
  *        days: [[pricing, trading] × 5] } — a session string may hold several ranges: "02:50-09:30,10:10-23:59".
  */
-export const HOURS_TABS = ['fx', 'goldSilver', 'crudeOil', 'crypto', 'cashIndices', 'stocks'];
+export const HOURS_TABS = ['fx', 'goldSilver', 'crudeOil', 'cashIndices', 'stocks'];
 
 /** Mon–Thu share one session; Friday may differ. */
 const week = (pricing, trading, friPricing = pricing, friTrading = trading) => [...Array(4).fill([pricing, trading]), [friPricing, friTrading]];
@@ -24,7 +24,6 @@ export const TRADING_HOURS = {
     { symbol: 'WTIUSD', label: 0, days: mondayOpen('01:00 - 24:00', '01:05 - 23:59', '01:00 - 24:00', '01:01 - 23:55', '01:00 - 23:59', '01:01 - 23:59') },
     { symbol: 'BRNUSD', label: 1, days: mondayOpen('01:00 - 23:59', '01:05 - 23:59', '03:00 - 23:59', '03:01 - 23:59') }
   ],
-  crypto: [{ symbol: 'Crypto', always: true, days: week('00:00 - 24:00', '00:01 - 24:00') }],
   cashIndices: [
     { symbol: 'AUS200c', days: week('02:50-09:30, 10:10-23:59', '02:51-09:30, 10:11-23:57', '00:50-08:30, 09:10-22:57', '00:51-08:30, 09:11-22:57') },
     { symbol: 'CN50c', days: [['04:00-13:10, 22:00-23:45', '04:02-13:10, 22:00-23:43'], ['04:00-13:10, 22:00-23:45', '04:00-13:10, 22:00-23:45'], ...Array(3).fill(['04:00-13:10, 22:00-23:45', '04:02-13:10, 22:00-23:43'])] },

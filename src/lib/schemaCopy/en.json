@@ -3,7 +3,7 @@
     "home": {
       "website": {
         "name": "Online CFD Trading with Low Spread | GTCFX",
-        "description": "Access 7+ trading markets with GTCFX, a leading CFD broker offering forex, indices, energy, metals, shares, and more. Access tight spreads & trade CFDs today."
+        "description": "Access 6+ trading markets with GTCFX, a leading CFD broker offering forex, indices, energy, metals, shares, and more. Access tight spreads & trade CFDs today."
       },
       "financialService": {
         "name": "GTC Global SA (Pty) Ltd",
@@ -35,7 +35,7 @@
           },
           {
             "question": "Which markets can I trade with GTCFX?",
-            "answer": "Depending on your account type and region, you may access Forex, Metals, Energy, Indices, Commodities, Shares, Crypto CFDs and Futures CFDs."
+            "answer": "Depending on your account type and region, you may access Forex, Metals, Energy, Indices, Commodities, Shares and Futures CFDs."
           },
           {
             "question": "What is leverage in trading?",
@@ -132,18 +132,6 @@
         ]
       }
     },
-    "marketsCryptoCfds": {
-      "product": {
-        "name": "GTCFX Crypto CFD Trading",
-        "serviceType": "Online Crypto CFD Trading",
-        "description": "Access cryptocurrency CFD markets including Bitcoin and other major cryptocurrencies through GTCFX without owning the underlying digital assets.",
-        "category": [
-          "Crypto CFDs",
-          "Cryptocurrency CFDs",
-          "Bitcoin CFDs"
-        ]
-      }
-    },
     "marketsFutureCfds": {
       "product": {
         "name": "GTCFX Futures CFD Trading",
@@ -196,9 +184,9 @@
           "GTC Go Trading App",
           "GTCFX Mobile Trading App"
         ],
-        "description": "GTC Go is a mobile trading application for iOS and Android that provides access to 7+ trading markets, live quotes, charting, professional order types, account management and copy trading.",
+        "description": "GTC Go is a mobile trading application for iOS and Android that provides access to 6+ trading markets, live quotes, charting, professional order types, account management and copy trading.",
         "featureList": [
-          "Access to 7+ trading markets",
+          "Access to 6+ trading markets",
           "Live market quotes",
           "Professional order types",
           "Technical charts and indicators",
@@ -336,13 +324,12 @@
     "swapUpdate": {
       "dataset": {
         "name": "GTCFX Daily CFD Swap Rates",
-        "description": "Daily overnight swap rates for CFD instruments across Forex, Metals, Crypto and Indices, including long and short swap values by trading symbol.",
+        "description": "Daily overnight swap rates for CFD instruments across Forex, Metals and Indices, including long and short swap values by trading symbol.",
         "keywords": [
           "CFD Swap Rates",
           "Overnight CFD Swap Rates",
           "Forex CFD Swap Rates",
           "Metal CFD Swap Rates",
-          "Crypto CFD Swap Rates",
           "Indices CFD Swap Rates"
         ]
       }

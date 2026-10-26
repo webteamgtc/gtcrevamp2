@@ -7,7 +7,7 @@ import {
   Building2, Sparkles, Globe, CalendarDays, ShieldCheck, Award, Headset, MessageCircle, Handshake, Crown,
   UserPlus, MonitorPlay, Wallet, Layers, Monitor, Smartphone, Tablet, Users, Gauge, RefreshCw, ChartPie, Server,
   Rocket, BookA, Network, BookOpen, Map, ShieldAlert, ChartCandlestick, CircleHelp, FileQuestion, Newspaper,
-  CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Bitcoin, Landmark, Wheat
+  CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Landmark, Wheat
 } from 'lucide-react';
 
 // account entry points: live account application, demo form, client portal log-in
@@ -25,7 +25,7 @@ export const PORTAL = {
 
 /** Footer link targets, in the same order as footer.columns.<id>.links in messages/<locale>/common.json */
 export const FOOTER_LINKS = {
-  instruments: ['/markets/forex', '/markets/energy', '/markets/indices', '/markets/metals', '/markets/shares', '/markets/crypto-cfds', '/markets/future-cfds'],
+  instruments: ['/markets/forex', '/markets/energy', '/markets/indices', '/markets/metals', '/markets/shares', '/markets/future-cfds'],
   quick: ['/trading/account-types', '/copy-trading', '/trading/deposit', '/markets', '/promotions'],
   platforms: ['/trading/mt4-platform', '/trading/mt5-platform', '/trading/gtc-go-app'],
   company: ['/company/about-us', '/company/why-gtc-group', '/company/regulations', '/company/events-and-exhibitions'],
@@ -50,7 +50,6 @@ export const MARKET_LINKS = {
   indices: '/markets/indices',
   metals: '/markets/metals',
   'shares-equity-cfds': '/markets/shares',
-  'crypto-cfds': '/markets/crypto-cfds',
   'future-cfds': '/markets/future-cfds'
 };
 
@@ -135,7 +134,6 @@ export const MENU = [
         { id: 'indices', href: '/markets/indices', icon: ChartColumn },
         { id: 'metals', href: '/markets/metals', icon: Gem },
         { id: 'shares', href: '/markets/shares', icon: Landmark },
-        { id: 'crypto', href: '/markets/crypto-cfds', icon: Bitcoin },
         { id: 'futures', href: '/markets/future-cfds', icon: Wheat }
       ] }],
       // live-price lists: `group` = demo feed group in shared/ticker.jsx

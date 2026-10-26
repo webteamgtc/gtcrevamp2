@@ -118,7 +118,7 @@
     },
     "demoTrading": {
       "title": "Invest with the World's Premier [Online Trading Platform.]",
-      "description": "Trade across 7+ markets with the most stable platform, our MetaTrader Platform offers favorable spreads.",
+      "description": "Trade across 6+ markets with the most stable platform, our MetaTrader Platform offers favorable spreads.",
       "openLiveAccount": "Open Live Account",
       "openDemoAccount": "Open Demo Account",
       "features": [
@@ -135,7 +135,7 @@
         {
           "key": "tradingInstrument",
           "title": "Trading Instrument",
-          "description": "Access to 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more across"
+          "description": "Access to 6+ trading markets including Forex, Metals, Indices, Shares & more across"
         },
         {
           "key": "ultraFastExecution",
@@ -239,11 +239,11 @@
     },
     "appPromo": {
       "title": "Trade global markets from the [palm of your hand]",
-      "description": "Live pricing on 7+ trading markets, one-tap execution, and institutional-grade charting — built for the moments the market won't wait for."
+      "description": "Live pricing on 6+ trading markets, one-tap execution, and institutional-grade charting — built for the moments the market won't wait for."
     },
     "cta": {
       "title": "Trade the World's [markets.]",
-      "description": "Open a live account and access 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more — from a broker trusted globally.",
+      "description": "Open a live account and access 6+ trading markets including Forex, Metals, Indices, Shares & more — from a broker trusted globally.",
       "openLiveAccount": "Open Live Account",
       "tryDemoFirst": "Try Demo Account First",
       "disclaimer": "CFD trading involves significant risk of loss. Please trade responsibly.",
@@ -443,7 +443,7 @@
     "cta": {
       "titleLine1": "Trade the World's",
       "titleAccent": "markets.",
-      "description": "Open a live account and access 7+ trading markets including Forex, Metals, Indices, Shares, Crypto & more — from a broker trusted globally.",
+      "description": "Open a live account and access 6+ trading markets including Forex, Metals, Indices, Shares & more — from a broker trusted globally.",
       "primaryCta": "Open Live Account"
     },
     "subTabs": {

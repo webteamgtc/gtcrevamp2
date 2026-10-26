@@ -6,7 +6,7 @@
  * `n` is the display name and `d` the price decimals. Confirm the names against the MT5 server
  * (the current site shows e.g. BRNUSD / WTIUSD for oil) and replace any that differ.
  */
-import { Globe, Flame, ChartColumn, Gem, Landmark, Bitcoin, Wheat } from 'lucide-react';
+import { Globe, Flame, ChartColumn, Gem, Landmark, Wheat } from 'lucide-react';
 
 export const MARKETS = [
   {
@@ -60,16 +60,6 @@ export const MARKETS = [
     ]
   },
   {
-    id: 'crypto',
-    href: '/markets/crypto-cfds',
-    icon: Bitcoin,
-    symbols: [
-      { s: 'BTCUSD', n: 'Bitcoin', d: 1 },
-      { s: 'ETHUSD', n: 'Ethereum', d: 2 },
-      { s: 'SOLUSD', n: 'Solana', d: 2 }
-    ]
-  },
-  {
     id: 'futures',
     href: '/markets/future-cfds',
     icon: Wheat,
@@ -85,7 +75,6 @@ export const MARKETS = [
 export const MARKETS_TAPE = [
   { s: 'EURUSD', n: 'EUR/USD', d: 5 },
   { s: 'XAUUSD', n: 'Gold', d: 2 },
-  { s: 'BTCUSD', n: 'Bitcoin', d: 1 },
   { s: 'SPX500', n: 'S&P 500', d: 1 },
   { s: 'BRNUSD', n: 'Brent', d: 2 },
   { s: 'GBPUSD', n: 'GBP/USD', d: 5 },
@@ -93,7 +82,6 @@ export const MARKETS_TAPE = [
   { s: 'XAGUSD', n: 'Silver', d: 3 },
   { s: 'USDJPY', n: 'USD/JPY', d: 3 },
   { s: 'NVDA', n: 'NVIDIA', d: 2 },
-  { s: 'ETHUSD', n: 'Ethereum', d: 2 },
   { s: 'WTIUSD', n: 'WTI', d: 2 }
 ];
 

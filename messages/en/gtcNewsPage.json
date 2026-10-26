@@ -360,8 +360,7 @@
       "tickerCategories": [
         "FX",
         "Gold",
-        "Index",
-        "Crypto"
+        "Index"
       ],
       "stats": [
         "Currency Pairs",
@@ -393,7 +392,6 @@
         "fx": "FX",
         "goldSilver": "Gold & Silver",
         "crudeOil": "Crude Oil",
-        "crypto": "Crypto",
         "cashIndices": "Cash Indices",
         "stocks": "Stocks"
       },
@@ -440,10 +438,6 @@
         "crudeOil": [
           "WTI",
           "Brent"
-        ],
-        "crypto": [
-          "BTC/USD",
-          "ETH/USD"
         ],
         "cashIndices": [
           "US30",
@@ -557,11 +551,6 @@
           "title": "Cash Indices",
           "hours": "Varies by exchange",
           "status": "Most Open"
-        },
-        {
-          "title": "Cryptocurrencies",
-          "hours": "24/7 — Always Open",
-          "status": "Always Open"
         },
         {
           "title": "US & EU Shares",

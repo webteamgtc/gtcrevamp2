@@ -34,7 +34,6 @@ const PREVIEW_PAGES = {
   '/markets/indices': 'indices',
   '/markets/metals': 'metals',
   '/markets/shares': 'shares',
-  '/markets/crypto-cfds': 'crypto-cfds',
   '/markets/future-cfds': 'future-cfds',
   '/markets/forex/eurusd': 'eurusd',
   '/markets/forex/gbpusd': 'gbpusd',

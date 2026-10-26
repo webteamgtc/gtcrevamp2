@@ -162,7 +162,6 @@ const SCHEMAS = {
   '/markets/indices': market('marketsIndices', 'indices'),
   '/markets/metals': market('marketsMetals', 'metals'),
   '/markets/shares': market('marketsShares', 'shares'),
-  '/markets/crypto-cfds': market('marketsCryptoCfds', 'crypto'),
   '/markets/future-cfds': market('marketsFutureCfds', 'future'),
   '/trading/mt4-platform': platform('mt4Platform'),
   '/trading/mt5-platform': platform('mt5Platform'),
