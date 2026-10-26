@@ -14,8 +14,8 @@ import { PLATFORM_LINKS } from '@/config/menu';
 // platform screenshots in public/ (intrinsic size: width × height)
 const PLATFORM_IMAGES = {
   mt4: { src: '/metatrade4.png', alt: 'MetaTrader 4', width: 597, height: 435 },
-  gtcgo: { src: '/gtcgo.png', alt: 'GTC Go', width: 940, height: 590 },
-  mt5: { src: '/metatrade5.png', alt: 'MetaTrader 5', width: 210, height: 411 }
+  gtcgo: { src: '/metatrade5.png', alt: 'GTC Go', width: 210, height: 411 },
+  mt5: { src: '/gtcgo.png', alt: 'MetaTrader 5', width: 940, height: 590 }
 };
 
 function PlatformImage({ k, className, sizes }) {
@@ -23,14 +23,17 @@ function PlatformImage({ k, className, sizes }) {
   return <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes={sizes} className={cn('h-auto select-none drop-shadow-2xl', className)} draggable={false} />;
 }
 
+/** Left → right matches tab order (GTC Go · MT5 · MT4). GTC Go uses the phone asset; MT5 uses the wide desktop asset. */
 const PLATFORM_DEVICES = {
-  mt4: { className: 'start-[2%] bottom-[64px] z-10', node: () => <PlatformImage k="mt4" className="w-[300px] lg:w-[330px]" sizes="330px" /> },
-  gtcgo: {
+  gtcgo: { className: 'start-[2%] bottom-[40px] z-30', node: () => <PlatformImage k="gtcgo" className="w-[158px] sm:w-[170px]" sizes="170px" /> },
+  mt5: {
     className: 'start-1/2 -translate-x-1/2 rtl:translate-x-1/2 bottom-[52px] z-20',
-    node: () => <PlatformImage k="gtcgo" className="w-[min(100vw-3rem,420px)] lg:w-[470px]" sizes="470px" />
+    node: () => <PlatformImage k="mt5" className="w-[min(100vw-3rem,420px)] lg:w-[470px]" sizes="470px" />
   },
-  mt5: { className: 'end-[3%] bottom-[40px] z-30', node: () => <PlatformImage k="mt5" className="w-[158px] sm:w-[170px]" sizes="170px" /> }
+  mt4: { className: 'end-[3%] bottom-[64px] z-10', node: () => <PlatformImage k="mt4" className="w-[300px] lg:w-[330px]" sizes="330px" /> }
 };
+
+const PLATFORM_VISUAL_ORDER = ['gtcgo', 'mt5', 'mt4'];
 
 function platformBadge(key) {
   if (key === 'gtcgo') return 'G';
@@ -145,7 +148,7 @@ export function Platforms() {
               </div>
               <motion.div
                 className="absolute bottom-8 h-20 w-72 rounded-[100%] bg-brand/20 blur-2xl"
-                animate={{ left: it.key === 'mt4' ? '6%' : it.key === 'gtcgo' ? '32%' : '58%' }}
+                animate={{ left: it.key === 'gtcgo' ? '6%' : it.key === 'mt5' ? '32%' : '58%' }}
                 transition={{ type: 'spring', stiffness: 90, damping: 18 }}
               />
               {perks.map((p, k) => (
@@ -163,7 +166,7 @@ export function Platforms() {
               ))}
 
               <div dir="ltr" className="absolute inset-0 hidden md:block">
-                {(['mt4', 'gtcgo', 'mt5']).map((k) => {
+                {PLATFORM_VISUAL_ORDER.map((k) => {
                   const on = it.key === k;
                   const idx = items.findIndex((x) => x.key === k);
                   const dev = PLATFORM_DEVICES[k];
@@ -192,12 +195,12 @@ export function Platforms() {
               <div className="absolute inset-0 flex items-end justify-center pb-10 md:hidden">
                 <AnimatePresence mode="wait">
                   <motion.div key={it.key} initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.45, ease: EASE }}>
-                    {it.key === 'mt5' ? (
-                      <PlatformImage k="mt5" className="w-[180px]" sizes="180px" />
-                    ) : it.key === 'mt4' ? (
-                      <PlatformImage k="mt4" className="w-[min(100vw-2.5rem,320px)]" sizes="320px" />
+                    {it.key === 'gtcgo' ? (
+                      <PlatformImage k="gtcgo" className="w-[180px]" sizes="180px" />
+                    ) : it.key === 'mt5' ? (
+                      <PlatformImage k="mt5" className="w-[min(100vw-2.5rem,340px)]" sizes="340px" />
                     ) : (
-                      <PlatformImage k="gtcgo" className="w-[min(100vw-2.5rem,340px)]" sizes="340px" />
+                      <PlatformImage k="mt4" className="w-[min(100vw-2.5rem,320px)]" sizes="320px" />
                     )}
                   </motion.div>
                 </AnimatePresence>
