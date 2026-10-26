@@ -347,6 +347,7 @@ export function NetworkBackdrop({ id = 'gtn', shade = true }) {
 }
 
 function Hero() {
+  const locale = useLocale();
   const t = useTranslations('marketingPage.hero');
   return (
     <section className="is-dark relative overflow-hidden bg-[#05081c] text-white">
@@ -355,7 +356,14 @@ function Hero() {
         <HeroIn as="p" className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-black/30 px-4 py-1.5 text-xs font-semibold text-gold-200 backdrop-blur">
           <ShieldCheck className="size-3.5" aria-hidden /> {t('badge')}
         </HeroIn>
-        <HeroIn as="h1" delay={0.05} className="heading-display mt-6 max-w-4xl text-balance drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+        <HeroIn
+          as="h1"
+          delay={0.05}
+          className={cn(
+            'heading-display mt-6 max-w-4xl text-balance drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]',
+            locale === 'ar' && '!leading-[1.55] md:!leading-[1.5] lg:!leading-[1.45]'
+          )}
+        >
           <AccentTitle text={t('title')} />
         </HeroIn>
         <HeroIn as="p" delay={0.1} className="mt-6 max-w-3xl text-pretty text-base leading-relaxed text-white/80 drop-shadow md:text-lg">
