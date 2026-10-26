@@ -11,6 +11,7 @@
  */
 import { SITE_URL, OG_IMAGE, localeUrl, breadcrumbLd } from './seo';
 import { langOf } from '@/i18n/locales';
+import { GTC_GO_APP_STORE_URL, GTC_GO_PLAY_STORE_URL } from '@/config/gtcGoStoreLinks';
 import en from './schemaCopy/en.json';
 import ar from './schemaCopy/ar.json';
 import zh from './schemaCopy/zh.json';
@@ -34,8 +35,6 @@ const ORGANIZATION = {
     'https://x.com/GTC_fx'
   ]
 };
-const GTC_GO_DOWNLOAD = 'https://mygtc.onelink.me/pZtr?af_sub1=Az7aFg5e&deep_link_sub1=Az7aFg5e&ref=Az7aFg5e';
-
 /* ---------------- schema copy ---------------- */
 
 function merge(base, over) {
@@ -181,7 +180,7 @@ const SCHEMAS = {
         description: c.application.description,
         applicationCategory: 'FinanceApplication',
         operatingSystem: ['iOS', 'Android'],
-        downloadUrl: GTC_GO_DOWNLOAD,
+        downloadUrl: [GTC_GO_APP_STORE_URL, GTC_GO_PLAY_STORE_URL],
         featureList: c.application.featureList,
         publisher: { '@id': ORG_ID }
       }

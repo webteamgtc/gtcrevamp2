@@ -147,7 +147,7 @@ export function DeviceHero({ ns, device }) {
             {t('text')}
           </motion.p>
           <motion.div className="mt-10 flex justify-center" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}>
-            <a href={href} className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-brand px-8 text-base font-semibold text-white shadow-xl shadow-brand/40 ring-1 ring-white/15 transition-colors hover:bg-brand-600">
+            <a href={href} target="_blank" rel="noopener noreferrer" className="group relative inline-flex h-14 items-center gap-3 overflow-hidden rounded-full bg-brand px-8 text-base font-semibold text-white shadow-xl shadow-brand/40 ring-1 ring-white/15 transition-colors hover:bg-brand-600">
               <motion.span className="absolute inset-y-0 -left-1/2 w-1/2 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/25 to-transparent" animate={{ left: ['-50%', '150%'] }} transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 2 }} aria-hidden />
               <span className="relative">{t('cta')}</span>
               <Download className="relative size-4 transition-transform group-hover:translate-y-0.5" />

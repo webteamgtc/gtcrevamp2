@@ -1,10 +1,9 @@
-/**
- * GTC Go download links.
- * TODO: replace the '#' placeholders with the App Store / Google Play listings and desktop installers.
- */
+import { GTC_GO_APP_STORE_URL, GTC_GO_PLAY_STORE_URL } from '@/config/gtcGoStoreLinks';
+
+/** GTC Go download links (mobile stores + desktop placeholders). */
 export const GO_LINKS = {
-  ios: '#',
-  android: '#',
+  ios: GTC_GO_APP_STORE_URL,
+  android: GTC_GO_PLAY_STORE_URL,
   windows: '#',
   mac: '#',
   linux: '#',
