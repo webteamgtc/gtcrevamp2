@@ -4,15 +4,18 @@ import { routing } from './routing';
 import { loadLocaleMessages } from './loadMessages';
 import { langOf } from './locales';
 
-// Deep-merge so any key missing from a language falls back to English.
+// Code identifiers inside messages (items[].id → icon/visual lookups): always the English value,
+// so a translated id in a language file can't break a page.
+const PINNED = new Set(['id', 'icon', 'key']);
+
+// Deep-merge so any key missing from a language falls back to English (arrays are merged item by item).
 function merge(base, extra) {
+  if (Array.isArray(base) && Array.isArray(extra)) return extra.map((item, i) => (i < base.length ? merge(base[i], item) : item));
   if (!extra || typeof extra !== 'object' || Array.isArray(extra)) return extra ?? base;
   const out = { ...base };
   for (const k of Object.keys(extra)) {
-    out[k] =
-      base && typeof base[k] === 'object' && !Array.isArray(base[k]) && typeof extra[k] === 'object' && !Array.isArray(extra[k])
-        ? merge(base[k], extra[k])
-        : extra[k];
+    if (PINNED.has(k) && typeof base?.[k] === 'string') continue;
+    out[k] = base && typeof base[k] === 'object' && base[k] && typeof extra[k] === 'object' ? merge(base[k], extra[k]) : extra[k];
   }
   return out;
 }
