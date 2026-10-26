@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Online CFD Trading with Low Spread | GTCFX",
-    "description": "Access 7+ trading markets with GTCFX, a leading CFD broker offering forex, indices, energy, metals, shares, and more. Access tight spreads & trade CFDs today."
+    "description": "Access 6+ trading markets with GTCFX, a leading CFD broker offering forex, indices, energy, metals, shares, and more. Access tight spreads & trade CFDs today."
   },
   "riskBar": "CFDs are highly speculative, leveraged instruments. Trading in CFDs carries a high degree of risk to your capital. Investors should ensure they possess adequate market knowledge or seek independent financial advice before executing trades.",
   "nav": {
@@ -77,10 +77,6 @@
           "desc": "Leading global companies"
         },
         {
-          "label": "Crypto CFDs",
-          "desc": "Popular digital assets"
-        },
-        {
           "label": "Futures CFDs",
           "desc": "Futures contracts as CFDs"
         }
@@ -122,7 +118,6 @@
           "Indices CFDs",
           "Metals CFDs",
           "Shares/Equity CFDs",
-          "Crypto CFDs",
           "Futures CFDs"
         ]
       },
@@ -332,7 +327,6 @@
       "indices": "Indices CFDs",
       "metals": "Metals CFDs",
       "shares": "Shares/Equity CFDs",
-      "crypto": "Crypto CFDs",
       "futures": "Futures CFDs",
       "EURUSD": "EURUSD",
       "GBPUSD": "GBPUSD",
@@ -437,7 +431,6 @@
       "indices": "Global stock indices",
       "metals": "Gold, silver and more",
       "shares": "Leading global companies",
-      "crypto": "Popular digital assets",
       "futures": "Futures contracts as CFDs",
       "beginners": "Your first steps in trading",
       "glossary": "Trading terms explained",

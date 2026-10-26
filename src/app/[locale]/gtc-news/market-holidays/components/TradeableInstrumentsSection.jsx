@@ -1,12 +1,12 @@
 'use client';
 /**
- * Tradeable instruments (white): six asset-class cards, each with today's session drawn on a 24h GMT bar,
+ * Tradeable instruments (white): five asset-class cards, each with today's session drawn on a 24h GMT bar,
  * a moving "now" marker and a live open / closed status.
  */
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { Bitcoin, ChartColumn, Coins, Flame, Gem, Landmark } from 'lucide-react';
+import { ChartColumn, Coins, Flame, Gem, Landmark } from 'lucide-react';
 import RingCard from '@/components/shared/RingCard';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, EASE } from '@/components/motion';
@@ -19,7 +19,6 @@ const CARDS = [
   { Icon: Gem, row: TRADING_HOURS.goldSilver[0] },
   { Icon: Flame, row: TRADING_HOURS.crudeOil[0] },
   { Icon: ChartColumn, row: TRADING_HOURS.cashIndices.find((r) => r.symbol === 'US30c'), fixed: 'amber' },
-  { Icon: Bitcoin, row: TRADING_HOURS.crypto[0] },
   { Icon: Landmark, row: TRADING_HOURS.stocks[0], fixed: 'amber' }
 ];
 

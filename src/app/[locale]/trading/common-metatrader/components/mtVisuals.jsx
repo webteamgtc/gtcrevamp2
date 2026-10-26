@@ -223,16 +223,15 @@ export function PositionsPanel() {
 export function MarketWatch() {
   const fx = useTicker(7, 1300);
   const idx = useTicker(8, 1500);
-  const cr = useTicker(5, 1700);
   const metals = useTicker(0, 1600);
   const cols = useMemo(
     () => [
       { head: 'Forex · 60+', rows: fx.slice(0, 3) },
+      { head: 'Forex · Crosses', rows: fx.slice(3, 5) },
       { head: 'Indices · 25+', rows: idx.slice(0, 2) },
-      { head: 'Commodities', rows: metals.slice(0, 1) },
-      { head: 'Crypto', rows: cr.slice(0, 1) }
+      { head: 'Commodities', rows: metals.slice(0, 1) }
     ],
-    [fx, idx, cr, metals]
+    [fx, idx, metals]
   );
   return (
     <AppWindow label="Market Watch · 200+ symbols">

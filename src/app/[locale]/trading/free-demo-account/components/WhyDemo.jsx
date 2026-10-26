@@ -147,7 +147,7 @@ function MarketsVisual() {
         })}
       </motion.div>
       <motion.span className="absolute left-1/2 top-1/2 grid size-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-900 text-xl font-bold text-white shadow-xl shadow-brand/30" animate={{ scale: [1, 1.07, 1] }} transition={{ duration: 2.6, repeat: Infinity }}>
-        7+
+        6+
       </motion.span>
     </div>
   );

@@ -99,12 +99,6 @@
         "title": "Trade Shares & Equity CFDs",
         "description": "Access global equity opportunities with flexible market."
       },
-      "crypto-cfds": {
-        "label": "Crypto CFDs",
-        "cardTitle": "Crypto CFDs\nTrading",
-        "title": "Explore Crypto CFDs",
-        "description": "Trade selected cryptocurrency CFDs through one secure."
-      },
       "future-cfds": {
         "label": "Futures CFDs",
         "cardTitle": "Futures CFDs\nTrading",
@@ -218,7 +212,7 @@
       },
       {
         "q": "Which markets can I trade with GTCFX?",
-        "a": "You can trade CFDs on forex, metals, energy, indices, commodities, shares, crypto and futures — all from one account."
+        "a": "You can trade CFDs on forex, metals, energy, indices, commodities, shares and futures — all from one account."
       },
       {
         "q": "What is leverage in trading?",

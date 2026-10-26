@@ -1,14 +1,14 @@
 'use client';
 /** Template B "All markets at a glance" Copy: marketsPage.detail.overview (shared); the current market is highlighted. */
 import { useTranslations } from 'next-intl';
-import { ArrowRight, Clock, Globe, Flame, ChartColumn, Gem, Wheat, Landmark, Bitcoin, Star } from 'lucide-react';
+import { ArrowRight, Clock, Globe, Flame, ChartColumn, Gem, Wheat, Landmark, Star } from 'lucide-react';
 import NavLink from '@/components/shared/nav/NavLink';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { Stagger, StaggerItem } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { useMarket } from './shared';
 
-const ROW_ICON = { forex: Globe, energy: Flame, indices: ChartColumn, metals: Gem, futures: Wheat, shares: Landmark, crypto: Bitcoin };
+const ROW_ICON = { forex: Globe, energy: Flame, indices: ChartColumn, metals: Gem, futures: Wheat, shares: Landmark };
 
 function Note() {
   const t = useTranslations('marketsPage.detail.overview');

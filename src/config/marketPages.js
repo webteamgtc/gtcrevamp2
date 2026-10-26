@@ -1,6 +1,6 @@
 /**
- * The 7 market pages (/markets/<slug>). Order = the Trade Markets menu.
- * Template A: Forex, Indices, Shares. Template B: Energy, Metals, Crypto, Futures.
+ * The 6 market pages (/markets/<slug>). Order = the Trade Markets menu.
+ * Template A: Forex, Indices, Shares. Template B: Energy, Metals, Futures.
  * Symbols come only from the symbols API — there is no static fallback list; a market the API has no
  * symbols for shows an empty state instead of placeholder prices.
  *
@@ -38,12 +38,6 @@ export const MARKET_PAGES = [
     id: 'shares',
     template: 'A',
     apiType: /share|stock|equit/i
-  },
-  {
-    slug: 'crypto-cfds',
-    id: 'crypto',
-    template: 'B',
-    apiType: /crypto|coin/i
   },
   {
     slug: 'future-cfds',

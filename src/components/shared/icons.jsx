@@ -11,7 +11,6 @@ import {
   ChartColumn,
   Wheat,
   Building2,
-  Bitcoin,
   CalendarClock
 } from 'lucide-react';
 
@@ -24,7 +23,6 @@ export const MARKET_ICONS = {
   indices: ChartColumn,
   metals: Gem,
   'shares-equity-cfds': Building2,
-  'crypto-cfds': Bitcoin,
   'future-cfds': CalendarClock
 };
 
