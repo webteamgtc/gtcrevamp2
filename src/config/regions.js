@@ -62,11 +62,9 @@ export const CAT5_LOCALE = 'en-ae';
 export const CAT5_LOCALES = ['en-ae', 'ar'];
 
 /**
- * Contact details on the CAT 5 site ("Prefer to talk now?", the form's error message). The UAE phone number is
- * still to come from compliance: while `phone` is empty it is simply not shown. The address text is in
- * marketingPage.form.address.
+ * Contact details on the CAT 5 site ("Prefer to talk now?", Support, contact page, form sidebar). Address: marketingPage.form.address.
  */
-export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '' };
+export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '971-45109800' };
 
 /** Preferred language options on the CAT 5 enquiry form → POST /api/uae-enquiry. */
 export const CAT5_LANGUAGES = ['ar', 'en'];
