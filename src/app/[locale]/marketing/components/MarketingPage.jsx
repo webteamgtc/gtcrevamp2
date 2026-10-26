@@ -50,9 +50,8 @@ import Logo from '@/components/shared/Logo';
 import FaqAccordion from '@/components/shared/FaqAccordion';
 import { SectionIntro, AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, HeroIn, EASE } from '@/components/motion';
-import { CAT5_CMA_URL, CAT5_CONTACT, CAT5_LEGAL_LINKS, CAT5_SOCIAL } from '@/config/regions';
+import { CAT5_CMA_URL, CAT5_CONTACT, CAT5_LEGAL_LINKS } from '@/config/regions';
 import { cat5Href } from './cat5Links';
-import { SOCIALS } from '@/components/shared/icons';
 import EnquiryForm from './EnquiryForm';
 import { cn } from '@/lib/utils';
 
@@ -993,7 +992,6 @@ function ClosingBanner() {
 function LegalFooter() {
   const t = useTranslations('marketingPage');
   const links = Object.keys(CAT5_LEGAL_LINKS);
-  const social = Object.fromEntries(SOCIALS.map((s) => [s.name, s.icon]));
   return (
     <footer id="legal" className="is-dark scroll-mt-32 bg-ink pb-28 pt-14 text-white md:pb-12">
       <div className="container-x">
@@ -1012,21 +1010,6 @@ function LegalFooter() {
               )
             )}
           </nav>
-          <ul className="flex gap-2">
-            {CAT5_SOCIAL.map((s) => (
-              <li key={s.name}>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.name}
-                  className="grid size-10 place-items-center rounded-full bg-white/5 text-white/70 ring-1 ring-white/10 transition-colors hover:bg-gold hover:text-white"
-                >
-                  {social[s.name]?.('size-4')}
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
         <h2 className="heading-label mt-10 flex items-center gap-2">
           <Info className="size-4" aria-hidden /> {t('footer.title')}
@@ -1034,7 +1017,14 @@ function LegalFooter() {
         <p className="mt-4 max-w-5xl text-[13px] leading-relaxed text-white/60">{t('footer.text')}</p>
         <p className="mt-3 max-w-5xl text-[13px] leading-relaxed text-white/60">
           {t('footer.verifyPrefix')}
-          {t('footer.verifyLink')}
+          <a
+            href={CAT5_CMA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-gold-200 underline underline-offset-4 hover:text-white"
+          >
+            {t('footer.verifyLink')}
+          </a>
           {t('footer.verifySuffix')}
         </p>
         <p className="mt-5 max-w-5xl rounded-2xl border border-gold/25 bg-gold/[0.06] px-5 py-4 text-[13px] leading-relaxed text-white/70">{t('footer.risk')}</p>

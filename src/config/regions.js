@@ -78,12 +78,5 @@ export const CAT5_LANGUAGES = ['ar', 'en'];
  */
 export const CAT5_LEGAL_LINKS = { legalDocuments: '', riskDisclosure: '', privacy: '', cookies: '', terms: '' };
 
-/** General CMA site (FAQ and “verify licence” lines outside the legal footer). */
-export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/home';
-
-/** CAT 5 footer social links (GTCFX official accounts; to be confirmed by Marketing). Icons: SOCIALS in components/shared/icons. */
-export const CAT5_SOCIAL = [
-  { name: 'LinkedIn', href: 'https://linkedin.com/company/gtcfx-official' },
-  { name: 'Instagram', href: 'https://www.instagram.com/gtcfxofficial/' },
-  { name: 'YouTube', href: 'https://www.youtube.com/channel/UCnKWakjm1b9Bm63xgwNFXHA' }
-];
+/** CMA licensed-companies register (footer “here” + relationship verify line). */
+export const CAT5_CMA_URL = 'https://uaecma.gov.ae/en/open-data/licensed-companies?q=CP-0001204';
