@@ -4,12 +4,11 @@ import { CAT5_LANGUAGES } from '@/config/regions';
 /**
  * GTC Financial Consultancy L.L.C. (UAE CAT 5) enquiry, posted by the form on the CAT 5 site (/en-ae, /ar).
  *  1. validates and normalises the enquiry and adds the client IP,
- *  2. e-mails it through Mailgun (src/config/nodemailer.js) to UAE_ENQUIRY_EMAIL (default support@gtcfx.com),
+ *  2. e-mails it through Mailgun with mailOptionsSupports (src/config/nodemailer.js: support@gtcfx.com, bcc zeeshan@gtcfx.com),
  *  3. optionally forwards it to a Zapier hook (CRM) when UAE_ENQUIRY_ZAPIER_URL is set.
  * Succeeds when at least one channel accepts it, so a lead is never lost to a single outage.
- * Env: MAILGUN_API_KEY (+ MAILGUN_USERNAME / MAILGUN_API_URL as for the VPS form), UAE_ENQUIRY_EMAIL, UAE_ENQUIRY_ZAPIER_URL.
+ * Env: MAILGUN_API_KEY (+ MAILGUN_USERNAME / MAILGUN_API_URL as for the VPS form), UAE_ENQUIRY_ZAPIER_URL.
  */
-const MAIL_TO = process.env.UAE_ENQUIRY_EMAIL?.trim() || 'support@gtcfx.com';
 const ZAPIER_HOOK = process.env.UAE_ENQUIRY_ZAPIER_URL?.trim();
 const SUBJECT = 'Enquiry: GTC Financial Consultancy (Category 5)';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -60,9 +59,9 @@ function emailContent(d) {
 
 async function sendEmail(d) {
   if (!process.env.MAILGUN_API_KEY) throw new Error('MAILGUN_API_KEY is not set');
-  const { MAILGUN_DOMAIN, MAILGUN_FROM, mailgunClient } = await import('@/config/nodemailer');
+  const { MAILGUN_DOMAIN, mailgunClient, mailOptionsSupports } = await import('@/config/nodemailer');
   const { html, text } = emailContent(d);
-  await mailgunClient.messages.create(MAILGUN_DOMAIN, { from: MAILGUN_FROM, to: MAIL_TO, 'h:Reply-To': d.email, subject: `${SUBJECT} — ${d.name} (${d.residence}, ${LANGUAGE_LABEL[d.language]})`, text, html });
+  await mailgunClient.messages.create(MAILGUN_DOMAIN, { ...mailOptionsSupports, 'h:Reply-To': d.email, subject: `${SUBJECT} — ${d.name} (${d.residence}, ${LANGUAGE_LABEL[d.language]})`, text, html });
 }
 
 async function sendZapier(d) {

@@ -55,10 +55,16 @@ function localiseUrls(value, locale) {
   return value;
 }
 
-/** Document for a locale (translated where a translation exists, English otherwise); null if unavailable. */
+/** The locale's own file (regional English: en-za.json, en-mu.json…), else its language's (es.json); null for plain English. */
+async function fetchLocalised(slug, locale, lang) {
+  const own = locale !== lang ? await fetchDoc(slug, locale) : null;
+  return own ?? (lang === 'en' ? null : fetchDoc(slug, lang));
+}
+
+/** Document for a locale (regional / translated where that file exists, English otherwise); null if unavailable. */
 export async function getLegalDocument(slug, locale) {
   const lang = langOf(locale);
-  const [english, localised] = await Promise.all([fetchDoc(slug, 'en'), lang === 'en' ? null : fetchDoc(slug, lang)]);
+  const [english, localised] = await Promise.all([fetchDoc(slug, 'en'), fetchLocalised(slug, locale, lang)]);
   const base = english || {};
   const doc = localised
     ? { ...base, ...localised, topSection: localised.topSection ?? base.topSection, footer: localised.footer ?? base.footer, content: localised.content ?? base.content }
