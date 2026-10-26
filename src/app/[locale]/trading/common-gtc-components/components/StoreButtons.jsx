@@ -4,6 +4,8 @@ import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { GO_LINKS } from './links';
 
+const STORE_LINK_PROPS = { target: '_blank', rel: 'noopener noreferrer' };
+
 function PlayGlyph({ className }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
@@ -33,12 +35,12 @@ export default function StoreButtons({ tone = 'navy', compact = false, className
   if (compact) {
     return (
       <div className={cn('flex items-center gap-4 text-[15px] font-semibold text-white', className)}>
-        <a href={GO_LINKS.ios} className="group inline-flex items-center gap-2 transition-colors hover:text-gold-200">
+        <a href={GO_LINKS.ios} {...STORE_LINK_PROPS} className="group inline-flex items-center gap-2 transition-colors hover:text-gold-200">
           <AppleGlyph className="size-4 transition-transform group-hover:-translate-y-0.5" />
           {t('appStore')}
         </a>
         <span className="h-4 w-px bg-white/30" aria-hidden />
-        <a href={GO_LINKS.android} className="group inline-flex items-center gap-2 transition-colors hover:text-gold-200">
+        <a href={GO_LINKS.android} {...STORE_LINK_PROPS} className="group inline-flex items-center gap-2 transition-colors hover:text-gold-200">
           <PlayGlyph className="size-4 transition-transform group-hover:-translate-y-0.5" />
           {t('googlePlay')}
         </a>
@@ -57,6 +59,7 @@ export default function StoreButtons({ tone = 'navy', compact = false, className
         <motion.a
           key={big}
           href={href}
+          {...STORE_LINK_PROPS}
           variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
           whileHover={{ y: -3 }}
           className={cn('group relative inline-flex h-16 min-w-[200px] items-center gap-3.5 overflow-hidden rounded-2xl px-6 transition-colors', cls)}
