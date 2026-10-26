@@ -76,7 +76,7 @@ export const CAT5_LANGUAGES = ['ar', 'en'];
  * shows as plain text. Labels: marketingPage.footer.links. "Legal Documents" is also the button in
  * "Your Relationship with GTC Financial Consultancy" (it jumps to the footer links until its URL is set).
  */
-export const CAT5_LEGAL_LINKS = { legalDocuments: '', riskDisclosure: '', complaints: '', privacy: '', cookies: '', terms: '' };
+export const CAT5_LEGAL_LINKS = { legalDocuments: '', riskDisclosure: '', privacy: '', cookies: '', terms: '' };
 
 /** General CMA site (FAQ and “verify licence” lines outside the legal footer). */
 export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/home';

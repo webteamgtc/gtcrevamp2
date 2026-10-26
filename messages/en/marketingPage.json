@@ -12,7 +12,7 @@
     "cta": "Speak to the Team",
     "hero": {
       "badge": "CMA Licensed · Category 5",
-      "title": "Connecting You to [Global Financial Markets]",
+      "title": "Your Trusted Global Partner in [Financial Insight]",
       "text": "Behind every confident decision is a clear explanation. We bring a thoughtful, professional approach to financial consultations, introductions to licensed financial service providers, and the promotion of financial products and services within our approved regulatory scope.",
       "primary": "Get Started",
       "secondary": "About our services"
@@ -161,7 +161,7 @@
     },
     "footer": {
       "title": "Important information",
-      "text": "GTC Financial Consultancy L.L.C. is licensed by the UAE Capital Market Authority (CMA) under Category 5 (Financial Consultations, Introduction and Promotion), Licence No. 20200000211. It is part of GTC Group and operates independently, introducing clients only to regulated financial services providers. Registered office: Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates. The Company does not hold client money and does not carry out transactions on behalf of clients. Nothing on this website is an offer, solicitation or personal recommendation, and the information is provided for general purposes only.",
+      "text": "GTC Financial Consultancy L.L.C. is licensed by the UAE Capital Market Authority (CMA) under Category 5 (Financial Consultations, Introduction and Promotion), Licence No. 20200000211. Registered office: Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates. It is part of GTC Group and operates independently, introducing clients only to regulated financial services providers. The Company does not hold client money and does not carry out transactions on behalf of clients. Nothing on this website is an offer, solicitation or personal recommendation, and the information is provided for general purposes only.",
       "verifyPrefix": "You can verify our CAT5 license under the Capital Market Authority ",
       "verifyLink": "here",
       "verifySuffix": ":",
@@ -169,7 +169,6 @@
       "links": {
         "legalDocuments": "Legal Documents",
         "riskDisclosure": "Risk Disclosure Policy",
-        "complaints": "Complaints Handling Policy",
         "privacy": "Privacy Policy",
         "cookies": "Cookie Policy",
         "terms": "Terms of Use"
@@ -209,7 +208,7 @@
     },
     "support": {
       "title": "Client Support in [Arabic and English]",
-      "text": "Financial matters can bring plenty of questions. You don't have to figure everything out alone. Whether something needs explaining or you're unsure where to begin, our team is here to listen and help you find the information you need.",
+      "text": "Financial matters can raise many questions. You don't have to figure everything out alone. Whether something needs explaining or you're unsure where to begin, our team is here to listen and help you find the information you need.",
       "hours": "Monday to Friday, 9:00 to 18:00 GST",
       "cta": "Get in Touch",
       "top": "Client Support"
