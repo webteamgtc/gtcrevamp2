@@ -50,7 +50,7 @@ import Logo from '@/components/shared/Logo';
 import FaqAccordion from '@/components/shared/FaqAccordion';
 import { SectionIntro, AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, HeroIn, EASE } from '@/components/motion';
-import { CAT5_CMA_URL, CAT5_CONTACT, CAT5_LEGAL_LINKS, CAT5_SOCIAL } from '@/config/regions';
+import { CAT5_CMA_URL, CAT5_CONTACT, CAT5_FOOTER_VERIFY_URL, CAT5_LEGAL_LINKS, CAT5_SOCIAL } from '@/config/regions';
 import { cat5Href } from './cat5Links';
 import { SOCIALS } from '@/components/shared/icons';
 import EnquiryForm from './EnquiryForm';
@@ -835,7 +835,7 @@ function Support() {
  * A link without a URL yet shows as plain text.
  */
 const TAG_LINKS = { privacy: () => CAT5_LEGAL_LINKS.privacy, cma: () => CAT5_CMA_URL };
-export const withLinks = (text) =>
+export const withLinks = (text, linkClass = 'font-semibold text-brand underline underline-offset-4 hover:text-gold-700') =>
   String(text)
     .split(/(<(?:privacy|cma)>.*?<\/(?:privacy|cma)>)/)
     .map((part, i) => {
@@ -843,7 +843,7 @@ export const withLinks = (text) =>
       if (!m) return part;
       const href = TAG_LINKS[m[1]]();
       return href ? (
-        <a key={i} href={href} {...(m[1] === 'cma' ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className="font-semibold text-brand underline underline-offset-4 hover:text-gold-700">
+        <a key={i} href={href} {...(m[1] === 'cma' ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className={linkClass}>
           {m[2]}
         </a>
       ) : (
@@ -1032,6 +1032,18 @@ function LegalFooter() {
           <Info className="size-4" aria-hidden /> {t('footer.title')}
         </h2>
         <p className="mt-4 max-w-5xl text-[13px] leading-relaxed text-white/60">{t('footer.text')}</p>
+        <p className="mt-3 max-w-5xl text-[13px] leading-relaxed text-white/60">
+          {t('footer.verifyPrefix')}
+          <a
+            href={CAT5_FOOTER_VERIFY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-gold-200 underline underline-offset-4 hover:text-white"
+          >
+            {t('footer.verifyLink')}
+          </a>
+          {t('footer.verifySuffix')}
+        </p>
         <p className="mt-5 max-w-5xl rounded-2xl border border-gold/25 bg-gold/[0.06] px-5 py-4 text-[13px] leading-relaxed text-white/70">{t('footer.risk')}</p>
         <p className="mt-10 border-t border-white/10 pt-6 text-sm text-white/50">{t('footer.copyright')}</p>
       </div>

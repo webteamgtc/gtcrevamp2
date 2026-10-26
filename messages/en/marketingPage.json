@@ -162,6 +162,9 @@
     "footer": {
       "title": "Important information",
       "text": "GTC Financial Consultancy L.L.C. is licensed by the UAE Capital Market Authority (CMA) under Category 5 (Financial Consultations, Introduction and Promotion), Licence No. 20200000211. It is part of GTC Group and operates independently, introducing clients only to regulated financial services providers. Registered office: Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates. The Company does not hold client money and does not carry out transactions on behalf of clients. Nothing on this website is an offer, solicitation or personal recommendation, and the information is provided for general purposes only.",
+      "verifyPrefix": "You can verify our CAT5 license under the Capital Market Authority ",
+      "verifyLink": "here",
+      "verifySuffix": ":",
       "risk": "Financial products carry risk and may not be suitable for everyone. Before making any financial decision, review the relevant product documentation and, where necessary, seek independent professional advice.",
       "links": {
         "legalDocuments": "Legal Documents",
