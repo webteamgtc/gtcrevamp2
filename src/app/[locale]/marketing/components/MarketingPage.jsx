@@ -938,11 +938,13 @@ function Enquiry() {
               </li>
               {tel && (
                 <li>
-                  <a href={tel} className="group flex items-center gap-3 font-semibold text-brand" dir="ltr">
+                  <a href={tel} className="group flex items-center gap-3 font-semibold text-brand">
                     <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white ring-1 ring-brand/15 transition-colors group-hover:bg-brand group-hover:text-white">
                       <Phone className="size-4" aria-hidden />
                     </span>
-                    {CAT5_CONTACT.phone}
+                    <span dir="ltr" className="[unicode-bidi:isolate]">
+                      {CAT5_CONTACT.phone}
+                    </span>
                   </a>
                 </li>
               )}
