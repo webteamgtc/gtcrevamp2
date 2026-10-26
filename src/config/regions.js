@@ -80,8 +80,6 @@ export const CAT5_LEGAL_LINKS = { legalDocuments: '', riskDisclosure: '', compla
 
 /** General CMA site (FAQ and “verify licence” lines outside the legal footer). */
 export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/home';
-/** Legal footer only: “here” → CMA licensed-companies register (CP-0001204). */
-export const CAT5_FOOTER_VERIFY_URL = 'https://uaecma.gov.ae/en/open-data/licensed-companies?q=CP-0001204';
 
 /** CAT 5 footer social links (GTCFX official accounts; to be confirmed by Marketing). Icons: SOCIALS in components/shared/icons. */
 export const CAT5_SOCIAL = [

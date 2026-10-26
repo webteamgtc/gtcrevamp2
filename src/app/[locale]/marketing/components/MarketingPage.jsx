@@ -50,7 +50,7 @@ import Logo from '@/components/shared/Logo';
 import FaqAccordion from '@/components/shared/FaqAccordion';
 import { SectionIntro, AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, HeroIn, EASE } from '@/components/motion';
-import { CAT5_CMA_URL, CAT5_CONTACT, CAT5_FOOTER_VERIFY_URL, CAT5_LEGAL_LINKS, CAT5_SOCIAL } from '@/config/regions';
+import { CAT5_CMA_URL, CAT5_CONTACT, CAT5_LEGAL_LINKS, CAT5_SOCIAL } from '@/config/regions';
 import { cat5Href } from './cat5Links';
 import { SOCIALS } from '@/components/shared/icons';
 import EnquiryForm from './EnquiryForm';
@@ -1034,14 +1034,7 @@ function LegalFooter() {
         <p className="mt-4 max-w-5xl text-[13px] leading-relaxed text-white/60">{t('footer.text')}</p>
         <p className="mt-3 max-w-5xl text-[13px] leading-relaxed text-white/60">
           {t('footer.verifyPrefix')}
-          <a
-            href={CAT5_FOOTER_VERIFY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-gold-200 underline underline-offset-4 hover:text-white"
-          >
-            {t('footer.verifyLink')}
-          </a>
+          {t('footer.verifyLink')}
           {t('footer.verifySuffix')}
         </p>
         <p className="mt-5 max-w-5xl rounded-2xl border border-gold/25 bg-gold/[0.06] px-5 py-4 text-[13px] leading-relaxed text-white/70">{t('footer.risk')}</p>
