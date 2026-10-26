@@ -95,8 +95,7 @@ function cat5Site(request, geo, first, restPath, redirect) {
   if (geo.country !== 'AE') return internal ? redirect(`/${first}`) : undefined;
   const pages = Object.values(CAT5_PAGES);
   if (!CAT5_LOCALES.includes(first)) {
-    const ar = first === 'ar' || request.cookies.get('NEXT_LOCALE')?.value === 'ar';
-    return redirect(`/${ar ? 'ar' : CAT5_LOCALE}`);
+    return redirect(`/${first === 'ar' ? 'ar' : CAT5_LOCALE}`);
   }
   if (internal) return redirect(`/${first}${pages.find((p) => p.dir === restPath.slice(CAT5_PATH.length))?.path ?? ''}`);
   const page = pages.find((p) => p.path === restPath);
@@ -129,13 +128,11 @@ export default async function proxy(request) {
     if (res) return res;
   }
 
-  // 2. no region/language in the URL (or the old /en) → the visitor's regional site,
-  //    unless they picked a non-English language before (next-intl's NEXT_LOCALE cookie)
+  // 2. no region/language in the URL (or the old /en) → the visitor's regional site (en-intl, en-ae…);
+  //    no remembered language — the locale lives only in the URL
   if (!LOCALES.has(first)) {
-    const picked = request.cookies.get('NEXT_LOCALE')?.value;
-    const target = picked && LOCALES.has(picked) && !REGIONAL.has(picked) ? picked : home;
     const tail = first === 'en' ? restPath : pathname === '/' ? '' : pathname;
-    return redirect(`/${target}${tail}`);
+    return redirect(`/${home}${tail}`);
   }
 
   // 3. another region's English site → the visitor's own region (same page).
