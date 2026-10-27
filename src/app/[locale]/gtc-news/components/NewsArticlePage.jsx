@@ -118,7 +118,7 @@ function Body({ article, className }) {
   ) : (
     // amount={0}: long designed posts are taller than the viewport, so a % threshold would keep them hidden
     <Reveal y={16} amount={0} className={className}>
-      <div className="learn-article" dangerouslySetInnerHTML={{ __html: article.html }} />
+      <div className="learn-article news-article-body" dangerouslySetInnerHTML={{ __html: article.html }} />
     </Reveal>
   );
 }
@@ -127,6 +127,21 @@ function Body({ article, className }) {
 const ArticleTitle = ({ text }) => (/\[[^\]]+\]/.test(text) ? <AccentTitle text={text} /> : text);
 
 const hasCover = (a) => a.cover?.url && !/<img\b/i.test(a.html ?? '');
+
+function CoverFrame({ cover, title }) {
+  return (
+    <div className="relative flex w-full items-center justify-center overflow-hidden rounded-[1.75rem] bg-white/[0.06] shadow-2xl shadow-black/40 ring-1 ring-white/10">
+      <img
+        src={cover.url}
+        alt={cover.alt || title}
+        width={cover.width ?? undefined}
+        height={cover.height ?? undefined}
+        decoding="async"
+        className="max-h-[min(26rem,52vh)] w-full object-contain object-center"
+      />
+    </div>
+  );
+}
 
 function Split({ article, related, t, crumbs, catHref, minutes, title, toc, active, progress, bodyRef }) {
   const side = related.slice(0, 4);
@@ -151,11 +166,11 @@ function Split({ article, related, t, crumbs, catHref, minutes, title, toc, acti
               </div>
             </div>
             {hasCover(article) && (
-              <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}>
-                <TiltCard max={5} className="relative">
-                  <span className="absolute -inset-3 rounded-[2.25rem] border border-gold/40" aria-hidden />
-                  <span className="absolute -end-5 -top-5 size-24 rounded-full bg-gold/40 blur-2xl" aria-hidden />
-                  <img src={article.cover.url} alt={article.cover.alt || article.title} className="relative aspect-[4/3] w-full rounded-[1.75rem] object-cover shadow-2xl shadow-black/40" />
+              <motion.div className="min-w-0 p-2" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}>
+                <TiltCard max={4} glare={false} className="relative">
+                  <span className="pointer-events-none absolute -inset-3 rounded-[2.25rem] border border-gold/40" aria-hidden />
+                  <span className="pointer-events-none absolute -end-5 -top-5 size-24 rounded-full bg-gold/40 blur-2xl" aria-hidden />
+                  <CoverFrame cover={article.cover} title={article.title} />
                 </TiltCard>
               </motion.div>
             )}
