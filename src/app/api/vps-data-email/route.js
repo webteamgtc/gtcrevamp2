@@ -36,11 +36,11 @@ function clientIp(request) {
 /* ------------------------------------------------------------ e-mail */
 
 const SOCIALS = [
-  ["Facebook", "https://www.facebook.com/gtcfxofficial", "facebook"],
-  ["X", "https://twitter.com/GTC_fx", "twitter"],
-  ["LinkedIn", "https://linkedin.com/company/gtcfx-official", "linkedin"],
+  ["Facebook", "https://www.facebook.com/GTCFXGlobalTradeCapital", "facebook"],
+  ["X", "https://x.com/GTC_fx", "twitter"],
+  ["LinkedIn", "https://www.linkedin.com/company/gtcfx-official", "linkedin"],
   ["YouTube", "https://www.youtube.com/channel/UCnKWakjm1b9Bm63xgwNFXHA", "youtube"],
-  ["Instagram", "https://www.instagram.com/gtcfxofficial", "instagram"],
+  ["Instagram", "https://www.instagram.com/gtcfxofficial/", "instagram"],
   ["TikTok", "https://www.tiktok.com/@gtcgroup_official", "tiktok"],
 ];
 
