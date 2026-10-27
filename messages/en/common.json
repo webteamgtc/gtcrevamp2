@@ -224,6 +224,7 @@
     "scroll": "Scroll to explore"
   },
   "app": {
+    "splashTitle": "GTCFX: GTC GO - Trade & Invest",
     "tagline": "Trade & Invest",
     "watchlist": "Watchlist",
     "portfolio": "Portfolio",

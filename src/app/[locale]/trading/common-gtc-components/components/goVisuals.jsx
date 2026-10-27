@@ -1,27 +1,32 @@
 'use client';
 /**
- * Code-drawn GTC Go visuals (no image assets): the app tile, floating hero chips, iPhone home screen,
+ * GTC Go visuals: app tile (GTCFX-ICON.svg), floating hero chips, iPhone home screen,
  * the five in-app screens used by the pillars strip and the multi-device cluster.
  */
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'motion/react';
 import { Bell, Calendar, Camera, ChevronLeft, Clock3, Cloud, Copy, Folder, Headphones, Home, Image as ImageIcon, LayoutGrid, LineChart, Mail, Map as MapIcon, Minus, Newspaper, Plus, Search, Send, Shield, Wallet } from 'lucide-react';
-import { CandleChart, LaptopMockup, PhoneMockup, TabletMockup } from '@/components/shared/devices';
+import { CandleChart } from '@/components/shared/devices';
 import { useTicker, FlashPrice, Sparkline, fmt, pct } from '@/components/shared/ticker';
 import { CountUp, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
 /* ------------------------------------------------------------ brand bits */
 
-/** Rounded "app icon" tile with the GTC mark. */
+const GTCFX_APP_ICON = '/GTCFX-ICON.svg';
+
+/** Rounded app icon tile — public/GTCFX-ICON.svg (home screen, push toast, hero). */
 export function AppTile({ className, badge = false }) {
   return (
-    <span className={cn('relative grid size-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-700 to-brand-950 shadow-xl shadow-brand/40 ring-1 ring-white/15', className)}>
-      <span className="text-[1.35em] font-black italic leading-none tracking-tighter text-white">
-        G<span className="text-gold-200">T</span>
-      </span>
+    <span className={cn('relative grid size-16 shrink-0 place-items-center overflow-visible rounded-2xl', className)}>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-br from-brand-700 to-brand-950 shadow-xl shadow-brand/40 ring-1 ring-white/15"
+      />
+      <Image src={GTCFX_APP_ICON} alt="" width={64} height={64} unoptimized className="relative z-[1] size-[70%] object-contain" />
       {badge && (
-        <span className="absolute -end-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-down text-[10px] font-bold text-white ring-2 ring-black">
+        <span className="absolute end-0 top-0 z-[2] grid size-5 translate-x-1/3 -translate-y-1/3 place-items-center rounded-full bg-down text-[10px] font-bold text-white ring-2 ring-black">
           <motion.span className="absolute inset-0 rounded-full bg-down" animate={{ scale: [1, 1.8], opacity: [0.6, 0] }} transition={{ duration: 1.6, repeat: Infinity }} />
           <span className="relative">1</span>
         </span>
@@ -108,8 +113,9 @@ export function HomeScreenPhone({ className }) {
       <span className="absolute -start-[4px] top-28 h-10 w-[4px] rounded-s bg-zinc-500" />
       <span className="absolute -start-[4px] top-44 h-16 w-[4px] rounded-s bg-zinc-500" />
       <span className="absolute -start-[4px] top-64 h-16 w-[4px] rounded-s bg-zinc-500" />
-      <div className="relative h-full overflow-hidden rounded-[2.6rem] bg-black px-5 pt-4">
-        <div className="flex items-center justify-between text-[13px] font-semibold text-white">
+      <div className="relative h-full overflow-visible rounded-[2.6rem] px-5 pt-4">
+        <div className="absolute inset-0 overflow-hidden rounded-[2.6rem] bg-black" aria-hidden />
+        <div className="relative flex items-center justify-between text-[13px] font-semibold text-white">
           <span>11:00</span>
           <span className="h-6 w-24 rounded-full bg-zinc-900" />
           <span className="flex items-center gap-1">
@@ -117,8 +123,8 @@ export function HomeScreenPhone({ className }) {
             <span className="h-2.5 w-5 rounded-sm border border-white/80" />
           </span>
         </div>
-        <div className="mt-7 grid grid-cols-4 gap-x-3 gap-y-5">
-          <motion.div className="flex flex-col items-center gap-1.5" initial={{ scale: 0.6, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ type: 'spring', stiffness: 220, damping: 14, delay: 0.2 }}>
+        <div className="relative mt-7 grid grid-cols-4 gap-x-3 gap-y-5 px-0.5 pt-1">
+          <motion.div className="flex flex-col items-center gap-1.5 overflow-visible" initial={{ scale: 0.6, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ type: 'spring', stiffness: 220, damping: 14, delay: 0.2 }}>
             <AppTile badge className="size-14 rounded-[1.1rem] text-[15px]" />
             <span className="text-[10px] text-white/85">GTCFX</span>
           </motion.div>
@@ -423,30 +429,67 @@ export const PILLAR_SCREENS = [WelcomeScreen, OrderScreen, AccountScreen, CopySc
 
 /* ------------------------------------------------------------ device cluster */
 
+/** Workstation section art in public/ — layout matches scroll-driven DeviceCluster animation. */
+const WORKSTATION_IMAGES = {
+  monitor: { src: '/bigscreen1.png', width: 2163, height: 1921 },
+  tablet: { src: '/ipad.png', width: 918, height: 1290 },
+  phoneLeft: { src: '/mobile1.png', width: 439, height: 887 },
+  phoneRight: { src: '/mobile2.png', width: 444, height: 887 },
+  laptop: { src: '/rightlaptop.png', width: 1968, height: 1220 }
+};
+
+function WorkstationDevice({ asset, className }) {
+  return (
+    // Native img: large PNG mockups load reliably and skip Next image sizing edge cases.
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={asset.src}
+      alt=""
+      width={asset.width}
+      height={asset.height}
+      loading="lazy"
+      decoding="async"
+      className={cn('block h-auto w-full max-w-full select-none object-contain object-bottom drop-shadow-2xl', className)}
+      draggable={false}
+    />
+  );
+}
+
 /**
  * Tablet · phones · laptop composition. `tabletX`, `laptopX` and `phonesY` take motion values,
  * so the parent can "open" the cluster as it scrolls into view.
  */
 export function DeviceCluster({ tabletX, laptopX, phonesY, className }) {
   return (
-    <div dir="ltr" className={cn('relative mx-auto aspect-[2.3/1] w-full max-w-6xl', className)} aria-hidden>
-      <div className="absolute inset-x-[10%] bottom-0 h-10 rounded-[100%] bg-brand/25 blur-2xl" />
-      {/* centre laptop (back) */}
-      <div className="absolute left-1/2 top-0 w-[46%] -translate-x-1/2">
-        <LaptopMockup className="w-full" symbol="XAUUSD" price="4,158.99" seed={31} />
+    <div
+      dir="ltr"
+      className={cn(
+        'relative isolate mx-auto w-full max-w-6xl overflow-visible',
+        'min-h-[320px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[580px]',
+        className
+      )}
+      aria-hidden
+    >
+      <div className="absolute inset-x-[8%] bottom-[4%] h-14 rounded-[100%] bg-brand/25 blur-2xl" />
+      {/* centre monitor (back) */}
+      <div className="pointer-events-none absolute bottom-0 left-1/2 z-[1] w-[50%] -translate-x-1/2 sm:w-[48%] lg:w-[46%]">
+        <WorkstationDevice asset={WORKSTATION_IMAGES.monitor} />
       </div>
-      {/* tablet (front-left) */}
-      <motion.div className="absolute bottom-0 left-0 w-[26%]" style={{ x: tabletX }}>
-        <TabletMockup className="w-full" symbol="EURUSD" price="1.16035" seed={7} />
+      {/* iPad (front-left) */}
+      <motion.div className="absolute bottom-0 left-0 z-[3] w-[30%] min-w-[120px] max-w-[320px] sm:w-[28%] md:w-[26%]" style={{ x: tabletX }}>
+        <WorkstationDevice asset={WORKSTATION_IMAGES.tablet} />
       </motion.div>
       {/* laptop (front-right) */}
-      <motion.div className="absolute bottom-0 right-0 w-[38%]" style={{ x: laptopX }}>
-        <LaptopMockup className="w-full" symbol="GBPUSD" price="1.34218" seed={21} />
+      <motion.div className="absolute bottom-0 right-0 z-[3] w-[40%] min-w-[140px] max-w-[480px] sm:w-[38%] md:w-[36%]" style={{ x: laptopX }}>
+        <WorkstationDevice asset={WORKSTATION_IMAGES.laptop} />
       </motion.div>
-      {/* phones (front-centre) */}
-      <motion.div className="absolute bottom-0 left-[29%] flex w-[22%] items-end gap-[6%]" style={{ y: phonesY }}>
-        <PhoneMockup className="w-1/2 rounded-[1.4rem] border-[5px]" symbol="NAS100" price="24,980.2" seed={3} />
-        <PhoneMockup className="w-1/2 rounded-[1.4rem] border-[5px]" dark symbol="BTCUSD" price="112,480.5" seed={12} />
+      {/* phones — mobile1 (left), mobile2 (right) */}
+      <motion.div
+        className="absolute bottom-0 left-[26%] z-[4] flex w-[26%] min-w-[140px] max-w-[300px] items-end justify-center gap-[5%] md:left-[28%] md:w-[24%]"
+        style={{ y: phonesY }}
+      >
+        <WorkstationDevice asset={WORKSTATION_IMAGES.phoneLeft} className="min-h-[1px] w-[47%] flex-shrink-0" />
+        <WorkstationDevice asset={WORKSTATION_IMAGES.phoneRight} className="min-h-[1px] w-[47%] flex-shrink-0" />
       </motion.div>
     </div>
   );

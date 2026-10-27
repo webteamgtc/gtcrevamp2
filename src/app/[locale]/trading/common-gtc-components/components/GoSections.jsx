@@ -188,15 +188,15 @@ export function Workstation({ ns = 'gtcGoApp' }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'center center'] });
   const p = useSpring(scrollYProgress, { stiffness: 90, damping: 22 });
-  const tabletX = useTransform(p, [0, 1], ['40%', '0%']);
-  const laptopX = useTransform(p, [0, 1], ['-30%', '0%']);
-  const phonesY = useTransform(p, [0, 1], ['30%', '0%']);
+  const tabletX = useTransform(p, [0, 1], ['18%', '0%']);
+  const laptopX = useTransform(p, [0, 1], ['-18%', '0%']);
+  const phonesY = useTransform(p, [0, 1], ['0%', '0%']);
   const glow = useTransform(p, [0, 1], [0.2, 1]);
 
   return (
-    <section id="workstation" className="relative overflow-hidden bg-white pb-14 md:pb-24">
+    <section id="workstation" className="relative overflow-x-hidden bg-white pb-14 md:pb-24">
       <div className="absolute -start-40 top-40 size-[420px] rounded-full bg-brand/[0.06] blur-[120px]" aria-hidden />
-      <div className="container-x relative">
+      <div className="container-x relative overflow-visible">
         <Reveal className="mx-auto max-w-5xl text-center">
           <h2 className="heading-section">
             <AccentTitle text={t('title')} />
@@ -208,7 +208,7 @@ export function Workstation({ ns = 'gtcGoApp' }) {
           </LiveAccountButton>
         </Reveal>
 
-        <div ref={ref} className="relative mt-14 md:mt-20">
+        <div ref={ref} className="relative mt-14 overflow-visible md:mt-20">
           <motion.div className="absolute inset-x-[15%] top-[20%] h-1/2 rounded-full bg-gradient-to-r from-brand/20 via-gold/20 to-brand/20 blur-3xl" style={{ opacity: glow }} aria-hidden />
           <DeviceCluster tabletX={tabletX} laptopX={laptopX} phonesY={phonesY} />
         </div>
@@ -219,7 +219,7 @@ export function Workstation({ ns = 'gtcGoApp' }) {
         <Stagger className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 md:grid-cols-4" stagger={0.08}>
           {PLATFORMS.map(({ key, Icon, primary }) => (
             <StaggerItem key={key}>
-              <a href={GO_LINKS[key]} className={cn('group relative flex h-14 items-center justify-center gap-3 overflow-hidden rounded-xl border text-base font-semibold transition-all duration-300 hover:-translate-y-0.5', primary ? 'border-brand bg-brand text-white shadow-lg shadow-brand/25 hover:bg-brand-700' : 'border-brand/25 bg-white text-ink hover:border-brand hover:bg-brand hover:text-white hover:shadow-lg hover:shadow-brand/20')}>
+              <a href={GO_LINKS[key]} target="_blank" rel="noopener noreferrer" className={cn('group relative flex h-14 items-center justify-center gap-3 overflow-hidden rounded-xl border text-base font-semibold transition-all duration-300 hover:-translate-y-0.5', primary ? 'border-brand bg-brand text-white shadow-lg shadow-brand/25 hover:bg-brand-700' : 'border-brand/25 bg-white text-ink hover:border-brand hover:bg-brand hover:text-white hover:shadow-lg hover:shadow-brand/20')}>
                 {primary && <motion.span className="absolute inset-y-0 -left-1/2 w-1/2 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/25 to-transparent" animate={{ left: ['-50%', '150%'] }} transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 2.4 }} aria-hidden />}
                 <Icon className="relative size-5 transition-transform duration-300 group-hover:scale-110" />
                 <span className="relative">{t(`platforms.${key}`)}</span>

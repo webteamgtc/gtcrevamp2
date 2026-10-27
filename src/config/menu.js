@@ -19,6 +19,7 @@ export const liveAccountHref = (account) => (account ? `${LIVE_ACCOUNT_HREF}?acc
 
 export const PORTAL = {
   login: CLIENT_PORTAL,
+  register: CLIENT_PORTAL,
   demo: '/trading/free-demo-account',
   clientPortal: CLIENT_PORTAL
 };
@@ -111,7 +112,7 @@ export const MENU = [
       [
         { id: 'gtcgo', items: [
           { id: 'gtcGo', href: '/trading/gtc-go-app', icon: AppWindow },
-          { id: 'gtcGoWeb', href: '/trading/gtc-go-web', icon: Globe },
+          { id: 'gtcGoWeb', href: CLIENT_PORTAL, icon: Globe },
           { id: 'gtcGoIos', href: '/trading/gtc-go-app-ipad', icon: Tablet },
           { id: 'gtcGoAndroid', href: '/trading/gtc-go-app-android', icon: Smartphone },
           { id: 'copyTrading', href: '/trading/copy-trading', icon: Users }
