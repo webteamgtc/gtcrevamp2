@@ -159,7 +159,11 @@ function Split({ article, related, t, crumbs, catHref, minutes, title, toc, acti
               <motion.h1 className="heading-page mt-6 text-balance" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.75, ease: EASE }}>
                 <ArticleTitle text={title} />
               </motion.h1>
-              {(article.lesson?.hero?.description || article.excerpt) && <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0">{article.lesson?.hero?.description || article.excerpt}</p>}
+              {(article.excerpt || article.lesson?.hero?.description) && (
+                <p className="mx-auto mt-5 max-w-xl line-clamp-3 text-pretty text-base leading-relaxed text-white/65 md:text-lg lg:mx-0">
+                  {article.excerpt || article.lesson?.hero?.description}
+                </p>
+              )}
               {article.lesson?.hero && <HeroPills pills={article.lesson.hero.pills} />}
               <div className="mt-8 border-t border-white/10 pt-6 [&>div]:justify-center lg:[&>div]:justify-start">
                 <MetaLine article={article} minutes={minutes} t={t} dark />
