@@ -188,7 +188,7 @@ function Editorial({ category, categories, articles, t, crumbs, loadMore }) {
                   </div>
                   <div>
                     <span className="heading-label">{t('hero.latest')}</span>
-                    <PostTitle a={lead} as="h2" className="heading-section mt-3 text-balance transition-colors group-hover:text-brand" />
+                    <PostTitle a={lead} as="h2" className="heading-card mt-3 text-balance text-xl md:text-[1.35rem] transition-colors group-hover:text-brand" />
                     <div className="mt-4">
                       <NewsMeta article={lead} showCategory={false} />
                     </div>
