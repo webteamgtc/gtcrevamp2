@@ -1,152 +1,133 @@
 'use client';
 /**
- * "GTCFX & Market Trends" — navy tab bar of Strapi news categories (sliding white pill) above a 3×2 grid of the
- * category's newest posts. One card is highlighted navy and the highlight follows the hovered card.
- * Tabs load through /api/news (cached per category); "Read More" opens the category page.
+ * "GTCFX & Market Trends" — every Strapi news category at once (no tabs), each with its newest posts and a
+ * "View all" link to the category page. No post counts. A row per category: one large story and two smaller
+ * (compact rows on phones).
  */
-import { useRef, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
-import ArrowLink from '@/components/shared/ArrowLink';
+import { useTranslations } from 'next-intl';
+import { motion } from 'motion/react';
+import { ArrowRight, CalendarDays } from 'lucide-react';
 import NavLink from '@/components/shared/nav/NavLink';
 import { SectionIntro } from '@/components/shared/SectionIntro';
-import { NewsCover, NewsMeta } from '@/components/shared/news/NewsCard';
+import { NewsCover } from '@/components/shared/news/NewsCard';
 import { Reveal, EASE } from '@/components/motion';
 import { newsCategoryHref } from '@/lib/news-path';
 import { cn } from '@/lib/utils';
+import { iconFor } from './newsUi';
 
-const SIZE = 6;
-const DEFAULT_ON = 2; // third card highlighted, as in the design
+const inView = (i = 0) => ({ initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.15 }, transition: { duration: 0.55, ease: EASE, delay: i * 0.06 } });
 
-function TrendCard({ article, on, onHover, readMore, index }) {
+function Go({ className }) {
+  return <ArrowRight className={cn('size-4 transition-transform duration-300 group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1', className)} aria-hidden />;
+}
+
+function TitleLink({ article, className, as: H = 'h4' }) {
   return (
-    <motion.article
-      onMouseEnter={onHover}
-      onFocus={onHover}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] ring-1 ring-brand/10"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: EASE, delay: index * 0.06 }}
-    >
-      {on && (
-        <motion.span layoutId="trend-on" className="absolute inset-0 bg-gradient-to-br from-brand-600 via-brand-800 to-brand-950 shadow-2xl shadow-brand/30" transition={{ type: 'spring', stiffness: 360, damping: 34 }} aria-hidden>
-          <span className="bg-grid-dark absolute inset-0 opacity-40" />
-        </motion.span>
-      )}
-      {!on && <span className="absolute inset-0 bg-white" aria-hidden />}
-      <div className="relative m-2 aspect-[16/9] overflow-hidden rounded-[1.35rem]">
-        <NewsCover article={article} />
-      </div>
-      <div className={cn('relative flex flex-1 flex-col px-5 pb-6 pt-3 transition-colors duration-500', on && 'is-dark text-white')}>
-        <NewsMeta article={article} dark={on} />
-        <h3 className={cn('mt-3 line-clamp-2 text-[17px] font-semibold leading-snug transition-colors', on ? 'text-white' : 'text-ink group-hover:text-brand')}>
-          <NavLink href={article.href} className="after:absolute after:inset-0">
-            {article.title}
-          </NavLink>
-        </h3>
-        {article.excerpt && <p className={cn('mt-2 line-clamp-3 flex-1 text-sm leading-relaxed transition-colors', on ? 'text-white/65' : 'text-ink/55')}>{article.excerpt}</p>}
-        <span className={cn('mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors', on ? 'text-gold-200' : 'text-brand')}>
-          {readMore}
-          <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1" />
-        </span>
-      </div>
-    </motion.article>
+    <H className={cn(/heading-/.test(className ?? '') ? '' : 'heading-small', className)}>
+      <NavLink href={article.href} className="after:absolute after:inset-0">
+        {article.title}
+      </NavLink>
+    </H>
   );
 }
 
-function Skeleton() {
+function When({ a, className }) {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-hidden>
-      {Array.from({ length: SIZE }, (_, i) => (
-        <div key={i} className="overflow-hidden rounded-[1.75rem] bg-white p-2 ring-1 ring-brand/10">
-          <div className="aspect-[16/9] animate-pulse rounded-[1.35rem] bg-brand-50" />
-          <div className="space-y-2.5 p-4">
-            <div className="h-3 w-1/3 animate-pulse rounded-full bg-brand-50" />
-            <div className="h-4 w-5/6 animate-pulse rounded-full bg-brand-50" />
-            <div className="h-4 w-2/3 animate-pulse rounded-full bg-brand-50" />
-          </div>
-        </div>
-      ))}
+    <span className={cn('inline-flex items-center gap-1.5 text-xs text-ink/50', className)}>
+      <CalendarDays className="size-3.5" aria-hidden />
+      <time dateTime={a.publishedAt}>{a.dateLabel}</time>
+    </span>
+  );
+}
+
+function ViewAll({ slug, label, className }) {
+  return (
+    <NavLink href={newsCategoryHref(slug)} className={cn('group inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-gold-700', className)}>
+      {label}
+      <span className="grid size-8 place-items-center rounded-full bg-brand text-white transition-colors group-hover:bg-gold">
+        <Go className="size-3.5" />
+      </span>
+    </NavLink>
+  );
+}
+
+function SectionHead({ s, viewAll, className }) {
+  const Icon = iconFor(s.slug);
+  return (
+    <div className={cn('flex items-center gap-4', className)}>
+      <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-900 text-gold-200 shadow-lg shadow-brand/25">
+        <Icon className="size-6" aria-hidden />
+      </span>
+      <h3 className="heading-title flex-1">{s.name}</h3>
+      <ViewAll slug={s.slug} label={viewAll} />
     </div>
   );
 }
 
-export default function TrendsSection({ categories, initial }) {
-  const t = useTranslations('gtcNewsPage.trends');
-  const locale = useLocale();
-  const [active, setActive] = useState(categories[0]?.slug ?? null);
-  const [articles, setArticles] = useState(initial);
-  const [loading, setLoading] = useState(false);
-  const [on, setOn] = useState(DEFAULT_ON);
-  const cache = useRef(new Map(active ? [[active, initial]] : []));
-
-  const pick = async (slug) => {
-    if (slug === active) return;
-    setActive(slug);
-    setOn(DEFAULT_ON);
-    if (cache.current.has(slug)) return setArticles(cache.current.get(slug));
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/news?${new URLSearchParams({ locale, category: slug, pageSize: String(SIZE) })}`);
-      const data = await res.json();
-      cache.current.set(slug, data.articles ?? []);
-      setArticles(data.articles ?? []);
-    } catch {
-      setArticles([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (!categories.length) return null;
-
+function Rows({ sections, t }) {
   return (
-    <section id="trends" className="relative overflow-hidden bg-[#f6f7fb] py-14 md:py-24">
+    <div className="space-y-12 md:space-y-14">
+      {sections.map((s) => {
+        const [lead, ...rest] = s.articles;
+        return (
+          <section key={s.slug} aria-label={s.name}>
+            <Reveal y={14}>
+              <SectionHead s={s} viewAll={t('viewAll')} className="border-b border-brand/10 pb-5" />
+            </Reveal>
+            <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+              <motion.article
+                {...inView(0)}
+                className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-white ring-1 ring-brand/10 transition-shadow duration-500 hover:shadow-2xl hover:shadow-brand/15 md:col-span-2 lg:col-span-1"
+              >
+                <div className="aspect-[16/9] overflow-hidden">
+                  <NewsCover article={lead} showTitle={false} />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <When a={lead} />
+                  <TitleLink article={lead} className="heading-card mt-3 line-clamp-2 transition-colors group-hover:text-brand" />
+                  {lead.excerpt && <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink/55">{lead.excerpt}</p>}
+                </div>
+              </motion.article>
+              {rest.slice(0, 2).map((a, i) => (
+                <motion.article
+                  key={a.id}
+                  {...inView(i + 1)}
+                  className="group relative grid grid-cols-[7rem_1fr] overflow-hidden rounded-[1.5rem] bg-white ring-1 ring-brand/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-brand/15 md:flex md:flex-col md:rounded-[1.75rem]"
+                >
+                  <div className="relative overflow-hidden md:aspect-[16/10]">
+                    <div className="absolute inset-0">
+                      <NewsCover article={a} showTitle={false} />
+                    </div>
+                  </div>
+                  <div className="flex flex-1 flex-col p-4 md:p-5">
+                    <When a={a} />
+                    <TitleLink article={a} className="mt-2 line-clamp-3 transition-colors group-hover:text-brand" />
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-brand">
+                      {t('readMore')} <Go />
+                    </span>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function TrendsSection({ sections }) {
+  const t = useTranslations('gtcNewsPage.trends');
+  if (!sections.length) return null;
+  return (
+    <section id="trends" className="relative overflow-hidden bg-[#f6f7fb] py-16 md:py-20">
       <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />
       <div className="absolute -end-40 top-10 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" aria-hidden />
       <div className="container-x relative">
         <SectionIntro title={t('title')} />
-
-        <Reveal y={16} className="mt-10 md:mt-12">
-          <div className="is-dark relative overflow-hidden rounded-[1.5rem] bg-gradient-to-r from-brand-700 via-brand-800 to-brand-900 p-2 shadow-xl shadow-brand/20">
-            <div className="bg-grid-dark absolute inset-0 opacity-40" aria-hidden />
-            <div className="no-scrollbar relative flex gap-1 overflow-x-auto" role="tablist">
-              {categories.map((c) => {
-                const sel = c.slug === active;
-                return (
-                  <button key={c.slug} type="button" role="tab" aria-selected={sel} onClick={() => pick(c.slug)} className={cn('relative inline-flex h-12 shrink-0 items-center gap-2 rounded-2xl px-5 text-sm font-semibold transition-colors md:px-6', sel ? 'text-brand-900' : 'text-white/75 hover:text-white')}>
-                    {sel && <motion.span layoutId="trend-tab" className="absolute inset-0 rounded-2xl bg-white shadow-lg" transition={{ type: 'spring', stiffness: 420, damping: 34 }} aria-hidden />}
-                    <span className="relative whitespace-nowrap">{c.name}</span>
-                    <span className={cn('relative rounded-full px-2 py-0.5 text-[11px] tabular-nums', sel ? 'bg-brand-50 text-brand' : 'bg-white/10 text-white/70')}>{c.count}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </Reveal>
-
-        <div className="mt-8">
-          <AnimatePresence mode="wait">
-            <motion.div key={loading ? 'loading' : active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
-              {loading ? (
-                <Skeleton />
-              ) : !articles.length ? (
-                <p className="rounded-[1.75rem] bg-white py-16 text-center text-ink/50 ring-1 ring-brand/10">{t('emptyState')}</p>
-              ) : (
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" onMouseLeave={() => setOn(Math.min(DEFAULT_ON, articles.length - 1))}>
-                  {articles.map((a, i) => (
-                    <TrendCard key={a.id} article={a} index={i} on={on === i} onHover={() => setOn(i)} readMore={t('readMore')} />
-                  ))}
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+        <div className="mt-10 md:mt-12">
+          <Rows sections={sections} t={t} />
         </div>
-
-        <Reveal y={12} className="mt-12 flex justify-center">
-          <ArrowLink href={newsCategoryHref(active)}>{t('readMore')}</ArrowLink>
-        </Reveal>
       </div>
     </section>
   );

@@ -431,11 +431,11 @@ export const PILLAR_SCREENS = [WelcomeScreen, OrderScreen, AccountScreen, CopySc
 
 /** Workstation section art in public/ — layout matches scroll-driven DeviceCluster animation. */
 const WORKSTATION_IMAGES = {
-  monitor: { src: '/bigscreen1.png', width: 2163, height: 1921 },
-  tablet: { src: '/ipad.png', width: 918, height: 1290 },
-  phoneLeft: { src: '/mobile1.png', width: 439, height: 887 },
-  phoneRight: { src: '/mobile2.png', width: 444, height: 887 },
-  laptop: { src: '/rightlaptop.png', width: 1968, height: 1220 }
+  monitor: { src: '/bigscreen1.webp', width: 2163, height: 1921 },
+  tablet: { src: '/ipad.webp', width: 918, height: 1290 },
+  phoneLeft: { src: '/mobile1.webp', width: 439, height: 887 },
+  phoneRight: { src: '/mobile2.webp', width: 444, height: 887 },
+  laptop: { src: '/rightlaptop.webp', width: 1968, height: 1220 }
 };
 
 function WorkstationDevice({ asset, className }) {

@@ -20,7 +20,12 @@ for d in "${DYN[@]}"; do
   case " $KEEP " in *" $d "*) continue ;; esac
   i=$((i+1)); mkdir -p "$PARK/$i"; echo "$d" > "$PARK/$i/path"; mv "$d" "$PARK/$i/dir"
 done
+# sample article page for the review link (removed again after the build)
+SAMPLE='src/app/[locale]/gtc-news/sample-article'
+SAMPLE_CAT='src/app/[locale]/gtc-news/sample-category'
+mkdir -p "$SAMPLE" "$SAMPLE_CAT" && cp scripts/preview-routes/sample-article.jsx "$SAMPLE/page.jsx" && cp scripts/preview-routes/sample-category.jsx "$SAMPLE_CAT/page.jsx"
 restore() {
+  rm -rf "$SAMPLE" "$SAMPLE_CAT"
   mv /tmp/gtc-proxy.js src/proxy.js; mv /tmp/gtc-api src/app/api
   for n in "$PARK"/*; do [ -d "$n/dir" ] && mv "$n/dir" "$(cat "$n/path")"; done
   rm -rf "$PARK"
@@ -34,7 +39,7 @@ cp -r out/_next out/images out/icon.png preview/ 2>/dev/null || true
 for l in $(ls -d out/*/ | xargs -n1 basename); do [ -f out/$l/index.html ] && [ -d out/$l/company ] && mkdir -p preview/$l/home && cp out/$l/index.html preview/$l/home/; done
 # Every other page, flattened to /<l>/<last-segment>/ so all pages sit two folders deep
 # (keep in sync with PREVIEW_PAGES in src/components/shared/nav/NavLink.jsx)
-PAGES="company trading trading/open-live-account trading/free-demo-account trading/deposit trading/account-types trading/compensation-fund trading/mt5-platform trading/mt4-platform trading/metatrader-for-android trading/metatrader-for-ipad trading/gtc-go-app trading/gtc-go-app-ipad trading/gtc-go-app-android company/about-us company/awards company/why-gtc-group gtc-news/market-holidays company/global-presence company/events-and-exhibitions company/regulations company/contact-us markets markets/forex markets/energy markets/indices markets/metals markets/shares markets/future-cfds markets/forex/eurusd markets/forex/gbpusd markets/forex/usdjpy markets/forex/usdchf markets/metals/xauusd markets/indices/us30 markets/indices/spx500 markets/indices/nas100 marketing marketing/about marketing/faq marketing/contact"
+PAGES="company trading trading/open-live-account trading/free-demo-account trading/deposit trading/account-types trading/compensation-fund trading/mt5-platform trading/mt4-platform trading/metatrader-for-android trading/metatrader-for-ipad trading/gtc-go-app trading/gtc-go-app-ipad trading/gtc-go-app-android company/about-us company/awards company/why-gtc-group gtc-news gtc-news/sample-article gtc-news/sample-category gtc-news/market-holidays company/global-presence company/events-and-exhibitions company/regulations company/contact-us markets markets/forex markets/energy markets/indices markets/metals markets/shares markets/future-cfds markets/forex/eurusd markets/forex/gbpusd markets/forex/usdjpy markets/forex/usdchf markets/metals/xauusd markets/indices/us30 markets/indices/spx500 markets/indices/nas100 marketing marketing/about marketing/faq marketing/contact"
 for l in $(ls -d out/*/ | xargs -n1 basename); do
   [ -d out/$l/company ] || continue
   for p in $PAGES; do
@@ -45,11 +50,17 @@ done
 mkdir -p preview/awards
 if ls public/awards/*.webp >/dev/null 2>&1; then cp public/awards/*.webp preview/awards/; else cp preview-hub/awards/*.webp preview/awards/ 2>/dev/null || true; fi
 cp public/ceo.webp preview/
+# other pictures at the top of public/ (GTC Go visuals etc.): copy them and point their URLs two folders up
+ROOT_IMGS=$(cd public && ls *.png *.webp *.jpg 2>/dev/null | grep -vx 'icon.png\|ceo.webp' || true)
+for f in $ROOT_IMGS; do cp "public/$f" preview/; done
 # every page sits two folders deep, so ../../ points to the preview root
 # CSS files live in _next/static/css/, so their font URLs point to ../media/
 find preview -name '*.css' | while read f; do sed -i 's#/__GTC__/_next/static/media/#../media/#g' "$f"; done
 find preview -name '*.html' -o -name '*.js' | while read f; do
   sed -i 's#/__GTC__/_next/#../../_next/#g; s#"/images/#"../../images/#g; s#"/icon.png#"../../icon.png#g; s#"/ceo.webp#"../../ceo.webp#g; s#"/awards/#"../../awards/#g' "$f"
+done
+for img in $ROOT_IMGS; do
+  find preview -name '*.html' -o -name '*.js' | xargs sed -i "s#\"/$img#\"../../$img#g"
 done
 
 # avoid "[locale]" in URLs: rename the chunk folder and its references

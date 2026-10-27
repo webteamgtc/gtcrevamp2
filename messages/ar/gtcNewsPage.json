@@ -8,11 +8,18 @@
       "home": "الرئيسية",
       "current": "أخبار GTC"
     },
+    "hero": {
+      "title": "أخبار ورؤى الأسواق [من GTCFX]",
+      "description": "تحديثات يومية للأسواق، ومقالات التداول، وأخبار الشركة والفعاليات، في مكان واحد.",
+      "latest": "الأحدث",
+      "readArticle": "اقرأ المقال"
+    },
     "trends": {
       "title": "GTCFX و[اتجاهات الأسواق]",
       "readMore": "قراءة المزيد",
       "emptyState": "لا توجد مقالات متاحة في هذه الفئة.",
-      "allNewsLink": "جميع الأخبار"
+      "allNewsLink": "جميع الأخبار",
+      "viewAll": "عرض الكل"
     },
     "knowledgeHub": {
       "title": "GTCFX و[مركز المعرفة]",
@@ -55,7 +62,8 @@
     "category": {
       "loadMore": "تحميل المزيد",
       "articles": "{count, plural, zero {لا توجد مقالات} one {مقال واحد} two {مقالان} few {# مقالات} many {# مقالًا} other {# مقال}}",
-      "backToNews": "العودة إلى أخبار GTC"
+      "backToNews": "العودة إلى أخبار GTC",
+      "description": "أحدث منشورات {category} من GTCFX، الأحدث أولًا."
     },
     "article": {
       "backToCategory": "العودة إلى {category}",
@@ -65,7 +73,10 @@
       "copied": "تم نسخ الرابط",
       "prev": "السابق",
       "next": "التالي",
-      "allNews": "جميع الأخبار"
+      "allNews": "جميع الأخبار",
+      "readTime": "{minutes} دقائق للقراءة",
+      "readNext": "اقرأ التالي",
+      "by": "بقلم {author}"
     }
   },
   "earningsCalendarPage": {

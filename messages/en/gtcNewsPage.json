@@ -8,11 +8,18 @@
       "home": "Home",
       "current": "GTC News"
     },
+    "hero": {
+      "title": "Market News & Insights [from GTCFX]",
+      "description": "Daily market updates, trading articles, company news and events, all in one place.",
+      "latest": "Latest",
+      "readArticle": "Read article"
+    },
     "trends": {
       "title": "GTCFX & [Market Trends]",
       "readMore": "Read More",
       "emptyState": "No articles available in this category.",
-      "allNewsLink": "All news"
+      "allNewsLink": "All news",
+      "viewAll": "View all"
     },
     "knowledgeHub": {
       "title": "GTCFX & [Knowledge Hub]",
@@ -55,7 +62,8 @@
     "category": {
       "loadMore": "Load more",
       "articles": "{count, plural, one {# article} other {# articles}}",
-      "backToNews": "Back to GTC News"
+      "backToNews": "Back to GTC News",
+      "description": "The latest {category} from GTCFX, newest first."
     },
     "article": {
       "backToCategory": "Back to {category}",
@@ -65,7 +73,10 @@
       "copied": "Link copied",
       "prev": "Previous",
       "next": "Next",
-      "allNews": "All news"
+      "allNews": "All news",
+      "readTime": "{minutes} min read",
+      "readNext": "Read next",
+      "by": "By {author}"
     }
   },
   "earningsCalendarPage": {
