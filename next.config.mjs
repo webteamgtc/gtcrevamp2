@@ -1,4 +1,5 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import { legacyBlogRedirects } from './src/config/legacyRedirects.js';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
 const isExport = process.env.STATIC_EXPORT === '1';
@@ -31,7 +32,7 @@ const nextConfig = {
             { source: '/markets/crypto-cfds', destination: '/markets', permanent: true },
             { source: '/markets/crypto-cfds/:path*', destination: '/markets', permanent: true }
           ];
-          return [...typoFixes, ...cryptoCfdsRetired];
+          return [...typoFixes, ...cryptoCfdsRetired, ...legacyBlogRedirects()];
         },
         // per-locale sitemaps listed in /sitemap.xml (src/lib/sitemap.js)
         async rewrites() {
