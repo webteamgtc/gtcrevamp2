@@ -79,13 +79,13 @@ function ProcessCard() {
   );
 }
 
-function Hero() {
+function Hero({ cat5 }) {
   const t = useTranslations('deleteAccountPage');
   return (
-    <section className="is-dark relative overflow-hidden bg-ink pb-40 pt-36 text-white md:pb-48 md:pt-44">
+    <section className={cn('is-dark relative overflow-hidden bg-ink pb-40 text-white md:pb-48', cat5 ? 'pt-24 md:pt-28' : 'pt-36 md:pt-44')}>
       <HeroBackdrop />
       <div className="container-x relative">
-        <Breadcrumb className="lg:justify-start" items={[{ label: t('breadcrumb.home'), href: '/' }, { label: t('breadcrumb.trading'), href: '/trading' }, { label: t('breadcrumb.current') }]} />
+        {!cat5 && <Breadcrumb className="lg:justify-start" items={[{ label: t('breadcrumb.home'), href: '/' }, { label: t('breadcrumb.trading'), href: '/trading' }, { label: t('breadcrumb.current') }]} />}
         <div className="mt-10 grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-16">
           <div className="text-center lg:text-start">
             <motion.span className="inline-flex items-center gap-2 rounded-full bg-down/15 px-4 py-1.5 text-xs font-bold tracking-wide text-red-200 ring-1 ring-down/30 backdrop-blur" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -212,15 +212,16 @@ function Sidebar({ progress }) {
   );
 }
 
-export default function DeleteAccountPage() {
+export default function DeleteAccountPage({ shell }) {
+  const cat5 = shell === 'cat5';
   const t = useTranslations('deleteAccountPage.formCard');
   const [progress, setProgress] = useState({});
   return (
-    <div className="overflow-x-clip bg-[#f6f7fb] text-ink">
-      <ScrollProgress />
-      <Header theme="dark" />
+    <div className={cn('overflow-x-clip text-ink', cat5 ? 'bg-white' : 'bg-[#f6f7fb]')}>
+      {!cat5 && <ScrollProgress />}
+      {!cat5 && <Header theme="dark" />}
       <main>
-        <Hero />
+        <Hero cat5={cat5} />
         <section className="relative pb-16 md:pb-24">
           <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />
           <span className="absolute -start-40 top-1/3 size-[460px] rounded-full bg-brand/[0.06] blur-[120px]" aria-hidden />
@@ -251,7 +252,7 @@ export default function DeleteAccountPage() {
           </div>
         </section>
       </main>
-      <Footer theme="dark" />
+      {!cat5 && <Footer theme="dark" />}
       <Toaster />
     </div>
   );

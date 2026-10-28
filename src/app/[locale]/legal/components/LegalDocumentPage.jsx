@@ -439,7 +439,7 @@ function SectionCard({ section, active }) {
 
 /* ---------------- page ---------------- */
 
-function Unavailable() {
+function Unavailable({ cat5 }) {
   const t = useTranslations('legalPage.document');
   return (
     <Reveal y={24} amount={0} className="mx-auto max-w-2xl rounded-[1.75rem] bg-white p-8 text-center shadow-xl shadow-brand/10 ring-1 ring-brand/10">
@@ -448,15 +448,18 @@ function Unavailable() {
       </span>
       <h2 className="heading-card mt-5">{t('unavailable.title')}</h2>
       <p className="mt-3 text-[15px] leading-relaxed text-ink/60">{t('unavailable.text')}</p>
-      <NavLink href="/legal/legal-documents" className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700">
-        {t('allDocuments')}
-        <ArrowRight className="size-4 rtl:-scale-x-100" />
-      </NavLink>
+      {!cat5 && (
+        <NavLink href="/legal/legal-documents" className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700">
+          {t('allDocuments')}
+          <ArrowRight className="size-4 rtl:-scale-x-100" />
+        </NavLink>
+      )}
     </Reveal>
   );
 }
 
-export default function LegalDocumentPage({ slug, doc }) {
+export default function LegalDocumentPage({ slug, doc, shell }) {
+  const cat5 = shell === 'cat5';
   const t = useTranslations('legalPage.document');
   const sections = useMemo(() => doc?.content ?? [], [doc]);
   const ids = useMemo(() => sections.map((s) => s.id), [sections]);
@@ -466,16 +469,16 @@ export default function LegalDocumentPage({ slug, doc }) {
   const [contact] = footer?.buttons ?? [];
 
   return (
-    <div className="overflow-x-clip bg-[#f6f7fb] text-ink">
-      <ScrollProgress />
-      <Header theme="dark" />
+    <div className={cn('overflow-x-clip text-ink', cat5 ? 'bg-white' : 'bg-[#f6f7fb]')}>
+      {!cat5 && <ScrollProgress />}
+      {!cat5 && <Header theme="dark" />}
       <main>
         <Hero slug={slug} doc={doc} minutes={minutes} />
 
         <section className="relative pb-16 md:pb-24">
           <div className="container-x relative -mt-28 md:-mt-32">
             {!doc ? (
-              <Unavailable />
+              <Unavailable cat5={cat5} />
             ) : (
               <>
                 <Overview top={doc.topSection} />
@@ -492,9 +495,9 @@ export default function LegalDocumentPage({ slug, doc }) {
           </div>
         </section>
 
-        <RelatedPolicies current={slug} />
+        {!cat5 && <RelatedPolicies current={slug} />}
 
-        {footer?.title && (
+        {!cat5 && footer?.title && (
           <CtaBand
             title={footer.title}
             description={footer.description}
@@ -503,7 +506,7 @@ export default function LegalDocumentPage({ slug, doc }) {
           />
         )}
       </main>
-      <Footer theme="dark" />
+      {!cat5 && <Footer theme="dark" />}
     </div>
   );
 }

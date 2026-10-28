@@ -3,7 +3,7 @@ import { CAT5_PAGES, CAT5_PATH, CAT5_SITE } from '@/config/regions';
 const PREVIEW = process.env.NEXT_PUBLIC_STATIC_EXPORT === '1';
 
 /**
- * Link to a CAT 5 page ('home' | 'about' | 'faq' | 'contact') in a locale ('en-ae' | 'ar'), optionally with a #hash.
+ * Link to a CAT 5 page (see CAT5_PAGES in regions.js) in a locale ('en-ae' | 'ar'), optionally with a #hash.
  * Live with the CAT 5 site on: the public address (/en-ae/about-us). Otherwise: the folder address
  * (/en-ae/marketing/about). Review link (flattened static pages): ../../<locale>/<folder>/index.html.
  */

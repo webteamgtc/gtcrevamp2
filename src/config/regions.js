@@ -45,7 +45,8 @@ export const CAT5_PATH = '/marketing';
 /**
  * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), until the CAT 1 licence arrives.
  * NEXT_PUBLIC_UAE_CAT5_SITE=on (Vercel env): every visitor with a UAE IP gets the CAT 5 website on the normal
- * addresses (gtcfx.com/en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, and the same under /ar); every other
+ * addresses (gtcfx.com/en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/privacy-policy,
+ * /en-ae/trading/delete, and the same under /ar); every other
  * page sends them to its Home; no CAT 1 / CAT 5 popup. Set it to off (or remove it) and redeploy to switch back to
  * the normal UAE site. See src/proxy.js.
  */
@@ -55,8 +56,19 @@ export const CAT5_PAGES = {
   home: { path: '', dir: '' },
   about: { path: '/about-us', dir: '/about' },
   faq: { path: '/faqs', dir: '/faq' },
-  contact: { path: '/contact-us', dir: '/contact' }
+  contact: { path: '/contact-us', dir: '/contact' },
+  privacy: { path: '/privacy-policy', dir: '/privacy-policy' },
+  delete: { path: '/trading/delete', dir: '/delete' }
 };
+
+/** Public CAT 5 URL (after /<locale>) is allowed while the visitor is on the CAT 5 site. */
+export function isCat5PublicPath(restPath) {
+  return Object.values(CAT5_PAGES).some((p) => p.path && p.path === restPath);
+}
+
+export function isCat5AllowedPath(restPath) {
+  return restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`) || isCat5PublicPath(restPath);
+}
 export const CAT5_LOCALE = 'en-ae';
 /** The CAT 5 page exists in English (/en-ae) and Arabic (/ar). */
 export const CAT5_LOCALES = ['en-ae', 'ar'];
@@ -68,18 +80,6 @@ export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '971-45109800' 
 
 /** Preferred language options on the CAT 5 enquiry form → POST /api/uae-enquiry. */
 export const CAT5_LANGUAGES = ['ar', 'en'];
-
-/**
- * CAT 5 footer links (GTC Financial Consultancy L.L.C. documents). Labels: marketingPage.footer.links.
- * "Legal Documents" is also the button in "Your Relationship with GTC Financial Consultancy".
- */
-export const CAT5_LEGAL_LINKS = {
-  legalDocuments: '/legal/legal-documents',
-  riskDisclosure: '/legal/risk-disclosure',
-  privacy: '/legal/privacy-policy',
-  cookies: '/legal/cookie-policy',
-  terms: '/legal/terms-and-conditions'
-};
 
 /** CMA licensed-companies register (footer “here” + relationship verify line). */
 export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/open-data/licensed-companies';

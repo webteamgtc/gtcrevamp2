@@ -3,12 +3,12 @@
  * Imported from next.config.mjs — keep this file free of @/ aliases.
  */
 import { LOCALES } from '../i18n/locales.js';
-import { CAT5_LOCALES } from './regions.js';
+import { CAT5_LOCALES, CAT5_PAGES } from './regions.js';
 
 const HOME = '/en-intl';
 
-/** Public CAT 5 addresses (regions.js → CAT5_PAGES.path) — must not redirect to /company/*. */
-const CAT5_PUBLIC_PATHS = new Set(['/about-us', '/faqs', '/contact-us']);
+/** Public CAT 5 addresses (regions.js → CAT5_PAGES.path) — en-ae/ar keep these URLs (see src/proxy.js). */
+const CAT5_PUBLIC_PATHS = new Set(Object.values(CAT5_PAGES).map((p) => p.path).filter(Boolean));
 
 /** Old flat paths → current app paths (locale applied when expanding). */
 const LEGACY_REDIRECTS = [

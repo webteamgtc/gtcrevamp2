@@ -47,11 +47,10 @@ import {
   X
 } from 'lucide-react';
 import Logo from '@/components/shared/Logo';
-import NavLink from '@/components/shared/nav/NavLink';
 import FaqAccordion from '@/components/shared/FaqAccordion';
 import { SectionIntro, AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, HeroIn, EASE } from '@/components/motion';
-import { CAT5_CMA_URL, CAT5_CONTACT, CAT5_LEGAL_LINKS } from '@/config/regions';
+import { CAT5_CMA_URL, CAT5_CONTACT } from '@/config/regions';
 import { cat5Href } from './cat5Links';
 import EnquiryForm from './EnquiryForm';
 import { cn } from '@/lib/utils';
@@ -630,7 +629,7 @@ function Approach() {
 
 /* ------------------------------------------------------------------ section 6: your relationship with us (dark) */
 
-/** Licence line ("You can verify our licence…", linked to the CMA site) + the Legal Documents button. */
+/** Licence line ("You can verify our licence…", linked to the CMA site). */
 function RelationshipActions({ center = false }) {
   const t = useTranslations('marketingPage.relationship');
   return (
@@ -639,15 +638,6 @@ function RelationshipActions({ center = false }) {
         <BadgeCheck className="size-5 shrink-0" aria-hidden /> {t('line')}
         <ExternalLink className="size-3.5 opacity-70" aria-hidden />
       </a>
-      <NavLink
-        href={CAT5_LEGAL_LINKS.legalDocuments}
-        className={cn(
-          'inline-flex h-12 items-center gap-2.5 rounded-full border border-white/25 bg-white/5 px-6 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900',
-          center ? 'self-center' : 'self-start'
-        )}
-      >
-        <FileText className="size-4" aria-hidden /> {t('cta')}
-      </NavLink>
     </div>
   );
 }
@@ -837,17 +827,16 @@ function Support() {
 /* ------------------------------------------------------------------ section 7: FAQ (grey) */
 
 /**
- * Links inside answers: "…our <privacy>Privacy Policy</privacy>." → the policy page, "<cma>…</cma>" → the CMA website.
- * A link without a URL yet shows as plain text.
+ * Links inside answers: "<cma>…</cma>" → the CMA website. <privacy>…</privacy> is plain text (policy is direct-URL only).
  */
-const TAG_LINKS = { privacy: () => CAT5_LEGAL_LINKS.privacy, cma: () => CAT5_CMA_URL };
+const TAG_LINKS = { cma: () => CAT5_CMA_URL };
 export const withLinks = (text, linkClass = 'font-semibold text-brand underline underline-offset-4 hover:text-gold-700') =>
   String(text)
     .split(/(<(?:privacy|cma)>.*?<\/(?:privacy|cma)>)/)
     .map((part, i) => {
       const m = part.match(/^<(privacy|cma)>(.*)<\/\1>$/);
       if (!m) return part;
-      const href = TAG_LINKS[m[1]]();
+      const href = TAG_LINKS[m[1]]?.();
       return href ? (
         <a key={i} href={href} {...(m[1] === 'cma' ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className={linkClass}>
           {m[2]}
@@ -1000,25 +989,11 @@ function ClosingBanner() {
 
 function LegalFooter() {
   const t = useTranslations('marketingPage');
-  const links = Object.keys(CAT5_LEGAL_LINKS);
   return (
     <footer id="legal" className="is-dark scroll-mt-32 bg-ink pb-28 pt-14 text-white md:pb-12">
       <div className="container-x">
-        <div className="flex flex-col gap-8 border-b border-white/10 pb-8 lg:flex-row lg:items-center lg:justify-between">
+        <div className="border-b border-white/10 pb-8">
           <Logo onDark />
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label={t('footer.title')}>
-            {links.map((k) =>
-              CAT5_LEGAL_LINKS[k] ? (
-                <NavLink key={k} href={CAT5_LEGAL_LINKS[k]} className="text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline">
-                  {t(`footer.links.${k}`)}
-                </NavLink>
-              ) : (
-                <span key={k} className="text-white/70">
-                  {t(`footer.links.${k}`)}
-                </span>
-              )
-            )}
-          </nav>
         </div>
         <h2 className="heading-label mt-10 flex items-center gap-2">
           <Info className="size-4" aria-hidden /> {t('footer.title')}

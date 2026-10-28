@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { COOKIES, CAT5_LOCALE, CAT5_LOCALES, CAT5_PAGES, CAT5_PATH, CAT5_SITE, REGION_LOCALES, regionForCountry, REMEMBER_DAYS } from './config/regions';
+import { COOKIES, CAT5_LOCALE, CAT5_LOCALES, CAT5_PAGES, CAT5_PATH, CAT5_SITE, isCat5AllowedPath, REGION_LOCALES, regionForCountry, REMEMBER_DAYS } from './config/regions';
 import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, isLocalIp } from './lib/geo/resolveCountryFromRequest';
 
 /**
@@ -98,7 +98,8 @@ function finish(response, { country, test, lookedUp }) {
 /**
  * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), on while NEXT_PUBLIC_UAE_CAT5_SITE=on.
  * UAE visitors (any page, any language):
- *   /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us (and /ar/…) → shown from src/app/[locale]/marketing/…
+ *   /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/privacy-policy, /en-ae/trading/delete (and /ar/…) →
+ *   shown from src/app/[locale]/marketing/…
  *   (the address stays the same); /en-ae/marketing/… → its public address; any other page or language → /en-ae
  *   (or /ar). The CAT 5 category cookie is set, so the CAT 1 / CAT 5 popup never shows.
  * Everyone else: /…/marketing/… → that language's normal Home; the normal site otherwise.
@@ -167,7 +168,7 @@ export default async function proxy(request) {
   }
 
   // 4. UAE CAT 5 (popup flow, CAT 5 website switch off): every page leads to the CAT 5 pages (Arabic pages to the Arabic version)
-  if (!CAT5_SITE && cat5 && !(CAT5_LOCALES.includes(first) && (restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`)))) {
+  if (!CAT5_SITE && cat5 && !(CAT5_LOCALES.includes(first) && isCat5AllowedPath(restPath))) {
     return redirect(`/${first === 'ar' ? 'ar' : CAT5_LOCALE}${CAT5_PATH}`);
   }
 
