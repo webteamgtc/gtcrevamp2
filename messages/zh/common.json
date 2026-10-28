@@ -1,0 +1,452 @@
+{
+  "meta": {
+    "title": "GTCFX | 通达全球市场——外汇与差价合约交易",
+    "description": "与GTCFX交易外汇、金属、大宗商品、指数等产品。享受低点差、最高1:2000杠杆及低于10毫秒的订单执行。"
+  },
+  "riskBar": "差价合约是采用杠杆的高风险投机工具。差价合约交易会使您的资金面临较高风险。投资者在进行交易前，应确保具备充分的市场知识，或寻求独立财务建议。",
+  "nav": {
+    "company": "公司",
+    "trading": "交易",
+    "markets": "市场",
+    "learn": "学习",
+    "news": "GTC新闻",
+    "register": "注册",
+    "login": "登录",
+    "menu": "菜单",
+    "close": "关闭",
+    "groups": {
+      "company": [
+        {
+          "label": "关于我们",
+          "desc": "了解我们及我们的动力"
+        },
+        {
+          "label": "为什么选择GTC集团",
+          "desc": "了解我们的交易优势"
+        },
+        {
+          "label": "全球牌照",
+          "desc": "我们的牌照与受监管实体"
+        },
+        {
+          "label": "活动",
+          "desc": "展会、奖项与交流活动"
+        }
+      ],
+      "trading": [
+        {
+          "label": "账户类型",
+          "desc": "Standard标准账户与ECN账户"
+        },
+        {
+          "label": "跟单交易",
+          "desc": "跟随经验丰富的交易者"
+        },
+        {
+          "label": "入金与出金",
+          "desc": "入金方式与到账时间"
+        },
+        {
+          "label": "交易品种",
+          "desc": "完整产品列表"
+        },
+        {
+          "label": "优惠活动",
+          "desc": "当前优惠与推广活动"
+        }
+      ],
+      "markets": [
+        {
+          "label": "外汇差价合约",
+          "desc": "主要、次要及稀有货币对"
+        },
+        {
+          "label": "金属差价合约",
+          "desc": "黄金、白银等产品"
+        },
+        {
+          "label": "能源差价合约",
+          "desc": "原油与天然气"
+        },
+        {
+          "label": "指数差价合约",
+          "desc": "全球股票指数"
+        },
+        {
+          "label": "股票差价合约",
+          "desc": "全球大型企业"
+        },
+        {
+          "label": "加密货币差价合约",
+          "desc": "热门数字资产"
+        },
+        {
+          "label": "期货差价合约",
+          "desc": "以差价合约形式交易期货"
+        }
+      ],
+      "learn": [
+        {
+          "label": "常见问题",
+          "desc": "常见问题解答"
+        },
+        {
+          "label": "帮助中心",
+          "desc": "指南与支持文章"
+        },
+        {
+          "label": "联系我们",
+          "desc": "联系支持团队"
+        }
+      ],
+      "news": [
+        {
+          "label": "最新资讯",
+          "desc": "公司公告"
+        },
+        {
+          "label": "活动",
+          "desc": "了解近期与GTCFX见面的机会"
+        }
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "全球市场，一站连接。",
+    "columns": {
+      "instruments": {
+        "title": "交易品种",
+        "links": [
+          "外汇差价合约",
+          "能源差价合约",
+          "指数差价合约",
+          "金属差价合约",
+          "股票差价合约",
+          "加密货币差价合约",
+          "期货差价合约"
+        ]
+      },
+      "quick": {
+        "title": "快捷链接",
+        "links": [
+          "账户类型",
+          "跟单交易",
+          "入金与出金",
+          "交易品种",
+          "优惠活动"
+        ]
+      },
+      "platforms": {
+        "title": "交易平台",
+        "links": [
+          "MT4平台",
+          "MT5平台",
+          "GTC Go - 交易与投资"
+        ]
+      },
+      "company": {
+        "title": "公司",
+        "links": [
+          "关于我们",
+          "为什么选择GTC集团",
+          "全球牌照",
+          "活动"
+        ]
+      },
+      "support": {
+        "title": "支持",
+        "links": [
+          "常见问题",
+          "联系我们",
+          "帮助中心"
+        ]
+      },
+      "legal": {
+        "title": "法律信息",
+        "links": [
+          "网站免责声明",
+          "风险披露",
+          "受限国家",
+          "入金与退款政策",
+          "了解您的客户（KYC）与合规政策",
+          "Cookie政策",
+          "隐私政策",
+          "条款与条件"
+        ]
+      }
+    },
+    "riskTitle": "风险警告",
+    "risk": [
+      "衍生品交易，包括滚动即期外汇（FX）与差价合约（CFDs），具有高度投机性，并涉及重大风险，不适合所有投资者。本网站任何内容均不构成投资建议或推荐，且在编制时未考虑您的个人目标、财务状况或需求。",
+      "外汇与差价合约是以保证金方式交易的复杂工具，由于杠杆作用，存在迅速亏损的高风险。杠杆会同时放大收益和损失。您可能损失部分或全部投资本金，亏损也可能超过初始投资。交易前，您应考虑自身目标、财务状况、经验水平及风险承受能力，确保理解这些产品的运作方式，并仅使用能够承受损失的资金进行交易。如有疑问，请寻求独立财务或税务建议。过往表现并不代表未来结果。",
+      "客户签约实体取决于客户所属司法管辖区、资格、分类及开户渠道。在客户提交开户申请前，将明确披露相关签约实体，并在适用情况下披露产品发行方和/或交易对手方；该实体也将在相关客户协议中列明。某一实体提供的产品和服务可能不适用于其他实体。GTC Financial Group旗下各实体均为独立法律实体。任何实体持有的牌照均不适用于集团内其他实体。",
+      "GTC Global Trading Ltd是在科摩罗联盟昂儒昂注册的公司（公司编号16283），持有昂儒昂离岸金融管理局颁发的L16283/GTC号牌照。其注册地址为科摩罗联盟昂儒昂穆察穆杜Boulevard de Coalancanthe。",
+      "GTC Global Trade Capital Co. Limited（公司编号40354）是在瓦努阿图注册的公司。该公司持有瓦努阿图金融服务委员会依据《金融交易商许可法》[CAP. 70]颁发的A、B及C类主牌照。其注册地址为瓦努阿图维拉港库穆尔公路B&P House一楼。",
+      "本国际网站提供的服务不适用于美国、日本或澳大利亚居民，也不适用于任何根据适用法律、法规或制裁措施禁止提供此类服务的司法管辖区居民。"
+    ],
+    "rights": "版权所有。",
+    "cookie": "我们使用Cookie来改善您的体验、分析网站流量并记住您的偏好。部分Cookie为网站运行所必需，其他Cookie则帮助我们改进服务并个性化展示内容。点击“全部接受”即表示您同意我们使用Cookie。",
+    "cookieAccept": "全部接受",
+    "cookieSettings": "设置",
+    "backToTop": "返回顶部"
+  },
+  "common": {
+    "prev": "上一页",
+    "next": "下一页",
+    "scroll": "滑动探索"
+  },
+  "app": {
+    "tagline": "交易与投资",
+    "watchlist": "自选列表",
+    "portfolio": "投资组合",
+    "balance": "余额",
+    "today": "今日",
+    "buy": "买入",
+    "sell": "卖出",
+    "filled": "订单已成交",
+    "filledSub": "买入0.10手XAUUSD",
+    "copy": "跟单交易",
+    "copySub": "跟随最佳策略",
+    "download": "下载GTC Go",
+    "appStore": "App Store",
+    "googlePlay": "Google Play",
+    "rating": "深受全球交易者信赖",
+    "tabs": [
+      "市场",
+      "交易",
+      "投资组合",
+      "账户"
+    ],
+    "onAppStore": "下载于",
+    "onPlay": "获取应用"
+  },
+  "lang": {
+    "title": "选择语言",
+    "subtitle": "GTCFX网站提供{count}种语言。",
+    "search": "搜索语言",
+    "current": "当前语言",
+    "all": "全部",
+    "regions": {
+      "global": "全球",
+      "mena": "中东与南亚",
+      "asia": "东亚与东南亚",
+      "europe": "欧洲"
+    },
+    "noResults": "未找到与“{q}”匹配的语言。",
+    "rtl": "从右向左",
+    "close": "关闭",
+    "remember": "您的选择将保存在此设备上。",
+    "open": "切换语言"
+  },
+  "menu": {
+    "groups": {
+      "company": "公司",
+      "trading": "交易",
+      "markets": "市场",
+      "learn": "学习",
+      "news": "GTC新闻"
+    },
+    "sections": {
+      "about": "关于GTCFX",
+      "legal": "法律信息",
+      "help": "帮助中心",
+      "partner": "成为合作伙伴",
+      "tradeWith": "与GTCFX交易",
+      "metatrader": "MetaTrader 4/5",
+      "gtcgo": "GTCFX: GTC Go",
+      "products": "我们的产品",
+      "advantages": "交易优势",
+      "tradeMarkets": "交易市场",
+      "recommendations": "推荐",
+      "popularIndices": "热门指数",
+      "startTrading": "开始交易",
+      "skills": "提升技能",
+      "helpCentre": "帮助中心",
+      "marketUpdates": "市场动态",
+      "companyUpdates": "公司新闻"
+    },
+    "links": {
+      "aboutUs": "关于我们",
+      "whyGtcfx": "为什么选择GTC集团",
+      "globalPresence": "全球布局",
+      "events": "活动与展会",
+      "regulation": "监管信息",
+      "awards": "GTCFX奖项",
+      "faqSupport": "常见问题与支持",
+      "contact": "联系我们",
+      "partners": "合作伙伴计划",
+      "prime": "GTC Prime",
+      "openLive": "开立真实账户",
+      "freeDemo": "免费模拟账户",
+      "fund": "为账户入金",
+      "accountTypes": "账户类型",
+      "security": "资金安全",
+      "mt5": "MetaTrader 5",
+      "mt4": "MetaTrader 4",
+      "mtAndroid": "MetaTrader安卓版",
+      "mtIos": "MetaTrader iPhone/iPad版",
+      "gtcGo": "GTC Go",
+      "gtcGoWeb": "GTC Go网页版",
+      "gtcGoIos": "GTC Go iPhone/iPad版",
+      "gtcGoAndroid": "GTC Go安卓版",
+      "copyTrading": "跟单交易",
+      "dynamicLeverage": "动态杠杆",
+      "swapUpdate": "隔夜利息更新",
+      "pamm": "PAMM账户",
+      "vps": "VPS服务器",
+      "forex": "外汇差价合约",
+      "energy": "能源差价合约",
+      "indices": "指数差价合约",
+      "metals": "金属差价合约",
+      "shares": "股票差价合约",
+      "crypto": "加密货币差价合约",
+      "futures": "期货差价合约",
+      "XAUUSD": "黄金（XAUUSD）",
+      "US30": "华尔街",
+      "SPX500": "美国标普500",
+      "NAS100": "美国科技100",
+      "beginners": "新手入门",
+      "glossary": "术语表",
+      "liquidity": "流动性与技术",
+      "essentials": "交易基础",
+      "marketGuides": "市场指南",
+      "risk": "风险管理基础",
+      "technical": "技术分析基础",
+      "qa": "GTCFX问答",
+      "depositFaq": "账户与入金常见问题",
+      "platformGuides": "平台指南",
+      "outlook": "每日/每周市场展望",
+      "calendar": "经济日历",
+      "earnings": "财报与股息日历",
+      "holidays": "市场假期",
+      "companyNews": "公司新闻",
+      "awardsMedia": "奖项与媒体"
+    },
+    "promos": {
+      "company": {
+        "title": "找到适合您的账户",
+        "text": "选择符合您需求的账户。",
+        "cta": "账户指南"
+      },
+      "trading": {
+        "title": "下载交易平台",
+        "text": "扫码在手机上下载GTC Go。",
+        "cta": "下载"
+      },
+      "markets": {
+        "title": "立即注册",
+        "text": "立即开立真实账户，与GTCFX开始交易，享用屡获殊荣的交易平台、市场分析及教育资源。",
+        "cta": "开立真实账户"
+      },
+      "learn": {
+        "title": "交易者洞察",
+        "text": "涵盖全球各类资产的每日市场评论，以及行业领袖和IBKR分析师的洞察。",
+        "cta": "探索市场洞察"
+      },
+      "news": {
+        "title": "使用您的交易货币入金",
+        "text": "可使用多达29种货币入金和交易，享受灵活的入金选择。",
+        "cta": "入金选项"
+      }
+    },
+    "downloads": {
+      "mt4": "MetaTrader 4",
+      "mt5": "MetaTrader 5",
+      "gtcgo": "GTCFX: GTC Go",
+      "scan": "扫码下载"
+    },
+    "accountsVisual": {
+      "standard": "Standard",
+      "ecn": "ECN",
+      "from": "起"
+    },
+    "live": "实时",
+    "allLinks": "{count}个链接",
+    "back": "返回",
+    "openMenu": "打开菜单",
+    "mobileCta": "几分钟内开始交易",
+    "currencies": "货币",
+    "desc": {
+      "aboutUs": "了解我们及我们的动力",
+      "whyGtcfx": "了解我们的交易优势",
+      "globalPresence": "我们的全球办事处与市场",
+      "events": "展会、峰会与交流活动",
+      "regulation": "我们的牌照与受监管实体",
+      "awards": "我们获得的行业认可",
+      "faqSupport": "由我们的团队提供解答与帮助",
+      "contact": "联系支持团队",
+      "partners": "成为介绍经纪商，赚取收益",
+      "prime": "为活跃交易者提供优质服务",
+      "openLive": "几分钟内开始交易",
+      "freeDemo": "使用虚拟资金练习",
+      "fund": "入金、出金及到账时间",
+      "accountTypes": "Standard标准账户与ECN账户",
+      "security": "我们如何保护客户资金",
+      "mt5": "先进的多资产交易平台",
+      "mt4": "经典交易平台",
+      "mtAndroid": "在安卓设备上使用MetaTrader",
+      "mtIos": "在iPhone和iPad上使用MetaTrader",
+      "gtcGo": "一站式交易应用",
+      "gtcGoWeb": "通过浏览器交易",
+      "gtcGoIos": "适用于iPhone和iPad的GTC Go",
+      "gtcGoAndroid": "适用于安卓设备的GTC Go",
+      "copyTrading": "跟随经验丰富的交易者",
+      "dynamicLeverage": "根据持仓动态调整杠杆",
+      "swapUpdate": "最新隔夜利息费率",
+      "pamm": "托管交易账户",
+      "vps": "全天候运行EA智能交易系统",
+      "forex": "主要、次要及稀有货币对",
+      "energy": "原油与天然气",
+      "indices": "全球股票指数",
+      "metals": "黄金、白银等产品",
+      "shares": "全球大型企业",
+      "crypto": "热门数字资产",
+      "futures": "以差价合约形式交易期货",
+      "beginners": "迈出交易第一步",
+      "glossary": "交易术语释义",
+      "liquidity": "了解定价与订单执行机制",
+      "essentials": "每位交易者都应了解的基础概念",
+      "marketGuides": "了解各个市场如何运行",
+      "risk": "保护您的资金",
+      "technical": "解读图表与形态",
+      "qa": "常见问题解答",
+      "depositFaq": "账户、入金与支付",
+      "platformGuides": "设置并使用我们的平台",
+      "outlook": "推动市场走势的因素",
+      "calendar": "重要经济数据",
+      "earnings": "公司业绩与股息",
+      "holidays": "交易时间与休市安排",
+      "companyNews": "GTCFX公告",
+      "awardsMedia": "媒体报道与奖项"
+    },
+    "eyebrow": "GTCFX"
+  },
+  "stats": {
+    "items": [
+      {
+        "value": 985000,
+        "prefix": "",
+        "suffix": "+",
+        "label": "已服务客户"
+      },
+      {
+        "value": 7,
+        "prefix": "",
+        "suffix": "+",
+        "label": "交易市场"
+      },
+      {
+        "value": 20,
+        "prefix": "",
+        "suffix": "+",
+        "label": "支持语言"
+      },
+      {
+        "value": 850,
+        "prefix": "$",
+        "suffix": " 十亿",
+        "label": "月交易量"
+      }
+    ]
+  }
+}

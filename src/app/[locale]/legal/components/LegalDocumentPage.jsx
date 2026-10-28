@@ -15,6 +15,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop from '@/components/shared/HeroBackdrop';
 import CtaBand from '@/components/shared/CtaBand';
 import NavLink from '@/components/shared/nav/NavLink';
+import { usePathname } from '@/i18n/navigation';
 import { Reveal, ScrollProgress, Stagger, StaggerItem, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { RichText, tidyTitle } from './RichText';
@@ -134,11 +135,13 @@ function Hero({ slug, doc, minutes }) {
   const t = useTranslations('legalPage');
   const top = doc?.topSection ?? {};
   const sections = doc?.content ?? [];
+  const pathname = usePathname();
   return (
     <section className="is-dark relative overflow-hidden bg-ink pb-40 pt-36 text-white md:pb-48 md:pt-44">
       <HeroBackdrop />
       <div className="container-x relative">
-        <Breadcrumb className="lg:justify-start" items={[{ label: t('breadcrumb.home'), href: '/' }, { label: t('breadcrumb.legal'), href: '/legal/legal-documents' }, { label: t(`docs.${slug}.name`) }]} />
+        {/* only on the /legal/… pages (not where the document is reused, e.g. the CAT 5 site's privacy policy) */}
+        {pathname.includes('/legal') && <Breadcrumb className="lg:justify-start" items={[{ label: t('breadcrumb.home'), href: '/' }, { label: t('breadcrumb.legal'), href: '/legal/legal-documents' }, { label: t(`docs.${slug}.name`) }]} />}
         <div className="mt-10 grid items-center gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
           <div className="text-center lg:text-start">
             {top.badge && (
