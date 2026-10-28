@@ -7,6 +7,7 @@ import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHea
 /**
  * Runs before every page:
  *  1. works out the visitor's country (see countryOf)
+ *  0. sends old-site language URLs to today's: /vi-intl → /vi, /zh-tw → /zh-TW, /en-intl/ru-intl/… → /ru/…
  *  2. sends URLs without a language/region (/, /company, old /en/…) to the visitor's regional site
  *  3. sends a regional English URL of another region to the visitor's own one, same path
  *     (UAE → /en-ae, South Africa → /en-za, Mauritius → /en-mu, Vanuatu → /en-vu, everyone else incl. US → /en-intl)
@@ -24,6 +25,19 @@ const GEO_TEST = process.env.VERCEL_ENV !== 'production' || process.env.GEO_TEST
 const COUNTRY_RE = /^[A-Z]{2}$/;
 // crawlers must reach every regional site (they would otherwise always land on /en-intl)
 const BOT_RE = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed/i;
+
+// old site: every language had an "-intl" folder (vi-intl, ru-intl, zh-intl…) and some other spellings
+const LOCALE_BY_LOWER = new Map(routing.locales.map((c) => [c.toLowerCase(), c]));
+const OLD_LOCALES = { cn: 'zh', 'zh-cn': 'zh', 'zh-hans': 'zh', tw: 'zh-TW', 'zh-hk': 'zh-TW', 'zh-hant': 'zh-TW', tl: 'fil', ph: 'fil' };
+
+/** Today's locale for a URL segment (vi-intl → vi, zh-tw → zh-TW, en-intl as is); null if it isn't one (plain /en: rule 2). */
+function localeOf(segment) {
+  const s = segment.toLowerCase();
+  if (LOCALE_BY_LOWER.has(s)) return LOCALE_BY_LOWER.get(s);
+  const old = s.endsWith('-intl');
+  const base = old ? s.slice(0, -'-intl'.length) : s;
+  return LOCALE_BY_LOWER.get(base) || ((old || base.includes('-')) && OLD_LOCALES[base]) || null;
+}
 
 const valid = (c) => {
   const v = String(c ?? '')
@@ -114,13 +128,21 @@ export default async function proxy(request) {
   const restPath = rest.length ? `/${rest.join('/')}` : '';
   const home = regionForCountry(geo.country);
   const isBot = BOT_RE.test(request.headers.get('user-agent') || '');
-  const redirect = (path) => {
+  const redirect = (path, status = 307) => {
     // drop ?geo= from the target so the override isn't re-applied on every page
     const url = new URL(path, request.url);
     url.search = search;
     url.searchParams.delete('geo');
-    return finish(NextResponse.redirect(url), geo);
+    return finish(NextResponse.redirect(url, status), geo);
   };
+
+  // 0. old-site language URLs → today's locale, same page (permanent, for search engines):
+  //    /vi-intl → /vi, /zh-tw → /zh-TW, /en-intl/vi-intl/… → /vi/… (old links that got /en-intl put in front)
+  const outer = localeOf(first);
+  const inner = outer && rest.length ? localeOf(rest[0]) : null;
+  const fixed = inner ?? outer;
+  const fixedTail = inner ? rest.slice(1) : rest;
+  if (fixed && (inner || fixed !== first)) return redirect(`/${fixed}${fixedTail.length ? `/${fixedTail.join('/')}` : ''}`, 301);
 
   // 1b. TEMPORARY UAE CAT 5 website
   if (CAT5_SITE) {

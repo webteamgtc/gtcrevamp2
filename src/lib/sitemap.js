@@ -54,6 +54,7 @@ const PAGES = [
   '/trading/copy-trading',
   '/trading/pamm-account',
   '/trading/vps-hosting-services',
+  '/trading/margin-bonus',
   '/trading/swap-update',
   '/markets',
   ...MARKET_PAGES.map((p) => `/markets/${p.slug}`),

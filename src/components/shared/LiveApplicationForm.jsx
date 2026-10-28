@@ -13,15 +13,7 @@ import { cn } from '@/lib/utils';
 import { PORTAL } from '@/config/menu';
 import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, dialFor, useGtcCountries } from './formKit';
-
-/* PhoneInput (react-phone-number-input) restyled to match the other fields */
-const phoneCls =
-  '[&_.PhoneInput]:flex [&_.PhoneInput]:h-full [&_.PhoneInput]:w-full [&_.PhoneInput]:items-center [&_.PhoneInput]:gap-2.5 ' +
-  '[&_.PhoneInputCountry]:me-0 [&_.PhoneInputCountry]:border-e [&_.PhoneInputCountry]:border-brand/10 [&_.PhoneInputCountry]:pe-2.5 ' +
-  '[&_.PhoneInputCountryIcon]:shadow-none [&_.PhoneInputCountryIcon--border]:bg-transparent [&_.PhoneInputCountryIcon--border]:shadow-none ' +
-  '[&_.PhoneInputCountrySelectArrow]:text-ink/50 [&_.PhoneInputCountrySelectArrow]:opacity-80 ' +
-  '[&_.PhoneInputInput]:h-full [&_.PhoneInputInput]:min-w-0 [&_.PhoneInputInput]:flex-1 [&_.PhoneInputInput]:border-0 [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:text-sm [&_.PhoneInputInput]:text-ink [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:placeholder:text-ink/35';
+import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, useGtcCountries } from './formKit';
 
 const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
