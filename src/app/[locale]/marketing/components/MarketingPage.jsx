@@ -987,13 +987,23 @@ function ClosingBanner() {
 
 /* ------------------------------------------------------------------ legal footer */
 
+/** Shown for compliance; not links (pages are direct-URL only for UAE CAT 5). */
+const FOOTER_LINK_KEYS = ['legalDocuments', 'riskDisclosure', 'privacy', 'cookies', 'terms'];
+
 function LegalFooter() {
   const t = useTranslations('marketingPage');
   return (
     <footer id="legal" className="is-dark scroll-mt-32 bg-ink pb-28 pt-14 text-white md:pb-12">
       <div className="container-x">
-        <div className="border-b border-white/10 pb-8">
+        <div className="flex flex-col gap-8 border-b border-white/10 pb-8 lg:flex-row lg:items-center lg:justify-between">
           <Logo onDark />
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label={t('footer.title')}>
+            {FOOTER_LINK_KEYS.map((k) => (
+              <span key={k} className="cursor-default text-white/70 select-none">
+                {t(`footer.links.${k}`)}
+              </span>
+            ))}
+          </nav>
         </div>
         <h2 className="heading-label mt-10 flex items-center gap-2">
           <Info className="size-4" aria-hidden /> {t('footer.title')}
