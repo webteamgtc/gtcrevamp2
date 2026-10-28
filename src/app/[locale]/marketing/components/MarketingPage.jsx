@@ -47,6 +47,7 @@ import {
   X
 } from 'lucide-react';
 import Logo from '@/components/shared/Logo';
+import NavLink from '@/components/shared/nav/NavLink';
 import FaqAccordion from '@/components/shared/FaqAccordion';
 import { SectionIntro, AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, HeroIn, EASE } from '@/components/motion';
@@ -629,8 +630,6 @@ function Approach() {
 
 /* ------------------------------------------------------------------ section 6: your relationship with us (dark) */
 
-const legalHref = CAT5_LEGAL_LINKS.legalDocuments || '#legal';
-
 /** Licence line ("You can verify our licence…", linked to the CMA site) + the Legal Documents button. */
 function RelationshipActions({ center = false }) {
   const t = useTranslations('marketingPage.relationship');
@@ -640,15 +639,15 @@ function RelationshipActions({ center = false }) {
         <BadgeCheck className="size-5 shrink-0" aria-hidden /> {t('line')}
         <ExternalLink className="size-3.5 opacity-70" aria-hidden />
       </a>
-      <a
-        href={legalHref}
+      <NavLink
+        href={CAT5_LEGAL_LINKS.legalDocuments}
         className={cn(
           'inline-flex h-12 items-center gap-2.5 rounded-full border border-white/25 bg-white/5 px-6 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-brand-900',
           center ? 'self-center' : 'self-start'
         )}
       >
         <FileText className="size-4" aria-hidden /> {t('cta')}
-      </a>
+      </NavLink>
     </div>
   );
 }
@@ -1010,9 +1009,9 @@ function LegalFooter() {
           <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label={t('footer.title')}>
             {links.map((k) =>
               CAT5_LEGAL_LINKS[k] ? (
-                <a key={k} href={CAT5_LEGAL_LINKS[k]} className="text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline">
+                <NavLink key={k} href={CAT5_LEGAL_LINKS[k]} className="text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline">
                   {t(`footer.links.${k}`)}
-                </a>
+                </NavLink>
               ) : (
                 <span key={k} className="text-white/70">
                   {t(`footer.links.${k}`)}

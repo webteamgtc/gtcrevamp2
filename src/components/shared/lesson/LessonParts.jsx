@@ -238,7 +238,7 @@ export function Block({ block, index }) {
 
 /* ------------------------------------------------------------ share + prev / next */
 
-const SHARE = {
+export const SHARE = {
   LinkedIn: (u) => `https://www.linkedin.com/sharing/share-offsite/?url=${u}`,
   Facebook: (u) => `https://www.facebook.com/sharer/sharer.php?u=${u}`,
   X: (u, t) => `https://twitter.com/intent/tweet?url=${u}&text=${t}`,

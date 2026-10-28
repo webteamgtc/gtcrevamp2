@@ -83,19 +83,19 @@ export async function POST(req) {
                         <tr>
                           <td class="footer" style="padding: 20px 0px; font-size: 10px; color: #000; background-color: #f7f7f736; border-radius: 0 0 36px 36px; text-align: left;">
                                 <div class="social-icons" style="padding-bottom: 10px; text-align: center;">
-                                    <a href="https://www.facebook.com/gtcfxofficial" style="text-decoration: none;" target="_blank">
+                                    <a href="https://www.facebook.com/GTCFXGlobalTradeCapital" style="text-decoration: none;" target="_blank">
                                         <img alt="Facebook" src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/facebook_96.png" style="width: 24px; height: 24px; margin: 0 5px;">
                                     </a>
-                                    <a href="https://twitter.com/GTC_fx" style="text-decoration: none;" target="_blank">
+                                    <a href="https://x.com/GTC_fx" style="text-decoration: none;" target="_blank">
                                         <img alt="Twitter" src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/twitter_96.png" style="width: 24px; height: 24px; margin: 0 5px;">
                                     </a>
-                                    <a href="https://linkedin.com/company/gtcfx-official" style="text-decoration: none;" target="_blank">
+                                    <a href="https://www.linkedin.com/company/gtcfx-official" style="text-decoration: none;" target="_blank">
                                         <img alt="LinkedIn" src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/linkedin_96.png" style="width: 24px; height: 24px; margin: 0 5px;">
                                     </a>
                                     <a href="https://www.youtube.com/channel/UCnKWakjm1b9Bm63xgwNFXHA" style="text-decoration: none;" target="_blank">
                                         <img alt="YouTube" src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/youtube_96.png" style="width: 24px; height: 24px; margin: 0 5px;">
                                     </a>
-                                    <a href="https://www.instagram.com/gtcfxofficial" style="text-decoration: none;" target="_blank">
+                                    <a href="https://www.instagram.com/gtcfxofficial/" style="text-decoration: none;" target="_blank">
                                         <img alt="Instagram" src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/instagram_96.png" style="width: 24px; height: 24px; margin: 0 5px;">
                                     </a>
                                     <a href="https://www.tiktok.com/@gtcgroup_official" style="text-decoration: none;" target="_blank">

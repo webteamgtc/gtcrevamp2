@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
 import { ChevronDown, LogIn, Menu, User } from 'lucide-react';
-import { MENU, PORTAL, LIVE_ACCOUNT_HREF } from '@/config/menu';
+import { MENU, PORTAL } from '@/config/menu';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
@@ -222,7 +222,7 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
 
               <div className="flex items-center gap-2">
                 <NavLink
-                  href={LIVE_ACCOUNT_HREF}
+                  href={PORTAL.register}
                   className={cn(
                     'hidden h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-all md:inline-flex',
                     dark ? 'border-white/20 text-white hover:bg-white hover:text-brand-900' : 'border-brand/15 bg-white text-brand hover:border-brand'

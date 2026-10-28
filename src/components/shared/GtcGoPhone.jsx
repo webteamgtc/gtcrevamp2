@@ -1,9 +1,10 @@
 'use client';
 /**
  * Animated "GTC Go" app advert inside a phone.
- * Loops through 4 screens: splash → watchlist → trade (order filled) → portfolio.
+ * Loops through 4 screens: splash (GTCFX icon + splashTitle) → watchlist → trade (order filled) → portfolio.
  */
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { BarChart3, Briefcase, Check, LineChart, User, Wifi, BatteryFull, Users } from 'lucide-react';
@@ -12,6 +13,7 @@ import { useTicker, FlashPrice, Sparkline, UpDown, fmt, pct } from './ticker';
 import { CandleChart, AreaChart } from './devices';
 import { CountUp, EASE } from '../motion';
 import { GTC_GO_APP_STORE_URL, GTC_GO_PLAY_STORE_URL } from '@/config/gtcGoStoreLinks';
+import { logoSrc } from './Logo';
 
 const STORE_LINK_PROPS = { target: '_blank', rel: 'noopener noreferrer' };
 
@@ -55,7 +57,7 @@ export default function GtcGoPhone({ className, dark = false, interval = 3600 })
             className="absolute inset-0 pt-9"
           >
             {screen === 'splash' && <Splash t={t} />}
-            {screen === 'watch' && <Watch t={t} dark={dark} />}
+            {screen === 'watch' && <Watch dark={dark} />}
             {screen === 'trade' && <Trade t={t} dark={dark} />}
             {screen === 'portfolio' && <Portfolio t={t} dark={dark} />}
           </motion.div>
@@ -72,10 +74,22 @@ export default function GtcGoPhone({ className, dark = false, interval = 3600 })
               const Icon = TabIcons[k];
               const on = TAB_FOR[screen] === k;
               return (
-                <div key={label} className="relative flex flex-col items-center gap-0.5 py-1.5 text-[8px] font-semibold">
-                  {on && <motion.span layoutId="gtcgo-tab" className="absolute inset-0 rounded-xl bg-brand" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />}
-                  <Icon className={cn('relative size-3.5', on ? 'text-white' : 'opacity-50')} />
-                  <span className={cn('relative', on ? 'text-white' : 'opacity-50')}>{label}</span>
+                <div
+                  key={label}
+                  className={cn(
+                    'relative flex flex-col items-center gap-0.5 rounded-xl py-1.5 text-[8px] font-semibold',
+                    on && 'bg-brand-600 shadow-sm shadow-brand/25'
+                  )}
+                >
+                  {on && (
+                    <motion.span
+                      layoutId="gtcgo-tab"
+                      className="absolute inset-0 z-0 rounded-xl bg-brand-600"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <Icon className={cn('relative z-[1] size-3.5', on ? 'text-gold' : 'text-ink/45')} strokeWidth={on ? 2.25 : 2} />
+                  <span className={cn('relative z-[1]', on ? 'text-white' : 'text-ink/45')}>{label}</span>
                 </div>
               );
             })}
@@ -88,7 +102,7 @@ export default function GtcGoPhone({ className, dark = false, interval = 3600 })
 
 function Splash({ t }) {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-brand via-brand-700 to-brand-950 text-white">
+    <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-brand via-brand-700 to-brand-950 px-6 text-center text-white">
       <div className="bg-grid-dark absolute inset-0 opacity-50" />
       {[0, 1, 2].map((k) => (
         <motion.span
@@ -99,15 +113,12 @@ function Splash({ t }) {
           transition={{ duration: 2.4, delay: k * 0.6, repeat: Infinity, ease: 'easeOut' }}
         />
       ))}
-      <motion.div initial={{ scale: 0.6, rotate: -20 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 160, damping: 12 }} className="relative grid size-20 place-items-center rounded-[1.6rem] bg-white shadow-2xl">
-        <span className="text-2xl font-black tracking-tighter text-brand">GTC</span>
+      <motion.div initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 160, damping: 14 }} className="relative">
+        <Image src="/GTCFX-ICON.svg" alt="" width={80} height={80} unoptimized className="mx-auto size-20 object-contain" />
       </motion.div>
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="relative mt-5 text-xl font-bold">
-        GTC <span className="text-gold-200">Go</span>
-      </motion.div>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="relative text-xs text-white/70">
-        {t('tagline')}
-      </motion.div>
+      <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.5 }} className="relative mt-5 max-w-[220px] text-[13px] font-bold leading-snug tracking-tight">
+        {t('splashTitle')}
+      </motion.p>
       <div className="relative mt-8 h-1 w-24 overflow-hidden rounded-full bg-white/20">
         <motion.div className="h-full bg-gold" initial={{ width: '0%' }} animate={{ width: '100%' }} transition={{ duration: 3 }} />
       </div>
@@ -115,14 +126,20 @@ function Splash({ t }) {
   );
 }
 
-function Watch({ t, dark }) {
+function PhoneLogoHeader({ trailing }) {
+  return (
+    <div className="flex items-center justify-between gap-2">
+      <Image src={logoSrc(false)} alt="GTCFX" width={174} height={62} className="h-7 w-auto max-w-[130px] shrink-0 object-contain object-left" />
+      {trailing}
+    </div>
+  );
+}
+
+function Watch({ dark }) {
   const rows = [...useTicker(0, 900), ...useTicker(2, 1000)].slice(0, 6);
   return (
     <div className="px-4">
-      <div className="flex items-center justify-between">
-        <h4 className="heading-small">{t('watchlist')}</h4>
-        <span className="rounded-full bg-gold/15 px-2 py-0.5 text-[9px] font-bold text-gold">LIVE</span>
-      </div>
+      <PhoneLogoHeader trailing={<span className="rounded-full bg-gold/15 px-2 py-0.5 text-[9px] font-bold text-gold">LIVE</span>} />
       <div className="mt-3 space-y-1.5">
         {rows.map((r, k) => (
           <motion.div
@@ -202,7 +219,7 @@ function Trade({ t, dark }) {
 function Portfolio({ t, dark }) {
   return (
     <div className="px-4">
-      <h4 className="heading-small">{t('portfolio')}</h4>
+      <PhoneLogoHeader />
       <div className="mt-3 overflow-hidden rounded-2xl bg-gradient-to-br from-brand to-brand-900 p-4 text-white">
         <div className="text-[9px] text-white/60">{t('balance')}</div>
         <div className="text-xl font-bold">

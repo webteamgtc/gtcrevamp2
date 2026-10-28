@@ -70,11 +70,16 @@ export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '971-45109800' 
 export const CAT5_LANGUAGES = ['ar', 'en'];
 
 /**
- * CAT 5 footer links (GTC Financial Consultancy L.L.C. documents). Fill in the URLs; a link without a URL
- * shows as plain text. Labels: marketingPage.footer.links. "Legal Documents" is also the button in
- * "Your Relationship with GTC Financial Consultancy" (it jumps to the footer links until its URL is set).
+ * CAT 5 footer links (GTC Financial Consultancy L.L.C. documents). Labels: marketingPage.footer.links.
+ * "Legal Documents" is also the button in "Your Relationship with GTC Financial Consultancy".
  */
-export const CAT5_LEGAL_LINKS = { legalDocuments: '', riskDisclosure: '', privacy: '', cookies: '', terms: '' };
+export const CAT5_LEGAL_LINKS = {
+  legalDocuments: '/legal/legal-documents',
+  riskDisclosure: '/legal/risk-disclosure',
+  privacy: '/legal/privacy-policy',
+  cookies: '/legal/cookie-policy',
+  terms: '/legal/terms-and-conditions'
+};
 
 /** CMA licensed-companies register (footer “here” + relationship verify line). */
 export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/open-data/licensed-companies';

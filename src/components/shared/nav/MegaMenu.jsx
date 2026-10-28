@@ -6,15 +6,14 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowUpRight, Download } from 'lucide-react';
-import { QRCodeSVG } from 'qrcode.react';
+import { ArrowUpRight } from 'lucide-react';
 import { MENU } from '@/config/menu';
 import { cn } from '@/lib/utils';
 import { useTicker, FlashPrice, Sparkline, pct } from '../ticker';
 import { CandleChart, AreaChart } from '../devices';
-import { StoreBadges } from '../GtcGoPhone';
 import { EASE } from '../../motion';
 import NavLink, { useIsActive } from './NavLink';
+import DownloadsPromo from './DownloadsPromo';
 
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
@@ -202,7 +201,7 @@ function Promo({ promo, onNavigate }) {
 
       <motion.div className="relative mt-5 flex-1" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.45, ease: EASE }}>
         {promo.visual === 'accounts' && <AccountsVisual />}
-        {promo.visual === 'downloads' && <DownloadsVisual onNavigate={onNavigate} />}
+        {promo.visual === 'downloads' && <DownloadsPromo onNavigate={onNavigate} />}
         {promo.visual === 'chart' && <ChartVisual />}
         {promo.visual === 'insight' && <InsightVisual />}
         {promo.visual === 'currencies' && <CurrencyVisual />}
@@ -239,37 +238,6 @@ function AccountsVisual() {
           </div>
         </motion.div>
       ))}
-    </div>
-  );
-}
-
-function DownloadsVisual({ onNavigate }) {
-  const t = useTranslations('menu.downloads');
-  return (
-    <div>
-      <ul className="space-y-1">
-        {[
-          ['mt4', '/trading/mt4-platform'],
-          ['mt5', '/trading/mt5-platform'],
-          ['gtcgo', '/trading/gtc-go-app']
-        ].map(([k, href]) => (
-          <li key={k}>
-            <NavLink href={href} onClick={onNavigate} className="group -mx-2 flex items-center gap-3 rounded-xl px-2 py-1.5 text-[15px] font-medium text-white/90 transition hover:bg-white/10 hover:text-white">
-              <span className="grid size-8 place-items-center rounded-lg bg-white/10 transition group-hover:bg-gold">
-                <Download className="size-4" />
-              </span>
-              {t(k)}
-              <ArrowUpRight className="ms-auto size-4 opacity-0 transition group-hover:opacity-100 rtl:-scale-x-100" />
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-4 flex items-center gap-3">
-        <div className="rounded-xl bg-white p-2 shadow-lg">
-          <QRCodeSVG value="https://mygtc.app" size={84} level="M" fgColor="#1a245c" aria-label={t('scan')} />
-        </div>
-        <StoreBadges dark className="flex-col [&>a]:px-3 [&>a]:py-2" />
-      </div>
     </div>
   );
 }

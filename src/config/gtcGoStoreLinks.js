@@ -4,3 +4,6 @@ export const GTC_GO_APP_STORE_URL =
 
 export const GTC_GO_PLAY_STORE_URL =
   'https://play.google.com/store/apps/details?id=com.gtcgo.trade&hl=en';
+
+/** GTC Go web / desktop entry (Windows, macOS, Linux, Web CTAs on the GTC Go page). */
+export const GTC_GO_WEB_APP_URL = 'https://cn.mygtc.app/user?redirect=%252Fdashboard';

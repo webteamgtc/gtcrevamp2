@@ -27,7 +27,7 @@ const ORGANIZATION = {
   foundingDate: '2012',
   sameAs: [
     'https://www.facebook.com/GTCFXGlobalTradeCapital',
-    'https://linkedin.com/company/gtcfx-official',
+    'https://www.linkedin.com/company/gtcfx-official',
     'https://www.youtube.com/channel/UCnKWakjm1b9Bm63xgwNFXHA',
     'https://www.instagram.com/gtcfxofficial/',
     'https://t.me/gtc_vip_signal',

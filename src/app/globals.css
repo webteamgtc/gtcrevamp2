@@ -260,6 +260,21 @@
 .learn-article a:hover { color: var(--color-gold-600); }
 .learn-article :is(strong, b) { color: var(--color-ink); font-weight: 600; }
 .learn-article img, .learn-article video { max-width: 100%; height: auto; border-radius: 1.25rem; }
+/* GTC News article: Strapi banner image at top of HTML (no separate hero cover) */
+.learn-article.news-article-body > img:first-child,
+.learn-article.news-article-body > figure:first-child img,
+.learn-article.news-article-body > div:first-child > img:first-child,
+.learn-article.news-article-body > p:first-child > img:only-child {
+  display: block;
+  width: 100%;
+  max-height: min(26rem, 52vh);
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  margin-inline: auto;
+  background: linear-gradient(180deg, var(--color-brand-50), #fff);
+  box-shadow: inset 0 0 0 1px rgb(41 59 147 / 0.08);
+}
 .learn-article iframe { width: 100%; aspect-ratio: 16 / 9; border-radius: 1.25rem; }
 .learn-article hr { border-color: rgb(41 59 147 / 0.12); margin-block: 2.5em; }
 .learn-article ul:not([class]), .learn-article ol:not([class]) { padding-inline-start: 1.4em; }

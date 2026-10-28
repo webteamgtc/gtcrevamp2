@@ -14,6 +14,7 @@ import Logo from '../Logo';
 import LanguagePicker from '../LanguagePicker';
 import { EASE } from '../../motion';
 import NavLink, { useIsActive } from './NavLink';
+import DownloadsPromo from './DownloadsPromo';
 
 const GROUP_ICONS = {
   company: MENU[0].columns[0][0].items[0].icon,
@@ -177,7 +178,18 @@ export default function MobileNav({ open, onClose }) {
                         </motion.section>
                       ))}
                     </div>
-                    {group.promo.href && (
+                    {group.promo?.visual === 'downloads' && (
+                      <div className="relative mt-8 overflow-hidden rounded-2xl bg-gradient-to-br from-brand via-brand-700 to-brand-950 p-5 text-white">
+                        <div className="bg-grid-dark absolute inset-0 opacity-50" aria-hidden />
+                        <div className="relative">
+                          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-200">{t('eyebrow')}</p>
+                          <p className="mt-2 font-semibold">{t(`promos.${group.promo.id}.title`)}</p>
+                          <p className="mt-1 text-sm text-white/75">{t(`promos.${group.promo.id}.text`)}</p>
+                          <DownloadsPromo onNavigate={onClose} />
+                        </div>
+                      </div>
+                    )}
+                    {group.promo?.href && (
                       <div className="mt-8 rounded-2xl bg-[#f4f6fb] p-5">
                         <p className="font-semibold">{t(`promos.${group.promo.id}.title`)}</p>
                         <p className="mt-1 text-sm text-ink/60">{t(`promos.${group.promo.id}.text`)}</p>
