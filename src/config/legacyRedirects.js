@@ -2,7 +2,13 @@
  * Legacy site URLs (Search Console / inbound links) → current routes.
  * Imported from next.config.mjs — keep this file free of @/ aliases.
  */
+import { LOCALES } from '../i18n/locales.js';
+import { CAT5_LOCALES } from './regions.js';
+
 const HOME = '/en-intl';
+
+/** Public CAT 5 addresses (regions.js → CAT5_PAGES.path) — must not redirect to /company/*. */
+const CAT5_PUBLIC_PATHS = new Set(['/about-us', '/faqs', '/contact-us']);
 
 /** Old flat paths → current app paths (locale applied when expanding). */
 const LEGACY_REDIRECTS = [
@@ -95,11 +101,22 @@ export function legacyPathRedirects() {
       destination: to === '/' ? HOME : `${HOME}${to}`,
       permanent: true
     });
-    rules.push({
-      source: `/:locale${from}`,
-      destination: to === '/' ? '/:locale' : `/:locale${to}`,
-      permanent: true
-    });
+    if (CAT5_PUBLIC_PATHS.has(from)) {
+      for (const { code } of LOCALES) {
+        if (CAT5_LOCALES.includes(code)) continue;
+        rules.push({
+          source: `/${code}${from}`,
+          destination: to === '/' ? `/${code}` : `/${code}${to}`,
+          permanent: true
+        });
+      }
+    } else {
+      rules.push({
+        source: `/:locale${from}`,
+        destination: to === '/' ? '/:locale' : `/:locale${to}`,
+        permanent: true
+      });
+    }
   }
   return rules;
 }
