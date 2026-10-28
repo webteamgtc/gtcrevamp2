@@ -83,6 +83,7 @@ const ROUTES = {
   '/trading/pamm-account': simple('pammPage', { section: TRADING }),
   '/trading/swap-update': simple('swapUpdatePage', { section: TRADING }),
   '/trading/vps-hosting-services': simple('vpsHostingPage', { section: TRADING }),
+  '/trading/margin-bonus': simple('marginBonusPage', { section: TRADING }),
   '/trading/mt4-platform': simple('mt4Page', { section: TRADING }),
   '/trading/mt5-platform': simple('mt5Page', { section: TRADING }),
   '/trading/metatrader-for-android': simple('metatraderAndroidPage', { section: TRADING }),

@@ -26,6 +26,14 @@ export async function post(url, body) {
 export const fieldBox = 'flex h-11 items-center gap-2.5 rounded-xl border bg-white px-3.5 transition-all focus-within:ring-4';
 export const fieldInput = 'h-full w-full min-w-0 bg-transparent text-sm text-ink outline-none placeholder:text-ink/35';
 
+/* PhoneInput (react-phone-number-input) restyled to match the other fields */
+export const phoneField =
+  '[&_.PhoneInput]:flex [&_.PhoneInput]:h-full [&_.PhoneInput]:w-full [&_.PhoneInput]:items-center [&_.PhoneInput]:gap-2.5 ' +
+  '[&_.PhoneInputCountry]:me-0 [&_.PhoneInputCountry]:border-e [&_.PhoneInputCountry]:border-brand/10 [&_.PhoneInputCountry]:pe-2.5 ' +
+  '[&_.PhoneInputCountryIcon]:shadow-none [&_.PhoneInputCountryIcon--border]:bg-transparent [&_.PhoneInputCountryIcon--border]:shadow-none ' +
+  '[&_.PhoneInputCountrySelectArrow]:text-ink/50 [&_.PhoneInputCountrySelectArrow]:opacity-80 ' +
+  '[&_.PhoneInputInput]:h-full [&_.PhoneInputInput]:min-w-0 [&_.PhoneInputInput]:flex-1 [&_.PhoneInputInput]:border-0 [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:text-sm [&_.PhoneInputInput]:text-ink [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:placeholder:text-ink/35';
+
 export function fieldState(err) {
   return err ? 'border-down/60 focus-within:border-down focus-within:ring-down/10' : 'border-brand/15 focus-within:border-brand focus-within:ring-brand/10';
 }
