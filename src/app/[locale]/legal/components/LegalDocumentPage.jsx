@@ -131,13 +131,13 @@ function ContentsSheet({ sections, badge }) {
   );
 }
 
-function Hero({ slug, doc, minutes }) {
+function Hero({ slug, doc, minutes, cat5 }) {
   const t = useTranslations('legalPage');
   const top = doc?.topSection ?? {};
   const sections = doc?.content ?? [];
   const pathname = usePathname();
   return (
-    <section className="is-dark relative overflow-hidden bg-ink pb-40 pt-36 text-white md:pb-48 md:pt-44">
+    <section className={cn('is-dark relative overflow-hidden bg-ink pb-40 text-white md:pb-48', cat5 ? 'pt-20 md:pt-24' : 'pt-36 md:pt-44')}>
       <HeroBackdrop />
       <div className="container-x relative">
         {/* only on the /legal/… pages (not where the document is reused, e.g. the CAT 5 site's privacy policy) */}
@@ -473,7 +473,7 @@ export default function LegalDocumentPage({ slug, doc, shell }) {
       {!cat5 && <ScrollProgress />}
       {!cat5 && <Header theme="dark" />}
       <main>
-        <Hero slug={slug} doc={doc} minutes={minutes} />
+        <Hero slug={slug} doc={doc} minutes={minutes} cat5={cat5} />
 
         <section className="relative pb-16 md:pb-24">
           <div className="container-x relative -mt-28 md:-mt-32">

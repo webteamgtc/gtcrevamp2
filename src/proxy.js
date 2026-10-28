@@ -118,15 +118,24 @@ function finish(response, { country, test, lookedUp }) {
  * Everyone else: /…/marketing/… → that language's normal Home; the normal site otherwise.
  * Returns undefined when the normal rules should run.
  */
+function cat5Rewrite(request, geo, locale, pageDir) {
+  const url = new URL(`/${locale}${CAT5_PATH}${pageDir}`, request.url);
+  url.search = request.nextUrl.search;
+  const res = finish(NextResponse.rewrite(url), geo);
+  res.cookies.set(COOKIES.uaeCategory, '5', { path: '/', sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 60 * 60 * 24 * REMEMBER_DAYS });
+  return res;
+}
+
 function cat5Site(request, geo, first, restPath, pathname, redirect) {
   const internal = restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`);
   if (geo.country !== 'AE') return internal ? redirect(`/${first}`) : undefined;
   const pages = Object.values(CAT5_PAGES);
   if (!CAT5_LOCALES.includes(first)) {
-    // gtcfx.com/delete, /privacy-policy (no locale) — not a locale segment; send to /en-ae/…
+    // gtcfx.com/delete, /privacy-policy — rewrite in place (URL stays the same)
     if (!LOCALES.has(first) && pathname !== '/') {
       const publicPath = cat5PublicPathForPathname(pathname);
-      if (publicPath) return redirect(`/${CAT5_LOCALE}${publicPath}`);
+      const page = publicPath ? pages.find((p) => p.path === publicPath) : null;
+      if (page) return cat5Rewrite(request, geo, CAT5_LOCALE, page.dir);
     }
     return redirect(`/${first === 'ar' ? 'ar' : CAT5_LOCALE}`);
   }
@@ -134,11 +143,7 @@ function cat5Site(request, geo, first, restPath, pathname, redirect) {
   const publicPath = resolveCat5RestPath(restPath);
   const page = pages.find((p) => p.path === publicPath);
   if (!page) return redirect(`/${first}`);
-  const url = new URL(`/${first}${CAT5_PATH}${page.dir}`, request.url);
-  url.search = request.nextUrl.search;
-  const res = finish(NextResponse.rewrite(url), geo);
-  res.cookies.set(COOKIES.uaeCategory, '5', { path: '/', sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 60 * 60 * 24 * REMEMBER_DAYS });
-  return res;
+  return cat5Rewrite(request, geo, first, page.dir);
 }
 
 export default async function proxy(request) {
@@ -173,6 +178,11 @@ export default async function proxy(request) {
   // 2. no region/language in the URL (or the old /en) → the visitor's regional site (en-intl, en-ae…);
   //    no remembered language — the locale lives only in the URL
   if (!LOCALES.has(first)) {
+    if (geo.country === 'AE' && pathname !== '/') {
+      const publicPath = cat5PublicPathForPathname(pathname);
+      const page = publicPath ? Object.values(CAT5_PAGES).find((p) => p.path === publicPath) : null;
+      if (page && CAT5_SITE) return cat5Rewrite(request, geo, CAT5_LOCALE, page.dir);
+    }
     const tail = first === 'en' ? restPath : pathname === '/' ? '' : pathname;
     return redirect(`/${home}${tail}`);
   }

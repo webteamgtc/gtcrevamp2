@@ -3,7 +3,10 @@
  * Imported from next.config.mjs — keep this file free of @/ aliases.
  */
 import { LOCALES } from '../i18n/locales.js';
-import { CAT5_LOCALES, CAT5_PAGES } from './regions.js';
+import { CAT5_FLAT_ALIASES, CAT5_LOCALES, CAT5_PAGES } from './regions.js';
+
+/** Flat paths handled by src/proxy.js (geo → CAT 5 or regional locale); no root / → /en-intl rule. */
+const NO_ROOT_LEGACY = new Set(Object.keys(CAT5_FLAT_ALIASES));
 
 const HOME = '/en-intl';
 
@@ -102,11 +105,13 @@ export function legacyPathRedirects() {
   for (const [from, to] of LEGACY_REDIRECTS) {
     if (!from?.startsWith('/') || seen.has(from)) continue;
     seen.add(from);
-    rules.push({
-      source: from,
-      destination: to === '/' ? HOME : `${HOME}${to}`,
-      permanent: true
-    });
+    if (!NO_ROOT_LEGACY.has(from)) {
+      rules.push({
+        source: from,
+        destination: to === '/' ? HOME : `${HOME}${to}`,
+        permanent: true
+      });
+    }
     if (CAT5_PUBLIC_PATHS.has(from)) {
       for (const { code } of LOCALES) {
         if (CAT5_LOCALES.includes(code)) continue;

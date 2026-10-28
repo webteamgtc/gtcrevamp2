@@ -5,5 +5,7 @@ import ClientMessages from '@/i18n/ClientMessages';
 export default async function Layout({ children, params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ClientMessages files={['legalPage']}>{children}</ClientMessages>;
+  return (
+    <ClientMessages files={['legalPage', 'marketingPage']}>{children}</ClientMessages>
+  );
 }

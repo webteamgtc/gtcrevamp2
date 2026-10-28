@@ -58,7 +58,9 @@ export const CAT5_PAGES = {
   faq: { path: '/faqs', dir: '/faq' },
   contact: { path: '/contact-us', dir: '/contact' },
   privacy: { path: '/privacy-policy', dir: '/privacy-policy' },
-  delete: { path: '/trading/delete', dir: '/delete' }
+  delete: { path: '/trading/delete', dir: '/delete' },
+  /** Same page as delete; keeps gtcfx.com/delete (and /en-ae/delete) on the CAT 5 site. */
+  deleteFlat: { path: '/delete', dir: '/delete' }
 };
 
 /** Public CAT 5 URL (after /<locale>) is allowed while the visitor is on the CAT 5 site. */

@@ -5,5 +5,9 @@ import ClientMessages from '@/i18n/ClientMessages';
 export default async function Layout({ children, params }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ClientMessages pick={['deleteAccountPage']}>{children}</ClientMessages>;
+  return (
+    <ClientMessages pick={['deleteAccountPage']} files={['marketingPage']}>
+      {children}
+    </ClientMessages>
+  );
 }
