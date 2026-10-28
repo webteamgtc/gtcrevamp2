@@ -1,7 +1,20 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { COOKIES, CAT5_LOCALE, CAT5_LOCALES, CAT5_PAGES, CAT5_PATH, CAT5_SITE, isCat5AllowedPath, REGION_LOCALES, regionForCountry, REMEMBER_DAYS } from './config/regions';
+import {
+  COOKIES,
+  CAT5_LOCALE,
+  CAT5_LOCALES,
+  CAT5_PAGES,
+  CAT5_PATH,
+  CAT5_SITE,
+  cat5PublicPathForPathname,
+  isCat5AllowedPath,
+  REGION_LOCALES,
+  regionForCountry,
+  REMEMBER_DAYS,
+  resolveCat5RestPath
+} from './config/regions';
 import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, isLocalIp } from './lib/geo/resolveCountryFromRequest';
 
 /**
@@ -105,15 +118,21 @@ function finish(response, { country, test, lookedUp }) {
  * Everyone else: /…/marketing/… → that language's normal Home; the normal site otherwise.
  * Returns undefined when the normal rules should run.
  */
-function cat5Site(request, geo, first, restPath, redirect) {
+function cat5Site(request, geo, first, restPath, pathname, redirect) {
   const internal = restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`);
   if (geo.country !== 'AE') return internal ? redirect(`/${first}`) : undefined;
   const pages = Object.values(CAT5_PAGES);
   if (!CAT5_LOCALES.includes(first)) {
+    // gtcfx.com/delete, /privacy-policy (no locale) — not a locale segment; send to /en-ae/…
+    if (!LOCALES.has(first) && pathname !== '/') {
+      const publicPath = cat5PublicPathForPathname(pathname);
+      if (publicPath) return redirect(`/${CAT5_LOCALE}${publicPath}`);
+    }
     return redirect(`/${first === 'ar' ? 'ar' : CAT5_LOCALE}`);
   }
   if (internal) return redirect(`/${first}${pages.find((p) => p.dir === restPath.slice(CAT5_PATH.length))?.path ?? ''}`);
-  const page = pages.find((p) => p.path === restPath);
+  const publicPath = resolveCat5RestPath(restPath);
+  const page = pages.find((p) => p.path === publicPath);
   if (!page) return redirect(`/${first}`);
   const url = new URL(`/${first}${CAT5_PATH}${page.dir}`, request.url);
   url.search = request.nextUrl.search;
@@ -147,7 +166,7 @@ export default async function proxy(request) {
 
   // 1b. TEMPORARY UAE CAT 5 website
   if (CAT5_SITE) {
-    const res = cat5Site(request, geo, first, restPath, redirect);
+    const res = cat5Site(request, geo, first, restPath, pathname, redirect);
     if (res) return res;
   }
 

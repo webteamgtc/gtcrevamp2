@@ -67,7 +67,26 @@ export function isCat5PublicPath(restPath) {
 }
 
 export function isCat5AllowedPath(restPath) {
-  return restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`) || isCat5PublicPath(restPath);
+  const resolved = resolveCat5RestPath(restPath);
+  return restPath === CAT5_PATH || restPath.startsWith(`${CAT5_PATH}/`) || isCat5PublicPath(resolved);
+}
+
+/** Old flat URLs (no locale), e.g. gtcfx.com/delete → /trading/delete on the CAT 5 site. */
+export const CAT5_FLAT_ALIASES = {
+  '/delete': '/trading/delete',
+  '/privacy': '/privacy-policy',
+  '/privacy-policy': '/privacy-policy'
+};
+
+/** Flat pathname or alias → public CAT 5 path (after /<locale>); null if not a CAT 5 page. */
+export function cat5PublicPathForPathname(pathname) {
+  if (isCat5PublicPath(pathname)) return pathname;
+  return CAT5_FLAT_ALIASES[pathname] ?? null;
+}
+
+/** Locale-prefixed segment (/en-ae/delete) → canonical CAT 5 public path for matching. */
+export function resolveCat5RestPath(restPath) {
+  return CAT5_FLAT_ALIASES[restPath] ?? restPath;
 }
 export const CAT5_LOCALE = 'en-ae';
 /** The CAT 5 page exists in English (/en-ae) and Arabic (/ar). */

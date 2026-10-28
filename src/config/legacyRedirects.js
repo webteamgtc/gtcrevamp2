@@ -7,8 +7,14 @@ import { CAT5_LOCALES, CAT5_PAGES } from './regions.js';
 
 const HOME = '/en-intl';
 
-/** Public CAT 5 addresses (regions.js → CAT5_PAGES.path) — en-ae/ar keep these URLs (see src/proxy.js). */
-const CAT5_PUBLIC_PATHS = new Set(Object.values(CAT5_PAGES).map((p) => p.path).filter(Boolean));
+/** Public CAT 5 addresses — en-ae/ar keep these URLs (see src/proxy.js); includes flat legacy aliases. */
+const CAT5_PUBLIC_PATHS = new Set([
+  ...Object.values(CAT5_PAGES)
+    .map((p) => p.path)
+    .filter(Boolean),
+  '/delete',
+  '/privacy'
+]);
 
 /** Old flat paths → current app paths (locale applied when expanding). */
 const LEGACY_REDIRECTS = [
