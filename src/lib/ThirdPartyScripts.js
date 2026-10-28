@@ -4,7 +4,7 @@ import PageViewTracker from '@/lib/analytics/PageViewTracker';
 
 /**
  * Site-wide third-party tags, rendered once in the root layout (src/app/[locale]/layout.js):
- *   Google tag (Google Ads + GA4), Finteza, Umami, Trustpilot invitations, Meta Pixel,
+ *   Google tag (Google Ads + GA4), Finteza, Trustpilot invitations, Meta Pixel,
  *   and window.gtag_report_conversion() for the forms.
  * All load after the page is interactive (Trustpilot when the browser is idle), so they never block rendering.
  *
@@ -14,7 +14,6 @@ import PageViewTracker from '@/lib/analytics/PageViewTracker';
  */
 const IDS = {
   finteza: 'dzwzfjftdagmxioapjzjratbyxemivrdqi',
-  umami: '6e6d0916-5871-41f5-8ef5-1f89b83e611b',
   trustpilot: '4fTEXBqNZH9fKyyp',
   metaPixel: '884963704127462'
 };
@@ -61,9 +60,6 @@ export default function ThirdPartyScripts({ analytics = true, advertising = true
               fz("register","website",{ id:"${IDS.finteza}", trackLinks:true, timeOnPage:true });
             `}
           </Script>
-
-          {/* Umami tracks client-side page changes on its own */}
-          <Script id="umami-script" src="https://cloud.umami.is/script.js" strategy="afterInteractive" data-website-id={IDS.umami} />
 
           <Script id="trustpilot-script" strategy="lazyOnload">
             {`

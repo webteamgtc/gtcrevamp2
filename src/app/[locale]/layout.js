@@ -12,8 +12,12 @@ import { routing } from '@/i18n/routing';
 import { getDir, hreflangOf } from '@/i18n/locales';
 import { SITE_URL } from '@/lib/seo';
 import { INTRO_SCRIPT } from '@/components/shared/intro/introScript';
+import { Analytics } from '@vercel/analytics/next';
+import UmamiScript from '@/lib/analytics/UmamiScript';
 import ThirdPartyScripts from '@/lib/ThirdPartyScripts';
 import ConvrsChatScript from '@/config/ConvrsChatScript';
+
+const VERCEL_ANALYTICS = process.env.NEXT_PUBLIC_STATIC_EXPORT !== '1';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -51,6 +55,9 @@ export default async function LocaleLayout({ children, schema, params }) {
         </ClientMessages>
         {/* site-wide analytics / ads tags (off in local development) */}
         <ThirdPartyScripts />
+        {/* Vercel Web Analytics (Dashboard → Analytics; active on Vercel deployments) */}
+        {VERCEL_ANALYTICS ? <Analytics /> : null}
+        <UmamiScript />
         {/* Convrs live chat widget (loads when the browser is idle) */}
         <ConvrsChatScript />
       </body>
