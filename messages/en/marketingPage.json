@@ -382,6 +382,21 @@
         }
       ]
     },
+    "legalDocumentsPage": {
+      "meta": {
+        "title": "Legal Documents | GTC Financial Consultancy L.L.C.",
+        "description": "View GTC Financial Consultancy L.L.C. legal and regulatory documents, including CMA Category 5 licence information."
+      },
+      "label": "Legal documents",
+      "title": "Legal [Documents]",
+      "text": "Review our regulatory documentation below. You can read it on this page, open it in a new tab, or download a copy for your records.",
+      "viewerTitle": "CMA documentation",
+      "viewerHint": "Capital Market Authority — Category 5 licence documentation",
+      "openNewTab": "Open in new tab",
+      "download": "Download PDF",
+      "cmaNote": "You can also verify our licence on the official CMA register:",
+      "cmaLink": "Licensed companies register"
+    },
     "contactPage": {
       "meta": {
         "title": "Contact Us | GTC Financial Consultancy L.L.C.",
