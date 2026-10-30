@@ -20,12 +20,18 @@ const pad = (n) => String(n).padStart(2, '0');
 
 /** Header cell → 'YYYY-MM-DD' ("01 Oct 2026, Thursday", "2026-10-01", an Excel serial, "2026年10月1日"). */
 function headerDate(value) {
-  const s = String(value ?? '')
+  let s = String(value ?? '')
     .trim()
+    .replace(/\u00a0/g, ' ')
     .replace(/[٠-٩]/g, (c) => c.charCodeAt(0) - 0x0660)
-    .replace(/[۰-۹]/g, (c) => c.charCodeAt(0) - 0x06f0);
+    .replace(/[۰-۹]/g, (c) => c.charCodeAt(0) - 0x06f0)
+    .replace(/\s+/g, ' ')
+    .replace(/,\s*(?:mon|tues|wednes|thurs|fri|satur|sun)day\b.*$/i, '');
   if (!s) return null;
-  if (/^\d{5}(\.\d+)?$/.test(s)) return excelDate(Number(s));
+  if (/^\d+(\.\d+)?$/.test(s)) {
+    const n = Number(s);
+    if (n >= 30000 && n < 60000) return excelDate(n);
+  }
   let m = s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
   if (m) return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
   m = s.match(/(\d{1,2})\s+([A-Za-z]{3,9})\.?,?\s+(\d{4})/);
@@ -38,7 +44,7 @@ function headerDate(value) {
 }
 
 // localised sheets use their own words; anything else non-empty counts as "closed"
-const EARLY = [/early\s*clos/i, /提前|提早/, /مبكر/, /sớm/i, /ก่อนเวลา|ปิดเร็ว/, /anticip/i];
+const EARLY = [/early\s*clos/i, /提前|提早/, /مبكر/, /sớm/i, /ก่อนเวลา|ปิดเร็ว/, /anticip/i, /ปิดก่อน/];
 const EMPTY = [/^-+$/, /^n\/?a$/i, /^(normal|open)$/i, /^mở\s*cửa$/i, /^ß$/];
 
 /** Cell → { status, time, label } or null for an ordinary trading day. */
@@ -62,12 +68,36 @@ function splitMarket(market) {
   return { group: market, name: market };
 }
 
+/** First row whose column A is "Instrument" (or has ≥2 parseable date headers). */
+function headerRowIndex(rows) {
+  for (let i = 0; i < Math.min(rows.length, 8); i++) {
+    const row = rows[i];
+    const label = String(row[0] ?? '')
+      .trim()
+      .toLowerCase();
+    if (label.includes('instrument')) return i;
+    const dateCols = row.slice(1).filter((c) => headerDate(c)).length;
+    if (dateCols >= 2) return i;
+  }
+  return 0;
+}
+
 export function parseHolidaySheet({ columns, rows }) {
-  const dates = columns.map((c, i) => (i === 0 ? null : headerDate(c)));
+  let header = columns;
+  let body = rows;
+  if (!columns.slice(1).some((c) => headerDate(c)) && rows.length) {
+    const hi = headerRowIndex(rows);
+    header = rows[hi];
+    body = rows.slice(hi + 1);
+  }
+  const width = Math.max(header.length, ...body.map((r) => r.length), 0);
+  const normHeader = Array.from({ length: width }, (_, i) => String(header[i] ?? '').trim());
+  const normRows = body.map((r) => Array.from({ length: width }, (_, i) => String(r[i] ?? '').trim()));
+  const dates = normHeader.map((c, i) => (i === 0 ? null : headerDate(c)));
   const events = [];
-  for (const row of rows) {
+  for (const row of normRows) {
     const market = String(row[0] ?? '').trim();
-    if (!market) continue;
+    if (!market || /^instrument$/i.test(market)) continue;
     dates.forEach((date, col) => {
       if (!date) return;
       const cell = parseCell(row[col]);
@@ -117,7 +147,8 @@ export async function getMarketHolidays(locale = 'en') {
   const events = [];
   for (const sheet of sheets) {
     const own = new Set(sheet.map((e) => e.date));
-    if (!sheet.length || [...own].every((d) => seenDates.has(d))) continue;
+    const newDates = [...own].filter((d) => !seenDates.has(d));
+    if (!sheet.length || newDates.length === 0) continue;
     for (const e of sheet) if (!seenDates.has(e.date)) events.push(e);
     own.forEach((d) => seenDates.add(d));
     if (new Set(events.map((e) => e.date.slice(0, 7))).size >= MONTHS) break;

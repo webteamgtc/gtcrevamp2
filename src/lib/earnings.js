@@ -84,7 +84,16 @@ export function readXlsx(buffer) {
 
   const rows = grid.filter((r) => r.some((x) => String(x).trim()));
   const [header = [], ...body] = rows;
-  const columns = header.map((h) => String(h).trim());
+  const columns = header.map((h) => {
+    const s = String(h ?? '')
+      .trim()
+      .replace(/\u00a0/g, ' ');
+    if (/^\d+(\.\d+)?$/.test(s)) {
+      const n = Number(s);
+      if (n >= 30000 && n < 60000) return excelDate(n);
+    }
+    return s;
+  });
   const width = columns.length;
   const dateCols = columns.map((h) => /date/i.test(h));
   const fmt = (x, i) => (dateCols[i] && /^\d+(\.\d+)?$/.test(x) ? excelDate(Number(x)) : /^-?\d+\.\d{7,}$/.test(x) ? String(Number(Number(x).toFixed(6))) : x);
