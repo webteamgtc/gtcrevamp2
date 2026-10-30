@@ -18,15 +18,25 @@ const MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'se
 const excelDate = (n) => new Date(Date.UTC(1899, 11, 30) + Math.round(n * 86400000)).toISOString().slice(0, 10);
 const pad = (n) => String(n).padStart(2, '0');
 
-/** Header cell → 'YYYY-MM-DD' ("01 Oct 2026, Thursday", "2026-10-01", an Excel serial, "2026年10月1日"). */
-function headerDate(value) {
-  let s = String(value ?? '')
+function normalizeHeaderCell(value) {
+  return String(value ?? '')
     .trim()
     .replace(/\u00a0/g, ' ')
     .replace(/[٠-٩]/g, (c) => c.charCodeAt(0) - 0x0660)
     .replace(/[۰-۹]/g, (c) => c.charCodeAt(0) - 0x06f0)
     .replace(/\s+/g, ' ')
     .replace(/,\s*(?:mon|tues|wednes|thurs|fri|satur|sun)day\b.*$/i, '');
+}
+
+function monthDayFromName(mon, day, year) {
+  const key = mon.slice(0, 3).toLowerCase();
+  if (!MONTH_NAMES.includes(key)) return null;
+  return `${year}-${pad(MONTH_NAMES.indexOf(key) + 1)}-${pad(day)}`;
+}
+
+/** Header cell → 'YYYY-MM-DD' ("01 Oct 2026, Thursday", "26 Nov", "2026-10-01", Excel serial, "2026年10月1日"). */
+function headerDate(value, defaultYear) {
+  const s = normalizeHeaderCell(value);
   if (!s) return null;
   if (/^\d+(\.\d+)?$/.test(s)) {
     const n = Number(s);
@@ -35,11 +45,29 @@ function headerDate(value) {
   let m = s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
   if (m) return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
   m = s.match(/(\d{1,2})\s+([A-Za-z]{3,9})\.?,?\s+(\d{4})/);
-  if (m && MONTH_NAMES.includes(m[2].slice(0, 3).toLowerCase())) return `${m[3]}-${pad(MONTH_NAMES.indexOf(m[2].slice(0, 3).toLowerCase()) + 1)}-${pad(m[1])}`;
+  if (m) {
+    const d = monthDayFromName(m[2], Number(m[1]), m[3]);
+    if (d) return d;
+  }
   m = s.match(/([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(\d{4})/);
-  if (m && MONTH_NAMES.includes(m[1].slice(0, 3).toLowerCase())) return `${m[3]}-${pad(MONTH_NAMES.indexOf(m[1].slice(0, 3).toLowerCase()) + 1)}-${pad(m[2])}`;
+  if (m) {
+    const d = monthDayFromName(m[1], Number(m[2]), m[3]);
+    if (d) return d;
+  }
   m = s.match(/(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})/);
   if (m) return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
+  if (defaultYear) {
+    m = s.match(/^(\d{1,2})\s+([A-Za-z]{3,9})\.?$/);
+    if (m) {
+      const d = monthDayFromName(m[2], Number(m[1]), defaultYear);
+      if (d) return d;
+    }
+    m = s.match(/^([A-Za-z]{3,9})\.?\s+(\d{1,2})$/);
+    if (m) {
+      const d = monthDayFromName(m[1], Number(m[2]), defaultYear);
+      if (d) return d;
+    }
+  }
   return null;
 }
 
@@ -82,7 +110,21 @@ function headerRowIndex(rows) {
   return 0;
 }
 
-export function parseHolidaySheet({ columns, rows }) {
+function resolveHeaderDates(headers, context = {}) {
+  const withYear = headers.map((c, i) => (i === 0 ? null : headerDate(c)));
+  let defaultYear = context.defaultYear ? String(context.defaultYear).slice(0, 4) : null;
+  if (!defaultYear) {
+    const sample = withYear.find(Boolean);
+    if (sample) defaultYear = sample.slice(0, 4);
+  }
+  if (!defaultYear && context.entryDate) defaultYear = String(context.entryDate).slice(0, 4);
+  return headers.map((c, i) => {
+    if (i === 0) return null;
+    return withYear[i] ?? (defaultYear ? headerDate(c, defaultYear) : null);
+  });
+}
+
+export function parseHolidaySheet({ columns, rows }, context = {}) {
   let header = columns;
   let body = rows;
   if (!columns.slice(1).some((c) => headerDate(c)) && rows.length) {
@@ -93,7 +135,7 @@ export function parseHolidaySheet({ columns, rows }) {
   const width = Math.max(header.length, ...body.map((r) => r.length), 0);
   const normHeader = Array.from({ length: width }, (_, i) => String(header[i] ?? '').trim());
   const normRows = body.map((r) => Array.from({ length: width }, (_, i) => String(r[i] ?? '').trim()));
-  const dates = normHeader.map((c, i) => (i === 0 ? null : headerDate(c)));
+  const dates = resolveHeaderDates(normHeader, context);
   const events = [];
   for (const row of normRows) {
     const market = String(row[0] ?? '').trim();
@@ -122,11 +164,11 @@ async function entriesFor(locale) {
   return Array.isArray(json?.data) ? json.data.map((e) => (e.attributes ? { id: e.id, ...e.attributes } : e)) : [];
 }
 
-async function readFile(url) {
+async function readFile(url, context = {}) {
   try {
     const res = await fetch(url, { next: { revalidate: REVALIDATE, tags: ['holiday-schedules'] } });
     if (!res.ok) return [];
-    return parseHolidaySheet(readXlsx(await res.arrayBuffer()));
+    return parseHolidaySheet(readXlsx(await res.arrayBuffer()), context);
   } catch (error) {
     console.error('Holiday schedule file error:', url, error?.message);
     return [];
@@ -139,8 +181,20 @@ export async function getMarketHolidays(locale = 'en') {
   let entries = code === 'en' ? [] : await entriesFor(code);
   if (!entries.length) entries = await entriesFor('en');
 
-  const urls = [...new Set(entries.map((e) => mediaUrl(rel(e.file))).filter(Boolean))].slice(0, MONTHS * 2);
-  const sheets = await Promise.all(urls.map(readFile));
+  const seenUrl = new Set();
+  const fileJobs = [];
+  for (const e of entries) {
+    const url = mediaUrl(rel(e.file));
+    if (!url || seenUrl.has(url)) continue;
+    seenUrl.add(url);
+    const entryDate = e.date ? String(e.date).slice(0, 10) : null;
+    fileJobs.push({
+      url,
+      context: { entryDate, defaultYear: entryDate?.slice(0, 4) ?? null }
+    });
+    if (fileJobs.length >= MONTHS * 2) break;
+  }
+  const sheets = await Promise.all(fileJobs.map((j) => readFile(j.url, j.context)));
 
   // newest upload wins for any date that appears in more than one file
   const seenDates = new Set();
