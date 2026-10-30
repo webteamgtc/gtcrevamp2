@@ -58,6 +58,7 @@ export const CAT5_PAGES = {
   faq: { path: '/faqs', dir: '/faq' },
   contact: { path: '/contact-us', dir: '/contact' },
   legalDocuments: { path: '/legal-documents', dir: '/legal-documents' },
+  termsOfBusiness: { path: '/terms-of-business', dir: '/terms-of-business' },
   privacy: { path: '/privacy-policy', dir: '/privacy-policy' },
   delete: { path: '/trading/delete', dir: '/delete' },
   /** Same page as delete; keeps gtcfx.com/delete (and /en-ae/delete) on the CAT 5 site. */
@@ -78,7 +79,14 @@ export function isCat5AllowedPath(restPath) {
 export const CAT5_FLAT_ALIASES = {
   '/delete': '/trading/delete',
   '/privacy': '/privacy-policy',
-  '/privacy-policy': '/privacy-policy'
+  '/privacy-policy': '/privacy-policy',
+  '/terms-of-business': '/terms-of-business'
+};
+
+/** PDFs served from /public for UAE CAT 5 document pages. */
+export const CAT5_PDF_PATHS = {
+  legalDocuments: '/CMA.pdf',
+  termsOfBusiness: '/Terms-of-Business.pdf'
 };
 
 /** Flat pathname or alias → public CAT 5 path (after /<locale>); null if not a CAT 5 page. */

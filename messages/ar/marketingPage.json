@@ -168,6 +168,7 @@
       "risk": "تنطوي المنتجات المالية على مخاطر، وقد لا تكون مناسبة للجميع. لذا، يُرجى الاطلاع على المستندات ذات الصلة بالمنتج المالي قبل اتخاذ أي قرار مالي، والحصول على مشورة مهنية مستقلة عند الحاجة.",
       "links": {
         "legalDocuments": "المستندات القانونية",
+        "termsOfBusiness": "شروط العمل",
         "riskDisclosure": "سياسة الإفصاح عن المخاطر",
         "privacy": "سياسة الخصوصية",
         "cookies": "سياسة ملفات تعريف الارتباط",
@@ -381,6 +382,19 @@
           ]
         }
       ]
+    },
+    "termsOfBusinessPage": {
+      "meta": {
+        "title": "شروط العمل | GTC Financial Consultancy L.L.C.",
+        "description": "اطّلع على شروط العمل لشركة GTC Financial Consultancy L.L.C. المرخّصة من هيئة سوق المال ضمن الفئة الخامسة."
+      },
+      "label": "شروط العمل",
+      "title": "شروط [العمل]",
+      "text": "يُرجى قراءة شروط العمل بعناية. يمكنك عرض المستند أدناه، أو فتحه في نافذة جديدة، أو تنزيل نسخة PDF.",
+      "viewerTitle": "شروط العمل",
+      "viewerHint": "GTC Financial Consultancy L.L.C.",
+      "openNewTab": "فتح في نافذة جديدة",
+      "download": "تنزيل PDF"
     },
     "legalDocumentsPage": {
       "meta": {

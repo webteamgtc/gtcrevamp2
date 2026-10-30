@@ -987,25 +987,28 @@ function ClosingBanner() {
 
 /* ------------------------------------------------------------------ legal footer */
 
-/** Shown for compliance; labels only except Legal Documents → CAT 5 PDF page. */
+/** Shown for compliance; labels only except linked CAT 5 PDF pages. */
+const FOOTER_LINK_PAGE_KEYS = ['legalDocuments', 'termsOfBusiness'];
 const FOOTER_STATIC_KEYS = ['riskDisclosure', 'privacy', 'cookies', 'terms'];
 
 function LegalFooter() {
   const t = useTranslations('marketingPage');
   const locale = useLocale();
-  const legalDocumentsHref = cat5Href(locale, 'legalDocuments');
   return (
     <footer id="legal" className="is-dark scroll-mt-32 bg-ink pb-28 pt-14 text-white md:pb-12">
       <div className="container-x">
         <div className="flex flex-col gap-8 border-b border-white/10 pb-8 lg:flex-row lg:items-center lg:justify-between">
           <Logo onDark />
           <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label={t('footer.title')}>
-            <a
-              href={legalDocumentsHref}
-              className="text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline"
-            >
-              {t('footer.links.legalDocuments')}
-            </a>
+            {FOOTER_LINK_PAGE_KEYS.map((k) => (
+              <a
+                key={k}
+                href={cat5Href(locale, k)}
+                className="text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline"
+              >
+                {t(`footer.links.${k}`)}
+              </a>
+            ))}
             {FOOTER_STATIC_KEYS.map((k) => (
               <span key={k} className="cursor-default text-white/70 select-none">
                 {t(`footer.links.${k}`)}

@@ -168,6 +168,7 @@
       "risk": "Financial products carry risk and may not be suitable for everyone. Before making any financial decision, review the relevant product documentation and, where necessary, seek independent professional advice.",
       "links": {
         "legalDocuments": "Legal Documents",
+        "termsOfBusiness": "Terms of Business",
         "riskDisclosure": "Risk Disclosure Policy",
         "privacy": "Privacy Policy",
         "cookies": "Cookie Policy",
@@ -381,6 +382,19 @@
           ]
         }
       ]
+    },
+    "termsOfBusinessPage": {
+      "meta": {
+        "title": "Terms of Business | GTC Financial Consultancy L.L.C.",
+        "description": "Read the Terms of Business for GTC Financial Consultancy L.L.C., licensed by the UAE Capital Market Authority under Category 5."
+      },
+      "label": "Terms of business",
+      "title": "Terms of [Business]",
+      "text": "Please read our Terms of Business carefully. You can view the document below, open it in a new tab, or download a copy.",
+      "viewerTitle": "Terms of Business",
+      "viewerHint": "GTC Financial Consultancy L.L.C.",
+      "openNewTab": "Open in new tab",
+      "download": "Download PDF"
     },
     "legalDocumentsPage": {
       "meta": {

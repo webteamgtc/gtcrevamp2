@@ -6,7 +6,7 @@ import { LOCALES } from '../i18n/locales.js';
 import { CAT5_FLAT_ALIASES, CAT5_LOCALES, CAT5_PAGES } from './regions.js';
 
 /** Flat paths handled by src/proxy.js (geo → CAT 5 or regional locale); no root / → /en-intl rule. */
-const NO_ROOT_LEGACY = new Set(Object.keys(CAT5_FLAT_ALIASES));
+const NO_ROOT_LEGACY = new Set([...Object.keys(CAT5_FLAT_ALIASES), '/legal-documents']);
 
 const HOME = '/en-intl';
 
