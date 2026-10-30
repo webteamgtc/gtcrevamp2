@@ -23,6 +23,10 @@ export const BUNDLED_LANGS = ['en', 'ar', 'zh'];
 const S3_BASE = (process.env.MESSAGES_S3_BASE || 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/messages').replace(/\/$/, '');
 const S3_REVALIDATE = 3600; // seconds; cached by Next's fetch cache, so pages stay static
 
+/** S3 prefix folders to try (first match wins). Keys are case-sensitive on S3. */
+const S3_LANG_CANDIDATES = { 'zh-TW': ['zh-TW', 'zh-tw'] };
+const s3LangFolders = (lang) => S3_LANG_CANDIDATES[lang] ?? [lang];
+
 /** Files that export several top-level namespaces (not wrapped by filename). */
 const MULTI_NAMESPACE_FILES = new Set(['common', 'homepage']);
 
@@ -114,9 +118,18 @@ async function fetchS3File(url) {
  * <S3_BASE>/<lang>/<file>.json for every file in messages/en (same layout as the local folders,
  * e.g. messages/es/common.json). Files not uploaded yet are skipped, so those texts show in English.
  */
+async function fetchS3FileFromLangFolders(folders, file) {
+  for (const folder of folders) {
+    const raw = await fetchS3File(`${S3_BASE}/${encodeURIComponent(folder)}/${file}`);
+    if (raw) return raw;
+  }
+  return null;
+}
+
 async function fetchS3Messages(lang) {
   const files = fs.readdirSync(path.join(messagesRoot, 'en')).filter((name) => name.endsWith('.json')).sort();
-  const parts = await Promise.all(files.map((file) => fetchS3File(`${S3_BASE}/${encodeURIComponent(lang)}/${file}`)));
+  const folders = s3LangFolders(lang);
+  const parts = await Promise.all(files.map((file) => fetchS3FileFromLangFolders(folders, file)));
   return parts.reduce((messages, raw, i) => {
     const part = raw && namespaceBundlePart(files[i], raw);
     return part && typeof part === 'object' ? merge(messages, part) : messages;
