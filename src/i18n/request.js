@@ -1,7 +1,7 @@
 import { getRequestConfig } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { routing } from './routing';
-import { loadLocaleMessages } from './loadMessages';
+import { loadLocaleMessages, loadRegionOverrides } from './loadMessages';
 import { langOf } from './locales';
 
 // Code identifiers inside messages (items[].id → icon/visual lookups): always the English value,
@@ -25,7 +25,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
   const en = await loadLocaleMessages('en');
   const lang = langOf(locale); // regional English (en-ae, en-za…) uses the English messages
-  if (lang === 'en') return { locale, messages: en };
-  const own = await loadLocaleMessages(lang);
-  return { locale, messages: merge(en, own) };
+  const messages = lang === 'en' ? en : merge(en, await loadLocaleMessages(lang));
+  // a regional site's own wording on top (e.g. /en-za: messages/regions/en-za.json)
+  const region = loadRegionOverrides(locale);
+  return { locale, messages: region ? merge(messages, region) : messages };
 });

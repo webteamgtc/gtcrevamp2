@@ -191,7 +191,7 @@
           "Trading in derivatives, including rolling spot Foreign Exchange (FX) and Contracts for Difference (CFDs), is highly speculative, carries a substantial degree of risk, and is not appropriate for every investor. Nothing on this website constitutes investment advice or a recommendation, and it has been prepared without regard to your individual objectives, financial circumstances or needs.",
           "FX and CFDs are complex instruments dealt on a margined basis and carry a high risk of losing money rapidly by reason of leverage, which magnifies gains and losses alike. You may lose part or all of your invested capital, and losses may exceed your initial investment. Before trading, you should consider your objectives, financial position, level of experience and appetite for risk, satisfy yourself that you understand how these products operate, and trade only with funds you can afford to lose. Seek independent financial or tax advice if in any doubt. Past performance is not indicative of future results.",
           "This website is operated by GTC Global SA (Pty) Ltd (Company No. 2020/810937/07), the licensed financial services provider for clients resident in South Africa (FSP No. 51545). Its registered address is 18 Cavendish Road, Claremont, Cape Town, Western Cape, 7708, South Africa. It is licensed and regulated by South Africa's Financial Sector Conduct Authority (FSCA). The company is neither a market maker nor a product issuer and acts solely as an intermediary under the Financial Advisory and Intermediary Services Act, 2002 (FAIS), between the client and GTC Global Trading Ltd, the product supplier and principal counterparty to all client transactions.",
-          "GTC Global Trading Ltd is a company incorporated in Anjouan, Union of the Comoros (Company No. 16283) and licensed by the Anjouan Offshore Finance Authority under Licence No. L162831GTC. Its registered address is Boulevard de Coalancanthe, Mutsamudu, Anjouan, Union of the Comoros.",
+          "GTC Global Trading Ltd, is a company incorporated in Anjouan, Union of the Comoros (Company No. 16283) and licensed by the Anjouan Offshore Finance Authority under Licence No. L16283/GTC. Its registered address is Boulevard de Coalancanthe, Mutsamudu, Anjouan, Union of the Comoros.",
           "Services offered through this website are not available to residents of the United States, Japan, Australia, or in any jurisdiction where the provision of those services would contravene applicable laws, regulations, or sanctions."
         ]
       },
@@ -482,6 +482,14 @@
   },
   "riskBarUs": "Trading CFDs involves significant risk and may result in the loss of your invested capital. You should carefully consider whether trading is appropriate for your financial circumstances and obtain independent financial advice where necessary. GTCFX services are not offered to residents of the United States or in jurisdictions where the distribution or use of such services is prohibited by applicable laws or regulations.",
   "geo": {
+    "za": {
+      "eyebrow": "South Africa Residents",
+      "title": "Please read and acknowledge the Upfront Disclosure and the Customer Terms Agreement",
+      "text": "GTC Global SA (Pty) Ltd, trading as GTCFX, is an authorised Category I Financial Services Provider (No. 51545) acting solely as an intermediary in terms of the FAIS Act between the client and GTC Global Trading LTD. The local FSP is not a market maker or product issuer and does not act as the principal or counterparty.",
+      "notice": "South African residents are required to obtain the necessary tax clearance certificates in order to utilise their foreign investment allowance should the South African resident wish to open an international account with GTC Global Trading LTD.",
+      "documents": "The Upfront Disclosure and the Customer Terms Agreement are provided to clients on request. To receive a copy, contact <link>{email}</link>.",
+      "accept": "I have read and acknowledge"
+    },
     "us": {
       "title": "Before you [continue]",
       "text": "By continuing, you confirm that you understand the risks of trading CFDs, that you are not relying solely on this site for financial advice, and that you are not a resident or citizen of the United States, where GTCFX does not provide CFD trading services.",
@@ -608,6 +616,7 @@
       "success": "Thank you! We will contact you soon",
       "genericError": "Something went wrong"
     },
-    "countrySearch": "Search country…"
+    "countrySearch": "Search country…",
+    "privacyLink": "Privacy Policy"
   }
 }

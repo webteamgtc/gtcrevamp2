@@ -7,10 +7,15 @@ import CategoryPage from '../components/CategoryPage';
 
 export const revalidate = 300; // posts come from Strapi
 
+/**
+ * A category this language has no posts in falls back to the English one (like the articles do), so every
+ * language version of a category URL exists — the hreflang alternates all answer 200.
+ */
 async function load(locale, slug) {
   const categories = await getNewsCategories(locale);
-  const category = categories.find((c) => c.slug === slug);
-  return category ? { categories, category } : null;
+  const category = categories.find((c) => c.slug === slug) ?? (await getNewsCategories('en')).find((c) => c.slug === slug);
+  if (!category) return null;
+  return { categories: categories.some((c) => c.slug === slug) ? categories : [...categories, category], category };
 }
 
 export async function generateMetadata({ params }) {

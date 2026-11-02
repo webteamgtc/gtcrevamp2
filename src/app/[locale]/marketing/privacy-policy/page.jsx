@@ -14,7 +14,7 @@ const PATH = '/privacy-policy';
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'legalPage.docs.privacy-policy' });
-  return { ...pageMetadata({ locale, path: PATH, title: t('title'), description: t('description') }), robots: { index: false, follow: false } };
+  return pageMetadata({ locale, path: PATH, title: t('title'), description: t('description'), noindex: true });
 }
 
 export default async function Page({ params }) {

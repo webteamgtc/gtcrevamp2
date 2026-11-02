@@ -7,6 +7,9 @@ const isExport = process.env.STATIC_EXPORT === '1';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // crawlers (search engines + SEO audit tools) get the metadata — canonical, hreflang — inside <head> on dynamic
+  // pages too, instead of streamed into <body>; visitors keep streaming metadata
+  htmlLimitedBots: /bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|petal|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed|sitebulb|screaming|ahrefs|semrush|moz\.com|validator/i,
   images: {
     unoptimized: isExport,
     remotePatterns: [

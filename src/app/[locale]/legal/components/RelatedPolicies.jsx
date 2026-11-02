@@ -1,7 +1,11 @@
 'use client';
-/** Grid of the web policy pages (all of them, or all but `current`). Used on every policy page and the legal hub. */
-import { useTranslations } from 'next-intl';
-import { ArrowUpRight, BadgeCheck, Cookie, FileText, Scale, ShieldAlert, ShieldCheck, UserCheck, Wallet } from 'lucide-react';
+/**
+ * Grid of the web policy pages (all of them, or all but `current`). Used on every policy page and the legal hub.
+ * /en-za lists its own five policies instead (ZA_LEGAL_SLUGS in src/config/regions.js).
+ */
+import { useLocale, useTranslations } from 'next-intl';
+import { ArrowUpRight, BadgeCheck, Cookie, FileText, Gauge, Library, MessageSquareWarning, Scale, ShieldAlert, ShieldCheck, Split, UserCheck, Wallet } from 'lucide-react';
+import { ZA_LEGAL_SLUGS, ZA_LOCALE } from '@/config/regions';
 import NavLink from '@/components/shared/nav/NavLink';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { Stagger, StaggerItem } from '@/components/motion';
@@ -18,9 +22,15 @@ export const POLICIES = [
   // { slug: 'swap-free-terms-and-conditions', Icon: BadgeCheck }
 ];
 
+const ZA_ICONS = { 'conflict-of-interest': Split, 'privacy-policy': ShieldCheck, 'order-execution': Gauge, 'complaints-handling': MessageSquareWarning, 'paia-manual': Library };
+const ZA_POLICIES = ZA_LEGAL_SLUGS.map((slug) => ({ slug, Icon: ZA_ICONS[slug] ?? FileText }));
+
+/** The policy pages published on a locale's site. */
+export const policiesFor = (locale) => (locale === ZA_LOCALE ? ZA_POLICIES : POLICIES);
+
 export function PolicyGrid({ current, className }) {
   const t = useTranslations('legalPage');
-  const items = POLICIES.filter((p) => p.slug !== current);
+  const items = policiesFor(useLocale()).filter((p) => p.slug !== current);
   return (
     <Stagger className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-4', className)} stagger={0.06} amount={0.1}>
       {items.map(({ slug, Icon }, i) => (

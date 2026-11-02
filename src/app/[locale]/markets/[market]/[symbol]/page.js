@@ -19,7 +19,15 @@ export function generateStaticParams() {
 async function load(market, symbol) {
   const page = marketPageBySlug(market);
   if (!page) return null;
-  const symbols = await getMarketSymbols(page);
+  let symbols = await getMarketSymbols(page);
+  // an empty list means the symbols API failed (timeout / outage), not an unknown symbol. Menu symbols (built ahead
+  // of time) still render from the URL — so an outage can't fail a build — and refresh with `revalidate`; any other
+  // symbol throws instead of a 404, so the last good version keeps being served rather than a cached 404.
+  if (!symbols.length) {
+    const prebuilt = (PREBUILT_SYMBOLS[page.id] ?? []).find((s) => s.toLowerCase() === String(symbol).toLowerCase());
+    if (!prebuilt) throw new Error(`Symbols API unavailable for ${market}`);
+    symbols = [{ s: prebuilt, n: prebuilt, d: 5 }];
+  }
   const sym = symbols.find((x) => x.s.toLowerCase() === String(symbol).toLowerCase());
   return sym ? { page, symbols, sym } : null;
 }

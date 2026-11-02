@@ -17,6 +17,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useLocale, useTranslations } from 'next-intl';
+import NavLink from '@/components/shared/nav/NavLink';
+import { ZA_LOCALE } from '@/config/regions';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
@@ -539,7 +541,8 @@ export default function CommonLeadForm({
 
       {/* disclaimer + terms */}
       <div className={cn('col-span-2 space-y-2.5', wide && 'md:col-span-3')}>
-        {!hideDisclaimer && (
+        {/* /en-za publishes only the South African entity's documents: no client agreement, consent → its privacy policy */}
+        {!hideDisclaimer && locale !== ZA_LOCALE && (
           <p className={cn('text-xs leading-relaxed', muted)}>
             <span className={cn('font-semibold', dark ? 'text-white/80' : 'text-ink/80')}>{t('disclaimerTitle')}</span> {t('disclaimerBefore')}{' '}
             <a href={links.clientAgreementPdf} target="_blank" rel="noopener noreferrer" className={link}>
@@ -552,9 +555,15 @@ export default function CommonLeadForm({
           <input type="checkbox" checked={values.terms} onChange={set('terms')} onBlur={blur('terms')} className={cn('mt-0.5 size-4 shrink-0 cursor-pointer', dark ? 'accent-[#b68756]' : 'accent-[#293b93]')} />
           <span>
             {t('termsPrefix')}{' '}
-            <a href={links.termsPdf} target="_blank" rel="noopener noreferrer" className={link}>
-              {t('termsLink')}
-            </a>
+            {locale === ZA_LOCALE ? (
+              <NavLink href="/legal/privacy-policy" className={link}>
+                {t('termsLink')}
+              </NavLink>
+            ) : (
+              <a href={links.termsPdf} target="_blank" rel="noopener noreferrer" className={link}>
+                {t('termsLink')}
+              </a>
+            )}
           </span>
         </label>
         {errText('terms')}

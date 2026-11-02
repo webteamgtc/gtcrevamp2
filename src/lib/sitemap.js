@@ -5,10 +5,12 @@
  *                             in next.config.mjs). hreflang alternates are declared in each page's <head> (pageMetadata).
  * Every URL is a final, locale-prefixed URL (no bare paths that depend on IP geo redirects).
  * To list a new page, add its path to PAGES. noindex pages (thank-you, delete, marketing) stay out.
+ * Pages a locale doesn't have (pageExists in src/config/regions.js, e.g. /en-za's own legal pages) are skipped.
  */
 import { LOCALES, DEFAULT_LOCALE } from '@/i18n/locales';
 import { SITE_URL } from '@/lib/seo';
 import { MARKET_PAGES, symbolHref } from '@/config/marketPages';
+import { ZA_ONLY_LEGAL_SLUGS, pageExists } from '@/config/regions';
 import { getMarketSymbols } from '@/lib/marketSymbols';
 import { ALPHABET } from '@/lib/glossary';
 import { getNewsCategories, getNewsPage } from '@/lib/news';
@@ -70,7 +72,8 @@ const PAGES = [
   ...Object.keys(COURSES).map(courseHref),
   '/legal/legal-documents',
   '/legal/restricted-countries',
-  ...LEGAL_SLUGS.map((s) => `/legal/${s}`)
+  ...LEGAL_SLUGS.map((s) => `/legal/${s}`),
+  ...ZA_ONLY_LEGAL_SLUGS.map((s) => `/legal/${s}`) // /en-za only (pageExists)
 ];
 
 /** Resolves to `fallback` if `promise` is slow or fails, so one unreachable API never breaks the sitemap. */
@@ -129,7 +132,7 @@ export async function buildLocaleSitemap(locale) {
   if (!SITEMAP_LOCALES.includes(locale)) return null;
   const pages = [...PAGES.map((path) => ({ path })), ...(await dynamicPages())];
   const seen = new Set();
-  const entries = pages.filter((p) => !seen.has(p.path) && seen.add(p.path)).map((p) => urlEntry(locale, p));
+  const entries = pages.filter((p) => pageExists(locale, p.path) && !seen.has(p.path) && seen.add(p.path)).map((p) => urlEntry(locale, p));
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries.join('\n')}

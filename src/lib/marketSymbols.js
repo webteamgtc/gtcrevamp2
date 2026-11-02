@@ -20,7 +20,30 @@ function typeInfo(t) {
   return [text, value];
 }
 
+/**
+ * The list is shared by every symbol page of a market in every language (24 renders per symbol), so it is kept
+ * in memory per market for CACHE_TTL and concurrent requests share one API call — otherwise a crawl fires the same
+ * two API calls hundreds of times and the API starts refusing. Only successful (non-empty) lists are kept.
+ */
+const CACHE_TTL = 10 * 60 * 1000;
+const cache = (global.__gtcMarketSymbols ??= new Map()); // apiType → { at, rows } | { pending }
+
 export async function getMarketSymbols(page) {
+  const key = String(page.apiType);
+  const hit = cache.get(key);
+  if (hit?.rows && Date.now() - hit.at < CACHE_TTL) return hit.rows;
+  if (hit?.pending) return hit.pending;
+  const pending = loadMarketSymbols(page).then((rows) => {
+    if (rows.length) cache.set(key, { at: Date.now(), rows });
+    else if (hit?.rows) cache.set(key, hit); // keep the last good list through an API hiccup
+    else cache.delete(key);
+    return rows.length ? rows : (hit?.rows ?? rows);
+  });
+  cache.set(key, { ...hit, pending });
+  return pending;
+}
+
+async function loadMarketSymbols(page) {
   try {
     const types = await withTimeout(fetchSymbolTypes());
     const match = types.map(typeInfo).find(([text]) => page.apiType.test(text));

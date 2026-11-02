@@ -165,6 +165,28 @@ export async function loadLocaleMessages(locale) {
 }
 
 /**
+ * Wording for one regional site, merged over its language (request.js): messages/regions/<locale>.json,
+ * e.g. messages/regions/en-za.json — the South African site's compliance wording over the English text.
+ * Same namespaces as the other files ({ "hero": { … }, "footer": { … } }); arrays are merged item by item,
+ * so {} keeps an item and extra items are appended. null when the locale has none.
+ */
+const regionCache = new Map();
+export function loadRegionOverrides(locale) {
+  if (CACHE && regionCache.has(locale)) return regionCache.get(locale);
+  const file = path.join(messagesRoot, 'regions', `${locale}.json`);
+  let data = null;
+  if (fs.existsSync(file)) {
+    try {
+      data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    } catch (err) {
+      console.error(`[i18n] Failed to parse ${file}:`, err);
+    }
+  }
+  if (CACHE) regionCache.set(locale, data);
+  return data;
+}
+
+/**
  * Top-level namespaces a messages file provides, e.g. namespacesOf('companyPage') → ['companyPage', 'aboutUsPage', …].
  * Read from the English folder (every language uses the same keys).
  */

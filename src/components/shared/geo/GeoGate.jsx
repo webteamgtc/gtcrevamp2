@@ -3,6 +3,7 @@
  * Region rules, opened as the intro fades out (settings: src/config/regions.js, copy: common.json → geo):
  *  - US visitors: "Important notice" — must accept to use the site (remembered 30 days)
  *  - UAE visitors (any language) and /en-ae: CAT 1 (full site) or CAT 5 (marketing page only) — remembered 30 days, changeable from the footer
+ *  - South African visitors: upfront disclosure to acknowledge (once per tab, see ZaNotice.jsx)
  *  - visitor on another region's site (e.g. a South African on /en-intl): small "go to your region?" note
  */
 import { useEffect, useState } from 'react';
@@ -16,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { readCookie, writeCookie, useCountry, whenIntroLeaving, localeHref } from './geoClient';
 import { Gate, EASE } from './Gate';
 import UsNotice from './UsNotice';
+import ZaNotice, { rememberZa, zaAcknowledged } from './ZaNotice';
 
 /* ------------------------------------------------------------------ UAE */
 
@@ -179,7 +181,7 @@ export default function GeoGate() {
   const locale = useLocale();
   const country = useCountry();
   const [ready, setReady] = useState(false);
-  const [step, setStep] = useState(null); // 'us' | 'uae' | 'region' | null
+  const [step, setStep] = useState(null); // 'us' | 'uae' | 'za' | 'region' | null
 
   useEffect(() => {
     let alive = true;
@@ -189,20 +191,31 @@ export default function GeoGate() {
     };
   }, []);
 
+  /** The first rule that still applies (each one is skipped once its cookie is set). */
+  const pending = () => {
+    if (country === 'US' && readCookie(COOKIES.usAccepted) !== '1') return 'us';
+    if ((country === 'AE' || locale === CAT5_LOCALE) && !readCookie(COOKIES.uaeCategory)) return 'uae';
+    if (country === 'ZA' && !zaAcknowledged()) return 'za';
+    const home = regionForCountry(country);
+    if (REGION_LOCALES.includes(locale) && home !== locale && home !== 'en-intl' && readCookie(COOKIES.regionDismissed) !== locale) return 'region';
+    return null;
+  };
+
   useEffect(() => {
     if (!ready || !country) return;
-    if (country === 'US' && readCookie(COOKIES.usAccepted) !== '1') return setStep('us');
-    if ((country === 'AE' || locale === CAT5_LOCALE) && !readCookie(COOKIES.uaeCategory)) return setStep('uae');
-    const home = regionForCountry(country);
-    if (REGION_LOCALES.includes(locale) && home !== locale && home !== 'en-intl' && readCookie(COOKIES.regionDismissed) !== locale) return setStep('region');
-    setStep(null);
+    setStep(pending());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, country, locale]);
 
   const next = () => setStep(null);
+  // accepting a notice continues with the next rule (e.g. UAE category, region suggestion) if any
   const acceptUs = () => {
     writeCookie(COOKIES.usAccepted, '1');
-    // continue with the next rule (e.g. UAE category) if any
-    setStep((country === 'AE' || locale === CAT5_LOCALE) && !readCookie(COOKIES.uaeCategory) ? 'uae' : null);
+    setStep(pending());
+  };
+  const acceptZa = () => {
+    rememberZa();
+    setStep(pending());
   };
   const chooseCat = (c) => {
     writeCookie(COOKIES.uaeCategory, c);
@@ -219,6 +232,7 @@ export default function GeoGate() {
     <AnimatePresence>
       {step === 'us' && <UsNotice key="us" onAccept={acceptUs} />}
       {step === 'uae' && <UaeCategory key="uae" onChoose={chooseCat} />}
+      {step === 'za' && <ZaNotice key="za" onAccept={acceptZa} />}
       {step === 'region' && <RegionSuggest key="region" country={country} target={regionForCountry(country)} onClose={stayHere} />}
     </AnimatePresence>
   );

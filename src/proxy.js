@@ -13,8 +13,7 @@ import {
   REGION_LOCALES,
   regionForCountry,
   REMEMBER_DAYS,
-  resolveCat5RestPath
-} from './config/regions';
+  resolveCat5RestPath, ZA_LEGAL_PATHS, ZA_LOCALE } from './config/regions';
 import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, isLocalIp } from './lib/geo/resolveCountryFromRequest';
 
 /**
@@ -37,7 +36,8 @@ const REGIONAL = new Set(REGION_LOCALES);
 const GEO_TEST = process.env.VERCEL_ENV !== 'production' || process.env.GEO_TEST === '1';
 const COUNTRY_RE = /^[A-Z]{2}$/;
 // crawlers must reach every regional site (they would otherwise always land on /en-intl)
-const BOT_RE = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed/i;
+// (also SEO audit tools, so hreflang targets such as /en-za/… answer 200 instead of a geo redirect)
+const BOT_RE = /bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|petal|bytespider|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed|sitebulb|screaming|ahrefs|semrush|moz\.com|seositecheckup|validator/i;
 
 // old site: every language had an "-intl" folder (vi-intl, ru-intl, zh-intl…) and some other spellings
 const LOCALE_BY_LOWER = new Map(routing.locales.map((c) => [c.toLowerCase(), c]));
@@ -168,6 +168,9 @@ export default async function proxy(request) {
   const fixed = inner ?? outer;
   const fixedTail = inner ? rest.slice(1) : rest;
   if (fixed && (inner || fixed !== first)) return redirect(`/${fixed}${fixedTail.length ? `/${fixedTail.join('/')}` : ''}`, 301);
+
+  // 0b. the South African site publishes only its own policies: any other /en-za/legal/… page → its legal hub
+  if (first === ZA_LOCALE && restPath.startsWith('/legal/') && !ZA_LEGAL_PATHS.includes(restPath)) return redirect(`/${ZA_LOCALE}/legal/legal-documents`, 301);
 
   // 1b. TEMPORARY UAE CAT 5 website
   if (CAT5_SITE) {

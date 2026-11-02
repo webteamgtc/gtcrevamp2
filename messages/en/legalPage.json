@@ -52,6 +52,30 @@
         "summary": "Eligibility, fees and rules for swap-free accounts.",
         "title": "Swap-Free Terms & Conditions | GTCFX",
         "description": "Review the terms and conditions for swap-free accounts, including eligibility, usage rules, and applicable conditions."
+      },
+      "conflict-of-interest": {
+        "name": "Conflict of Interest Management Policy",
+        "summary": "How GTC Global SA identifies, avoids, mitigates and discloses conflicts of interest.",
+        "title": "Conflict of Interest Management Policy | GTC Global SA | GTCFX",
+        "description": "How GTC Global SA (Pty) Ltd identifies, avoids, mitigates and discloses conflicts of interest."
+      },
+      "order-execution": {
+        "name": "Order Execution Policy",
+        "summary": "How GTC Global Trading LTD receives, prices and executes client orders.",
+        "title": "Order Execution Policy | GTC Global Trading LTD | GTCFX",
+        "description": "How GTC Global Trading LTD executes client orders."
+      },
+      "complaints-handling": {
+        "name": "Complaints Handling Policy",
+        "summary": "How to lodge a complaint and how to escalate it to the FAIS Ombud.",
+        "title": "Complaints Handling Policy | GTC Global SA | GTCFX",
+        "description": "How to lodge a complaint with GTC Global SA (Pty) Ltd and how to escalate to the FAIS Ombud."
+      },
+      "paia-manual": {
+        "name": "PAIA Manual",
+        "summary": "How to request access to records held by GTC Global SA under PAIA.",
+        "title": "PAIA Manual | GTC Global SA | GTCFX",
+        "description": "How to request access to records held by GTC Global SA (Pty) Ltd under PAIA."
       }
     },
     "document": {
@@ -89,7 +113,8 @@
         "entities": "Regulated entities",
         "documents": "PDF documents",
         "policies": "Online policies",
-        "verified": "Official document"
+        "verified": "Official document",
+        "issuers": "Issuing companies"
       },
       "content": {
         "title": "Download [by entity]",
@@ -107,9 +132,18 @@
           "vanuatu": {
             "label": "GTC Global Trade Capital Co.Ltd (Vanuatu)",
             "short": "Vanuatu"
+          },
+          "gtcGlobalSa": {
+            "label": "Issued by GTC Global SA (Pty) Ltd",
+            "short": "GTC Global SA"
+          },
+          "gtcGlobalTrading": {
+            "label": "Issued by GTC Global Trading LTD",
+            "short": "GTC Global Trading"
           }
         },
-        "open": "Open"
+        "open": "Open",
+        "page": "Web page"
       },
       "web": {
         "title": "Read our policies [online]",
