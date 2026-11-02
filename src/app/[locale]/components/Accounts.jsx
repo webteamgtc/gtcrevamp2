@@ -61,7 +61,8 @@ export function Accounts() {
                       >
                         0{i + 1} / GTCFX
                       </span>
-                      {standard && (
+                      {/* no badge where recommending a product isn't allowed (/en-za: intermediary only, accounts.recommended is empty) */}
+                      {standard && t('recommended') && (
                         <span className="rounded-full border border-white/70 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                           {t('recommended')}
                         </span>

@@ -9,7 +9,7 @@ import NavLink from './nav/NavLink';
 import { FOOTER_LINKS } from '@/config/menu';
 import { StoreBadges } from './GtcGoPhone';
 import { Stagger, StaggerItem, Reveal, EASE } from '../motion';
-import { FOOTER_NOTICE_REGIONS, CAT5_LOCALE, regionOf } from '@/config/regions';
+import { FOOTER_NOTICE_REGIONS, CAT5_LOCALE, ZA_LEGAL_PATHS, ZA_LOCALE, regionOf } from '@/config/regions';
 import { resetUaeCategory, useCountry } from './geo/geoClient';
 
 const COLS = ['instruments', 'quick', 'platforms', 'company', 'support', 'legal'];
@@ -18,10 +18,17 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
   const t = useTranslations('footer');
   const locale = useLocale();
   const country = useCountry();
-  // legal notice for the visitor's regional site (South Africa, Mauritius, Vanuatu have their own)
+  // legal notice for the visitor's regional site (South Africa, Mauritius, Vanuatu have their own);
+  // South African visitors also get theirs on sites without their own notice (/en-intl, /es, /ar…)
   const region = regionOf(locale);
-  const notice = FOOTER_NOTICE_REGIONS.includes(region) ? t.raw(`notices.${region}`) : { title: t('riskTitle'), paras: t.raw('risk') };
+  const noticeRegion = FOOTER_NOTICE_REGIONS.includes(region) ? region : country === 'ZA' ? 'za' : null;
+  const notice = noticeRegion ? t.raw(`notices.${noticeRegion}`) : { title: t('riskTitle'), paras: t.raw('risk') };
   const dark = theme === 'dark';
+  const za = locale === ZA_LOCALE;
+  // South African site: its own legal pages only (labels: messages/regions/en-za.json), no Telegram signals channel
+  const hrefs = za ? { ...FOOTER_LINKS, legal: ZA_LEGAL_PATHS } : FOOTER_LINKS;
+  const socials = za ? SOCIALS.filter((s) => s.name !== 'Telegram') : SOCIALS;
+  const year = new Date().getFullYear();
 
   return (
     <footer
@@ -43,7 +50,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
                 ))}
               </h2>
               <div className="mt-6 flex flex-wrap gap-2">
-                {SOCIALS.map((s, i) => (
+                {socials.map((s, i) => (
                   <motion.a
                     key={s.name}
                     href={s.href}
@@ -65,7 +72,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
                 const col = t.raw(`columns.${c}`);
                 return (
                   <StaggerItem key={c}>
-                    <FooterColumn title={col.title} links={col.links} hrefs={FOOTER_LINKS[c]} dark={dark} />
+                    <FooterColumn title={col.title} links={col.links} hrefs={hrefs[c]} dark={dark} />
                   </StaggerItem>
                 );
               })}
@@ -86,7 +93,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
             </h2>
           </Reveal>
           <Stagger className="flex flex-wrap gap-2" stagger={0.06}>
-            {SOCIALS.map((s) => (
+            {socials.map((s) => (
               <StaggerItem key={s.name} variants={{ hidden: { opacity: 0, scale: 0.4, rotate: -30 }, show: { opacity: 1, scale: 1, rotate: 0, transition: { type: 'spring', stiffness: 260, damping: 18 } } }}>
                 <a
                   href={s.href}
@@ -109,7 +116,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
             const col = t.raw(`columns.${c}`);
             return (
               <StaggerItem key={c}>
-                <FooterColumn title={col.title} links={col.links} hrefs={FOOTER_LINKS[c]} dark={dark} />
+                <FooterColumn title={col.title} links={col.links} hrefs={hrefs[c]} dark={dark} />
               </StaggerItem>
             );
           })}
@@ -130,7 +137,7 @@ export default function Footer({ theme = 'light', layout = 'stacked' }) {
 
         <div className={cn('flex flex-col items-start justify-between gap-4 border-t py-6 text-sm sm:flex-row sm:items-center', dark ? 'border-white/10 text-white/50' : 'border-brand/10 text-ink/50')}>
           <p>
-            © {new Date().getFullYear()} GTCFX. {t('rights')}
+            {t.has('copyright') ? t('copyright', { year }) : `© ${year} GTCFX. ${t('rights')}`}
             {(locale === CAT5_LOCALE || country === 'AE') && (
               <button type="button" onClick={resetUaeCategory} className={cn('ms-3 underline underline-offset-4 transition-colors', dark ? 'hover:text-white' : 'hover:text-brand')}>
                 {t('changeCategory')}

@@ -1,0 +1,167 @@
+{
+  "hero": {
+    "subtitle": "Trade forex, metals, commodities and indices as CFDs through GTC Global SA (Pty) Ltd, an authorised financial services provider regulated by the FSCA, which introduces South African residents to GTC Global Trading LTD."
+  },
+  "features": {
+    "titleA": "Trading",
+    "titleB": "Conditions",
+    "subtitle": "Conditions offered by GTC Global Trading LTD, the product supplier. GTC Global SA renders intermediary services only and does not give advice.",
+    "items": [
+      {
+        "text": "Competitive spreads from 1.0 pips on Standard and 0.0 pips on ECN accounts, plus commission where it applies. Spreads are variable and widen in volatile or illiquid markets."
+      },
+      {
+        "eyebrow": "Leverage carries risk",
+        "title": "Leverage",
+        "text": "Leverage up to 1:2000 is available on some accounts and instruments. Leverage magnifies losses as well as gains — a small move against you can wipe out your margin. Use the lowest level you are comfortable with."
+      },
+      {
+        "eyebrow": "Order handling",
+        "title": "Execution",
+        "text": "Orders are received and executed by the Broker. Execution speed and fill price depend on market conditions, liquidity and your connection, and are not guaranteed."
+      },
+      {
+        "text": "Leverage adjusts according to your position size, so larger exposures attract lower leverage. This changes the margin required to hold a position."
+      },
+      {
+        "text": "Markets are available 24 hours a day, five days a week, subject to each instrument's trading hours, market holidays and weekend gaps."
+      },
+      {
+        "eyebrow": "Margin close-out",
+        "title": "Stop-Out Level",
+        "text": "Positions close automatically when margin falls to the 20% stop-out level. A stop-out does not cap your loss — gapping markets can close you out at a worse price."
+      }
+    ]
+  },
+  "stats": {
+    "items": [
+      {
+        "value": 51545,
+        "prefix": "",
+        "suffix": "",
+        "label": "FSP Licence Number",
+        "grouping": false
+      },
+      {
+        "value": 7,
+        "prefix": "",
+        "suffix": "+",
+        "label": "Trading Markets"
+      },
+      {
+        "value": 1,
+        "prefix": "Category ",
+        "suffix": "",
+        "label": "FSCA Authorisation"
+      },
+      {
+        "value": 3,
+        "prefix": "",
+        "suffix": "",
+        "label": "Trading Platforms"
+      }
+    ]
+  },
+  "accounts": {
+    "subtitle": "Account specifications offered by GTC Global Trading LTD. We are not permitted to advise you which account is appropriate for you.",
+    "recommended": "",
+    "standard": {
+      "desc": "No minimum deposit and no commission; the cost is carried in the spread."
+    },
+    "ecn": {
+      "desc": "Raw spreads with a separate per-lot commission, and ECN execution."
+    }
+  },
+  "faq": {
+    "items": [
+      {},
+      {
+        "a": "Depending on your account type you can access forex, metals, energy, indices, commodities, shares, crypto CFDs and futures CFDs through GTC Global Trading LTD."
+      },
+      {
+        "a": "Leverage lets you control a larger position with less capital. It increases potential gains and potential losses in the same proportion. At high leverage a small move against you can eliminate the margin supporting your position. Higher leverage is a larger risk, not a better deal."
+      },
+      {},
+      {},
+      {
+        "q": "Who am I actually contracting with?",
+        "a": "Two companies. GTC Global SA (Pty) Ltd (FSP No. 51545) is your South African intermediary, regulated by the FSCA. GTC Global Trading LTD, licensed in Anjouan, Union of Comoros, is the product supplier: it provides the platform, executes your orders, holds your money and is the counterparty to every trade. It is not regulated by the FSCA and the FAIS Ombud has no jurisdiction over it."
+      },
+      {
+        "q": "Can you tell me which account or instrument to choose?",
+        "a": "No. GTC Global SA is authorised for intermediary services only and is not permitted to furnish advice. We can give factual information about the products, but not a recommendation. Any decision is yours. If you need advice, consult an independent financial adviser."
+      }
+    ]
+  },
+  "register": {
+    "subtitle": "Open a live account and access global markets across forex, indices, commodities and precious metals through GTC Global Trading LTD."
+  },
+  "footer": {
+    "copyright": "© COPYRIGHT {year} GTC GLOBAL SA (PTY) LTD - ALL RIGHTS RESERVED",
+    "columns": {
+      "legal": {
+        "links": [
+          "Legal Documents",
+          "Conflict of Interest Management Policy",
+          "Privacy Policy",
+          "Order Execution Policy",
+          "Complaints Handling Policy",
+          "PAIA Manual"
+        ]
+      }
+    }
+  },
+  "leadForm": {
+    "termsLink": "Privacy Policy"
+  },
+  "legalPage": {
+    "docs": {
+      "privacy-policy": {
+        "name": "Data Protection and Privacy Policy",
+        "title": "Data Protection and Privacy Policy | GTC Global SA | GTCFX",
+        "description": "How GTC Global SA (Pty) Ltd and GTC Global Trading LTD collect, use and protect the personal information of clients resident in South Africa."
+      }
+    },
+    "hub": {
+      "hero": {
+        "title": "Legal [Policies]",
+        "description": "Access the Conflict of Interest Management Policy, Privacy Policy, Order Execution Policy, Complaints Handling Policy and PAIA Manual for clients resident in South Africa."
+      },
+      "content": {
+        "title": "Policies [by issuer]",
+        "description": "Choose the company that issues the policy. Each policy opens as a page on this site.",
+        "footnote": "These are the only legal documents published on the South African site. The FAIS Disclosure, the Risk Disclosure Statement and the Customer Terms Agreement are provided to clients on request. Policies may be updated periodically — always refer to the latest published version.",
+        "count": "{count, plural, one {# policy} other {# policies}}"
+      },
+      "cta": {
+        "description": "Our support team can help you find the right policy or explain any part of it."
+      },
+      "meta": {
+        "title": "Legal Policies | GTC Global SA (Pty) Ltd | GTCFX",
+        "description": "The Conflict of Interest Management Policy, Privacy Policy, Order Execution Policy, Complaints Handling Policy and PAIA Manual for clients resident in South Africa."
+      },
+      "current": "Legal Policies"
+    },
+    "document": {
+      "unavailable": {
+        "text": "We could not load this policy right now. Please try again shortly, or see all our legal policies."
+      }
+    }
+  },
+  "contactPage": {
+    "form": {
+      "termsMiddle": "for the purpose of reviewing and responding to my enquiry, and I",
+      "termsSuffix": "accept my number is not on the Do Not Call Register (DNCR)."
+    }
+  },
+  "tradingPage": {
+    "liveForm": {
+      "confirm1Start": "(1) You confirm that you are 18 years of age or older and have read our"
+    }
+  },
+  "freeDemoAccount": {
+    "form": {
+      "agreements": "Privacy Policy"
+    }
+  }
+}

@@ -39,6 +39,12 @@ export const COOKIES = {
 };
 export const REMEMBER_DAYS = 30;
 
+/**
+ * South Africa pop-up (src/components/shared/geo/ZaNotice.jsx): the Upfront Disclosure and the Customer Terms
+ * Agreement are not published on the website (given to clients on request), so the pop-up names this address.
+ */
+export const ZA_DOCUMENTS_EMAIL = 'support@gtcfx.com';
+
 /** UAE CAT 5: GTC Financial Consultancy L.L.C page (CMA Category 5). While CAT 5 is chosen, every other page redirects here. */
 export const CAT5_PATH = '/marketing';
 
@@ -113,3 +119,35 @@ export const CAT5_LANGUAGES = ['ar', 'en'];
 
 /** CMA licensed-companies register (footer “here” + relationship verify line). */
 export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/open-data/licensed-companies';
+
+/* ------------------------------------------------------------------ South Africa (/en-za) */
+
+/**
+ * The South African site: GTC Global SA (Pty) Ltd, FSP No. 51545 (intermediary only). English only.
+ * Its wording is messages/regions/en-za.json (merged over the English text); its policies are the S3
+ * documents <slug>/en-za.json (src/lib/legalDocuments.js). FAIS Disclosure, Risk Disclosure Statement and the
+ * Customer Terms Agreement are given to clients on request and are not published.
+ */
+export const ZA_LOCALE = 'en-za';
+
+/** Policies published on /en-za, grouped by the company that issues them (legal hub). */
+export const ZA_LEGAL_GROUPS = [
+  { key: 'gtcGlobalSa', slugs: ['conflict-of-interest', 'privacy-policy', 'complaints-handling', 'paia-manual'] },
+  { key: 'gtcGlobalTrading', slugs: ['order-execution'] }
+];
+/** Same policies in footer order (labels: messages/regions/en-za.json → footer.columns.legal.links). */
+export const ZA_LEGAL_SLUGS = ['conflict-of-interest', 'privacy-policy', 'order-execution', 'complaints-handling', 'paia-manual'];
+/** Policies that exist only on /en-za (every other locale answers 404). */
+export const ZA_ONLY_LEGAL_SLUGS = ZA_LEGAL_SLUGS.filter((s) => s !== 'privacy-policy');
+/** The /legal pages of /en-za (hub first); any other /en-za/legal/… page redirects to the hub. */
+export const ZA_LEGAL_PATHS = ['/legal/legal-documents', ...ZA_LEGAL_SLUGS.map((s) => `/legal/${s}`)];
+
+/**
+ * Does `path` (without the locale, e.g. '/legal/paia-manual') exist on `locale`'s site?
+ * Used for hreflang (src/lib/seo.js), the sitemaps, the proxy and the legal routes.
+ */
+export function pageExists(locale, path = '') {
+  if (locale === ZA_LOCALE && path.startsWith('/legal/')) return ZA_LEGAL_PATHS.includes(path);
+  if (ZA_ONLY_LEGAL_SLUGS.some((s) => path === `/legal/${s}`)) return locale === ZA_LOCALE;
+  return true;
+}

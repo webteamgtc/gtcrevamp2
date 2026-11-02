@@ -13,8 +13,7 @@ import {
   REGION_LOCALES,
   regionForCountry,
   REMEMBER_DAYS,
-  resolveCat5RestPath
-} from './config/regions';
+  resolveCat5RestPath, ZA_LEGAL_PATHS, ZA_LOCALE } from './config/regions';
 import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, isLocalIp } from './lib/geo/resolveCountryFromRequest';
 
 /**
@@ -169,6 +168,9 @@ export default async function proxy(request) {
   const fixed = inner ?? outer;
   const fixedTail = inner ? rest.slice(1) : rest;
   if (fixed && (inner || fixed !== first)) return redirect(`/${fixed}${fixedTail.length ? `/${fixedTail.join('/')}` : ''}`, 301);
+
+  // 0b. the South African site publishes only its own policies: any other /en-za/legal/… page → its legal hub
+  if (first === ZA_LOCALE && restPath.startsWith('/legal/') && !ZA_LEGAL_PATHS.includes(restPath)) return redirect(`/${ZA_LOCALE}/legal/legal-documents`, 301);
 
   // 1b. TEMPORARY UAE CAT 5 website
   if (CAT5_SITE) {

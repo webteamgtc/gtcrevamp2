@@ -7,15 +7,19 @@ import { useScrollLock } from './geoClient';
 
 export const EASE = [0.22, 1, 0.36, 1];
 
-/** Full-screen blocking dialog: dimmed, blurred page behind; focus kept inside; Esc does nothing (a choice is required). */
-/** `bare`: no default padding / background, so the caller styles the card itself. */
-export function Gate({ labelledBy, wide = false, bare = false, className, children }) {
+/**
+ * Full-screen blocking dialog: dimmed, blurred page behind; focus kept inside.
+ * Esc does nothing (a choice is required) unless `onEscape` is given.
+ * `bare`: no default padding / background, so the caller styles the card itself.
+ */
+export function Gate({ labelledBy, wide = false, bare = false, onEscape, className, children }) {
   const ref = useRef(null);
   useScrollLock(true);
   useEffect(() => {
     const el = ref.current;
     el?.querySelector('button')?.focus({ preventScroll: true });
     const onKey = (e) => {
+      if (e.key === 'Escape' && onEscape) return onEscape();
       if (e.key !== 'Tab' || !el) return;
       const f = [...el.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])')].filter((x) => !x.disabled);
       if (!f.length) return;
@@ -25,7 +29,7 @@ export function Gate({ labelledBy, wide = false, bare = false, className, childr
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, []);
+  }, [onEscape]);
   return (
     <motion.div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#070b24]/75 p-4 backdrop-blur-md" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
       <motion.div

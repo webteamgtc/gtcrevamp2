@@ -9,6 +9,8 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import NavLink from './nav/NavLink';
+import { ZA_LOCALE } from '@/config/regions';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
 import PhoneInput, { getCountries, isValidPhoneNumber } from 'react-phone-number-input';
@@ -295,9 +297,15 @@ export function DemoAccountForm({ id = 'demo-form', className }) {
             <input type="checkbox" checked={values.consent} onChange={set('consent')} onBlur={blur('consent')} className="mt-0.5 size-4 shrink-0 cursor-pointer accent-[#293b93]" />
             <span>
               {t('consentStart')}{' '}
-              <a href={CLIENT_AGREEMENT_PDF} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline underline-offset-2">
-                {t('agreements')}
-              </a>{' '}
+              {locale === ZA_LOCALE ? (
+                <NavLink href="/legal/privacy-policy" className="font-semibold text-brand underline underline-offset-2">
+                  {t('agreements')}
+                </NavLink>
+              ) : (
+                <a href={CLIENT_AGREEMENT_PDF} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline underline-offset-2">
+                  {t('agreements')}
+                </a>
+              )}{' '}
               {t('consentEnd')}
             </span>
           </label>

@@ -618,7 +618,8 @@
         "licence": "Licence Number",
         "company": "Company No.",
         "validity": "Validity Period",
-        "address": "Registered Address"
+        "address": "Registered Address",
+        "website": "Website"
       },
       "items": [
         {
@@ -719,6 +720,10 @@
             {
               "id": "address",
               "value": "18 Cavendish Road, Claremont, Cape Town, Western Cape, 7708, South Africa"
+            },
+            {
+              "id": "website",
+              "value": "www.gtcfx.com/en-za"
             }
           ]
         },

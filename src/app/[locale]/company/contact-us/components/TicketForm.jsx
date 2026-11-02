@@ -6,7 +6,8 @@
  * Option values below are the exact strings Salesforce expects; only their labels are translated.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { ZA_LOCALE } from '@/config/regions';
 import { motion } from 'motion/react';
 import { toast } from 'react-toastify';
 import PhoneInput, { getCountries } from 'react-phone-number-input';
@@ -116,6 +117,7 @@ const phoneCls =
 
 export function TicketForm() {
   const t = useTranslations('contactPage.form');
+  const za = useLocale() === ZA_LOCALE;
   const { countries: allCountries, failed, suggested } = useGtcCountries();
   const countries = useMemo(() => allCountries.filter((c) => !EXCLUDED.has(c.code)), [allCountries]);
   const [values, setValues] = useState(EMPTY);
@@ -391,9 +393,13 @@ export function TicketForm() {
             {t('privacyPolicy')}
           </NavLink>{' '}
           {t('termsMiddle')}{' '}
-          <a href={CLIENT_AGREEMENT_PDF} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline underline-offset-2 hover:text-gold-700">
-            {t('clientAgreement')}
-          </a>{' '}
+          {!za && (
+            <>
+              <a href={CLIENT_AGREEMENT_PDF} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline underline-offset-2 hover:text-gold-700">
+                {t('clientAgreement')}
+              </a>{' '}
+            </>
+          )}
           {t('termsSuffix')}
         </p>
       </form>

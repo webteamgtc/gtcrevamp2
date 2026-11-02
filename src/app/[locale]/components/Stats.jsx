@@ -14,7 +14,8 @@ export function Stats() {
           {items.map((s, i) => (
             <StaggerItem key={s.label} className={cn('relative px-4 text-center', i > 0 && 'lg:border-s lg:border-white/10')}>
               <div className="text-gradient-gold text-3xl font-bold tracking-tight md:text-4xl xl:text-5xl lg:whitespace-nowrap">
-                <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />
+                {/* grouping: false keeps licence numbers as written (FSP No. 51545, not 51,545) */}
+                <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} grouping={s.grouping !== false} />
               </div>
               <div className="mt-3 text-sm uppercase tracking-[0.18em] text-white/50">{s.label}</div>
             </StaggerItem>

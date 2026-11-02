@@ -2,12 +2,14 @@
 /**
  * /legal/legal-documents — PDF agreements per regulated entity + links to the online policy pages.
  * UI copy: messages/<lang>/legalPage.json → `legalPage.hub`; PDF list: ../legalDocumentsData.js
+ * /en-za: the South African policies (web pages, grouped by issuing company — ZA_LEGAL_GROUPS in
+ * src/config/regions.js) instead of the other entities' PDFs; no separate online-policies grid.
  * Rhythm: dark hero (a document being signed + stamped, cycling through the real files)
  * → gray (dark entity picker + paper-style PDF cards, lifted over the hero) → white (online policies)
  * → navy CTA band → dark footer.
  */
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowDown, ArrowUpRight, BadgeCheck, Building2, Check, FileText, Globe2, Info, Landmark } from 'lucide-react';
 import Header from '@/components/shared/Header';
@@ -18,24 +20,36 @@ import CtaBand from '@/components/shared/CtaBand';
 import { AccentTitle, SectionIntro } from '@/components/shared/SectionIntro';
 import { CountUp, Reveal, ScrollProgress, TiltCard, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
-import { PolicyGrid, POLICIES } from '../../components/RelatedPolicies';
+import NavLink from '@/components/shared/nav/NavLink';
+import { ZA_LEGAL_GROUPS, ZA_LOCALE } from '@/config/regions';
+import { PolicyGrid, policiesFor } from '../../components/RelatedPolicies';
 import { LEGAL_DOCUMENT_ENTITIES } from '../legalDocumentsData';
 
-const visibleDocs = (entity) => entity.sections.flatMap((s) => s.items.filter((d) => !d.hidden));
-const ENTITY_ICONS = { mauritius: Landmark, vanuatu: Globe2 };
-const ALL_DOCS = LEGAL_DOCUMENT_ENTITIES.flatMap((e) => visibleDocs(e).map((d) => ({ ...d, entity: e.key })));
+const ENTITY_ICONS = { mauritius: Landmark, vanuatu: Globe2, gtcGlobalSa: Landmark, gtcGlobalTrading: Globe2 };
+const PDF_ENTITIES = LEGAL_DOCUMENT_ENTITIES.map((e) => ({ key: e.key, docs: e.sections.flatMap((s) => s.items.filter((d) => !d.hidden)) }));
+
+/**
+ * The hub's entities and their documents: [{ key, docs: [{ name, link, page? }] }].
+ * page: true → a policy page on this site (same tab) instead of a PDF.
+ */
+function useEntities() {
+  const locale = useLocale();
+  const t = useTranslations('legalPage.docs');
+  if (locale !== ZA_LOCALE) return PDF_ENTITIES;
+  return ZA_LEGAL_GROUPS.map((g) => ({ key: g.key, docs: g.slugs.map((slug) => ({ name: t(`${slug}.name`), link: `/legal/${slug}`, page: true })) }));
+}
 
 /* ---------------- hero ---------------- */
 
 /** Hero visual: a PDF that gets signed and stamped, then swaps to the next real document. */
-function SigningDocument() {
+function SigningDocument({ docs }) {
   const t = useTranslations('legalPage.hub');
   const [i, setI] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setI((n) => (n + 1) % ALL_DOCS.length), 4800);
+    const id = setInterval(() => setI((n) => (n + 1) % docs.length), 4800);
     return () => clearInterval(id);
-  }, []);
-  const doc = ALL_DOCS[i];
+  }, [docs.length]);
+  const doc = docs[i % docs.length];
   return (
     <motion.div initial={{ opacity: 0, y: 40, rotate: 3 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ duration: 1, ease: EASE, delay: 0.2 }} className="relative mx-auto w-full max-w-[22rem] max-lg:hidden" aria-hidden>
       <motion.span className="absolute -inset-12 -z-10 rounded-full bg-brand/40 blur-3xl" animate={{ opacity: [0.4, 0.85, 0.4], scale: [1, 1.06, 1] }} transition={{ duration: 7, repeat: Infinity }} />
@@ -51,7 +65,13 @@ function SigningDocument() {
           <span className="absolute end-0 top-0 size-10 rounded-es-2xl bg-gradient-to-bl from-brand-100 to-brand-50 shadow-[-4px_4px_10px_rgba(41,59,147,0.12)]" />
 
           <div className="flex items-center gap-3">
-            <span className="grid size-11 place-items-center rounded-xl bg-red-50 text-[11px] font-black text-down ring-1 ring-down/15">PDF</span>
+            {doc.page ? (
+              <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-brand ring-1 ring-brand/15">
+                <FileText className="size-5" />
+              </span>
+            ) : (
+              <span className="grid size-11 place-items-center rounded-xl bg-red-50 text-[11px] font-black text-down ring-1 ring-down/15">PDF</span>
+            )}
             <div className="min-w-0 flex-1 pe-8">
               <span className="block text-[10px] font-bold uppercase tracking-[0.2em] text-gold-700">{t(`content.entities.${doc.entity}.short`)}</span>
               <AnimatePresence mode="wait">
@@ -94,19 +114,27 @@ function SigningDocument() {
         <motion.span animate={{ y: [0, 3, 0] }} transition={{ duration: 1.2, repeat: Infinity }}>
           <ArrowDown className="size-3.5" />
         </motion.span>
-        {t('content.pdf')}
+        {doc.page ? t('content.page') : t('content.pdf')}
       </motion.span>
     </motion.div>
   );
 }
 
-function Hero() {
+function Hero({ entities }) {
   const t = useTranslations('legalPage');
-  const stats = [
-    { value: LEGAL_DOCUMENT_ENTITIES.length, label: t('hub.hero.entities'), Icon: Building2 },
-    { value: ALL_DOCS.length, label: t('hub.hero.documents'), Icon: FileText },
-    { value: POLICIES.length, label: t('hub.hero.policies'), Icon: Globe2 }
-  ];
+  const locale = useLocale();
+  const docs = entities.flatMap((e) => e.docs.map((d) => ({ ...d, entity: e.key })));
+  const stats =
+    locale === ZA_LOCALE
+      ? [
+          { value: entities.length, label: t('hub.hero.issuers'), Icon: Building2 },
+          { value: docs.length, label: t('hub.hero.policies'), Icon: Globe2 }
+        ]
+      : [
+          { value: entities.length, label: t('hub.hero.entities'), Icon: Building2 },
+          { value: docs.length, label: t('hub.hero.documents'), Icon: FileText },
+          { value: policiesFor(locale).length, label: t('hub.hero.policies'), Icon: Globe2 }
+        ];
   return (
     <section className="is-dark relative overflow-hidden bg-ink pb-40 pt-36 text-white md:pb-48 md:pt-44">
       <HeroBackdrop />
@@ -138,7 +166,7 @@ function Hero() {
               ))}
             </motion.dl>
           </div>
-          <SigningDocument />
+          <SigningDocument docs={docs} />
         </div>
       </div>
     </section>
@@ -154,16 +182,20 @@ const cardVariants = {
 };
 
 /** A paper-style card: mini PDF sheet on top (lifts on hover), name + download below. */
-function DocumentCard({ doc, entityShort, download, open }) {
+const MotionNavLink = motion.create(NavLink);
+
+function DocumentCard({ doc, entityShort, download, open, pageLabel }) {
+  const Card = doc.page ? MotionNavLink : motion.a;
+  const linkProps = doc.page ? { href: doc.link } : { href: doc.link, target: '_blank', rel: 'noopener noreferrer' };
   return (
-    <motion.a variants={cardVariants} href={doc.link} target="_blank" rel="noopener noreferrer" className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-lg shadow-brand/5 ring-1 ring-brand/10 transition-[box-shadow,ring-color,transform] duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand/15 hover:ring-brand/25">
+    <Card variants={cardVariants} {...linkProps} className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-lg shadow-brand/5 ring-1 ring-brand/10 transition-[box-shadow,ring-color,transform] duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand/15 hover:ring-brand/25">
       {/* preview */}
       <div className="relative h-28 overflow-hidden sm:h-36 bg-gradient-to-br from-brand-50 via-white to-gold-50">
         <div className="bg-grid-light absolute inset-0 opacity-70" aria-hidden />
         <div className="absolute inset-x-0 -bottom-6 mx-auto w-40 rounded-t-xl bg-white p-3.5 shadow-xl shadow-brand/15 ring-1 ring-brand/10 transition-transform duration-500 ease-out group-hover:-translate-y-3 group-hover:-rotate-2" aria-hidden>
           <span className="absolute end-0 top-0 size-6 rounded-es-lg bg-gradient-to-bl from-brand-100 to-brand-50" />
           <div className="flex items-center gap-2">
-            <span className="rounded bg-down px-1.5 py-0.5 text-[9px] font-black leading-none text-white">PDF</span>
+            <span className={cn('rounded px-1.5 py-0.5 text-[9px] font-black leading-none text-white', doc.page ? 'bg-brand' : 'bg-down')}>{doc.page ? 'WEB' : 'PDF'}</span>
             <span className="h-1.5 w-12 rounded-full bg-ink/15" />
           </div>
           <div className="mt-3 space-y-1.5">
@@ -183,19 +215,27 @@ function DocumentCard({ doc, entityShort, download, open }) {
       <div className="relative flex flex-1 items-center gap-3 border-t border-brand/10 p-4">
         <div className="min-w-0 flex-1">
           <span className="block text-[15px] font-bold leading-snug text-ink transition-colors group-hover:text-brand">{doc.name}</span>
-          <span className="mt-1 block text-xs text-ink/45">PDF · {entityShort}</span>
+          <span className="mt-1 block text-xs text-ink/45">
+            {doc.page ? pageLabel : 'PDF'} · {entityShort}
+          </span>
         </div>
-        <span className="relative grid size-10 shrink-0 place-items-center overflow-hidden rounded-full bg-brand/[0.07] text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white" title={download}>
-          <ArrowDown className="size-4 transition-transform duration-300 group-hover:translate-y-10" />
-          <ArrowDown className="absolute size-4 -translate-y-10 transition-transform duration-300 group-hover:translate-y-0" />
-                  </span>
+        <span className="relative grid size-10 shrink-0 place-items-center overflow-hidden rounded-full bg-brand/[0.07] text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white" title={doc.page ? open : download}>
+          {doc.page ? (
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" />
+          ) : (
+            <>
+              <ArrowDown className="size-4 transition-transform duration-300 group-hover:translate-y-10" />
+              <ArrowDown className="absolute size-4 -translate-y-10 transition-transform duration-300 group-hover:translate-y-0" />
+            </>
+          )}
+        </span>
       </div>
-    </motion.a>
+    </Card>
   );
 }
 
 /** Dark panel with the entity choices (vertical on desktop, side by side on mobile). */
-function EntityPicker({ active, setActive }) {
+function EntityPicker({ entities, active, setActive }) {
   const t = useTranslations('legalPage.hub.content');
   return (
     <Reveal y={24} amount={0} className="is-dark relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-700 via-brand-900 to-ink p-6 text-white shadow-2xl shadow-brand/25 md:p-7 lg:sticky lg:top-28">
@@ -208,7 +248,7 @@ function EntityPicker({ active, setActive }) {
         <p className="mt-3 text-sm leading-relaxed text-white/60">{t('description')}</p>
 
         <div role="tablist" aria-label={t('tabsLabel')} className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
-          {LEGAL_DOCUMENT_ENTITIES.map((e) => {
+          {entities.map((e) => {
             const on = e.key === active;
             const Icon = ENTITY_ICONS[e.key] ?? Building2;
             return (
@@ -221,7 +261,7 @@ function EntityPicker({ active, setActive }) {
                   <span className="block font-bold text-white">{t(`entities.${e.key}.short`)}</span>
                   <span className="mt-0.5 block truncate text-xs text-white/50">{t(`entities.${e.key}.label`)}</span>
                 </span>
-                <span className={cn('relative shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums transition-colors', on ? 'bg-gold text-white' : 'bg-white/10 text-white/60')}>{visibleDocs(e).length}</span>
+                <span className={cn('relative shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums transition-colors', on ? 'bg-gold text-white' : 'bg-white/10 text-white/60')}>{e.docs.length}</span>
               </button>
             );
           })}
@@ -236,15 +276,15 @@ function EntityPicker({ active, setActive }) {
   );
 }
 
-function Documents() {
+function Documents({ entities }) {
   const t = useTranslations('legalPage.hub.content');
-  const [active, setActive] = useState(LEGAL_DOCUMENT_ENTITIES[0]?.key);
-  const entity = LEGAL_DOCUMENT_ENTITIES.find((e) => e.key === active) ?? LEGAL_DOCUMENT_ENTITIES[0];
-  const docs = visibleDocs(entity);
+  const [active, setActive] = useState(entities[0]?.key);
+  const entity = entities.find((e) => e.key === active) ?? entities[0];
+  const docs = entity.docs;
   return (
     <section className="relative pb-16 md:pb-24">
       <div className="container-x relative -mt-28 grid items-start gap-6 md:-mt-32 lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-8">
-        <EntityPicker active={active} setActive={setActive} />
+        <EntityPicker entities={entities} active={active} setActive={setActive} />
 
         <Reveal y={24} delay={0.08} amount={0} className="rounded-[2rem] bg-white p-4 shadow-xl shadow-brand/10 ring-1 ring-brand/10 md:p-6">
           <div className="flex flex-wrap items-center justify-between gap-3 px-1 pb-4 md:px-2">
@@ -258,7 +298,7 @@ function Documents() {
           <AnimatePresence mode="wait">
             <motion.div key={entity.key} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" initial="hidden" animate="show" exit="exit" variants={{ show: { transition: { staggerChildren: 0.07 } } }}>
               {docs.map((d) => (
-                <DocumentCard key={d.link} doc={d} entityShort={t(`entities.${entity.key}.short`)} download={t('download')} open={t('open')} />
+                <DocumentCard key={d.link} doc={d} entityShort={t(`entities.${entity.key}.short`)} download={t('download')} open={t('open')} pageLabel={t('page')} />
               ))}
             </motion.div>
           </AnimatePresence>
@@ -270,21 +310,25 @@ function Documents() {
 
 export default function LegalDocumentsPage() {
   const t = useTranslations('legalPage.hub');
+  const entities = useEntities();
+  const za = useLocale() === ZA_LOCALE;
   return (
     <div className="overflow-x-clip bg-[#f6f7fb] text-ink">
       <ScrollProgress />
       <Header theme="dark" />
       <main>
-        <Hero />
-        <Documents />
-        <section className="relative overflow-hidden bg-white py-16 md:py-24">
-          <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />
-          <div className="container-x relative">
-            <SectionIntro title={t('web.title')} description={t('web.description')} />
-            <PolicyGrid className="mt-10 md:mt-12" />
-          </div>
-        </section>
-        <CtaBand title={t('cta.title')} description={t('cta.description')} primary={{ label: t('cta.primary'), href: '/company/contact-us' }} secondary={{ label: t('cta.secondary'), href: '/legal/restricted-countries' }} />
+        <Hero entities={entities} />
+        <Documents entities={entities} />
+        {!za && (
+          <section className="relative overflow-hidden bg-white py-16 md:py-24">
+            <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />
+            <div className="container-x relative">
+              <SectionIntro title={t('web.title')} description={t('web.description')} />
+              <PolicyGrid className="mt-10 md:mt-12" />
+            </div>
+          </section>
+        )}
+        <CtaBand title={t('cta.title')} description={t('cta.description')} primary={{ label: t('cta.primary'), href: '/company/contact-us' }} secondary={za ? undefined : { label: t('cta.secondary'), href: '/legal/restricted-countries' }} />
       </main>
       <Footer theme="dark" />
     </div>

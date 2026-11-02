@@ -5,7 +5,9 @@
  * Partner code / deep link are read from the URL (?code, ?ref, ?partner_id, ?partner_code, ?ib, ?deep_link_value).
  */
 import { useEffect, useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import NavLink from './nav/NavLink';
+import { ZA_LOCALE } from '@/config/regions';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
 import { ChevronDown, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
@@ -43,6 +45,7 @@ function readUrlParams() {
  */
 export function LiveAccountForm({ title, subtitle, variant = 'compact', className }) {
   const t = useTranslations('tradingPage.liveForm');
+  const za = useLocale() === ZA_LOCALE;
   const page = variant === 'page';
   const [values, setValues] = useState(EMPTY);
   const [touched, setTouched] = useState({});
@@ -283,13 +286,21 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
               <span className="block font-medium text-ink/80">{t('confirmIntro')}</span>
               <span className="block">
                 {t('confirm1Start')}{' '}
-                <a href={TERMS_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">
-                  {t('terms')}
-                </a>{' '}
-                {t('and')}{' '}
-                <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">
-                  {t('privacy')}
-                </a>
+                {za ? (
+                  <NavLink href="/legal/privacy-policy" className="font-semibold text-brand hover:underline">
+                    {t('privacy')}
+                  </NavLink>
+                ) : (
+                  <>
+                    <a href={TERMS_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">
+                      {t('terms')}
+                    </a>{' '}
+                    {t('and')}{' '}
+                    <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">
+                      {t('privacy')}
+                    </a>
+                  </>
+                )}
                 ;
               </span>
               <span className="block">{t('confirm2')}</span>

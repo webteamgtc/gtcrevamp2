@@ -21,6 +21,7 @@ import { normalizePlatformGuideLocale } from '@/lib/platform-guide/locales';
 import { getMarketSymbols } from '@/lib/marketSymbols';
 import { marketPageBySlug } from '@/config/marketPages';
 import { LEGAL_SLUGS } from '@/lib/legalDocuments';
+import { ZA_ONLY_LEGAL_SLUGS, pageExists } from '@/config/regions';
 import { COURSES, HUB_PATH, courseHref, sectionHref } from '../knowledge-to-learn/courses';
 import { GUIDES_PATH } from '../knowledge-to-learn/platform-guide/guides';
 
@@ -216,7 +217,8 @@ const ROUTES = {
     return { crumbs: [{ name: t('breadcrumb.home'), path: '' }, { name: t('hub.current'), path }] };
   },
   '/legal/restricted-countries': ({ locale, path }) => legalCrumbs(locale, path, 'restricted.current'),
-  '/legal/:doc': ({ locale, params, path }) => (LEGAL_SLUGS.includes(params.doc) ? legalCrumbs(locale, path, `docs.${params.doc}.name`) : null)
+  '/legal/:doc': ({ locale, params, path }) =>
+    [...LEGAL_SLUGS, ...ZA_ONLY_LEGAL_SLUGS].includes(params.doc) && pageExists(locale, path) ? legalCrumbs(locale, path, `docs.${params.doc}.name`) : null
 };
 
 async function courseCrumbs(locale, course) {

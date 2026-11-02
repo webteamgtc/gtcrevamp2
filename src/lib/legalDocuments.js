@@ -6,6 +6,7 @@
  * anything missing comes from the English file.
  */
 import { langOf } from '@/i18n/locales';
+import { ZA_LOCALE } from '@/config/regions';
 
 const DOCUMENTS_URL = (process.env.NEXT_PUBLIC_DOCUMENTS_URL || 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/documents').replace(/\/$/, '');
 export const LEGAL_REVALIDATE = 3600;
@@ -61,10 +62,15 @@ async function fetchLocalised(slug, locale, lang) {
   return own ?? (lang === 'en' ? null : fetchDoc(slug, lang));
 }
 
-/** Document for a locale (regional / translated where that file exists, English otherwise); null if unavailable. */
+/**
+ * Document for a locale (regional / translated where that file exists, English otherwise); null if unavailable.
+ * /en-za uses only its own files (<slug>/en-za.json): its policies are issued by the South African entity, so
+ * the English (other entities') version is never shown in their place.
+ */
 export async function getLegalDocument(slug, locale) {
   const lang = langOf(locale);
-  const [english, localised] = await Promise.all([fetchDoc(slug, 'en'), fetchLocalised(slug, locale, lang)]);
+  const own = locale === ZA_LOCALE;
+  const [english, localised] = await Promise.all([own ? null : fetchDoc(slug, 'en'), fetchLocalised(slug, locale, lang)]);
   const base = english || {};
   const doc = localised
     ? { ...base, ...localised, topSection: localised.topSection ?? base.topSection, footer: localised.footer ?? base.footer, content: localised.content ?? base.content }
