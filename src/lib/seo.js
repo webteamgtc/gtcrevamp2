@@ -1,6 +1,8 @@
 /**
  * SEO helpers shared by every page.
- * - pageMetadata(): title, description, canonical, hreflang (all 19 languages + x-default), Open Graph, Twitter
+ * - pageMetadata(): title, description, self canonical, hreflang (every locale incl. itself + x-default), Open Graph, Twitter.
+ *   Every page gets the same reciprocal set for its path, so A → B always comes with B → A.
+ *   noindex: true → robots noindex and no hreflang (hreflang must only point at indexable pages)
  * - breadcrumbLd(): BreadcrumbList structured data
  * Set NEXT_PUBLIC_SITE_URL in .env for the live domain.
  */
@@ -14,13 +16,14 @@ export function localeUrl(locale, path = '') {
   return `/${locale}${path}`;
 }
 
-export function pageMetadata({ locale, path = '', title, description }) {
+export function pageMetadata({ locale, path = '', title, description, noindex = false }) {
   const languages = Object.fromEntries(LOCALES.map((l) => [hreflangOf(l.code), localeUrl(l.code, path)]));
   languages['x-default'] = localeUrl(DEFAULT_LOCALE, path);
   return {
     title,
     description,
-    alternates: { canonical: localeUrl(locale, path), languages },
+    alternates: noindex ? { canonical: localeUrl(locale, path) } : { canonical: localeUrl(locale, path), languages },
+    ...(noindex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: 'website',
       siteName: 'GTCFX',

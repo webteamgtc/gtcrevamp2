@@ -29,10 +29,9 @@ export async function generateMetadata({ params }) {
   return {
     metadataBase: new URL(SITE_URL),
     title: t('title'),
-    description: t('description'),
-    alternates: {
-      languages: Object.fromEntries(routing.locales.map((l) => [hreflangOf(l), `/${l}`]))
-    }
+    description: t('description')
+    // no alternates here: they would be inherited by every page that doesn't set its own, pointing its hreflang at
+    // the homepages (non-reciprocal). Each page declares its own set through pageMetadata() in src/lib/seo.js.
   };
 }
 

@@ -37,7 +37,8 @@ const REGIONAL = new Set(REGION_LOCALES);
 const GEO_TEST = process.env.VERCEL_ENV !== 'production' || process.env.GEO_TEST === '1';
 const COUNTRY_RE = /^[A-Z]{2}$/;
 // crawlers must reach every regional site (they would otherwise always land on /en-intl)
-const BOT_RE = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed/i;
+// (also SEO audit tools, so hreflang targets such as /en-za/… answer 200 instead of a geo redirect)
+const BOT_RE = /bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|petal|bytespider|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed|sitebulb|screaming|ahrefs|semrush|moz\.com|seositecheckup|validator/i;
 
 // old site: every language had an "-intl" folder (vi-intl, ru-intl, zh-intl…) and some other spellings
 const LOCALE_BY_LOWER = new Map(routing.locales.map((c) => [c.toLowerCase(), c]));

@@ -20,6 +20,9 @@ async function load(market, symbol) {
   const page = marketPageBySlug(market);
   if (!page) return null;
   const symbols = await getMarketSymbols(page);
+  // an empty list means the symbols API failed (timeout / outage), not an unknown symbol: throw instead of a 404,
+  // so the last good version keeps being served (ISR) rather than a 404 being cached for every language
+  if (!symbols.length) throw new Error(`Symbols API unavailable for ${market}`);
   const sym = symbols.find((x) => x.s.toLowerCase() === String(symbol).toLowerCase());
   return sym ? { page, symbols, sym } : null;
 }
