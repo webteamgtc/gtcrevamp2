@@ -43,8 +43,11 @@ function readUrlParams() {
  * the page must render <Toaster /> (src/components/shared/Toaster.jsx).
  * `title` / `subtitle` override the card header (defaults: tradingPage.liveForm.title / subtitle).
  * `variant="page"` is the roomier layout used on /live-account-application; the default suits a hero column.
+ * `saveTo`: 'portal' (default) opens the account on the trading portal (/api/gtc/*);
+ * 'database' (UAE CAT 5 page) only saves the application to MongoDB → /api/cat5/live-account (code: /api/otp-smtp).
  */
-export function LiveAccountForm({ title, subtitle, variant = 'compact', className }) {
+export function LiveAccountForm({ title, subtitle, variant = 'compact', className, saveTo = 'portal' }) {
+  const database = saveTo === 'database';
   const t = useTranslations('tradingPage.liveForm');
   const za = useLocale() === ZA_LOCALE;
   const ukGate = useUkGate();
@@ -117,6 +120,21 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
       return;
     }
     setOtpLoading(true);
+    if (database) {
+      // CAT 5: our own e-mail code, checked by /api/cat5/live-account
+      try {
+        const res = await post('/api/otp-smtp', { email: values.email.trim(), first_name: values.firstname.trim() });
+        if (res?.success) {
+          setCodeSent(true);
+          toast.success(t('toast.otpSent'));
+        } else toast.error(t('toast.codeError'));
+      } catch {
+        toast.error(t('toast.codeError'));
+      } finally {
+        setOtpLoading(false);
+      }
+      return;
+    }
     try {
       const check = await post('/api/gtc/check-email', { email: values.email.trim() });
       if (!(check?.code === 200 && /available/i.test(check?.message || ''))) {
@@ -163,6 +181,34 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
     };
 
     setLoading(true);
+    if (database) {
+      try {
+        const res = await post('/api/cat5/live-account', {
+          firstname,
+          lastname,
+          email: payload.email,
+          otp: values.otp,
+          password: values.password,
+          country: selected.name,
+          phone: values.phone,
+          partnerCode: partner,
+          deepLink: deepLink.trim(),
+          terms: values.terms,
+          page: window.location.pathname
+        });
+        if (res?.ok) {
+          toast.success(t('toast.registrationSuccess'));
+          setValues((v) => ({ ...EMPTY, country: v.country, phone: dial ? `+${dial}` : '', partnerCode: partnerLocked ? v.partnerCode : '' }));
+          setTouched({});
+          setCodeSent(false);
+        } else toast.error(res?.error === 'exists' ? t('errors.emailRegistered') : res?.error === 'otp' ? t('errors.otpInvalid') : t('toast.registrationFailed'));
+      } catch {
+        toast.error(t('toast.registrationFailed'));
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
     try {
       const res = await post('/api/gtc/reg', payload);
       if (res?.code === 200) {

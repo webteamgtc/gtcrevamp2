@@ -80,6 +80,7 @@ export const CAT5_PAGES = {
   legalDocuments: { path: '/legal-documents', dir: '/legal-documents' },
   termsOfBusiness: { path: '/terms-of-business', dir: '/terms-of-business' },
   privacy: { path: '/privacy-policy', dir: '/privacy-policy' },
+  liveAccount: { path: '/live-account-application', dir: '/live-account-application' },
   delete: { path: '/trading/delete', dir: '/delete' },
   /** Same page as delete; keeps gtcfx.com/delete (and /en-ae/delete) on the CAT 5 site. */
   deleteFlat: { path: '/delete', dir: '/delete' }
