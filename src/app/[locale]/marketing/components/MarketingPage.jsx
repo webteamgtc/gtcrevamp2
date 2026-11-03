@@ -141,7 +141,7 @@ export function useEnquiryHref() {
 function usePageLinks() {
   const t = useTranslations('marketingPage.nav');
   const locale = useLocale();
-  return ['home', 'about', 'faq', 'contact'].map((key) => ({ key, href: cat5Href(locale, key), label: t(key) }));
+  return ['home', 'about', 'faq', 'contact', 'liveApplicationForm'].map((key) => ({ key, href: cat5Href(locale, key), label: t(key) }));
 }
 
 function Header() {

@@ -1,6 +1,6 @@
 'use client';
 /**
- * UAE CAT 5 site: /en-ae/live-account-application (rewritten here by src/proxy.js, see CAT5_PAGES).
+ * UAE CAT 5 site: /en-ae/live-application-form (and /live-account-application alias; src/proxy.js, CAT5_PAGES).
  * Submissions are saved only to MongoDB (user_record) — saveTo="database" → /api/cat5/live-account.
  * /live-account-application[?account=<slug>][&code|ref|partner_id|…]
  * UI copy: messages/<locale>/liveApplicationPage.json → `liveAccountApplicationPage`;
@@ -9,12 +9,11 @@
  */
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import Header from '@/components/shared/Header';
-import Footer from '@/components/shared/Footer';
 import { LiveAccountForm } from '@/components/shared/LiveApplicationForm';
 import Toaster from '@/components/shared/Toaster';
 import { useUkGate } from '@/components/shared/geo/UkGate';
-import { Reveal, ScrollProgress } from '@/components/motion';
+import { Reveal } from '@/components/motion';
+import { Cat5Frame } from '../../components/MarketingPage';
 import LiveAccountApplicationHeroSection from './LiveAccountApplicationHeroSection';
 import LiveAccountApplicationSidebar from './LiveAccountApplicationSidebar';
 
@@ -22,10 +21,8 @@ export default function LiveAccountApplicationPage({ accountKey, showAccount }) 
   const t = useTranslations('liveAccountApplicationPage.form');
   const { blocked } = useUkGate(); // UK visitor: the UK notice shows instead of the form
   return (
-    <div className="overflow-x-clip bg-[#f6f7fb] text-ink">
-      <ScrollProgress />
-      <Header theme="dark" />
-      <main>
+    <Cat5Frame page="liveApplicationForm">
+      <div className="overflow-x-clip bg-[#f6f7fb] text-ink">
         <LiveAccountApplicationHeroSection accountKey={accountKey} showAccount={showAccount} />
         <section className="relative pb-16 md:pb-24">
           <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />
@@ -41,9 +38,8 @@ export default function LiveAccountApplicationPage({ accountKey, showAccount }) 
             </div>
           </div>
         </section>
-      </main>
-      <Footer theme="dark" />
-      <Toaster />
-    </div>
+        <Toaster />
+      </div>
+    </Cat5Frame>
   );
 }

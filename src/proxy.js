@@ -111,7 +111,8 @@ function finish(response, { country, test, lookedUp }) {
 /**
  * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), on while NEXT_PUBLIC_UAE_CAT5_SITE=on.
  * UAE visitors (any page, any language):
- *   /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/privacy-policy, /en-ae/trading/delete (and /ar/…) →
+ *   /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/live-application-form, /en-ae/privacy-policy,
+ *   /en-ae/trading/delete (and /ar/…) →
  *   shown from src/app/[locale]/marketing/…
  *   (the address stays the same); /en-ae/marketing/… → its public address; any other page or language → /en-ae
  *   (or /ar). The CAT 5 category cookie is set, so the CAT 1 / CAT 5 popup never shows.

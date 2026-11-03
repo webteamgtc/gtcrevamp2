@@ -65,8 +65,8 @@ export const CAT5_PATH = '/marketing';
 /**
  * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), until the CAT 1 licence arrives.
  * NEXT_PUBLIC_UAE_CAT5_SITE=on (Vercel env): every visitor with a UAE IP gets the CAT 5 website on the normal
- * addresses (gtcfx.com/en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/privacy-policy,
- * /en-ae/trading/delete, and the same under /ar); every other
+ * addresses (gtcfx.com/en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/live-application-form,
+ * /en-ae/privacy-policy, /en-ae/trading/delete, and the same under /ar); every other
  * page sends them to its Home; no CAT 1 / CAT 5 popup. Set it to off (or remove it) and redeploy to switch back to
  * the normal UAE site. See src/proxy.js.
  */
@@ -80,6 +80,8 @@ export const CAT5_PAGES = {
   legalDocuments: { path: '/legal-documents', dir: '/legal-documents' },
   termsOfBusiness: { path: '/terms-of-business', dir: '/terms-of-business' },
   privacy: { path: '/privacy-policy', dir: '/privacy-policy' },
+  liveApplicationForm: { path: '/live-application-form', dir: '/live-account-application' },
+  /** Same form; keeps /live-account-application working on the CAT 5 site. */
   liveAccount: { path: '/live-account-application', dir: '/live-account-application' },
   delete: { path: '/trading/delete', dir: '/delete' },
   /** Same page as delete; keeps gtcfx.com/delete (and /en-ae/delete) on the CAT 5 site. */

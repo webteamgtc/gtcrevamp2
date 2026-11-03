@@ -1,20 +1,20 @@
+import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { pageMetadata } from '@/lib/seo';
+import { CAT5_LOCALES } from '@/config/regions';
 import LiveAccountApplicationPage from './components/LiveAccountApplicationPage';
 
-const PATH = '/live-account-application';
-
+/** UAE CAT 5 live application (public URL via src/proxy.js → CAT5_PAGES.liveApplicationForm). */
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'liveAccountApplicationPage.meta' });
-  return pageMetadata({ locale, path: PATH, title: t('title'), description: t('description') });
+  return { title: t('title'), description: t('description'), robots: { index: false, follow: false } };
 }
 
 export default async function Page({ params, searchParams }) {
   const { locale } = await params;
+  if (!CAT5_LOCALES.includes(locale)) notFound();
   setRequestLocale(locale);
   const [{ account }, t] = await Promise.all([searchParams, getTranslations({ locale, namespace: 'liveAccountApplicationPage' })]);
-  // ?account=<slug> picks the hero copy; unknown or missing slugs use the standard account
   const requested = account === 'standard' ? 'standard-account' : account;
   const accountKey = requested && t.has(`accounts.${requested}.title`) ? requested : 'standard-account';
   return <LiveAccountApplicationPage accountKey={accountKey} showAccount={accountKey !== 'standard-account'} />;
