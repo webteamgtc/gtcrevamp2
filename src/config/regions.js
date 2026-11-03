@@ -131,6 +131,9 @@ export const CAT5_LOCALES = ['en-ae', 'ar'];
  */
 export const CAT5_CONTACT = { email: 'support@gtcfx.com', phone: '971-45109800' };
 
+/** Client portal login, sent in the welcome e-mail after a CAT 5 live account application (src/lib/emails/liveAccountWelcome.js). */
+export const CAT5_PORTAL_LOGIN = 'https://portal.gtcfx.com/login';
+
 /** Preferred language options on the CAT 5 enquiry form → POST /api/uae-enquiry. */
 export const CAT5_LANGUAGES = ['ar', 'en'];
 

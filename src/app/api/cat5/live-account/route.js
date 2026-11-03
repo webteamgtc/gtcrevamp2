@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { collection } from '@/lib/mongo';
 import { verifyOtp } from '@/lib/otpStore';
+import { liveAccountWelcomeEmail } from '@/lib/emails/liveAccountWelcome';
+import { CAT5_CONTACT, CAT5_PORTAL_LOGIN } from '@/config/regions';
 
 export const runtime = 'nodejs';
 
@@ -14,7 +16,9 @@ export const runtime = 'nodejs';
  *   2. checks the e-mail code sent by /api/otp-smtp,
  *   3. one application per e-mail,
  *   4. inserts the record in the collection's format: name, email, password (bcrypt hash — never plain text),
- *      createdAt, plus the other form fields.
+ *      createdAt, plus the other form fields,
+ *   5. e-mails the applicant their login details and the next steps (src/lib/emails/liveAccountWelcome.js,
+ *      Mailgun); the record stays saved if the e-mail fails (welcomeEmailSent: false on the record).
  * → { ok: true } or { ok: false, error: 'invalid' | 'otp' | 'exists' | 'server' }
  */
 const COLLECTION = 'user_record';
@@ -23,6 +27,13 @@ const LETTERS_RE = /^[\p{L}\p{M}\s'’.-]+$/u;
 
 const str = (v, max = 200) => String(v ?? '').trim().slice(0, max);
 const fail = (error, status) => NextResponse.json({ ok: false, error }, { status });
+
+async function sendWelcome({ name, email, password }) {
+  if (!process.env.MAILGUN_API_KEY) throw new Error('MAILGUN_API_KEY is not set');
+  const { MAILGUN_DOMAIN, MAILGUN_FROM, mailgunClient } = await import('@/config/nodemailer');
+  const { subject, html, text } = liveAccountWelcomeEmail({ name, email, password, portalUrl: CAT5_PORTAL_LOGIN, supportEmail: CAT5_CONTACT.email });
+  await mailgunClient.messages.create(MAILGUN_DOMAIN, { from: MAILGUN_FROM, to: email, subject, text, html });
+}
 
 function clientIp(request) {
   const fwd = request.headers.get('x-forwarded-for');
@@ -65,8 +76,9 @@ export async function POST(request) {
     const records = await collection(COLLECTION);
     if (await records.findOne({ email: d.email }, { projection: { _id: 1 } })) return fail('exists', 409);
     if (!verifyOtp(d.email, otp).success) return fail('otp', 400);
-    await records.insertOne({
-      name: `${d.firstname} ${d.lastname}`,
+    const name = `${d.firstname} ${d.lastname}`;
+    const { insertedId } = await records.insertOne({
+      name,
       ...d,
       password: await bcrypt.hash(password, 10),
       termsAccepted: true,
@@ -77,6 +89,12 @@ export async function POST(request) {
       userAgent: str(request.headers.get('user-agent'), 300),
       createdAt: new Date()
     });
+    // login details + next steps; a failed e-mail doesn't undo the application
+    const sent = await sendWelcome({ name, email: d.email, password }).then(
+      () => true,
+      (err) => (console.error('[cat5/live-account] welcome e-mail:', err.message), false)
+    );
+    await records.updateOne({ _id: insertedId }, { $set: { welcomeEmailSent: sent } }).catch(() => {});
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('[cat5/live-account]', err.message);
