@@ -9,7 +9,7 @@ export default async function Layout({ children, params }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <ClientMessages files={['liveApplicationPage']} pick={['tradingPage.liveForm']}>
+    <ClientMessages files={['liveApplicationPage', 'marketingPage']} pick={['tradingPage.liveForm']}>
       {children}
     </ClientMessages>
   );
