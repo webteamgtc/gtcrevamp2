@@ -62,7 +62,8 @@
         "validCountry": "Please select a valid country",
         "phone": "Phone is required",
         "phoneInvalid": "Invalid phone number",
-        "terms": "You must accept the declaration"
+        "terms": "You must accept the declaration",
+        "otpInvalid": "Wrong or expired code, please try again."
       },
       "toast": {
         "otpSent": "OTP sent successfully!",
