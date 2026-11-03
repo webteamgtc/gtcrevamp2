@@ -2,10 +2,19 @@
 /**
  * Shared building blocks for the account forms (live + demo):
  * compact field styles, a JSON POST helper and the GTC country list (with dial codes).
+ * Countries in FORM_EXCLUDED_COUNTRIES (src/config/regions.js) are left out of every list and phone picker.
  */
 import { useEffect, useState } from 'react';
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
+import { getCountries } from 'react-phone-number-input';
+import { FORM_EXCLUDED_COUNTRIES } from '@/config/regions';
 import { cn } from '@/lib/utils';
+
+/** Countries the phone-number pickers offer: pass as `countries={PHONE_COUNTRIES}` to <PhoneInput>. */
+export const PHONE_COUNTRIES = getCountries().filter((c) => !FORM_EXCLUDED_COUNTRIES.includes(c));
+
+/** First of `codes` the phone picker offers (its default country), else the UAE. */
+export const phoneCountryOf = (...codes) => codes.find((c) => c && PHONE_COUNTRIES.includes(c)) ?? 'AE';
 
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // letters in any script (Arabic, Chinese, accents…) plus spaces, apostrophes, dots and hyphens
@@ -63,7 +72,7 @@ export function dialFor(country) {
 }
 
 /**
- * GTC country list from /api/gtc/get-country, sorted by name.
+ * GTC country list from /api/gtc/get-country, sorted by name, without FORM_EXCLUDED_COUNTRIES.
  * `suggested` is the visitor's country (from the browser locale) when it is in the list.
  */
 export function useGtcCountries() {
@@ -77,7 +86,7 @@ export function useGtcCountries() {
       .then((res) => {
         if (!alive) return;
         if (res?.code === 200 && Array.isArray(res.data)) {
-          const list = [...res.data].sort((a, b) => a.name.localeCompare(b.name));
+          const list = res.data.filter((c) => !FORM_EXCLUDED_COUNTRIES.includes(String(c.code).toUpperCase())).sort((a, b) => a.name.localeCompare(b.name));
           setCountries(list);
           let region = '';
           try {

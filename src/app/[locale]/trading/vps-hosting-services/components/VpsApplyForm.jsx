@@ -14,7 +14,7 @@ import 'react-phone-number-input/style.css';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, ChevronDown, CircleAlert, CircleCheck, Globe, Hash, LoaderCircle, Mail, MonitorSmartphone, Package, User, X } from 'lucide-react';
-import { EMAIL_RE, post, useGtcCountries } from '@/components/shared/formKit';
+import { EMAIL_RE, PHONE_COUNTRIES, post, useGtcCountries } from '@/components/shared/formKit';
 import { cn } from '@/lib/utils';
 
 const API = '/api/vps-data-email';
@@ -248,6 +248,7 @@ export function VpsApplyForm({ pkg, onPkg, packages }) {
                 name="phone"
                 international
                 countryCallingCodeEditable={false}
+                countries={PHONE_COUNTRIES}
                 defaultCountry={phoneDefaultCountry}
                 value={values.phone || undefined}
                 onChange={(v) => set('phone')(v ?? '')}

@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import NavLink from './nav/NavLink';
 import { ZA_LOCALE } from '@/config/regions';
+import { useUkGate } from './geo/UkGate';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
 import { ChevronDown, Eye, EyeOff, Globe, LoaderCircle, LockKeyhole, Mail, ShieldCheck, User } from 'lucide-react';
@@ -15,7 +16,7 @@ import { cn } from '@/lib/utils';
 import { PORTAL } from '@/config/menu';
 import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, useGtcCountries } from './formKit';
+import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from './formKit';
 
 const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
@@ -46,6 +47,7 @@ function readUrlParams() {
 export function LiveAccountForm({ title, subtitle, variant = 'compact', className }) {
   const t = useTranslations('tradingPage.liveForm');
   const za = useLocale() === ZA_LOCALE;
+  const ukGate = useUkGate();
   const page = variant === 'page';
   const [values, setValues] = useState(EMPTY);
   const [touched, setTouched] = useState({});
@@ -135,6 +137,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (ukGate.blocked) return ukGate.open(); // UK: no live accounts
     setTouched(Object.fromEntries(Object.keys(EMPTY).map((k) => [k, true])));
     if (Object.keys(errors).length) return;
     if (!selected) {
@@ -251,7 +254,8 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
                 id="lf-phone"
                 name="phone"
                 international
-                defaultCountry={selected?.code || suggested?.code || 'AE'}
+                countries={PHONE_COUNTRIES}
+                defaultCountry={phoneCountryOf(selected?.code, suggested?.code)}
                 value={values.phone || undefined}
                 onChange={(v) => set('phone')(v ?? '')}
                 onBlur={blur('phone')}

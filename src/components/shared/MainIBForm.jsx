@@ -13,15 +13,14 @@ import NavLink from './nav/NavLink';
 import { ZA_LOCALE } from '@/config/regions';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
-import PhoneInput, { getCountries, isValidPhoneNumber } from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { BadgeCheck, ChevronDown, Globe, LoaderCircle, Mail, MonitorSmartphone, ShieldCheck, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { validateBusinessEmail } from '@/lib/emailValidation';
 import { useLocationDetail } from '@/config/useLocationDetails';
-import { EMAIL_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, useGtcCountries } from './formKit';
+import { EMAIL_RE, PHONE_COUNTRIES, phoneCountryOf, post, Field, fieldBox as box, fieldInput as input, fieldState, useGtcCountries } from './formKit';
 
-const PHONE_COUNTRIES = new Set(getCountries()); // ISO codes PhoneInput can show as a flag
 
 const CLIENT_AGREEMENT_PDF = 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/pdf-files/Vanuatu.pdf';
 const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/16420445/3ajp4wk/';
@@ -69,7 +68,7 @@ export function DemoAccountForm({ id = 'demo-form', className }) {
   }, [ipCountry, suggested, countryPicked]);
 
   // Phone flag: IP country → browser-language guess → UAE
-  const phoneCountry = [countryCode, suggested?.code].find((c) => c && PHONE_COUNTRIES.has(c)) ?? 'AE';
+  const phoneCountry = phoneCountryOf(countryCode, suggested?.code);
 
   const phoneValid = Boolean(values.phone) && isValidPhoneNumber(values.phone);
 
@@ -219,7 +218,7 @@ export function DemoAccountForm({ id = 'demo-form', className }) {
         <Field id="df-phone" label={t('phone')} required error={err('phone')}>
           <div className="flex gap-2.5">
             <span className={cn(box, fieldState(err('phone')), phoneCls, 'flex-1')} dir="ltr">
-              <PhoneInput key={phoneCountry} id="df-phone" international countryCallingCodeEditable={false} defaultCountry={phoneCountry} value={values.phone || undefined} onChange={setPhone} onBlur={blur('phone')} autoComplete="tel" />
+              <PhoneInput key={phoneCountry} id="df-phone" international countryCallingCodeEditable={false} countries={PHONE_COUNTRIES} defaultCountry={phoneCountry} value={values.phone || undefined} onChange={setPhone} onBlur={blur('phone')} autoComplete="tel" />
               {verified && <BadgeCheck className="size-4 shrink-0 text-up" aria-label={t('verified')} />}
             </span>
             <button type="button" onClick={requestCode} disabled={codeLoading || !phoneValid} className="h-11 shrink-0 rounded-xl border border-brand/25 px-4 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-transparent disabled:hover:text-brand">

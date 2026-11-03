@@ -177,6 +177,7 @@
       "The entity with which a client contracts will depend on the client's jurisdiction, eligibility, classification and onboarding route. The applicable contracting entity and, where relevant, the product issuer and/or counterparty will be clearly disclosed before the client submits an account application and will be identified in the relevant Client Agreement. Products and services available under one entity may not be available under another entity. Each entity within the GTC Financial Group is a separate legal entity. A licence held by one entity does not extend to any other entity within the group.",
       "GTC Global Trading Ltd, is a company incorporated in Anjouan, Union of the Comoros (Company No. 16283) and licensed by the Anjouan Offshore Finance Authority under Licence No. L16283/GTC. Its registered address is Boulevard de Coalancanthe, Mutsamudu, Anjouan, Union of the Comoros.",
       "GTC Global Trade Capital Co. Limited (Company No. 40354) is a company incorporated in Vanuatu. The company holds Class A, Class B and Class C Principal's Licences issued by the Vanuatu Financial Services Commission under the Financial Dealers Licensing Act [CAP. 70]. Its registered address is First Floor, B&P House, Kumul Highway, Port Vila, Vanuatu.",
+      "GTC Global Ltd is a company incorporated in Mauritius (Company No. C188049), holding a Global Business Licence, and authorised and regulated by the Financial Services Commission, Mauritius (FSC) as an Investment Dealer (Full Service Dealer, excluding Underwriting) / SEC-2.1B, Licence No. GB22200292, pursuant to Section 29 of the Securities Act 2005, Rule 4 of the Securities (Licensing) Rules 2007, and the Financial Services (Consolidated Licensing and Fees) Rules 2008. Its registered office and principal place of business is Ground Floor, The Catalyst, Silicon Avenue, 40 Cybercity, 72201 Ebene, Republic of Mauritius.",
       "Services offered through this international website are not available to residents of the United States, Japan, Australia, or in any jurisdiction where the provision of those services would contravene applicable laws, regulations, or sanctions."
     ],
     "rights": "All rights reserved.",
@@ -558,6 +559,24 @@
     },
     "intro": {
       "loading": "Loading GTCFX"
+    },
+    "uk": {
+      "title": "Important Notice for Website Visitors from [UK-Based IPs]",
+      "points": [
+        "GTCFX does not currently accept new clients residing in the United Kingdom.",
+        "Due to UK Financial Conduct Authority (FCA) regulatory requirements.",
+        "If you are a UK resident seeking trading services, please contact an FCA-regulated broker, such as GMG Markets."
+      ],
+      "fullNotice": "Full notice",
+      "text": "GTCFX is no longer accepting new customers residing in the United Kingdom. You may continue browsing our website for informational purposes.",
+      "visit": "Visit GMG Markets",
+      "outside": "I Reside Outside the UK – Continue Browsing",
+      "confirmPoints": [
+        "Please be informed that GTCFX is no longer accepting new customers residing in the United Kingdom.",
+        "You may continue browsing our website for informational purposes."
+      ],
+      "confirmText": "GTCFX does not accept new customers residing in the United Kingdom due to UK Financial Conduct Authority (FCA) regulatory requirements.",
+      "agree": "I Agree – Continue Browsing"
     }
   },
   "leadForm": {

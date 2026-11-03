@@ -16,19 +16,17 @@ import { ChevronDown, CircleAlert, CircleCheck, DollarSign, Globe, Hash, LoaderC
 import { useRouter } from '@/i18n/navigation';
 import NavLink from '@/components/shared/nav/NavLink';
 import { LIVE_ACCOUNT_HREF } from '@/config/menu';
-import { EMAIL_RE, LETTERS_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, phoneField, useGtcCountries } from '@/components/shared/formKit';
+import { EMAIL_RE, LETTERS_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, phoneField, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from '@/components/shared/formKit';
 import { cn } from '@/lib/utils';
 
 const API = '/api/margin-bonus';
-const EXCLUDED_COUNTRIES = ['AU', 'GB', 'US'];
 const EMPTY = { Full_name: '', email: '', otp: '', phone: '', account_no: '', deposit_amount: '', country: '', terms: false };
 const FIELDS = Object.keys(EMPTY);
 
 export function MarginApplyForm() {
   const t = useTranslations('marginBonusPage.apply.form');
   const router = useRouter();
-  const { countries: all, failed, suggested } = useGtcCountries();
-  const countries = useMemo(() => all.filter((c) => !EXCLUDED_COUNTRIES.includes(c.code)), [all]);
+  const { countries, failed, suggested } = useGtcCountries();
   const [values, setValues] = useState(EMPTY);
   const [touched, setTouched] = useState({});
   const [client, setClient] = useState(null); // null | 'checking' | 'registered' | 'notRegistered'
@@ -48,7 +46,7 @@ export function MarginApplyForm() {
   }, []);
 
   useEffect(() => {
-    if (suggested && !EXCLUDED_COUNTRIES.includes(suggested.code)) setValues((v) => (v.country ? v : { ...v, country: suggested.name }));
+    if (suggested) setValues((v) => (v.country ? v : { ...v, country: suggested.name }));
   }, [suggested]);
 
   const errors = useMemo(() => {
@@ -211,7 +209,7 @@ export function MarginApplyForm() {
         <div className="grid gap-4 sm:grid-cols-2">
           <Field id="mb-phone" label={t('phone')} required error={err('phone')}>
             <span className={cn(box, fieldState(err('phone')), phoneField)} dir="ltr">
-              <PhoneInput id="mb-phone" name="phone" international defaultCountry={suggested?.code || 'AE'} value={values.phone || undefined} onChange={(v) => set('phone')(v ?? '')} onBlur={blur('phone')} autoComplete="tel" />
+              <PhoneInput id="mb-phone" name="phone" international countries={PHONE_COUNTRIES} defaultCountry={phoneCountryOf(suggested?.code)} value={values.phone || undefined} onChange={(v) => set('phone')(v ?? '')} onBlur={blur('phone')} autoComplete="tel" />
             </span>
           </Field>
           <Field id="mb-country" label={t('country')} required error={err('country')}>

@@ -10,19 +10,17 @@ import { useLocale, useTranslations } from 'next-intl';
 import { ZA_LOCALE } from '@/config/regions';
 import { motion } from 'motion/react';
 import { toast } from 'react-toastify';
-import PhoneInput, { getCountries } from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { Banknote, Briefcase, ChevronDown, Clock, Globe, Hash, LoaderCircle, Mail, Paperclip, TriangleAlert, Type, User, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
-import { EMAIL_RE, Field, fieldBox as box, fieldInput as input, fieldState as boxState, useGtcCountries } from '@/components/shared/formKit';
+import { EMAIL_RE, Field, PHONE_COUNTRIES, fieldBox as box, fieldInput as input, fieldState as boxState, useGtcCountries } from '@/components/shared/formKit';
 
 const MAX = 5 * 1024 * 1024;
 const CLIENT_AGREEMENT_PDF = 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/Website+Client+Document/GTC+Global+Trade+Capital+Co.+Ltd+(VANUATU)/T%26S+-+GTC+GLOBAL+TRADE+CAPITAL+CO.+LTD.pdf';
 
 // countries this form does not serve (country list + phone picker)
-const EXCLUDED = new Set(['AU', 'US']);
-const PHONE_COUNTRIES = getCountries().filter((c) => !EXCLUDED.has(c));
 
 const GENERAL = 'General Query';
 const COMPLIANCE = 'Compliance Query';
@@ -118,8 +116,7 @@ const phoneCls =
 export function TicketForm() {
   const t = useTranslations('contactPage.form');
   const za = useLocale() === ZA_LOCALE;
-  const { countries: allCountries, failed, suggested } = useGtcCountries();
-  const countries = useMemo(() => allCountries.filter((c) => !EXCLUDED.has(c.code)), [allCountries]);
+  const { countries, failed, suggested } = useGtcCountries();
   const [values, setValues] = useState(EMPTY);
   const [file, setFile] = useState(null);
   const [drag, setDrag] = useState(false);
@@ -130,7 +127,7 @@ export function TicketForm() {
 
   // preselect the visitor's country (unless it is one we don't serve)
   useEffect(() => {
-    if (!suggested || EXCLUDED.has(suggested.code)) return;
+    if (!suggested) return;
     setValues((v) => (v.country ? v : { ...v, country: suggested.name }));
     setPhoneCountry(suggested.code);
   }, [suggested]);

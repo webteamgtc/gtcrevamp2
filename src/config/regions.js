@@ -15,6 +15,20 @@
  * ?geo=clear removes it. The override is ignored on the production deployment unless GEO_TEST=1.
  */
 
+/**
+ * Countries no form offers (country lists and phone-number pickers): United States (incl. its Minor Outlying
+ * Islands), Australia, Japan, Ukraine, Israel, United Kingdom. Applied in src/components/shared/formKit.jsx
+ * (useGtcCountries, PHONE_COUNTRIES).
+ */
+export const FORM_EXCLUDED_COUNTRIES = ['US', 'UM', 'AU', 'JP', 'UA', 'IL', 'GB'];
+
+/**
+ * UK visitors (IP in GB) can't open a live account: every link to the live account application, the application
+ * page itself and the registration forms open the UK notice instead (src/components/shared/geo/UkGate.jsx).
+ * They may keep browsing; the notice points UK residents to an FCA-regulated broker (gmgUrl).
+ */
+export const UK_NOTICE = { country: 'GB', gmgUrl: 'https://www.gmgmarkets.co.uk' };
+
 /** country (ISO 3166-1 alpha-2) → regional English site */
 export const REGION_BY_COUNTRY = { AE: 'en-ae', ZA: 'en-za', MU: 'en-mu', VU: 'en-vu' };
 export const DEFAULT_REGION = 'en-intl';
