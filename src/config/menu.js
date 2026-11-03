@@ -43,10 +43,10 @@ export const FOOTER_LINKS = {
   ]
 };
 
-/** Homepage market cards, by key of markets.markets in homepage.json (no commodities page yet → futures) */
+/** Homepage market cards, by key of markets.markets in homepage.json (no dedicated /markets/commodities page) */
 export const MARKET_LINKS = {
   energy: '/markets/energy',
-  commodities: '/markets/future-cfds',
+  commodities: '/markets',
   forex: '/markets/forex',
   indices: '/markets/indices',
   metals: '/markets/metals',

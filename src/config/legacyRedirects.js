@@ -53,7 +53,7 @@ const LEGACY_REDIRECTS = [
   // Markets (flat -> /markets/*)
   ['/forex', '/markets/forex'],
   ['/indices', '/markets/indices'],
-  ['/commodities', '/markets/commodities'],
+  ['/commodities', '/markets/energy'],
   ['/cfd-energy', '/markets/energy'],
   ['/precious-metals', '/markets/metals'],
   ['/economic-calendar', '/gtc-news/economic-calendar'],

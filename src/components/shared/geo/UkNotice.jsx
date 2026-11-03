@@ -52,7 +52,7 @@ export default function UkNotice({ onDone }) {
   const [step, setStep] = useState('notice'); // 'notice' | 'confirm'
   return (
     <Gate labelledBy="geo-uk-title" bare className="max-w-xl bg-white p-7 sm:p-10">
-      <h2 id="geo-uk-title" className="heading-section">
+      <h2 id="geo-uk-title" className="heading-section !text-[2rem]">
         <AccentTitle text={t('title')} />
       </h2>
       <AnimatePresence mode="wait" initial={false}>

@@ -35,7 +35,14 @@ const nextConfig = {
             { source: '/markets/crypto-cfds', destination: '/markets', permanent: true },
             { source: '/markets/crypto-cfds/:path*', destination: '/markets', permanent: true }
           ];
-          return [...typoFixes, ...cryptoCfdsRetired, ...legacyPathRedirects(), ...legacyBlogRedirects()];
+          const marketPathFixes = [
+            { source: '/:locale/markets/economic-calendar', destination: '/:locale/gtc-news/economic-calendar', permanent: true },
+            { source: '/markets/economic-calendar', destination: '/en-intl/gtc-news/economic-calendar', permanent: true },
+            // no /markets/commodities page — legacy URL + old flat /commodities (see legacyRedirects.js)
+            { source: '/:locale/markets/commodities', destination: '/:locale/markets/energy', permanent: true },
+            { source: '/markets/commodities', destination: '/en-intl/markets/energy', permanent: true }
+          ];
+          return [...typoFixes, ...cryptoCfdsRetired, ...marketPathFixes, ...legacyPathRedirects(), ...legacyBlogRedirects()];
         },
         // per-locale sitemaps listed in /sitemap.xml (src/lib/sitemap.js)
         async rewrites() {
