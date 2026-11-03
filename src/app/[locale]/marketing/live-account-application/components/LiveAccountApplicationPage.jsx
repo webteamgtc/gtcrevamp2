@@ -24,13 +24,13 @@ export default function LiveAccountApplicationPage({ accountKey, showAccount }) 
     <Cat5Frame page="liveApplicationForm">
       <div className="overflow-x-clip bg-[#f6f7fb] text-ink">
         <LiveAccountApplicationHeroSection accountKey={accountKey} showAccount={showAccount} />
-        <section className="relative pb-16 md:pb-24">
+        <section className="relative pt-8 pb-16 md:pt-12 md:pb-24">
           <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />
           <motion.span className="absolute -start-40 top-1/3 size-[460px] rounded-full bg-brand/[0.07] blur-[120px]" animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 8, repeat: Infinity }} aria-hidden />
           <motion.span className="absolute -end-40 bottom-10 size-[420px] rounded-full bg-gold/[0.1] blur-[120px]" animate={{ opacity: [1, 0.6, 1] }} transition={{ duration: 8, repeat: Infinity }} aria-hidden />
-          <div className="container-x relative -mt-20 md:-mt-24">
-            <div className="mx-auto grid max-w-6xl items-start gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-8">
-              <Reveal y={40} className="relative">
+          <div className="container-x relative">
+            <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start justify-items-center gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:justify-items-stretch lg:gap-10">
+              <Reveal y={24} className="relative w-full max-w-2xl lg:max-w-none">
                 <span className="absolute -inset-px -z-10 rounded-[1.85rem] bg-gradient-to-br from-gold/50 via-brand-300/30 to-brand/50 blur-sm" aria-hidden />
                 {!blocked && <LiveAccountForm variant="page" saveTo="database" title={t('title')} subtitle={t('subtitle')} />}
               </Reveal>

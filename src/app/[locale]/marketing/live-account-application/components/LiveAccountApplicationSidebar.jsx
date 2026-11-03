@@ -15,8 +15,8 @@ const CONTACTS = [
 export default function LiveAccountApplicationSidebar() {
   const t = useTranslations('liveAccountApplicationPage.sidebar');
   return (
-    <aside className="lg:sticky lg:top-28">
-      <Reveal y={24} delay={0.1} className="is-dark relative overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-brand-700 via-brand-900 to-ink p-6 text-white shadow-2xl shadow-brand/20">
+    <aside className="w-full max-w-md lg:sticky lg:top-32 lg:max-w-none lg:self-start">
+      <Reveal y={24} delay={0.1} className="is-dark relative mx-auto overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-brand-700 via-brand-900 to-ink p-6 text-white shadow-2xl shadow-brand/20 lg:mx-0">
         <div className="bg-grid-dark absolute inset-0 opacity-40" aria-hidden />
         <motion.span className="absolute -end-12 -top-12 size-40 rounded-full bg-gold/25 blur-3xl" animate={{ opacity: [0.45, 0.9, 0.45] }} transition={{ duration: 6, repeat: Infinity }} aria-hidden />
         <span className="relative grid size-12 place-items-center rounded-2xl bg-gold text-white shadow-lg shadow-gold/30">
