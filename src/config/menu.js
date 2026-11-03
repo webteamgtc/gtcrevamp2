@@ -37,7 +37,8 @@ export const liveAccountHref = (account) => (account ? `${LIVE_ACCOUNT_HREF}?acc
 
 export const PORTAL = {
   login: CLIENT_PORTAL,
-  register: CLIENT_PORTAL,
+  /** Header Register — live application route; UK visitors see account notice (UkGate). */
+  register: LIVE_ACCOUNT_HREF,
   demo: '/trading/free-demo-account',
   clientPortal: CLIENT_PORTAL
 };
