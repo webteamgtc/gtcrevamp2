@@ -19,17 +19,18 @@ import { createPortal } from 'react-dom';
 import { useLocale, useTranslations } from 'next-intl';
 import NavLink from '@/components/shared/nav/NavLink';
 import { ZA_LOCALE } from '@/config/regions';
+import { useUkGate } from './geo/UkGate';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
-import PhoneInput, { getCountries, isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { ArrowRight, BadgeCheck, Check, ChevronDown, LoaderCircle, Search, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { EASE } from '@/components/motion';
 import { validateBusinessEmail } from '@/lib/emailValidation';
 import { useLocationDetail } from '@/config/useLocationDetails';
-import { EMAIL_RE, post, useGtcCountries } from './formKit';
+import { EMAIL_RE, PHONE_COUNTRIES, phoneCountryOf, post, useGtcCountries } from './formKit';
 
 export const DEFAULT_LEAD_FORM_ENDPOINTS = {
   validateEmail: '/api/validate-email',
@@ -51,7 +52,6 @@ export const DEFAULT_LEAD_FORM_LINKS = {
 };
 
 const OFFER_KEYS = ['level1', 'level2', 'level3', 'level4', 'level5', 'premium', 'eliteRaw'];
-const PHONE_COUNTRIES = new Set(getCountries());
 const EMPTY = { firstName: '', lastName: '', email: '', country: '', phone: '', otp: '', terms: false };
 
 /** "  " / "null" → null so an endpoint can be switched off from config */
@@ -232,6 +232,7 @@ export default function CommonLeadForm({
 }) {
   const t = useTranslations(translationNamespace);
   const locale = useLocale();
+  const ukGate = useUkGate();
   const router = useRouter();
   const path = usePathname();
   const endpoints = useMemo(() => ({ ...DEFAULT_LEAD_FORM_ENDPOINTS, ...endpointsProp }), [endpointsProp]);
@@ -260,7 +261,7 @@ export default function CommonLeadForm({
   }, [ipCountry, suggested, countryPicked]);
 
   // phone flag follows the selected country until a number is typed
-  const phoneCountry = [values.country, countryCode, suggested?.code].find((c) => c && PHONE_COUNTRIES.has(c)) ?? 'AE';
+  const phoneCountry = phoneCountryOf(values.country, countryCode, suggested?.code);
   const phoneValid = Boolean(values.phone) && isValidPhoneNumber(values.phone);
 
   // a different number needs a new code
@@ -342,6 +343,7 @@ export default function CommonLeadForm({
 
   const submit = async (e) => {
     e.preventDefault();
+    if (ukGate.blocked) return ukGate.open(); // UK: no live accounts
     setTouched(Object.fromEntries(Object.keys(EMPTY).map((k) => [k, true])));
     if (!verified) return toast.error(t('toast.verifyPhoneFirst'));
     if (Object.keys(errors).length) return;
@@ -494,7 +496,7 @@ export default function CommonLeadForm({
         <div className="flex gap-2">
           <div className={cn(shell(err('phone')), phoneCls, 'min-w-0 flex-1')} dir="ltr">
             <span className={fixedLabel}>{t('phone')}</span>
-            <PhoneInput key={phoneCountry} id="lf-phone" international countryCallingCodeEditable={false} defaultCountry={phoneCountry} value={values.phone || undefined} onChange={(v) => set('phone')(v ?? '')} onBlur={blur('phone')} autoComplete="tel" />
+            <PhoneInput key={phoneCountry} id="lf-phone" international countryCallingCodeEditable={false} countries={PHONE_COUNTRIES} defaultCountry={phoneCountry} value={values.phone || undefined} onChange={(v) => set('phone')(v ?? '')} onBlur={blur('phone')} autoComplete="tel" />
             {verified && <BadgeCheck className="absolute end-3 top-1/2 size-5 -translate-y-1/2 text-up" aria-label={t('verified')} />}
           </div>
           {!verified && (

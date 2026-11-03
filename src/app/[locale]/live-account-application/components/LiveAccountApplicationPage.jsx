@@ -11,12 +11,14 @@ import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import { LiveAccountForm } from '@/components/shared/LiveApplicationForm';
 import Toaster from '@/components/shared/Toaster';
+import { useUkGate } from '@/components/shared/geo/UkGate';
 import { Reveal, ScrollProgress } from '@/components/motion';
 import LiveAccountApplicationHeroSection from './LiveAccountApplicationHeroSection';
 import LiveAccountApplicationSidebar from './LiveAccountApplicationSidebar';
 
 export default function LiveAccountApplicationPage({ accountKey, showAccount }) {
   const t = useTranslations('liveAccountApplicationPage.form');
+  const { blocked } = useUkGate(); // UK visitor: the UK notice shows instead of the form
   return (
     <div className="overflow-x-clip bg-[#f6f7fb] text-ink">
       <ScrollProgress />
@@ -31,7 +33,7 @@ export default function LiveAccountApplicationPage({ accountKey, showAccount }) 
             <div className="mx-auto grid max-w-6xl items-start gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-8">
               <Reveal y={40} className="relative">
                 <span className="absolute -inset-px -z-10 rounded-[1.85rem] bg-gradient-to-br from-gold/50 via-brand-300/30 to-brand/50 blur-sm" aria-hidden />
-                <LiveAccountForm variant="page" title={t('title')} subtitle={t('subtitle')} />
+                {!blocked && <LiveAccountForm variant="page" title={t('title')} subtitle={t('subtitle')} />}
               </Reveal>
               <LiveAccountApplicationSidebar />
             </div>

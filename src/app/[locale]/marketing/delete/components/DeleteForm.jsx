@@ -8,12 +8,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
-import PhoneInput, { getCountries } from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { BadgeCheck, CalendarDays, Check, Hash, LoaderCircle, Mail, PenLine, ShieldCheck, TriangleAlert, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { validateBusinessEmail } from '@/lib/emailValidation';
-import { EMAIL_RE, post, Field, fieldBox as box, fieldInput as input, fieldState } from '@/components/shared/formKit';
+import { EMAIL_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, PHONE_COUNTRIES, phoneCountryOf } from '@/components/shared/formKit';
 import { useLocationDetail } from '@/config/useLocationDetails';
 
 const PLATFORMS = ['mt4', 'mt5', 'both'];
@@ -21,7 +21,6 @@ const CONFIRMS = ['c1', 'c2', 'c3'];
 const ACCOUNTS_RE = /^\s*\d+(\s*,\s*\d+)*\s*$/;
 const REASON_MAX = 1000;
 const COOLDOWN = 60;
-const PHONE_COUNTRIES = new Set(getCountries()); // ISO codes PhoneInput can show as a flag
 const EMPTY = { fullName: '', email: '', phone: '', platform: '', accounts: '', reason: '', otp: '', c1: false, c2: false, c3: false, signature: '', dob: '' };
 
 /* PhoneInput (react-phone-number-input) restyled to match the other fields */
@@ -64,7 +63,7 @@ export default function DeleteForm({ onProgress }) {
   const [cooldown, setCooldown] = useState(0);
   const [loadingOtp, setLoadingOtp] = useState(false);
   const [loading, setLoading] = useState(false);
-  const phoneCountry = countryCode && PHONE_COUNTRIES.has(countryCode) ? countryCode : 'AE';
+  const phoneCountry = phoneCountryOf(countryCode);
 
   useEffect(() => {
     if (cooldown <= 0) return undefined;
@@ -255,7 +254,7 @@ export default function DeleteForm({ onProgress }) {
 
           <Field id="del-phone" label={`${t('fields.phoneLabel')} ${t('fields.phoneOptional')}`} className="sm:col-span-2">
             <span className={cn(box, fieldState(false), phoneCls)} dir="ltr">
-              <PhoneInput key={phoneCountry} id="del-phone" international countryCallingCodeEditable={false} defaultCountry={phoneCountry} value={values.phone || undefined} onChange={(v) => set('phone')(v ?? '')} autoComplete="tel" />
+              <PhoneInput key={phoneCountry} id="del-phone" international countryCallingCodeEditable={false} countries={PHONE_COUNTRIES} defaultCountry={phoneCountry} value={values.phone || undefined} onChange={(v) => set('phone')(v ?? '')} autoComplete="tel" />
             </span>
           </Field>
         </div>

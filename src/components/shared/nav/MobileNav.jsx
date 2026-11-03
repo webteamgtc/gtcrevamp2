@@ -15,6 +15,7 @@ import LanguagePicker from '../LanguagePicker';
 import { EASE } from '../../motion';
 import NavLink, { useIsActive } from './NavLink';
 import DownloadsPromo from './DownloadsPromo';
+import { useUkGate } from '../geo/UkGate';
 
 const GROUP_ICONS = {
   company: MENU[0].columns[0][0].items[0].icon,
@@ -28,6 +29,14 @@ export default function MobileNav({ open, onClose }) {
   const t = useTranslations('menu');
   const tn = useTranslations('nav');
   const rtl = getDir(useLocale()) === 'rtl';
+  const ukGate = useUkGate();
+  // UK visitors: Log in opens the UK notice (Register already does — it links to the live account application)
+  const onLogin = (e) => {
+    onClose();
+    if (!ukGate.blocked) return;
+    e.preventDefault();
+    ukGate.open();
+  };
   const isActive = useIsActive();
   const [level, setLevel] = useState(null);
   const off = rtl ? '-100%' : '100%';
@@ -126,7 +135,7 @@ export default function MobileNav({ open, onClose }) {
                         <NavLink href={LIVE_ACCOUNT_HREF} onClick={onClose} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-gold text-sm font-semibold">
                           <User className="size-4" /> {tn('register')}
                         </NavLink>
-                        <NavLink href={PORTAL.login} onClick={onClose} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-white/10 text-sm font-semibold ring-1 ring-white/20">
+                        <NavLink href={PORTAL.login} onClick={onLogin} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-white/10 text-sm font-semibold ring-1 ring-white/20">
                           <LogIn className="size-4" /> {tn('login')}
                         </NavLink>
                       </div>
