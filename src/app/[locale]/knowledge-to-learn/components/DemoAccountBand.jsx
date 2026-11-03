@@ -14,6 +14,7 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import LiveAccountButton from '@/components/shared/LiveAccountButton';
+import { useShowDemoAccount } from '@/components/shared/geo/UkGate';
 
 const ICONS = { tightestSpread: Gauge, bestLeverage: Scale, tradingInstrument: Layers, ultraFastExecution: Zap };
 
@@ -79,8 +80,10 @@ function FeatureStrip({ features }) {
 
 /** Free demo account: copy + buttons beside a laptop/phone composition, the four features below. */
 export function DemoAccountBand() {
+  const showDemo = useShowDemoAccount();
   const t = useTranslations('knowledgePage.demoTrading');
   const features = t.raw('features');
+  if (!showDemo) return null;
   return (
     <section id="demo" className="relative overflow-hidden bg-[#f6f7fb] py-14 md:py-24">
       <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />

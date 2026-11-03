@@ -1,4 +1,7 @@
 'use client';
+import { useEffect } from 'react';
+import { useLocale } from 'next-intl';
+import { useUkGate } from '@/components/shared/geo/UkGate';
 /**
  * /trading/free-demo-account — dark hero → white (why) → gray (workflow)
  * → white (tips) → gray (FAQ) → navy CTA → footer.
@@ -16,6 +19,12 @@ import { DemoFaq } from './DemoFaq';
 import { DemoCta } from './DemoCta';
 
 export default function FreeDemoAccountPage() {
+  const locale = useLocale();
+  const { blocked } = useUkGate();
+  useEffect(() => {
+    if (blocked) window.location.replace(`/${locale}`);
+  }, [blocked, locale]);
+  if (blocked) return null;
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />

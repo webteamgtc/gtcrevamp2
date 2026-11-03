@@ -18,6 +18,9 @@ const UkGateContext = createContext({ blocked: false, open: () => {} });
 /** { blocked: visitor is in the UK, open(): show the account notice (Register / live account) } */
 export const useUkGate = () => useContext(UkGateContext);
 
+/** false for UK IPs — hide demo CTAs site-wide */
+export const useShowDemoAccount = () => !useContext(UkGateContext).blocked;
+
 function isLiveAccountLink(href) {
   if (!href) return false;
   try {

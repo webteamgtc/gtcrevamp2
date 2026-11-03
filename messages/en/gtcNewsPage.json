@@ -578,5 +578,54 @@
       "openCta": "Open an Account",
       "contactCta": "Contact Support"
     }
+  },
+  "tradingNewsPage": {
+    "meta": {
+      "title": "Trading News | Futures Expiry & Session Notices | GTCFX",
+      "description": "Nov 2026 futures contract expiry dates, new trading sessions, and close-only times for GTCFX clients."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "news": "GTC News",
+      "current": "Trading News"
+    },
+    "hero": {
+      "badge": "Market updates",
+      "title": "Trading [News]",
+      "description": "Contract expiry notices, session changes, and operational updates to help you plan positions ahead of rollover."
+    },
+    "article": {
+      "title": "Nov 2026 Futures Contract Expiry Dates and New Trading Sessions Notification",
+      "subtitle": "Nov 2026 Futures Contract Expiry Dates and New Trading Sessions Notification:",
+      "table": {
+        "columns": {
+          "tradingSymbol": "Trading Symbol",
+          "expiringSymbol": "Expiring Symbol",
+          "newContract": "New Contract",
+          "newSessionFrom": "New Trading Session From",
+          "closeOnlyTime": "Close Only Time (Expiring Symbol)",
+          "expiryTime": "Expiry Time"
+        },
+        "rows": [
+          {
+            "tradingSymbol": "GC Future (CFD)",
+            "expiringSymbol": "GC. Z26",
+            "newContract": "GC. G27",
+            "newSessionFrom": "25/11/2026, 01:01",
+            "closeOnlyTime": "23/11/2026, 23:59",
+            "expiryTime": "24/11/2026, 23:59"
+          }
+        ]
+      },
+      "note": "Note: Contracts expiring this month may be affected by public holidays. Clients will need to close their positions before the expiry date or the system will do so for them. Automatic rollover is not currently supported; if needed, clients will have to manually open a new position from the new trading day. (All times shown are server time.)"
+    },
+    "cta": {
+      "heading": "Plan ahead of [expiry]",
+      "sub": "Review close-only windows and open your next contract in time. Need help? Our team can walk you through rollover steps.",
+      "rolloverBadge": "No automatic rollover",
+      "hoursBadge": "Server time shown",
+      "openCta": "Open an Account",
+      "contactCta": "Contact Support"
+    }
   }
 }

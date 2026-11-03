@@ -15,6 +15,7 @@ const PREVIEW_PAGES = {
   '/gtc-news/sample-article': 'sample-article', // review link only (scripts/preview-routes)
   '/gtc-news/sample-category': 'sample-category', // review link only (scripts/preview-routes)
   '/gtc-news/market-holidays': 'market-holidays',
+  '/gtc-news/trading-news': 'trading-news',
   '/company/why-gtc-group': 'why-gtc-group',
   '/company/global-presence': 'global-presence',
   '/company/events-and-exhibitions': 'events-and-exhibitions',

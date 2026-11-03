@@ -1,4 +1,5 @@
 'use client';
+import { useShowDemoAccount } from '@/components/shared/geo/UkGate';
 /**
  * /trading — dark hero → white (demo, fund) → gray (account types) → white (platforms) → gray (app)
  * → white (leverage, swap) → gray (advantages) → white (VPS, CTA)
@@ -20,13 +21,14 @@ import { VpsPricing } from './VpsPricing';
 import { TradingCta } from './TradingCta';
 
 export default function TradingPage() {
+  const showDemo = useShowDemoAccount();
   return (
     <div className="dark overflow-x-clip bg-ink text-white">
       <ScrollProgress />
       <Header theme="dark" />
       <main>
         <TradingHero />
-        <DemoAccount />
+        {showDemo && <DemoAccount />}
         <FundAccount />
         <AccountTypes />
         <PlatformShowcase />

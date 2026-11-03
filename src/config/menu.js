@@ -7,7 +7,7 @@ import {
   Building2, Sparkles, Globe, CalendarDays, ShieldCheck, Award, Headset, MessageCircle, Handshake, Crown,
   UserPlus, MonitorPlay, Wallet, Layers, Monitor, Smartphone, Tablet, Users, Gauge, RefreshCw, ChartPie, Server,
   Rocket, BookA, Network, BookOpen, Map, ShieldAlert, ChartCandlestick, CircleHelp, FileQuestion, Newspaper,
-  CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Landmark, Wheat
+  CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Landmark, Wheat, TrendingDown
 } from 'lucide-react';
 
 // account entry points: live account application, demo form, client portal log-in
@@ -203,7 +203,8 @@ export const MENU = [
         { id: 'outlook', href: '/gtc-news/market-daily-updates', icon: Newspaper },
         { id: 'calendar', href: '/gtc-news/economic-calendar', icon: CalendarClock },
         { id: 'earnings', href: '/gtc-news/earnings-calendar', icon: Coins },
-        { id: 'holidays', href: '/gtc-news/market-holidays', icon: CalendarX }
+        { id: 'holidays', href: '/gtc-news/market-holidays', icon: CalendarX },
+        { id: 'tradingNews', href: '/gtc-news/trading-news', icon: TrendingDown }
       ] }],
       [{ id: 'companyUpdates', items: [
         { id: 'companyNews', href: '/gtc-news/company-news', icon: Megaphone },

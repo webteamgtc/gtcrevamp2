@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
 import { PORTAL } from '@/config/menu';
 import LiveAccountButton from '@/components/shared/LiveAccountButton';
+import { useShowDemoAccount } from '@/components/shared/geo/UkGate';
 
 function Meteors({ count = 14 }) {
   const [items, setItems] = useState([]);
@@ -36,6 +37,7 @@ function Meteors({ count = 14 }) {
 
 export function Hero() {
   const t = useTranslations('hero');
+  const showDemo = useShowDemoAccount();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const rotateX = useTransform(scrollYProgress, [0, 0.45], [28, 0]);
@@ -92,11 +94,13 @@ export function Hero() {
               {t('ctaLive')}
             </LiveAccountButton>
           </Magnetic>
-          <Magnetic>
-            <Button size="lg" variant="outlineLight" as={NavLink} href={PORTAL.demo}>
-              {t('ctaDemo')}
-            </Button>
-          </Magnetic>
+          {showDemo && (
+            <Magnetic>
+              <Button size="lg" variant="outlineLight" as={NavLink} href={PORTAL.demo}>
+                {t('ctaDemo')}
+              </Button>
+            </Magnetic>
+          )}
         </HeroIn>
 
         {/* Terminal that flattens as you scroll */}
