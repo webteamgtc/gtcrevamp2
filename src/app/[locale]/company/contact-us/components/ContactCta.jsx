@@ -2,7 +2,8 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ArrowRight, Rocket, MonitorPlay } from 'lucide-react';
-import { PORTAL, LIVE_ACCOUNT_HREF } from '@/config/menu';
+import { PORTAL, LIVE_ACCOUNT_HREF, isDemoAccountHref } from '@/config/menu';
+import { useUkGate } from '@/components/shared/geo/UkGate';
 import NavLink from '@/components/shared/nav/NavLink';
 import BandLine from '@/components/shared/BandLine';
 import { AccentTitle } from '@/components/shared/SectionIntro';
@@ -12,10 +13,11 @@ import { cn } from '@/lib/utils';
 /** Same navy band as About Us: headline on one side, the open-account card on the other. */
 export function ContactCta() {
   const t = useTranslations('contactPage.cta');
+  const { blocked: ukBlocked } = useUkGate();
   const actions = [
     { key: 'live', href: LIVE_ACCOUNT_HREF, Icon: Rocket, primary: true },
     { key: 'demo', href: PORTAL.demo, Icon: MonitorPlay, primary: false }
-  ];
+  ].filter((a) => !(ukBlocked && isDemoAccountHref(a.href)));
   return (
     <section id="get-started" className="relative bg-white py-14 text-white md:py-20">
       <div className="container-x">

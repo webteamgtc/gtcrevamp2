@@ -23,9 +23,8 @@
 export const FORM_EXCLUDED_COUNTRIES = ['US', 'UM', 'AU', 'JP', 'UA', 'IL', 'GB'];
 
 /**
- * UK visitors (IP in GB) can't open a live account: every link to the live account application, the application
- * page itself and the registration forms open the UK notice instead (src/components/shared/geo/UkGate.jsx).
- * They may keep browsing; the notice points UK residents to an FCA-regulated broker (gmgUrl).
+ * UK visitors (IP in GB): informational notice on first visit (GeoGate + UkNotice.jsx), no live or demo accounts
+ * (UkGate.jsx). They may keep browsing after accepting the notice.
  */
 export const UK_NOTICE = { country: 'GB', gmgUrl: 'https://www.gmgmarkets.co.uk' };
 
@@ -47,6 +46,7 @@ export const COOKIES = {
   country: 'gtc_country', // visitor's country, refreshed on every page view by the proxy
   geoTest: 'gtc_geo_test', // ?geo= override while testing
   usAccepted: 'gtc_us_notice', // US visitor accepted the important notice
+  ukAccepted: 'gtc_uk_notice', // UK visitor accepted the important notice (informational browsing only)
   uaeCategory: 'gtc_uae_cat', // UAE visitor's choice: '1' or '5'
   uaeAck: 'gtc_uae_ack', // when the UAE visitor accepted the important-information statement
   regionDismissed: 'gtc_region_ok' // visitor chose to stay on another region's site

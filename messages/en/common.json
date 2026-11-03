@@ -352,6 +352,7 @@
       "calendar": "Economic Calendar",
       "earnings": "Earnings & Dividends Calendar",
       "holidays": "Market Holidays",
+      "tradingNews": "Trading News",
       "companyNews": "Company News",
       "awardsMedia": "Awards & Media"
     },
@@ -448,6 +449,7 @@
       "calendar": "Key economic releases",
       "earnings": "Company results and payouts",
       "holidays": "Trading hours and closures",
+      "tradingNews": "Futures expiry and session notices",
       "companyNews": "Announcements from GTCFX",
       "awardsMedia": "Press coverage and awards"
     },

@@ -3,11 +3,13 @@
 import FadeInSection from "@/app/[locale]/company/contact-us/components/FadeInSection";
 import { localizedHref } from "@/i18n/localizedHref";
 import { usePathTranslation } from "@/app/[locale]/LocaleProvider";
+import { useShowDemoAccount } from "@/components/shared/geo/UkGate";
 
 const REGISTER_HREF = "/live-account-application";
 
 export default function EconomicCalendarCtaSection({ locale = "en" }) {
   const t = usePathTranslation("economicCalendarPage.cta");
+  const showDemo = useShowDemoAccount();
   return (
     <section className="relative overflow-hidden py-16 md:py-24 bg-[#F2F4FB]">
       {/* Soft bg */}
@@ -43,12 +45,14 @@ export default function EconomicCalendarCtaSection({ locale = "en" }) {
               >
                 {t("openCta", "Open Live Account")}
               </a>
-              <a
-                href={localizedHref(locale, "/trading/free-demo-account")}
-                className="inline-flex items-center rounded-full border border-[#293B93] px-8 py-3.5 text-sm font-semibold text-[#293B93] transition hover:bg-[#293B93]/5"
-              >
-                {t("demoCta", "Try Demo Account")}
-              </a>
+              {showDemo && (
+                <a
+                  href={localizedHref(locale, "/trading/free-demo-account")}
+                  className="inline-flex items-center rounded-full border border-[#293B93] px-8 py-3.5 text-sm font-semibold text-[#293B93] transition hover:bg-[#293B93]/5"
+                >
+                  {t("demoCta", "Try Demo Account")}
+                </a>
+              )}
             </div>
           </FadeInSection>
         </div>

@@ -1,6 +1,8 @@
 'use client';
 import { useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
+import { isDemoAccountHref } from '@/config/menu';
+import { useUkGate } from '../geo/UkGate';
 
 // Review-link builds only: pages that exist in the static preview, so menu links between them work there
 const PREVIEW = process.env.NEXT_PUBLIC_STATIC_EXPORT === '1';
@@ -13,6 +15,7 @@ const PREVIEW_PAGES = {
   '/gtc-news/sample-article': 'sample-article', // review link only (scripts/preview-routes)
   '/gtc-news/sample-category': 'sample-category', // review link only (scripts/preview-routes)
   '/gtc-news/market-holidays': 'market-holidays',
+  '/gtc-news/trading-news': 'trading-news',
   '/company/why-gtc-group': 'why-gtc-group',
   '/company/global-presence': 'global-presence',
   '/company/events-and-exhibitions': 'events-and-exhibitions',
@@ -52,7 +55,9 @@ const PREVIEW_PAGES = {
 /** Internal routes use the locale-aware Link; '#…' and full URLs use a plain <a>. */
 export default function NavLink({ href, children, prefetch, ...rest }) {
   const locale = useLocale();
+  const { blocked: ukBlocked } = useUkGate();
   const [path, hash] = (href || '').split('#');
+  if (ukBlocked && isDemoAccountHref(path || href)) return null;
   // review link: every news article / category opens the sample article / category page
   const page = PREVIEW && path && (PREVIEW_PAGES[path] ?? (/^\/gtc-news\/[^/]+\/[^/]+$/.test(path) ? 'sample-article' : /^\/gtc-news\/(?!economic-calendar|earnings-calendar)[^/]+$/.test(path) ? 'sample-category' : null));
   if (page) {

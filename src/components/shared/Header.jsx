@@ -13,7 +13,6 @@ import MobileNav from './nav/MobileNav';
 import NavLink, { useIsActive } from './nav/NavLink';
 import { EASE } from '../motion';
 import { useCountry } from './geo/geoClient';
-import { useUkGate } from './geo/UkGate';
 
 const IDS = MENU.map((g) => g.id);
 
@@ -28,13 +27,6 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
   const tm = useTranslations('menu');
   const tr = useTranslations();
   const country = useCountry(); // US visitors see the US risk warning
-  const ukGate = useUkGate();
-  // UK visitors: Register / Log in open the UK notice instead of the client portal
-  const ukClick = (e) => {
-    if (!ukGate.blocked) return;
-    e.preventDefault();
-    ukGate.open();
-  };
   const isActive = useIsActive();
   const [open, setOpen] = useState(null);
   const [dirn, setDirn] = useState(1);
@@ -231,7 +223,6 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
               <div className="flex items-center gap-2">
                 <NavLink
                   href={PORTAL.register}
-                  onClick={ukClick}
                   className={cn(
                     'hidden h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-all md:inline-flex',
                     dark ? 'border-white/20 text-white hover:bg-white hover:text-brand-900' : 'border-brand/15 bg-white text-brand hover:border-brand'
@@ -241,7 +232,6 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
                 </NavLink>
                 <NavLink
                   href={PORTAL.login}
-                  onClick={ukClick}
                   className={cn(
                     'hidden h-10 items-center gap-2 rounded-full px-3 text-sm font-medium transition-all md:inline-flex',
                     dark ? 'text-white/80 hover:text-white' : 'text-brand-900/70 hover:text-brand'

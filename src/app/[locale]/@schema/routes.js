@@ -141,6 +141,7 @@ const ROUTES = {
     faq: faqFrom((await tr(locale, 'earningsCalendarPage.faq')).raw('items'))
   }),
   '/gtc-news/market-holidays': simple('marketHolidaysPage', { section: NEWS }),
+  '/gtc-news/trading-news': simple('tradingNewsPage', { section: NEWS }),
   '/gtc-news/:category': async ({ locale, params }) => {
     const category = (await getNewsCategories(locale)).find((c) => c.slug === params.category);
     if (!category) return null;

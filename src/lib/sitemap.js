@@ -64,6 +64,7 @@ const PAGES = [
   '/gtc-news/economic-calendar',
   '/gtc-news/earnings-calendar',
   '/gtc-news/market-holidays',
+  '/gtc-news/trading-news',
   '/knowledge-to-learn',
   '/knowledge-to-learn/liquidity-technology',
   '/knowledge-to-learn/platform-guide',

@@ -192,12 +192,12 @@ export function loadRegionOverrides(locale) {
  */
 const nsCache = new Map();
 export function namespacesOf(file) {
-  if (nsCache.has(file)) return nsCache.get(file);
+  if (CACHE && nsCache.has(file)) return nsCache.get(file);
   let keys = [];
   try {
     const raw = JSON.parse(fs.readFileSync(path.join(messagesRoot, 'en', `${file}.json`), 'utf8'));
     keys = Object.keys(namespaceBundlePart(`${file}.json`, raw) || {});
   } catch {}
-  nsCache.set(file, keys);
+  if (CACHE) nsCache.set(file, keys);
   return keys;
 }

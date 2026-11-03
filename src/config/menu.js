@@ -7,19 +7,38 @@ import {
   Building2, Sparkles, Globe, CalendarDays, ShieldCheck, Award, Headset, MessageCircle, Handshake, Crown,
   UserPlus, MonitorPlay, Wallet, Layers, Monitor, Smartphone, Tablet, Users, Gauge, RefreshCw, ChartPie, Server,
   Rocket, BookA, Network, BookOpen, Map, ShieldAlert, ChartCandlestick, CircleHelp, FileQuestion, Newspaper,
-  CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Landmark, Wheat
+  CalendarClock, Coins, CalendarX, Megaphone, Trophy, AppWindow, Gem, Flame, ChartColumn, Landmark, Wheat, TrendingDown
 } from 'lucide-react';
 
 // account entry points: live account application, demo form, client portal log-in
 const CLIENT_PORTAL = 'https://web.mygtc.app/user?redirect=%252Fdashboard';
 /** Live account application page — every 'Open live account' button goes here (see components/shared/LiveAccountButton). */
 export const LIVE_ACCOUNT_HREF = '/live-account-application';
+/** Free demo account — hidden and blocked for UK visitors (see UkGate). */
+export const DEMO_ACCOUNT_HREF = '/trading/free-demo-account';
+
+/** Same path normalisation as UkGate (optional locale prefix). */
+export function pathWithoutLocale(pathname) {
+  return pathname.replace(/^\/[^/]+(?=\/)/, '') || pathname;
+}
+
+export function isDemoAccountHref(href) {
+  if (!href) return false;
+  try {
+    const url = new URL(href, 'https://gtcfx.com');
+    const p = pathWithoutLocale(url.pathname);
+    return p === DEMO_ACCOUNT_HREF;
+  } catch {
+    return href === DEMO_ACCOUNT_HREF;
+  }
+}
 /** ?account=<slug> preselects an account on the application page (slugs: liveAccountApplicationPage.accounts). */
 export const liveAccountHref = (account) => (account ? `${LIVE_ACCOUNT_HREF}?account=${encodeURIComponent(account)}` : LIVE_ACCOUNT_HREF);
 
 export const PORTAL = {
   login: CLIENT_PORTAL,
-  register: CLIENT_PORTAL,
+  /** Header Register — live application route; UK visitors see account notice (UkGate). */
+  register: LIVE_ACCOUNT_HREF,
   demo: '/trading/free-demo-account',
   clientPortal: CLIENT_PORTAL
 };
@@ -43,10 +62,10 @@ export const FOOTER_LINKS = {
   ]
 };
 
-/** Homepage market cards, by key of markets.markets in homepage.json (no commodities page yet → futures) */
+/** Homepage market cards, by key of markets.markets in homepage.json (no dedicated /markets/commodities page) */
 export const MARKET_LINKS = {
   energy: '/markets/energy',
-  commodities: '/markets/future-cfds',
+  commodities: '/markets',
   forex: '/markets/forex',
   indices: '/markets/indices',
   metals: '/markets/metals',
@@ -185,7 +204,8 @@ export const MENU = [
         { id: 'outlook', href: '/gtc-news/market-daily-updates', icon: Newspaper },
         { id: 'calendar', href: '/gtc-news/economic-calendar', icon: CalendarClock },
         { id: 'earnings', href: '/gtc-news/earnings-calendar', icon: Coins },
-        { id: 'holidays', href: '/gtc-news/market-holidays', icon: CalendarX }
+        { id: 'holidays', href: '/gtc-news/market-holidays', icon: CalendarX },
+        { id: 'tradingNews', href: '/gtc-news/trading-news', icon: TrendingDown }
       ] }],
       [{ id: 'companyUpdates', items: [
         { id: 'companyNews', href: '/gtc-news/company-news', icon: Megaphone },

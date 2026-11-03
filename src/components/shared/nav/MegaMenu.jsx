@@ -14,6 +14,8 @@ import { CandleChart, AreaChart } from '../devices';
 import { EASE } from '../../motion';
 import NavLink, { useIsActive } from './NavLink';
 import DownloadsPromo from './DownloadsPromo';
+import { isDemoAccountHref } from '@/config/menu';
+import { useUkGate } from '../geo/UkGate';
 
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
@@ -116,7 +118,9 @@ function Section({ sec, onNavigate, dark }) {
 
 function MenuItem({ it, onNavigate, dark }) {
   const t = useTranslations('menu');
+  const { blocked: ukBlocked } = useUkGate();
   const isActive = useIsActive();
+  if (ukBlocked && (it.id === 'freeDemo' || isDemoAccountHref(it.href))) return null;
   const on = isActive(it.href);
   const Icon = it.icon ?? ArrowUpRight;
   return (
