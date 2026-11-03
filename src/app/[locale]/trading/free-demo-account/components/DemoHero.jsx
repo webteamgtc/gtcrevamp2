@@ -6,6 +6,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import HeroBackdrop, { LightHeroBackdrop } from '@/components/shared/HeroBackdrop';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { DemoAccountForm } from '@/components/shared/MainIBForm';
+import { useUkGate } from '@/components/shared/geo/UkGate';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
@@ -16,6 +17,7 @@ const HIGHLIGHT_ICONS = [CircleCheck, Zap, History];
  * tone 'dark' (default, same look as the open-live-account hero) or 'light'.
  */
 export function DemoHero({ tone = 'dark' }) {
+  const { blocked: ukBlocked } = useUkGate();
   const t = useTranslations('freeDemoAccount.hero');
   const tb = useTranslations('freeDemoAccount.breadcrumb');
   const points = t.raw('points');
@@ -91,11 +93,12 @@ export function DemoHero({ tone = 'dark' }) {
             </motion.ul>
           </div>
 
-          {/* form, with a soft glow behind it */}
-          <motion.div className="relative" initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.85, ease: EASE }}>
-            <div className={cn('absolute -inset-6 rounded-[2.5rem] blur-3xl', light ? 'bg-gradient-to-br from-brand/20 via-gold/15 to-transparent' : 'bg-brand/30')} aria-hidden />
-            <DemoAccountForm className={cn('relative', light && 'border-brand/10 shadow-[0_40px_100px_-40px_rgba(41,59,147,0.45)]')} />
-          </motion.div>
+          {!ukBlocked && (
+            <motion.div className="relative" initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.85, ease: EASE }}>
+              <div className={cn('absolute -inset-6 rounded-[2.5rem] blur-3xl', light ? 'bg-gradient-to-br from-brand/20 via-gold/15 to-transparent' : 'bg-brand/30')} aria-hidden />
+              <DemoAccountForm className={cn('relative', light && 'border-brand/10 shadow-[0_40px_100px_-40px_rgba(41,59,147,0.45)]')} />
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

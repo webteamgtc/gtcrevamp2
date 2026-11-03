@@ -14,6 +14,24 @@ import {
 const CLIENT_PORTAL = 'https://web.mygtc.app/user?redirect=%252Fdashboard';
 /** Live account application page — every 'Open live account' button goes here (see components/shared/LiveAccountButton). */
 export const LIVE_ACCOUNT_HREF = '/live-account-application';
+/** Free demo account — hidden and blocked for UK visitors (see UkGate). */
+export const DEMO_ACCOUNT_HREF = '/trading/free-demo-account';
+
+/** Same path normalisation as UkGate (optional locale prefix). */
+export function pathWithoutLocale(pathname) {
+  return pathname.replace(/^\/[^/]+(?=\/)/, '') || pathname;
+}
+
+export function isDemoAccountHref(href) {
+  if (!href) return false;
+  try {
+    const url = new URL(href, 'https://gtcfx.com');
+    const p = pathWithoutLocale(url.pathname);
+    return p === DEMO_ACCOUNT_HREF;
+  } catch {
+    return href === DEMO_ACCOUNT_HREF;
+  }
+}
 /** ?account=<slug> preselects an account on the application page (slugs: liveAccountApplicationPage.accounts). */
 export const liveAccountHref = (account) => (account ? `${LIVE_ACCOUNT_HREF}?account=${encodeURIComponent(account)}` : LIVE_ACCOUNT_HREF);
 

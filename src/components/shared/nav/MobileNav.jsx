@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowLeft, ChevronRight, LogIn, User, X } from 'lucide-react';
-import { MENU, PORTAL, LIVE_ACCOUNT_HREF } from '@/config/menu';
+import { MENU, PORTAL, LIVE_ACCOUNT_HREF, isDemoAccountHref } from '@/config/menu';
 import { getDir } from '@/i18n/locales';
 import { cn } from '@/lib/utils';
 import Logo from '../Logo';
@@ -163,7 +163,9 @@ export default function MobileNav({ open, onClose }) {
                         <motion.section key={sec.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06 + si * 0.05 }}>
                           <h3 className="heading-label">{t(`sections.${sec.id}`)}</h3>
                           <ul className="mt-2 grid gap-1">
-                            {sec.items.map((it) => {
+                            {sec.items
+                              .filter((it) => !(ukGate.blocked && (it.id === 'freeDemo' || isDemoAccountHref(it.href))))
+                              .map((it) => {
                               const Icon = it.icon;
                               const on = isActive(it.href);
                               return (

@@ -2,6 +2,7 @@
 /**
  * Region rules, opened as the intro fades out (settings: src/config/regions.js, copy: common.json → geo):
  *  - US visitors: "Important notice" — must accept to use the site (remembered 30 days)
+ *  - UK visitors (GB): informational notice on load — must accept to browse (remembered 30 days, see UkNotice.jsx)
  *  - UAE visitors (any language) and /en-ae: CAT 1 (full site) or CAT 5 (marketing page only) — remembered 30 days, changeable from the footer
  *  - South African visitors: upfront disclosure to acknowledge (once per tab, see ZaNotice.jsx)
  *  - visitor on another region's site (e.g. a South African on /en-intl): small "go to your region?" note
@@ -18,6 +19,7 @@ import { readCookie, writeCookie, useCountry, whenIntroLeaving, localeHref } fro
 import { Gate, EASE } from './Gate';
 import UsNotice from './UsNotice';
 import ZaNotice, { rememberZa, zaAcknowledged } from './ZaNotice';
+import UkNotice from './UkNotice';
 
 /* ------------------------------------------------------------------ UAE */
 
@@ -181,7 +183,7 @@ export default function GeoGate() {
   const locale = useLocale();
   const country = useCountry();
   const [ready, setReady] = useState(false);
-  const [step, setStep] = useState(null); // 'us' | 'uae' | 'za' | 'region' | null
+  const [step, setStep] = useState(null); // 'us' | 'uk' | 'uae' | 'za' | 'region' | null
 
   useEffect(() => {
     let alive = true;
@@ -194,6 +196,7 @@ export default function GeoGate() {
   /** The first rule that still applies (each one is skipped once its cookie is set). */
   const pending = () => {
     if (country === 'US' && readCookie(COOKIES.usAccepted) !== '1') return 'us';
+    if (country === 'GB' && readCookie(COOKIES.ukAccepted) !== '1') return 'uk';
     if ((country === 'AE' || locale === CAT5_LOCALE) && !readCookie(COOKIES.uaeCategory)) return 'uae';
     if (country === 'ZA' && !zaAcknowledged()) return 'za';
     const home = regionForCountry(country);
@@ -211,6 +214,10 @@ export default function GeoGate() {
   // accepting a notice continues with the next rule (e.g. UAE category, region suggestion) if any
   const acceptUs = () => {
     writeCookie(COOKIES.usAccepted, '1');
+    setStep(pending());
+  };
+  const acceptUk = () => {
+    writeCookie(COOKIES.ukAccepted, '1');
     setStep(pending());
   };
   const acceptZa = () => {
@@ -231,6 +238,7 @@ export default function GeoGate() {
   return (
     <AnimatePresence>
       {step === 'us' && <UsNotice key="us" onAccept={acceptUs} />}
+      {step === 'uk' && <UkNotice key="uk" mode="browse" onAccept={acceptUk} />}
       {step === 'uae' && <UaeCategory key="uae" onChoose={chooseCat} />}
       {step === 'za' && <ZaNotice key="za" onAccept={acceptZa} />}
       {step === 'region' && <RegionSuggest key="region" country={country} target={regionForCountry(country)} onClose={stayHere} />}
