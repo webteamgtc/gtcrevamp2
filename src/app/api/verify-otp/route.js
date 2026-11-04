@@ -12,7 +12,7 @@ export async function POST(req) {
     const { phone, email, otp } = await req.json();
     const identifier = phone || email;
     if (!identifier || !otp) return NextResponse.json({ success: false, message: 'Phone/Email and OTP are required.' }, { status: 400 });
-    const result = verifyOtp(identifier, otp);
+    const result = await verifyOtp(identifier, otp);
     return NextResponse.json(result, { status: result.success ? 200 : 400 });
   } catch (error) {
     return NextResponse.json({ success: false, message: error?.message || 'Error verifying OTP.' }, { status: 500 });

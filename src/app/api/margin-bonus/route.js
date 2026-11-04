@@ -120,7 +120,7 @@ export async function POST(request) {
   try {
     if (!(await isClient(d.email))) return fail('notRegistered', 403);
     if (await hasApplied(d.email)) return fail('alreadyApplied', 409);
-    if (!verifyOtp(d.email, otp).success) return fail('otp', 400);
+    if (!(await verifyOtp(d.email, otp)).success) return fail('otp', 400);
 
     await query(
       `INSERT INTO marketing_campaign (Full_name, Email_address, Account_number, Country, Campaign_code, Campaign_name, Phone_number, create_time)

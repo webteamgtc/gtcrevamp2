@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { collection } from '@/lib/mongo';
-import { verifyOtp } from '@/lib/otpStore';
+import { normalizeOtp, verifyOtp } from '@/lib/otpStore';
 import { liveAccountWelcomeEmail } from '@/lib/emails/liveAccountWelcome';
 import { CAT5_CONTACT, CAT5_PORTAL_LOGIN } from '@/config/regions';
 
@@ -57,7 +57,7 @@ export async function POST(request) {
     deepLink: str(body?.deepLink, 300),
     page: str(body?.page, 300)
   };
-  const otp = str(body?.otp, 6);
+  const otp = normalizeOtp(body?.otp);
   const password = String(body?.password ?? '');
   const valid =
     LETTERS_RE.test(d.firstname) &&
@@ -75,7 +75,7 @@ export async function POST(request) {
   try {
     const records = await collection(COLLECTION);
     if (await records.findOne({ email: d.email }, { projection: { _id: 1 } })) return fail('exists', 409);
-    if (!verifyOtp(d.email, otp).success) return fail('otp', 400);
+    if (!(await verifyOtp(d.email, otp)).success) return fail('otp', 400);
     const name = `${d.firstname} ${d.lastname}`;
     const { insertedId } = await records.insertOne({
       name,

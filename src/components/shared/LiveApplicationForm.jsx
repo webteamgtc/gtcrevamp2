@@ -4,7 +4,7 @@
  * Talks to the GTC proxy routes in /api/gtc: get-country → check-email → get-code → reg.
  * Partner code / deep link are read from the URL (?code, ?ref, ?partner_id, ?partner_code, ?ib, ?deep_link_value).
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import NavLink from './nav/NavLink';
 import { ZA_LOCALE } from '@/config/regions';
@@ -72,6 +72,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
   const [loading, setLoading] = useState(false);
   /** CAT 5: set after a successful /api/cat5/live-account submit — replaces the form with a thank-you panel. */
   const [cat5Done, setCat5Done] = useState(null);
+  const submitLock = useRef(false);
 
   useEffect(() => {
     if (cat5Done) document.getElementById('cat5-registration-success')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -146,7 +147,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
     if (database) {
       // CAT 5: our own e-mail code, checked by /api/cat5/live-account
       try {
-        const res = await post('/api/otp-smtp', { email: values.email.trim(), first_name: values.firstname.trim() });
+        const res = await post('/api/otp-smtp', { email: values.email.trim().toLowerCase(), first_name: values.firstname.trim() });
         if (res?.success) {
           setCodeSent(true);
           toast.success(t('toast.otpSent'));
@@ -178,6 +179,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (submitLock.current || loading) return;
     if (ukGate.blocked) return ukGate.open(); // UK: no live accounts
     setTouched(Object.fromEntries(Object.keys(EMPTY).map((k) => [k, true])));
     if (Object.keys(errors).length) return;
@@ -203,14 +205,16 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
       ...(deepLink.trim() ? { deep_link_value: deepLink.trim() } : {})
     };
 
+    submitLock.current = true;
     setLoading(true);
+    const otpCode = values.otp.replace(/\D/g, '').padStart(6, '0').slice(-6);
     if (database) {
       try {
         const res = await post('/api/cat5/live-account', {
           firstname,
           lastname,
-          email: payload.email,
-          otp: values.otp,
+          email: payload.email.toLowerCase(),
+          otp: otpCode,
           password: values.password,
           country: selected.name,
           phone: values.phone,
@@ -226,11 +230,12 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
         toast.error(t('toast.registrationFailed'));
       } finally {
         setLoading(false);
+        submitLock.current = false;
       }
       return;
     }
     try {
-      const res = await post('/api/gtc/reg', payload);
+      const res = await post('/api/gtc/reg', { ...payload, code: otpCode });
       if (res?.code === 200) {
         toast.success(res?.message || t('toast.registrationSuccess'));
         setValues((v) => ({ ...EMPTY, country: v.country, phone: dial ? `+${dial}` : '', partnerCode: partnerLocked ? v.partnerCode : '' }));
@@ -241,6 +246,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
       toast.error(t('toast.registrationFailed'));
     } finally {
       setLoading(false);
+      submitLock.current = false;
     }
   };
 

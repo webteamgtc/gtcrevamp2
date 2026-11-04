@@ -14,10 +14,11 @@ const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<
 export async function POST(req) {
   try {
     const { email, first_name } = await req.json();
-    const check = validateBusinessEmail(email);
+    const normalizedEmail = String(email ?? '').trim().toLowerCase();
+    const check = validateBusinessEmail(normalizedEmail);
     if (!check.valid) return NextResponse.json({ success: false, reason: check.reason, message: 'Invalid email address' }, { status: 400 });
 
-    const otp = createOtp(email);
+    const otp = createOtp(normalizedEmail);
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Your GTCFX OTP</title></head>
 <body style="margin:0;padding:0;background-color:#F7F7F7;font-family:Arial,sans-serif;color:#000;line-height:22px;">
@@ -45,7 +46,7 @@ export async function POST(req) {
   </td></tr></table>
 </body></html>`;
 
-    await mailgunClient.messages.create(MAILGUN_DOMAIN, { from: MAILGUN_FROM, to: email, subject: 'Your GTCFX OTP Code', text: `Your OTP is ${otp}`, html });
+    await mailgunClient.messages.create(MAILGUN_DOMAIN, { from: MAILGUN_FROM, to: normalizedEmail, subject: 'Your GTCFX OTP Code', text: `Your OTP is ${otp}`, html });
     return NextResponse.json({ success: true, message: 'OTP sent' });
   } catch (error) {
     console.error('OTP email error:', error?.message || error);

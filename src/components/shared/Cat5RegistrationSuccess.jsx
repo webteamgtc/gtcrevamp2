@@ -13,7 +13,7 @@ export default function Cat5RegistrationSuccess({ email, firstName, page = false
 
   return (
     <div id="cat5-registration-success" className={cn('overflow-hidden rounded-[1.75rem] border border-white/10 bg-white text-ink shadow-[0_40px_100px_-30px_rgba(41,59,147,0.45)]', className)}>
-      <div className="relative overflow-hidden bg-gradient-to-br from-brand via-brand-800 to-brand-950 px-6 py-10 text-center text-white md:px-10 md:py-12">
+      <div className="is-dark relative overflow-hidden bg-gradient-to-br from-brand via-brand-800 to-brand-950 px-6 py-10 text-center text-white md:px-10 md:py-12">
         <span className="bg-grid-dark absolute inset-0 opacity-40" aria-hidden />
         <motion.span
           className="absolute -end-16 -top-20 size-56 rounded-full bg-gold/30 blur-3xl"
@@ -33,9 +33,9 @@ export default function Cat5RegistrationSuccess({ email, firstName, page = false
           initial={{ y: 12, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.08, duration: 0.5 }}
-          className="relative heading-title mt-6 text-balance"
+          className="relative heading-title mt-6 text-balance text-white"
         >
-          <AccentTitle text={t('title')} />
+          <AccentTitle text={t('title')} accentClassName="text-gold-200" />
         </motion.h2>
         <motion.p
           initial={{ y: 10, opacity: 0 }}
