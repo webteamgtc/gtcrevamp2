@@ -1,6 +1,6 @@
 'use client';
 /**
- * UAE CAT 5 site: /en-ae/live-application-form (and /live-account-application alias; src/proxy.js, CAT5_PAGES).
+ * UAE CAT 5 site: /en-ae/register-now (legacy /live-application-form and /live-account-application aliases).
  * Submissions are saved only to MongoDB (user_record) — saveTo="database" → /api/cat5/live-account.
  * /live-account-application[?account=<slug>][&code|ref|partner_id|…]
  * UI copy: messages/<locale>/liveApplicationPage.json → `liveAccountApplicationPage`;

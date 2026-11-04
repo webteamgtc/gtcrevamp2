@@ -23,6 +23,8 @@ const TERMS_URL = 'https://www.gtcfx.com/terms';
 const PRIVACY_URL = 'https://www.gtcfx.com/privacy';
 
 const EMPTY = { firstname: '', lastname: '', email: '', otp: '', password: '', country: '', phone: '', partnerCode: '', terms: false };
+const UAE_PHONE_COUNTRIES = ['AE'];
+const UAE_COUNTRY_FALLBACK = { code: 'AE', name: 'United Arab Emirates', phone_code: '971' };
 
 function splitName(fullName) {
   const parts = fullName.trim().split(/\s+/).filter(Boolean);
@@ -54,7 +56,12 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
   const page = variant === 'page';
   const [values, setValues] = useState(EMPTY);
   const [touched, setTouched] = useState({});
-  const { countries, failed: countriesFailed, suggested } = useGtcCountries();
+  const { countries: allCountries, failed: countriesFailed, suggested } = useGtcCountries();
+  const countries = useMemo(() => {
+    if (!database) return allCountries;
+    const uae = allCountries.find((c) => c.code === 'AE');
+    return uae ? [uae] : [UAE_COUNTRY_FALLBACK];
+  }, [allCountries, database]);
   const [showPw, setShowPw] = useState(false);
   const [partnerOpen, setPartnerOpen] = useState(false);
   const [partnerLocked, setPartnerLocked] = useState(false);
@@ -74,10 +81,19 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
     setDeepLink(dl);
   }, []);
 
-  // preselect the visitor's country once the list arrives
+  // preselect the visitor's country once the list arrives (CAT 5: UAE only)
   useEffect(() => {
+    if (database) {
+      const uae = allCountries.find((c) => c.code === 'AE') ?? UAE_COUNTRY_FALLBACK;
+      setValues((v) =>
+        v.country === uae.name && v.phone?.startsWith('+971')
+          ? v
+          : { ...v, country: uae.name, phone: v.phone && !/^\+\d{0,4}$/.test(v.phone) && v.phone.startsWith('+971') ? v.phone : '+971' }
+      );
+      return;
+    }
     if (suggested) setValues((v) => (v.country ? v : { ...v, country: suggested.name }));
-  }, [suggested]);
+  }, [suggested, database, allCountries]);
 
   const selected = countries.find((c) => c.name === values.country);
   const dial = dialFor(selected);
@@ -277,9 +293,16 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
             </span>
           </Field>
           <Field id="lf-country" label={t('country')} required error={err('country')}>
-            <span className={cn(box, boxState(err('country')), 'relative')}>
+            <span className={cn(box, boxState(err('country')), 'relative', database && 'bg-[#f4f6fb]')}>
               <Globe className="size-4 shrink-0 text-ink/35" />
-              <select id="lf-country" value={values.country} onChange={set('country')} onBlur={blur('country')} disabled={!countries.length} className={cn(input, 'cursor-pointer appearance-none pe-6 disabled:cursor-wait', !values.country && 'text-ink/40')}>
+              <select
+                id="lf-country"
+                value={values.country}
+                onChange={set('country')}
+                onBlur={blur('country')}
+                disabled={database || !countries.length}
+                className={cn(input, 'appearance-none pe-6 disabled:cursor-not-allowed', database ? 'cursor-default' : 'cursor-pointer disabled:cursor-wait', !values.country && 'text-ink/40')}
+              >
                 <option value="" disabled>
                   {countries.length ? t('countrySelect') : countriesFailed ? t('errors.country') : t('countryLoading')}
                 </option>
@@ -289,7 +312,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
                   </option>
                 ))}
               </select>
-              <ChevronDown className="pointer-events-none absolute end-3.5 size-4 text-ink/35" />
+              {!database && <ChevronDown className="pointer-events-none absolute end-3.5 size-4 text-ink/35" />}
             </span>
           </Field>
 
@@ -300,8 +323,9 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
                 id="lf-phone"
                 name="phone"
                 international
-                countries={PHONE_COUNTRIES}
-                defaultCountry={phoneCountryOf(selected?.code, suggested?.code)}
+                countries={database ? UAE_PHONE_COUNTRIES : PHONE_COUNTRIES}
+                defaultCountry={database ? 'AE' : phoneCountryOf(selected?.code, suggested?.code)}
+                countryCallingCodeEditable={!database}
                 value={values.phone || undefined}
                 onChange={(v) => set('phone')(v ?? '')}
                 onBlur={blur('phone')}

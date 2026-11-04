@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CAT5_LOCALES } from '@/config/regions';
 import LiveAccountApplicationPage from './components/LiveAccountApplicationPage';
 
-/** UAE CAT 5 live application (public URL via src/proxy.js → CAT5_PAGES.liveApplicationForm). */
+/** UAE CAT 5 live application (public URL /register-now via src/proxy.js → CAT5_PAGES.liveApplicationForm). */
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'liveAccountApplicationPage.meta' });
