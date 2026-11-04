@@ -35,16 +35,18 @@ export default function LiveAccountApplicationHeroSection({ accountKey, showAcco
         <HeroIn as="h1" delay={0.06} className="heading-page mx-auto mt-6 w-full max-w-4xl text-balance text-center drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
           <AccentTitle text={t('hero.title')} />
         </HeroIn>
-        {showAccount && (
+        {showAccount && t.has(`accounts.${accountKey}.title`) && (
           <HeroIn delay={0.08} className="mt-5 flex w-full justify-center">
             <span className="inline-flex rounded-full bg-gold px-4 py-1.5 text-sm font-bold text-white shadow-lg shadow-gold/30">
               {t(`accounts.${accountKey}.title`)}
             </span>
           </HeroIn>
         )}
-        <HeroIn as="p" delay={0.1} className="mx-auto mt-5 max-w-2xl text-pretty text-center text-base leading-relaxed text-white/80 md:text-lg">
-          {t(`accounts.${accountKey}.subtitle`)}
-        </HeroIn>
+        {(t.has(`accounts.${accountKey}.subtitle`) || t.has('hero.subtitle')) && (
+          <HeroIn as="p" delay={0.1} className="mx-auto mt-5 max-w-2xl text-pretty text-center text-base leading-relaxed text-white/80 md:text-lg">
+            {t.has(`accounts.${accountKey}.subtitle`) ? t(`accounts.${accountKey}.subtitle`) : t('hero.subtitle')}
+          </HeroIn>
+        )}
       </div>
     </section>
   );
