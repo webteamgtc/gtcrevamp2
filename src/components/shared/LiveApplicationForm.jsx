@@ -17,6 +17,7 @@ import { PORTAL } from '@/config/menu';
 import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from './formKit';
+import Cat5RegistrationSuccess from './Cat5RegistrationSuccess';
 
 const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
@@ -69,6 +70,12 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
   const [otpLoading, setOtpLoading] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  /** CAT 5: set after a successful /api/cat5/live-account submit — replaces the form with a thank-you panel. */
+  const [cat5Done, setCat5Done] = useState(null);
+
+  useEffect(() => {
+    if (cat5Done) document.getElementById('cat5-registration-success')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [cat5Done]);
 
   // URL params (read after mount so the page can stay statically rendered)
   useEffect(() => {
@@ -213,10 +220,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
           page: window.location.pathname
         });
         if (res?.ok) {
-          toast.success(t('toast.registrationSuccess'));
-          setValues((v) => ({ ...EMPTY, country: v.country, phone: dial ? `+${dial}` : '', partnerCode: partnerLocked ? v.partnerCode : '' }));
-          setTouched({});
-          setCodeSent(false);
+          setCat5Done({ email: payload.email, firstName: firstname.trim() });
         } else toast.error(res?.error === 'exists' ? t('errors.emailRegistered') : res?.error === 'otp' ? t('errors.otpInvalid') : t('toast.registrationFailed'));
       } catch {
         toast.error(t('toast.registrationFailed'));
@@ -239,6 +243,10 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
       setLoading(false);
     }
   };
+
+  if (database && cat5Done) {
+    return <Cat5RegistrationSuccess email={cat5Done.email} firstName={cat5Done.firstName} page={page} className={className} />;
+  }
 
   return (
     <div className={cn('overflow-hidden rounded-[1.75rem] border border-white/10 bg-white text-ink shadow-[0_40px_100px_-30px_rgba(41,59,147,0.6)]', className)}>

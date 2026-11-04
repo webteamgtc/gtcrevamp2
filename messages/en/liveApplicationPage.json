@@ -79,6 +79,39 @@
         "website": "Website",
         "email": "Email"
       }
+    },
+    "success": {
+      "title": "Thank you for [registering]!",
+      "lead": "Your application has been received successfully.",
+      "leadNamed": "Thank you, {name} — your application has been received successfully.",
+      "emailLabel": "Check your inbox",
+      "emailTip": "We sent your login details and the next steps to the email above. If it is not there within a few minutes, please check your spam or promotions folder.",
+      "stepsTitle": "What happens next",
+      "steps": [
+        {
+          "title": "Open your welcome email",
+          "text": "You will find your client portal login URL, email, and password so you can sign in securely."
+        },
+        {
+          "title": "Log in to the client portal",
+          "text": "Use the details in the email to access your account and begin onboarding."
+        },
+        {
+          "title": "Complete your profile",
+          "text": "Fill in your personal, address, and financial information as requested."
+        },
+        {
+          "title": "Upload your documents",
+          "text": "Submit a valid ID and proof of address (dated within the last 3 months)."
+        },
+        {
+          "title": "Account verification",
+          "text": "Our team reviews your documents and confirms your account by email, usually within 1–2 business days."
+        }
+      ],
+      "portalCta": "Open client portal",
+      "supportCta": "Contact support",
+      "footerNote": "Keep your login details safe and do not share your password with anyone."
     }
   }
 }
