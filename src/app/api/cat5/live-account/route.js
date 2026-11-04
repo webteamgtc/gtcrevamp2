@@ -19,6 +19,8 @@ export const runtime = 'nodejs';
  *      createdAt, plus the other form fields,
  *   5. e-mails the applicant their login details and the next steps (src/lib/emails/liveAccountWelcome.js,
  *      Mailgun); the record stays saved if the e-mail fails (welcomeEmailSent: false on the record).
+ * After success the browser redirects to the client portal with e-mail (and password when enabled)
+ * — see src/lib/cat5Portal.js and LiveApplicationForm saveTo="database".
  * → { ok: true } or { ok: false, error: 'invalid' | 'otp' | 'exists' | 'server' }
  */
 const COLLECTION = 'user_record';

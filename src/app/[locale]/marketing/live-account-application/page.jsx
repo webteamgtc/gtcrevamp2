@@ -6,7 +6,7 @@ import LiveAccountApplicationPage from './components/LiveAccountApplicationPage'
 /** UAE CAT 5 live application (public URL /register-now via src/proxy.js → CAT5_PAGES.liveApplicationForm). */
 export async function generateMetadata({ params }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'liveAccountApplicationPage.meta' });
+  const t = await getTranslations({ locale, namespace: 'cat5RegisterPage.meta' });
   return { title: t('title'), description: t('description'), robots: { index: false, follow: false } };
 }
 
@@ -14,7 +14,7 @@ export default async function Page({ params, searchParams }) {
   const { locale } = await params;
   if (!CAT5_LOCALES.includes(locale)) notFound();
   setRequestLocale(locale);
-  const [{ account }, t] = await Promise.all([searchParams, getTranslations({ locale, namespace: 'liveAccountApplicationPage' })]);
+  const [{ account }, t] = await Promise.all([searchParams, getTranslations({ locale, namespace: 'cat5RegisterPage' })]);
   const requested = account === 'standard' ? 'standard-account' : account;
   const accountKey = requested && t.has(`accounts.${requested}.title`) ? requested : 'standard-account';
   return <LiveAccountApplicationPage accountKey={accountKey} showAccount={accountKey !== 'standard-account'} />;

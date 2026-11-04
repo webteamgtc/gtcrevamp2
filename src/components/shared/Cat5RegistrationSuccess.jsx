@@ -4,11 +4,13 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Mail, Sparkles } from 'lucide-react';
 import { AccentTitle } from '@/components/shared/SectionIntro';
-import { CAT5_CONTACT, CAT5_PORTAL_LOGIN } from '@/config/regions';
+import { CAT5_CONTACT } from '@/config/regions';
+import { buildCat5PortalRedirectUrl } from '@/lib/cat5Portal';
 import { cn } from '@/lib/utils';
 
-export default function Cat5RegistrationSuccess({ email, firstName, page = false, className }) {
-  const t = useTranslations('liveAccountApplicationPage.success');
+export default function Cat5RegistrationSuccess({ email, firstName, portalUrl, page = false, className }) {
+  const t = useTranslations('cat5RegisterPage.success');
+  const loginHref = portalUrl || buildCat5PortalRedirectUrl({ email });
   const steps = t.raw('steps');
 
   return (
@@ -89,7 +91,7 @@ export default function Cat5RegistrationSuccess({ email, firstName, page = false
           className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
           <a
-            href={CAT5_PORTAL_LOGIN}
+            href={loginHref}
             target="_blank"
             rel="noopener noreferrer"
             className="shine inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-brand-900 px-6 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-colors hover:bg-brand sm:text-base"

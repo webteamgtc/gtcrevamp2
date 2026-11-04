@@ -13,7 +13,7 @@ const CONTACTS = [
 ];
 
 export default function LiveAccountApplicationSidebar() {
-  const t = useTranslations('liveAccountApplicationPage.sidebar');
+  const t = useTranslations('cat5RegisterPage.sidebar');
   return (
     <aside className="w-full max-w-md lg:sticky lg:top-32 lg:max-w-none lg:self-start">
       <Reveal y={24} delay={0.1} className="is-dark relative mx-auto overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-brand-700 via-brand-900 to-ink p-6 text-white shadow-2xl shadow-brand/20 lg:mx-0">

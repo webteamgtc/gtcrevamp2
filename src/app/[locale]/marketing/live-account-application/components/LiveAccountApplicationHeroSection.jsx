@@ -9,7 +9,7 @@ import { NetworkBackdrop } from '../../components/MarketingPage';
 import { cat5Href } from '../../components/cat5Links';
 
 export default function LiveAccountApplicationHeroSection({ accountKey, showAccount }) {
-  const t = useTranslations('liveAccountApplicationPage');
+  const t = useTranslations('cat5RegisterPage');
   const locale = useLocale();
 
   return (

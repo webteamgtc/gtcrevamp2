@@ -1,0 +1,117 @@
+{
+  "cat5RegisterPage": {
+    "meta": {
+      "title": "Register Now | GTC Financial Consultancy (UAE CAT 5)",
+      "description": "Open your live trading account with GTC Financial Consultancy L.L.C. Complete the secure registration form and access the client portal."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Register now"
+    },
+    "hero": {
+      "eyebrow": "GTC FINANCIAL CONSULTANCY L.L.C",
+      "title": "Register [Live Account]"
+    },
+    "accounts": {
+      "standard-account": {
+        "title": "Standard Account",
+        "subtitle": "Start trading across global markets with institutional-grade infrastructure and multi-regulatory protection."
+      },
+      "ecn-account": {
+        "title": "ECN Account",
+        "subtitle": "Trade with raw spreads and direct market access for professional traders."
+      },
+      "mam-pamm-account": {
+        "title": "MAM/PAMM Account",
+        "subtitle": "Manage multiple accounts with advanced allocation methods."
+      },
+      "pro-ecn-account": {
+        "title": "Pro ECN Account",
+        "subtitle": "Professional-grade ECN trading with ultra-low latency execution."
+      },
+      "raw-spread-account": {
+        "title": "RAW Spread Account",
+        "subtitle": "Access raw interbank spreads with minimal markup."
+      },
+      "vip-account": {
+        "title": "VIP Account",
+        "subtitle": "Exclusive trading conditions and personalized services for high-volume traders."
+      },
+      "corporate-account": {
+        "title": "Corporate Account",
+        "subtitle": "Institutional trading solutions for corporate clients."
+      },
+      "demo-account": {
+        "title": "Demo Account",
+        "subtitle": "Practice your trading with virtual funds."
+      },
+      "multi-account": {
+        "title": "Multi-Account",
+        "subtitle": "Manage multiple trading accounts from a single dashboard."
+      },
+      "mt5-account": {
+        "title": "MT5 Account",
+        "subtitle": "Trade on MetaTrader 5 with multi-asset access and advanced analytics."
+      },
+      "partnership-account": {
+        "title": "Partnership Account",
+        "subtitle": "Start trading across global markets with institutional-grade infrastructure and multi-regulatory protection."
+      },
+      "pamm-account": {
+        "title": "PAMM Account",
+        "subtitle": "Allocate capital across managed strategies with transparent performance."
+      },
+      "mam-account": {
+        "title": "MAM Account",
+        "subtitle": "Manage multiple client accounts with flexible allocation methods."
+      }
+    },
+    "form": {
+      "title": "Register your live account",
+      "subtitle": "Complete the form below. After you register, you will be taken to the client portal to sign in."
+    },
+    "sidebar": {
+      "needHelp": "Need Help?",
+      "needHelpText": "Questions about your application? Our support team is ready to help.",
+      "labels": {
+        "phone": "Phone",
+        "website": "Website",
+        "email": "Email"
+      }
+    },
+    "success": {
+      "title": "Thank you for [registering]!",
+      "lead": "Your application has been received successfully.",
+      "leadNamed": "Thank you, {name} — your application has been received successfully.",
+      "emailLabel": "Check your inbox",
+      "emailTip": "We sent your login details and the next steps to the email above. If it is not there within a few minutes, please check your spam or promotions folder.",
+      "redirecting": "Taking you to the client portal…",
+      "stepsTitle": "What happens next",
+      "steps": [
+        {
+          "title": "Open your welcome email",
+          "text": "You will find your client portal login URL, email, and password so you can sign in securely."
+        },
+        {
+          "title": "Log in to the client portal",
+          "text": "Use the details in the email to access your account and begin onboarding."
+        },
+        {
+          "title": "Complete your profile",
+          "text": "Fill in your personal, address, and financial information as requested."
+        },
+        {
+          "title": "Upload your documents",
+          "text": "Submit a valid ID and proof of address (dated within the last 3 months)."
+        },
+        {
+          "title": "Account verification",
+          "text": "Our team reviews your documents and confirms your account by email, usually within 1–2 business days."
+        }
+      ],
+      "portalCta": "Open client portal",
+      "supportCta": "Contact support",
+      "footerNote": "Keep your login details safe and do not share your password with anyone."
+    }
+  }
+}

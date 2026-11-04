@@ -3,7 +3,7 @@
  * UAE CAT 5 site: /en-ae/register-now (legacy /live-application-form and /live-account-application aliases).
  * Submissions are saved only to MongoDB (user_record) — saveTo="database" → /api/cat5/live-account.
  * /live-account-application[?account=<slug>][&code|ref|partner_id|…]
- * UI copy: messages/<locale>/liveApplicationPage.json → `liveAccountApplicationPage`;
+ * UI copy: messages/<locale>/cat5RegisterPage.json → `cat5RegisterPage`;
  * form fields: tradingPage.liveForm (shared with the Trading page form, src/components/shared/LiveApplicationForm.jsx).
  * Rhythm: dark hero → form card lifted over the hero beside a sticky side column (account types, help) → dark footer.
  */
@@ -18,7 +18,7 @@ import LiveAccountApplicationHeroSection from './LiveAccountApplicationHeroSecti
 import LiveAccountApplicationSidebar from './LiveAccountApplicationSidebar';
 
 export default function LiveAccountApplicationPage({ accountKey, showAccount }) {
-  const t = useTranslations('liveAccountApplicationPage.form');
+  const t = useTranslations('cat5RegisterPage.form');
   const { blocked } = useUkGate(); // UK visitor: the UK notice shows instead of the form
   return (
     <Cat5Frame page="liveApplicationForm">

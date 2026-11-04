@@ -18,6 +18,7 @@ import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-nu
 import 'react-phone-number-input/style.css';
 import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from './formKit';
 import Cat5RegistrationSuccess from './Cat5RegistrationSuccess';
+import { buildCat5PortalRedirectUrl, cat5AutoRedirectToPortal } from '@/lib/cat5Portal';
 
 const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
@@ -224,7 +225,13 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
           page: window.location.pathname
         });
         if (res?.ok) {
-          setCat5Done({ email: payload.email, firstName: firstname.trim() });
+          const portalUrl = buildCat5PortalRedirectUrl({ email: payload.email, password: values.password });
+          if (cat5AutoRedirectToPortal()) {
+            toast.success(t('toast.registrationSuccess'));
+            window.location.assign(portalUrl);
+            return;
+          }
+          setCat5Done({ email: payload.email, firstName: firstname.trim(), portalUrl });
         } else toast.error(res?.error === 'exists' ? t('errors.emailRegistered') : res?.error === 'otp' ? t('errors.otpInvalid') : t('toast.registrationFailed'));
       } catch {
         toast.error(t('toast.registrationFailed'));
@@ -251,7 +258,15 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
   };
 
   if (database && cat5Done) {
-    return <Cat5RegistrationSuccess email={cat5Done.email} firstName={cat5Done.firstName} page={page} className={className} />;
+    return (
+      <Cat5RegistrationSuccess
+        email={cat5Done.email}
+        firstName={cat5Done.firstName}
+        portalUrl={cat5Done.portalUrl}
+        page={page}
+        className={className}
+      />
+    );
   }
 
   return (
