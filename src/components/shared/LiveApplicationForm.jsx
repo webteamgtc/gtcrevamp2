@@ -45,14 +45,15 @@ function readUrlParams() {
 /**
  * Messages (code sent, already registered, registration result…) are shown as react-toastify toasts —
  * the page must render <Toaster /> (src/components/shared/Toaster.jsx).
- * `title` / `subtitle` override the card header (defaults: tradingPage.liveForm.title / subtitle).
+ * `title` / `subtitle` override the card header (defaults: form namespace title / subtitle).
+ * CAT 5 (`saveTo="database"`) uses cat5RegisterPage.form; the main site uses tradingPage.liveForm.
  * `variant="page"` is the roomier layout used on /live-account-application; the default suits a hero column.
  * `saveTo`: 'portal' (default) opens the account on the trading portal (/api/gtc/*);
  * 'database' (UAE CAT 5 page) only saves the application to MongoDB → /api/cat5/live-account (code: /api/otp-smtp).
  */
-export function LiveAccountForm({ title, subtitle, variant = 'compact', className, saveTo = 'portal' }) {
+export function LiveAccountForm({ title, subtitle, variant = 'compact', className, saveTo = 'portal', formNamespace }) {
   const database = saveTo === 'database';
-  const t = useTranslations('tradingPage.liveForm');
+  const t = useTranslations(formNamespace ?? (database ? 'cat5RegisterPage.form' : 'tradingPage.liveForm'));
   const za = useLocale() === ZA_LOCALE;
   const ukGate = useUkGate();
   const page = variant === 'page';

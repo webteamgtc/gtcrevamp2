@@ -4,7 +4,7 @@
  * Submissions are saved only to MongoDB (user_record) — saveTo="database" → /api/cat5/live-account.
  * /live-account-application[?account=<slug>][&code|ref|partner_id|…]
  * UI copy: messages/<locale>/cat5RegisterPage.json → `cat5RegisterPage`;
- * form fields: tradingPage.liveForm (shared with the Trading page form, src/components/shared/LiveApplicationForm.jsx).
+ * form fields + checkbox: cat5RegisterPage.form (src/components/shared/LiveApplicationForm.jsx, saveTo="database").
  * Rhythm: dark hero → form card lifted over the hero beside a sticky side column (account types, help) → dark footer.
  */
 import { useTranslations } from 'next-intl';

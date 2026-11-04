@@ -3,13 +3,13 @@ import ClientMessages from '@/i18n/ClientMessages';
 
 /**
  * Sends the browser only the shared texts + messages/<lang>/cat5RegisterPage.json for this page,
- * plus the form's field texts from tradingPage.liveForm (see src/i18n/ClientMessages.jsx).
+ * including all form field and checkbox copy under cat5RegisterPage.form.
  */
 export default async function Layout({ children, params }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <ClientMessages files={['cat5RegisterPage', 'marketingPage']} pick={['tradingPage.liveForm']}>
+    <ClientMessages files={['cat5RegisterPage', 'marketingPage']}>
       {children}
     </ClientMessages>
   );
