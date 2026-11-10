@@ -23,7 +23,7 @@ export function Leaders() {
                 <span className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-700">{t(`${p.k}.role`)}</span>
               </Reveal>
                 <h3 className="heading-title mt-4">
-                  <WordReveal text={t(`${p.k}.name`)} />
+                  <WordReveal text={t(`${p.k}.name`)} />  
                 </h3>
                 <TextGenerate text={`“${t(`${p.k}.quote`)}”`} className="mt-6 text-lg font-light leading-relaxed text-ink/70 md:text-2xl" />
                 <Reveal delay={0.4} className="mt-10 flex items-center gap-4">
