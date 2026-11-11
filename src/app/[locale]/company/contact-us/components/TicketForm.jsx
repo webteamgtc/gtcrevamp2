@@ -1,6 +1,7 @@
 'use client';
 /**
  * Contact ticket form.
+ * Email must be verified first: Get code → /api/validate-email → /api/otp-smtp, the 6-digit code → /api/verify-otp.
  * 1) POST /api/sales-force-with-auth  — Salesforce Contact Us case (required for success)
  * 2) POST /api/send-support-email     — support mailbox copy with the attachment (non-blocking)
  * Option values below are the exact strings Salesforce expects; only their labels are translated.
@@ -8,16 +9,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { ZA_LOCALE } from '@/config/regions';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { toast } from 'react-toastify';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { Banknote, Briefcase, ChevronDown, Clock, Globe, Hash, LoaderCircle, Mail, Paperclip, TriangleAlert, Type, User, X } from 'lucide-react';
+import { BadgeCheck, Banknote, Briefcase, ChevronDown, Clock, Globe, Hash, LoaderCircle, Mail, Paperclip, ShieldCheck, TriangleAlert, Type, User, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
-import { applyBusinessEmailValidation, Field, PHONE_COUNTRIES, fieldBox as box, fieldInput as input, fieldState as boxState, useGtcCountries } from '@/components/shared/formKit';
+import { applyBusinessEmailValidation, Field, post, PHONE_COUNTRIES, fieldBox as box, fieldInput as input, fieldState as boxState, useGtcCountries } from '@/components/shared/formKit';
 
 const MAX = 5 * 1024 * 1024;
+const COOLDOWN = 60; // seconds before a new code can be requested
 const CLIENT_AGREEMENT_PDF = 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/Website+Client+Document/GTC+Global+Trade+Capital+Co.+Ltd+(VANUATU)/T%26S+-+GTC+GLOBAL+TRADE+CAPITAL+CO.+LTD.pdf';
 
 // countries this form does not serve (country list + phone picker)
@@ -62,7 +64,8 @@ const EMPTY = {
   email: '',
   country: '',
   phone: '',
-  message: ''
+  message: '',
+  otp: ''
 };
 // cleared whenever the query or ticket type changes, so stale answers are never sent
 const DEPENDENT = { ticket_type: '', promotion_bonus_type: '' };
@@ -123,7 +126,17 @@ export function TicketForm() {
   const [touched, setTouched] = useState({});
   const [loading, setLoading] = useState(false);
   const [phoneCountry, setPhoneCountry] = useState('AE');
+  const [codeOpen, setCodeOpen] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
+  const [loadingOtp, setLoadingOtp] = useState(false);
   const fileRef = useRef(null);
+
+  useEffect(() => {
+    if (cooldown <= 0) return undefined;
+    const id = setInterval(() => setCooldown((s) => (s > 0 ? s - 1 : 0)), 1000);
+    return () => clearInterval(id);
+  }, [cooldown]);
 
   // preselect the visitor's country (unless it is one we don't serve)
   useEffect(() => {
@@ -168,12 +181,13 @@ export function TicketForm() {
       blocked: t('errors.emailBlockedDomain'),
       plus: t('errors.emailNoPlus')
     });
+    if (!verified) e.otp = t(codeOpen ? 'errors.otpRequired' : 'errors.verifyFirst');
     need('phone', 'phone');
     need('country', 'countryRequired');
     need('message', 'description');
     if (file && file.size > MAX) e.file = t('errors.file');
     return e;
-  }, [values, file, general, show.promotionBonusType, show.tradeOrderIds, show.dateTimeIncident, tradeAccountRequired, t]);
+  }, [values, file, general, show.promotionBonusType, show.tradeOrderIds, show.dateTimeIncident, tradeAccountRequired, verified, codeOpen, t]);
 
   // the phone's calling code follows the chosen country until a number has been typed
   useEffect(() => {
@@ -199,9 +213,52 @@ export function TicketForm() {
   };
   const setTicket = (e) => setValues((v) => ({ ...v, ticket_type: e.target.value, promotion_bonus_type: '' }));
 
+  // a different email needs a new code
+  const setEmail = (e) => {
+    const email = e.target.value;
+    setValues((v) => ({ ...v, email, otp: '' }));
+    setVerified(false);
+    setCodeOpen(false);
+  };
+
+  const sendCode = async () => {
+    const email = values.email.trim();
+    setTouched((x) => ({ ...x, email: true }));
+    if (errors.email) return toast.error(errors.email);
+    if (cooldown > 0) return;
+    setLoadingOtp(true);
+    try {
+      const check = await post('/api/validate-email', { email });
+      if (!check?.valid) return toast.error(check?.reason === 'plus_alias' ? t('errors.emailNoPlus') : check?.reason === 'blocked_domain' ? t('errors.emailBlockedDomain') : t('errors.email'));
+      const res = await post('/api/otp-smtp', { email, first_name: values.first_name.trim() });
+      if (!res?.success) return toast.error(t('errors.otpSendFailed'));
+      setValues((v) => ({ ...v, otp: '' }));
+      setVerified(false);
+      setCodeOpen(true);
+      setCooldown(COOLDOWN);
+      toast.success(t('toastOtpSent'));
+    } catch {
+      toast.error(t('errors.otpSendFailed'));
+    } finally {
+      setLoadingOtp(false);
+    }
+  };
+
+  const onOtp = async (e) => {
+    const otp = e.target.value.replace(/\D/g, '').slice(0, 6);
+    setValues((v) => ({ ...v, otp }));
+    if (otp.length !== 6) return;
+    const res = await post('/api/verify-otp', { email: values.email.trim(), otp });
+    if (res?.success) {
+      setVerified(true);
+      toast.success(t('toastEmailVerified'));
+    } else toast.error(t('errors.otpInvalid'));
+  };
+
   async function onSubmit(e) {
     e.preventDefault();
     setTouched(Object.fromEntries([...Object.keys(EMPTY), 'file'].map((k) => [k, true])));
+    if (!verified) return toast.error(t('errors.verifyFirst'));
     if (Object.keys(errors).length) return;
     setLoading(true);
     try {
@@ -237,12 +294,14 @@ export function TicketForm() {
       fetch('/api/send-support-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, attachment_name: file?.name || null, attachment_base64: attachmentBase64 })
+        body: JSON.stringify({ ...values, otp: undefined, attachment_name: file?.name || null, attachment_base64: attachmentBase64 })
       }).catch(() => {});
 
       toast.success(t('toastSubmitted'));
       if (typeof window.gtag_report_conversion === 'function') window.gtag_report_conversion();
       setValues({ ...EMPTY, country: values.country });
+      setVerified(false);
+      setCodeOpen(false);
       setFile(null);
       if (fileRef.current) fileRef.current.value = '';
       setTouched({});
@@ -312,10 +371,46 @@ export function TicketForm() {
         <div className="grid gap-4 sm:grid-cols-2">
           <TextField id="ct-first" label={t('firstName')} required error={err('first_name')} icon={User} value={values.first_name} onChange={set('first_name')} onBlur={blur('first_name')} autoComplete="given-name" />
           <TextField id="ct-last" label={t('lastName')} required error={err('last_name')} icon={User} value={values.last_name} onChange={set('last_name')} onBlur={blur('last_name')} autoComplete="family-name" />
-          <TextField id="ct-email" type="email" label={t('email')} required error={err('email')} icon={Mail} value={values.email} onChange={set('email')} onBlur={blur('email')} autoComplete="email" />
+          <Field id="ct-email" label={t('email')} required error={err('email')}>
+            <span className={cn(box, boxState(err('email')), 'pe-1.5')}>
+              <Mail className="size-4 shrink-0 text-ink/35" />
+              <input id="ct-email" type="email" className={input} value={values.email} onChange={setEmail} onBlur={blur('email')} placeholder={t('email')} autoComplete="email" />
+              {verified ? (
+                <span className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-up/10 px-2 py-1 text-[11px] font-bold text-up">
+                  <BadgeCheck className="size-3.5" />
+                  {t('otp.verified')}
+                </span>
+              ) : (
+                <button type="button" onClick={sendCode} disabled={loadingOtp || !values.email.trim() || cooldown > 0} className="shrink-0 whitespace-nowrap rounded-lg bg-brand px-2.5 py-1.5 text-[11px] font-bold text-white transition-colors hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-50">
+                  {loadingOtp ? t('otp.sending') : cooldown > 0 ? `${t('otp.resendPrefix')} ${cooldown}${t('otp.resendSuffix')}` : t('otp.get')}
+                </button>
+              )}
+            </span>
+          </Field>
           <Field id="ct-country" label={t('country')} required error={err('country')}>
             <Select id="ct-country" icon={Globe} value={values.country} onChange={set('country')} onBlur={blur('country')} err={err('country')} disabled={!countries.length} placeholder={countries.length ? t('countrySelect') : failed ? t('errors.country') : t('countryLoading')} options={countries.map((c) => ({ value: c.name, label: c.name }))} />
           </Field>
+
+          {/* verification code strip */}
+          <AnimatePresence initial={false}>
+            {codeOpen && !verified && (
+              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden sm:col-span-2">
+                <div className="flex flex-col gap-3 rounded-2xl bg-brand-50/60 p-3 ring-1 ring-brand/10 sm:flex-row sm:items-center">
+                  <span className="hidden size-9 shrink-0 place-items-center rounded-xl bg-brand text-white shadow-md shadow-brand/25 sm:grid">
+                    <ShieldCheck className="size-4" />
+                  </span>
+                  <p className="min-w-0 flex-1 text-xs leading-relaxed text-ink/60">
+                    {t('otp.sentToPrefix')} <span className="font-semibold text-ink">{values.email}</span>
+                    <span className="block text-ink/45">{t('otp.instruction')}</span>
+                  </p>
+                  <span className={cn(box, boxState(err('otp')), 'w-full sm:w-40')}>
+                    <input id="ct-otp" aria-label={t('otp.codeLabel')} className={cn(input, 'text-center font-bold tracking-[0.45em]')} value={values.otp} onChange={onOtp} onBlur={blur('otp')} inputMode="numeric" maxLength={6} placeholder="••••••" autoComplete="one-time-code" />
+                  </span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {err('otp') && <p className="-mt-2 text-[11px] text-down sm:col-span-2">{err('otp')}</p>}
         </div>
 
         <Field id="ct-phone" label={t('phone')} required error={err('phone')}>
@@ -383,9 +478,9 @@ export function TicketForm() {
 
         <p className="text-center text-xs italic text-ink/55">{t('note')}</p>
 
-        <button type="submit" disabled={loading} className="shine inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-900 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:opacity-60">
-          {loading && <LoaderCircle className="size-4 animate-spin" />}
-          {loading ? t('submitting') : t('submit')}
+        <button type="submit" disabled={loading || !verified} className="shine inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-900 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:bg-brand/45 disabled:shadow-none">
+          {loading ? <LoaderCircle className="size-4 animate-spin" /> : !verified && <ShieldCheck className="size-4" />}
+          {loading ? t('submitting') : verified ? t('submit') : t('submitVerifyFirst')}
         </button>
 
         <p className="text-center text-[11px] leading-relaxed text-ink/50">

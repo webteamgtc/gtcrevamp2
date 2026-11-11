@@ -1336,8 +1336,25 @@
         "promotionBonusType": "Promotion/Bonus type is required",
         "tradeAccount": "Trade account is required",
         "tradeOrderIds": "Trade order(s) ID is required",
-        "dateTimeIncident": "Date and time of incident is required"
+        "dateTimeIncident": "Date and time of incident is required",
+        "otpRequired": "Enter the 6-digit code sent to your email",
+        "verifyFirst": "Please verify your email before submitting",
+        "otpInvalid": "Invalid or expired code. Please try again.",
+        "otpSendFailed": "Could not send the code. Please try again."
       },
+      "otp": {
+        "get": "Get code",
+        "sending": "Sending…",
+        "resendPrefix": "Resend in",
+        "resendSuffix": "s",
+        "verified": "Verified",
+        "sentToPrefix": "We sent a 6-digit code to",
+        "instruction": "Enter it here to verify your email.",
+        "codeLabel": "Verification code"
+      },
+      "submitVerifyFirst": "Verify your email to submit",
+      "toastOtpSent": "Verification code sent. Please check your email.",
+      "toastEmailVerified": "Email verified",
       "queryTypeSelect": "Select query type",
       "queryTypeOptions": {
         "general": "General Query",
