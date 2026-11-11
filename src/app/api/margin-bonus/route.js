@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import { verifyOtp } from '@/lib/otpStore';
+import { businessEmailRejectReason } from '@/lib/emailValidation';
 
 export const runtime = 'nodejs';
 
@@ -105,6 +106,7 @@ export async function POST(request) {
     ip: clientIp(request)
   };
   const otp = str(body?.otp, 6);
+  if (businessEmailRejectReason(d.email)) return fail('invalid', 422);
   const valid =
     d.Full_name.length >= 2 &&
     LETTERS_RE.test(d.Full_name) &&

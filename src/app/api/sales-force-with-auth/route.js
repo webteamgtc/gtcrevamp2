@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { businessEmailRejectReason } from "@/lib/emailValidation";
 
 function requireEnv(name) {
   const v = process.env[name];
@@ -134,6 +135,22 @@ export async function POST(req) {
           { status: 400 }
         );
       }
+    }
+
+    const emailReason = businessEmailRejectReason(payload.email);
+    if (emailReason) {
+      return NextResponse.json(
+        {
+          status: "error",
+          message:
+            emailReason === "blocked_domain"
+              ? "Temporary or disposable email addresses are not allowed"
+              : emailReason === "plus_alias"
+                ? "Email addresses with a + alias are not allowed"
+                : "Invalid email address",
+        },
+        { status: 422 }
+      );
     }
 
     const token = await getSalesforceToken();

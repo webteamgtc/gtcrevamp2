@@ -17,6 +17,7 @@
     "country-flag-icons": "^1.6.20",
     "form-data": "^4.0.6",
     "lucide-react": "^1.52.0",
+    "mailchecker": "^6.0.21",
     "mailgun.js": "^14.1.0",
     "mongodb": "^6.10.0",
     "motion": "^14.0.0",

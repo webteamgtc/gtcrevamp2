@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { collection } from '@/lib/mongo';
 import { normalizeOtp, verifyOtp } from '@/lib/otpStore';
 import { liveAccountWelcomeEmail } from '@/lib/emails/liveAccountWelcome';
+import { businessEmailRejectReason } from '@/lib/emailValidation';
 import { CAT5_CONTACT, CAT5_PORTAL_LOGIN } from '@/config/regions';
 
 export const runtime = 'nodejs';
@@ -61,6 +62,8 @@ export async function POST(request) {
   };
   const otp = normalizeOtp(body?.otp);
   const password = String(body?.password ?? '');
+  if (businessEmailRejectReason(d.email)) return fail('invalid', 422);
+
   const valid =
     LETTERS_RE.test(d.firstname) &&
     LETTERS_RE.test(d.lastname) &&

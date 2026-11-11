@@ -109,6 +109,8 @@
       "errors": {
         "name": "Please enter your name",
         "email": "Please enter a valid email",
+        "emailBlockedDomain": "Temporary or disposable email addresses are not allowed",
+        "emailNoPlus": "Email addresses with a + alias are not allowed",
         "phone": "Please enter a valid phone number",
         "consent": "Please agree to be contacted",
         "country": "Please enter your country of residence",

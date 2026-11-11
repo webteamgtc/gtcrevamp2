@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import { getCountries } from 'react-phone-number-input';
 import { FORM_EXCLUDED_COUNTRIES } from '@/config/regions';
+import { validateBusinessEmail } from '@/lib/emailValidation';
 import { cn } from '@/lib/utils';
 
 /** Countries the phone-number pickers offer: pass as `countries={PHONE_COUNTRIES}` to <PhoneInput>. */
@@ -19,6 +20,22 @@ export const phoneCountryOf = (...codes) => codes.find((c) => c && PHONE_COUNTRI
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // letters in any script (Arabic, Chinese, accents…) plus spaces, apostrophes, dots and hyphens
 export const LETTERS_RE = /^[\p{L}\p{M}\s'’.-]+$/u;
+
+/** Sets `errors[field]` from required / format / disposable-domain rules (messages.* are already translated). */
+export function applyBusinessEmailValidation(email, errors, field, messages) {
+  const trimmed = String(email ?? '').trim();
+  if (!trimmed) {
+    errors[field] = messages.required;
+    return;
+  }
+  if (!EMAIL_RE.test(trimmed)) {
+    errors[field] = messages.invalid;
+    return;
+  }
+  const { reason } = validateBusinessEmail(trimmed);
+  if (reason === 'blocked_domain') errors[field] = messages.blocked;
+  else if (reason === 'plus_alias') errors[field] = messages.plus;
+}
 
 /** POST JSON and always resolve to an object (empty on network / parse errors). */
 export async function post(url, body) {

@@ -15,7 +15,7 @@ import 'react-phone-number-input/style.css';
 import { Banknote, Briefcase, ChevronDown, Clock, Globe, Hash, LoaderCircle, Mail, Paperclip, TriangleAlert, Type, User, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
-import { EMAIL_RE, Field, PHONE_COUNTRIES, fieldBox as box, fieldInput as input, fieldState as boxState, useGtcCountries } from '@/components/shared/formKit';
+import { applyBusinessEmailValidation, Field, PHONE_COUNTRIES, fieldBox as box, fieldInput as input, fieldState as boxState, useGtcCountries } from '@/components/shared/formKit';
 
 const MAX = 5 * 1024 * 1024;
 const CLIENT_AGREEMENT_PDF = 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/Website+Client+Document/GTC+Global+Trade+Capital+Co.+Ltd+(VANUATU)/T%26S+-+GTC+GLOBAL+TRADE+CAPITAL+CO.+LTD.pdf';
@@ -162,8 +162,12 @@ export function TicketForm() {
       if (!v) e[k] = t(k === 'first_name' ? 'errors.firstName' : 'errors.lastName');
       else if (v.length < 2) e[k] = t('errors.minLetters');
     });
-    if (!values.email.trim()) e.email = t('errors.emailRequired');
-    else if (!EMAIL_RE.test(values.email.trim())) e.email = t('errors.email');
+    applyBusinessEmailValidation(values.email, e, 'email', {
+      required: t('errors.emailRequired'),
+      invalid: t('errors.email'),
+      blocked: t('errors.emailBlockedDomain'),
+      plus: t('errors.emailNoPlus')
+    });
     need('phone', 'phone');
     need('country', 'countryRequired');
     need('message', 'description');

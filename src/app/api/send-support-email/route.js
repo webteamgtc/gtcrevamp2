@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { businessEmailRejectReason } from "@/lib/emailValidation";
 import {
   mailgunClient,
   MAILGUN_DOMAIN,
@@ -128,6 +129,9 @@ const generateEmailContent = (data) => {
 export async function POST(req) {
   try {
     const reqBody = await req.json();
+    if (businessEmailRejectReason(reqBody?.email)) {
+      return NextResponse.json({ message: "Invalid email address" }, { status: 422 });
+    }
     const content = generateEmailContent(reqBody);
 
     const mailgunPayload = {

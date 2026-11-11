@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { businessEmailRejectReason } from "@/lib/emailValidation";
 
 /**
  * POST lead → Salesforce Apex `leadform/v1` (CommonLeadForm). env: SALESFORCE_LOGIN_URL, SALESFORCE_CLIENT_ID,
@@ -230,6 +231,22 @@ export async function POST(req) {
           message: "Missing required field: termsAccepted",
         },
         { status: 400 }
+      );
+    }
+
+    const emailReason = businessEmailRejectReason(payload.Email);
+    if (emailReason) {
+      return NextResponse.json(
+        {
+          status: "error",
+          message:
+            emailReason === "blocked_domain"
+              ? "Temporary or disposable email addresses are not allowed"
+              : emailReason === "plus_alias"
+                ? "Email addresses with a + alias are not allowed"
+                : "Invalid email address",
+        },
+        { status: 422 }
       );
     }
 

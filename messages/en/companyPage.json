@@ -1329,6 +1329,8 @@
         "lastName": "Last name is required",
         "minLetters": "At least 2 letters",
         "emailRequired": "Email is required",
+        "emailBlockedDomain": "Temporary or disposable email addresses are not allowed",
+        "emailNoPlus": "Email addresses with a + alias are not allowed",
         "countryRequired": "Country is required",
         "description": "Description is required",
         "promotionBonusType": "Promotion/Bonus type is required",

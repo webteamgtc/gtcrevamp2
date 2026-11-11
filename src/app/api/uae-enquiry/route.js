@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { CAT5_LANGUAGES } from '@/config/regions';
+import { businessEmailRejectReason } from '@/lib/emailValidation';
 
 /**
  * GTC Financial Consultancy L.L.C. (UAE CAT 5) enquiry, posted by the form on the CAT 5 site (/en-ae, /ar).
@@ -91,8 +92,9 @@ export async function POST(request) {
     country: (request.headers.get('x-vercel-ip-country') || '').toUpperCase(),
     ip: clientIp(request)
   };
-  const valid = d.name.length >= 2 && EMAIL_RE.test(d.email) && /^\+?[\d\s()-]{7,20}$/.test(d.phone) && d.residence.length >= 2 && CAT5_LANGUAGES.includes(d.language) && d.consent;
-  if (!valid) return NextResponse.json({ ok: false, error: 'Missing or invalid fields' }, { status: 422 });
+  const emailReject = businessEmailRejectReason(d.email);
+  const valid = d.name.length >= 2 && !emailReject && /^\+?[\d\s()-]{7,20}$/.test(d.phone) && d.residence.length >= 2 && CAT5_LANGUAGES.includes(d.language) && d.consent;
+  if (!valid) return NextResponse.json({ ok: false, error: emailReject ? 'Invalid email address' : 'Missing or invalid fields' }, { status: 422 });
   // honeypot: bots fill hidden fields; pretend success
   if (str(body?.website)) return NextResponse.json({ ok: true });
 

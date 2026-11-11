@@ -208,6 +208,8 @@
           "letters": "Only letters are allowed",
           "email": "Email Address is required",
           "emailInvalid": "Invalid email address",
+          "emailBlockedDomain": "Temporary or disposable email addresses are not allowed",
+          "emailNoPlus": "Email addresses with a + alias are not allowed",
           "code": "Enter the 6-digit code from your e-mail",
           "codeFirst": "Send the code to your e-mail first",
           "codeError": "Couldn't send the code. Please try again.",

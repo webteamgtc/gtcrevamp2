@@ -63,7 +63,9 @@
         "phone": "Phone is required",
         "phoneInvalid": "Invalid phone number",
         "terms": "You must accept the declaration",
-        "otpInvalid": "Wrong or expired code, please try again."
+        "otpInvalid": "Wrong or expired code, please try again.",
+        "emailBlockedDomain": "Temporary or disposable email addresses are not allowed",
+        "emailNoPlus": "Email addresses with a + alias are not allowed"
       },
       "toast": {
         "otpSent": "OTP sent successfully!",
@@ -2539,6 +2541,8 @@
           "account": "Account Number is required",
           "email": "Email Address is required",
           "emailInvalid": "Please enter a valid email address",
+          "emailBlockedDomain": "Temporary or disposable email addresses are not allowed",
+          "emailNoPlus": "Email addresses with a + alias are not allowed",
           "phone": "Phone Number is required",
           "phoneInvalid": "Please enter a valid phone number",
           "country": "Country is required",

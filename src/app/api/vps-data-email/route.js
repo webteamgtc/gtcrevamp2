@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { businessEmailRejectReason } from "@/lib/emailValidation";
 
 /**
  * VPS application intake (posted by the VPS Application Form).
@@ -219,7 +220,7 @@ export async function POST(request) {
     /^\+\d{6,15}$/.test(payload.phone) &&
     payload.country.length > 0;
 
-  if (!valid) {
+  if (!valid || businessEmailRejectReason(payload.email)) {
     return NextResponse.json({ ok: false, error: "Missing or invalid VPS application fields" }, { status: 422 });
   }
 

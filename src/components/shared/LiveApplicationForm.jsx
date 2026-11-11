@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 import { PORTAL } from '@/config/menu';
 import PhoneInput, { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from './formKit';
+import { applyBusinessEmailValidation, EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from './formKit';
 import Cat5RegistrationSuccess from './Cat5RegistrationSuccess';
 import { buildCat5PortalRedirectUrl, cat5AutoRedirectToPortal } from '@/lib/cat5Portal';
 
@@ -121,8 +121,12 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
     else if (!LETTERS.test(values.firstname)) e.firstname = t('errors.firstNameLetters');
     if (!values.lastname.trim()) e.lastname = t('errors.lastName');
     else if (!LETTERS.test(values.lastname)) e.lastname = t('errors.lastNameLetters');
-    if (!values.email.trim()) e.email = t('errors.email');
-    else if (!EMAIL.test(values.email.trim())) e.email = t('errors.emailInvalid');
+    applyBusinessEmailValidation(values.email, e, 'email', {
+      required: t('errors.email'),
+      invalid: t('errors.emailInvalid'),
+      blocked: t('errors.emailBlockedDomain'),
+      plus: t('errors.emailNoPlus')
+    });
     if (!values.otp) e.otp = t('errors.otpRequired');
     else if (!/^\d{6}$/.test(values.otp)) e.otp = t('errors.otpLength');
     if (!values.password) e.password = t('errors.passwordRequired');

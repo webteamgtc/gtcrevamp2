@@ -14,7 +14,7 @@ import 'react-phone-number-input/style.css';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, ChevronDown, CircleAlert, CircleCheck, Globe, Hash, LoaderCircle, Mail, MonitorSmartphone, Package, User, X } from 'lucide-react';
-import { EMAIL_RE, PHONE_COUNTRIES, post, useGtcCountries } from '@/components/shared/formKit';
+import { applyBusinessEmailValidation, PHONE_COUNTRIES, post, useGtcCountries } from '@/components/shared/formKit';
 import { cn } from '@/lib/utils';
 
 const API = '/api/vps-data-email';
@@ -133,8 +133,12 @@ export function VpsApplyForm({ pkg, onPkg, packages }) {
     else if (acc.length < 6) e.account_no = t('errors.accountMin');
     else if (acc.length > 9) e.account_no = t('errors.accountMax');
     if (!pkg) e.package = t('errors.package');
-    if (!values.email.trim()) e.email = t('errors.email');
-    else if (!EMAIL_RE.test(values.email.trim())) e.email = t('errors.emailInvalid');
+    applyBusinessEmailValidation(values.email, e, 'email', {
+      required: t('errors.email'),
+      invalid: t('errors.emailInvalid'),
+      blocked: t('errors.emailBlockedDomain'),
+      plus: t('errors.emailNoPlus')
+    });
     if (!values.phone) e.phone = t('errors.phone');
     else if (!isValidPhoneNumber(values.phone)) e.phone = t('errors.phoneInvalid');
     if (!values.country) e.country = t('errors.country');

@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, CircleCheck, LoaderCircle, TriangleAlert } from 'lucide-react';
-import { EMAIL_RE, Field, fieldBox, fieldInput, fieldState, post } from '@/components/shared/formKit';
+import { applyBusinessEmailValidation, Field, fieldBox, fieldInput, fieldState, post } from '@/components/shared/formKit';
 import { CAT5_CONTACT, CAT5_LANGUAGES } from '@/config/regions';
 import { cn } from '@/lib/utils';
 
@@ -22,7 +22,12 @@ function validate(v, t, split) {
     if (!v.firstName.trim()) e.firstName = t('errors.firstName');
     if (!v.lastName.trim()) e.lastName = t('errors.lastName');
   } else if (v.name.trim().length < 2) e.name = t('errors.name');
-  if (!EMAIL_RE.test(v.email.trim())) e.email = t('errors.email');
+  applyBusinessEmailValidation(v.email, e, 'email', {
+    required: t('errors.email'),
+    invalid: t('errors.email'),
+    blocked: t('errors.emailBlockedDomain'),
+    plus: t('errors.emailNoPlus')
+  });
   if (!PHONE_RE.test(v.phone.trim())) e.phone = t('errors.phone');
   if (v.country.trim().length < 2) e.country = t('errors.country');
   if (!CAT5_LANGUAGES.includes(v.language)) e.language = t('errors.language');

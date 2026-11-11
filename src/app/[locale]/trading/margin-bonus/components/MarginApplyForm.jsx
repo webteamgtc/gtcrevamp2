@@ -16,7 +16,7 @@ import { ChevronDown, CircleAlert, CircleCheck, DollarSign, Globe, Hash, LoaderC
 import { useRouter } from '@/i18n/navigation';
 import NavLink from '@/components/shared/nav/NavLink';
 import { LIVE_ACCOUNT_HREF } from '@/config/menu';
-import { EMAIL_RE, LETTERS_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, phoneField, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from '@/components/shared/formKit';
+import { applyBusinessEmailValidation, EMAIL_RE, LETTERS_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, phoneField, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from '@/components/shared/formKit';
 import { cn } from '@/lib/utils';
 
 const API = '/api/margin-bonus';
@@ -54,8 +54,12 @@ export function MarginApplyForm() {
     const name = values.Full_name.trim();
     if (!name) e.Full_name = t('errors.fullName');
     else if (!LETTERS_RE.test(name) || name.length < 2) e.Full_name = t('errors.letters');
-    if (!values.email.trim()) e.email = t('errors.email');
-    else if (!EMAIL_RE.test(values.email.trim())) e.email = t('errors.emailInvalid');
+    applyBusinessEmailValidation(values.email, e, 'email', {
+      required: t('errors.email'),
+      invalid: t('errors.emailInvalid'),
+      blocked: t('errors.emailBlockedDomain'),
+      plus: t('errors.emailNoPlus')
+    });
     if (!codeSent) e.otp = t('errors.codeFirst');
     else if (!/^\d{6}$/.test(values.otp)) e.otp = t('errors.code');
     if (!values.phone) e.phone = t('errors.phone');
