@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { businessEmailRejectReason } from "@/lib/emailValidation";
+import { verifyRecaptcha } from "@/lib/recaptcha";
 
 function requireEnv(name) {
   const v = process.env[name];
@@ -152,6 +153,15 @@ export async function POST(req) {
         { status: 422 }
       );
     }
+
+    const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim();
+    if (!(await verifyRecaptcha(payload.recaptchaToken, ip))) {
+      return NextResponse.json(
+        { status: "error", code: "captcha", message: "Please confirm you are not a robot." },
+        { status: 400 }
+      );
+    }
+    delete payload.recaptchaToken;
 
     const token = await getSalesforceToken();
     console.log("token", token);

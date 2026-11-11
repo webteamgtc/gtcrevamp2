@@ -7,6 +7,8 @@ const isExport = process.env.STATIC_EXPORT === '1';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // reCAPTCHA site key is public by design; the browser widget (src/components/shared/Recaptcha.jsx) needs it
+  env: { NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY ?? '' },
   // crawlers (search engines + SEO audit tools) get the metadata — canonical, hreflang — inside <head> on dynamic
   // pages too, instead of streamed into <body>; visitors keep streaming metadata
   htmlLimitedBots: /bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|petal|facebookexternalhit|embedly|whatsapp|lighthouse|pagespeed|sitebulb|screaming|ahrefs|semrush|moz\.com|validator/i,
@@ -52,7 +54,7 @@ const nextConfig = {
           ];
         }
       }),
-  ...(isExport ? { output: 'export', trailingSlash: true, assetPrefix: '/__GTC__', env: { NEXT_PUBLIC_STATIC_EXPORT: '1' } } : {})
+  ...(isExport ? { output: 'export', trailingSlash: true, assetPrefix: '/__GTC__', env: { NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY ?? '', NEXT_PUBLIC_STATIC_EXPORT: '1' } } : {})
 };
 
 export default withNextIntl(nextConfig);

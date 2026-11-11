@@ -2,6 +2,7 @@
 /**
  * Contact ticket form.
  * Email must be verified first: Get code → /api/validate-email → /api/otp-smtp, the 6-digit code → /api/verify-otp.
+ * Then the reCAPTCHA checkbox (token checked server side by /api/sales-force-with-auth).
  * 1) POST /api/sales-force-with-auth  — Salesforce Contact Us case (required for success)
  * 2) POST /api/send-support-email     — support mailbox copy with the attachment (non-blocking)
  * Option values below are the exact strings Salesforce expects; only their labels are translated.
@@ -16,6 +17,7 @@ import 'react-phone-number-input/style.css';
 import { BadgeCheck, Banknote, Briefcase, ChevronDown, Clock, Globe, Hash, LoaderCircle, Mail, Paperclip, ShieldCheck, TriangleAlert, Type, User, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import NavLink from '@/components/shared/nav/NavLink';
+import Recaptcha from '@/components/shared/Recaptcha';
 import { applyBusinessEmailValidation, Field, post, PHONE_COUNTRIES, fieldBox as box, fieldInput as input, fieldState as boxState, useGtcCountries } from '@/components/shared/formKit';
 
 const MAX = 5 * 1024 * 1024;
@@ -130,6 +132,8 @@ export function TicketForm() {
   const [verified, setVerified] = useState(false);
   const [cooldown, setCooldown] = useState(0);
   const [loadingOtp, setLoadingOtp] = useState(false);
+  const [captcha, setCaptcha] = useState('');
+  const captchaRef = useRef(null);
   const fileRef = useRef(null);
 
   useEffect(() => {
@@ -260,6 +264,7 @@ export function TicketForm() {
     setTouched(Object.fromEntries([...Object.keys(EMPTY), 'file'].map((k) => [k, true])));
     if (!verified) return toast.error(t('errors.verifyFirst'));
     if (Object.keys(errors).length) return;
+    if (!captcha) return toast.error(t('errors.captcha'));
     setLoading(true);
     try {
       const attachmentBase64 = file?.size > 0 ? await fileToBase64(file) : null;
@@ -284,11 +289,11 @@ export function TicketForm() {
           additionalFields,
           query_type: query,
           files: attachmentBase64 ? [{ fileName: file.name, contentType: file.type || 'application/octet-stream', base64Data: attachmentBase64 }] : [],
-          recaptchaToken: ''
+          recaptchaToken: captcha
         })
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.status === 'error') throw new Error(data.message || t('toastError'));
+      if (!res.ok || data.status === 'error') throw new Error(data.code === 'captcha' ? t('errors.captcha') : data.message || t('toastError'));
 
       // support mailbox copy — never blocks the success message
       fetch('/api/send-support-email', {
@@ -308,6 +313,7 @@ export function TicketForm() {
     } catch (error) {
       toast.error(error?.message || t('toastError'));
     } finally {
+      captchaRef.current?.reset(); // a token works once — success or not, tick again for the next try
       setLoading(false);
     }
   }
@@ -478,7 +484,9 @@ export function TicketForm() {
 
         <p className="text-center text-xs italic text-ink/55">{t('note')}</p>
 
-        <button type="submit" disabled={loading || !verified} className="shine inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-900 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:bg-brand/45 disabled:shadow-none">
+        <Recaptcha ref={captchaRef} onChange={setCaptcha} className="flex min-h-[78px] justify-center" />
+
+        <button type="submit" disabled={loading || !verified || !captcha} className="shine inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-900 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:bg-brand/45 disabled:shadow-none">
           {loading ? <LoaderCircle className="size-4 animate-spin" /> : !verified && <ShieldCheck className="size-4" />}
           {loading ? t('submitting') : verified ? t('submit') : t('submitVerifyFirst')}
         </button>
