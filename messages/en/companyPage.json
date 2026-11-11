@@ -1340,7 +1340,8 @@
         "otpRequired": "Enter the 6-digit code sent to your email",
         "verifyFirst": "Please verify your email before submitting",
         "otpInvalid": "Invalid or expired code. Please try again.",
-        "otpSendFailed": "Could not send the code. Please try again."
+        "otpSendFailed": "Could not send the code. Please try again.",
+        "captcha": "Please confirm you are not a robot."
       },
       "otp": {
         "get": "Get code",
