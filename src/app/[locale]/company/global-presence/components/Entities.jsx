@@ -164,11 +164,10 @@ function FlipCard({ e, labels, t }) {
   );
 }
 function LicenceCards({ items, labels, t }) {
-  const SPAN = ['lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-3', 'lg:col-span-3'];
   return (
     <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6" stagger={0.08}>
-      {items.map((e, i) => (
-        <StaggerItem key={e.id} className={cn('h-full', SPAN[i], i === 4 && 'sm:col-span-2 lg:col-span-3')}>
+      {items.map((e) => (
+        <StaggerItem key={e.id} className="h-full sm:col-span-1 lg:col-span-2">
           <FlipCard e={e} labels={labels} t={t} />
         </StaggerItem>
       ))}

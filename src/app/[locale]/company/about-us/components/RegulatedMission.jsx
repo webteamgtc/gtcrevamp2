@@ -25,7 +25,7 @@ export function RegulatedMission() {
           </Reveal>
         </div>
 
-        <Stagger className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5" stagger={0.07}>
+        <Stagger className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6" stagger={0.07}>
           {regs.map((r) => (
             <StaggerItem key={r.code}>
               <motion.div whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 320, damping: 22 }} className="group relative overflow-hidden rounded-2xl border border-brand/10 bg-white p-5 text-center shadow-sm transition-shadow duration-500 hover:shadow-xl hover:shadow-brand/10">

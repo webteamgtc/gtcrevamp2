@@ -20,6 +20,10 @@
       "description": "GTC Group owns the following entities globally, together the GTC Financial Group. Each of these entities provides financial services according to their respective licences in the relevant jurisdiction.",
       "viewMore": "View More",
       "entities": {
+        "uae": {
+          "name": "UAE - CMA - CAT 1",
+          "text": "GTC Financial Consultancy L.L.C. is licensed by the UAE Capital Market Authority (CMA) under Category 1 (Dealing in securities), Licence No. 20200000512, to act as a trading broker in international markets and as a trading broker of OTC derivatives and currencies in the spot market."
+        },
         "australia": {
           "name": "Australia",
           "text": "GTC Global (Australia) Pty Ltd holds an Australian Financial Services Licence number 496371. GTC Global (Australia) focuses on providing education services to Australian clients."
@@ -274,8 +278,8 @@
         {
           "id": "compliance",
           "title": "Global multi-regulation",
-          "text": "Subject to regulatory requirements, client funds are FSCA, VFSC, FCA, ASIC, and FSC, client funds are held in segregated accounts, ensuring comprehensive protection of rights and interests.",
-          "note": "5 regulators"
+          "text": "Subject to regulatory requirements of the CMA, FSCA, VFSC, FCA, ASIC, and FSC, client funds are held in segregated accounts, ensuring comprehensive protection of rights and interests.",
+          "note": "6 regulators"
         },
         {
           "id": "platforms",
@@ -352,9 +356,13 @@
       ]
     },
     "regulated": {
-      "title": "Protected and recognized across [five global jurisdictions]",
+      "title": "Protected and recognized across [six global jurisdictions]",
       "cta": "Complete regulatory information",
       "items": [
+        {
+          "code": "CMA - CAT 1",
+          "country": "UAE"
+        },
         {
           "code": "FSCA",
           "country": "S. Africa"
@@ -592,7 +600,7 @@
       "commission": "Financial Commission member",
       "stats": [
         {
-          "value": 5,
+          "value": 6,
           "label": "Regulated Entities"
         },
         {
@@ -609,7 +617,7 @@
       ]
     },
     "entities": {
-      "title": "Five Entities. [One Standard of Compliance.]",
+      "title": "Six Entities. [One Standard of Compliance.]",
       "description": "Each GTCFX entity is independently licensed and supervised by its local regulatory authority, providing clients with transparent, accountable service within established legal frameworks.",
       "cta": "Complete regulatory information",
       "labels": {
@@ -622,6 +630,35 @@
         "website": "Website"
       },
       "items": [
+        {
+          "id": "uae",
+          "code": "AE",
+          "name": "GTC Financial Consultancy L.L.C.",
+          "place": "United Arab Emirates · Dubai",
+          "rows": [
+            {
+              "id": "authority",
+              "value": "Capital Market Authority (CMA)"
+            },
+            {
+              "id": "type",
+              "value": "Category 1 — Dealing in securities (trading broker in international markets; trading broker of OTC derivatives and currencies in the spot market)"
+            },
+            {
+              "id": "licence",
+              "value": "20200000512"
+            },
+            {
+              "id": "validity",
+              "value": "Licensed 9 November 2026; activities valid until 31 December 2027"
+            },
+            {
+              "id": "address",
+              "value": "Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates"
+            }
+          ],
+          "tier": "Tier 1"
+        },
         {
           "id": "australia",
           "code": "AU",
@@ -974,6 +1011,34 @@
       "copy": "Copy",
       "copied": "Copied",
       "items": [
+        {
+          "id": "uae",
+          "code": "AE",
+          "country": "UAE",
+          "city": "Dubai",
+          "name": "GTC Financial Consultancy L.L.C.",
+          "short": "CMA",
+          "number": "20200000512",
+          "rows": [
+            {
+              "id": "authority",
+              "value": "Capital Market Authority (CMA)"
+            },
+            {
+              "id": "type",
+              "value": "Category 1 — Dealing in securities (trading broker in international markets; trading broker of OTC derivatives and currencies in the spot market)"
+            },
+            {
+              "id": "licence",
+              "value": "20200000512"
+            },
+            {
+              "id": "address",
+              "value": "Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates"
+            }
+          ],
+          "registerUrl": "https://www.uaecma.gov.ae/en/open-data/licensed-companies"
+        },
         {
           "id": "southAfrica",
           "code": "ZA",
@@ -1548,8 +1613,8 @@
         },
         {
           "tag": "03 · Licences",
-          "value": "5",
-          "text": "FSCA · VFSC · FCA · ASIC · FSC — five regulated entities worldwide.",
+          "value": "6",
+          "text": "CMA · FSCA · VFSC · FCA · ASIC · FSC — six regulated entities worldwide.",
           "fill": 80
         },
         {
