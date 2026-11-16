@@ -15,7 +15,7 @@ function isLocalHost(hostname) {
 function resolveGtcOrigin(req, bodyOrigin) {
   const envOrigin =
     process.env.GTC_PORTAL_ORIGIN?.trim() ||
-    (process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_SITE_URL?.trim()||'https://www.gtcfx.com' : '');
+    (process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://www.gtcfx.com' : '');
   if (envOrigin) return envOrigin.replace(/\/$/, '');
 
   const fromBody = String(bodyOrigin ?? '').trim();

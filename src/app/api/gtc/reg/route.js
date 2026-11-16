@@ -1,21 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { gtcPubRequest, gtcRouteError } from '../_gtcProxy';
 
-const GTC_REG_URL = `${process.env.GTC_PORTAL_API || "https://web.mygtc.app/api/pub"}/reg`;
+export const runtime = 'nodejs';
 
 export async function POST(req) {
   try {
     const body = await req.json();
-    const response = await fetch(GTC_REG_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+    const result = await gtcPubRequest('reg', {
+      headers: { 'Content-Type': 'application/json' },
+      body
     });
-    const data = await response.json();
-    return NextResponse.json(data, { status: response.status });
-  } catch {
-    return NextResponse.json(
-      { code: 500, message: "Failed to reach GTC API", data: [] },
-      { status: 500 }
-    );
+    return NextResponse.json(result.data, { status: result.status });
+  } catch (err) {
+    return gtcRouteError(err);
   }
 }
