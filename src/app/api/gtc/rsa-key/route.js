@@ -13,7 +13,8 @@ export async function POST(req) {
       body: JSON.stringify({
         scene: body?.scene ?? 'site_visit',
         client: body?.client ?? 'pc'
-      })
+      }),
+      signal: AbortSignal.timeout(60_000)
     });
     const data = await response.json();
     return NextResponse.json(data, { status: response.status });

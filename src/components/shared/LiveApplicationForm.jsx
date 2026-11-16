@@ -19,6 +19,8 @@ import 'react-phone-number-input/style.css';
 import { applyBusinessEmailValidation, EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from './formKit';
 import Cat5RegistrationSuccess from './Cat5RegistrationSuccess';
 import { buildCat5PortalRedirectUrl, cat5AutoRedirectToPortal } from '@/lib/cat5Portal';
+import { isEmailAvailableForRegistration } from '@/lib/gtc/checkEmailAvailability';
+import { requestGtcCheckEmail } from '@/lib/gtc/requestCheckEmail';
 import { requestGtcEmailCode } from '@/lib/gtc/requestGetCode';
 
 const LOGIN_URL = PORTAL.login;
@@ -168,8 +170,8 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
       return;
     }
     try {
-      const check = await post('/api/gtc/check-email', { email: values.email.trim() });
-      if (!(check?.code === 200 && /available/i.test(check?.message || ''))) {
+      const check = await requestGtcCheckEmail(values.email.trim(), locale);
+      if (!isEmailAvailableForRegistration(check)) {
         toast.error(check?.message || t('errors.emailRegistered'));
         return;
       }

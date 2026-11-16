@@ -5,13 +5,21 @@
 import { rsaOaepEncryptJson } from './rsaCrypto';
 import { gtcClientContextHeaders, gtcClientOriginBodyField, siteVisitHostname } from './gtcPageOrigin';
 
-const SUPPORTED_ALG = new Set(['RSA-OAEP', 'RSA-OAEP-256', 'RSA-OAEP-SHA256', 'RSA-OAEP/SHA-256']);
+const SUPPORTED_ALG = new Set([
+  'RSA-OAEP',
+  'RSA-OAEP-256',
+  'RSA-OAEP-SHA256',
+  'RSA-OAEP-SHA-256',
+  'RSA-OAEP/SHA-256',
+  'RSA/OAEP-SHA256'
+]);
 
 function normalizeAlg(alg) {
   return String(alg ?? '')
     .trim()
     .toUpperCase()
-    .replace(/\s+/g, '');
+    .replace(/\s+/g, '')
+    .replace(/\//g, '-');
 }
 
 /** Accept wrapped `{ code:200, data }` or a raw config object. */
@@ -21,26 +29,32 @@ export function parseRsaKeyPayload(json) {
 
   if (data.alg && !SUPPORTED_ALG.has(normalizeAlg(data.alg))) throw new Error('UNSUPPORTED_RSA_ALG');
 
-  const expires = Number(data.expires_in);
-  if (!Number.isFinite(expires) || expires <= 0) throw new Error('INVALID_RSA_CONFIG');
+  if (data.expires_in != null && data.expires_in !== '') {
+    const expires = Number(data.expires_in);
+    if (!Number.isFinite(expires) || expires <= 0) throw new Error('INVALID_RSA_CONFIG');
+  }
 
   return data;
 }
 
-export async function fetchRsaKeyConfig() {
+/** @param {string} [appLang] GTC `Accept-Language` / `X-App-Lang` (from gtcAppLang). */
+export async function fetchRsaKeyConfig(appLang = 'en') {
   const res = await fetch('/api/gtc/rsa-key', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json, text/plain, */*',
       'app-type': 'web',
+      'Accept-Language': appLang,
+      'X-App-Lang': appLang,
       ...gtcClientContextHeaders()
     },
     credentials: 'include',
     body: JSON.stringify({ scene: 'site_visit', client: 'pc', ...gtcClientOriginBodyField() })
   });
   const json = await res.json().catch(() => ({}));
-  if (!res.ok && json?.code !== 200) throw new Error('RSA_KEY_HTTP');
+  if (json?.code === 200 || json?.kid) return parseRsaKeyPayload(json);
+  if (!res.ok) throw new Error('RSA_KEY_HTTP');
   return parseRsaKeyPayload(json);
 }
 
@@ -65,7 +79,7 @@ export async function encryptSiteVisitHeaders(key) {
 }
 
 /** Fresh rsa_key + encrypted headers for each send attempt. */
-export async function buildSiteVisitHeaders() {
-  const key = await fetchRsaKeyConfig();
+export async function buildSiteVisitHeaders(appLang = 'en') {
+  const key = await fetchRsaKeyConfig(appLang);
   return encryptSiteVisitHeaders(key);
 }

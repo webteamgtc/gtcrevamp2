@@ -11,18 +11,27 @@ function readDeviceId() {
 }
 
 /**
- * POST /api/gtc/get-code → GTC /api/pub/get_code with site-visit headers when encryption succeeds.
- * On RSA failure, sends get_code without x-r-* (PC2.0 fallback).
+ * POST /api/gtc/get-code → GTC /api/pub/get_code with PC2.0 site-visit headers (x-r-a/b/c).
+ * Proof is built in the browser (rsa_key + RSA-OAEP); headers are also sent in the JSON body
+ * so the Next proxy can forward them even if a layer strips custom headers.
  */
 export async function requestGtcEmailCode(email, locale) {
-  let siteHeaders = {};
+  const appLang = gtcAppLang(locale);
+  let siteHeaders;
   try {
-    siteHeaders = await buildSiteVisitHeaders();
+    siteHeaders = await buildSiteVisitHeaders(appLang);
   } catch (err) {
-    console.warn('[gtc] site visit proof skipped:', err?.message || err);
+    console.error('[gtc] site visit proof failed:', err?.message || err);
+    return {
+      code: 500,
+      message: 'Could not initialize verification. Please refresh the page and try again.',
+      data: []
+    };
+  }
+  if (!siteHeaders['x-r-c']) {
+    return { code: 500, message: 'Verification setup incomplete.', data: [] };
   }
 
-  const appLang = gtcAppLang(locale);
   const headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json, text/plain, */*',
@@ -40,7 +49,12 @@ export async function requestGtcEmailCode(email, locale) {
     method: 'POST',
     headers,
     credentials: 'include',
-    body: JSON.stringify({ email: String(email ?? '').trim(), type: '0', ...gtcClientOriginBodyField() })
+    body: JSON.stringify({
+      email: String(email ?? '').trim(),
+      type: '0',
+      ...gtcClientOriginBodyField(),
+      site_visit: siteHeaders
+    })
   });
 
   try {

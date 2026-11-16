@@ -93,7 +93,7 @@ export function gtcUpstreamHeaders(req, extra = {}, opts = {}) {
   ];
   for (const [from, to] of pairs) {
     const v = req.headers.get(from);
-    if (v) out[to] = v;
+    if (v && (out[to] == null || out[to] === '')) out[to] = v;
   }
   return out;
 }
