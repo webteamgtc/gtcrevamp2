@@ -16,5 +16,21 @@ function client() {
 
 /** A collection of the MONGODB_DB database. */
 export async function collection(name) {
-  return (await client()).db(process.env.MONGODB_DB).collection(name);
+  const db = process.env.MONGODB_DB;
+  if (!db) throw new Error('MONGODB_DB is not set');
+  return (await client()).db(db).collection(name);
+}
+
+/** Margin Bonus applications → database `margin_bonus`, collection `bonus-form`. */
+export async function marginBonusCollection() {
+  const db = process.env.MONGODB_MARGIN_BONUS_DB || 'margin_bonus';
+  const coll = process.env.MONGODB_MARGIN_BONUS_COLLECTION || 'bonus-form';
+  return (await client()).db(db).collection(coll);
+}
+
+export async function marginBonusEmailExists(email) {
+  const normalized = String(email ?? '').trim().toLowerCase();
+  if (!normalized) return false;
+  const coll = await marginBonusCollection();
+  return Boolean(await coll.findOne({ email: normalized }, { projection: { _id: 1 } }));
 }

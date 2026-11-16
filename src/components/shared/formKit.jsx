@@ -3,13 +3,28 @@
  * Shared building blocks for the account forms (live + demo):
  * compact field styles, a JSON POST helper and the GTC country list (with dial codes).
  * Countries in FORM_EXCLUDED_COUNTRIES (src/config/regions.js) are left out of every list and phone picker.
+ * Country names/codes come from src/lib/geo/countriesList.js (not the GTC portal API).
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
-import { getCountries } from 'react-phone-number-input';
+import { getCountries, getCountryCallingCode } from 'react-phone-number-input';
 import { FORM_EXCLUDED_COUNTRIES } from '@/config/regions';
+import { formCountriesFromList } from '@/lib/geo/countriesList';
 import { validateBusinessEmail } from '@/lib/emailValidation';
 import { cn } from '@/lib/utils';
+
+/** Sorted form countries (code, name, phone_code) from countriesList.js. */
+function attachPhoneCode(entry) {
+  let phone_code = '';
+  try {
+    if (getCountries().includes(entry.code)) phone_code = String(getCountryCallingCode(entry.code));
+  } catch {
+    /* no calling code for this territory in libphonenumber */
+  }
+  return { ...entry, phone_code };
+}
+
+export const GTC_FORM_COUNTRIES = formCountriesFromList(FORM_EXCLUDED_COUNTRIES).map(attachPhoneCode);
 
 /** Countries the phone-number pickers offer: pass as `countries={PHONE_COUNTRIES}` to <PhoneInput>. */
 export const PHONE_COUNTRIES = getCountries().filter((c) => !FORM_EXCLUDED_COUNTRIES.includes(c));
@@ -89,34 +104,22 @@ export function dialFor(country) {
 }
 
 /**
- * GTC country list from /api/gtc/get-country, sorted by name, without FORM_EXCLUDED_COUNTRIES.
- * `suggested` is the visitor's country (from the browser locale) when it is in the list.
+ * GTC form country list (countriesList.js), minus FORM_EXCLUDED_COUNTRIES.
+ * `suggested` is the visitor's country from the browser locale when it is in the list.
  */
 export function useGtcCountries() {
-  const [countries, setCountries] = useState([]);
-  const [failed, setFailed] = useState(false);
+  const countries = useMemo(() => GTC_FORM_COUNTRIES, []);
   const [suggested, setSuggested] = useState(null);
 
   useEffect(() => {
-    let alive = true;
-    post('/api/gtc/get-country')
-      .then((res) => {
-        if (!alive) return;
-        if (res?.code === 200 && Array.isArray(res.data)) {
-          const list = res.data.filter((c) => !FORM_EXCLUDED_COUNTRIES.includes(String(c.code).toUpperCase())).sort((a, b) => a.name.localeCompare(b.name));
-          setCountries(list);
-          let region = '';
-          try {
-            region = new Intl.Locale(navigator.language).maximize().region || '';
-          } catch {}
-          setSuggested(list.find((c) => c.code === region) ?? null);
-        } else setFailed(true);
-      })
-      .catch(() => alive && setFailed(true));
-    return () => {
-      alive = false;
-    };
-  }, []);
+    let region = '';
+    try {
+      region = new Intl.Locale(navigator.language).maximize().region || '';
+    } catch {
+      /* ignore */
+    }
+    setSuggested(countries.find((c) => c.code === region) ?? null);
+  }, [countries]);
 
-  return { countries, failed, suggested };
+  return { countries, failed: false, suggested };
 }

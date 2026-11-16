@@ -1,39 +1,52 @@
 import { NextResponse } from 'next/server';
-import { query } from '@/lib/db';
+import { isDbConfigured, query } from '@/lib/db';
+import { marginBonusCollection, marginBonusEmailExists } from '@/lib/mongo';
 import { verifyOtp } from '@/lib/otpStore';
 import { businessEmailRejectReason } from '@/lib/emailValidation';
 
 export const runtime = 'nodejs';
 
 /**
- * Margin Bonus sign-up (form on /trading/margin-bonus).
+ * Margin Bonus sign-up (form on /trading/margin-bonus). Also mounted at /api/trading/margin-bonus.
  *
- * GET ?email=… → { registered } — is the e-mail a GTCFX client (Client_mail_list)? Shown as a hint under the field.
+ * GET ?email=… → { registered } — GTCFX client (Client_mail_list).
  *
- * POST { Full_name, email, otp, phone, account_no, deposit_amount, country, terms, utm_campain, utm_source, fbclid, qr_code_id, user_referrer }
- *   1. validates the fields,
- *   2. the e-mail must be a registered client and must not have applied before (marketing_campaign),
- *   3. checks the e-mail code sent by /api/otp-smtp,
- *   4. saves the sign-up in marketing_campaign,
- *   5. forwards it to the Zapier hook (CRM) and e-mails it to the margin bonus team (mailOptions in src/config/nodemailer.js).
- * → { ok: true } or { ok: false, error: 'invalid' | 'notRegistered' | 'alreadyApplied' | 'otp' | 'server' }
- * Env: DB_* (src/lib/db.js), MAILGUN_API_KEY, MARGIN_BONUS_ZAPIER_URL (optional, defaults to the campaign hook).
+ * POST → validates, OTP, saves to MongoDB (margin_bonus.bonus-form), e-mails support@gtcfx.com (cc adeel.nazeer@gtcfx.com), optional Zapier.
  */
 const ZAPIER_HOOK = process.env.MARGIN_BONUS_ZAPIER_URL?.trim() || 'https://hooks.zapier.com/hooks/catch/16420445/3kq25sj/';
 const SUBJECT = 'Margin Bonus application';
+const NOTIFY_TO = process.env.MARGIN_BONUS_NOTIFY_TO?.trim() || 'support@gtcfx.com';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const LETTERS_RE = /^[\p{L}\p{M}\s'’.-]+$/u;
 
 const str = (v, max = 200) => String(v ?? '').trim().slice(0, max);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-// outside production the response also carries the underlying reason (e.g. the database error) for debugging
 const DEV = process.env.NODE_ENV !== 'production';
 const fail = (error, status, cause) => NextResponse.json({ ok: false, error, ...(DEV && cause ? { detail: cause.message } : {}) }, { status });
 
-const isClient = async (email) => (await query('SELECT TOP 1 email FROM Client_mail_list WHERE email = @email', { email })).length > 0;
-const hasApplied = async (email) => (await query('SELECT TOP 1 Email_address FROM marketing_campaign WHERE Email_address = @email', { email })).length > 0;
+/** Registered client e-mail (Azure SQL). Skipped when `MARGIN_BONUS_SKIP_CLIENT_CHECK=true` or SQL unreachable in dev. */
+async function isClient(email) {
+  if (process.env.MARGIN_BONUS_SKIP_CLIENT_CHECK === 'true') return true;
+  if (!isDbConfigured()) {
+    if (DEV) {
+      console.warn('[margin-bonus] SQL not configured — skipping client check (dev only)');
+      return true;
+    }
+    throw new Error('Client database is not configured');
+  }
+  try {
+    return (await query('SELECT TOP 1 email FROM Client_mail_list WHERE email = @email', { email })).length > 0;
+  } catch (err) {
+    if (DEV) {
+      console.warn('[margin-bonus] SQL unreachable — skipping client check (dev only):', err.message);
+      return true;
+    }
+    throw err;
+  }
+}
 
-/** Campaign code = submission date, e.g. 28oct2026 (same format as the original campaign forms). */
+const hasApplied = (email) => marginBonusEmailExists(email);
+
 function campaignCode(date = new Date()) {
   return `${date.getDate()}${date.toLocaleString('en', { month: 'short' }).toLowerCase()}${date.getFullYear()}`;
 }
@@ -43,9 +56,40 @@ function clientIp(request) {
   return (fwd ? fwd.split(',')[0] : request.headers.get('x-real-ip') || '').trim();
 }
 
+async function saveToMongo(d) {
+  const coll = await marginBonusCollection();
+  const email = d.email.toLowerCase();
+  if (await coll.findOne({ email }, { projection: { _id: 1 } })) {
+    const err = new Error('already applied');
+    err.code = 'ALREADY_APPLIED';
+    throw err;
+  }
+  const submittedAt = new Date();
+  const doc = {
+    Full_name: d.Full_name,
+    email,
+    phone: d.phone,
+    account_no: d.account_no,
+    deposit_amount: d.deposit_amount,
+    country: d.country,
+    terms: d.terms,
+    utm_campain: d.utm_campain,
+    utm_source: d.utm_source,
+    fbclid: d.fbclid,
+    qr_code_id: d.qr_code_id,
+    user_referrer: d.user_referrer,
+    ip: d.ip,
+    campaign_code: campaignCode(submittedAt),
+    campaign_name: d.utm_campain.replace(/^\//, ''),
+    submittedAt
+  };
+  const inserted = await coll.insertOne(doc);
+  if (!inserted.acknowledged) throw new Error('Mongo insert failed');
+}
+
 async function sendEmail(d) {
   if (!process.env.MAILGUN_API_KEY) throw new Error('MAILGUN_API_KEY is not set');
-  const { MAILGUN_DOMAIN, mailgunClient, mailOptions } = await import('@/config/nodemailer');
+  const { MAILGUN_DOMAIN, mailgunClient, MAILGUN_FROM } = await import('@/config/nodemailer');
   const rows = [
     ['Full name', d.Full_name],
     ['Email', d.email],
@@ -64,7 +108,14 @@ async function sendEmail(d) {
       .map(([k, v]) => `<tr><td style="padding:10px 14px;width:35%;background:#f6f7fb;font-size:13px;color:#6b7194;border-bottom:1px solid #e6e9f2">${k}</td><td style="padding:10px 14px;font-size:14px;border-bottom:1px solid #e6e9f2">${esc(v) || '—'}</td></tr>`)
       .join('')}</table></div>`;
   const text = rows.map(([k, v]) => `${k}: ${v || '—'}`).join('\n');
-  await mailgunClient.messages.create(MAILGUN_DOMAIN, { ...mailOptions, 'h:Reply-To': d.email, subject: `${SUBJECT} — ${d.Full_name} (${d.account_no})`, text, html });
+  await mailgunClient.messages.create(MAILGUN_DOMAIN, {
+    from: MAILGUN_FROM,
+    to: NOTIFY_TO,
+    'h:Reply-To': d.email,
+    subject: `${SUBJECT} — ${d.Full_name} (${d.account_no})`,
+    text,
+    html
+  });
 }
 
 async function sendZapier(d) {
@@ -76,7 +127,8 @@ export async function GET(request) {
   const email = str(new URL(request.url).searchParams.get('email'), 160);
   if (!EMAIL_RE.test(email)) return NextResponse.json({ registered: false }, { status: 400 });
   try {
-    return NextResponse.json({ registered: await isClient(email) });
+    const [registered, alreadyApplied] = await Promise.all([isClient(email), hasApplied(email)]);
+    return NextResponse.json({ registered, alreadyApplied });
   } catch (err) {
     console.error('[margin-bonus] client check:', err.message);
     return NextResponse.json({ registered: null, ...(DEV ? { detail: err.message } : {}) }, { status: 500 });
@@ -120,30 +172,17 @@ export async function POST(request) {
   if (!valid) return fail('invalid', 422);
 
   try {
-    if (!(await isClient(d.email))) return fail('notRegistered', 403);
     if (await hasApplied(d.email)) return fail('alreadyApplied', 409);
+    if (!(await isClient(d.email))) return fail('notRegistered', 403);
     if (!(await verifyOtp(d.email, otp)).success) return fail('otp', 400);
 
-    await query(
-      `INSERT INTO marketing_campaign (Full_name, Email_address, Account_number, Country, Campaign_code, Campaign_name, Phone_number, create_time)
-       VALUES (@Full_name, @Email_address, @Account_number, @Country, @Campaign_code, @Campaign_name, @Phone_number, @create_time)`,
-      {
-        Full_name: d.Full_name,
-        Email_address: d.email,
-        Account_number: d.account_no,
-        Country: d.country,
-        Campaign_code: campaignCode(),
-        Campaign_name: d.utm_campain.replace(/^\//, ''),
-        Phone_number: d.phone,
-        create_time: new Date()
-      }
-    );
+    await saveToMongo(d);
   } catch (err) {
+    if (err?.code === 'ALREADY_APPLIED') return fail('alreadyApplied', 409);
     console.error('[margin-bonus] database:', err.message);
     return fail('server', 500, err);
   }
 
-  // the sign-up is saved; notifications failing must not fail the request
   const [zapier, email] = await Promise.allSettled([sendZapier(d), sendEmail(d)]);
   if (zapier.status === 'rejected') console.error('[margin-bonus] Zapier:', zapier.reason?.message);
   if (email.status === 'rejected') console.error('[margin-bonus] Mailgun:', email.reason?.message);
