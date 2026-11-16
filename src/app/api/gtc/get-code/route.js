@@ -11,7 +11,7 @@ export async function POST(req) {
     const type = body?.type != null ? String(body.type) : '0';
     const response = await fetch(gtcGetCodeUrl(), {
       method: 'POST',
-      headers: gtcUpstreamHeaders(req),
+      headers: gtcUpstreamHeaders(req, {}, { bodyOrigin: body?.client_origin }),
       body: JSON.stringify({ email, type })
     });
     const data = await response.json();

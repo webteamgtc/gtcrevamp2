@@ -3,7 +3,7 @@
  * @see project RSA configuration doc (scene=site_visit, client=pc)
  */
 import { rsaOaepEncryptJson } from './rsaCrypto';
-import { gtcClientContextHeaders, siteVisitHostname } from './gtcPageOrigin';
+import { gtcClientContextHeaders, gtcClientOriginBodyField, siteVisitHostname } from './gtcPageOrigin';
 
 const SUPPORTED_ALG = new Set(['RSA-OAEP', 'RSA-OAEP-256', 'RSA-OAEP-SHA256', 'RSA-OAEP/SHA-256']);
 
@@ -37,7 +37,7 @@ export async function fetchRsaKeyConfig() {
       ...gtcClientContextHeaders()
     },
     credentials: 'include',
-    body: JSON.stringify({ scene: 'site_visit', client: 'pc' })
+    body: JSON.stringify({ scene: 'site_visit', client: 'pc', ...gtcClientOriginBodyField() })
   });
   const json = await res.json().catch(() => ({}));
   if (!res.ok && json?.code !== 200) throw new Error('RSA_KEY_HTTP');
