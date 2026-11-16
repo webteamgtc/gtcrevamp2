@@ -12,9 +12,25 @@ function isLocalHost(hostname) {
   return hostname === 'localhost' || hostname === '127.0.0.1';
 }
 
-function resolveGtcOrigin(req) {
-  const envOrigin = process.env.GTC_PORTAL_ORIGIN?.trim();
-  if (envOrigin) return envOrigin;
+function resolveGtcOrigin(req, bodyOrigin) {
+  const envOrigin =
+    process.env.GTC_PORTAL_ORIGIN?.trim() ||
+    (process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_SITE_URL?.trim()||'https://www.gtcfx.com' : '');
+  if (envOrigin) return envOrigin.replace(/\/$/, '');
+
+  const fromBody = String(bodyOrigin ?? '').trim();
+  if (fromBody) {
+    if (hostFromUrl(fromBody) === '127.0.0.1') {
+      try {
+        const u = new URL(fromBody);
+        u.hostname = 'localhost';
+        return u.origin;
+      } catch {
+        return fromBody;
+      }
+    }
+    return fromBody;
+  }
 
   const clientOrigin = req.headers.get('x-gtc-client-origin')?.trim();
   if (clientOrigin) return clientOrigin;
@@ -36,7 +52,7 @@ function resolveGtcOrigin(req) {
   const host = (req.headers.get('x-forwarded-host') || req.headers.get('host') || '').split(',')[0].trim();
   if (!host) return '';
 
-  const proto = (req.headers.get('x-forwarded-proto') || 'http').split(',')[0].trim();
+  const proto = (req.headers.get('x-forwarded-proto') || 'https').split(',')[0].trim();
   const normalizedHost = host.replace(/^127\.0\.0\.1/i, 'localhost');
   return `${proto}://${normalizedHost}`;
 }
@@ -50,14 +66,14 @@ function shouldAttachOrigin(origin) {
 }
 
 /** Forward browser context and GTC business headers to the portal API. */
-export function gtcUpstreamHeaders(req, extra = {}) {
+export function gtcUpstreamHeaders(req, extra = {}, opts = {}) {
   const out = {
     'Content-Type': 'application/json',
     Accept: 'application/json, text/plain, */*',
     ...extra
   };
 
-  const origin = resolveGtcOrigin(req);
+  const origin = resolveGtcOrigin(req, opts.bodyOrigin);
   if (shouldAttachOrigin(origin)) {
     out.Origin = origin;
     const referer = req.headers.get('referer')?.trim();

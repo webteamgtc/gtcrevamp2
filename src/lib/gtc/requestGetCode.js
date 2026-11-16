@@ -1,5 +1,5 @@
 import { gtcAppLang } from './gtcAppLang';
-import { gtcClientContextHeaders } from './gtcPageOrigin';
+import { gtcClientContextHeaders, gtcClientOriginBodyField } from './gtcPageOrigin';
 import { buildSiteVisitHeaders } from './siteVisitProof';
 
 function readDeviceId() {
@@ -40,7 +40,7 @@ export async function requestGtcEmailCode(email, locale) {
     method: 'POST',
     headers,
     credentials: 'include',
-    body: JSON.stringify({ email: String(email ?? '').trim(), type: '0' })
+    body: JSON.stringify({ email: String(email ?? '').trim(), type: '0', ...gtcClientOriginBodyField() })
   });
 
   try {

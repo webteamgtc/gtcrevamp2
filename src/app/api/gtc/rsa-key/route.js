@@ -9,7 +9,7 @@ export async function POST(req) {
     const body = await req.json();
     const response = await fetch(gtcRsaKeyUrl(), {
       method: 'POST',
-      headers: gtcUpstreamHeaders(req),
+      headers: gtcUpstreamHeaders(req, {}, { bodyOrigin: body?.client_origin }),
       body: JSON.stringify({
         scene: body?.scene ?? 'site_visit',
         client: body?.client ?? 'pc'
