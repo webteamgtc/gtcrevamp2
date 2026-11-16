@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { MAILGUN_DOMAIN, MAILGUN_FROM, mailgunClient } from '@/config/nodemailer';
 import { createOtp } from '@/lib/otpStore';
 import { validateBusinessEmail } from '@/lib/emailValidation';
+import { marginBonusEmailExists } from '@/lib/mongo';
 
 export const runtime = 'nodejs';
 
@@ -13,10 +14,14 @@ const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<
  */
 export async function POST(req) {
   try {
-    const { email, first_name } = await req.json();
+    const { email, first_name, purpose } = await req.json();
     const normalizedEmail = String(email ?? '').trim().toLowerCase();
     const check = validateBusinessEmail(normalizedEmail);
     if (!check.valid) return NextResponse.json({ success: false, reason: check.reason, message: 'Invalid email address' }, { status: 400 });
+
+    if (purpose === 'margin_bonus' && (await marginBonusEmailExists(normalizedEmail))) {
+      return NextResponse.json({ success: false, reason: 'alreadyApplied', message: 'Already applied with this e-mail' }, { status: 409 });
+    }
 
     const otp = createOtp(normalizedEmail);
     const html = `<!DOCTYPE html>

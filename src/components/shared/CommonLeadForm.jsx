@@ -1,6 +1,6 @@
 'use client';
 /**
- * Reusable lead form (site theme): name, business email, country, phone with WhatsApp code verification, terms.
+ * Reusable lead form (site theme): name, business email, country (countriesList.js), phone with WhatsApp code verification, terms.
  *
  * Submit (only once the phone is verified):
  *   POST endpoints.validateEmail → endpoints.strapiIfxExpos (optional, first)

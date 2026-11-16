@@ -1,9 +1,9 @@
 'use client';
 /**
  * Margin Bonus application form (registered GTCFX clients only).
- *  - e-mail: on blur, GET /api/margin-bonus?email= shows whether it's a registered client;
+ *  - e-mail: on blur, GET /api/trading/margin-bonus?email= shows whether it's a registered client;
  *    "Send Code" e-mails a 6-digit code (/api/otp-smtp) that the server checks on submit
- *  - POST /api/margin-bonus saves the sign-up (database + Zapier + e-mail), then → /thank-you
+ *  - POST /api/trading/margin-bonus saves the sign-up (MongoDB margin_bonus.bonus-form + e-mail + optional Zapier), then → /thank-you
  * Tracking sent along (as on the original campaign form): page path, ?utm_source, ?fbclid, ?id (QR code), user_referrer.
  */
 import { useEffect, useMemo, useState } from 'react';
@@ -19,7 +19,7 @@ import { LIVE_ACCOUNT_HREF } from '@/config/menu';
 import { applyBusinessEmailValidation, EMAIL_RE, LETTERS_RE, post, Field, fieldBox as box, fieldInput as input, fieldState, phoneField, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from '@/components/shared/formKit';
 import { cn } from '@/lib/utils';
 
-const API = '/api/margin-bonus';
+const API = '/api/trading/margin-bonus';
 const EMPTY = { Full_name: '', email: '', otp: '', phone: '', account_no: '', deposit_amount: '', country: '', terms: false };
 const FIELDS = Object.keys(EMPTY);
 
@@ -29,7 +29,7 @@ export function MarginApplyForm() {
   const { countries, failed, suggested } = useGtcCountries();
   const [values, setValues] = useState(EMPTY);
   const [touched, setTouched] = useState({});
-  const [client, setClient] = useState(null); // null | 'checking' | 'registered' | 'notRegistered'
+  const [client, setClient] = useState(null); // null | 'checking' | 'registered' | 'notRegistered' | 'alreadyApplied'
   const [codeSent, setCodeSent] = useState(false);
   const [codeLoading, setCodeLoading] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -92,7 +92,8 @@ export function MarginApplyForm() {
     setClient('checking');
     try {
       const res = await fetch(`${API}?email=${encodeURIComponent(email)}`).then((r) => r.json());
-      setClient(res?.registered === true ? 'registered' : res?.registered === false ? 'notRegistered' : null);
+      if (res?.alreadyApplied) setClient('alreadyApplied');
+      else setClient(res?.registered === true ? 'registered' : res?.registered === false ? 'notRegistered' : null);
     } catch {
       setClient(null);
     }
@@ -102,9 +103,18 @@ export function MarginApplyForm() {
     setTouched((tc) => ({ ...tc, email: true }));
     if (errors.email) return toast.error(errors.email);
     if (client === 'notRegistered') return toast.error(t('errors.notRegistered'));
+    if (client === 'alreadyApplied') return toast.error(t('errors.alreadyApplied'));
     setCodeLoading(true);
     try {
-      const res = await post('/api/otp-smtp', { email: values.email.trim(), first_name: values.Full_name.trim() });
+      const res = await post('/api/otp-smtp', {
+        email: values.email.trim(),
+        first_name: values.Full_name.trim(),
+        purpose: 'margin_bonus'
+      });
+      if (res?.reason === 'alreadyApplied') {
+        setClient('alreadyApplied');
+        return toast.error(t('errors.alreadyApplied'));
+      }
       if (res?.success) {
         setCodeSent(true);
         toast.success(t('codeSent', { email: values.email.trim() }));
@@ -138,6 +148,7 @@ export function MarginApplyForm() {
         return;
       }
       if (res?.error === 'notRegistered') setClient('notRegistered');
+      if (res?.error === 'alreadyApplied') setClient('alreadyApplied');
       toast.error(t(`errors.${['notRegistered', 'alreadyApplied', 'otp'].includes(res?.error) ? res.error : 'generic'}`));
     } catch {
       toast.error(t('errors.generic'));
@@ -183,7 +194,7 @@ export function MarginApplyForm() {
             <span className={cn(box, fieldState(err('otp')))}>
               <ShieldCheck className="size-4 shrink-0 text-ink/35" />
               <input id="mb-otp" className={input} value={values.otp} onChange={(e) => set('otp')(e.target.value.replace(/\D/g, '').slice(0, 6))} onBlur={blur('otp')} inputMode="numeric" maxLength={6} placeholder={t('codePlaceholder')} autoComplete="one-time-code" />
-              <button type="button" onClick={sendCode} disabled={codeLoading || client === 'notRegistered'} className="shrink-0 whitespace-nowrap text-xs font-semibold text-brand transition-colors hover:text-gold-700 disabled:opacity-50">
+              <button type="button" onClick={sendCode} disabled={codeLoading || client === 'notRegistered' || client === 'alreadyApplied'} className="shrink-0 whitespace-nowrap text-xs font-semibold text-brand transition-colors hover:text-gold-700 disabled:opacity-50">
                 {codeLoading ? t('sendingCode') : codeSent ? t('resendCode') : t('getCode')}
               </button>
             </span>
@@ -192,11 +203,22 @@ export function MarginApplyForm() {
 
         {/* registered-client check */}
         <AnimatePresence initial={false}>
-          {(client === 'registered' || client === 'notRegistered') && (
-            <motion.p key={client} initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className={cn('flex items-start gap-2 overflow-hidden rounded-xl px-3.5 py-2.5 text-xs', client === 'registered' ? 'bg-up/[0.07] text-up' : 'bg-down/[0.06] text-down')}>
+          {(client === 'registered' || client === 'notRegistered' || client === 'alreadyApplied') && (
+            <motion.p
+              key={client}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className={cn(
+                'flex items-start gap-2 overflow-hidden rounded-xl px-3.5 py-2.5 text-xs',
+                client === 'registered' ? 'bg-up/[0.07] text-up' : 'bg-down/[0.06] text-down'
+              )}
+            >
               {client === 'registered' ? <CircleCheck className="size-4 shrink-0" /> : <CircleAlert className="size-4 shrink-0" />}
               <span>
-                {client === 'registered'
+                {client === 'alreadyApplied'
+                  ? t('errors.alreadyApplied')
+                  : client === 'registered'
                   ? t('registered')
                   : t.rich('notRegistered', {
                       link: (c) => (
@@ -213,7 +235,18 @@ export function MarginApplyForm() {
         <div className="grid gap-4 sm:grid-cols-2">
           <Field id="mb-phone" label={t('phone')} required error={err('phone')}>
             <span className={cn(box, fieldState(err('phone')), phoneField)} dir="ltr">
-              <PhoneInput id="mb-phone" name="phone" international countries={PHONE_COUNTRIES} defaultCountry={phoneCountryOf(suggested?.code)} value={values.phone || undefined} onChange={(v) => set('phone')(v ?? '')} onBlur={blur('phone')} autoComplete="tel" />
+              <PhoneInput
+                key={phoneCountryOf(countries.find((c) => c.name === values.country)?.code, suggested?.code)}
+                id="mb-phone"
+                name="phone"
+                international
+                countries={PHONE_COUNTRIES}
+                defaultCountry={phoneCountryOf(countries.find((c) => c.name === values.country)?.code, suggested?.code)}
+                value={values.phone || undefined}
+                onChange={(v) => set('phone')(v ?? '')}
+                onBlur={blur('phone')}
+                autoComplete="tel"
+              />
             </span>
           </Field>
           <Field id="mb-country" label={t('country')} required error={err('country')}>
@@ -257,7 +290,7 @@ export function MarginApplyForm() {
           {err('terms') && <p className="mt-1 text-[11px] text-down">{err('terms')}</p>}
         </div>
 
-        <button type="submit" disabled={loading || client === 'notRegistered'} className="shine inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-900 text-base font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:opacity-60">
+        <button type="submit" disabled={loading || client === 'notRegistered' || client === 'alreadyApplied'} className="shine inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-900 text-base font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand disabled:cursor-not-allowed disabled:opacity-60">
           {loading && <LoaderCircle className="size-4 animate-spin" />}
           {loading ? t('submitting') : t('submit')}
         </button>
