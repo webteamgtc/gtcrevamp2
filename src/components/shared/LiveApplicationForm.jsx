@@ -1,7 +1,7 @@
 'use client';
 /**
  * "Apply live trading account" form.
- * Talks to the GTC proxy routes in /api/gtc: get-country → check-email → get-code → reg.
+ * Talks to the GTC proxy routes in /api/gtc: get-country → check-email → rsa_key + get-code (x-r-*) → reg.
  * Partner code / deep link are read from the URL (?code, ?ref, ?partner_id, ?partner_code, ?ib, ?deep_link_value).
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -19,6 +19,7 @@ import 'react-phone-number-input/style.css';
 import { applyBusinessEmailValidation, EMAIL_RE as EMAIL, LETTERS_RE as LETTERS, post, Field, fieldBox as box, fieldInput as input, fieldState as boxState, phoneField as phoneCls, dialFor, PHONE_COUNTRIES, phoneCountryOf, useGtcCountries } from './formKit';
 import Cat5RegistrationSuccess from './Cat5RegistrationSuccess';
 import { buildCat5PortalRedirectUrl, cat5AutoRedirectToPortal } from '@/lib/cat5Portal';
+import { requestGtcEmailCode } from '@/lib/gtc/requestGetCode';
 
 const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
@@ -53,8 +54,9 @@ function readUrlParams() {
  */
 export function LiveAccountForm({ title, subtitle, variant = 'compact', className, saveTo = 'portal', formNamespace }) {
   const database = saveTo === 'database';
+  const locale = useLocale();
   const t = useTranslations(formNamespace ?? (database ? 'cat5RegisterPage.form' : 'tradingPage.liveForm'));
-  const za = useLocale() === ZA_LOCALE;
+  const za = locale === ZA_LOCALE;
   const ukGate = useUkGate();
   const page = variant === 'page';
   const [values, setValues] = useState(EMPTY);
@@ -171,7 +173,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
         toast.error(check?.message || t('errors.emailRegistered'));
         return;
       }
-      const res = await post('/api/gtc/get-code', { email: values.email.trim(), type: '0' });
+      const res = await requestGtcEmailCode(values.email, locale);
       if (res?.code === 200) {
         setCodeSent(true);
         toast.success(res?.message || t('toast.otpSent'));
