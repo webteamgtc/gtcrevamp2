@@ -12,42 +12,40 @@ function isLocalHost(hostname) {
   return hostname === 'localhost' || hostname === '127.0.0.1';
 }
 
+function normalizePageOrigin(raw) {
+  const s = String(raw ?? '').trim();
+  if (!s) return '';
+  if (hostFromUrl(s) === '127.0.0.1') {
+    try {
+      const u = new URL(s);
+      u.hostname = 'localhost';
+      return u.origin.replace(/\/$/, '');
+    } catch {
+      return s.replace(/\/$/, '');
+    }
+  }
+  try {
+    return new URL(s).origin;
+  } catch {
+    return s.replace(/\/$/, '');
+  }
+}
+
 function resolveGtcOrigin(req, bodyOrigin) {
+  // PC2.0: Origin must match the encrypted site-visit proof `h` from the browser — prefer client context first.
+  const fromBody = normalizePageOrigin(bodyOrigin);
+  if (fromBody) return fromBody;
+
+  const clientOrigin = normalizePageOrigin(req.headers.get('x-gtc-client-origin'));
+  if (clientOrigin) return clientOrigin;
+
+  const browserOrigin = normalizePageOrigin(req.headers.get('origin'));
+  if (browserOrigin) return browserOrigin;
+
   const envOrigin =
     process.env.GTC_PORTAL_ORIGIN?.trim() ||
     (process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://www.gtcfx.com' : '');
   if (envOrigin) return envOrigin.replace(/\/$/, '');
-
-  const fromBody = String(bodyOrigin ?? '').trim();
-  if (fromBody) {
-    if (hostFromUrl(fromBody) === '127.0.0.1') {
-      try {
-        const u = new URL(fromBody);
-        u.hostname = 'localhost';
-        return u.origin;
-      } catch {
-        return fromBody;
-      }
-    }
-    return fromBody;
-  }
-
-  const clientOrigin = req.headers.get('x-gtc-client-origin')?.trim();
-  if (clientOrigin) return clientOrigin;
-
-  const browserOrigin = req.headers.get('origin')?.trim();
-  if (browserOrigin) {
-    if (hostFromUrl(browserOrigin) === '127.0.0.1') {
-      try {
-        const u = new URL(browserOrigin);
-        u.hostname = 'localhost';
-        return u.toString().replace(/\/$/, '');
-      } catch {
-        /* keep browserOrigin */
-      }
-    }
-    return browserOrigin;
-  }
 
   const host = (req.headers.get('x-forwarded-host') || req.headers.get('host') || '').split(',')[0].trim();
   if (!host) return '';

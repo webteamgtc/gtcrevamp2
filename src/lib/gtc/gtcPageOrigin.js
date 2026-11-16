@@ -20,11 +20,18 @@ function canonicalFromEnv() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (!siteUrl) return null;
 
+  const canonical = parseOriginUrl(siteUrl);
+  if (!canonical) return null;
+
   if (typeof window === 'undefined') {
-    return process.env.NODE_ENV === 'production' ? parseOriginUrl(siteUrl) : null;
+    return process.env.NODE_ENV === 'production' ? canonical : null;
   }
-  if (!isLocalHostname(window.location.hostname)) {
-    return parseOriginUrl(siteUrl);
+  if (isLocalHostname(window.location.hostname)) return null;
+
+  // Use configured site origin only when the visitor is on that host (not Vercel preview / other domains).
+  const current = window.location.hostname;
+  if (current === canonical.host || current.endsWith(`.${canonical.host}`)) {
+    return canonical;
   }
   return null;
 }
