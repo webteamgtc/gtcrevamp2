@@ -20,12 +20,23 @@ import { Flag } from './Flag';
 import { RegGlobe } from './RegGlobe';
 import LiveAccountButton from '@/components/shared/LiveAccountButton';
 
-const GEO = { southAfrica: [18.4, -33.9], comoros: [44.4, -12.2], mauritius: [57.5, -20.2], cambodia: [104.9, 11.6], australia: [151.2, -33.9], vanuatu: [168.3, -17.7] };
+const GEO = {
+  uae: [55.27, 25.2],
+  southAfrica: [18.4, -33.9],
+  comoros: [44.4, -12.2],
+  mauritius: [57.5, -20.2],
+  cambodia: [104.9, 11.6],
+  australia: [151.2, -33.9],
+  vanuatu: [168.3, -17.7]
+};
 
 function useEnt() {
   const te = useTranslations('regulationsPage.entities');
   return { te, items: te.raw('items'), labels: te.raw('labels') };
 }
+
+/** Hero chips show the flag — drop redundant country prefix (e.g. UAE + “UAE CMA” → “CMA”). */
+const heroRegLabel = (e) => (e.code === 'AE' ? 'CMA' : e.short);
 
 function HeroShell({ children }) {
   const tb = useTranslations('regulationsPage.breadcrumb');
@@ -75,7 +86,7 @@ export function RegHero() {
                 <motion.span key={e.id} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: `${50 + Math.cos(a) * 46}%`, top: `${50 + Math.sin(a) * 46}%` }} animate={{ rotate: -360 }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}>
                   <span className="flex items-center gap-1.5 rounded-full bg-ink/80 px-2.5 py-1 text-[11px] font-bold text-white ring-1 ring-white/15 backdrop-blur">
                     <Flag code={e.code} className="h-3 w-[18px]" />
-                    {e.short}
+                    {heroRegLabel(e)}
                   </span>
                 </motion.span>
               );
@@ -107,7 +118,7 @@ export function RegHero() {
               <Flag code={e.code} className="h-5 w-[30px]" />
               <span className="text-start">
                 <span className="block text-sm font-bold text-white">
-                  {e.country} · {e.short}
+                  {e.country} · {heroRegLabel(e)}
                 </span>
                 <span dir="ltr" className="block font-mono text-[11px] text-white/50">
                   {e.number}

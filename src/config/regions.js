@@ -139,8 +139,11 @@ export const CAT5_PORTAL_LOGIN = 'https://portal.gtcfx.com/login';
 /** Preferred language options on the CAT 5 enquiry form → POST /api/uae-enquiry. */
 export const CAT5_LANGUAGES = ['ar', 'en'];
 
-/** CMA licensed-companies register (footer “here” + relationship verify line). */
-export const CAT5_CMA_URL = 'https://www.uaecma.gov.ae/en/open-data/licensed-companies';
+/** UAE Capital Market Authority — open-data licensed companies register (verify licences). */
+export const UAE_CMA_LICENSE_REGISTER =
+  'https://www.uaecma.gov.ae/en/open-data/licensed-companies';
+/** @deprecated Use UAE_CMA_LICENSE_REGISTER — kept for CAT 5 marketing components. */
+export const CAT5_CMA_URL = UAE_CMA_LICENSE_REGISTER;
 
 /* ------------------------------------------------------------------ South Africa (/en-za) */
 

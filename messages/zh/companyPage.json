@@ -20,6 +20,10 @@
       "description": "GTC集团在全球拥有以下实体，共同组成GTC Financial Group。各实体依据其在相关司法管辖区持有的牌照提供金融服务。",
       "viewMore": "查看更多",
       "entities": {
+        "uae": {
+          "name": "阿联酋 - CMA - 第一类",
+          "text": "GTC Financial Consultancy L.L.C.获阿联酋资本市场管理局（CMA）第一类（证券交易）牌照，牌照编号20200000512，获准作为国际市场交易经纪商，以及场外衍生品和即期货币市场交易经纪商开展业务。"
+        },
         "australia": {
           "name": "澳大利亚",
           "text": "GTC Global (Australia) Pty Ltd持有编号为496371的澳大利亚金融服务牌照。GTC Global (Australia)专注于为澳大利亚客户提供教育服务。"
@@ -274,8 +278,8 @@
         {
           "id": "compliance",
           "title": "全球多重监管",
-          "text": "根据相关监管要求（FSCA、VFSC、FCA、ASIC及FSC），客户资金存放于隔离账户，确保权益得到全面保护。",
-          "note": "5家监管机构"
+          "text": "根据阿联酋资本市场管理局（CMA）、FSCA、VFSC、FCA、ASIC及FSC的监管要求，客户资金存放于隔离账户，确保权益得到全面保护。",
+          "note": "6家监管机构"
         },
         {
           "id": "platforms",
@@ -352,9 +356,13 @@
       ]
     },
     "regulated": {
-      "title": "在[全球五个司法管辖区]获得保障与认可",
+      "title": "在[全球六个司法管辖区]获得保障与认可",
       "cta": "完整监管信息",
       "items": [
+        {
+          "code": "CMA - 第一类",
+          "country": "阿联酋"
+        },
         {
           "code": "FSCA",
           "country": "南非"
@@ -592,7 +600,7 @@
       "commission": "Financial Commission会员",
       "stats": [
         {
-          "value": 5,
+          "value": 6,
           "label": "受监管实体"
         },
         {
@@ -609,7 +617,7 @@
       ]
     },
     "entities": {
-      "title": "五个实体，[统一合规标准。]",
+      "title": "六个实体，[统一合规标准。]",
       "description": "每个GTCFX实体均独立持牌，并接受当地监管机构监督，在既定法律框架下为客户提供透明、负责的服务。",
       "cta": "完整监管信息",
       "labels": {
@@ -621,6 +629,35 @@
         "address": "注册地址"
       },
       "items": [
+        {
+          "id": "uae",
+          "code": "AE",
+          "name": "GTC Financial Consultancy L.L.C.",
+          "place": "阿联酋 · 迪拜",
+          "rows": [
+            {
+              "id": "authority",
+              "value": "阿联酋资本市场管理局（CMA）"
+            },
+            {
+              "id": "type",
+              "value": "第一类——证券交易（国际市场交易经纪商；场外衍生品及即期货币市场交易经纪商）"
+            },
+            {
+              "id": "licence",
+              "value": "20200000512"
+            },
+            {
+              "id": "validity",
+              "value": "牌照于2026年11月9日核发；授权业务有效期至2027年12月31日"
+            },
+            {
+              "id": "address",
+              "value": "Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates"
+            }
+          ],
+          "tier": "一级"
+        },
         {
           "id": "australia",
           "code": "AU",
@@ -969,6 +1006,34 @@
       "copy": "复制",
       "copied": "已复制",
       "items": [
+        {
+          "id": "uae",
+          "code": "AE",
+          "country": "阿联酋",
+          "city": "迪拜",
+          "name": "GTC Financial Consultancy L.L.C.",
+          "short": "CMA",
+          "number": "20200000512",
+          "rows": [
+            {
+              "id": "authority",
+              "value": "阿联酋资本市场管理局（CMA）"
+            },
+            {
+              "id": "type",
+              "value": "第一类——证券交易（国际市场交易经纪商；场外衍生品及即期货币市场交易经纪商）"
+            },
+            {
+              "id": "licence",
+              "value": "20200000512"
+            },
+            {
+              "id": "address",
+              "value": "Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates"
+            }
+          ],
+          "registerUrl": "https://www.uaecma.gov.ae/en/open-data/licensed-companies"
+        },
         {
           "id": "southAfrica",
           "code": "ZA",
@@ -1523,8 +1588,8 @@
         },
         {
           "tag": "03 · 牌照",
-          "value": "5",
-          "text": "FSCA · VFSC · FCA · ASIC · FSC——全球五家受监管实体。",
+          "value": "6",
+          "text": "CMA · FSCA · VFSC · FCA · ASIC · FSC——全球六家受监管实体。",
           "fill": 80
         },
         {

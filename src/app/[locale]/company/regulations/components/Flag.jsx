@@ -1,8 +1,8 @@
 'use client';
-import { ZA, VU, KM, AU, MU, KH } from 'country-flag-icons/react/3x2';
+import { AE, ZA, VU, KM, AU, MU, KH } from 'country-flag-icons/react/3x2';
 import { cn } from '@/lib/utils';
 
-const FLAGS = { ZA, VU, KM, AU, MU, KH };
+const FLAGS = { AE, ZA, VU, KM, AU, MU, KH };
 
 /** Small 3:2 country flag (SVG, no image request). */
 export function Flag({ code, className, title }) {

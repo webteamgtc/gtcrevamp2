@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ShieldCheck } from 'lucide-react';
 import ArrowLink from '@/components/shared/ArrowLink';
 import { Reveal, EASE } from '@/components/motion';
-import { AU, MU, ZA, VU, KH } from 'country-flag-icons/react/3x2';
+import { AE, AU, MU, ZA, VU, KH } from 'country-flag-icons/react/3x2';
 import { cn } from '@/lib/utils';
 import { SectionIntro } from '@/components/shared/SectionIntro';
 import { useScrollSteps } from '@/components/shared/useScrollSteps';
@@ -12,6 +12,7 @@ import { useScrollSteps } from '@/components/shared/useScrollSteps';
 const AUTO_MS = 6500;
 
 const ENTITIES = [
+  { id: 'uae', Flag: AE },
   { id: 'australia', Flag: AU },
   { id: 'mauritius', Flag: MU },
   { id: 'southAfrica', Flag: ZA },
@@ -41,7 +42,7 @@ export function Legal() {
         <div className="mt-10" {...s.hover}>
           {/* tabs */}
           <div>
-            <div role="tablist" aria-label={t('subtitle')} className="grid grid-cols-5 gap-1.5 sm:gap-2 rounded-2xl border border-brand/10 bg-[#f3f5fa] p-1.5">
+            <div role="tablist" aria-label={t('subtitle')} className="grid grid-cols-3 gap-1.5 sm:grid-cols-6 sm:gap-2 rounded-2xl border border-brand/10 bg-[#f3f5fa] p-1.5">
               {ENTITIES.map((e, k) => {
                 const on = k === i;
                 return (
