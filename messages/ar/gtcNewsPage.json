@@ -85,6 +85,14 @@
       "readTime": "{minutes} دقائق للقراءة",
       "readNext": "اقرأ التالي",
       "by": "بقلم {author}"
+    },
+    "companyNews": {
+      "badge": "غرفة أخبار GTCFX",
+      "archive": "المزيد من أخبار الشركة",
+      "archiveSub": "الجوائز والفعاليات والإعلانات من GTCFX — اضغط على أي خبر لعرضه بالحجم الكامل.",
+      "viewInfographic": "عرض الخبر",
+      "openFull": "قراءة الخبر كاملًا",
+      "close": "إغلاق"
     }
   },
   "earningsCalendarPage": {

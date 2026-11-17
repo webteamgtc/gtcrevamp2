@@ -2,7 +2,8 @@
 /**
  * /gtc-news/<category> — every post of one Strapi news category, newest first, "Load more" pages through /api/news.
  * Category links (no post counts) switch to the other categories.
- * DRAFTS (temporary, see shared/Draft.jsx):
+ * Market Daily Updates and Company News have their own final layouts (MarketDailyCategory.jsx, CompanyNewsCategory.jsx).
+ * Other categories — DRAFTS (temporary, see shared/Draft.jsx):
  *  A · Editorial index — light hero with the category emblem and an ornament, a lead story, then a two-column
  *      index of posts (picture, date, title, summary) separated by fine lines.
  *  B · Dark showcase — dark hero with the two newest posts as glass cards beside the title, then a card grid.
@@ -27,7 +28,7 @@ import { cn } from '@/lib/utils';
 import { iconFor } from './newsUi';
 import ActivationBand from './ActivationBand';
 import MarketDailyCategory from './MarketDailyCategory';
-import CompanyNewsHero, { COMPANY_HERO_LABELS } from './CompanyNewsHeroes';
+import CompanyNewsCategory from './CompanyNewsCategory';
 import { CategoryLinks, Empty, LoadMore, PostTitle, When } from './categoryShared';
 
 const PAGE_SIZE = 12;
@@ -38,12 +39,11 @@ const inView = (i = 0) => ({ initial: { opacity: 0, y: 24 }, whileInView: { opac
 
 /* ------------------------------------------------------------ A · Editorial index */
 
-function Editorial({ category, categories, articles, t, crumbs, loadMore, hero }) {
+function Editorial({ category, categories, articles, t, crumbs, loadMore }) {
   const [lead, ...rest] = articles;
   const Icon = iconFor(category.slug);
   return (
     <>
-      {hero ?? (
       <section className="relative overflow-hidden bg-white pb-10 pt-36 md:pt-44">
         <div className="bg-grid-light mask-radial absolute inset-0 opacity-50" aria-hidden />
         <div className="container-x relative">
@@ -73,7 +73,6 @@ function Editorial({ category, categories, articles, t, crumbs, loadMore, hero }
           </div>
         </div>
       </section>
-      )}
 
       <section className="relative bg-white pb-16 md:pb-20">
         <div className="container-x">
@@ -275,8 +274,6 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const t = useTranslations('gtcNewsPage');
   const locale = useLocale();
   const draft = useDraft('category', ['a', 'b', 'c']);
-  // Company News hero drafts, section by section review (first option = the live hero)
-  const companyHero = useDraft('companyHero', ['now', 'h1', 'h2', 'h3']);
   const [articles, setArticles] = useState(initial);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -306,12 +303,9 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const v = draft.value;
   const marketDaily = category.slug === 'market-daily-updates';
   const company = category.slug === 'company-news';
-  const ch = companyHero.value;
-  const hero = company && ch !== 'now' ? <CompanyNewsHero variant={ch} {...props} /> : undefined;
-  // company news shows the live Editorial body (A) under any hero; the draft heroes are dark
-  const theme = marketDaily || hero ? 'dark' : company ? 'light' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
-  // Market Daily is final (no draft bar)
-  const [barDraft, barLabels] = marketDaily ? [null, null] : company ? [companyHero, COMPANY_HERO_LABELS] : [draft, LABELS];
+  const theme = marketDaily || company ? 'dark' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
+  // Market Daily and Company News are final (no draft bar)
+  const [barDraft, barLabels] = marketDaily || company ? [null, null] : [draft, LABELS];
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />
@@ -325,7 +319,7 @@ export default function CategoryPage({ category, categories, initial, total }) {
         {marketDaily ? (
           <MarketDailyCategory {...props} />
         ) : company ? (
-          <Editorial {...props} hero={hero} />
+          <CompanyNewsCategory {...props} />
         ) : (
           <>
             {v === 'a' && <Editorial {...props} />}

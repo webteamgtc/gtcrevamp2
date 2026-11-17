@@ -85,6 +85,14 @@
       "readTime": "{minutes} min read",
       "readNext": "Read next",
       "by": "By {author}"
+    },
+    "companyNews": {
+      "badge": "GTCFX newsroom",
+      "archive": "More company news",
+      "archiveSub": "Awards, events and announcements from GTCFX — tap any story to see it full size.",
+      "viewInfographic": "View story",
+      "openFull": "Read the full story",
+      "close": "Close"
     }
   },
   "earningsCalendarPage": {

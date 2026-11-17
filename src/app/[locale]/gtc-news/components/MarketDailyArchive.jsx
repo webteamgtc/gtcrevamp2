@@ -31,10 +31,10 @@ function useParts() {
   }, [locale]);
 }
 
-function Infographic({ article, className }) {
+function Infographic({ article, className, fit = 'contain', bare = false }) {
   return (
-    <div className={cn('flex items-center justify-center overflow-hidden bg-white', className)}>
-      <NewsCover article={article} showTitle={false} fit="contain" />
+    <div className={cn('flex items-center justify-center overflow-hidden', !bare && 'bg-white', className)}>
+      <NewsCover article={article} showTitle={false} fit={fit} />
     </div>
   );
 }
@@ -57,7 +57,7 @@ function Section({ children }) {
   );
 }
 
-function Viewer({ items, index, onClose, onGo, t, tm }) {
+function Viewer({ items, index, onClose, onGo, t, tm, photo }) {
   const parts = useParts();
   const a = items[index];
   const [dir, setDir] = useState(1);
@@ -114,7 +114,7 @@ function Viewer({ items, index, onClose, onGo, t, tm }) {
               dragConstraints={{ left: 0, right: 0 }}
               onDragEnd={(_, info) => Math.abs(info.offset.x) > 80 && go(info.offset.x < 0 ? 1 : -1)}
             >
-              <Infographic article={a} className="size-full rounded-3xl" />
+              <Infographic article={a} bare={photo} className="size-full rounded-3xl" />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -149,7 +149,7 @@ function Viewer({ items, index, onClose, onGo, t, tm }) {
   );
 }
 
-function Gallery({ rows, t, tm, loadMore }) {
+function Gallery({ rows, t, tm, loadMore, photo }) {
   const parts = useParts();
   const [open, setOpen] = useState(null);
   return (
@@ -161,7 +161,7 @@ function Gallery({ rows, t, tm, loadMore }) {
           return (
             <motion.button key={a.id} type="button" onClick={() => setOpen(i)} {...inView(i)} className="group relative block w-full overflow-hidden rounded-[1.5rem] bg-white p-2 text-start shadow-sm ring-1 ring-brand/10 transition-shadow hover:shadow-2xl hover:shadow-brand/15">
               <span className="relative block overflow-hidden rounded-[1.1rem]">
-                <Infographic article={a} className="aspect-square transition-transform duration-500 group-hover:scale-105" />
+                <Infographic article={a} fit={photo ? 'cover' : 'contain'} className={cn(photo ? 'aspect-[4/3]' : 'aspect-square', 'transition-transform duration-500 group-hover:scale-105')} />
                 <span className="absolute inset-0 grid place-items-center bg-ink/55 text-white opacity-0 transition-opacity group-hover:opacity-100">
                   <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold backdrop-blur">
                     <Expand className="size-4" aria-hidden /> {tm('viewInfographic')}
@@ -179,18 +179,19 @@ function Gallery({ rows, t, tm, loadMore }) {
         })}
       </div>
       <LoadMore {...loadMore} label={t('category.loadMore')} />
-      <AnimatePresence>{open !== null && rows[open] && <Viewer items={rows} index={open} onClose={() => setOpen(null)} onGo={setOpen} t={t} tm={tm} />}</AnimatePresence>
+      <AnimatePresence>{open !== null && rows[open] && <Viewer items={rows} index={open} onClose={() => setOpen(null)} onGo={setOpen} t={t} tm={tm} photo={photo} />}</AnimatePresence>
     </Section>
   );
 }
 
-export default function MarketDailyArchive({ articles, t, loadMore }) {
-  const tm = (key, v) => t(`marketDaily.${key}`, v);
+/** ns: text namespace ('marketDaily' | 'companyNews'); photo: photo covers (cropped tiles) instead of infographics. */
+export default function MarketDailyArchive({ articles, t, loadMore, ns = 'marketDaily', photo = false }) {
+  const tm = (key, v) => t(`${ns}.${key}`, v);
   if (!articles.length)
     return (
       <Section>
         <Empty t={t} />
       </Section>
     );
-  return <Gallery rows={articles.slice(1)} t={t} tm={tm} loadMore={loadMore} />; // the newest update is in the hero
+  return <Gallery rows={articles.slice(1)} t={t} tm={tm} loadMore={loadMore} photo={photo} />; // the newest update is in the hero
 }

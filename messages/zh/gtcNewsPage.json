@@ -75,6 +75,14 @@
       "prev": "上一页",
       "next": "下一页",
       "allNews": "全部新闻"
+    },
+    "companyNews": {
+      "badge": "GTCFX 新闻中心",
+      "archive": "更多公司新闻",
+      "archiveSub": "GTCFX 的奖项、活动与公告 — 点击任意新闻即可查看大图。",
+      "viewInfographic": "查看新闻",
+      "openFull": "阅读完整新闻",
+      "close": "关闭"
     }
   },
   "earningsCalendarPage": {
