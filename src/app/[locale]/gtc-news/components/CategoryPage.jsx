@@ -28,7 +28,7 @@ import { iconFor } from './newsUi';
 import ActivationBand from './ActivationBand';
 import MarketDailyCategory from './MarketDailyCategory';
 import CompanyNewsHero, { COMPANY_HERO_LABELS } from './CompanyNewsHeroes';
-import MarketDailyHero, { DAILY_HERO_LABELS } from './MarketDailyHeroes';
+import { DAILY_ARCHIVE_LABELS } from './MarketDailyArchives';
 import { CategoryLinks, Empty, LoadMore, PostTitle, When } from './categoryShared';
 
 const PAGE_SIZE = 12;
@@ -278,7 +278,7 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const draft = useDraft('category', ['a', 'b', 'c']);
   // hero drafts for the two pages under review, section by section (first option = the live hero)
   const companyHero = useDraft('companyHero', ['now', 'h1', 'h2', 'h3']);
-  const dailyHero = useDraft('dailyHero', ['now', 'h1', 'h2', 'h3']);
+  const dailyArchive = useDraft('dailyArchive', ['now', 'a1', 'a2', 'a3']);
   const [articles, setArticles] = useState(initial);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -309,11 +309,10 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const marketDaily = category.slug === 'market-daily-updates';
   const company = category.slug === 'company-news';
   const ch = companyHero.value;
-  const dh = dailyHero.value;
-  const hero = company && ch !== 'now' ? <CompanyNewsHero variant={ch} {...props} /> : marketDaily && dh !== 'now' ? <MarketDailyHero variant={dh} {...props} /> : undefined;
+  const hero = company && ch !== 'now' ? <CompanyNewsHero variant={ch} {...props} /> : undefined;
   // company news shows the live Editorial body (A) under any hero; the draft heroes are dark
   const theme = marketDaily || hero ? 'dark' : company ? 'light' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
-  const [barDraft, barLabels] = marketDaily ? [dailyHero, DAILY_HERO_LABELS] : company ? [companyHero, COMPANY_HERO_LABELS] : [draft, LABELS];
+  const [barDraft, barLabels] = marketDaily ? [dailyArchive, DAILY_ARCHIVE_LABELS] : company ? [companyHero, COMPANY_HERO_LABELS] : [draft, LABELS];
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />
@@ -325,7 +324,7 @@ export default function CategoryPage({ category, categories, initial, total }) {
       )}
       <main>
         {marketDaily ? (
-          <MarketDailyCategory {...props} hero={hero} />
+          <MarketDailyCategory {...props} archive={dailyArchive.value} />
         ) : company ? (
           <Editorial {...props} hero={hero} />
         ) : (

@@ -68,7 +68,12 @@
     "marketDaily": {
       "badge": "Market intelligence",
       "archive": "Previous daily updates",
-      "archiveSub": "Full infographic previews — tap any update to read the full brief."
+      "archiveSub": "Full infographic previews — tap any update to read the full brief.",
+      "updatesCount": "{count, plural, one {# update} other {# updates}}",
+      "noUpdate": "No update",
+      "viewInfographic": "View infographic",
+      "openFull": "Read the full update",
+      "close": "Close"
     },
     "article": {
       "backToCategory": "Back to {category}",

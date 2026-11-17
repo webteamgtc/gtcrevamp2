@@ -61,7 +61,12 @@
     "marketDaily": {
       "badge": "市场洞察",
       "archive": "往期每日更新",
-      "archiveSub": "完整信息图预览 — 点击任意更新阅读全文。"
+      "archiveSub": "完整信息图预览 — 点击任意更新阅读全文。",
+      "updatesCount": "{count, plural, other {# 篇更新}}",
+      "noUpdate": "无更新",
+      "viewInfographic": "查看信息图",
+      "openFull": "阅读完整更新",
+      "close": "关闭"
     },
     "article": {
       "backToCategory": "返回{category}",
