@@ -28,13 +28,14 @@ function CoverFrame({ article, className }) {
   );
 }
 
-export default function MarketDailyCategory({ category, categories, articles, t, crumbs, loadMore }) {
+export default function MarketDailyCategory({ category, categories, articles, t, crumbs, loadMore, hero }) {
   const tm = (key) => t(`marketDaily.${key}`);
   const [lead, ...rest] = articles;
   const rows = lead ? rest : articles;
 
   return (
     <>
+      {hero ?? (
       <section className="is-dark relative overflow-hidden bg-ink pb-16 pt-36 text-white md:pb-24 md:pt-44">
         <HeroBackdrop />
         <motion.span className="absolute -start-24 top-1/3 size-80 rounded-full bg-gold/20 blur-[120px]" animate={{ opacity: [0.35, 0.65, 0.35] }} transition={{ duration: 7, repeat: Infinity }} aria-hidden />
@@ -95,6 +96,7 @@ export default function MarketDailyCategory({ category, categories, articles, t,
           </div>
         </div>
       </section>
+      )}
 
       <section className="relative scroll-mt-20 overflow-clip bg-[#f6f7fb] py-14 md:py-24">
         <div className="bg-grid-light mask-radial absolute inset-0 opacity-60" aria-hidden />

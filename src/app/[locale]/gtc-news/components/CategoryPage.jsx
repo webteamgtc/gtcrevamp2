@@ -2,7 +2,6 @@
 /**
  * /gtc-news/<category> — every post of one Strapi news category, newest first, "Load more" pages through /api/news.
  * Category links (no post counts) switch to the other categories.
- * Company News and Market Daily Updates have their own drafts under review (CompanyNewsDrafts.jsx, MarketDailyDrafts.jsx).
  * DRAFTS (temporary, see shared/Draft.jsx):
  *  A · Editorial index — light hero with the category emblem and an ornament, a lead story, then a two-column
  *      index of posts (picture, date, title, summary) separated by fine lines.
@@ -28,8 +27,8 @@ import { cn } from '@/lib/utils';
 import { iconFor } from './newsUi';
 import ActivationBand from './ActivationBand';
 import MarketDailyCategory from './MarketDailyCategory';
-import CompanyNewsDrafts, { COMPANY_HEADER, COMPANY_LABELS } from './CompanyNewsDrafts';
-import MarketDailyDrafts, { DAILY_HEADER, DAILY_LABELS } from './MarketDailyDrafts';
+import CompanyNewsHero, { COMPANY_HERO_LABELS } from './CompanyNewsHeroes';
+import MarketDailyHero, { DAILY_HERO_LABELS } from './MarketDailyHeroes';
 import { CategoryLinks, Empty, LoadMore, PostTitle, When } from './categoryShared';
 
 const PAGE_SIZE = 12;
@@ -40,11 +39,12 @@ const inView = (i = 0) => ({ initial: { opacity: 0, y: 24 }, whileInView: { opac
 
 /* ------------------------------------------------------------ A · Editorial index */
 
-function Editorial({ category, categories, articles, t, crumbs, loadMore }) {
+function Editorial({ category, categories, articles, t, crumbs, loadMore, hero }) {
   const [lead, ...rest] = articles;
   const Icon = iconFor(category.slug);
   return (
     <>
+      {hero ?? (
       <section className="relative overflow-hidden bg-white pb-10 pt-36 md:pt-44">
         <div className="bg-grid-light mask-radial absolute inset-0 opacity-50" aria-hidden />
         <div className="container-x relative">
@@ -74,6 +74,7 @@ function Editorial({ category, categories, articles, t, crumbs, loadMore }) {
           </div>
         </div>
       </section>
+      )}
 
       <section className="relative bg-white pb-16 md:pb-20">
         <div className="container-x">
@@ -275,9 +276,9 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const t = useTranslations('gtcNewsPage');
   const locale = useLocale();
   const draft = useDraft('category', ['a', 'b', 'c']);
-  // drafts for the two category pages under review (first option = the live layout)
-  const companyDraft = useDraft('company', ['now', 'n1', 'n2', 'n3']);
-  const dailyDraft = useDraft('daily', ['now', 'd1', 'd2', 'd3']);
+  // hero drafts for the two pages under review, section by section (first option = the live hero)
+  const companyHero = useDraft('companyHero', ['now', 'h1', 'h2', 'h3']);
+  const dailyHero = useDraft('dailyHero', ['now', 'h1', 'h2', 'h3']);
   const [articles, setArticles] = useState(initial);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -303,28 +304,30 @@ export default function CategoryPage({ category, categories, initial, total }) {
   };
 
   const crumbs = [{ label: t('breadcrumb.home'), href: '/' }, { label: t('breadcrumb.current'), href: NEWS_PATH }, { label: category.name }];
-  const props = { category, categories, articles, total, t, crumbs, loadMore: { more, loading, onClick: loadMore } };
+  const props = { category, categories, articles, t, crumbs, loadMore: { more, loading, onClick: loadMore } };
   const v = draft.value;
   const marketDaily = category.slug === 'market-daily-updates';
   const company = category.slug === 'company-news';
-  const dv = dailyDraft.value;
-  const cv = companyDraft.value;
-  const theme = marketDaily ? (DAILY_HEADER[dv] ?? 'dark') : company && cv !== 'now' ? COMPANY_HEADER[cv] : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
-  const bar = marketDaily ? [dailyDraft, DAILY_LABELS] : company ? [companyDraft, COMPANY_LABELS] : [draft, LABELS];
+  const ch = companyHero.value;
+  const dh = dailyHero.value;
+  const hero = company && ch !== 'now' ? <CompanyNewsHero variant={ch} {...props} /> : marketDaily && dh !== 'now' ? <MarketDailyHero variant={dh} {...props} /> : undefined;
+  // company news shows the live Editorial body (A) under any hero; the draft heroes are dark
+  const theme = marketDaily || hero ? 'dark' : company ? 'light' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
+  const [barDraft, barLabels] = marketDaily ? [dailyHero, DAILY_HERO_LABELS] : company ? [companyHero, COMPANY_HERO_LABELS] : [draft, LABELS];
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />
       <Header theme={theme} />
-      {bar[0].show && (
+      {barDraft.show && (
         <div className="fixed bottom-4 end-4 z-[70]">
-          <DraftBar draft={bar[0]} labels={bar[1]} className="mb-0" />
+          <DraftBar draft={barDraft} labels={barLabels} className="mb-0" />
         </div>
       )}
       <main>
         {marketDaily ? (
-          dv === 'now' ? <MarketDailyCategory {...props} /> : <MarketDailyDrafts variant={dv} {...props} />
-        ) : company && cv !== 'now' ? (
-          <CompanyNewsDrafts variant={cv} {...props} />
+          <MarketDailyCategory {...props} hero={hero} />
+        ) : company ? (
+          <Editorial {...props} hero={hero} />
         ) : (
           <>
             {v === 'a' && <Editorial {...props} />}

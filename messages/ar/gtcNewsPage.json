@@ -82,16 +82,6 @@
       "readTime": "{minutes} دقائق للقراءة",
       "readNext": "اقرأ التالي",
       "by": "بقلم {author}"
-    },
-    "drafts": {
-      "newsroom": "غرفة أخبار GTCFX",
-      "stories": "{count, plural, one {خبر} other {أخبار}}",
-      "todaysBrief": "موجز اليوم",
-      "updatesCount": "{count, plural, one {تحديث واحد} other {# تحديثات}}",
-      "noUpdate": "لا يوجد تحديث",
-      "view": "عرض الإنفوجرافيك",
-      "openFull": "قراءة التحديث كاملًا",
-      "close": "إغلاق"
     }
   },
   "earningsCalendarPage": {
