@@ -55,7 +55,14 @@
     "category": {
       "loadMore": "加载更多",
       "articles": "{count, plural, one {#篇文章} other {#篇文章}}",
-      "backToNews": "返回GTC新闻"
+      "backToNews": "返回GTC新闻",
+      "description": "GTCFX最新{category}，按时间倒序排列。"
+    },
+    "marketDaily": {
+      "eyebrow": "市场洞察",
+      "allUpdates": "全部每日更新",
+      "readUpdate": "阅读更新",
+      "featured": "今日精选"
     },
     "article": {
       "backToCategory": "返回{category}",

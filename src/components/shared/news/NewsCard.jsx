@@ -53,7 +53,41 @@ export function NewsMeta({ article, dark = false, showCategory = true }) {
   );
 }
 
-export default function NewsCard({ article, variant = 'default', showCategory = true, compact = false, className }) {
+export default function NewsCard({ article, variant = 'default', showCategory = true, compact = false, className, readLabel = 'Read More' }) {
+  if (variant === 'brief') {
+    return (
+      <article
+        className={cn(
+          'group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-[0_8px_30px_-12px_rgba(41,59,147,0.25)] ring-1 ring-brand/[0.08] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-16px_rgba(41,59,147,0.35)] hover:ring-brand/20',
+          className
+        )}
+      >
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <NewsCover article={article} showTitle={false} />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/10 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
+          <span className="absolute start-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-[11px] font-bold text-brand shadow-md backdrop-blur">
+            <CalendarDays className="size-3.5 text-gold-700" aria-hidden />
+            <time dateTime={article.publishedAt}>{article.dateLabel}</time>
+          </span>
+          <span className="absolute end-4 top-4 grid size-10 translate-y-2 place-items-center rounded-full bg-gold text-white opacity-0 shadow-lg transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100" aria-hidden>
+            <ArrowUpRight className="size-4 rtl:-scale-x-100" />
+          </span>
+        </div>
+        <div className="flex flex-1 flex-col p-5 md:p-6">
+          <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-ink transition-colors group-hover:text-brand">
+            <NavLink href={article.href} className="after:absolute after:inset-0">
+              {article.title}
+            </NavLink>
+          </h3>
+          {article.excerpt && <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-ink/55">{article.excerpt}</p>}
+          <span className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-semibold text-brand">
+            {readLabel}
+            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100" aria-hidden />
+          </span>
+        </div>
+      </article>
+    );
+  }
   if (variant === 'row') {
     return (
       <article className={cn('group relative flex rounded-2xl p-2.5 transition-colors hover:bg-[#f6f7fb]', compact ? 'gap-3' : 'gap-4', className)}>

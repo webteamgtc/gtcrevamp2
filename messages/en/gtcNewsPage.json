@@ -65,6 +65,12 @@
       "backToNews": "Back to GTC News",
       "description": "The latest {category} from GTCFX, newest first."
     },
+    "marketDaily": {
+      "eyebrow": "Market intelligence",
+      "allUpdates": "All daily updates",
+      "readUpdate": "Read update",
+      "featured": "Today’s highlight"
+    },
     "article": {
       "backToCategory": "Back to {category}",
       "related": "More from [{category}]",
