@@ -22,6 +22,7 @@ import { buildCat5PortalRedirectUrl, cat5AutoRedirectToPortal } from '@/lib/cat5
 import { isEmailAvailableForRegistration } from '@/lib/gtc/checkEmailAvailability';
 import { requestGtcCheckEmail } from '@/lib/gtc/requestCheckEmail';
 import { requestGtcEmailCode } from '@/lib/gtc/requestGetCode';
+import { requestGtcRegistration } from '@/lib/gtc/requestReg';
 
 const LOGIN_URL = PORTAL.login;
 const TERMS_URL = 'https://www.gtcfx.com/terms';
@@ -251,7 +252,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
       return;
     }
     try {
-      const res = await post('/api/gtc/reg', { ...payload, code: otpCode });
+      const res = await requestGtcRegistration({ ...payload, code: otpCode }, locale);
       if (res?.code === 200) {
         toast.success(res?.message || t('toast.registrationSuccess'));
         setValues((v) => ({ ...EMPTY, country: v.country, phone: dial ? `+${dial}` : '', partnerCode: partnerLocked ? v.partnerCode : '' }));
