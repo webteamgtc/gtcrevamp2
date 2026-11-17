@@ -82,6 +82,16 @@
       "readTime": "{minutes} min read",
       "readNext": "Read next",
       "by": "By {author}"
+    },
+    "drafts": {
+      "newsroom": "GTCFX Newsroom",
+      "stories": "{count, plural, one {story} other {stories}}",
+      "todaysBrief": "Today's brief",
+      "updatesCount": "{count, plural, one {# update} other {# updates}}",
+      "noUpdate": "No update",
+      "view": "View infographic",
+      "openFull": "Read the full update",
+      "close": "Close"
     }
   },
   "earningsCalendarPage": {

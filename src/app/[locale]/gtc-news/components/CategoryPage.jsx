@@ -2,6 +2,7 @@
 /**
  * /gtc-news/<category> — every post of one Strapi news category, newest first, "Load more" pages through /api/news.
  * Category links (no post counts) switch to the other categories.
+ * Company News and Market Daily Updates have their own drafts under review (CompanyNewsDrafts.jsx, MarketDailyDrafts.jsx).
  * DRAFTS (temporary, see shared/Draft.jsx):
  *  A · Editorial index — light hero with the category emblem and an ornament, a lead story, then a two-column
  *      index of posts (picture, date, title, summary) separated by fine lines.
@@ -27,6 +28,8 @@ import { cn } from '@/lib/utils';
 import { iconFor } from './newsUi';
 import ActivationBand from './ActivationBand';
 import MarketDailyCategory from './MarketDailyCategory';
+import CompanyNewsDrafts, { COMPANY_HEADER, COMPANY_LABELS } from './CompanyNewsDrafts';
+import MarketDailyDrafts, { DAILY_HEADER, DAILY_LABELS } from './MarketDailyDrafts';
 import { CategoryLinks, Empty, LoadMore, PostTitle, When } from './categoryShared';
 
 const PAGE_SIZE = 12;
@@ -272,6 +275,9 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const t = useTranslations('gtcNewsPage');
   const locale = useLocale();
   const draft = useDraft('category', ['a', 'b', 'c']);
+  // drafts for the two category pages under review (first option = the live layout)
+  const companyDraft = useDraft('company', ['now', 'n1', 'n2', 'n3']);
+  const dailyDraft = useDraft('daily', ['now', 'd1', 'd2', 'd3']);
   const [articles, setArticles] = useState(initial);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -297,21 +303,28 @@ export default function CategoryPage({ category, categories, initial, total }) {
   };
 
   const crumbs = [{ label: t('breadcrumb.home'), href: '/' }, { label: t('breadcrumb.current'), href: NEWS_PATH }, { label: category.name }];
-  const props = { category, categories, articles, t, crumbs, loadMore: { more, loading, onClick: loadMore } };
+  const props = { category, categories, articles, total, t, crumbs, loadMore: { more, loading, onClick: loadMore } };
   const v = draft.value;
   const marketDaily = category.slug === 'market-daily-updates';
+  const company = category.slug === 'company-news';
+  const dv = dailyDraft.value;
+  const cv = companyDraft.value;
+  const theme = marketDaily ? (DAILY_HEADER[dv] ?? 'dark') : company && cv !== 'now' ? COMPANY_HEADER[cv] : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
+  const bar = marketDaily ? [dailyDraft, DAILY_LABELS] : company ? [companyDraft, COMPANY_LABELS] : [draft, LABELS];
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />
-      <Header theme={marketDaily ? 'dark' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark'} />
-      {!marketDaily && draft.show && (
+      <Header theme={theme} />
+      {bar[0].show && (
         <div className="fixed bottom-4 end-4 z-[70]">
-          <DraftBar draft={draft} labels={LABELS} className="mb-0" />
+          <DraftBar draft={bar[0]} labels={bar[1]} className="mb-0" />
         </div>
       )}
       <main>
         {marketDaily ? (
-          <MarketDailyCategory {...props} />
+          dv === 'now' ? <MarketDailyCategory {...props} /> : <MarketDailyDrafts variant={dv} {...props} />
+        ) : company && cv !== 'now' ? (
+          <CompanyNewsDrafts variant={cv} {...props} />
         ) : (
           <>
             {v === 'a' && <Editorial {...props} />}
