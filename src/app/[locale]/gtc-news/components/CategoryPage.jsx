@@ -28,7 +28,6 @@ import { iconFor } from './newsUi';
 import ActivationBand from './ActivationBand';
 import MarketDailyCategory from './MarketDailyCategory';
 import CompanyNewsHero, { COMPANY_HERO_LABELS } from './CompanyNewsHeroes';
-import { DAILY_ARCHIVE_LABELS } from './MarketDailyArchives';
 import { CategoryLinks, Empty, LoadMore, PostTitle, When } from './categoryShared';
 
 const PAGE_SIZE = 12;
@@ -276,9 +275,8 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const t = useTranslations('gtcNewsPage');
   const locale = useLocale();
   const draft = useDraft('category', ['a', 'b', 'c']);
-  // hero drafts for the two pages under review, section by section (first option = the live hero)
+  // Company News hero drafts, section by section review (first option = the live hero)
   const companyHero = useDraft('companyHero', ['now', 'h1', 'h2', 'h3']);
-  const dailyArchive = useDraft('dailyArchive', ['now', 'a1', 'a2', 'a3']);
   const [articles, setArticles] = useState(initial);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -312,19 +310,20 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const hero = company && ch !== 'now' ? <CompanyNewsHero variant={ch} {...props} /> : undefined;
   // company news shows the live Editorial body (A) under any hero; the draft heroes are dark
   const theme = marketDaily || hero ? 'dark' : company ? 'light' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
-  const [barDraft, barLabels] = marketDaily ? [dailyArchive, DAILY_ARCHIVE_LABELS] : company ? [companyHero, COMPANY_HERO_LABELS] : [draft, LABELS];
+  // Market Daily is final (no draft bar)
+  const [barDraft, barLabels] = marketDaily ? [null, null] : company ? [companyHero, COMPANY_HERO_LABELS] : [draft, LABELS];
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />
       <Header theme={theme} />
-      {barDraft.show && (
+      {barDraft?.show && (
         <div className="fixed bottom-4 end-4 z-[70]">
           <DraftBar draft={barDraft} labels={barLabels} className="mb-0" />
         </div>
       )}
       <main>
         {marketDaily ? (
-          <MarketDailyCategory {...props} archive={dailyArchive.value} />
+          <MarketDailyCategory {...props} />
         ) : company ? (
           <Editorial {...props} hero={hero} />
         ) : (
