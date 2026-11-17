@@ -41,7 +41,7 @@ export const mailgunClient = mg.client({
   url: process.env.MAILGUN_API_URL || "https://api.mailgun.net",
 });
 
-export const MAILGUN_DOMAIN = "mx.gtcmail.com" || "mx.gtcmail.com";
+export const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN || 'mx.gtcmail.com';
 
-export const MAILGUN_FROM =
-  "GTCFX <portal@mx.gtcmail.com>" || `GTCFX <postmaster@${MAILGUN_DOMAIN}>`;    
+/** Display name in the inbox (e.g. `GTC <portal@…>`). Override with MAILGUN_FROM in env. */
+export const MAILGUN_FROM = process.env.MAILGUN_FROM?.trim() || `GTC <portal@${MAILGUN_DOMAIN}>`;
