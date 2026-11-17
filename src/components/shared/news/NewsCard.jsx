@@ -8,7 +8,8 @@ import NavLink from '@/components/shared/nav/NavLink';
 import { cn } from '@/lib/utils';
 
 /** Article cover from Strapi, or a branded navy cover with the title when there is no image. */
-export function NewsCover({ article, className, showTitle = true }) {
+export function NewsCover({ article, className, showTitle = true, fit = 'cover' }) {
+  const contain = fit === 'contain';
   if (article.cover?.url) {
     return (
       <img
@@ -18,7 +19,12 @@ export function NewsCover({ article, className, showTitle = true }) {
         height={article.cover.height ?? undefined}
         loading="lazy"
         decoding="async"
-        className={cn('size-full object-cover transition-transform duration-700 group-hover:scale-[1.05]', className)}
+        className={cn(
+          'size-full',
+          contain ? 'object-contain object-center' : 'object-cover',
+          !contain && 'transition-transform duration-700 group-hover:scale-[1.05]',
+          className
+        )}
       />
     );
   }

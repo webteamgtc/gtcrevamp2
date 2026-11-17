@@ -58,6 +58,11 @@
       "backToNews": "返回GTC新闻",
       "description": "GTCFX最新{category}，按时间倒序排列。"
     },
+    "marketDaily": {
+      "badge": "市场洞察",
+      "archive": "往期每日更新",
+      "archiveSub": "完整信息图预览 — 点击任意更新阅读全文。"
+    },
     "article": {
       "backToCategory": "返回{category}",
       "related": "更多[{category}]内容",

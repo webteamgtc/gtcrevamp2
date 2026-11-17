@@ -65,6 +65,11 @@
       "backToNews": "Back to GTC News",
       "description": "The latest {category} from GTCFX, newest first."
     },
+    "marketDaily": {
+      "badge": "Market intelligence",
+      "archive": "Previous daily updates",
+      "archiveSub": "Full infographic previews — tap any update to read the full brief."
+    },
     "article": {
       "backToCategory": "Back to {category}",
       "related": "More from [{category}]",

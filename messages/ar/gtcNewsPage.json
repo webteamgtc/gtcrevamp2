@@ -65,6 +65,11 @@
       "backToNews": "العودة إلى أخبار GTC",
       "description": "أحدث منشورات {category} من GTCFX، الأحدث أولًا."
     },
+    "marketDaily": {
+      "badge": "تحليلات السوق",
+      "archive": "تحديثات يومية سابقة",
+      "archiveSub": "معاينة كاملة للرسوم — اختر أي تحديث لقراءة الملخص."
+    },
     "article": {
       "backToCategory": "العودة إلى {category}",
       "related": "المزيد من [{category}]",
