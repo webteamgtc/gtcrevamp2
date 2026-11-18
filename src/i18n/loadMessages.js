@@ -23,6 +23,22 @@ export const BUNDLED_LANGS = ['en', 'ar', 'zh'];
 const S3_BASE = (process.env.MESSAGES_S3_BASE || 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/messages').replace(/\/$/, '');
 const S3_REVALIDATE = 3600; // seconds; cached by Next's fetch cache, so pages stay static
 
+/** One in-process cache per S3 language (avoids hundreds of duplicate fetches during `next build`). */
+const s3MessagesCache = new Map();
+const s3FailureLogged = new Set();
+
+function envFlag(name) {
+  const v = process.env[name]?.trim().toLowerCase();
+  return v === '1' || v === 'true' || v === 'yes' || v === 'fetch';
+}
+
+/** Skip S3 entirely, or during build unless MESSAGES_S3_BUILD=fetch (missing files → English in request.js). */
+function shouldSkipS3() {
+  if (envFlag('MESSAGES_S3_SKIP')) return true;
+  if (process.env.NEXT_PHASE === 'phase-production-build') return !envFlag('MESSAGES_S3_BUILD');
+  return false;
+}
+
 /** S3 prefix folders to try (first match wins). Keys are case-sensitive on S3. */
 const S3_LANG_CANDIDATES = { 'zh-TW': ['zh-TW', 'zh-tw'] };
 const s3LangFolders = (lang) => S3_LANG_CANDIDATES[lang] ?? [lang];
@@ -91,27 +107,52 @@ function loadFolderMessages(locale) {
   return { messages, loaded: files.length > 0 };
 }
 
-/** One file from S3, or null if it isn't there (S3 answers 403/404) / is invalid / can't be reached. */
+function logS3Unavailable(url, reason) {
+  if (s3FailureLogged.has(url)) return;
+  s3FailureLogged.add(url);
+  console.warn(`[i18n] S3 skip → English fallback: ${url}${reason ? ` (${reason})` : ''}`);
+}
+
+/** One file from S3, or null if missing / unreachable (never throws — merge uses English in request.js). */
 async function fetchS3File(url) {
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
     try {
       const res = await fetch(url, { headers: { Accept: 'application/json' }, next: { revalidate: S3_REVALIDATE } });
-      if (res.status === 403 || res.status === 404) return null; // not uploaded yet → English
+      if (res.status === 403 || res.status === 404) {
+        logS3Unavailable(url, res.status);
+        return null;
+      }
       if (!res.ok) {
-        console.error(`[i18n] ${url} returned ${res.status}`);
+        logS3Unavailable(url, res.status);
         return null;
       }
       const data = await res.json();
       return data && typeof data === 'object' && !Array.isArray(data) ? data : null;
     } catch (err) {
-      if (attempt === 3) {
-        console.error(`[i18n] ${url} failed:`, err);
+      const reason = err?.cause?.code || err?.code || err?.message;
+      if (attempt === 2) {
+        logS3Unavailable(url, reason);
         return null;
       }
-      await new Promise((resolve) => setTimeout(resolve, attempt * 300));
+      await new Promise((resolve) => setTimeout(resolve, 200));
     }
   }
   return null;
+}
+
+/** Limit parallel S3 reads per language (reduces ECONNRESET during dev/build). */
+const S3_FILE_CONCURRENCY = 4;
+async function mapPool(items, mapper) {
+  const results = new Array(items.length);
+  let i = 0;
+  async function worker() {
+    while (i < items.length) {
+      const idx = i++;
+      results[idx] = await mapper(items[idx], idx);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(S3_FILE_CONCURRENCY, items.length) }, worker));
+  return results;
 }
 
 /**
@@ -127,13 +168,20 @@ async function fetchS3FileFromLangFolders(folders, file) {
 }
 
 async function fetchS3Messages(lang) {
+  if (shouldSkipS3()) return {};
+
+  if (s3MessagesCache.has(lang)) return s3MessagesCache.get(lang);
+
   const files = fs.readdirSync(path.join(messagesRoot, 'en')).filter((name) => name.endsWith('.json')).sort();
   const folders = s3LangFolders(lang);
-  const parts = await Promise.all(files.map((file) => fetchS3FileFromLangFolders(folders, file)));
-  return parts.reduce((messages, raw, i) => {
+  const parts = await mapPool(files, (file) => fetchS3FileFromLangFolders(folders, file));
+  const messages = parts.reduce((acc, raw, i) => {
     const part = raw && namespaceBundlePart(files[i], raw);
-    return part && typeof part === 'object' ? merge(messages, part) : messages;
+    return part && typeof part === 'object' ? merge(acc, part) : acc;
   }, {});
+
+  s3MessagesCache.set(lang, messages);
+  return messages;
 }
 
 const cache = new Map();
@@ -158,7 +206,6 @@ export async function loadLocaleMessages(locale) {
     return messages;
   }
 
-  // not memoised here: the fetch cache refreshes the S3 file every S3_REVALIDATE seconds
   const remote = await fetchS3Messages(lang);
   const { messages: local, loaded } = loadFolderMessages(lang);
   return loaded ? merge(remote, local) : remote;
