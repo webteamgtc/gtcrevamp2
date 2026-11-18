@@ -14,7 +14,7 @@ import { SITE_URL } from '@/lib/seo';
 import { INTRO_SCRIPT } from '@/components/shared/intro/introScript';
 import { Analytics } from '@vercel/analytics/next';
 import UmamiScript from '@/lib/analytics/UmamiScript';
-import ThirdPartyScripts from '@/lib/ThirdPartyScripts';
+import ConsentScripts from '@/components/shared/consent/ConsentScripts';
 import ConvrsChatScript from '@/config/ConvrsChatScript';
 
 const VERCEL_ANALYTICS = process.env.NEXT_PUBLIC_STATIC_EXPORT !== '1';
@@ -52,8 +52,8 @@ export default async function LocaleLayout({ children, schema, params }) {
         <ClientMessages>
           <Providers>{children}</Providers>
         </ClientMessages>
-        {/* site-wide analytics / ads tags (off in local development) */}
-        <ThirdPartyScripts />
+        {/* site-wide analytics / ads tags (off in local development); on the UAE CAT 5 site only after cookie consent */}
+        <ConsentScripts />
         {/* Vercel Web Analytics (Dashboard → Analytics; active on Vercel deployments) */}
         {VERCEL_ANALYTICS ? <Analytics /> : null}
         <UmamiScript />

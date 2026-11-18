@@ -163,7 +163,7 @@
     },
     "footer": {
       "title": "Important information",
-      "text": "GTC Financial Consultancy L.L.C. is licensed by the UAE Capital Market Authority (CMA) under Category 5 (Financial Consultations, Introduction and Promotion), Licence No. 20200000211. Registered office: Office 2201, Nassima Tower, Trade Centre First, Dubai, United Arab Emirates. It is part of GTC Group and operates independently, introducing clients only to regulated financial services providers. The Company does not hold client money and does not carry out transactions on behalf of clients. Nothing on this website is an offer, solicitation or personal recommendation, and the information is provided for general purposes only.",
+      "text": "GTC Financial Consultancy L.L.C. is licensed and regulated by the Capital Market Authority (CMA) under licence number 20200000211 We introduce clients to licensed financial service providers and may receive commissions or referral fees from those providers. We will tell you about these arrangements before any introduction is made. Further details are set out in our Client Agreement.",
       "verifyPrefix": "You can verify our CAT5 license under the Capital Market Authority ",
       "verifyLink": "here",
       "verifySuffix": ":",
@@ -412,7 +412,11 @@
       "openNewTab": "Open in new tab",
       "download": "Download PDF",
       "cmaNote": "You can also verify our licence on the official CMA register:",
-      "cmaLink": "Licensed companies register"
+      "cmaLink": "Licensed companies register",
+      "listTitle": "Our [documents]",
+      "view": "View",
+      "pdf": "PDF",
+      "page": "Page"
     },
     "contactPage": {
       "meta": {
@@ -430,6 +434,32 @@
         "hours": "Hours"
       },
       "map": "Map of Nassima Tower, Trade Centre First, Dubai"
+    },
+    "cookies": {
+      "title": "Your cookie choices",
+      "text": "We use cookies that are necessary for this website to work. With your consent, we also use analytics and advertising cookies. You can change your choice at any time. Please refer to our <link>cookie policy</link>.",
+      "acceptAll": "Accept all",
+      "rejectAll": "Reject non-essential",
+      "manage": "Manage preferences",
+      "save": "Save preferences",
+      "back": "Back",
+      "alwaysOn": "Always on",
+      "settings": "Cookie Settings",
+      "close": "Close",
+      "categories": {
+        "necessary": {
+          "title": "Necessary",
+          "text": "Required for the website to work, for example security and remembering your choices."
+        },
+        "analytics": {
+          "title": "Analytics",
+          "text": "Help us understand how visitors use the website so we can improve it."
+        },
+        "advertising": {
+          "title": "Advertising",
+          "text": "Used to measure our advertising and show you relevant adverts."
+        }
+      }
     }
   }
 }
