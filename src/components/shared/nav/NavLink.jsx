@@ -14,6 +14,10 @@ const PREVIEW_PAGES = {
   '/gtc-news': 'gtc-news',
   '/gtc-news/sample-article': 'sample-article', // review link only (scripts/preview-routes)
   '/gtc-news/sample-category': 'sample-category', // review link only (scripts/preview-routes)
+  '/gtc-news/sample-company': 'sample-company', // review link only (scripts/preview-routes)
+  '/gtc-news/sample-daily': 'sample-daily', // review link only (scripts/preview-routes)
+  '/gtc-news/company-news': 'sample-company', // review link only
+  '/gtc-news/market-daily-updates': 'sample-daily', // review link only
   '/gtc-news/market-holidays': 'market-holidays',
   '/gtc-news/trading-news': 'trading-news',
   '/company/why-gtc-group': 'why-gtc-group',
