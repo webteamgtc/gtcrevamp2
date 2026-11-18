@@ -11,12 +11,16 @@ const CATS = [
 
 const POSTS = {
   'market-daily-updates': [
-    ['Gold holds near record highs as traders weigh Fed signals', 'Spot gold stays firm while the dollar softens ahead of this week’s US inflation data and central bank commentary.'],
-    ['EUR/USD edges higher on soft US jobs data', 'The euro gains as weaker payrolls revive rate-cut bets; traders now look to ECB speakers for direction.'],
-    ['Oil steadies after OPEC+ keeps output plan unchanged', 'Brent and WTI trade in a tight range as supply worries balance a cautious demand outlook.'],
-    ['US indices mixed as tech earnings season begins', 'Nasdaq futures lead while Dow futures lag; results from the big tech names set the tone for the week.'],
-    ['Yen strengthens as BoJ hints at policy shift', 'USD/JPY slips from recent highs as comments from Bank of Japan officials lift rate-hike expectations.'],
-    ['GBP/USD looks to UK CPI for the next move', 'Sterling trades cautiously ahead of inflation figures that could reshape Bank of England expectations.']
+    ['Gold holds near record highs as traders weigh Fed signals', 'Spot gold stays firm while the dollar softens ahead of this week’s US inflation data and central bank commentary.', '/images/news-preview/daily-1.svg'],
+    ['EUR/USD edges higher on soft US jobs data', 'The euro gains as weaker payrolls revive rate-cut bets; traders now look to ECB speakers for direction.', '/images/news-preview/daily-2.svg'],
+    ['Oil steadies after OPEC+ keeps output plan unchanged', 'Brent and WTI trade in a tight range as supply worries balance a cautious demand outlook.', '/images/news-preview/daily-3.svg'],
+    ['US indices mixed as tech earnings season begins', 'Nasdaq futures lead while Dow futures lag; results from the big tech names set the tone for the week.', '/images/news-preview/daily-4.svg'],
+    ['Yen strengthens as BoJ hints at policy shift', 'USD/JPY slips from recent highs as comments from Bank of Japan officials lift rate-hike expectations.', '/images/news-preview/daily-5.svg'],
+    ['GBP/USD looks to UK CPI for the next move', 'Sterling trades cautiously ahead of inflation figures that could reshape Bank of England expectations.', '/images/news-preview/daily-6.svg'],
+    ['Nasdaq extends gains on chip-maker rally', 'Semiconductor names lift the tech-heavy index as AI demand forecasts are revised higher.', '/images/news-preview/daily-7.svg'],
+    ['Silver jumps as industrial demand outlook improves', 'XAG/USD outperforms gold on stronger manufacturing data from China and Europe.', '/images/news-preview/daily-8.svg'],
+    ['DAX slips as German factory orders disappoint', 'European equities open lower after weak industrial data revives growth concerns.', '/images/news-preview/daily-9.svg'],
+    ['Bitcoin climbs above $90K on ETF inflows', 'Crypto CFDs rally as spot ETF inflows hit a monthly high and risk appetite improves.', '/images/news-preview/daily-10.svg']
   ],
   blogs: [
     ['How to make a forex withdrawal on GTC Go', 'A step-by-step guide to withdrawing funds from your GTCFX account using the GTC Go mobile app.'],

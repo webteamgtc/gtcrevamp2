@@ -68,7 +68,10 @@
     "marketDaily": {
       "badge": "تحليلات السوق",
       "archive": "تحديثات يومية سابقة",
-      "archiveSub": "معاينة كاملة للرسوم — اختر أي تحديث لقراءة الملخص."
+      "archiveSub": "معاينة كاملة للرسوم — اختر أي تحديث لقراءة الملخص.",
+      "viewInfographic": "عرض الإنفوجرافيك",
+      "openFull": "قراءة التحديث كاملًا",
+      "close": "إغلاق"
     },
     "article": {
       "backToCategory": "العودة إلى {category}",
@@ -82,6 +85,14 @@
       "readTime": "{minutes} دقائق للقراءة",
       "readNext": "اقرأ التالي",
       "by": "بقلم {author}"
+    },
+    "companyNews": {
+      "badge": "غرفة أخبار GTCFX",
+      "archive": "المزيد من أخبار الشركة",
+      "archiveSub": "الجوائز والفعاليات والإعلانات من GTCFX — اضغط على أي خبر لعرضه بالحجم الكامل.",
+      "viewInfographic": "عرض الخبر",
+      "openFull": "قراءة الخبر كاملًا",
+      "close": "إغلاق"
     }
   },
   "earningsCalendarPage": {

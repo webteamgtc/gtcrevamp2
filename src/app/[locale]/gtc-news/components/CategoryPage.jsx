@@ -2,7 +2,8 @@
 /**
  * /gtc-news/<category> — every post of one Strapi news category, newest first, "Load more" pages through /api/news.
  * Category links (no post counts) switch to the other categories.
- * DRAFTS (temporary, see shared/Draft.jsx):
+ * Market Daily Updates and Company News have their own final layouts (MarketDailyCategory.jsx, CompanyNewsCategory.jsx).
+ * Other categories — DRAFTS (temporary, see shared/Draft.jsx):
  *  A · Editorial index — light hero with the category emblem and an ornament, a lead story, then a two-column
  *      index of posts (picture, date, title, summary) separated by fine lines.
  *  B · Dark showcase — dark hero with the two newest posts as glass cards beside the title, then a card grid.
@@ -27,6 +28,7 @@ import { cn } from '@/lib/utils';
 import { iconFor } from './newsUi';
 import ActivationBand from './ActivationBand';
 import MarketDailyCategory from './MarketDailyCategory';
+import CompanyNewsCategory from './CompanyNewsCategory';
 import { CategoryLinks, Empty, LoadMore, PostTitle, When } from './categoryShared';
 
 const PAGE_SIZE = 12;
@@ -300,18 +302,24 @@ export default function CategoryPage({ category, categories, initial, total }) {
   const props = { category, categories, articles, t, crumbs, loadMore: { more, loading, onClick: loadMore } };
   const v = draft.value;
   const marketDaily = category.slug === 'market-daily-updates';
+  const company = category.slug === 'company-news';
+  const theme = marketDaily || company ? 'dark' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark';
+  // Market Daily and Company News are final (no draft bar)
+  const [barDraft, barLabels] = marketDaily || company ? [null, null] : [draft, LABELS];
   return (
     <div className="overflow-x-clip bg-white text-ink">
       <ScrollProgress />
-      <Header theme={marketDaily ? 'dark' : v === 'a' ? 'light' : v === 'c' ? 'overlay' : 'dark'} />
-      {!marketDaily && draft.show && (
+      <Header theme={theme} />
+      {barDraft?.show && (
         <div className="fixed bottom-4 end-4 z-[70]">
-          <DraftBar draft={draft} labels={LABELS} className="mb-0" />
+          <DraftBar draft={barDraft} labels={barLabels} className="mb-0" />
         </div>
       )}
       <main>
         {marketDaily ? (
           <MarketDailyCategory {...props} />
+        ) : company ? (
+          <CompanyNewsCategory {...props} />
         ) : (
           <>
             {v === 'a' && <Editorial {...props} />}
