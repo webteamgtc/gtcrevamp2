@@ -124,6 +124,11 @@ export function cat5PublicPathForPathname(pathname) {
 export function resolveCat5RestPath(restPath) {
   return CAT5_FLAT_ALIASES[restPath] ?? restPath;
 }
+/**
+ * Cookie policy linked from the CAT 5 cookie modal ("Please refer to our cookie policy"). null → the words are shown
+ * without a link (the CAT 5 site has no cookie-policy page yet; the main site's /legal pages redirect to its Home).
+ */
+export const CAT5_COOKIE_POLICY_HREF = null;
 export const CAT5_LOCALE = 'en-ae';
 /** The CAT 5 page exists in English (/en-ae) and Arabic (/ar). */
 export const CAT5_LOCALES = ['en-ae', 'ar'];

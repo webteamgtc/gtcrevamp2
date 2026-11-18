@@ -53,6 +53,8 @@ import { Reveal, Stagger, StaggerItem, HeroIn, EASE } from '@/components/motion'
 import { CAT5_CMA_URL, CAT5_CONTACT } from '@/config/regions';
 import { cat5Href } from './cat5Links';
 import EnquiryForm from './EnquiryForm';
+import Cat5CookieConsent from './Cat5CookieConsent';
+import { openConsentSettings } from '@/lib/consent';
 import { cn } from '@/lib/utils';
 
 /** Icon names used in marketingPage.json → components. */
@@ -1000,7 +1002,7 @@ function LegalFooter() {
         <div className="flex flex-col gap-8 border-b border-white/10 pb-8 lg:flex-row lg:items-center lg:justify-between">
           <Logo onDark />
           <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label={t('footer.title')}>
-            {FOOTER_LINK_PAGE_KEYS.map((k) => (
+            {/* {FOOTER_LINK_PAGE_KEYS.map((k) => (
               <a
                 key={k}
                 href={cat5Href(locale, k)}
@@ -1008,12 +1010,20 @@ function LegalFooter() {
               >
                 {t(`footer.links.${k}`)}
               </a>
-            ))}
-            {FOOTER_STATIC_KEYS.map((k) => (
+            ))} */}
+            {/* {FOOTER_STATIC_KEYS.map((k) => (
               <span key={k} className="cursor-default text-white/70 select-none">
                 {t(`footer.links.${k}`)}
               </span>
-            ))}
+            ))} */}
+            {/* CAT 5 legal hub: CMA documentation, Terms of Business, Privacy Policy */}
+            <a href={cat5Href(locale, 'legalDocuments')} className="text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline">
+              {t('footer.links.legalDocuments')}
+            </a>
+            {/* reopens the cookie modal — visitors can change their choice at any time */}
+            <button type="button" onClick={openConsentSettings} className="text-gold-200 underline-offset-4 transition-colors hover:text-white hover:underline">
+              {t('cookies.settings')}
+            </button>
           </nav>
         </div>
         <h2 className="heading-label mt-10 flex items-center gap-2">
@@ -1075,6 +1085,7 @@ export function Cat5Frame({ page = 'home', children }) {
         <main className="overflow-x-clip">{children}</main>
         <LegalFooter />
         <StickyCta />
+        <Cat5CookieConsent />
       </div>
     </Cat5PageCtx.Provider>
   );
