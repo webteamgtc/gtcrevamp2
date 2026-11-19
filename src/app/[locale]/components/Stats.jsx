@@ -3,10 +3,11 @@ import { useTranslations } from 'next-intl';
 import { Stagger, StaggerItem, CountUp } from '@/components/motion';
 import { cn } from '@/lib/utils';
 
+
 export function Stats() {
   const t = useTranslations('stats');
   const items = t.raw('items');
-  
+
   return (
     <section className="relative overflow-hidden py-10 md:py-16">
       <div className="bg-dots-dark mask-radial absolute inset-0 opacity-70" />
