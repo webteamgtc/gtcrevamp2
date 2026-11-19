@@ -212,7 +212,7 @@ export function LiveAccountForm({ title, subtitle, variant = 'compact', classNam
       password: values.password,
       lastname,
       firstname,
-      ...(partner ? { ref: partner, invite_code: partner } : {}),
+      ...(partner ? { ref: partner, invitation_code: partner } : {}),
       ...(deepLink.trim() ? { deep_link_value: deepLink.trim() } : {})
     };
 
