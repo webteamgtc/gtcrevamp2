@@ -77,6 +77,9 @@ export function getCountryFromHeaders(request) {
     return String(cfCountry).toUpperCase();
   }
 
+  const cloudfront = request.headers.get("cloudfront-viewer-country");
+  if (cloudfront) return String(cloudfront).toUpperCase();
+
   return null;
 }
 

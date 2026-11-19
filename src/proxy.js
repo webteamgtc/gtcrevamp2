@@ -179,6 +179,11 @@ export default async function proxy(request) {
     if (res) return res;
   }
 
+  // 1c. UAE visitors always use /en-ae for regional English (not /en-intl), even if they dismissed a region popup earlier
+  if (geo.country === 'AE' && REGIONAL.has(first) && first !== CAT5_LOCALE && !isBot) {
+    return redirect(`/${CAT5_LOCALE}${restPath}`);
+  }
+
   // 2. no region/language in the URL (or the old /en) → the visitor's regional site (en-intl, en-ae…);
   //    no remembered language — the locale lives only in the URL
   if (!LOCALES.has(first)) {
