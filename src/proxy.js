@@ -67,7 +67,7 @@ async function lookupIp(request) {
   try {
     const res = await fetch(token ? `https://ipinfo.io/${ip}?token=${token}` : `https://ipinfo.io/${ip}/json`, {
       headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(1500)
+      signal: AbortSignal.timeout(4000)
     });
     return res.ok ? valid((await res.json())?.country) : '';
   } catch {
@@ -79,9 +79,8 @@ async function lookupIp(request) {
  * Visitor country, first match wins:
  *   ?geo=XX (test deployments; ?geo=clear removes it) → saved test override
  *   → CDN header (Vercel x-vercel-ip-country, Cloudflare cf-ipcountry)
- *   → cookies (gtcfx_geo_country: an earlier lookup here or the browser fallback in useLocationDetail,
- *      then gtc_country from the previous request)
- *   → ipinfo lookup of the request IP
+ *   → ipinfo lookup of the request IP (beats stale cookies from an old session or VPN)
+ *   → cookies (gtcfx_geo_country / gtc_country) only when lookup is unavailable
  */
 async function countryOf(request) {
   const q = request.nextUrl.searchParams.get('geo')?.toUpperCase();
@@ -92,10 +91,11 @@ async function countryOf(request) {
 
   const fromHeader = valid(getCountryFromHeaders(request));
   if (fromHeader) return { country: fromHeader };
+  const looked = await lookupIp(request);
+  if (looked) return { country: looked, lookedUp: true };
   const fromCookie = valid(request.cookies.get(GEO_COUNTRY_COOKIE)?.value) || valid(request.cookies.get(COOKIES.country)?.value);
   if (fromCookie) return { country: fromCookie };
-  const looked = await lookupIp(request);
-  return { country: looked, lookedUp: Boolean(looked) };
+  return { country: '' };
 }
 
 function finish(response, { country, test, lookedUp }) {
@@ -177,6 +177,11 @@ export default async function proxy(request) {
   if (CAT5_SITE) {
     const res = cat5Site(request, geo, first, restPath, pathname, redirect);
     if (res) return res;
+  }
+
+  // 1c. UAE visitors always use /en-ae for regional English (not /en-intl), even if they dismissed a region popup earlier
+  if (geo.country === 'AE' && REGIONAL.has(first) && first !== CAT5_LOCALE && !isBot) {
+    return redirect(`/${CAT5_LOCALE}${restPath}`);
   }
 
   // 2. no region/language in the URL (or the old /en) → the visitor's regional site (en-intl, en-ae…);

@@ -2,6 +2,7 @@
 import { MotionConfig } from 'motion/react';
 import IntroLoader from './shared/intro/IntroLoader';
 import GeoGate from './shared/geo/GeoGate';
+import GeoRegionRedirect from './shared/geo/GeoRegionRedirect';
 import UkGate from './shared/geo/UkGate';
 
 export default function Providers({ children }) {
@@ -10,6 +11,7 @@ export default function Providers({ children }) {
       <IntroLoader />
       {/* UK visitors: live account links / forms open the UK notice instead */}
       <UkGate>{children}</UkGate>
+      <GeoRegionRedirect />
       <GeoGate />
     </MotionConfig>
   );

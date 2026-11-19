@@ -15,6 +15,7 @@ import { AccentTitle } from '@/components/shared/SectionIntro';
 import { getLocale } from '@/i18n/locales';
 import { COOKIES, CAT5_LOCALE, CAT5_PATH, REGION_LOCALES, regionForCountry } from '@/config/regions';
 import { cn } from '@/lib/utils';
+import { useLocationDetail } from '@/config/useLocationDetails';
 import { readCookie, writeCookie, useCountry, whenIntroLeaving, localeHref } from './geoClient';
 import { Gate, EASE } from './Gate';
 import UsNotice from './UsNotice';
@@ -181,7 +182,9 @@ function RegionSuggest({ country, target, onClose }) {
 
 export default function GeoGate() {
   const locale = useLocale();
-  const country = useCountry();
+  const fromProxy = useCountry();
+  const { countryCode } = useLocationDetail();
+  const country = (fromProxy || countryCode || '').toUpperCase();
   const [ready, setReady] = useState(false);
   const [step, setStep] = useState(null); // 'us' | 'uk' | 'uae' | 'za' | 'region' | null
 
