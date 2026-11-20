@@ -278,8 +278,8 @@
         {
           "id": "compliance",
           "title": "全球多重监管",
-          "text": "根据阿联酋资本市场管理局（CMA）、FSCA、VFSC、FCA、ASIC及FSC的监管要求，客户资金存放于隔离账户，确保权益得到全面保护。",
-          "note": "6家监管机构"
+          "text": "根据阿联酋资本市场管理局（CMA）、FSCA、VFSC、ASIC及FSC的监管要求，客户资金存放于隔离账户，确保权益得到全面保护。",
+          "note": "5家监管机构"
         },
         {
           "id": "platforms",
@@ -356,7 +356,7 @@
       ]
     },
     "regulated": {
-      "title": "在[全球六个司法管辖区]获得保障与认可",
+      "title": "在[全球五个司法管辖区]获得保障与认可",
       "cta": "完整监管信息",
       "items": [
         {
@@ -370,10 +370,6 @@
         {
           "code": "VFSC",
           "country": "瓦努阿图"
-        },
-        {
-          "code": "FCA",
-          "country": "英国"
         },
         {
           "code": "ASIC",
@@ -414,9 +410,9 @@
       "stats": [
         {
           "id": "support",
-          "value": 3,
+          "value": 2,
           "label": "全球支持中心",
-          "note": "阿联酋 – 英国 – 塞浦路斯"
+          "note": "阿联酋 – 塞浦路斯"
         },
         {
           "id": "compensation",
@@ -600,7 +596,7 @@
       "commission": "Financial Commission会员",
       "stats": [
         {
-          "value": 6,
+          "value": 5,
           "label": "受监管实体"
         },
         {
@@ -617,7 +613,7 @@
       ]
     },
     "entities": {
-      "title": "六个实体，[统一合规标准。]",
+      "title": "五个实体，[统一合规标准。]",
       "description": "每个GTCFX实体均独立持牌，并接受当地监管机构监督，在既定法律框架下为客户提供透明、负责的服务。",
       "cta": "完整监管信息",
       "labels": {
@@ -1467,20 +1463,6 @@
       "description": "我们的客户支持办公室分布于多个地区，为一般咨询、账户管理、平台访问、技术问题及其他服务相关事务提供多语言协助。这些地点仅提供客户支持及行政协助，并非独立签约实体，不应被视为GTC Global Trading Ltd在相关司法管辖区获得许可或授权的证明。",
       "items": [
         {
-          "id": "london",
-          "code": "GB",
-          "city": "英国伦敦",
-          "entity": "GTC Global Trade Capital (UK) Ltd",
-          "address": [
-            "加拿大广场一号18层",
-            "金丝雀码头",
-            "英国伦敦，邮编E14 5AB"
-          ],
-          "lon": -0.02,
-          "lat": 51.5,
-          "tz": "Europe/London"
-        },
-        {
           "id": "limassol",
           "code": "CY",
           "city": "塞浦路斯利马索尔",
@@ -1588,8 +1570,8 @@
         },
         {
           "tag": "03 · 牌照",
-          "value": "6",
-          "text": "CMA · FSCA · VFSC · FCA · ASIC · FSC——全球六家受监管实体。",
+          "value": "5",
+          "text": "CMA · FSCA · VFSC · ASIC · FSC——全球五家受监管实体。",
           "fill": 80
         },
         {

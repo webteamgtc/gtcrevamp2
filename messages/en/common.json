@@ -560,8 +560,8 @@
       "title": "Important Notice for Website Visitors from [UK-Based IPs]",
       "points": [
         "GTCFX does not currently accept new clients residing in the United Kingdom.",
-        "Due to UK Financial Conduct Authority (FCA) regulatory requirements.",
-        "If you are a UK resident seeking trading services, please contact an FCA-regulated broker, such as GMG Markets."
+        "Due to applicable United Kingdom regulatory requirements.",
+        "If you are a UK resident seeking trading services, please contact an appropriately authorised broker, such as GMG Markets."
       ],
       "fullNotice": "Full notice",
       "text": "GTCFX is no longer accepting new customers residing in the United Kingdom. You may continue browsing our website for informational purposes.",
@@ -571,7 +571,7 @@
         "Please be informed that GTCFX is no longer accepting new customers residing in the United Kingdom.",
         "You may continue browsing our website for informational purposes."
       ],
-      "confirmText": "GTCFX does not accept new customers residing in the United Kingdom due to UK Financial Conduct Authority (FCA) regulatory requirements.",
+      "confirmText": "GTCFX does not accept new customers residing in the United Kingdom due to applicable United Kingdom regulatory requirements.",
       "agree": "I Agree – Continue Browsing"
     }
   },

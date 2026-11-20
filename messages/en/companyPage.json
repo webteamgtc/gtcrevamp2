@@ -278,8 +278,8 @@
         {
           "id": "compliance",
           "title": "Global multi-regulation",
-          "text": "Subject to regulatory requirements of the CMA, FSCA, VFSC, FCA, ASIC, and FSC, client funds are held in segregated accounts, ensuring comprehensive protection of rights and interests.",
-          "note": "6 regulators"
+          "text": "Subject to regulatory requirements of the CMA, FSCA, VFSC, ASIC, and FSC, client funds are held in segregated accounts, ensuring comprehensive protection of rights and interests.",
+          "note": "5 regulators"
         },
         {
           "id": "platforms",
@@ -356,7 +356,7 @@
       ]
     },
     "regulated": {
-      "title": "Protected and recognized across [six global jurisdictions]",
+      "title": "Protected and recognized across [five global jurisdictions]",
       "cta": "Complete regulatory information",
       "items": [
         {
@@ -370,10 +370,6 @@
         {
           "code": "VFSC",
           "country": "Vanuatu"
-        },
-        {
-          "code": "FCA",
-          "country": "UK"
         },
         {
           "code": "ASIC",
@@ -414,9 +410,9 @@
       "stats": [
         {
           "id": "support",
-          "value": 3,
+          "value": 2,
           "label": "Global Support Centre",
-          "note": "UAE – UK – Cyprus"
+          "note": "UAE – Cyprus"
         },
         {
           "id": "compensation",
@@ -600,7 +596,7 @@
       "commission": "Financial Commission member",
       "stats": [
         {
-          "value": 6,
+          "value": 5,
           "label": "Regulated Entities"
         },
         {
@@ -617,7 +613,7 @@
       ]
     },
     "entities": {
-      "title": "Six Entities. [One Standard of Compliance.]",
+      "title": "Five Entities. [One Standard of Compliance.]",
       "description": "Each GTCFX entity is independently licensed and supervised by its local regulatory authority, providing clients with transparent, accountable service within established legal frameworks.",
       "cta": "Complete regulatory information",
       "labels": {
@@ -1492,20 +1488,6 @@
       "description": "Our customer support offices are strategically located across multiple regions to provide multilingual assistance with general enquiries, account administration, platform access, technical issues and other service-related matters. These locations provide customer support and administrative assistance only. They are not separate contracting entities and should not be regarded as evidence that GTC Global Trading Ltd is licensed or authorised in those jurisdictions.",
       "items": [
         {
-          "id": "london",
-          "code": "GB",
-          "city": "London, UK",
-          "entity": "GTC Global Trade Capital (UK) Ltd",
-          "address": [
-            "Level 18, One Canada Square",
-            "Canary Wharf",
-            "London E14 5AB, UK"
-          ],
-          "lon": -0.02,
-          "lat": 51.5,
-          "tz": "Europe/London"
-        },
-        {
           "id": "limassol",
           "code": "CY",
           "city": "Limassol, Cyprus",
@@ -1613,8 +1595,8 @@
         },
         {
           "tag": "03 · Licences",
-          "value": "6",
-          "text": "CMA · FSCA · VFSC · FCA · ASIC · FSC — six regulated entities worldwide.",
+          "value": "5",
+          "text": "CMA · FSCA · VFSC · ASIC · FSC — five regulated entities worldwide.",
           "fill": 80
         },
         {
