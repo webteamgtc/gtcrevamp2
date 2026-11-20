@@ -19,6 +19,7 @@ export const DEMO_ACCOUNT_HREF = '/trading/free-demo-account';
 
 const REGISTER="https://web.mygtc.app/user?redirect=%252Fcopy-trading%252Fgtc-copy%252Fdiscover-signals"
 
+
 /** Same path normalisation as UkGate (optional locale prefix). */
 export function pathWithoutLocale(pathname) {
   return pathname.replace(/^\/[^/]+(?=\/)/, '') || pathname;
