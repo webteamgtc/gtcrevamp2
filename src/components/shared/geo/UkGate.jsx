@@ -9,7 +9,7 @@ import { useLocale } from 'next-intl';
 import { AnimatePresence } from 'motion/react';
 import { usePathname } from '@/i18n/navigation';
 import { UK_NOTICE } from '@/config/regions';
-import { isDemoAccountHref, LIVE_ACCOUNT_HREF, pathWithoutLocale } from '@/config/menu';
+import { isDemoAccountHref, isRegisterPortalHref, LIVE_ACCOUNT_HREF, pathWithoutLocale } from '@/config/menu';
 import { useCountry } from './geoClient';
 import UkNotice from './UkNotice';
 
@@ -23,6 +23,7 @@ export const useShowDemoAccount = () => !useContext(UkGateContext).blocked;
 
 function isLiveAccountLink(href) {
   if (!href) return false;
+  if (isRegisterPortalHref(href)) return true;
   try {
     const url = new URL(href, window.location.href);
     if (url.origin !== window.location.origin) return false;
@@ -43,7 +44,7 @@ export default function UkGate({ children }) {
   }, [blocked]);
 
   useEffect(() => {
-    if (blocked && pathname === LIVE_ACCOUNT_HREF) setShown(true);
+    if (blocked && (pathname === LIVE_ACCOUNT_HREF)) setShown(true);
   }, [blocked, pathname]);
 
   useEffect(() => {

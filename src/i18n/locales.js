@@ -20,6 +20,7 @@ export const LOCALES = [
   { code: 'ar', label: 'Arabic', native: 'العربية', region: 'mena', flag: 'AE', dir: 'rtl' },
   { code: 'ur', label: 'Urdu', native: 'اردو', region: 'mena', flag: 'PK', dir: 'rtl' },
   { code: 'ps', label: 'Pashto', native: 'پښتو', region: 'mena', flag: 'AF', dir: 'rtl' },
+  { code: 'fa', label: 'Persian (Farsi)', native: 'فارسی', region: 'mena', flag: 'IR', dir: 'rtl' },
   { code: 'hi', label: 'Hindi', native: 'हिंदी', region: 'mena', flag: 'IN', dir: 'ltr' },
   { code: 'tr', label: 'Turkish', native: 'Türkçe', region: 'mena', flag: 'TR', dir: 'ltr' },
   { code: 'uz', label: 'Uzbek', native: "O'zbek", region: 'mena', flag: 'UZ', dir: 'ltr' },

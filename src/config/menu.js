@@ -35,8 +35,21 @@ export function isDemoAccountHref(href) {
     return href === DEMO_ACCOUNT_HREF;
   }
 }
+/** Portal sign-up link (PORTAL.registerPortal) — UK visitors get the account notice instead (UkGate). */
+export function isRegisterPortalHref(href) {
+  if (!href) return false;
+  try {
+    return new URL(href, 'https://gtcfx.com').href === new URL(REGISTER).href;
+  } catch {
+    return false;
+  }
+}
+
 /** ?account=<slug> preselects an account on the application page (slugs: liveAccountApplicationPage.accounts). */
-export const liveAccountHref = (account) => (account ? `${LIVE_ACCOUNT_HREF}?account=${encodeURIComponent(account)}` : LIVE_ACCOUNT_HREF);
+// export const liveAccountHref = (account) => (account ? `${LIVE_ACCOUNT_HREF}?account=${encodeURIComponent(account)}` : LIVE_ACCOUNT_HREF);
+
+export const liveAccountHref = (account) => (account ? `${REGISTER}?account=${encodeURIComponent(account)}` : REGISTER);
+
 
 export const PORTAL = {
   login: CLIENT_PORTAL,
