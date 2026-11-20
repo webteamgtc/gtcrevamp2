@@ -278,8 +278,8 @@
         {
           "id": "compliance",
           "title": "全球多重监管",
-          "text": "根据阿联酋资本市场管理局（CMA）、FSCA、VFSC、ASIC及FSC的监管要求，客户资金存放于隔离账户，确保权益得到全面保护。",
-          "note": "5家监管机构"
+          "text": "根据阿联酋资本市场管理局（CMA）、FSCA、VFSC、SERC、ASIC及FSC的监管要求，客户资金存放于隔离账户，确保权益得到全面保护。",
+          "note": "6家监管机构"
         },
         {
           "id": "platforms",
@@ -356,7 +356,7 @@
       ]
     },
     "regulated": {
-      "title": "在[全球五个司法管辖区]获得保障与认可",
+      "title": "在[全球六个司法管辖区]获得保障与认可",
       "cta": "完整监管信息",
       "items": [
         {
@@ -370,6 +370,10 @@
         {
           "code": "VFSC",
           "country": "瓦努阿图"
+        },
+        {
+          "code": "SERC",
+          "country": "柬埔寨"
         },
         {
           "code": "ASIC",
@@ -596,7 +600,7 @@
       "commission": "Financial Commission会员",
       "stats": [
         {
-          "value": 5,
+          "value": 6,
           "label": "受监管实体"
         },
         {
@@ -613,7 +617,7 @@
       ]
     },
     "entities": {
-      "title": "五个实体，[统一合规标准。]",
+      "title": "六个实体，[统一合规标准。]",
       "description": "每个GTCFX实体均独立持牌，并接受当地监管机构监督，在既定法律框架下为客户提供透明、负责的服务。",
       "cta": "完整监管信息",
       "labels": {
@@ -1570,8 +1574,8 @@
         },
         {
           "tag": "03 · 牌照",
-          "value": "5",
-          "text": "CMA · FSCA · VFSC · ASIC · FSC——全球五家受监管实体。",
+          "value": "6",
+          "text": "CMA · FSCA · VFSC · SERC · ASIC · FSC——全球六家受监管实体。",
           "fill": 80
         },
         {

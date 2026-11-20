@@ -278,8 +278,8 @@
         {
           "id": "compliance",
           "title": "Global multi-regulation",
-          "text": "Subject to regulatory requirements of the CMA, FSCA, VFSC, ASIC, and FSC, client funds are held in segregated accounts, ensuring comprehensive protection of rights and interests.",
-          "note": "5 regulators"
+          "text": "Subject to regulatory requirements of the CMA, FSCA, VFSC, SERC, ASIC, and FSC, client funds are held in segregated accounts, ensuring comprehensive protection of rights and interests.",
+          "note": "6 regulators"
         },
         {
           "id": "platforms",
@@ -356,7 +356,7 @@
       ]
     },
     "regulated": {
-      "title": "Protected and recognized across [five global jurisdictions]",
+      "title": "Protected and recognized across [six global jurisdictions]",
       "cta": "Complete regulatory information",
       "items": [
         {
@@ -370,6 +370,10 @@
         {
           "code": "VFSC",
           "country": "Vanuatu"
+        },
+        {
+          "code": "SERC",
+          "country": "Cambodia"
         },
         {
           "code": "ASIC",
@@ -596,7 +600,7 @@
       "commission": "Financial Commission member",
       "stats": [
         {
-          "value": 5,
+          "value": 6,
           "label": "Regulated Entities"
         },
         {
@@ -613,7 +617,7 @@
       ]
     },
     "entities": {
-      "title": "Five Entities. [One Standard of Compliance.]",
+      "title": "Six Entities. [One Standard of Compliance.]",
       "description": "Each GTCFX entity is independently licensed and supervised by its local regulatory authority, providing clients with transparent, accountable service within established legal frameworks.",
       "cta": "Complete regulatory information",
       "labels": {
@@ -1595,8 +1599,8 @@
         },
         {
           "tag": "03 · Licences",
-          "value": "5",
-          "text": "CMA · FSCA · VFSC · ASIC · FSC — five regulated entities worldwide.",
+          "value": "6",
+          "text": "CMA · FSCA · VFSC · SERC · ASIC · FSC — six regulated entities worldwide.",
           "fill": 80
         },
         {
