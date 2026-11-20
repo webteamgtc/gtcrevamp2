@@ -22,8 +22,15 @@ export const BUNDLED_LANGS = ['en', 'ar', 'zh'];
 /** S3 folder holding <lang>/<file>.json for the other languages (same files + namespaces as messages/en). */
 const S3_BASE = (process.env.MESSAGES_S3_BASE || 'https://gtcfx-bucket.s3.ap-southeast-1.amazonaws.com/messages').replace(/\/$/, '');
 const S3_REVALIDATE = 3600; // seconds; cached by Next's fetch cache, so pages stay static
+const DEV = process.env.NODE_ENV !== 'production';
+/** How long one language's S3 texts are kept in memory: an hour live, 30 s in dev (so uploads show up quickly). */
+const S3_MEMORY_MS = (DEV ? 30 : S3_REVALIDATE) * 1000;
 
-/** One in-process cache per S3 language (avoids hundreds of duplicate fetches during `next build`). */
+/**
+ * One in-process cache per S3 language (avoids hundreds of duplicate fetches during `next build`): { at, messages }.
+ * Entries expire after S3_MEMORY_MS, and a language whose files were all missing is not kept, so files uploaded
+ * later (e.g. a new language) show up without a restart.
+ */
 const s3MessagesCache = new Map();
 const s3FailureLogged = new Set();
 
@@ -117,7 +124,7 @@ function logS3Unavailable(url, reason) {
 async function fetchS3File(url) {
   for (let attempt = 1; attempt <= 2; attempt += 1) {
     try {
-      const res = await fetch(url, { headers: { Accept: 'application/json' }, next: { revalidate: S3_REVALIDATE } });
+      const res = await fetch(url, { headers: { Accept: 'application/json' }, ...(DEV ? { cache: 'no-store' } : { next: { revalidate: S3_REVALIDATE } }) });
       if (res.status === 403 || res.status === 404) {
         logS3Unavailable(url, res.status);
         return null;
@@ -170,7 +177,8 @@ async function fetchS3FileFromLangFolders(folders, file) {
 async function fetchS3Messages(lang) {
   if (shouldSkipS3()) return {};
 
-  if (s3MessagesCache.has(lang)) return s3MessagesCache.get(lang);
+  const hit = s3MessagesCache.get(lang);
+  if (hit && Date.now() - hit.at < S3_MEMORY_MS) return hit.messages;
 
   const files = fs.readdirSync(path.join(messagesRoot, 'en')).filter((name) => name.endsWith('.json')).sort();
   const folders = s3LangFolders(lang);
@@ -180,7 +188,8 @@ async function fetchS3Messages(lang) {
     return part && typeof part === 'object' ? merge(acc, part) : acc;
   }, {});
 
-  s3MessagesCache.set(lang, messages);
+  if (parts.some(Boolean)) s3MessagesCache.set(lang, { at: Date.now(), messages });
+  else s3MessagesCache.delete(lang);
   return messages;
 }
 
