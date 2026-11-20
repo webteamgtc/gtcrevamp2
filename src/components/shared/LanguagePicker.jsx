@@ -11,8 +11,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { Check, ChevronDown, Globe, Search, X } from 'lucide-react';
 // import only the flags we use (keeps the bundle small)
-import { AE, PK, AF, IN, TR, UZ, CN, TW, VN, TH, MY, ID, PH, ES, FR, IT, PT, RU } from 'country-flag-icons/react/1x1';
-const Flags = { AE, PK, AF, IN, TR, UZ, CN, TW, VN, TH, MY, ID, PH, ES, FR, IT, PT, RU };
+import { AE, PK, AF, IR, IN, TR, UZ, CN, TW, VN, TH, MY, ID, PH, ES, FR, IT, PT, RU } from 'country-flag-icons/react/1x1';
+const Flags = { AE, PK, AF, IR, IN, TR, UZ, CN, TW, VN, TH, MY, ID, PH, ES, FR, IT, PT, RU };
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { LOCALES, REGIONS, getLocale } from '@/i18n/locales';
 import { COOKIES, REGION_LOCALES, REMEMBER_DAYS } from '@/config/regions';

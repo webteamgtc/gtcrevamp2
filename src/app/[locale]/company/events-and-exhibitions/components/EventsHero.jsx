@@ -13,7 +13,7 @@ import { TiltCard, EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
 import { EventImage } from './EventImage';
 import CommonLeadForm from '@/components/shared/CommonLeadForm';
-import { intlLocale } from '@/i18n/locales';
+import { getDir, intlLocale } from '@/i18n/locales';
 
 /* ---------------- shared helpers ---------------- */
 const dl = (locale) => intlLocale(locale);
@@ -105,7 +105,7 @@ function Ticket({ ev, t, locale }) {
           <span className="absolute -bottom-3 left-1/2 size-6 -translate-x-1/2 rounded-full bg-ink" />
         </div>
         {/* body */}
-        <div className="relative min-w-0 flex-1 p-5 text-start sm:p-6" dir={locale === 'ar' || locale === 'ur' || locale === 'ps' ? 'rtl' : 'ltr'}>
+        <div className="relative min-w-0 flex-1 p-5 text-start sm:p-6" dir={getDir(locale)}>
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/45">{ev.country || ev.city}</div>

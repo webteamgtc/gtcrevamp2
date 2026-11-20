@@ -251,7 +251,7 @@ function CalendarSection({ calendar }) {
 
 /* ------------------------------------------------------------ screener */
 
-const TV_LOCALE = { ar: 'ar_AE', zh: 'zh_CN', 'zh-TW': 'zh_TW', es: 'es', fr: 'fr', pt: 'br', ru: 'ru', tr: 'tr', vi: 'vi_VN', id: 'id', it: 'it', th: 'th_TH', ms: 'ms_MY' };
+const TV_LOCALE = { ar: 'ar_AE', zh: 'zh_CN', 'zh-TW': 'zh_TW', es: 'es', fr: 'fr', pt: 'br', ru: 'ru', tr: 'tr', vi: 'vi_VN', id: 'id', it: 'it', th: 'th_TH', ms: 'ms_MY', fa: 'fa_IR' };
 
 function ScreenerSection() {
   const t = useTranslations('earningsCalendarPage.screener');

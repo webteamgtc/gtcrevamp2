@@ -88,7 +88,7 @@ export const MARKETS_TAPE = [
 /** next-intl locale → TradingView widget locale (unsupported languages fall back to English). */
 export const TRADINGVIEW_LOCALE = {
   en: 'en', ar: 'ar_AE', es: 'es', fr: 'fr', it: 'it', pt: 'br', ru: 'ru', tr: 'tr', zh: 'zh_CN', 'zh-TW': 'zh_TW',
-  vi: 'vi_VN', th: 'th_TH', id: 'id_ID', ms: 'ms_MY', hi: 'in'
+  vi: 'vi_VN', th: 'th_TH', id: 'id_ID', ms: 'ms_MY', hi: 'in', fa: 'fa_IR'
 };
 
 /** First symbol of every market, for overview boards. */
