@@ -17,6 +17,8 @@ export const LIVE_ACCOUNT_HREF = '/live-account-application';
 /** Free demo account — hidden and blocked for UK visitors (see UkGate). */
 export const DEMO_ACCOUNT_HREF = '/trading/free-demo-account';
 
+const REGISTER="https://web.mygtc.app/user?redirect=%252Fcopy-trading%252Fgtc-copy%252Fdiscover-signals"
+
 /** Same path normalisation as UkGate (optional locale prefix). */
 export function pathWithoutLocale(pathname) {
   return pathname.replace(/^\/[^/]+(?=\/)/, '') || pathname;
@@ -40,7 +42,8 @@ export const PORTAL = {
   /** Header Register — live application route; UK visitors see account notice (UkGate). */
   register: LIVE_ACCOUNT_HREF,
   demo: '/trading/free-demo-account',
-  clientPortal: CLIENT_PORTAL
+  clientPortal: CLIENT_PORTAL,
+  registerPortal: REGISTER
 };
 
 /** Footer link targets, in the same order as footer.columns.<id>.links in messages/<locale>/common.json */

@@ -222,7 +222,7 @@ export default function Header({ theme = 'light', variant = 'bar' }) {
 
               <div className="flex items-center gap-2">
                 <NavLink
-                  href={PORTAL.register}
+                  href={PORTAL.registerPortal}
                   className={cn(
                     'hidden h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-all md:inline-flex',
                     dark ? 'border-white/20 text-white hover:bg-white hover:text-brand-900' : 'border-brand/15 bg-white text-brand hover:border-brand'
