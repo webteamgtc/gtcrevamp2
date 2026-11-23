@@ -1,18 +1,17 @@
 'use client';
 /**
  * UAE CAT 5 — Legal Documents hub (GTC Financial Consultancy L.L.C. documents only; the main site's /legal hub lists
- * other GTC entities). Cards only: the CMA licence documentation and the CAT5_DOCS PDFs (Website Terms of Use,
- * Client Agreement, Complaint Handling Policy, Cookie Policy — /public/en-ae) open in a new tab or download;
- * the Privacy Policy links to its page. Rhythm: dark hero → gray (document cards) → legal footer (Cat5Frame).
+ * other GTC entities). Cards only, every PDF opens in a new tab or downloads: the CMA licence (/CMA.pdf), the Privacy
+ * Policy and the CAT5_DOCS (Website Terms of Use, Client Agreement, Complaint Handling Policy, Cookie Policy), both in
+ * /public/en-ae/documents. Rhythm: dark hero → gray (document cards) → legal footer (Cat5Frame).
  */
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Cookie, Download, ExternalLink, FileText, Globe, Handshake, Lock, MessageSquareWarning, ShieldCheck } from 'lucide-react';
+import { Cookie, Download, ExternalLink, FileText, Globe, Handshake, Lock, MessageSquareWarning, ShieldCheck } from 'lucide-react';
 import { AccentTitle } from '@/components/shared/SectionIntro';
 import { HeroIn, Reveal, Stagger, StaggerItem } from '@/components/motion';
 import { CAT5_CMA_URL, CAT5_DOCS, CAT5_PDF_PATHS } from '@/config/regions';
 import { Cat5Frame, LICENCE_NO, NetworkBackdrop, TopTitle } from '../../components/MarketingPage';
-import { cat5Href } from '../../components/cat5Links';
 
 const NS = 'marketingPage.legalDocumentsPage';
 
@@ -65,7 +64,6 @@ export default function LegalDocumentsPage() {
   const t = useTranslations(NS);
   const tt = useTranslations('marketingPage.termsOfBusinessPage');
   const tf = useTranslations('marketingPage.footer.links');
-  const locale = useLocale();
 
   return (
     <Cat5Frame page="home">
@@ -106,10 +104,8 @@ export default function LegalDocumentsPage() {
               </DocCard>
             </StaggerItem>
             <StaggerItem className="h-full">
-              <DocCard Icon={Lock} title={tf('privacy')} hint={tt('viewerHint')} type={t('page')}>
-                <a href={cat5Href(locale, 'privacy')} className={btn.brand}>
-                  {t('view')} <ArrowUpRight className="size-4 rtl:-scale-x-100" aria-hidden />
-                </a>
+              <DocCard Icon={Lock} title={tf('privacy')} hint={tt('viewerHint')} type={t('pdf')}>
+                <PdfLinks file={CAT5_PDF_PATHS.privacyPolicy} t={t} />
               </DocCard>
             </StaggerItem>
             {CAT5_DOCS.map(({ key, file }) => (

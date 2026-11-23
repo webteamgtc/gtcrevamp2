@@ -7,6 +7,7 @@ import { HeroIn, Reveal } from '@/components/motion';
 import { CAT5_CMA_URL } from '@/config/regions';
 import { Cat5Frame, LICENCE_NO, NetworkBackdrop, TopTitle } from './MarketingPage';
 
+
 /**
  * UAE CAT 5 PDF viewer (Legal Documents, Terms of Business, …).
  * @param {string} namespace e.g. 'marketingPage.legalDocumentsPage'

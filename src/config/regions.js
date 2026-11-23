@@ -112,18 +112,19 @@ export const CAT5_FLAT_ALIASES = {
 export const CAT5_PDF_PATHS = {
   legalDocuments: '/CMA.pdf',
   termsOfBusiness: '/Terms-of-Business.pdf',
-  termsOfUse: '/en-ae/GTCFX-Website-Terms-of-Use.pdf'
+  termsOfUse: '/en-ae/documents/GTCFX-Website-Terms-of-Use.pdf',
+  privacyPolicy: '/en-ae/documents/Privacy-Policy.pdf'
 };
 
 /**
- * PDFs (/public/en-ae) listed on the CAT 5 Legal Documents page, opened in a new tab
+ * PDFs (/public/en-ae/documents) listed on the CAT 5 Legal Documents page, opened in a new tab
  * (labels: marketingPage.legalDocumentsPage.docs.<key>).
  */
 export const CAT5_DOCS = [
   { key: 'termsOfUse', file: CAT5_PDF_PATHS.termsOfUse },
-  { key: 'clientAgreement', file: '/en-ae/GTCFX_Client_Agreement_CAT5_Bilingual_EN-AR.pdf' },
-  { key: 'complaints', file: '/en-ae/Complaint-Handling-Policy.pdf' },
-  { key: 'cookies', file: '/en-ae/Cookie-Policy.pdf' }
+  { key: 'clientAgreement', file: '/en-ae/documents/GTCFX_Client_Agreement_CAT5_Bilingual_EN-AR.pdf' },
+  { key: 'complaints', file: '/en-ae/documents/Complaint-Handling-Policy.pdf' },
+  { key: 'cookies', file: '/en-ae/documents/Cookie-Policy.pdf' }
 ];
 
 /** Flat pathname or alias → public CAT 5 path (after /<locale>); null if not a CAT 5 page. */
