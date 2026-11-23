@@ -409,15 +409,12 @@
       "text": "Review our regulatory documentation below. You can read it on this page, open it in a new tab, or download a copy for your records.",
       "viewerTitle": "CMA License",
       "viewerHint": "Capital Market Authority — Category 5 licence documentation",
-      "openNewTab": "Open in new tab",
-      "download": "Download PDF",
       "cmaNote": "You can also verify our licence on the official CMA register:",
       "cmaLink": "Licensed companies register",
       "listTitle": "Our [documents]",
       "view": "View",
       "pdf": "PDF",
       "page": "Page",
-      "word": "Word",
       "downloadFile": "Download",
       "docs": {
         "clientAgreement": {
@@ -436,9 +433,7 @@
           "title": "Website Terms of Use",
           "hint": "The terms that apply when you use the GTC Financial Consultancy L.L.C. website"
         }
-      },
-      "loading": "Loading document…",
-      "loadError": "This document could not be shown here. Please download it instead."
+      }
     },
     "contactPage": {
       "meta": {
