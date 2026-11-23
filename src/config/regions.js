@@ -111,8 +111,19 @@ export const CAT5_FLAT_ALIASES = {
 /** PDFs served from /public for UAE CAT 5 document pages. */
 export const CAT5_PDF_PATHS = {
   legalDocuments: '/CMA.pdf',
-  termsOfBusiness: '/Terms-of-Business.pdf'
+  termsOfBusiness: '/Terms-of-Business.pdf',
+  termsOfUse: '/en-ae/GTCFX-Website-Terms-of-Use.pdf'
 };
+
+/**
+ * Word documents (/public) listed on the CAT 5 Legal Documents page (labels: marketingPage.legalDocumentsPage.docs.<key>).
+ * Browsers cannot show .docx inline: the page renders them itself (legal-documents/components/WordDocument.jsx).
+ */
+export const CAT5_WORD_DOCS = [
+  { key: 'clientAgreement', file: '/Client_Agreement_CAT5_Bilingual_EN-AR.docx' },
+  { key: 'complaints', file: '/Complaint Handling Policy.docx' },
+  { key: 'cookies', file: '/Cookie Policy.docx' }
+];
 
 /** Flat pathname or alias → public CAT 5 path (after /<locale>); null if not a CAT 5 page. */
 export function cat5PublicPathForPathname(pathname) {
@@ -124,11 +135,6 @@ export function cat5PublicPathForPathname(pathname) {
 export function resolveCat5RestPath(restPath) {
   return CAT5_FLAT_ALIASES[restPath] ?? restPath;
 }
-/**
- * Cookie policy linked from the CAT 5 cookie modal ("Please refer to our cookie policy"). null → the words are shown
- * without a link (the CAT 5 site has no cookie-policy page yet; the main site's /legal pages redirect to its Home).
- */
-export const CAT5_COOKIE_POLICY_HREF = null;
 export const CAT5_LOCALE = 'en-ae';
 /** The CAT 5 page exists in English (/en-ae) and Arabic (/ar). */
 export const CAT5_LOCALES = ['en-ae', 'ar'];

@@ -13,3 +13,4 @@ export function cat5Href(locale, page = 'home', hash = '') {
   if (CAT5_SITE) return `/${locale}${p.path}${hash}` || `/${locale}`;
   return `/${locale}${CAT5_PATH}${p.dir}${hash}`;
 }
+
