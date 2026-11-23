@@ -116,13 +116,14 @@ export const CAT5_PDF_PATHS = {
 };
 
 /**
- * Word documents (/public) listed on the CAT 5 Legal Documents page (labels: marketingPage.legalDocumentsPage.docs.<key>).
- * Browsers cannot show .docx inline: the page renders them itself (legal-documents/components/WordDocument.jsx).
+ * PDFs (/public/en-ae) listed on the CAT 5 Legal Documents page, opened in a new tab
+ * (labels: marketingPage.legalDocumentsPage.docs.<key>).
  */
-export const CAT5_WORD_DOCS = [
-  { key: 'clientAgreement', file: '/Client_Agreement_CAT5_Bilingual_EN-AR.docx' },
-  { key: 'complaints', file: '/Complaint Handling Policy.docx' },
-  { key: 'cookies', file: '/Cookie Policy.docx' }
+export const CAT5_DOCS = [
+  { key: 'termsOfUse', file: CAT5_PDF_PATHS.termsOfUse },
+  { key: 'clientAgreement', file: '/en-ae/GTCFX_Client_Agreement_CAT5_Bilingual_EN-AR.pdf' },
+  { key: 'complaints', file: '/en-ae/Complaint-Handling-Policy.pdf' },
+  { key: 'cookies', file: '/en-ae/Cookie-Policy.pdf' }
 ];
 
 /** Flat pathname or alias → public CAT 5 path (after /<locale>); null if not a CAT 5 page. */

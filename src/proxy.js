@@ -14,7 +14,7 @@ import {
   regionForCountry,
   REMEMBER_DAYS,
   resolveCat5RestPath, ZA_LEGAL_PATHS, ZA_LOCALE } from './config/regions';
-import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, isLocalIp } from './lib/geo/resolveCountryFromRequest';
+import { GEO_COUNTRY_COOKIE, GEO_COUNTRY_MAX_AGE, getClientIp, getCountryFromHeaders, getProxyVisitor, isLocalIp } from './lib/geo/resolveCountryFromRequest';
 
 /**
  * Runs before every page:
@@ -59,25 +59,39 @@ const valid = (c) => {
   return COUNTRY_RE.test(v) ? v : '';
 };
 
-/** Server-side IP → country (only when no CDN header and no cookie is available, e.g. off Vercel). */
-async function lookupIp(request) {
-  const ip = getClientIp(request);
+// ip → { country, at }: behind the WAF every page request needs a lookup, so remember answers for an hour
+const IP_CACHE = (globalThis.__gtcIpCountry ??= new Map());
+const IP_TTL = 60 * 60 * 1000;
+
+/** Server-side IP → country via ipinfo (IPINFO_TOKEN raises the free limit). */
+async function lookupIp(ip) {
   if (isLocalIp(ip)) return '';
+  const hit = IP_CACHE.get(ip);
+  if (hit && Date.now() - hit.at < IP_TTL) return hit.country;
   const token = process.env.IPINFO_TOKEN;
   try {
     const res = await fetch(token ? `https://ipinfo.io/${ip}?token=${token}` : `https://ipinfo.io/${ip}/json`, {
       headers: { Accept: 'application/json' },
       signal: AbortSignal.timeout(4000)
     });
-    return res.ok ? valid((await res.json())?.country) : '';
+    const country = res.ok ? valid((await res.json())?.country) : '';
+    if (country) {
+      if (IP_CACHE.size > 5000) IP_CACHE.clear();
+      IP_CACHE.set(ip, { country, at: Date.now() });
+    }
+    return country;
   } catch {
     return '';
   }
 }
 
+const cookieCountry = (request) => valid(request.cookies.get(GEO_COUNTRY_COOKIE)?.value) || valid(request.cookies.get(COOKIES.country)?.value);
+
 /**
  * Visitor country, first match wins:
  *   ?geo=XX (test deployments; ?geo=clear removes it) → saved test override
+ *   → through Alibaba's WAF: its country header → ipinfo lookup of its visitor-IP header → cookies
+ *     (never Vercel's header there — it is the WAF node's country; see getProxyVisitor)
  *   → CDN header (Vercel x-vercel-ip-country, Cloudflare cf-ipcountry)
  *   → ipinfo lookup of the request IP (beats stale cookies from an old session or VPN)
  *   → cookies (gtcfx_geo_country / gtc_country) only when lookup is unavailable
@@ -89,13 +103,19 @@ async function countryOf(request) {
   const saved = GEO_TEST ? valid(request.cookies.get(COOKIES.geoTest)?.value) : '';
   if (saved) return { country: saved };
 
+  const waf = getProxyVisitor(request);
+  if (waf) {
+    if (waf.country) return { country: waf.country };
+    const looked = waf.ip ? await lookupIp(waf.ip) : '';
+    if (looked) return { country: looked, lookedUp: true };
+    return { country: cookieCountry(request) };
+  }
+
   const fromHeader = valid(getCountryFromHeaders(request));
   if (fromHeader) return { country: fromHeader };
-  const looked = await lookupIp(request);
+  const looked = await lookupIp(getClientIp(request));
   if (looked) return { country: looked, lookedUp: true };
-  const fromCookie = valid(request.cookies.get(GEO_COUNTRY_COOKIE)?.value) || valid(request.cookies.get(COOKIES.country)?.value);
-  if (fromCookie) return { country: fromCookie };
-  return { country: '' };
+  return { country: cookieCountry(request) };
 }
 
 function finish(response, { country, test, lookedUp }) {
