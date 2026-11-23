@@ -64,6 +64,30 @@ export function isLocalIp(ip) {
   );
 }
 
+/**
+ * Visitors who reach Vercel through Alibaba's WAF (www.gtcfx.com CNAME → WAF → Vercel). Vercel then sees the WAF
+ * node: x-vercel-ip-country is the node's country, and Vercel overwrites X-Forwarded-For / X-Real-IP with the
+ * node's IP. So the WAF has to pass the visitor on in its own headers — names come from env (confirm with Alibaba):
+ *   GEO_PROXY_COUNTRY_HEADER   visitor's country code (best: no lookup needed)
+ *   GEO_PROXY_IP_HEADER        visitor's IP (looked up with ipinfo)
+ *   GEO_PROXY_SECRET           optional; the WAF headers are trusted only when the WAF also sends this value in
+ *                              GEO_PROXY_SECRET_HEADER (default x-ddos-waf-secret, Alibaba Anti-DDoS), so nobody can fake their country
+ * → { country, ip } (either may be null) when the request came through the WAF, otherwise null.
+ */
+export function getProxyVisitor(request) {
+  const countryHeader = process.env.GEO_PROXY_COUNTRY_HEADER;
+  const ipHeader = process.env.GEO_PROXY_IP_HEADER;
+  if (!countryHeader && !ipHeader) return null;
+  const secret = process.env.GEO_PROXY_SECRET;
+  if (secret && request.headers.get(process.env.GEO_PROXY_SECRET_HEADER || "x-ddos-waf-secret") !== secret) return null;
+
+  const code = countryHeader ? String(request.headers.get(countryHeader) ?? "").trim().toUpperCase() : "";
+  const country = /^[A-Z]{2}$/.test(code) && code !== "XX" ? code : null;
+  const ip = ipHeader ? request.headers.get(ipHeader)?.split(",")[0]?.trim() || null : null;
+  // with a secret we know it's the WAF even if it sent nothing usable; without one, only when it did
+  return country || ip || secret ? { country, ip } : null;
+}
+
 /** Read country from CDN / edge headers (Vercel, Cloudflare, …). */
 export function getCountryFromHeaders(request) {
   const geoCountry = request.geo?.country;
