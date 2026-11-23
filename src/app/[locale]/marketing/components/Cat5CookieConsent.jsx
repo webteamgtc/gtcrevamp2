@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { BarChart3, ChevronLeft, Cookie, Lock, Megaphone, ShieldCheck, X } from 'lucide-react';
-import { CAT5_COOKIE_POLICY_HREF } from '@/config/regions';
+import { CAT5_DOCS } from '@/config/regions';
 import { CONSENT_OPEN_EVENT, getConsent, setConsent } from '@/lib/consent';
 import { EASE } from '@/components/motion';
 import { cn } from '@/lib/utils';
@@ -81,9 +81,10 @@ export default function Cat5CookieConsent() {
     setOpen(false);
   };
 
+  const cookieDoc = CAT5_DOCS.find((d) => d.key === 'cookies');
   const policy = (chunks) =>
-    CAT5_COOKIE_POLICY_HREF ? (
-      <a href={CAT5_COOKIE_POLICY_HREF} className="font-semibold text-brand underline underline-offset-4 hover:text-gold-600">
+    cookieDoc ? (
+      <a href={cookieDoc.file} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline underline-offset-4 hover:text-gold-600">
         {chunks}
       </a>
     ) : (
