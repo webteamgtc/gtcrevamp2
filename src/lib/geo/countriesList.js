@@ -723,6 +723,13 @@ export const countryList = [
         "nationality": "Indonesian"
     },
     {
+        "num_code": "364",
+        "alpha_2_code": "IR",
+        "alpha_3_code": "IRN",
+        "en_short_name": "Iran",
+        "nationality": "Iranian"
+    },
+    {
         "num_code": "368",
         "alpha_2_code": "IQ",
         "alpha_3_code": "IRQ",
