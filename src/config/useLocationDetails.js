@@ -55,6 +55,7 @@ function lookupCountry() {
     .then((res) => (res.ok ? res.json() : null))
     .then((data) => {
       const country = normaliseCountry(data?.country);
+      console.log('lookupCountry', country, data);
       if (!country) return null;
       document.cookie = `${GEO_COUNTRY_COOKIE}=${country}; path=/; max-age=${GEO_COUNTRY_MAX_AGE}; SameSite=Lax`;
       return { countryCode: country, countryData: { ...data, country, source: 'ipinfo' } };
@@ -75,6 +76,7 @@ export const useLocationDetail = () => {
     let alive = true;
     // cookies first (cheap, and they follow the proxy on every navigation), then this page's ipinfo answer
     const known = knownCountry() ?? cached;
+    console.log('useLocationDetail knownCountry', known, cached);
     if (known) {
       setState({ ...known, locationReady: true });
       return undefined;
