@@ -77,10 +77,10 @@ export const useLocationDetail = () => {
     // cookies first (cheap, and they follow the proxy on every navigation), then this page's ipinfo answer
     const known = knownCountry() ?? cached;
     console.log('useLocationDetail knownCountry', known, cached);
-    // if (known) {
-    //   setState({ ...known, locationReady: true });
-    //   return undefined;
-    // }
+    if (known) {
+      setState({ ...known, locationReady: true });
+      return undefined;
+    }
     lookupCountry().then((result) => {
       if (!alive) return;
       if (result) cached = result;
