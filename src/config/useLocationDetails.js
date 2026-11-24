@@ -67,6 +67,7 @@ function lookupCountry() {
   return lookup;
 }
 
+
 const EMPTY = { countryCode: null, countryData: null, locationReady: false };
 
 export const useLocationDetail = () => {
