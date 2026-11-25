@@ -1,64 +1,73 @@
 'use client';
-import { ArrowRight, CalendarDays, Loader2, Plus } from 'lucide-react';
+import { CalendarDays, Loader2, Plus } from 'lucide-react';
 import NavLink from '@/components/shared/nav/NavLink';
 import { newsCategoryHref } from '@/lib/news-path';
 import { cn } from '@/lib/utils';
 import { iconFor } from './newsUi';
 
+/** Categories with their own wording (gtcNewsPage.<ns>); the others use gtcNewsPage.category. */
+const TEXT_NS = { 'market-daily-updates': 'marketDaily', 'company-news': 'companyNews' };
+
+/** Category text: the category's own key when it has one, else the shared one ({category} = its name). */
+export function newsText(t, category) {
+  const ns = TEXT_NS[category.slug];
+  return (key) => (ns && t.has(`${ns}.${key}`) ? t(`${ns}.${key}`) : t(`category.${key}`, { category: category.name }));
+}
+
+/**
+ * Cover shown whole (covers are mostly wide banners with text on them), centred over a blurred copy of itself so the
+ * frame is always filled; a branded navy cover with the category icon when the post has no image. The frame
+ * (className) sets the size.
+ */
+export function Photo({ a, className }) {
+  if (!a.cover?.url) {
+    const Icon = iconFor(a.categorySlug);
+    return (
+      <div className={cn('relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand to-brand-700 text-white', className)} aria-hidden>
+        <div className="bg-grid-dark absolute inset-0 opacity-50" />
+        <span className="absolute -end-10 -top-10 size-48 rounded-full bg-gold/30 blur-3xl" />
+        <span className="absolute -bottom-16 start-1/4 size-56 rounded-full bg-[#5b6ed2]/40 blur-3xl" />
+        <span className="absolute start-5 top-4 text-sm font-black tracking-tight text-white/80">GTCFX</span>
+        <span className="absolute inset-0 grid place-items-center">
+          <span className="grid size-20 place-items-center rounded-3xl bg-white/10 text-gold-200 ring-1 ring-white/20 backdrop-blur transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-6">
+            <Icon className="size-9" />
+          </span>
+        </span>
+      </div>
+    );
+  }
+  return (
+    <div className={cn('relative overflow-hidden bg-brand-950', className)}>
+      <img src={a.cover.url} alt="" aria-hidden className="absolute inset-0 size-full scale-125 object-cover opacity-70 blur-2xl" />
+      <img
+        src={a.cover.url}
+        alt={a.cover.alt || a.title}
+        width={a.cover.width ?? undefined}
+        height={a.cover.height ?? undefined}
+        loading="lazy"
+        decoding="async"
+        className="relative size-full object-contain transition-transform duration-700 group-hover:scale-[1.04]"
+      />
+    </div>
+  );
+}
+
 export function When({ a, className }) {
   return (
-    <span className={cn('inline-flex items-center gap-1.5 text-xs text-ink/50', className)}>
+    <span className={cn('inline-flex items-center gap-1.5 text-xs', className)}>
       <CalendarDays className="size-3.5" aria-hidden />
       <time dateTime={a.publishedAt}>{a.dateLabel}</time>
     </span>
   );
 }
 
-export function PostTitle({ a, className, as: H = 'h3' }) {
+/** Category pills (dark hero). */
+export function CategoryLinks({ categories, current }) {
   return (
-    <H className={cn(/heading-/.test(className ?? '') ? '' : 'heading-small', className)}>
-      <NavLink href={a.href} className="after:absolute after:inset-0">
-        {a.title}
-      </NavLink>
-    </H>
-  );
-}
-
-/** Category links: 'underline' (light page), 'pills' (dark hero), 'list' (sidebar). */
-export function CategoryLinks({ categories, current, style }) {
-  if (style === 'list') {
-    return (
-      <nav className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:flex-col lg:px-0">
-        {categories.map((c) => {
-          const on = c.slug === current;
-          const Icon = iconFor(c.slug);
-          return (
-            <NavLink
-              key={c.slug}
-              href={newsCategoryHref(c.slug)}
-              aria-current={on ? 'page' : undefined}
-              className={cn(
-                'group flex shrink-0 items-center gap-3 rounded-2xl p-2 pe-4 text-sm font-semibold transition-colors',
-                on ? 'bg-gradient-to-br from-brand-600 to-brand-900 text-white shadow-xl shadow-brand/25' : 'bg-white text-ink/70 ring-1 ring-brand/10 hover:text-brand'
-              )}
-            >
-              <span className={cn('grid size-10 shrink-0 place-items-center rounded-xl', on ? 'bg-white/10 text-gold-200' : 'bg-brand-50 text-brand')}>
-                <Icon className="size-5" aria-hidden />
-              </span>
-              <span className="flex-1 whitespace-nowrap">{c.name}</span>
-              <ArrowRight className={cn('hidden size-4 transition-opacity lg:block rtl:-scale-x-100', on ? 'text-gold-200' : 'opacity-0 group-hover:opacity-100')} aria-hidden />
-            </NavLink>
-          );
-        })}
-      </nav>
-    );
-  }
-  const dark = style === 'pills';
-  return (
-    <nav className={cn('no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:px-0', dark ? 'lg:flex-wrap' : 'gap-7 border-b border-brand/10 lg:justify-center')}>
+    <nav className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:flex-wrap lg:px-0">
       {categories.map((c) => {
         const on = c.slug === current;
-        return dark ? (
+        return (
           <NavLink
             key={c.slug}
             href={newsCategoryHref(c.slug)}
@@ -70,23 +79,13 @@ export function CategoryLinks({ categories, current, style }) {
           >
             {c.name}
           </NavLink>
-        ) : (
-          <NavLink
-            key={c.slug}
-            href={newsCategoryHref(c.slug)}
-            aria-current={on ? 'page' : undefined}
-            className={cn('relative shrink-0 whitespace-nowrap pb-4 text-[15px] font-semibold transition-colors', on ? 'text-brand' : 'text-ink/50 hover:text-ink')}
-          >
-            {c.name}
-            {on && <span className="absolute inset-x-0 -bottom-px h-[3px] rounded-full bg-gradient-to-r from-brand to-gold" />}
-          </NavLink>
         );
       })}
     </nav>
   );
 }
 
-export function LoadMore({ more, loading, onClick, label, tone = 'solid' }) {
+export function LoadMore({ more, loading, onClick, label }) {
   if (!more) return null;
   return (
     <div className="mt-12 flex justify-center">
@@ -94,13 +93,10 @@ export function LoadMore({ more, loading, onClick, label, tone = 'solid' }) {
         type="button"
         onClick={onClick}
         disabled={loading}
-        className={cn(
-          'group inline-flex h-13 items-center gap-2.5 rounded-full ps-7 pe-2 text-base font-semibold transition-colors disabled:opacity-70',
-          tone === 'outline' ? 'text-brand ring-2 ring-brand/20 hover:ring-brand' : 'bg-brand text-white shadow-lg shadow-brand/25 hover:bg-brand-700'
-        )}
+        className="group inline-flex h-13 items-center gap-2.5 rounded-full bg-brand pe-2 ps-7 text-base font-semibold text-white shadow-lg shadow-brand/25 transition-colors hover:bg-brand-700 disabled:opacity-70"
       >
         {label}
-        <span className={cn('grid size-9 place-items-center rounded-full', tone === 'outline' ? 'bg-brand text-white' : 'bg-white text-brand')}>
+        <span className="grid size-9 place-items-center rounded-full bg-white text-brand">
           {loading ? <Loader2 className="size-4 animate-spin" /> : <Plus className="size-4 transition-transform duration-300 group-hover:rotate-90" />}
         </span>
       </button>
@@ -109,5 +105,5 @@ export function LoadMore({ more, loading, onClick, label, tone = 'solid' }) {
 }
 
 export function Empty({ t }) {
-  return <p className="rounded-[1.75rem] bg-[#f6f7fb] py-16 text-center text-ink/50">{t('trends.emptyState')}</p>;
+  return <p className="rounded-[1.75rem] bg-white py-16 text-center text-ink/50 ring-1 ring-brand/10">{t('trends.emptyState')}</p>;
 }

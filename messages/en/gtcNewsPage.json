@@ -63,15 +63,21 @@
       "loadMore": "Load more",
       "articles": "{count, plural, one {# article} other {# articles}}",
       "backToNews": "Back to GTC News",
-      "description": "The latest {category} from GTCFX, newest first."
+      "description": "The latest {category} from GTCFX, newest first.",
+      "badge": "GTC News",
+      "archive": "More {category}",
+      "archiveSub": "Earlier {category} from GTCFX — open any story to read it in full.",
+      "featured": "Featured story",
+      "openFull": "Read the full story",
+      "readStory": "Read story"
     },
     "marketDaily": {
       "badge": "Market intelligence",
       "archive": "Previous daily updates",
-      "archiveSub": "Full infographic previews — tap any update to read the full brief.",
-      "viewInfographic": "View infographic",
+      "archiveSub": "Earlier daily briefs — open any update to read it in full.",
       "openFull": "Read the full update",
-      "close": "Close"
+      "featured": "Featured update",
+      "readStory": "Read update"
     },
     "article": {
       "backToCategory": "Back to {category}",
@@ -89,10 +95,7 @@
     "companyNews": {
       "badge": "GTCFX newsroom",
       "archive": "More company news",
-      "archiveSub": "Awards, events and announcements from GTCFX — tap any story to see it full size.",
-      "viewInfographic": "View story",
-      "openFull": "Read the full story",
-      "close": "Close"
+      "archiveSub": "Awards, events and announcements from GTCFX — open any story to read it in full."
     }
   },
   "earningsCalendarPage": {
