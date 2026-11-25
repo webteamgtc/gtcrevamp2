@@ -56,15 +56,21 @@
       "loadMore": "加载更多",
       "articles": "{count, plural, one {#篇文章} other {#篇文章}}",
       "backToNews": "返回GTC新闻",
-      "description": "GTCFX最新{category}，按时间倒序排列。"
+      "description": "GTCFX最新{category}，按时间倒序排列。",
+      "badge": "GTC新闻",
+      "archive": "更多{category}",
+      "archiveSub": "GTCFX 往期{category} — 点击任意内容即可阅读全文。",
+      "featured": "精选内容",
+      "openFull": "阅读全文",
+      "readStory": "阅读"
     },
     "marketDaily": {
       "badge": "市场洞察",
       "archive": "往期每日更新",
-      "archiveSub": "完整信息图预览 — 点击任意更新阅读全文。",
-      "viewInfographic": "查看信息图",
+      "archiveSub": "往期每日简报 — 点击任意更新即可阅读全文。",
       "openFull": "阅读完整更新",
-      "close": "关闭"
+      "featured": "精选更新",
+      "readStory": "阅读更新"
     },
     "article": {
       "backToCategory": "返回{category}",
@@ -79,10 +85,7 @@
     "companyNews": {
       "badge": "GTCFX 新闻中心",
       "archive": "更多公司新闻",
-      "archiveSub": "GTCFX 的奖项、活动与公告 — 点击任意新闻即可查看大图。",
-      "viewInfographic": "查看新闻",
-      "openFull": "阅读完整新闻",
-      "close": "关闭"
+      "archiveSub": "GTCFX 的奖项、活动与公告 — 点击任意新闻即可阅读全文。"
     }
   },
   "earningsCalendarPage": {

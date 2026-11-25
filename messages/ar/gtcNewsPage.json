@@ -63,15 +63,21 @@
       "loadMore": "تحميل المزيد",
       "articles": "{count, plural, zero {لا توجد مقالات} one {مقال واحد} two {مقالان} few {# مقالات} many {# مقالًا} other {# مقال}}",
       "backToNews": "العودة إلى أخبار GTC",
-      "description": "أحدث منشورات {category} من GTCFX، الأحدث أولًا."
+      "description": "أحدث منشورات {category} من GTCFX، الأحدث أولًا.",
+      "badge": "أخبار GTC",
+      "archive": "المزيد من {category}",
+      "archiveSub": "منشورات {category} السابقة من GTCFX — افتح أي خبر لقراءته كاملًا.",
+      "featured": "خبر مميز",
+      "openFull": "قراءة الخبر كاملًا",
+      "readStory": "اقرأ الخبر"
     },
     "marketDaily": {
       "badge": "تحليلات السوق",
       "archive": "تحديثات يومية سابقة",
-      "archiveSub": "معاينة كاملة للرسوم — اختر أي تحديث لقراءة الملخص.",
-      "viewInfographic": "عرض الإنفوجرافيك",
+      "archiveSub": "الملخصات اليومية السابقة — افتح أي تحديث لقراءته كاملًا.",
       "openFull": "قراءة التحديث كاملًا",
-      "close": "إغلاق"
+      "featured": "تحديث مميز",
+      "readStory": "اقرأ التحديث"
     },
     "article": {
       "backToCategory": "العودة إلى {category}",
@@ -89,10 +95,7 @@
     "companyNews": {
       "badge": "غرفة أخبار GTCFX",
       "archive": "المزيد من أخبار الشركة",
-      "archiveSub": "الجوائز والفعاليات والإعلانات من GTCFX — اضغط على أي خبر لعرضه بالحجم الكامل.",
-      "viewInfographic": "عرض الخبر",
-      "openFull": "قراءة الخبر كاملًا",
-      "close": "إغلاق"
+      "archiveSub": "الجوائز والفعاليات والإعلانات من GTCFX — افتح أي خبر لقراءته كاملًا."
     }
   },
   "earningsCalendarPage": {
