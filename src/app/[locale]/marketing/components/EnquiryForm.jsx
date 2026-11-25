@@ -1,6 +1,6 @@
 'use client';
 /**
- * GTC Financial Consultancy L.L.C. (CAT 5) enquiry → POST /api/uae-enquiry (e-mail via Mailgun and/or Zapier, see that route).
+ * GTCFX Securities Brokers L.L.C. (CAT 5) enquiry → POST /api/uae-enquiry (e-mail via Mailgun and/or Zapier, see that route).
  * Sends the page URL and utm_* so the team can see which campaign the enquiry came from.
  * `split` (Contact Us page): First Name + Last Name, then Email, Country of Residence, Phone Number, Preferred
  * Language (optional). Home: Full Name, Email, Phone, Country of Residence, Preferred Language.

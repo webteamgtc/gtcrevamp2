@@ -1,6 +1,6 @@
 'use client';
 /**
- * UAE CAT 5 page — GTC Financial Consultancy L.L.C, licensed by the UAE CMA under Category 5:
+ * UAE CAT 5 page — GTCFX Securities Brokers L.L.C, licensed by the UAE CMA under Category 5:
  * financial consultations, introduction to licensed providers and promotion (only where the licence permits).
  * Not a marketing agency; no trading terms anywhere on the page. Standalone: no site menu or footer links.
  *
@@ -223,7 +223,7 @@ function Header() {
 
 /**
  * Connected network behind the hero: points of light joined by thin lines drift gently while light pulses run
- * along the lines; a gold hub (GTC Financial Consultancy) sends pulses to the points around it, i.e. introducing
+ * along the lines; a gold hub (GTCFX Securities Brokers) sends pulses to the points around it, i.e. introducing
  * clients to licensed providers. SVG + CSS only (no image, script or blur filter cost); frozen for visitors who
  * turn off animations.
  */
@@ -323,7 +323,7 @@ export function NetworkBackdrop({ id = 'gtn', shade = true }) {
         <rect width={VW} height={VH} fill={`url(#${id}-wash)`} />
         <NetLayer net={NET_BACK} color="#6f93ff" lineOpacity={0.18} cls="gtn-back" />
         <NetLayer net={NET_FRONT} color="#8fb0ff" lineOpacity={0.32} pulse cls="gtn-front" />
-        {/* the gold hub: GTC Financial Consultancy introducing clients onwards */}
+        {/* the gold hub: GTCFX Securities Brokers introducing clients onwards */}
         <g className="gtn-front">
           {HUB_LINKS.map((n, i) => (
             <g key={i}>

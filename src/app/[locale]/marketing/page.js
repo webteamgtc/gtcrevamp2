@@ -4,7 +4,7 @@ import { CAT5_LOCALES } from '@/config/regions';
 import MarketingPage from './components/MarketingPage';
 
 /**
- * UAE CAT 5 website, Home: GTC Financial Consultancy L.L.C. (CMA Category 5), in English (en-ae) and Arabic (ar).
+ * UAE CAT 5 website, Home: GTCFX Securities Brokers L.L.C. (CMA Category 5), in English (en-ae) and Arabic (ar).
  * Pages: this one, about/, faq/, contact/. With NEXT_PUBLIC_UAE_CAT5_SITE=on, UAE visitors see them at
  * /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us (and /ar/…) — src/proxy.js rewrites those addresses here.
  * Hidden from search engines. Copy: messages/<lang>/marketingPage.json

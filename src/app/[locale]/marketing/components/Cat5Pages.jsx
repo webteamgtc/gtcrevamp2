@@ -1,6 +1,6 @@
 'use client';
 /**
- * UAE CAT 5 website, inner pages: About Us, FAQs, Contact Us (GTC Financial Consultancy L.L.C., CMA Category 5).
+ * UAE CAT 5 website, inner pages: About Us, FAQs, Contact Us (GTCFX Securities Brokers L.L.C., CMA Category 5).
  * Same header, footer and look as the Home page (MarketingPage.jsx). Copy: messages/<lang>/marketingPage.json
  * (about, faqPage, contactPage), compliance-approved: change only with their approval.
  */

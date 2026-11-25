@@ -1,6 +1,6 @@
 'use client';
 /**
- * UAE CAT 5 — Legal Documents hub (GTC Financial Consultancy L.L.C. documents only; the main site's /legal hub lists
+ * UAE CAT 5 — Legal Documents hub (GTCFX Securities Brokers L.L.C. documents only; the main site's /legal hub lists
  * other GTC entities). Cards only, every PDF opens in a new tab or downloads: the CMA licence (/CMA.pdf), the Privacy
  * Policy and the CAT5_DOCS (Website Terms of Use, Client Agreement, Complaint Handling Policy, Cookie Policy), both in
  * /public/en-ae/documents. Rhythm: dark hero → gray (document cards) → legal footer (Cat5Frame).

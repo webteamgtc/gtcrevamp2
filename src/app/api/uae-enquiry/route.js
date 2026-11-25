@@ -3,7 +3,7 @@ import { CAT5_LANGUAGES } from '@/config/regions';
 import { businessEmailRejectReason } from '@/lib/emailValidation';
 
 /**
- * GTC Financial Consultancy L.L.C. (UAE CAT 5) enquiry, posted by the form on the CAT 5 site (/en-ae, /ar).
+ * GTCFX Securities Brokers L.L.C. (UAE CAT 5) enquiry, posted by the form on the CAT 5 site (/en-ae, /ar).
  *  1. validates and normalises the enquiry and adds the client IP,
  *  2. e-mails it through Mailgun with mailOptionsSupports (src/config/nodemailer.js: support@gtcfx.com, bcc zeeshan@gtcfx.com),
  *  3. optionally forwards it to a Zapier hook (CRM) when UAE_ENQUIRY_ZAPIER_URL is set.
@@ -11,7 +11,7 @@ import { businessEmailRejectReason } from '@/lib/emailValidation';
  * Env: MAILGUN_API_KEY (+ MAILGUN_USERNAME / MAILGUN_API_URL as for the VPS form), UAE_ENQUIRY_ZAPIER_URL.
  */
 const ZAPIER_HOOK = process.env.UAE_ENQUIRY_ZAPIER_URL?.trim();
-const SUBJECT = 'Enquiry: GTC Financial Consultancy (Category 5)';
+const SUBJECT = 'Enquiry: GTCFX Securities Brokers (Category 5)';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const LANGUAGE_LABEL = { ar: 'Arabic', en: 'English' };
 
@@ -53,7 +53,7 @@ function emailContent(d) {
           `<tr><td style="padding:10px 14px;width:35%;background:#f6f7fb;font-size:13px;color:#6b7194;border-bottom:1px solid #e6e9f2">${k}</td><td style="padding:10px 14px;font-size:14px;border-bottom:1px solid #e6e9f2">${v}</td></tr>`
       )
       .join('')}</table>
-    <p style="font-size:12px;color:#6b7194">The visitor agreed that GTC Financial Consultancy L.L.C. may contact them by email regarding this enquiry.</p></div>`;
+    <p style="font-size:12px;color:#6b7194">The visitor agreed that GTCFX Securities Brokers L.L.C. may contact them by email regarding this enquiry.</p></div>`;
   const text = rows.map(([k, v]) => `${k}: ${String(v).replace(/<[^>]+>/g, '')}`).join('\n');
   return { html, text };
 }

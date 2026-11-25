@@ -1,15 +1,15 @@
 {
   "cat5RegisterPage": {
     "meta": {
-      "title": "Register Now | GTC Financial Consultancy (UAE CAT 5)",
-      "description": "Register with GTC Financial Consultancy L.L.C, licensed by the Capital Market Authority (Category 5). Complete the secure registration form and access the client portal."
+      "title": "Register Now | GTCFX Securities Brokers (UAE CAT 5)",
+      "description": "Register with GTCFX Securities Brokers L.L.C, licensed by the Capital Market Authority (Category 5). Complete the secure registration form and access the client portal."
     },
     "breadcrumb": {
       "home": "Home",
       "current": "Register now"
     },
     "hero": {
-      "eyebrow": "GTC FINANCIAL CONSULTANCY L.L.C",
+      "eyebrow": "GTCFX SECURITIES BROKERS L.L.C",
       "title": "Register Now"
     },
     "form": {
@@ -33,7 +33,7 @@
       "terms": "Terms and Conditions",
       "and": "and",
       "privacy": "Privacy Policy",
-      "confirm2": "I agree that GTC Financial Consultancy L.L.C may contact me within a reasonable time regarding my registration and its services;",
+      "confirm2": "I agree that GTCFX Securities Brokers L.L.C may contact me within a reasonable time regarding my registration and its services;",
       "confirm3": "(3) My phone number is not on the Do Not Call Register (DNCR). I declare that I am not a Politically Exposed Person (PEP), nor have I ever held any significant public office. I also confirm that I have never been convicted of any offense related to money laundering, fraud, bribery, corruption, or any other criminal offense, and that I am not currently subject to any ongoing regulatory or legal proceedings.",
       "submit": "Register",
       "haveAccount": "Already have an account?",

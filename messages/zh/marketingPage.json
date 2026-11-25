@@ -1,8 +1,8 @@
 {
   "marketingPage": {
     "meta": {
-      "title": "GTC Financial Consultancy | CMA许可——第5类",
-      "description": "GTC Financial Consultancy L.L.C获阿联酋资本市场管理局颁发第5类牌照，提供金融咨询、引介及推广服务。本网站仅提供信息，不提供交易、经纪或开户服务。"
+      "title": "GTCFX Securities Brokers | CMA许可——第5类",
+      "description": "GTCFX Securities Brokers L.L.C获阿联酋资本市场管理局颁发第5类牌照，提供金融咨询、引介及推广服务。本网站仅提供信息，不提供交易、经纪或开户服务。"
     },
     "notice": "获阿联酋资本市场管理局颁发第5类牌照（金融咨询、引介及推广），牌照编号：20200000211。本网站不提供交易、经纪或开户服务。",
     "version": {
@@ -94,7 +94,7 @@
       ]
     },
     "why": {
-      "title": "为何选择[GTC Financial Consultancy]",
+      "title": "为何选择[GTCFX Securities Brokers]",
       "items": [
         {
           "icon": "shield",
@@ -128,7 +128,7 @@
       "servicePlaceholder": "选择主题",
       "message": "留言（选填）",
       "messagePlaceholder": "请简要介绍您的目标",
-      "consent": "我同意GTC Financial Consultancy L.L.C就我的咨询通过电子邮件与我联系。我的数据将按照《隐私政策》处理。",
+      "consent": "我同意GTCFX Securities Brokers L.L.C就我的咨询通过电子邮件与我联系。我的数据将按照《隐私政策》处理。",
       "submit": "提交咨询",
       "sending": "正在发送…",
       "success": "感谢您！我们的阿联酋团队已收到您的咨询，并将尽快与您联系。",
@@ -147,8 +147,8 @@
       "title": "常见[问题]",
       "items": [
         {
-          "q": "GTC Financial Consultancy获准开展哪些业务？",
-          "a": "GTC Financial Consultancy L.L.C获阿联酋资本市场管理局颁发第5类牌照（牌照编号：20200000211），提供金融咨询、引介及推广服务。公司不持有客户资金，不代表客户进行交易，也不为客户开立账户。"
+          "q": "GTCFX Securities Brokers获准开展哪些业务？",
+          "a": "GTCFX Securities Brokers L.L.C获阿联酋资本市场管理局颁发第5类牌照（牌照编号：20200000211），提供金融咨询、引介及推广服务。公司不持有客户资金，不代表客户进行交易，也不为客户开立账户。"
         },
         {
           "q": "哪些人可以使用你们的服务？",
@@ -166,7 +166,7 @@
     },
     "footer": {
       "title": "重要信息",
-      "text": "GTC Financial Consultancy L.L.C获阿联酋资本市场管理局（CMA）颁发第5类牌照（金融咨询、引介及推广），牌照编号：20200000211。注册地址：阿拉伯联合酋长国迪拜Trade Centre First区Nassima大厦2201室。公司不持有客户资金，也不代表客户进行交易。本网站的任何内容均不构成要约、招揽或个性化推荐，所提供的信息仅供一般参考。",
+      "text": "GTCFX Securities Brokers L.L.C获阿联酋资本市场管理局（CMA）颁发第5类牌照（金融咨询、引介及推广），牌照编号：20200000211。注册地址：阿拉伯联合酋长国迪拜Trade Centre First区Nassima大厦2201室。公司不持有客户资金，也不代表客户进行交易。本网站的任何内容均不构成要约、招揽或个性化推荐，所提供的信息仅供一般参考。",
       "risk": "金融产品具有风险，可能并非适合所有人。在作出任何金融决策前，请阅读相关产品文件，并在必要时寻求独立专业意见。",
       "links": {
         "privacy": "隐私政策",
@@ -174,7 +174,7 @@
         "terms": "使用条款",
         "complaints": "投诉"
       },
-      "copyright": "© 2026 GTC Financial Consultancy L.L.C. 保留所有权利。"
+      "copyright": "© 2026 GTCFX Securities Brokers L.L.C. 保留所有权利。"
     }
   }
 }

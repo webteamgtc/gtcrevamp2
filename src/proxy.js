@@ -129,7 +129,7 @@ function finish(response, { country, test, lookedUp }) {
 }
 
 /**
- * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), on while NEXT_PUBLIC_UAE_CAT5_SITE=on.
+ * TEMPORARY UAE CAT 5 website (GTCFX Securities Brokers L.L.C.), on while NEXT_PUBLIC_UAE_CAT5_SITE=on.
  * UAE visitors (any page, any language):
  *   /en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/register-now, /en-ae/privacy-policy,
  *   /en-ae/trading/delete (and /ar/…) →

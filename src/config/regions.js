@@ -59,11 +59,11 @@ export const REMEMBER_DAYS = 30;
  */
 export const ZA_DOCUMENTS_EMAIL = 'support@gtcfx.com';
 
-/** UAE CAT 5: GTC Financial Consultancy L.L.C page (CMA Category 5). While CAT 5 is chosen, every other page redirects here. */
+/** UAE CAT 5: GTCFX Securities Brokers L.L.C page (CMA Category 5). While CAT 5 is chosen, every other page redirects here. */
 export const CAT5_PATH = '/marketing';
 
 /**
- * TEMPORARY UAE CAT 5 website (GTC Financial Consultancy L.L.C.), until the CAT 1 licence arrives.
+ * TEMPORARY UAE CAT 5 website (GTCFX Securities Brokers L.L.C.), until the CAT 1 licence arrives.
  * NEXT_PUBLIC_UAE_CAT5_SITE=on (Vercel env): every visitor with a UAE IP gets the CAT 5 website on the normal
  * addresses (gtcfx.com/en-ae, /en-ae/about-us, /en-ae/faqs, /en-ae/contact-us, /en-ae/register-now,
  * /en-ae/privacy-policy, /en-ae/trading/delete, and the same under /ar); every other
