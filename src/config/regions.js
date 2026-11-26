@@ -155,8 +155,11 @@ export const CAT5_LANGUAGES = ['ar', 'en'];
 /** UAE Capital Market Authority — open-data licensed companies register (verify licences). */
 export const UAE_CMA_LICENSE_REGISTER =
   'https://www.uaecma.gov.ae/en/open-data/licensed-companies';
-/** @deprecated Use UAE_CMA_LICENSE_REGISTER — kept for CAT 5 marketing components. */
-export const CAT5_CMA_URL = UAE_CMA_LICENSE_REGISTER;
+/** CMA register search for GTCFX Securities Brokers L.L.C. (CAT 5 footer verify links). */
+export const UAE_CMA_LICENSE_LOOKUP =
+  'https://www.uaecma.gov.ae/en/open-data/licensed-companies.aspx?keyword=GTCFX+Securities+Brokers+LLC';
+/** @deprecated Use UAE_CMA_LICENSE_LOOKUP for CAT 5 verify links; register base URL for generic CMA links. */
+export const CAT5_CMA_URL = UAE_CMA_LICENSE_LOOKUP;
 
 /* ------------------------------------------------------------------ South Africa (/en-za) */
 

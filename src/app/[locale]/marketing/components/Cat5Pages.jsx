@@ -79,7 +79,10 @@ function AboutWho() {
                   <Landmark className="size-8" aria-hidden />
                 </span>
                 <p className="mt-5 text-sm font-semibold text-gold-200">{t('hero.badge')}</p>
-                <p className="mt-2 text-3xl font-black tracking-tight md:text-4xl" dir="ltr">
+                <p className="mt-3 text-xs font-semibold leading-snug text-white/85 md:text-sm" dir="ltr">
+                  {t('header.companyName')}
+                </p>
+                <p className="mt-3 text-3xl font-black tracking-tight md:text-4xl" dir="ltr">
                   {LICENCE_NO}
                 </p>
               </div>

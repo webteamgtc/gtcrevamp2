@@ -50,7 +50,7 @@ import Logo from '@/components/shared/Logo';
 import FaqAccordion from '@/components/shared/FaqAccordion';
 import { SectionIntro, AccentTitle } from '@/components/shared/SectionIntro';
 import { Reveal, Stagger, StaggerItem, HeroIn, EASE } from '@/components/motion';
-import { CAT5_CMA_URL, CAT5_CONTACT } from '@/config/regions';
+import { CAT5_CMA_URL, CAT5_CONTACT, UAE_CMA_LICENSE_LOOKUP } from '@/config/regions';
 import { cat5Href } from './cat5Links';
 import EnquiryForm from './EnquiryForm';
 import Cat5CookieConsent from './Cat5CookieConsent';
@@ -170,8 +170,11 @@ function Header() {
       </div>
       <header className={cn('sticky top-0 z-30 border-b bg-white/95 backdrop-blur transition-shadow', scrolled ? 'border-brand/10 shadow-[0_10px_30px_-18px_rgba(13,21,58,0.35)]' : 'border-transparent')}>
         <div className="container-x flex h-[72px] items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-4">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <Logo />
+            <p className="hidden max-w-[11rem] text-[10px] font-semibold leading-snug text-ink/70 sm:block sm:max-w-[13rem] sm:text-[11px] md:max-w-none md:text-xs">
+              {t('header.companyName')}
+            </p>
           </div>
           <nav className="hidden items-center gap-0.5 lg:flex" aria-label={t('version.menu')}>
             {links.map((l) => (
@@ -351,12 +354,16 @@ export function NetworkBackdrop({ id = 'gtn', shade = true }) {
 function Hero() {
   const locale = useLocale();
   const t = useTranslations('marketingPage.hero');
+  const tPage = useTranslations('marketingPage');
   return (
     <section className="is-dark relative overflow-hidden bg-[#05081c] text-white">
       <NetworkBackdrop />
       <div className="container-x relative flex min-h-[560px] flex-col items-center justify-center py-20 text-center md:min-h-[640px]">
         <HeroIn as="p" className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-black/30 px-4 py-1.5 text-xs font-semibold text-gold-200 backdrop-blur">
           <ShieldCheck className="size-3.5" aria-hidden /> {t('badge')}
+        </HeroIn>
+        <HeroIn as="p" delay={0.03} className="mt-4 text-sm font-semibold tracking-tight text-white/90 md:text-base" dir="ltr">
+          {tPage('header.companyName')}
         </HeroIn>
         <HeroIn
           as="h1"
@@ -597,7 +604,7 @@ function ApproachPanel() {
       <div className="is-dark relative overflow-hidden rounded-[2rem] bg-[#05081c] text-white shadow-2xl shadow-brand/25">
         <NetworkBackdrop id="gtn-approach" />
         <p
-          className="pointer-events-none absolute inset-x-0 -bottom-4 select-none overflow-hidden whitespace-nowrap text-center text-[5rem] font-black leading-none text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.08)] md:text-[8rem]"
+          className="pointer-events-none absolute inset-x-0 -bottom-4 select-none overflow-hidden whitespace-nowrap text-center text-[3.25rem] font-black leading-none text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.08)] md:text-[5.5rem] lg:text-[6.5rem]"
           aria-hidden
         >
           {t('label')}
@@ -1029,20 +1036,54 @@ function LegalFooter() {
         <h2 className="heading-label mt-10 flex items-center gap-2">
           <Info className="size-4" aria-hidden /> {t('footer.title')}
         </h2>
-        <p className="mt-4 max-w-5xl text-[13px] leading-relaxed text-white/60">{t('footer.text')}</p>
-        <p className="mt-3 max-w-5xl text-[13px] leading-relaxed text-white/60">
-          {t('footer.verifyPrefix')}
-          <a
-            href={CAT5_CMA_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-gold-200 underline underline-offset-4 hover:text-white"
-          >
-            {t('footer.verifyLink')}
-          </a>
-          {t('footer.verifySuffix')}
+        <div className="mt-4 max-w-5xl space-y-3 text-[13px] leading-relaxed text-white/60">
+          {(t.raw('footer.paragraphs') ?? [t('footer.text')]).map((para) => (
+            <p key={para.slice(0, 48)}>{para}</p>
+          ))}
+          {Array.isArray(t.raw('footer.licences')) && t.raw('footer.licences').length > 0 ? (
+            <ul className="list-disc space-y-2 ps-5 marker:text-gold-200/80">
+              {t.raw('footer.licences').map((item) => (
+                <li key={item.slice(0, 48)}>{item}</li>
+              ))}
+            </ul>
+          ) : null}
+          {(t.raw('footer.paragraphsAfterLicences') ?? []).map((para) => (
+            <p key={para.slice(0, 48)}>{para}</p>
+          ))}
+          {t.has('footer.verifyIntro') ? (
+            <p>
+              {t('footer.verifyIntro')}
+              <a
+                href={UAE_CMA_LICENSE_LOOKUP}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-gold-200 underline underline-offset-4 hover:text-white"
+              >
+                {t('footer.verifyLink')}
+              </a>
+              {t('footer.verifyBetween')}
+              <a
+                href={UAE_CMA_LICENSE_LOOKUP}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-gold-200 underline underline-offset-4 hover:text-white"
+              >
+                {t('footer.verifyLink')}
+              </a>
+              .
+            </p>
+          ) : null}
+        </div>
+        <p className="mt-5 max-w-5xl rounded-2xl border border-gold/25 bg-gold/[0.06] px-5 py-4 text-[13px] leading-relaxed text-white/70">
+          {t.has('footer.riskLabel') ? (
+            <>
+              <span className="font-semibold text-gold-200">{t('footer.riskLabel')} </span>
+              {t('footer.risk')}
+            </>
+          ) : (
+            t('footer.risk')
+          )}
         </p>
-        <p className="mt-5 max-w-5xl rounded-2xl border border-gold/25 bg-gold/[0.06] px-5 py-4 text-[13px] leading-relaxed text-white/70">{t('footer.risk')}</p>
         <p className="mt-10 border-t border-white/10 pt-6 text-sm text-white/50">{t('footer.copyright')}</p>
       </div>
     </footer>

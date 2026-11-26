@@ -1,10 +1,13 @@
 {
   "marketingPage": {
     "meta": {
-      "title": "GTCFX Securities Brokers | CMA许可——第5类",
+      "title": "GTCFX Securities Brokers L.L.C. | CMA许可——第5类",
       "description": "GTCFX Securities Brokers L.L.C获阿联酋资本市场管理局颁发第5类牌照，提供金融咨询、引介及推广服务。本网站仅提供信息，不提供交易、经纪或开户服务。"
     },
     "notice": "获阿联酋资本市场管理局颁发第5类牌照（金融咨询、引介及推广），牌照编号：20200000211。本网站不提供交易、经纪或开户服务。",
+    "header": {
+      "companyName": "GTCFX Securities Brokers L.L.C."
+    },
     "version": {
       "label": "第5类",
       "current": "您正在浏览第5类业务网站。",
@@ -94,7 +97,7 @@
       ]
     },
     "why": {
-      "title": "为何选择[GTCFX Securities Brokers]",
+      "title": "为何选择[GTCFX Securities Brokers L.L.C.]",
       "items": [
         {
           "icon": "shield",
@@ -147,7 +150,7 @@
       "title": "常见[问题]",
       "items": [
         {
-          "q": "GTCFX Securities Brokers获准开展哪些业务？",
+          "q": "GTCFX Securities Brokers L.L.C.获准开展哪些业务？",
           "a": "GTCFX Securities Brokers L.L.C获阿联酋资本市场管理局颁发第5类牌照（牌照编号：20200000211），提供金融咨询、引介及推广服务。公司不持有客户资金，不代表客户进行交易，也不为客户开立账户。"
         },
         {
@@ -166,8 +169,22 @@
     },
     "footer": {
       "title": "重要信息",
-      "text": "GTCFX Securities Brokers L.L.C获阿联酋资本市场管理局（CMA）颁发第5类牌照（金融咨询、引介及推广），牌照编号：20200000211。注册地址：阿拉伯联合酋长国迪拜Trade Centre First区Nassima大厦2201室。公司不持有客户资金，也不代表客户进行交易。本网站的任何内容均不构成要约、招揽或个性化推荐，所提供的信息仅供一般参考。",
-      "risk": "金融产品具有风险，可能并非适合所有人。在作出任何金融决策前，请阅读相关产品文件，并在必要时寻求独立专业意见。",
+      "paragraphs": [
+        "GTCFX Securities Brokers L.L.C.为依照迪拜酋长国法律及阿联酋联邦法律设立的有限责任公司，商业登记编号1369716。注册地址：阿联酋迪拜Sheikh Zayed Road，Nassima Tower 2201室。",
+        "GTCFX Securities Brokers L.L.C.受阿联酋资本市场管理局（CMA）监管，持以下牌照："
+      ],
+      "licences": [
+        "第1类——证券交易：国际市场交易经纪商，以及场外衍生品与即期外汇市场交易经纪商，牌照编号20200000512；",
+        "第5类——安排与咨询：金融咨询、引介及推广，牌照编号20200000211。"
+      ],
+      "paragraphsAfterLicences": [
+        "根据第5类牌照向客户引介其他持牌金融服务机构时，我们可能从相关机构获得佣金或介绍费。我们将在任何引介前向您说明上述安排。更多细节载于客户协议。"
+      ],
+      "verifyIntro": "您可在资本市场管理局网站核实我们的牌照：第1类 ",
+      "verifyBetween": " | 第5类 ",
+      "verifyLink": "此处",
+      "riskLabel": "风险提示：",
+      "risk": "场外衍生品交易（包括差价合约CFD及外汇）具有较高风险，可能不适合所有投资者。杠杆产品可能导致亏损超过您的初始入金。作出任何金融决定前，请阅读相关产品文件，并在必要时寻求独立专业意见。本网站信息不构成投资建议。",
       "links": {
         "privacy": "隐私政策",
         "cookies": "Cookie政策",
