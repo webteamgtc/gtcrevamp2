@@ -25,7 +25,7 @@ export default function HomePage() {
           <Hero />
           <Features />
           <Markets />
-          <Stats />
+          {/* <Stats /> */}
           <Platforms />
           <Accounts />
           <Leaders />
